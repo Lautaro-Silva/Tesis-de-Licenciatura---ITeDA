@@ -1,0 +1,18 @@
+Es  imperativo para todo el trabajo que estoy haciendo aprender y entender como se ordenan y guardan las cosas en los ADST y en pos de esto, es clave la documentación que se encuentra en: \url{https://web.iap.kit.edu/augeroracle-doc/ADST/html/classes.html}.
+
+A día 9/10/2025 ya va encaminado la lectura de los 600 ADST que me paso Marina y empece a hacer algo de análisis respecto a lo que quiero analizar, pero me falta formalizarlo.
+
+Papers posibles que quiero leer:
+\begin{itemize}
+    \item \url{https://pure.rug.nl/ws/portalfiles/portal/1243882867/ICRC2023_248.pdf}
+    \item \url{https://www.sciencedirect.com/science/article/abs/pii/S0168900207014106?via%3Dihub}
+    \item \url{https://link.springer.com/article/10.1140/epjc/s10052-024-13560-5}
+    \item \url{https://arxiv.org/pdf/1208.2154}
+\end{itemize}
+
+Después de una semana de no hacer nada vamos con una de las cosas que considero que son fundamentales: la limpieza de los datos para las lluvias simuladas. Para esto considero que hay que establecer algunos criterios; tengo algunas propuestas:
+
+\begin{itemize}
+	\item Considerar como es la relación entre los valores de $\theta$ y $\phi$ entre la reconstrucción y los valores de la simulación. Establecer un \textit{threshold} para que por encima de cierta diferencia entre estos valores angulares desestimo el \textit{datapoint}. No considero la reconstrucción de la energía porque en general le pega (podría poner algún if para que me diga si no le pega por mucho).
+\end{itemize}
+
