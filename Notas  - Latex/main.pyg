@@ -1,0 +1,20 @@
+	data.append({
+		"event_id": event_id_lluvia, # El ID único de la lluvia
+		
+		# Info MC
+		"logE_MC": logE_MC, "theta_MC": theta_MC, "phi_MC": phi_MC, "primary": primary,
+		
+		# Info REC
+		"logE_REC": logE_REC, "theta_REC": theta_REC, "phi_REC": phi_REC,
+		
+		# Info específica del Counter
+		"counterId": counter.GetId(),
+		"nMuones": nMuones,
+		"x_plane": x_plane,
+		"y_plane": y_plane,
+		"phi_plane": phi_plane, # <-- AÑADIDO
+		"r_core": r_core,
+		"sdId": sdId,
+		"sdSignal": sdSignal
+	})	
+	

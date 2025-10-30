@@ -14,7 +14,54 @@ Después de una semana de no hacer nada, hoy 21/10 vamos con una de las cosas qu
 
 \begin{itemize}
 	\item Considerar como es la relación entre los valores de $\theta$ y $\phi$ entre la reconstrucción y los valores de la simulación. Establecer un \textit{threshold} para que por encima de cierta diferencia entre estos valores angulares desestimo el \textit{datapoint}. No considero la reconstrucción de la energía porque en general le pega (podría poner algún if para que me diga si no le pega por mucho).
-	\item Todavia tengo que pensar otras jeje
+	\item Al final son todos razonables y no hay casi problemas con nada, lo único que a veces la $E_{REC}$ es o 0 o negativa entonces me queda un  -inf pero lo tiro convirtiendolo en nan's y tirando esas filas.
 \end{itemize}
 
 Por otro lado todavía tengo problemas para hacer los plots que yo quiero. Me lo imagino como un plot en polares visto desde arriba donde veo como están distribuidos angularmente en $\theta$ alrededor del eje $z$ pero como q quiero q el radio vaya desde -1 en adelante así no tengo las curvas todas pegadas en cero.
+
+
+Estamos a 30/10, lo de los últimos días fueron todo medio boludeces porque todavía se estaban copiando los datos de los ADST del ruso y los datos de Carmi. Vamos paso a paso, ya revise los tamaños de los ADST y no son tan grandes, son del orden de 10Gb cada uno así que se pueden leer normalmente y sin problemas. Por el lado de los datos de Carmi, el problema es que no tiene el $\varphi$ que es lo que a mi me interesa para hacer los mapas de muones y el análisis de las asimetrías. Entonces, por ahora eso queda descartado.
+
+Vamos ahora con lo que estuve haciendo adaptando mi código para leer los ADST grandes (que igual no debería ser tan un problema ahora). Ya me arme todo el codigo, despues relleno esto y explico como es q funciona que guardo y lalala. (lo voy a hacer ahora, unas hora despues jeje).
+
+\begin{itemize}
+	\item La idea es que hago un loop paralelizado (por ahora 4 workers) sobre los ADST que pesan $\approx 10$Gb y corren cada uno en unos 6.5min y se guardan en archivos \lstinline|.parquet| de menos de 1Mb c/u. 
+	\item  Lo que estoy guardando por ahora es: el id del evento (o lluvia); las energias, $\varphi$ y $\theta$ de MC y REC; el nombre del primario; cantidad de muones; posiciones x-y de los detectores en el plano de la lluvia; distancia r al eje de la lluvia y la posición $\phi$ en polares; y después algunas cositas más
+
+	
+		\begin{lstlisting}[language=Python, caption=Generador de SPE]
+data.append({
+	"event_id": event_id_lluvia, # El ID único de la lluvia
+		
+	# Info MC
+	"logE_MC": logE_MC, "theta_MC": theta_MC, "phi_MC": phi_MC, "primary": primary,
+		
+	# Info REC
+	"logE_REC": logE_REC, "theta_REC": theta_REC, "phi_REC": phi_REC,
+		
+	# Info específica del Counter
+	"counterId": counter.GetId(),
+	"nMuones": nMuones,
+	"x_plane": x_plane,
+	"y_plane": y_plane,
+	"phi_plane": phi_plane, # <-- AÑADIDO
+	"r_core": r_core,
+	"sdId": sdId,
+	"sdSignal": sdSignal
+})	
+\end{lstlisting}
+
+	\item Las 20 simulaciones por energía por modelo por primario de 1200 lluvias c/u con una distribución uniforme de ángulos en $\sin^2(\theta)$ tarda del orden de 40min.
+\end{itemize}
+
+Pero ahora quiero ir a cosas importantes que tengo que ver/leer/discutir:
+
+\begin{itemize}
+	\item Ver si haciendo cortes a $r$ fijo se ve alguna cosa caracteristica sobre como es la distribución en función del $\varphi$.
+	\item Ver si haciendo estos mismo plot pero con el SD (para esto tengo que cambiar lo que estoy levantando de los ADST) se ve mejor la asimetria mirando solo los muones y si el problema es cuando se lleva al UMD enterrado, en el que sobreviven solo los de alta energía.
+	\item Leer del paper de Bradfield (o el de 2002??) si hacia las simulaciones con el offline o solo con CORSIKA.
+	\item Ver si el bineado en $r$ tiene sentido hacerlo que scalee con la distancia, es decir, bines más chicos para $r$ más chico (al menos eso entendí de lo que discutí con Fede).
+\end{itemize}
+
+
+Indiferentemente de esto, yo ya logre hacer el analisis y levnatar al menos a grosso modo (o primera iteracion) los datos de los ADST de \textbf{Helio con Sibyl de $10^{17.5-18}eV$}.

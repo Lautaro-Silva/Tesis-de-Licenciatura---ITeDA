@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  21 OCT 2025 10:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  30 OCT 2025 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -851,24 +851,24 @@ LaTeX Info: Redefining \% on input line 16.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count482
@@ -890,8 +890,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \. on input line 76.
-LaTeX Info: Redefining \% on input line 76.
+LaTeX Info: Redefining \. on input line 80.
+LaTeX Info: Redefining \% on input line 80.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictio
 nary-spanish.trsl
@@ -899,7 +899,7 @@ File: translations-basic-dictionary-spanish.trsl (spanish translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `spanish'. on input line 76.
+or `spanish'. on input line 80.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -942,7 +942,7 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 76.
+Package hyperref Info: Link coloring OFF on input line 80.
 (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
@@ -960,8 +960,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
 (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 76.
-Package biblatex Info: Reference segment=0 on input line 76.
+Package biblatex Info: Reference section=0 on input line 80.
+Package biblatex Info: Reference segment=0 on input line 80.
 \c@lstlisting=\count488
 (/usr/share/texlive/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
@@ -1031,13 +1031,13 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `subscript' on input line 95.
 
 [3]
-<Notas Iniciales/GZK.png, id=60, 513.71925pt x 396.2805pt>
+<Notas Iniciales/GZK.png, id=61, 513.71925pt x 396.2805pt>
 File: Notas Iniciales/GZK.png Graphic file (type png)
 <use Notas Iniciales/GZK.png>
 Package pdftex.def Info: Notas Iniciales/GZK.png  used on input line 109.
 (pdftex.def)             Requested size: 455.24411pt x 351.18893pt.
 [4 <./Notas Iniciales/GZK.png>]
-<Notas Iniciales/X_max_para_light_y_heavy.png, id=68, 513.71925pt x 287.8755pt>
+<Notas Iniciales/X_max_para_light_y_heavy.png, id=69, 513.71925pt x 287.8755pt>
 
 File: Notas Iniciales/X_max_para_light_y_heavy.png Graphic file (type png)
 <use Notas Iniciales/X_max_para_light_y_heavy.png>
@@ -1055,19 +1055,19 @@ Overfull \hbox (20.65pt too wide) in paragraph at lines 140--141
  []
 
 [5 <./Notas Iniciales/X_max_para_light_y_heavy.png>]
-<Notas Iniciales/asymmetry_amplitude.png, id=75, 531.78674pt x 422.17725pt>
+<Notas Iniciales/asymmetry_amplitude.png, id=76, 531.78674pt x 422.17725pt>
 File: Notas Iniciales/asymmetry_amplitude.png Graphic file (type png)
 <use Notas Iniciales/asymmetry_amplitude.png>
 Package pdftex.def Info: Notas Iniciales/asymmetry_amplitude.png  used on input
  line 151.
 (pdftex.def)             Requested size: 455.24411pt x 361.40977pt.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 157--110
+Underfull \hbox (badness 10000) in paragraph at lines 157--114
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--110
+Underfull \hbox (badness 10000) in paragraph at lines 157--114
 
  []
 
@@ -1077,17 +1077,22 @@ Overfull \hbox (9.03122pt too wide) in paragraph at lines 8--9
 cle / abs / pii / S0168900207014106 ? via %
  []
 
+[7] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 32.
 )
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 11
-4.
+8.
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-)
+) [8]
 
 Package caption Warning: Unused \captionsetup[sub] on input line 34.
 See the caption package documentation for explanation.
 
-[7] (./main.aux
+[9] (./main.aux
 LaTeX Info: Redefining \sptext on input line 16.
 LaTeX Info: Redefining \. on input line 16.
 LaTeX Info: Redefining \% on input line 16.
@@ -1097,36 +1102,41 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C34A7B7B991613BBF0EBC19D98BF90F4;787.
+(rerunfilecheck)             Checksum: 96E464293FD54A0B065C0360455CEDC2;827.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34060 strings out of 474222
- 681586 string characters out of 5748732
- 1936975 words of memory out of 5000000
- 55887 multiletter control sequences out of 15000+600000
- 565841 words of font info for 65 fonts, out of 8000000 for 9000
+ 34544 strings out of 474222
+ 686172 string characters out of 5748732
+ 2031975 words of memory out of 5000000
+ 56342 multiletter control sequences out of 15000+600000
+ 566923 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,6n,117p,812b,2540s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-tt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/la
-sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msa
-m10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (7 pages, 428905 bytes).
+ 94i,6n,117p,812b,3511s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type
+1/public/cm-super/sfrm1095.pfb>
+Output written on main.pdf (9 pages, 492460 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
+ 223 PDF objects out of 1000 (max. 8388607)
+ 166 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

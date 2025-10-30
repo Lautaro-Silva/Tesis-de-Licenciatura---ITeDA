@@ -46,24 +46,28 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+% --- MODIFICADO AQUÍ ---
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                   
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	% --- LÍNEA AÑADIDA PARA UTF-8 EN LISTINGS ---
+	literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Ñ}{{\~N}}1 {ñ}{{\~n}}1
 }
+% --- FIN DE LA MODIFICACIÓN ---
 
 \lstset{style=mystyle}
 \addbibresource{Referencias.bib}
@@ -107,7 +111,7 @@
 \section{Notas sobre los papers}
 \input{Notas Iniciales}
 \label{sec:Notas_iniciales}
-\section{Trabajo - Programación}
+\section{Trabajo - Análisis de datos y Programación}
 \input{Trabajo}
 \label{sec:Trabajo_Programacion}
 
