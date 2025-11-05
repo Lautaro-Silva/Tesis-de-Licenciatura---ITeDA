@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  4 NOV 2025 12:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  5 NOV 2025 15:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1072,7 +1072,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 157--114
  []
 
 (./Trabajo.tex [6 <./Notas Iniciales/asymmetry_amplitude.png>]
-Overfull \hbox (9.03122pt too wide) in paragraph at lines 8--9
+Overfull \hbox (9.03122pt too wide) in paragraph at lines 10--11
 [][]$\OT1/cmtt/m/n/10.95 https : / / www . sciencedirect . com / science / arti
 cle / abs / pii / S0168900207014106 ? via %
  []
@@ -1081,8 +1081,24 @@ cle / abs / pii / S0168900207014106 ? via %
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 33.
-[8])
+nput line 39.
+[8] [9]
+Overfull \hbox (20.93843pt too wide) in paragraph at lines 138--139
+[]\OT1/cmr/bx/n/10.95 Soluci^^Son 1: \OT1/cmr/m/n/10.95 Cam-bia-mos la l^^Sogi-
+ca pa-ra ite-rar di-rec-ta-men-te so-bre el [][][][] ([][][][][]
+ []
+
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 141.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 141.
+[10] [11]
+Overfull \hbox (60.3622pt too wide) in paragraph at lines 196--197
+[]\OT1/cmr/bx/n/10.95 Creaci^^Son del "Mega-DataFrame": \OT1/cmr/m/n/10.95 En e
+l nue-vo no-te-book de an^^Sali-sis, []
+ []
+
+)
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 11
 8.
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
@@ -1092,7 +1108,7 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 Package caption Warning: Unused \captionsetup[sub] on input line 34.
 See the caption package documentation for explanation.
 
-[9] (./main.aux
+[12] (./main.aux
 LaTeX Info: Redefining \sptext on input line 16.
 LaTeX Info: Redefining \. on input line 16.
 LaTeX Info: Redefining \% on input line 16.
@@ -1102,19 +1118,19 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 96E464293FD54A0B065C0360455CEDC2;827.
+(rerunfilecheck)             Checksum: C65AD12E208467AE8D44FEDF2DBD029C;827.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34546 strings out of 474222
- 686199 string characters out of 5748732
- 2031975 words of memory out of 5000000
- 56344 multiletter control sequences out of 15000+600000
+ 34599 strings out of 474222
+ 686957 string characters out of 5748732
+ 2049975 words of memory out of 5000000
+ 56393 multiletter control sequences out of 15000+600000
  566923 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,6n,117p,812b,2606s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,6n,117p,812b,2736s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
@@ -1133,10 +1149,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type
 1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (9 pages, 497062 bytes).
+Output written on main.pdf (12 pages, 521657 bytes).
 PDF statistics:
- 223 PDF objects out of 1000 (max. 8388607)
- 166 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
+ 237 PDF objects out of 1000 (max. 8388607)
+ 177 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

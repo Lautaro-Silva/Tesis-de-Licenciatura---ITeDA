@@ -1,72 +1,78 @@
-Es  imperativo para todo el trabajo que estoy haciendo aprender y entender como se ordenan y guardan las cosas en los ADST y en pos de esto, es clave la documentación que se encuentra en: \url{https://web.iap.kit.edu/augeroracle-doc/ADST/html/classes.html}.
+Es imperativo para todo el trabajo que estoy haciendo aprender y entender como se ordenan y guardan las cosas en los ADST y en pos de esto, es clave la documentación que se encuentra en: \url{https://web.iap.kit.edu/augeroracle-doc/ADST/html/classes.html}.
+
+\subsection*{Update 09/10: Primeros Pasos y Lecturas}
 
 A día 9/10/2025 ya va encaminado la lectura de los 600 ADST que me paso Marina y empece a hacer algo de análisis respecto a lo que quiero analizar, pero me falta formalizarlo.
 
 Papers posibles que quiero leer:
 \begin{itemize}
-    \item \url{https://pure.rug.nl/ws/portalfiles/portal/1243882867/ICRC2023_248.pdf}
-    \item \url{https://www.sciencedirect.com/science/article/abs/pii/S0168900207014106?via%3Dihub}
-    \item \url{https://link.springer.com/article/10.1140/epjc/s10052-024-13560-5}
-    \item \url{https://arxiv.org/pdf/1208.2154}
+	\item \url{https://pure.rug.nl/ws/portalfiles/portal/1243882867/ICRC2023_248.pdf}
+	\item \url{https://www.sciencedirect.com/science/article/abs/pii/S0168900207014106?via%3Dihub}
+	\item \url{https://link.springer.com/article/10.1140/epjc/s10052-024-13560-5}
+	\item \url{https://arxiv.org/pdf/1208.2154}
 \end{itemize}
+
+
+\subsection*{Update 21/10: Limpieza de Datos (Simulaciones Marina)}
 
 Después de una semana de no hacer nada, hoy 21/10 vamos con una de las cosas que considero que son fundamentales: la limpieza de los datos para las lluvias simuladas. Para esto considero que hay que establecer algunos criterios; tengo algunas propuestas:
 
 \begin{itemize}
 	\item Considerar como es la relación entre los valores de $\theta$ y $\phi$ entre la reconstrucción y los valores de la simulación. Establecer un \textit{threshold} para que por encima de cierta diferencia entre estos valores angulares desestimo el \textit{datapoint}. No considero la reconstrucción de la energía porque en general le pega (podría poner algún if para que me diga si no le pega por mucho).
-	\item Al final son todos razonables y no hay casi problemas con nada, lo único que a veces la $E_{REC}$ es o 0 o negativa entonces me queda un  -inf pero lo tiro convirtiéndolo en nan's y tirando esas filas.
+	\item Al final son todos razonables y no hay casi problemas con nada, lo único que a veces la $E_{REC}$ es o 0 o negativa entonces me queda un \lstinline|-inf| pero lo tiro convirtiéndolo en \lstinline|nan|'s y tirando esas filas.
 \end{itemize}
 
-Por otro lado todavía tengo problemas para hacer los plots que yo quiero. Me lo imagino como un plot en polares visto desde arriba donde veo como están distribuidos angularmente en $\theta$ alrededor del eje $z$ pero como q quiero q el radio vaya desde -1 en adelante así no tengo las curvas todas pegadas en cero.
+Por otro lado todavía tengo problemas para hacer los plots que yo quiero. Me lo imagino como un plot en polares visto desde arriba donde veo como están distribuidos angularmente en $\theta$ alrededor del eje $z$ pero como que quiero que el radio vaya desde -1 en adelante así no tengo las curvas todas pegadas en cero. Todo esto esta en el script \lstinline|Analisis_y_Limpieza_ADST_Marina_175|.
 
----
+\subsection*{Update 30/10: Pipeline de Procesamiento (Datos Alexey)}
 
-Estamos a 30/10, lo de los últimos días fueron todo medio boludeces porque todavía se estaban copiando los datos de los ADST del ruso y los datos de Carmi. Vamos paso a paso, ya revise los tamaños de los ADST y no son tan grandes, son del orden de 10Gb cada uno así que se pueden leer normalmente y sin problemas. Por el lado de los datos de Carmi, el problema es que no tiene el $\varphi$ que es lo que a mi me interesa para hacer los mapas de muones y el análisis de las asimetrías. Entonces, por ahora eso queda descartado.
+Estamos a 30/10, lo de los últimos días fueron todo medio boludeces porque todavía se estaban copiando los datos de los ADST de Alexey y los datos de Carmi. 
 
-Vamos ahora con lo que estuve haciendo adaptando mi código para leer los ADST grandes (que igual no debería ser tan un problema ahora). Ya me arme todo el código, despues relleno esto y explico como es q funciona que guardo y lalala. (lo voy a hacer ahora, unas hora despues jeje).
+Vamos paso a paso, ya revise los tamaños de los ADST y no son tan grandes, son del orden de 10Gb cada uno así que se pueden leer normalmente y sin problemas. Por el lado de los datos de Carmi, el problema es que no tiene el $\phi$ que es lo que a mi me interesa para hacer los mapas de muones y el análisis de las asimetrías. Entonces, por ahora eso queda descartado. Esto esta en el script \lstinline|Analisis_datos_Carmi|. 
+
+Vamos ahora con lo que estuve haciendo adaptando mi código para leer los ADST grandes.
 
 \begin{itemize}
 	\item La idea es que hago un loop paralelizado (por ahora 4 workers) sobre los ADST que pesan $\approx 10$Gb y corren cada uno en unos 6.5mín y se guardan en archivos \lstinline|.parquet| de menos de 1Mb c/u. 
-	\item  Lo que estoy guardando por ahora es: el id del evento (o lluvia); las energías, $\varphi$ y $\theta$ de MC y REC; el nombre del primario; cantidad de muones; posiciones x-y de los detectores en el plano de la lluvia; distancia r al eje de la lluvia y la posición $\phi$ en polares; y después algunas cositas más
-
+	\item Lo que estoy guardando por ahora es: el id del evento (o lluvia); las energías, $\phi$ y $\theta$ de MC y REC; el nombre del primario; cantidad de muones; posiciones x-y de los detectores en el plano de la lluvia; distancia r al eje de la lluvia y la posición $\phi$ en polares; y después algunas cositas más.
 	
-		\begin{lstlisting}[language=Python, caption=Generador de SPE]
-data.append({
-	"event_id": event_id_lluvia, # El ID único de la lluvia
-		
-	# Info MC
-	"logE_MC": logE_MC, "theta_MC": theta_MC, "phi_MC": phi_MC, "primary": primary,
-		
-	# Info REC
-	"logE_REC": logE_REC, "theta_REC": theta_REC, "phi_REC": phi_REC,
-		
-	# Info específica del Counter
-	"counterId": counter.GetId(),
-	"nMuones": nMuones,
-	"x_plane": x_plane,
-	"y_plane": y_plane,
-	"phi_plane": phi_plane, # <-- AÑADIDO
-	"r_core": r_core,
-	"sdId": sdId,
-	"sdSignal": sdSignal
-})	
-\end{lstlisting}
-
-	\item Las 20 simulaciones por energía por modelo por primario de 1200 lluvias c/u con una distribución uniforme de ángulos en $\sin^2(\theta)$ tarda del orden de 40mín.
+	\begin{lstlisting}[language=Python, caption=Definición de datos guardados (v1)]
+		data.append({
+			"event_id": event_id_lluvia, # El ID único de la lluvia
+			
+			# Info MC
+			"logE_MC": logE_MC, "theta_MC": theta_MC, "phi_MC": phi_MC, "primary": primary,
+			
+			# Info REC
+			"logE_REC": logE_REC, "theta_REC": theta_REC, "phi_REC": phi_REC,
+			
+			# Info específica del Counter
+			"counterId": counter.GetId(),
+			"nMuones": nMuones,
+			"x_plane": x_plane,
+			"y_plane": y_plane,
+			"phi_plane": phi_plane, # <-- AÑADIDO
+			"r_core": r_core,
+			"sdId": sdId,
+			"sdSignal": sdSignal
+		})  
+	\end{lstlisting}
+	
+	\item Las 20 simulaciones por energía por modelo por primario de 1200 lluvias c/u con una distribución uniforme de ángulos en $\sin^2(\theta)$ tarda del orden de 40mín. Esto esta en el script \lstinline|Procesamiento_ADST_Alexey|. 
 \end{itemize}
 
 Pero ahora quiero ir a cosas importantes que tengo que ver/leer/discutir:
 
 \begin{itemize}
-	\item Ver si haciendo cortes a $r$ fijo se ve alguna cosa característica sobre como es la distribución en función del $\varphi$.
+	\item Ver si haciendo cortes a $r$ fijo se ve alguna cosa característica sobre como es la distribución en función del $\phi$.
 	\item Ver si haciendo estos mismo plot pero con el SD (para esto tengo que cambiar lo que estoy levantando de los ADST) se ve mejor la asimetría mirando solo los muones y si el problema es cuando se lleva al UMD enterrado, en el que sobreviven solo los de alta energía.
 	\item Leer del paper de Bradfield (o el de 2002??) si hacia las simulaciones con el offline o solo con CORSIKA.
 	\item Ver si el bineado en $r$ tiene sentido hacerlo que scalee con la distancia, es decir, bines más chicos para $r$ más chico (al menos eso entendí de lo que discutí con Fede).
 \end{itemize}
 
----
+\subsection*{Update 04/11 (Mañana): Primer Análisis de Datos (Helio-Sibyl)}
 
-Indiferentemente de esto, yo ya logre hacer el análisis y levantar al menos a groso modo (o primera iteración) los datos de los ADST de \textbf{Helio con Sibyl de $10^{17.5-18}eV$}.
+Indiferentemente de esto, yo ya logre hacer el análisis y levantar al menos a groso modo (o primera iteración) los datos de los ADST de \textbf{Helio con Sibyl de $10^{17.5-18}eV$}. Esto esta en el script \lstinline|Analisis_ADST_Alexey|. 
 
 Hoy estamos a 04/11, voy a contar un poco lo que hice los últimos días. Estuve trabajando en comenzar a hacer el análisis de los datos de los ADST de Alexey de Helio-Sib-$10^{17.5-18}$eV. 
 
@@ -79,16 +85,15 @@ Hice el análisis de como se comportaban los datos de manera global, viendo:
 	\item Por el lado de los $\theta$ y $\phi$ no hay mayores problemas y anda re bien.
 \end{itemize}
 
-Finalmente hice los mapas polares pero esto es más visual que otra cosa, no sirve mucho para ver efectivamente la asimetría, para eso debería hacer cortes a r fijo.
+Finalmente hice los mapas polares pero esto es más visual que otra cosa, no sirve mucho para ver efectivamente la asimetría, para eso debería hacer cortes a $r$ fijo.
 
 Hice esto mismo para todos los ADST juntos y se ve el mismo comportamiento con todo (con mayores errores en las reconstrucciones de la energia para eventos de mayor energía, pero son pocos, del orden de 50 teniendo 200k).
 
-Hice lo que creo que es lo que tengo que hacer, que es, agarra mis datos, binearlos en $\theta$ y en $r_{core}$ y plotear cantidad en funcion de $\phi$ de las estaciones donde deberia ver la asimetria. Esto no lo logre, lo cual es una cagada y no me queda claro si estoy haciendo algo mal, o por que no se ve lo que espero.
+Hice lo que creo que es lo que tengo que hacer, que es, agarra mis datos, binearlos en $\theta$ y en $r_{core}$ y plotear cantidad en funcion de $\phi$ de las estaciones donde deberia ver la asimetria. \textbf{Esto no lo logre, lo cual es una cagada y no me queda claro si estoy haciendo algo mal, o por que no se ve lo que espero.}
 
+\subsubsection*{Resumen de Datos (04/11)}
 
-
-
-\textit{NOTAS:} voy a hacer un mini resumen los datos (ADST de Alexey) a los que tengo acceso actualmente (04/11):
+Voy a hacer un mini resumen los datos (ADST de Alexey) a los que tengo acceso actualmente (04/11):
 
 \begin{itemize}
 	\item Sibyl (modelo hadrónico)
@@ -120,3 +125,77 @@ Hice lo que creo que es lo que tengo que hacer, que es, agarra mis datos, binear
 		\item Energías = $10^{18-18.5}\,\text{eV}$ (pero no tengo acceso)
 	\end{itemize}
 \end{itemize}
+
+Una de las cosas que puedo probar para ver que onda es, como yo se que las asimetrias son visibles en los datos de superficie con el SD, puedo ver si puedo reproducir lo que vio Bradfield solo con los muones del SD y ver si el problema es: o el Offline, o mi codigo, o los datos de las lluvias simuladas en si mismas. Por suerte esta info ya la tenia en los ADST procesados pero tuve que modificar otras cosas.
+
+
+\subsection*{Update 04/11 (Tarde): El Deep Dive en el Procesamiento}
+
+Bueno, estuve investigando por qué corno no veía la asimetría. Resulta que el problema no era (solo) el análisis, sino \textbf{cómo estaba leyendo los datos}. Hablé con Carmi y encontramos varios problemas fundamentales:
+
+\begin{itemize}
+	\item \textbf{Problema 1: Los IDs 90k no aparecían.} Mi primer script de lectura (\lstinline|getCounterList|) iteraba sobre el \lstinline|SDEvent| (\lstinline|sEvent.GetStationVector()|). Pero los detectores del anillo denso (\lstinline|90k|) son "ficticios" y no tienen un SD "real", por lo que \textbf{el script los estaba ignorando por completo} a causa del filtro reyected.
+	\item \textbf{Solución 1:} Cambiamos la lógica para iterar directamente sobre el \lstinline|MDEvent| (\lstinline|mEvent.CountersBegin()|), tal como hace Carmi en su C++. Esto ahora levanta \textbf{todos} los counters (los \lstinline|4xxx| del infill y los \lstinline|90xxx| del anillo denso).
+	
+	\item \textbf{Problema 2: El filtro `rejected`.} Al correr el script nuevo, vi que $\approx 1/3$ de todos los módulos (\lstinline|28k| de \lstinline|81k|) estaban marcados como \lstinline|rejected|. Lo más importante: ¡casi todos los \lstinline|90k| estaban en esa lista!
+	\item \textbf{Solución 2:} Hablando con la gente, me confirmaron que esto es \textbf{intencional}. El que hizo las simulaciones (Alexey) quería sacar el anillo denso de su análisis de LDF, así que los etiquetó como \lstinline|rejected|. Esto es una noticia excelente: \textbf{los datos de \lstinline|nMuones| son válidos}, pero mi código de análisis (y mi script de procesamiento original) los estaba filtrando estúpidamente.
+	
+	\item \textbf{Problema 3: El filtro `IsLowGainSaturated`.} Discutimos si este filtro era necesario. Saturar el SD (superficie) no satura el UMD (subterráneo), pero sí puede cagar la geometría de la lluvia (y por ende \lstinline|r_core| y \lstinline|phi_plane|).
+	\item \textbf{Solución 3 (Corte Diferido):} La mejor metodología es \textbf{no filtrar} en el script de procesamiento, sino guardar un nuevo flag \lstinline|is_sd_saturated| (True/False). Así puedo hacer el corte de calidad después en \lstinline|pandas| y, más importante, comparar los resultados con y sin el corte.
+	
+	\item \textbf{Problema 4: 1 fila/módulo vs 1 fila/counter.} Le di vueltas a si tenía sentido guardar 3 filas por módulo (agranda la tabla). La respuesta es sí. El "jugo" que le saco es doble:
+	\begin{itemize}
+		\item \textbf{Flexibilidad:} Puedo decidir en \lstinline|pandas| si quiero analizar la suma (\lstinline|.sum()|), el promedio (\lstinline|.mean()|) o el máximo (\lstinline|.max()|) de los 3 módulos, sin tener que re-procesar los 20 ADSTs.
+		\item \textbf{Seguridad:} Me permite manejar los flags (\lstinline|rejected|, \lstinline|saturated|) en el análisis y no perder datos en el procesamiento.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection*{Pipeline Definitivo}
+
+La función final de procesamiento (\lstinline|readADST_surface| v6) ahora implementa todo esto. El \lstinline|data.append()| final guarda 1 fila por módulo y añade todas las columnas de calidad (\lstinline|module_status|, \lstinline|is_sd_saturated|), las señales de SD (\lstinline|sdSignal|, \lstinline|sdMuonSignal|) y los errores (\lstinline|r_core_err|).
+
+Ahora sí, con el dataset completo y bien entendido, voy a volver a correr el análisis de asimetría (el plot \lstinline|S/<S>|). La hipótesis es que la señal de asimetría está en los módulos que mi código viejo estaba tirando a la basura.
+
+
+\subsubsection*{Refinamiento del Análisis: Barras de Error}
+
+El otro punto que faltaba en mis plots de asimetría (\lstinline|S/<S>| vs \lstinline|phi_plane|) eran las \textbf{barras de error}.
+
+\begin{itemize}
+	\item \textbf{Por qué son importantes:} Sin barras de error, es imposible saber si la campana (o la falta de ella) es una señal física real o simplemente una fluctuación estadística (ruido) porque un bin tiene pocos puntos.
+	
+	\item \textbf{Metodología (SEM):} Para agregar esto, cambié la forma en que calculo los bines. En lugar de usar \lstinline|np.histogram| dos veces (uno para la suma y otro para el conteo), ahora uso la función \lstinline|pandas.groupby().agg()|.
+	
+	\item Esto me permite calcular, para cada bin de \lstinline|phi_plane|, tres cosas de una sola vez:
+	\begin{itemize}
+		\item \lstinline|'mean'|: La densidad promedio de muones (mi $S$).
+		\item \lstinline|'count'|: El número de módulos ($N$) en ese bin.
+		\item \lstinline|'std'|: La desviación estándar ($\sigma$) de los muones en ese bin.
+	\end{itemize}
+	
+	\item \textbf{El Error Estadístico:} Con esto, calculo el **Error Estándar de la Media (SEM)** para cada bin:
+	$$ SEM = \frac{\sigma}{\sqrt{N}} $$
+	
+	\item \textbf{Resultado Final:} Ahora ploteo la media normalizada (\lstinline|S/<S>|) como el punto, y el \lstinline|SEM| normalizado (\lstinline|SEM / <S>|) como la barra de error (\lstinline|plt.errorbar|). Esto me permite ver con confianza estadística si la asimetría es real.
+\end{itemize}
+
+\subsection*{Update 05/11: Pipeline de Datos Completo y Verificado}
+
+Con la metodología final (\lstinline|readADST_surface| v6, que itera por módulo y guarda los flags de calidad) definida, adapté mis scripts de procesamiento. El script original \lstinline|Procesamiento_ADST_Alexey.ipynb| fue actualizado al nuevo \lstinline|Procesamiento_ADST_modulos_adaptado.ipynb|, que implementa esta nueva función de lectura.
+
+\begin{itemize}
+	\item \textbf{Procesamiento Completo:} Corrí el script en modo paralelo (4 workers) sobre los 20 ADSTs de Helio-Sibyl ($10^{17.5-18}$eV). El proceso fue un éxito y generó 20 archivos \lstinline|.parquet| en la nueva carpeta \lstinline|ADST_Alexey_por_module/parquet/|.
+	
+	\item \textbf{Validación Exitosa:} Cargué el primer archivo procesado (\lstinline|Run010.parquet|) y confirmé que todos los problemas están resueltos:
+	\begin{itemize}
+		\item Se extrajeron \textbf{81,909 filas} (módulos) de un solo archivo, recuperando toda la estadística que antes estaba perdiendo.
+		\item Aparecen los \textbf{IDs \lstinline|90000...|} (el anillo denso) junto con los \lstinline|104xxx...|.
+		\item Se guardan correctamente los \lstinline|module_status| (\lstinline|candidate: 53k|, \lstinline|rejected: 28k|), confirmando que los \lstinline|90k| son los \lstinline|rejected| y que sus datos \lstinline|nMuones| son válidos.
+	\end{itemize}
+	
+	\item \textbf{Creación del "Mega-DataFrame":} En el nuevo notebook de análisis, \lstinline|Analisis_ADST_Alexey_por_module.ipynb|, implementé un script para cargar y concatenar (\lstinline|pd.concat|) los 20 archivos \lstinline|.parquet|.
+	
+	\item \textbf{Dataset Maestro:} El resultado es un "mega-DataFrame" final (\lstinline|df_new|) que contiene \textbf{1.56 millones de filas} (módulos).
+\end{itemize}
+
+Ahora sí, tengo el dataset maestro, completo, validado y con toda la estadística recuperada. El próximo paso es refinar el análisis de asimetría (el plot \lstinline|S/<S>| con barras de error) sobre este dataset final. Y verficar otras cosas.
