@@ -199,3 +199,75 @@ Con la metodología final (\lstinline|readADST_surface| v6, que itera por módul
 \end{itemize}
 
 Ahora sí, tengo el dataset maestro, completo, validado y con toda la estadística recuperada. El próximo paso es refinar el análisis de asimetría (el plot \lstinline|S/<S>| con barras de error) sobre este dataset final. Y verficar otras cosas.
+
+\subsection*{Update 06/11: Cuantificando la Asimetría}
+
+Con el "mega-DataFrame" (1.56M de filas) cargado y la metodología de análisis de \lstinline|S/<S>| con barras de error (SEM) definida, corrí los plots.
+
+\begin{itemize}
+	\item \textbf{Primer Resultado (Frustrante):} Los plots de asimetría, incluso para bins de $\theta$ inclinados (ej. $40^\circ < \theta < 52^\circ$), \textbf{salen planos} (ver Figura X). Tanto UMD como SD (Total) muestran puntos que oscilan alrededor de 1.0, sin una campana clara.
+	
+	\item \textbf{Datos Nulos:} El tercer plot, \lstinline|sdMuonSignal|, salió completamente vacío. Al inspeccionar el \lstinline|df_new.head()|, confirmé que esta columna es \textbf{siempre 0.0} en los ADSTs que estoy usando. Aparentemente, la reconstrucción de la señal muónica del SD no se corrió o no se guardó en estas simulaciones. Por lo tanto, \textbf{descarto \lstinline|sdMuonSignal|} del análisis.
+	
+	\item \textbf{Hipótesis (B-Field):} La falta de asimetría, incluso en el SD (Total) donde debería ser más fuerte, me hace preguntarme de la configuración de la simulación. La asimetría azimutal principal se debe al efecto geomagnético ($q \cdot (\vec{v} \times \vec{B})$). Aunque dudo que este sea el caso (preguntaré a Alexey/directores), es una explicación para una asimetría nula.
+	
+	\item \textbf{Siguiente Paso (Cuantificación):} Para dejar de analizar a ojo, el próximo paso es \textbf{cuantificar} la (no-)asimetría. Voy a fittear (ajustar) los puntos de \lstinline|S/<S>| a la función del primer armónico, que es la forma estándar:
+	$$ S/\langle S \rangle = A_0 \cdot (1 + A_1 \cos(\phi - \phi_0)) $$
+	
+	\item \textbf{El Objetivo:} El parámetro de interés es la amplitud $A_1$.
+	\begin{itemize}
+		\item Si el fit me da un valor como $A_1 = 0.01 \pm 0.02$, es compatible con cero (confirma que no hay asimetría).
+		\item Si da $A_1 = 0.1 \pm 0.02$, es una señal real que estaba escondida en el ruido.
+	\end{itemize}
+	Esto me va a permitir medir la asimetría (o su ausencia) de forma robusta en los distintos bins de $\theta$.
+\end{itemize}
+
+Ademas voy a pasar a analizar los datos de lluvias de elementos mas pesados y de rangos de energía mas altos.
+
+\subsection*{Update 06/11 (Tarde): ¡Resultados Físicos! (Asimetría vs. E y Masa)}
+
+Con el "mega-DataFrame" de 1.56M de filas (Helio 17.5-18.0) cargado y la metodología de análisis final validada (1 fila por módulo, filtros de calidad diferidos, y el plot de \lstinline|S/<S>| con barras de error SEM y fiteo cosenoidal), el resultado fue claro:
+
+\begin{itemize}
+	\item \textbf{Helio \@ 17.5-18.0 eV:} La asimetría es \textbf{nula}. El fit de amplitud $A_1$ para todos los bins de $\theta$, tanto en UMD como en SD, dio resultados compatibles con cero (ej. $A_1 = -0.0016 \pm 0.0027$).
+\end{itemize}
+
+Esto me llevó a dos hipótesis: o (A) las simulaciones se corrieron con el campo geomagnético (B-field) apagado, o (B) la asimetría es dependiente de la energía y simplemente es muy débil en este rango.
+
+Para probar esto, procesé los 20 archivos de \textbf{Helio de alta energía ($10^{18.0-18.5}$eV)} y los 20 archivos de \textbf{Hierro de baja energía ($10^{17.5-18.0}$eV)}. Luego, corrí \textit{exactamente el mismo script de análisis}.
+
+Los resultados son importantísimos y resuelven el misterio.
+
+\subsubsection*{1. Dependencia con la Energía (Helio 18.0-18.5 vs 17.5-18.0)}
+Al analizar el set de Helio de mayor energía, la asimetría \textbf{sí aparece}:
+\begin{itemize}
+	\item Para lluvias poco inclinadas ($\theta < 39^\circ$), la amplitud $A_1$ sigue siendo nula ($\approx 0 \pm 0.001$).
+	\item Para lluvias inclinadas ($\theta > 39^\circ$), la señal es estadísticamente significativa. En el bin de $\theta \approx 50^\circ$ ($[46.2^\circ, 53.8^\circ]$), la amplitud es:
+	\begin{itemize}
+		\item \textbf{UMD:} $A_1 = 0.0052 \pm 0.0016$ (una detección de \textbf{3.2$\sigma$})
+		\item \textbf{SD:} $A_1 = 0.0071 \pm 0.0009$ (una detección de \textbf{7.9$\sigma$})
+	\end{itemize}
+	\item \textbf{Conclusión:} Esto confirma que la asimetría \textbf{depende fuertemente de la energía} (y del ángulo $\theta$), tal como predecían los papers. No era un error de mi código, sino un resultado físico.
+\end{itemize}
+
+\subsubsection*{2. Dependencia con la Masa (Hierro 17.5-18.0 vs Helio 17.5-18.0)}
+Este es el resultado más impactante. Al analizar Hierro a la \textbf{misma energía} donde Helio no mostró señal (17.5-18.0 eV):
+\begin{itemize}
+	\item El set de Hierro (Fe) \textbf{SÍ} muestra una asimetría medible en el SD (Señal Total), incluso a ángulos bajos.
+	\item En el bin de $\theta \approx 35^\circ$, el Hierro da $A_1 = 0.0032 \pm 0.0010$ (una detección de \textbf{3.2$\sigma$}), mientras que el Helio daba cero.
+	\item En el bin de $\theta \approx 51^\circ$, el Hierro da $A_1 = 0.0065 \pm 0.0018$ (una detección de \textbf{3.6$\sigma$}).
+\end{itemize}
+
+\subsubsection*{Conclusiones del Análisis}
+\begin{itemize}
+	\item \textbf{Metodología Validada:} El pipeline de procesamiento (v6) y el script de análisis (con \lstinline|groupby().agg()|, SEM y fit) están \textbf{validados y funcionan}.
+	\item \textbf{Resultado Físico 1 (Detector):} La asimetría es consistentemente más fuerte en el \textbf{SD} (dominado por EM) que en el \textbf{UMD} (muones puros de alta E).
+	\item \textbf{Resultado Físico 2 (Masa):} A $E \approx 10^{17.7}$eV, la asimetría \textbf{depende de la masa del primario}. Es medible para Hierro pero nula para Helio. Esto prueba que la asimetría azimutal (en el SD) funciona como un \textit{discriminador de masa} en este rango de energía.
+\end{itemize}
+
+\subsubsection*{Próximos Pasos}
+El plan ahora es claro:
+\begin{itemize}
+	\item Terminar de procesar todos los ADSTs restantes (Hierro 18.0-18.5, Oxígeno, etc.).
+	\item Generar el "money plot" final: un solo gráfico que muestre $A_1$ vs. $\sin^2(\theta)$ con líneas separadas para cada primario y cada energía, para comparar todas las simulaciones juntas.
+\end{itemize}
