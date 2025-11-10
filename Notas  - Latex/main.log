@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  5 NOV 2025 15:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  6 NOV 2025 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1098,7 +1098,7 @@ Overfull \hbox (60.3622pt too wide) in paragraph at lines 196--197
 l nue-vo no-te-book de an^^Sali-sis, []
  []
 
-)
+[12] [13])
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 11
 8.
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
@@ -1108,7 +1108,7 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 Package caption Warning: Unused \captionsetup[sub] on input line 34.
 See the caption package documentation for explanation.
 
-[12] (./main.aux
+[14] (./main.aux
 LaTeX Info: Redefining \sptext on input line 16.
 LaTeX Info: Redefining \. on input line 16.
 LaTeX Info: Redefining \% on input line 16.
@@ -1124,10 +1124,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34599 strings out of 474222
- 686957 string characters out of 5748732
+ 34612 strings out of 474222
+ 687119 string characters out of 5748732
  2049975 words of memory out of 5000000
- 56393 multiletter control sequences out of 15000+600000
+ 56404 multiletter control sequences out of 15000+600000
  566923 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,6n,117p,812b,2736s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1149,10 +1149,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type
 1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (12 pages, 521657 bytes).
+Output written on main.pdf (14 pages, 532177 bytes).
 PDF statistics:
- 237 PDF objects out of 1000 (max. 8388607)
- 177 compressed objects within 2 object streams
- 46 named destinations out of 1000 (max. 500000)
+ 246 PDF objects out of 1000 (max. 8388607)
+ 184 compressed objects within 2 object streams
+ 48 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
