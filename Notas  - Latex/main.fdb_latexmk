@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1761857279.57608 "main.bcf" "main.bbl" "main" 1762463234.89575 0
+["biber main"] 1762874804.65583 "main.bcf" "main.bbl" "main" 1762874810.46861 0
   "Referencias.bib" 1760822599.90602 685 3ae17c046b7e6f8007b37e7111f5b9ca ""
-  "main.bcf" 1762463234.81207 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
+  "main.bcf" 1762874810.32122 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1762463233.51607 "main.tex" "main.pdf" "main" 1762463234.89598 0
+["pdflatex"] 1762874808.07931 "main.tex" "main.pdf" "main" 1762874810.46907 0
   "/etc/texmf/web2c/texmf.cnf" 1760822055.89896 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -204,11 +204,11 @@
   "Notas Iniciales/GZK.png" 1760823066.54925 88152 0da1bf67f668d5ae9474bd3a3d2d12ac ""
   "Notas Iniciales/X_max_para_light_y_heavy.png" 1760823068.3929 84597 8cd1b1bd711d77845bfef0c6b0589440 ""
   "Notas Iniciales/asymmetry_amplitude.png" 1760823064.21948 87277 57f9bd3c2a3e44db4e740ebe6b4cb364 ""
-  "Trabajo.tex" 1762463233.40758 21686 7dd84b6fef93488d6f13e19be60dd282 ""
-  "main.aux" 1762463234.80807 3479 847475d54f6df6b262d41c2c5f333ce7 "pdflatex"
-  "main.bbl" 1761857280.10812 3920 7ec4411ea035d4e9582e43b7ebd27263 "biber main"
-  "main.out" 1762463234.81007 827 c65ad12e208467ae8d44fedf2dbd029c "pdflatex"
-  "main.run.xml" 1762463234.81307 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
+  "Trabajo.tex" 1762874801.93875 32510 de4dbc7f20feb61850d7255f7b2db211 ""
+  "main.aux" 1762874810.31522 3479 0b490eff84e605e542810ef21dec321b "pdflatex"
+  "main.bbl" 1762874805.63327 3920 7ec4411ea035d4e9582e43b7ebd27263 "biber main"
+  "main.out" 1762874810.31822 827 c65ad12e208467ae8d44fedf2dbd029c "pdflatex"
+  "main.run.xml" 1762874810.32378 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
   "main.tex" 1762268804.04363 3215 b33eab04084a2be62580ce4a7e048e36 ""
   (generated)
   "main.aux"
