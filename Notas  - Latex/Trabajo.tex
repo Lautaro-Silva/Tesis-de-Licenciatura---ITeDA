@@ -407,3 +407,38 @@ Los reportes generados contienen la validación completa (plots de resolución, 
 
 \subsubsection*{Próximos Pasos}
 El plan ahora es claro. El siguiente paso es tomar estas 6 tablas de resumen (Página 17 de cada \lstinline|.pdf|) y cargarlas en un \lstinline|pandas.DataFrame| final para generar el "money plot" que compare todas las simulaciones en un solo gráfico de $A_1$ vs. $\sin^2(\theta)$.
+
+\subsection*{Update 11/11 (Tarde): Error Catastrófico y Pipeline v7}
+
+Después de los últimos resultados (donde la asimetría era nula o random y siempre muy pequeña), tuve una larga discusión con mis directores (Juan y Fede) y descubrimos un \textbf{error catastrófico} en mi pipeline de procesamiento.
+
+La frustración tenía una causa 100\% real: el problema no era la física, sino que mi cálculo de \lstinline|phi_plane| estaba \textbf{lavando la asimetría}.
+
+\begin{itemize}
+	\item \textbf{El Error (El "Lavado"):} Mi script (\lstinline|readADST_surface_v6|) calculaba el ángulo azimutal como \lstinline|phi_rel = sdStation.GetAzimuthSP() - sShower.GetAzimuth()| para \textit{todos} los detectores. Esto es correcto para el infill (los \lstinline|104k|), que están fijos en el suelo.
+	
+	\item \textbf{El Descubrimiento (¡La clave!):} Fede me explicó que las simulaciones del anillo denso (\lstinline|90k|) son especiales: las estaciones se "acomodan" al eje de la lluvia MC. La estación \lstinline|90000| está \textbf{siempre} en $\phi=0$ (temprano) y la \lstinline|90006| en $\phi=180$ (tardío). Su \lstinline|GetAzimuthSP()| \textit{ya es} el ángulo relativo correcto.
+	
+	\item \textbf{La Consecuencia:} Al restarle \lstinline|sShower.GetAzimuth()| a un ángulo que ya era relativo, estaba rotando los datos aleatoriamente en cada evento. Esto promediaba la asimetría a cero. Los resultados malos, inconsistentes y raros eran una consecuencia directa de este bug.
+\end{itemize}
+
+\subsubsection*{Pipeline Definitivo (v7)}
+
+Para corregir esto, tuve que re-procesar todos los ADSTs con una nueva función, \lstinline|readADST_surface_v7|.
+
+\begin{itemize}
+	\item \textbf{Cálculo de $\phi$ Corregido:} La nueva función tiene un \lstinline|if sdId >= 90000:| que aplica la lógica correcta:
+	\begin{itemize}
+		\item Si es 90k, $\phi_{rel} = \text{station\_azimuth\_sp}$ (se usa el valor directo).
+		\item Si es 4k, $\phi_{rel} = \text{station\_azimuth\_sp} - \text{shower\_azimuth\_rec}$ (se hace la resta).
+	\end{itemize}
+	Además, se reemplazó el cálculo de \lstinline|np.arctan2| por \lstinline|(phi_rel + 2 * np.pi) % (2 * np.pi)| para evitar el bug de wrap-around numérico que vimos en los tests (el que partía el pico de $\phi=0$ en dos).
+	
+	\item \textbf{Validación (Muones MC):} Para estar 100\% seguro de la señal de UMD, también modifiqué el pipeline para guardar la verdad de la simulación. Siguiendo la lógica de Carmi (\lstinline|readADST.cc|), ahora itero sobre los \lstinline|channelIterator| y \lstinline|simCounter| para guardar \lstinline|nMuones_MC| (el número de muones inyectados por el MC).
+	
+	\item \textbf{Propósito:} Esto me permite comparar \lstinline|nMuones_REC| vs \lstinline|nMuones_MC| y validar la reconstrucción del detector. Me aseguro de que problemas como el clipping corner (muones que pegan en el borde de un módulo) no me estén generando problemas.
+\end{itemize}
+
+\textbf{Conclusión:} Mi fracaso anterior era un \textbf{error de pipeline, no de física}. El script original estaba (A) ignorando los 90k, (B) lavando la asimetría con un cálculo de $\phi$ erróneo, y (C) tirando a la basura los datos \lstinline|rejected|.
+
+Ahora sí, con el dataset completo y la metodología corregida, puedo volver a correr el análisis de asimetría (el plot \lstinline|S/<S>|).

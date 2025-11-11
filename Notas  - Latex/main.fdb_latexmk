@@ -1,20 +1,23 @@
 # Fdb version 4
-["biber main"] 1762874804.65583 "main.bcf" "main.bbl" "main" 1762874810.46861 0
+["biber main"] 1762874804.65583 "main.bcf" "main.bbl" "main" 1762890513.98318 0
   "Referencias.bib" 1760822599.90602 685 3ae17c046b7e6f8007b37e7111f5b9ca ""
-  "main.bcf" 1762874810.32122 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
+  "main.bcf" 1762890513.89782 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1762874808.07931 "main.tex" "main.pdf" "main" 1762874810.46907 0
+["pdflatex"] 1762890512.5367 "main.tex" "main.pdf" "main" 1762890513.98342 0
   "/etc/texmf/web2c/texmf.cnf" 1760822055.89896 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm" 1246382020 924 9904cf1d39e9767e7a3622f2a125a565 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1246382020 928 2dc8d444221b7a635bb58038579b861a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1246382020 908 2921f8a10601f252058503cc6570e581 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1246382020 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1246382020 940 228d6584342e91276bf566bcf9716b83 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -23,6 +26,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1136768653 1528 abec98dbc43e172678c11b3b9031252a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm" 1136768653 1524 d89e2d087a9828407a196f428428ef4a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr17.tfm" 1136768653 1292 296a67155bdbfc32aa9c636f21e91433 ""
@@ -32,6 +36,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm" 1136768653 1116 25a7bf822c58caf309a702ef79f4afbb ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1136768653 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti12.tfm" 1136768653 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm" 1136768653 768 1321e9409b4137d6fb428ac9dc956269 ""
@@ -204,11 +209,11 @@
   "Notas Iniciales/GZK.png" 1760823066.54925 88152 0da1bf67f668d5ae9474bd3a3d2d12ac ""
   "Notas Iniciales/X_max_para_light_y_heavy.png" 1760823068.3929 84597 8cd1b1bd711d77845bfef0c6b0589440 ""
   "Notas Iniciales/asymmetry_amplitude.png" 1760823064.21948 87277 57f9bd3c2a3e44db4e740ebe6b4cb364 ""
-  "Trabajo.tex" 1762874801.93875 32510 de4dbc7f20feb61850d7255f7b2db211 ""
-  "main.aux" 1762874810.31522 3479 0b490eff84e605e542810ef21dec321b "pdflatex"
+  "Trabajo.tex" 1762890512.42668 35854 ef0aa755749b64c4ed282780d0535233 ""
+  "main.aux" 1762890513.89382 3479 fb8b56c2d12b51ee6bd3f10d96bda5e8 "pdflatex"
   "main.bbl" 1762874805.63327 3920 7ec4411ea035d4e9582e43b7ebd27263 "biber main"
-  "main.out" 1762874810.31822 827 c65ad12e208467ae8d44fedf2dbd029c "pdflatex"
-  "main.run.xml" 1762874810.32378 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
+  "main.out" 1762890513.89481 827 c65ad12e208467ae8d44fedf2dbd029c "pdflatex"
+  "main.run.xml" 1762890513.89904 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
   "main.tex" 1762268804.04363 3215 b33eab04084a2be62580ce4a7e048e36 ""
   (generated)
   "main.aux"
