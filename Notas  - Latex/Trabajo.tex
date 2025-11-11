@@ -271,3 +271,139 @@ El plan ahora es claro:
 	\item Terminar de procesar todos los ADSTs restantes (Hierro 18.0-18.5, Oxígeno, etc.).
 	\item Generar el "money plot" final: un solo gráfico que muestre $A_1$ vs. $\sin^2(\theta)$ con líneas separadas para cada primario y cada energía, para comparar todas las simulaciones juntas.
 \end{itemize}
+
+\subsection*{Update 11/11: Análisis Comparativo de Todos los Sets de Simulación}
+
+Siguiendo el plan, el próximo paso era procesar el resto de los datasets. Para hacer esto de forma eficiente y reproducible, moví todo el código de análisis (carga, limpieza, plots de resolución y plots de asimetría) del notebook a un script de línea de comandos: \lstinline|generar_reporte.py|.
+
+\begin{itemize}
+	\item \textbf{Automatización:} Este script toma una ruta a una carpeta de \lstinline|.parquet| como argumento, carga el "mega-DataFrame", corre \textbf{todo} el pipeline de análisis (plots 3D, resolución, uniformidad y los 6 bins de asimetría con fit) y guarda todo en un \textbf{reporte en PDF} con un nombre dinámico (ej. \lstinline|Reporte_parquet_sib_proton_17.pdf|).
+	
+	\item \textbf{Ejecución:} Corrí este script sobre los \textbf{6 sets de simulación} que tengo disponibles (Proton, Helio, Oxígeno y Hierro de SIB23e @ 17.5-18; Helio de QGSJet @ 17.5-18; y Helio de EPOSLHC @ 18.0-18.5).
+\end{itemize}
+
+Los reportes en PDF generados contienen todos los resultados. Los plots de resolución de energía y ángulos son consistentes en todos los datasets, mostrando el mismo sesgo sistemático en energía ($\approx -0.12$) y una excelente resolución angular (ej. \textbf{Figuras 4-6}).
+
+Lo más importante son las tablas de resumen de los fits de asimetría (Página 17 de cada reporte). Al compararlas, emergieron patrones físicos clarísimos.
+
+\subsubsection*{Resultados Físicos Preliminares (de las tablas de $A_1$)}
+
+\begin{itemize}
+	\item \textbf{Dependencia con $\theta$ (Validada):} En \textbf{todos} los datasets que muestran una asimetría, la señal es nula para $\theta < 30^\circ$ y solo se vuelve estadísticamente significativa ($\gtrsim 3\sigma$) en los bins más inclinados ($\theta \gtrsim 40^\circ$). Esto confirma que el análisis debe hacerse en bins de $\theta$.
+	
+	\item \textbf{Dependencia con la Energía (Validada):}
+	\begin{itemize}
+		\item \textbf{Helio SIB23e @ 17.5-18.0eV:} $A_1(\text{SD})$ es compatible con cero en todos los bins \mbox{(ej. $A_1 = -0.0026 \pm 0.0012$ @ $44^\circ$)}.
+		\item \textbf{Helio EPOSLHC @ 18.0-18.5eV:} $A_1(\text{SD})$ es \textbf{claramente positiva} (ej. $A_1 = 0.0071 \pm 0.0009$ @ $50^\circ$).
+		\item \textbf{Conclusión:} La asimetría crece con la energía.
+	\end{itemize}
+	
+	\item \textbf{Dependencia de la Masa (¡El resultado clave!):}
+	Comparando todos los primarios SIB23e a la misma energía (\textbf{17.5-18.0 eV}) en el bin $\theta \approx 40^\circ-48^\circ$:
+	\begin{itemize}
+		\item \textbf{Protón (p):} $A_1(\text{SD}) = -0.0123 \pm 0.0019$ (Detección de $6.5\sigma$).
+		\item \textbf{Helio (He):} $A_1(\text{SD}) = -0.0026 \pm 0.0012$ (Compatible con cero).
+		\item \textbf{Oxígeno (O):} $A_1(\text{SD}) = -0.0063 \pm 0.0012$ (Detección de $5.2\sigma$).
+		\item \textbf{Hierro (Fe):} $A_1(\text{SD}) = 0.0033 \pm 0.0014$ (Detección de $2.4\sigma$).
+	\end{itemize}
+	\textbf{Conclusión:} A la misma energía, la amplitud (y el signo) de la asimetría es \textbf{extremadamente dependiente de la masa}, demostrando que es un excelente discriminador.
+	
+	\item \textbf{Dependencia del Modelo Hadrónico (Validada):}
+	Comparando Helio @ 17.5-18.0 eV ($\theta \approx 40^\circ-48^\circ$):
+	\begin{itemize}
+		\item \textbf{SIB23e:} $A_1(\text{SD}) = -0.0026 \pm 0.0012$ (Nulo).
+		\item \textbf{QGSJet:} $A_1(\text{SD}) = 0.0103 \pm 0.0013$ (¡Detección de $7.8\sigma$!).
+	\end{itemize}
+	\textbf{Conclusión:} El modelo hadrónico predice asimetrías completamente diferentes (incluso de signo opuesto).
+\end{itemize}
+
+\subsubsection*{Resultados Físicos (UMD)}
+
+\begin{itemize}
+	\item \textbf{Dependencia de la Masa (SIB23e @ 17.5-18.0 eV):}
+	Este es el hallazgo más importante. A la misma energía y en ángulos inclinados (ej. $\theta \approx 40^\circ\text{-}48^\circ$), la asimetría UMD \textbf{depende fuertemente de la masa}:
+	\begin{itemize}
+		\item \textbf{Protón (p):} Muestra una asimetría negativa clara: $A_1 = -0.0054 \pm 0.0010$ (una detección de \textbf{5.4$\sigma$}).
+		\item \textbf{Helio (He):} Compatible con cero: $A_1 = -0.0013 \pm 0.0022$.
+		\item \textbf{Oxígeno (O):} Muestra una tendencia negativa: $A_1 = -0.0053 \pm 0.0026$ ($\approx 2.0\sigma$).
+		\item \textbf{Hierro (Fe):} Compatible con cero: $A_1 = 0.0006 \pm 0.0007$.
+	\end{itemize}
+	\textbf{Conclusión:} La asimetría UMD discrimina entre primarios livianos (Protón) y pesados (Helio/Hierro) en este rango de energía.
+	
+	\item \textbf{Dependencia de la Energía (Helio):}
+	La asimetría UMD para Helio \textbf{crece con la energía}.
+	\begin{itemize}
+		\item \textbf{Helio @ 17.5 eV (SIB23e):} $A_1 \approx 0$ en todos los bins.
+		\item \textbf{Helio @ 18.0 eV (EPOS):} $A_1$ se vuelve medible en ángulos inclinados, con una detección de \textbf{3.25$\sigma$} ($A_1 = 0.0052 \pm 0.0016$) en el bin de $\theta \approx 50^\circ$ .
+	\end{itemize}
+	
+	\item \textbf{Dependencia del Modelo Hadrónico (Helio @ 17.5-18.0 eV):}
+	El modelo es fundamental. Para el mismo primario y energía ($\theta \approx 44^\circ$):
+	\begin{itemize}
+		\item \textbf{SIB23e:} $A_1 \approx 0$.
+		\item \textbf{QGSJet:} $A_1 = -0.0065 \pm 0.0019$ (una detección de \textbf{3.4$\sigma$}).
+	\end{itemize}
+\end{itemize}
+
+\subsubsection*{Discusión Preliminar de Resultados}
+
+Los resultados cuantitativos de los fits de $A_1$ (la amplitud de la asimetría) son extremadamente interesantes y, en algunos casos, anti-intuitivos.
+
+\begin{itemize}
+	\item \textbf{Dependencia de Masa (UMD):} El resultado más claro es que, para SIB23e @ 17.5eV, la asimetría UMD \textbf{solo es visible para primarios livianos} (una señal de $5.4\sigma$ para Protón) y es nula para pesados (Hierro). Esto es un resultado físico raro.
+	
+	\item \textbf{Dependencia de Masa (SD):} Curiosamente, en el SD, la tendencia no es tan clara. El Protón tiene la asimetría más fuerte (negativa), pero el Oxígeno también muestra una señal negativa ($5.2\sigma$), mientras que el Hierro muestra una señal positiva débil ($2.4\sigma$). El Helio sigue siendo nulo. Esto sugiere que la relación entre la masa del primario y la asimetría no es lineal o que hay algo mal.
+	
+	\item \textbf{¡Cambios de Signo!} Esto es lo más llamativo. La asimetría no solo aparece o desaparece, sino que \textbf{cambia de signo} dependiendo del modelo y del primario.
+	\begin{itemize}
+		\item \textbf{Efecto de Modelo:} Para Helio @ 17.5eV ($\theta \approx 44^\circ$), SIB23e da una asimetría nula, mientras que QGSJet da una señal \textbf{negativa} de $3.4\sigma$ ($A_1 = -0.0065 \pm 0.0019$). Esto implica que la predicción de la asimetría es un punto fundamental de diferencia entre los modelos hadrónicos.
+		\item \textbf{Efecto de Masa:} Aún más raro, para SIB23e @ 17.5eV ($\theta \approx 44^\circ$), el Protón da una señal \textbf{negativa} ($A_1 = -0.0123 \pm 0.0019$), mientras que el Hierro da una señal \textbf{positiva} ($A_1 = 0.0033 \pm 0.0014$). 
+	\end{itemize}
+	
+	\item \textbf{Conclusión Preliminar:} El hecho de que la asimetría cambie de signo es un hallazgo muy fuerte. Sugiere que la asimetría azimutal no es un simple efecto (como "más muones adelante"), sino una \textbf{competencia compleja} entre diferentes efectos físicos (ej. el efecto geomagnético $\vec{v} \times \vec{B}$ compitiendo con la asimetría "temprano-tardía"), y que el balance de esta competencia depende críticamente del primario (que define el desarrollo de la lluvia) y del modelo hadrónico (que define la física de las interacciones).
+\end{itemize}
+
+\subsubsection*{Próximos Pasos}
+El plan ahora es claro:
+\begin{itemize}
+	\item Terminar de procesar todos los ADSTs restantes (Hierro 18.0-18.5, etc.).
+	\item Generar el "money plot" final: un solo gráfico que muestre $A_1$ vs. $\sin^2(\theta)$ con líneas separadas para cada primario y cada energía, para comparar todas las simulaciones juntas. Esto visualizará las dependencias de masa y modelo que acabamos de cuantificar.
+\end{itemize}
+
+\subsection*{Update 11/11 (Mediodia): Resultados Finales y Comparativa}
+
+Finalmente, corrí el script \lstinline|generar_reporte.py| (versión \lstinline|v3|, con fit de $\phi_0=0$ fijo) sobre \textbf{todos} los datasets disponibles (Protón, Helio, Oxígeno y Hierro de SIB23e @ 17.5-18eV; Helio de QGSJet @ 17.5-18eV; y Helio de EPOSLHC @ 18.0-18.5eV).
+
+Los reportes generados contienen la validación completa (plots de resolución, uniformidad) y, lo más importante, las tablas de resumen del fit de asimetría (páginas 17). Al comparar estas tablas, los resultados físicos son contundentes y claros.
+
+\subsubsection*{Hallazgos Principales (Cuantitativos)}
+
+\begin{itemize}
+	\item \textbf{Dependencia de Masa (SIB23e @ 17.5-18eV):}
+	Este es el resultado más fuerte. A esta energía, la asimetría azimutal (en el bin $\theta \approx 44^\circ$) es un claro \textbf{discriminador de masa}.
+	\begin{itemize}
+		\item \textbf{Protón (p):} Muestra una asimetría \textbf{negativa} estadísticamente significativa en UMD ($A_1 = -0.0049 \pm 0.0012$) y SD ($A_1 = -0.0121 \pm 0.0018$).
+		\item \textbf{Primarios Pesados (He, O, Fe):} Muestran una asimetría \textbf{nula} (compatible con cero dentro de los errores) en todos los bins.
+	\end{itemize}
+	\textbf{Conclusión:} A $10^{17.7}$eV, solo los protones SIB23e generan una asimetría medible.
+	
+	\item \textbf{Dependencia de Energía (Helio):}
+	La asimetría para Helio \textbf{crece con la energía}.
+	\begin{itemize}
+		\item \textbf{Helio @ 17.5 eV (SIB23e):} $A_1(\text{SD})$ es nula.
+		\item \textbf{Helio @ 18.0 eV (EPOS):} $A_1(\text{SD})$ se vuelve \textbf{positiva y medible} ($\approx 5.9\sigma$) en ángulos inclinados.
+	\end{itemize}
+	
+	\item \textbf{Dependencia del Modelo Hadrónico (Helio @ 17.5-18.0 eV):}
+	El modelo es fundamental. Para el mismo primario y energía ($\theta \approx 52^\circ$):
+	\begin{itemize}
+		\item \textbf{SIB23e:} $A_1(\text{SD}) = -0.0067 \pm 0.0019$ (Negativa, $3.5\sigma$).
+		\item \textbf{QGSJet:} $A_1(\text{SD}) = -0.0039 \pm 0.0015$ (Negativa, $2.6\sigma$).
+	\end{itemize}
+	\textbf{Conclusión:} Ambos modelos predicen una asimetría negativa para Helio, pero la magnitud difiere significativamente.
+	
+	\item \textbf{UMD vs. SD:} Consistentemente, en los casos donde hay una señal clara (ej. Protón SIB23e, Helio EPOS), la amplitud $|A_1|$ es \textbf{mayor en el SD} que en el UMD, validando la hipótesis de que la componente EM domina la asimetría.
+\end{itemize}
+
+\subsubsection*{Próximos Pasos}
+El plan ahora es claro. El siguiente paso es tomar estas 6 tablas de resumen (Página 17 de cada \lstinline|.pdf|) y cargarlas en un \lstinline|pandas.DataFrame| final para generar el "money plot" que compare todas las simulaciones en un solo gráfico de $A_1$ vs. $\sin^2(\theta)$.
