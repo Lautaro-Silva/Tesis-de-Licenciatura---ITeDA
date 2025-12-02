@@ -442,3 +442,53 @@ Para corregir esto, tuve que re-procesar todos los ADSTs con una nueva función,
 \textbf{Conclusión:} Mi fracaso anterior era un \textbf{error de pipeline, no de física}. El script original estaba (A) ignorando los 90k, (B) lavando la asimetría con un cálculo de $\phi$ erróneo, y (C) tirando a la basura los datos \lstinline|rejected|.
 
 Ahora sí, con el dataset completo y la metodología corregida, puedo volver a correr el análisis de asimetría (el plot \lstinline|S/<S>|).
+
+\section*{Update Ultimas Semanas - 02/12: Automatización y Visualización Final}
+
+Tras la corrección crítica del cálculo de $\phi$ en el anillo denso (Pipeline v7), procedí a re-procesar masivamente todos los datasets disponibles: Protón, Helio, Oxigeno y Hierro para SIBYLL 2.3d ($10^{17.5-18.0}$ eV), así como algunas las variantes de QGSJetII-04 y EPOS-LHC.
+
+Para sistematizar la generación de los resultados y asegurar la consistencia visual y estadística entre diferentes comparaciones, se desarrolló un nuevo módulo de análisis robusto (\texttt{AsymmetryPlotter}). Este desarrollo desacopla la extracción de datos pesada de la visualización, permitiendo iterar rápidamente sobre los parámetros estéticos sin re-procesar los datasets.
+
+\subsection*{1. Metodología: Clase \texttt{AsymmetryPlotter}}
+Se implementó una clase en Python encargada de:
+\begin{itemize}
+	\item \textbf{Estandarización:} Carga unificada de datos desde archivos CSV intermedios, homogeneizando nombres de detectores (\texttt{UMD\_REC}, \texttt{UMD\_MC}, \texttt{SD\_REC}) y métricas.
+	\item \textbf{Manejo de Errores:} Propagación automática de los errores de ajuste ($\sigma_{A_1}$) a las barras de error en los gráficos comparativos.
+	\item \textbf{Estilos Físicos:} Definición de estilos visuales consistentes asociados a la física:
+	\begin{itemize}
+		\item \textit{Primarios:} Protón (Azul/Círculo), Helio (Verde/Cuadrado), Hierro (Rojo/Triángulo).
+		\item \textit{Modelos:} SIBYLL (Línea sólida), QGSJet (Línea punteada), EPOS (Línea punto-raya).
+	\end{itemize}
+\end{itemize}
+
+\subsection*{2. Discusión de Resultados del Análisis Robusto}
+
+\subsubsection*{Validación el objetivo principal - UMD REC}
+Se validó la señal de asimetría utilizando la información de la reconstrucción ($N_{\mu}^{REC}$) para todos los modelos, energías y primarios.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{Imagenes Trabajo/umd_rec_todo.png} % Asimetría Verdad MC
+	\caption{Comparación Multi-Parámetro en UMD REC. Se observa un comportamiento esperado a nivel global, validando al UMD como herramienta de composición.}
+	\label{fig:umd_rec_all}
+\end{figure}
+
+\subsubsection*{Discriminación de Masa (UMD Reconstruido)}
+Al aplicar el análisis sobre la variable reconstruida ($N_{\mu}^{REC}$), la separación de masas se mantiene visible y estadísticamente significativa en el rango angular de interés.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Imagenes Trabajo/masas_sybil_umd_rec.png} % Money Plot UMD REC
+	\caption{Discriminación de Masa usando la reconstrucción ($N_{\mu}^{REC}$) para el modelo SIBYLL a 17.5 log eV. Se observa una separación ideal entre las curvas de Protón, Helio, Oxigeno y Hierro.}
+	\label{fig:mass_discrim_rec}
+\end{figure}
+
+
+\subsubsection*{Comparacion entre UMD REC, UMD MC y SD REC}
+Se intento comparar los ajustes de los 3 "detectores" o indicadores para ver si su comportamiento era el esperado.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Imagenes Trabajo/comparacion.png} % Money Plot UMD REC
+	\caption{Comparacion entre los detectores para modelo SIBYLL a 17.5 log eV y un primario de Helio. Se observa que efectivamente en el SD la asimetría es mas notoria y a su vez que ambas del UMD son muy similares en forma pero que hay cierta perdida en la reconstrucción por lo que es menor a la de MC.}
+	\label{fig:comparacion_sd_umd}
+\end{figure}
