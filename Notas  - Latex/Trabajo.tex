@@ -465,12 +465,14 @@ Se implementó una clase en Python encargada de:
 
 \subsubsection*{Validación el objetivo principal - UMD REC}
 Se validó la señal de asimetría utilizando la información de la reconstrucción ($N_{\mu}^{REC}$) para todos los modelos, energías y primarios.
-\begin{figure}[h!]
+\begin{figure}[ht!]
 	\centering
 	\includegraphics[width=1\textwidth]{Imagenes Trabajo/umd_rec_todo.png} % Asimetría Verdad MC
 	\caption{Comparación Multi-Parámetro en UMD REC. Se observa un comportamiento esperado a nivel global, validando al UMD como herramienta de composición.}
 	\label{fig:umd_rec_all}
 \end{figure}
+
+Se ve claramente que los datos del Helio EPOS 18-18.5eV tuvieron problemas y esto se ve cuando se observa el informe de este dataset. Los datos no fueron super conformes al ajuste y por eso dio grande el error.
 
 \subsubsection*{Discriminación de Masa (UMD Reconstruido)}
 Al aplicar el análisis sobre la variable reconstruida ($N_{\mu}^{REC}$), la separación de masas se mantiene visible y estadísticamente significativa en el rango angular de interés.
@@ -492,3 +494,67 @@ Se intento comparar los ajustes de los 3 "detectores" o indicadores para ver si 
 	\caption{Comparacion entre los detectores para modelo SIBYLL a 17.5 log eV y un primario de Helio. Se observa que efectivamente en el SD la asimetría es mas notoria y a su vez que ambas del UMD son muy similares en forma pero que hay cierta perdida en la reconstrucción por lo que es menor a la de MC.}
 	\label{fig:comparacion_sd_umd}
 \end{figure}
+
+
+
+\section*{Estado de Situación y Hoja de Ruta - 13 de Enero 2026}
+
+A la fecha, el pipeline de análisis ha sido validado exitosamente para el Anillo Denso (UMD, estaciones a 450m), logrando reproducir la discriminación de masa esperada ($A_1^p > A_1^{Fe}$) y coincidiendo con la verdad de Monte Carlo. 
+
+Actualmente, el trabajo se centra en resolver discrepancias en el Array Estándar/Infill y en refinar el estudio físico de la asimetría. Las tareas pendientes y en curso son:
+
+\begin{itemize}
+	\item \textbf{Debugging de la Asimetría en el Infill (Prioridad Actual):} 
+	Al extender el análisis al Infill (cortes radiales 400-600m), se observa una desaparición de la señal ($A_1 \approx 0$) y una correlación espuria con la ocupación geométrica del detector. 
+	\textit{Diagnóstico:} Error en la rotación de coordenadas al \textit{Shower Plane}.
+	\textit{Acción:} Corregir el cálculo de $\phi$ y la proyección de las estaciones, pasando de una resta simple de ángulos en el suelo a una rotación completa del vector posición $\vec{r}$ usando el eje de la lluvia ($\theta, \phi$).
+	
+	\item \textbf{Separación de Componentes (Muónica vs. Electromagnética):}
+	Rehacer el código de lectura de datos (ADST) para analizar por separado la contribución muónica y la electromagnética (EM) en las estaciones del SD.
+	\textit{Objetivo:} Verificar que la suma de ambas componentes recupere la señal total que se está graficando actualmente y estudiar si la magnitud de la asimetría $A_1$ varía significativamente entre la componente pura de muones y la "contaminación" EM.
+	
+	\item \textbf{Estudio de la Fase ($\phi_0$) Libre:}
+	Modificar el ajuste de la asimetría para permitir una fase variable: 
+	$$S / \langle S \rangle = 1 + A_1 \cos(\phi - \phi_0)$$
+	\textit{Objetivo:} Cuantificar la desviación de la fase respecto al caso puramente geométrico ($\phi_0 = 0$). Esto permitirá estudiar la competencia entre el efecto de proyección (Temprano-Tardío) y las desviaciones introducidas por el Campo Geomagnético.
+	
+	\item \textbf{Análisis con Datos Reales:}
+	Una vez validada la corrección de coordenadas en las simulaciones (Infill/SD), aplicar el pipeline completo a los datos experimentales del Observatorio Pierre Auger para obtener la medición física real.
+\end{itemize}\\
+
+
+\section*{Update 20/01: Resolución de la Asimetría en el Infill (Rotación de Euler)}
+
+Tras el diagnóstico del 13/01, donde la señal de asimetría desaparecía en el Infill (IDs $\ge 100k$), se implementó una solución geométrica completa. Se confirmó que el software estándar (\texttt{Offline}) no entrega las coordenadas proyectadas correctamente para estas estaciones en los archivos ADST, devolviendo ángulos de suelo en lugar de ángulos en el plano de la lluvia.
+
+\subsubsection*{1. El Diagnóstico: Falla de la Variable Nativa}
+Al comparar la variable nativa \texttt{GetAzimuthSP} con el ángulo azimutal geométrico calculado en el suelo ($\phi_{ground} = \arctan2(y_{st}-y_{core}, x_{st}-x_{core})$), se observó un comportamiento anómalo para los IDs del Infill:
+\begin{itemize}
+	\item \textbf{Anillo Denso (90k):} Muestra diferencias esperadas debido a la proyección.
+	\item \textbf{Infill (100k):} Muestra una diferencia exactamente cero (un pico delta en $\Delta\phi = 0$).
+\end{itemize}
+Esto confirma que el \texttt{Offline} no estaba corrigiendo la proyección geométrica para el Infill, lo cual "lavaba" la señal de asimetría al mezclar estaciones temporalmente "tempranas" con estaciones "laterales".
+
+\subsubsection*{2. La Solución: Implementación de Rotación de Euler 3D}
+Se desarrolló e implementó una rutina de rotación manual en el script de lectura (\texttt{readADST\_surface\_v11}). La transformación lleva el vector relativo de la estación del sistema de coordenadas terrestre al \textit{Shower Plane} (sistema intrínseco de la lluvia):
+
+\begin{equation}
+	\vec{r}_{SP} = R_y(-\theta_{inc}) \cdot R_z(-\phi_{inc}) \cdot (\vec{r}_{est} - \vec{r}_{core})
+\end{equation}
+
+Donde $R_z$ alinea el eje $x$ con la llegada de la lluvia y $R_y$ rota el plano perpendicular al eje $z$ de la lluvia. De este nuevo vector $(x', y', z')$ se extraen las variables físicas correctas:
+\begin{itemize}
+	\item $r_{plane} = \sqrt{x'^2 + y'^2}$: Distancia perpendicular al eje (fundamental para muestrear correctamente la LDF).
+	\item $\phi_{plane} = \arctan2(y', x')$: Fase azimutal en el plano de la lluvia.
+\end{itemize}
+
+\textbf{Validación:} Se graficó la corrección aplicada ($\phi_{Euler} - \phi_{Suelo}$) en función del Zenit ($\theta$). Se obtuvo una distribución en forma de "trompeta", donde la corrección es nula para $\theta=0^\circ$ y crece con la inclinación (hasta $\pm 20^\circ$ a $\theta=60^\circ$), validando que la rotación recupera la circularidad del frente de lluvia.
+
+\subsubsection*{3. Refinamiento del Rango Radial (Efecto de Saturación)}
+Una vez corregida la geometría, se analizó la asimetría en función de la distancia al eje ($r_{plane}$):
+\begin{itemize}
+	\item \textbf{Zona Próxima ($r < 400$ m):} Se observó un comportamiento invertido (valle en $\phi=0$) y ruidoso. Se atribuye a la saturación de la electrónica PMT por la cercanía al core y a la alta pendiente de la LDF, donde pequeños errores de posición dominan.
+	\item \textbf{Zona Óptima ($400 < r < 800$ m):} Se recuperó una señal cosenoidal limpia ($N_{\mu}^{REC}$ y $S_{tot}$) con el máximo en $\phi=0$ (temprano), consistente con la física esperada.
+\end{itemize}
+
+\textbf{Conclusión:} El pipeline ahora filtra eventos con $r_{plane} < 400$ m y utiliza exclusivamente las coordenadas transformadas por Euler para el Infill. Los ajustes preliminares muestran ahora amplitudes $A_1$ consistentes y significativas.

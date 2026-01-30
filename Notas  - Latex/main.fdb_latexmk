@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1762874804.65583 "main.bcf" "main.bbl" "main" 1764699275.41558 0
+["biber main"] 1762874804.65583 "main.bcf" "main.bbl" "main" 1768926559.43353 0
   "Referencias.bib" 1760822599.90602 685 3ae17c046b7e6f8007b37e7111f5b9ca ""
-  "main.bcf" 1764699275.34797 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
+  "main.bcf" 1768926559.27621 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1764699274.14338 "main.tex" "main.pdf" "main" 1764699275.41576 0
+["pdflatex"] 1768926556.59536 "main.tex" "main.pdf" "main" 1768926559.43399 2
   "/etc/texmf/web2c/texmf.cnf" 1760822055.89896 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -46,6 +46,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb" 1248133631 32298 c6d25bb16d1eac01ebdc6d7084126a1e ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
@@ -216,11 +217,11 @@
   "Notas Iniciales/GZK.png" 1760823066.54925 88152 0da1bf67f668d5ae9474bd3a3d2d12ac ""
   "Notas Iniciales/X_max_para_light_y_heavy.png" 1760823068.3929 84597 8cd1b1bd711d77845bfef0c6b0589440 ""
   "Notas Iniciales/asymmetry_amplitude.png" 1760823064.21948 87277 57f9bd3c2a3e44db4e740ebe6b4cb364 ""
-  "Trabajo.tex" 1764699272.77118 39327 63a360023ac67dcc1a2b5f6bd6c7d9b4 ""
-  "main.aux" 1764699275.34497 5406 71e8404144c85bfdfc36237a80b7b984 "pdflatex"
+  "Trabajo.tex" 1768926556.42397 45310 cab77fa628247a5f6e9452449d286741 ""
+  "main.aux" 1768926559.26821 5402 77c41721e7a357821fdca8c1c546f2b5 "pdflatex"
   "main.bbl" 1762874805.63327 3920 7ec4411ea035d4e9582e43b7ebd27263 "biber main"
-  "main.out" 1764699275.34597 870 be158f495dfc5a368711a8e382d331b8 "pdflatex"
-  "main.run.xml" 1764699275.34964 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
+  "main.out" 1768926559.27221 870 be158f495dfc5a368711a8e382d331b8 "pdflatex"
+  "main.run.xml" 1768926559.2782 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
   "main.tex" 1764697511.17072 3239 6931ce71df86564515470f55fc98a1f5 ""
   (generated)
   "main.aux"
