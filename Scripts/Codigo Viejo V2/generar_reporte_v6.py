@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-generar_reporte_v5.py
+generar_reporte_v6.py
 Autor: Lautaro Silva Pizzi (Pierre Auger Observatory - UMD)
-Versión: 5.0 (Tabla Final con Errores)
+Versión: 6.0 (Tabla Final con Errores)
 """
 
 import os
@@ -542,43 +542,63 @@ def run_analysis(pdf, folder_path):
         ax_final.legend()
         ax_final.grid(True, which='both', linestyle='--', alpha=0.5)
         pdf.add_plot(fig_final)
-    
+        
     # =========================================================================
-    # 8. PERFILES AZIMUTALES INFILL (MATRIZ R vs THETA) - CON ESTADÍSTICA
+    # 8. PERFILES AZIMUTALES INFILL (OPTIMIZADO: ALTA ESTADÍSTICA)
     # =========================================================================
-    pdf.chapter_title("8. Perfiles Infill (Evolución Radial)")
+    pdf.chapter_title("8. Perfiles Infill (Bines Anchos)")
     
-    # Configuración de Bines Radiales (Aumentamos el rango para tener estadística)
-    # Fusionamos el primer bin (0-400) que suele tener poca data con el siguiente si es necesario
-    # Pero probemos mantener la granularidad para ver el efecto.
-    r_edges = [0, 400, 800, 1200, 1600]
-    r_labels = ["0-400 m", "400-800 m", "800-1200 m", "1200-1600 m"]
+    # --- 1. CONFIGURACIÓN DE BINES MANUAL (La Clave) ---
+    # Usamos rangos anchos para acumular estadística y suavizar la curva.
     
-    # Filtramos Infill
+    # Radios: Aislamos 400-800 que es el mejor. Juntamos lo lejano.
+    # El bin 0-400 suele tener poca data en Infill, pero lo dejamos por completitud.
+    r_edges_manual = [0, 400, 800, 2000]
+    r_labels_manual = ["0-400 m (Core)", "400-800 m (Goldilocks)", "800-2000 m (Lejano)"]
+    
+    # Theta: Definimos solo 2 grandes regiones de interés.
+    # Bin 0: Verticales (Control negativo).
+    # Bin 1: Inclinadas (Donde está la física).
+    theta_edges_manual = [20, 40, 60] 
+    
+    # Filtramos Infill y calidad
     df_infill = df_new[
         (df_new['counterId'] >= 100000) & 
         (df_new['module_status'].isin(['candidate', 'rejected', 'saturated']))
     ].copy()
 
-    # Pre-cálculos
-    phi_deg_infill = np.rad2deg(df_infill['phi_plane']+np.pi)
+    # --- 2. MANEJO DE ÁNGULOS ---
+    phi_deg_infill = np.rad2deg(df_infill['phi_plane'])
+    
+    # IMPORTANTE: NO rotamos +180 aquí para mantener tu convención actual (pico en 180).
+    # Si quisieras alinearlo con el Denso, descomentá la siguiente línea:
+    # phi_deg_infill += 180 
+    
     df_infill['phi_deg_centered'] = (phi_deg_infill + 180) % 360 - 180
-    df_infill['r_bin_idx'] = pd.cut(df_infill['r_core'], bins=r_edges, labels=False, include_lowest=True)
+    
+    # Asignamos los bines manuales
+    df_infill['r_bin_manual'] = pd.cut(df_infill['r_core'], bins=r_edges_manual, labels=False, include_lowest=True)
+    df_infill['theta_bin_manual'] = pd.cut(df_infill['theta_REC'], bins=theta_edges_manual, labels=False, include_lowest=True)
 
-    for i in range(N_theta_bins):
-        th_min, th_max = theta_bins_deg[i], theta_bins_deg[i+1]
+    # --- BUCLE DE PLOTEO ---
+    # Iteramos sobre los bines manuales de Theta
+    for i in range(len(theta_edges_manual) - 1):
+        th_min = theta_edges_manual[i]
+        th_max = theta_edges_manual[i+1]
         
         pdf.add_page()
         pdf.set_font("Helvetica", "B", 12)
-        pdf.cell(0, 10, f"Bin Theta {i}: {th_min:.1f} - {th_max:.1f} deg (Evolución Radial Infill)", 0, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.cell(0, 10, f"Rango Theta Consolidado: {th_min:.0f}° - {th_max:.0f}°", 0, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         
-        df_th = df_infill[df_infill['theta_bin_idx'] == i]
+        df_th = df_infill[df_infill['theta_bin_manual'] == i]
         
         if df_th.empty:
             pdf.cell(0, 10, "Sin datos.", 0, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
             continue
 
-        fig, axs = plt.subplots(4, 3, figsize=(15, 22), sharex=True) # sharey quitado para permitir escalas dinámicas
+        # Figura: 3 Filas (Radios) x 3 Columnas (Variables)
+        # Aumentamos figsize para que se vea claro
+        fig, axs = plt.subplots(3, 3, figsize=(15, 18), sharex=True)
         
         configs = [
             ('nMuones_REC', r'$N_\mu^{REC}$', 'royalblue'), 
@@ -586,77 +606,60 @@ def run_analysis(pdf, folder_path):
             ('sdSignal', 'SD Signal', 'crimson')
         ]
 
-        for j in range(4): 
-            r_label = r_labels[j]
-            df_r = df_th[df_th['r_bin_idx'] == j]
+        for j in range(3): # 3 Rangos radiales manuales
+            r_label = r_labels_manual[j]
+            df_r = df_th[df_th['r_bin_manual'] == j]
             
-            # Chequeo rápido de vacío
-            if df_r.empty or len(df_r) < 20:
-                for k in range(3):
-                    axs[j, k].text(0.5, 0.5, "Vacio", ha='center', transform=axs[j, k].transAxes, color='gray')
-                    axs[j, k].set_yticks([])
-                axs[j, 0].set_ylabel(f"{r_label}", fontweight='bold', fontsize=10)
+            # Filtro de estadística mínima por anillo
+            if df_r.empty or len(df_r) < 50:
+                axs[j, 0].set_ylabel(f"{r_label}\n(Poca Data)", fontweight='bold', fontsize=9)
                 continue
 
-            # Bining y Estadística
+            # Bining en Phi (Mantenemos la granularidad angular)
             df_r['phi_bin'] = pd.cut(df_r['phi_deg_centered'], bins=phi_bin_edges)
-            
             stats = df_r.groupby('phi_bin', observed=True).agg({
-                'nMuones_REC': ['mean', 'sem', 'count'], 
-                'nMuones_MC': ['mean', 'sem', 'count'], 
-                'sdSignal': ['mean', 'sem', 'count']
+                'nMuones_REC': ['mean', 'sem'], 
+                'nMuones_MC': ['mean', 'sem'], 
+                'sdSignal': ['mean', 'sem']
             })
+
+            # Curva de Referencia Visual (Coseno genérico para guiar el ojo)
+            # Fase: Si el pico está en 180, usamos cos(x + pi) o -cos(x)
+            x_ref = np.linspace(-180, 180, 100)
+            y_ref = 1 + 0.05 * np.cos(np.deg2rad(x_ref) + np.pi) 
 
             for k, (col, label, color) in enumerate(configs):
                 ax = axs[j, k]
                 
-                # Datos
                 means = stats[col]['mean']
                 sems = stats[col]['sem']
-                counts = stats[col]['count'] # <--- ESTO ES LO QUE PEDISTE
-                x = phi_centers
+                norm = means.mean()
                 
-                # --- EJE DERECHO: HISTOGRAMA DE CUENTAS (Estadística) ---
-                ax2 = ax.twinx()
-                # Graficamos las cuentas como barras grises al fondo
-                ax2.bar(x, counts, width=25, color='gray', alpha=0.15, label='Events')
-                ax2.set_ylim(0, counts.max() * 1.5) # Dejar espacio arriba para la señal
-                ax2.set_yticks([]) # Ocultamos números para no ensuciar, o dejales si querés ver N exacto
+                if pd.isna(norm) or norm == 0: continue
+
+                # Puntos limpios (sin lineas)
+                ax.errorbar(phi_centers, means/norm, yerr=sems/norm, 
+                            fmt='o', color=color, markersize=6, capsize=4, elinewidth=1.5, label='Data')
                 
-                # --- EJE IZQUIERDO: SEÑAL (Física) ---
-                # Normalizamos a 1.0 para comparar amplitud, pero usando el promedio ponderado
-                norm_factor = means.mean()
-                if pd.isna(norm_factor) or norm_factor == 0: continue
+                # Curva Guía (Solo visual, no es un fit real)
+                if i == 1: # Solo mostramos la guía en el bin inclinado (donde esperamos señal)
+                    ax.plot(x_ref, y_ref, 'k--', alpha=0.2, label='Ref')
 
-                y = means / norm_factor
-                y_err = sems / norm_factor
-
-                # Plot limpio sin líneas
-                ax.errorbar(x, y, yerr=y_err, fmt='o', color=color, 
-                            markersize=5, capsize=3, elinewidth=1.5, zorder=10)
-                
-                # Línea de referencia
-                ax.axhline(1.0, color='black', linestyle=':', alpha=0.4)
-
-                # Decoración
+                ax.grid(True, alpha=0.3, linestyle='--')
                 ax.set_xlim(-180, 180)
-                ax.grid(True, alpha=0.2)
                 
-                # Títulos y Etiquetas
+                # Títulos y Ejes
                 if j == 0: ax.set_title(label, fontsize=12, fontweight='bold')
-                if j == 3: ax.set_xlabel(r"$\phi$ [deg]", fontsize=10)
+                if j == 2: ax.set_xlabel(r"$\phi$ [deg]", fontsize=10)
+                if k == 0: ax.set_ylabel(f"{r_label}\nNorm. Amp.", fontweight='bold', fontsize=9)
                 
-                # Etiqueta lateral (Radio)
-                if k == 0: 
-                    ax.set_ylabel(f"{r_label}\nNorm. Amp.", fontweight='bold', fontsize=9)
-                
-                # Ajuste de escala Y inteligente
-                # Evita que un punto outlier con error gigante aplaste todo el gráfico
-                valid_y = y[y_err < 0.2] # Filtramos puntos con error gigante para el auto-scale
-                if not valid_y.empty:
-                    y_span = valid_y.max() - valid_y.min()
-                    y_mid = valid_y.mean()
-                    ax.set_ylim(y_mid - max(y_span, 0.05), y_mid + max(y_span, 0.05))
+                # Auto-escala inteligente
+                vals = means/norm
+                if not vals.isna().all():
+                    v_span = vals.max() - vals.min()
+                    # Aseguramos un mínimo de rango para no ver ruido plano amplificado
+                    rango = max(v_span, 0.05) 
+                    ax.set_ylim(vals.mean() - rango, vals.mean() + rango)
 
         plt.subplots_adjust(hspace=0.1, wspace=0.15)
         
@@ -664,10 +667,9 @@ def run_analysis(pdf, folder_path):
         plt.savefig(buf, format='png', dpi=120, bbox_inches='tight')
         buf.seek(0)
         plt.close(fig)
-        
         pdf.image(buf, x=pdf.l_margin, w=pdf.w - 2*pdf.l_margin)
         pdf.ln()
-
+        
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("folder", help="Carpeta con parquets")
