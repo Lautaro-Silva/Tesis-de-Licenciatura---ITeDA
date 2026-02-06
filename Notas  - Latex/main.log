@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  20 JAN 2026 13:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.10.18)  6 FEB 2026 10:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1031,13 +1031,13 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `subscript' on input line 95.
 
 [3]
-<Notas Iniciales/GZK.png, id=64, 513.71925pt x 396.2805pt>
+<Notas Iniciales/GZK.png, id=68, 513.71925pt x 396.2805pt>
 File: Notas Iniciales/GZK.png Graphic file (type png)
 <use Notas Iniciales/GZK.png>
 Package pdftex.def Info: Notas Iniciales/GZK.png  used on input line 109.
 (pdftex.def)             Requested size: 455.24411pt x 351.18893pt.
 [4 <./Notas Iniciales/GZK.png>]
-<Notas Iniciales/X_max_para_light_y_heavy.png, id=72, 513.71925pt x 287.8755pt>
+<Notas Iniciales/X_max_para_light_y_heavy.png, id=76, 513.71925pt x 287.8755pt>
 
 File: Notas Iniciales/X_max_para_light_y_heavy.png Graphic file (type png)
 <use Notas Iniciales/X_max_para_light_y_heavy.png>
@@ -1055,23 +1055,13 @@ Overfull \hbox (20.65pt too wide) in paragraph at lines 140--141
  []
 
 [5 <./Notas Iniciales/X_max_para_light_y_heavy.png>]
-<Notas Iniciales/asymmetry_amplitude.png, id=79, 531.78674pt x 422.17725pt>
+<Notas Iniciales/asymmetry_amplitude.png, id=83, 531.78674pt x 422.17725pt>
 File: Notas Iniciales/asymmetry_amplitude.png Graphic file (type png)
 <use Notas Iniciales/asymmetry_amplitude.png>
 Package pdftex.def Info: Notas Iniciales/asymmetry_amplitude.png  used on input
  line 151.
 (pdftex.def)             Requested size: 455.24411pt x 361.40977pt.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 157--114
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 157--114
-
- []
-
-(./Trabajo.tex [6 <./Notas Iniciales/asymmetry_amplitude.png>]
+) (./Trabajo.tex [6 <./Notas Iniciales/asymmetry_amplitude.png>]
 Overfull \hbox (9.03122pt too wide) in paragraph at lines 10--11
 [][]$\OT1/cmtt/m/n/10.95 https : / / www . sciencedirect . com / science / arti
 cle / abs / pii / S0168900207014106 ? via %
@@ -1081,55 +1071,63 @@ cle / abs / pii / S0168900207014106 ? via %
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 39.
-[8] [9]
-Overfull \hbox (20.93843pt too wide) in paragraph at lines 138--139
+nput line 41.
+[8]
+Overfull \hbox (20.65pt too wide) in paragraph at lines 102--103
+[][][][][][][] 
+ []
+
+[9]
+Overfull \hbox (20.93843pt too wide) in paragraph at lines 162--163
 []\OT1/cmr/bx/n/10.95 Soluci^^Son 1: \OT1/cmr/m/n/10.95 Cam-bia-mos la l^^Sogi-
 ca pa-ra ite-rar di-rec-ta-men-te so-bre el [][][][] ([][][][][]
  []
 
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 141.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 165.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 141.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 165.
 [10] [11]
-Overfull \hbox (60.3622pt too wide) in paragraph at lines 196--197
+Overfull \hbox (60.3622pt too wide) in paragraph at lines 220--221
 []\OT1/cmr/bx/n/10.95 Creaci^^Son del "Mega-DataFrame": \OT1/cmr/m/n/10.95 En e
 l nue-vo no-te-book de an^^Sali-sis, []
  []
 
+
+Overfull \hbox (31.02505pt too wide) in paragraph at lines 238--239
+[][][][][][][] 
+ []
+
 [12] [13] [14] [15] [16] [17]
-Overfull \hbox (27.39143pt too wide) in paragraph at lines 427--428
+Overfull \hbox (27.39143pt too wide) in paragraph at lines 455--456
 []\OT1/cmr/m/n/10.95 Para co-rre-gir es-to, tu-ve que re-procesar to-dos los AD
 STs con una nue-va fun-ci^^Son, []
  []
 
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 452.
 [18]
-<Imagenes Trabajo/umd_rec_todo.png, id=173, 1183.42125pt x 731.73375pt>
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 480.
+<Imagenes Trabajo/umd_rec_todo.png, id=176, 1183.42125pt x 731.73375pt>
 File: Imagenes Trabajo/umd_rec_todo.png Graphic file (type png)
 <use Imagenes Trabajo/umd_rec_todo.png>
 Package pdftex.def Info: Imagenes Trabajo/umd_rec_todo.png  used on input line 
-470.
+504.
 (pdftex.def)             Requested size: 455.24411pt x 281.48947pt.
-<Imagenes Trabajo/masas_sybil_umd_rec.png, id=174, 1187.43625pt x 778.91pt>
+[19]
+<Imagenes Trabajo/masas_sybil_umd_rec.png, id=183, 1187.43625pt x 778.91pt>
 File: Imagenes Trabajo/masas_sybil_umd_rec.png Graphic file (type png)
 <use Imagenes Trabajo/masas_sybil_umd_rec.png>
 Package pdftex.def Info: Imagenes Trabajo/masas_sybil_umd_rec.png  used on inpu
-t line 482.
+t line 517.
 (pdftex.def)             Requested size: 364.19667pt x 238.89241pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<Imagenes Trabajo/comparacion.png, id=175, 1110.1475pt x 638.385pt>
+<Imagenes Trabajo/comparacion.png, id=184, 1110.1475pt x 638.385pt>
 File: Imagenes Trabajo/comparacion.png Graphic file (type png)
 <use Imagenes Trabajo/comparacion.png>
-Package pdftex.def Info: Imagenes Trabajo/comparacion.png  used on input line 4
-93.
+Package pdftex.def Info: Imagenes Trabajo/comparacion.png  used on input line 5
+28.
 (pdftex.def)             Requested size: 364.19667pt x 209.43059pt.
-[19 <./Imagenes Trabajo/umd_rec_todo.png>] [20 <./Imagenes Trabajo/masas_sybil_
-umd_rec.png> <./Imagenes Trabajo/comparacion.png>]
+[20 <./Imagenes Trabajo/umd_rec_todo.png> <./Imagenes Trabajo/masas_sybil_umd_r
+ec.png>] [21 <./Imagenes Trabajo/comparacion.png>]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1137,30 +1135,30 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.524 
+l.557 
       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[21]
-Overfull \hbox (58.2817pt too wide) in paragraph at lines 539--540
+
+Overfull \hbox (58.2817pt too wide) in paragraph at lines 572--573
 []\OT1/cmr/m/n/10.95 Se de-sa-rroll^^So e im-ple-ment^^So una ru-ti-na de ro-ta
 -ci^^Son ma-nual en el script de lec-tu-ra (\OT1/cmtt/m/n/10.95 readADST[]surfa
 ce[]v11\OT1/cmr/m/n/10.95 ).
  []
 
-)
+[22] [23])
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 11
 9.
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-) [22]
+)
 
 Package caption Warning: Unused \captionsetup[sub] on input line 34.
 See the caption package documentation for explanation.
 
-[23] (./main.aux
+[24] (./main.aux
 LaTeX Info: Redefining \sptext on input line 16.
 LaTeX Info: Redefining \. on input line 16.
 LaTeX Info: Redefining \% on input line 16.
@@ -1170,7 +1168,7 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BE158F495DFC5A368711A8E382D331B8;870.
+(rerunfilecheck)             Checksum: 042EAE54AB3F00BCD07B669393ADCA49;956.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
@@ -1179,10 +1177,10 @@ Here is how much of TeX's memory you used:
  34700 strings out of 474222
  688858 string characters out of 5748732
  2049975 words of memory out of 5000000
- 56472 multiletter control sequences out of 15000+600000
+ 56470 multiletter control sequences out of 15000+600000
  568983 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,7n,117p,812b,3511s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,7n,117p,812b,2734s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
@@ -1205,10 +1203,10 @@ lic/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/latxfont/lasy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095
 .pfb>
-Output written on main.pdf (23 pages, 856057 bytes).
+Output written on main.pdf (24 pages, 859724 bytes).
 PDF statistics:
- 321 PDF objects out of 1000 (max. 8388607)
- 235 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
- 99 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 329 PDF objects out of 1000 (max. 8388607)
+ 242 compressed objects within 3 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 107 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -12,6 +12,8 @@ Papers posibles que quiero leer:
 	\item \url{https://arxiv.org/pdf/1208.2154}
 \end{itemize}
 
+NUNCA LEI NIGUNO JEJE
+
 
 \subsection*{Update 21/10: Limpieza de Datos (Simulaciones Marina)}
 
@@ -81,7 +83,7 @@ Lo que hice es esencialmente plotear los datos de un solo ADST en 3D donde veo l
 Hice el análisis de como se comportaban los datos de manera global, viendo:
 
 \begin{itemize}
-	\item Relación entre la $E_{MC}$ y $E_{REC}$ donde se ve que anda mayoritariamente bien pero con una consistente subestima la energía por aproximadamente 0.2 ordenes de magnitud. 
+	\item Relación entre la $E_{MC}$ y $E_{REC}$ donde se ve que anda mayoritariamente bien pero con una consistente subestimacion la energía por aproximadamente 0.2 ordenes de magnitud. 
 	\item Por el lado de los $\theta$ y $\phi$ no hay mayores problemas y anda re bien.
 \end{itemize}
 
@@ -93,7 +95,11 @@ Hice lo que creo que es lo que tengo que hacer, que es, agarra mis datos, binear
 
 \subsubsection*{Resumen de Datos (04/11)}
 
-Voy a hacer un mini resumen los datos (ADST de Alexey) a los que tengo acceso actualmente (04/11):
+Voy a hacer un mini resumen los datos (ADST de Alexey) a los que tengo acceso actualmente (04/11). 
+
+\colorbox{yellow}{
+	\parbox{\dimexpr\textwidth-2\fboxsep}{%
+		\textbf{UPDATE 02/02/2026}:}}
 
 \begin{itemize}
 	\item Sibyl (modelo hadrónico)
@@ -103,9 +109,15 @@ Voy a hacer un mini resumen los datos (ADST de Alexey) a los que tengo acceso ac
 			\item Helio ×20
 			\item Hierro ×20
 			\item Oxígeno ×20
-			\item Protones (pero no tengo acceso)
+			\item Protones x20
 		\end{itemize}
-		\item Energías = $10^{18-18.5}\,\text{eV}$ (pero no tengo acceso)
+		\item Energías = $10^{18-18.5}\,\text{eV}$ (revisar todas)
+		\begin{itemize}
+			\item Helio ×12
+			\item Hierro (pero vacío)
+			\item Oxígeno ×3
+			\item Protones x1
+		\end{itemize}
 	\end{itemize}
 	\item QGS (modelo hadrónico)
 	\begin{itemize}
@@ -114,19 +126,31 @@ Voy a hacer un mini resumen los datos (ADST de Alexey) a los que tengo acceso ac
 			\item Helio ×20
 			\item Hierro (pero vacío)
 		\end{itemize}
-		\item Energías = $10^{18-18.5}\,\text{eV}$ (pero no tengo acceso)
+		\item Energías = $10^{18-18.5}\,\text{eV}$ (revisar todas)
+		\begin{itemize}
+			\item Helio (pero vacío)
+			\item Hierro (pero no tengo acceso)
+			\item Oxígeno (pero no tengo acceso)
+			\item Protones (pero no tengo acceso)
+		\end{itemize}
 	\end{itemize}
 	\item EPOSLHC (modelo hadrónico)
 	\begin{itemize}
-		\item Energías = $10^{17.5-18}\,\text{eV}$
+		\item Energías = $10^{17.5-18}\,\text{eV}$ (revisar)
 		\begin{itemize}
-			\item Helio ×2 (raro)
+			\item Helio ×2
 		\end{itemize}
-		\item Energías = $10^{18-18.5}\,\text{eV}$ (pero no tengo acceso)
+		\item Energías = $10^{18-18.5}\,\text{eV}$
+		\begin{itemize}
+			\item Helio ×20
+			\item Hierro (pero vacío)
+			\item Oxígeno (pero no tengo acceso))
+			\item Protones (pero no tengo acceso))
+		\end{itemize}
 	\end{itemize}
 \end{itemize}
 
-Una de las cosas que puedo probar para ver que onda es, como yo se que las asimetrias son visibles en los datos de superficie con el SD, puedo ver si puedo reproducir lo que vio Bradfield solo con los muones del SD y ver si el problema es: o el Offline, o mi codigo, o los datos de las lluvias simuladas en si mismas. Por suerte esta info ya la tenia en los ADST procesados pero tuve que modificar otras cosas.
+Una de las cosas que puedo probar para ver que onda es, como yo se que las asimetrías son visibles en los datos de superficie con el SD, puedo ver si puedo reproducir lo que vio Bradfield solo con los muones del SD y ver si el problema es: o el Offline, o mi codigo, o los datos de las lluvias simuladas en si mismas. Por suerte esta info ya la tenia en los ADST procesados pero tuve que modificar otras cosas.
 
 
 \subsection*{Update 04/11 (Tarde): El Deep Dive en el Procesamiento}
@@ -134,7 +158,7 @@ Una de las cosas que puedo probar para ver que onda es, como yo se que las asime
 Bueno, estuve investigando por qué corno no veía la asimetría. Resulta que el problema no era (solo) el análisis, sino \textbf{cómo estaba leyendo los datos}. Hablé con Carmi y encontramos varios problemas fundamentales:
 
 \begin{itemize}
-	\item \textbf{Problema 1: Los IDs 90k no aparecían.} Mi primer script de lectura (\lstinline|getCounterList|) iteraba sobre el \lstinline|SDEvent| (\lstinline|sEvent.GetStationVector()|). Pero los detectores del anillo denso (\lstinline|90k|) son "ficticios" y no tienen un SD "real", por lo que \textbf{el script los estaba ignorando por completo} a causa del filtro reyected.
+	\item \textbf{Problema 1: Los IDs 90k no aparecían.} Mi primer script de lectura (\lstinline|getCounterList|) iteraba sobre el \lstinline|SDEvent| (\lstinline|sEvent.GetStationVector()|). Pero los detectores del anillo denso (\lstinline|90k|) son 'ficticios' y no tienen un SD 'real', por lo que \textbf{el script los estaba ignorando por completo} a causa del filtro reyected.
 	\item \textbf{Solución 1:} Cambiamos la lógica para iterar directamente sobre el \lstinline|MDEvent| (\lstinline|mEvent.CountersBegin()|), tal como hace Carmi en su C++. Esto ahora levanta \textbf{todos} los counters (los \lstinline|4xxx| del infill y los \lstinline|90xxx| del anillo denso).
 	
 	\item \textbf{Problema 2: El filtro `rejected`.} Al correr el script nuevo, vi que $\approx 1/3$ de todos los módulos (\lstinline|28k| de \lstinline|81k|) estaban marcados como \lstinline|rejected|. Lo más importante: ¡casi todos los \lstinline|90k| estaban en esa lista!
@@ -205,9 +229,13 @@ Ahora sí, tengo el dataset maestro, completo, validado y con toda la estadísti
 Con el "mega-DataFrame" (1.56M de filas) cargado y la metodología de análisis de \lstinline|S/<S>| con barras de error (SEM) definida, corrí los plots.
 
 \begin{itemize}
-	\item \textbf{Primer Resultado (Frustrante):} Los plots de asimetría, incluso para bins de $\theta$ inclinados (ej. $40^\circ < \theta < 52^\circ$), \textbf{salen planos} (ver Figura X). Tanto UMD como SD (Total) muestran puntos que oscilan alrededor de 1.0, sin una campana clara.
+	\item \textbf{Primer Resultado (Frustrante):} Los plots de asimetría, incluso para bins de $\theta$ inclinados (ej. $40^\circ < \theta < 52^\circ$), \textbf{salen planos}. Tanto UMD como SD (Total) muestran puntos que oscilan alrededor de 1.0, sin una campana clara.
 	
-	\item \textbf{Datos Nulos:} El tercer plot, \lstinline|sdMuonSignal|, salió completamente vacío. Al inspeccionar el \lstinline|df_new.head()|, confirmé que esta columna es \textbf{siempre 0.0} en los ADSTs que estoy usando. Aparentemente, la reconstrucción de la señal muónica del SD no se corrió o no se guardó en estas simulaciones. Por lo tanto, \textbf{descarto \lstinline|sdMuonSignal|} del análisis.
+	
+	\item \colorbox{yellow}{
+		\parbox{\dimexpr\textwidth-2\fboxsep}{% 
+		
+		\textbf{Datos Nulos:} El tercer plot, \lstinline|sdMuonSignal|, salió completamente vacío. Al inspeccionar el \lstinline|df_new.head()|, confirmé que esta columna es \textbf{siempre 0.0} en los ADSTs que estoy usando. Aparentemente, la reconstrucción de la señal muónica del SD no se corrió o no se guardó en estas simulaciones. Por lo tanto, \textbf{descarto \lstinline|sdMuonSignal|} del análisis.}}
 	
 	\item \textbf{Hipótesis (B-Field):} La falta de asimetría, incluso en el SD (Total) donde debería ser más fuerte, me hace preguntarme de la configuración de la simulación. La asimetría azimutal principal se debe al efecto geomagnético ($q \cdot (\vec{v} \times \vec{B})$). Aunque dudo que este sea el caso (preguntaré a Alexey/directores), es una explicación para una asimetría nula.
 	
@@ -282,7 +310,7 @@ Siguiendo el plan, el próximo paso era procesar el resto de los datasets. Para 
 	\item \textbf{Ejecución:} Corrí este script sobre los \textbf{6 sets de simulación} que tengo disponibles (Proton, Helio, Oxígeno y Hierro de SIB23e @ 17.5-18; Helio de QGSJet @ 17.5-18; y Helio de EPOSLHC @ 18.0-18.5).
 \end{itemize}
 
-Los reportes en PDF generados contienen todos los resultados. Los plots de resolución de energía y ángulos son consistentes en todos los datasets, mostrando el mismo sesgo sistemático en energía ($\approx -0.12$) y una excelente resolución angular (ej. \textbf{Figuras 4-6}).
+Los reportes en PDF generados contienen todos los resultados. Los plots de resolución de energía y ángulos son consistentes en todos los datasets, mostrando el mismo sesgo sistemático en energía ($\approx -0.12$) y una excelente resolución angular.
 
 Lo más importante son las tablas de resumen de los fits de asimetría (Página 17 de cada reporte). Al compararlas, emergieron patrones físicos clarísimos.
 
@@ -417,14 +445,14 @@ La frustración tenía una causa 100\% real: el problema no era la física, sino
 \begin{itemize}
 	\item \textbf{El Error (El "Lavado"):} Mi script (\lstinline|readADST_surface_v6|) calculaba el ángulo azimutal como \lstinline|phi_rel = sdStation.GetAzimuthSP() - sShower.GetAzimuth()| para \textit{todos} los detectores. Esto es correcto para el infill (los \lstinline|104k|), que están fijos en el suelo.
 	
-	\item \textbf{El Descubrimiento (¡La clave!):} Fede me explicó que las simulaciones del anillo denso (\lstinline|90k|) son especiales: las estaciones se "acomodan" al eje de la lluvia MC. La estación \lstinline|90000| está \textbf{siempre} en $\phi=0$ (temprano) y la \lstinline|90006| en $\phi=180$ (tardío). Su \lstinline|GetAzimuthSP()| \textit{ya es} el ángulo relativo correcto.
+	\item \textbf{El Descubrimiento (¡La clave!):} Fede me explicó que las simulaciones del anillo denso (\lstinline|90k|) son especiales: las estaciones se 'acomodan' al eje de la lluvia MC. La estación \lstinline|90000| está \textbf{siempre} en $\phi=0$ (temprano) y la \lstinline|90006| en $\phi=180$ (tardío). Su \lstinline|GetAzimuthSP()| \textit{ya es} el ángulo relativo correcto.
 	
 	\item \textbf{La Consecuencia:} Al restarle \lstinline|sShower.GetAzimuth()| a un ángulo que ya era relativo, estaba rotando los datos aleatoriamente en cada evento. Esto promediaba la asimetría a cero. Los resultados malos, inconsistentes y raros eran una consecuencia directa de este bug.
 \end{itemize}
 
 \subsubsection*{Pipeline Definitivo (v7)}
 
-Para corregir esto, tuve que re-procesar todos los ADSTs con una nueva función, \lstinline|readADST_surface_v7|.
+Para corregir esto, tuve que re-procesar todos los ADSTs con una nueva función, \lstinline|readADST_surface_v7|
 
 \begin{itemize}
 	\item \textbf{Cálculo de $\phi$ Corregido:} La nueva función tiene un \lstinline|if sdId >= 90000:| que aplica la lógica correcta:
@@ -465,6 +493,12 @@ Se implementó una clase en Python encargada de:
 
 \subsubsection*{Validación el objetivo principal - UMD REC}
 Se validó la señal de asimetría utilizando la información de la reconstrucción ($N_{\mu}^{REC}$) para todos los modelos, energías y primarios.
+
+Se ve claramente que los datos del Helio EPOS 18-18.5eV tuvieron problemas y esto se ve cuando se observa el informe de este dataset. Los datos no fueron super conformes al ajuste y por eso dio grande el error. 
+
+HAY QUE REVISAR SI ACA NO HAY QUE FITEAR ALGO CON EL DOBLE DE FRECUENCIA (DISCUTIR POR QUE).  PUEDE SER UN EFECTO COMBINADO CON EL EFECTO GEOMAGNETICO
+
+
 \begin{figure}[ht!]
 	\centering
 	\includegraphics[width=1\textwidth]{Imagenes Trabajo/umd_rec_todo.png} % Asimetría Verdad MC
@@ -472,12 +506,13 @@ Se validó la señal de asimetría utilizando la información de la reconstrucci
 	\label{fig:umd_rec_all}
 \end{figure}
 
-Se ve claramente que los datos del Helio EPOS 18-18.5eV tuvieron problemas y esto se ve cuando se observa el informe de este dataset. Los datos no fueron super conformes al ajuste y por eso dio grande el error.
+\vspace{10cm}
+
 
 \subsubsection*{Discriminación de Masa (UMD Reconstruido)}
 Al aplicar el análisis sobre la variable reconstruida ($N_{\mu}^{REC}$), la separación de masas se mantiene visible y estadísticamente significativa en el rango angular de interés.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Imagenes Trabajo/masas_sybil_umd_rec.png} % Money Plot UMD REC
 	\caption{Discriminación de Masa usando la reconstrucción ($N_{\mu}^{REC}$) para el modelo SIBYLL a 17.5 log eV. Se observa una separación ideal entre las curvas de Protón, Helio, Oxigeno y Hierro.}
@@ -486,16 +521,14 @@ Al aplicar el análisis sobre la variable reconstruida ($N_{\mu}^{REC}$), la sep
 
 
 \subsubsection*{Comparacion entre UMD REC, UMD MC y SD REC}
-Se intento comparar los ajustes de los 3 "detectores" o indicadores para ver si su comportamiento era el esperado.
+Se intento comparar los ajustes de los 3 'detectores' o indicadores para ver si su comportamiento era el esperado.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Imagenes Trabajo/comparacion.png} % Money Plot UMD REC
 	\caption{Comparacion entre los detectores para modelo SIBYLL a 17.5 log eV y un primario de Helio. Se observa que efectivamente en el SD la asimetría es mas notoria y a su vez que ambas del UMD son muy similares en forma pero que hay cierta perdida en la reconstrucción por lo que es menor a la de MC.}
 	\label{fig:comparacion_sd_umd}
 \end{figure}
-
-
 
 \section*{Estado de Situación y Hoja de Ruta - 13 de Enero 2026}
 
@@ -511,7 +544,7 @@ Actualmente, el trabajo se centra en resolver discrepancias en el Array Estánda
 	
 	\item \textbf{Separación de Componentes (Muónica vs. Electromagnética):}
 	Rehacer el código de lectura de datos (ADST) para analizar por separado la contribución muónica y la electromagnética (EM) en las estaciones del SD.
-	\textit{Objetivo:} Verificar que la suma de ambas componentes recupere la señal total que se está graficando actualmente y estudiar si la magnitud de la asimetría $A_1$ varía significativamente entre la componente pura de muones y la "contaminación" EM.
+	\textit{Objetivo:} Verificar que la suma de ambas componentes recupere la señal total que se está graficando actualmente y estudiar si la magnitud de la asimetría $A_1$ varía significativamente entre la componente pura de muones y la 'contaminación' EM.
 	
 	\item \textbf{Estudio de la Fase ($\phi_0$) Libre:}
 	Modificar el ajuste de la asimetría para permitir una fase variable: 
@@ -533,7 +566,7 @@ Al comparar la variable nativa \texttt{GetAzimuthSP} con el ángulo azimutal geo
 	\item \textbf{Anillo Denso (90k):} Muestra diferencias esperadas debido a la proyección.
 	\item \textbf{Infill (100k):} Muestra una diferencia exactamente cero (un pico delta en $\Delta\phi = 0$).
 \end{itemize}
-Esto confirma que el \texttt{Offline} no estaba corrigiendo la proyección geométrica para el Infill, lo cual "lavaba" la señal de asimetría al mezclar estaciones temporalmente "tempranas" con estaciones "laterales".
+Esto confirma que el \texttt{Offline} no estaba corrigiendo la proyección geométrica para el Infill, lo cual 'lavaba' la señal de asimetría al mezclar estaciones temporalmente 'tempranas' con estaciones 'laterales'.
 
 \subsubsection*{2. La Solución: Implementación de Rotación de Euler 3D}
 Se desarrolló e implementó una rutina de rotación manual en el script de lectura (\texttt{readADST\_surface\_v11}). La transformación lleva el vector relativo de la estación del sistema de coordenadas terrestre al \textit{Shower Plane} (sistema intrínseco de la lluvia):
@@ -557,4 +590,39 @@ Una vez corregida la geometría, se analizó la asimetría en función de la dis
 	\item \textbf{Zona Óptima ($400 < r < 800$ m):} Se recuperó una señal cosenoidal limpia ($N_{\mu}^{REC}$ y $S_{tot}$) con el máximo en $\phi=0$ (temprano), consistente con la física esperada.
 \end{itemize}
 
-\textbf{Conclusión:} El pipeline ahora filtra eventos con $r_{plane} < 400$ m y utiliza exclusivamente las coordenadas transformadas por Euler para el Infill. Los ajustes preliminares muestran ahora amplitudes $A_1$ consistentes y significativas.
+ESTO TODAVIA NO ESTA TERMINADO Y ES UNA DE LAS COSAS A DISCUTIR.
+
+\section*{Actualización y Avances: Validación Geométrica y Pipeline v12 (Febrero 2026)}
+
+A partir de las inconsistencias observadas en la reconstrucción de la asimetría para el arreglo \textit{Infill}, se realizó una auditoría profunda del código de análisis y de las variables geométricas proporcionadas por el marco \textit{Offline} de Auger. A continuación se detallan los hallazgos críticos y las soluciones implementadas.
+
+\subsection*{1.Diagnóstico del Problema Geométrico}
+
+Se detectó que para las estaciones del \textit{Infill}, la variable azimutal estándar proporcionada por la simulación (\texttt{GetAzimuthSP}) presentaba una correlación 1:1 con el ángulo azimutal geométrico del terreno ($\phi_{ground}$).
+
+Esto indicaba un error sistemático en la interpretación de los datos: se estaba analizando la asimetría en la proyección del suelo en lugar del \textit{Shower Plane}. Este efecto de proyección distorsiona los ángulos azimutales, especialmente para lluvias muy inclinadas ($\theta > 40^{\circ}$), ``lavando'' la señal física de asimetría $A_1$.
+
+\subsection*{2. Validación de la Corrección (Gráfico de ``La Mariposa'')}
+
+Para validar la corrección, se graficó la diferencia entre el ángulo corregido y el ángulo del suelo ($\Delta \phi = \phi_{Euler} - \phi_{Ground}$) en función del ángulo cenital $\theta$.
+
+\begin{itemize}
+	\item Para lluvias verticales ($\theta \approx 0^{\circ}$), la diferencia es nula, confirmando la consistencia topológica.
+	\item Para lluvias inclinadas ($\theta \approx 60^{\circ}$), la corrección alcanza magnitudes de hasta $\pm 20^{\circ}$, dibujando una estructura característica de ``trompeta'' o ``mariposa''.
+\end{itemize}
+
+Esta estructura confirma que la corrección geométrica está actuando precisamente donde el efecto de proyección es máximo. Al aplicar esta corrección, los perfiles de asimetría para el Infill recuperaron la modulación cosenoidal esperada.
+
+\subsection{Estado de Tareas (Updated)}
+
+A continuación se actualiza la lista de tareas pendientes basada en los últimos avances:
+
+\begin{itemize}
+	\item[\checkmark] \textbf{[COMPLETADO]} Unificar lógica de IDs: Se estandarizó el pipeline para manejar tanto IDs físicos (4xxx) como lógicos (104xxx), evitando la pérdida de datos del Infill en simulaciones.
+	\item[\checkmark] \textbf{[COMPLETADO]} Implementar y validar Rotación de Euler para corrección geométrica del Infill.
+	\item[\checkmark] \textbf{[COMPLETADO]} Recuperar histogramas de control centrados en cero (Validación de fase $\phi_{SP}$ vs $\phi_{Ground}$).
+	\item[\checkmark] \textbf{[COMPLETADO]} Generar script de reporte automático robusto (v15) con métricas de resolución, limpieza y composición física.
+	\item[\checkmark] \textbf{[COMPLETADO]} Reprocesamiento masivo (Bulk Processing): Ejecutar el pipeline \texttt{v12} validado sobre los 6 datasets completos (4 SIBYLL, 1 EPOS, 1 QGS).
+	\item[\checkmark] \textbf{[COMPLETADO]} Levantar por separado las componentes muonicas y EM para el SD
+	\item[\textbf{--}] \textbf{[PENDIENTE]} Análisis comparativo de $A_1$ (Amplitud de Asimetría) entre modelos hadrónicos usando los datos reprocesados. Para esto falta terminar de ver como hacer los plots para el infill.
+\end{itemize}
