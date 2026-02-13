@@ -1,0 +1,6 @@
+/home/lsilva/Github/Tesis-de-Licenciatura---ITeDA/venv/lib/python3.12/site-packages/scipy/optimize/_minpack_py.py:989: RuntimeWarning: divide by zero encountered in divide
+  transform = 1.0 / sigma
+/home/lsilva/Github/Tesis-de-Licenciatura---ITeDA/Scripts/generar_reporte_v8.py:560: OptimizeWarning: Covariance of the parameters could not be estimated
+  popt, pcov = curve_fit(fit_func_deg, phi_fit_centers, stats_r['mean']/nr, p0=[0.05], sigma=stats_r['sem']/nr, absolute_sigma=True)
+Cargando DataFrames...
+Reporte generado exitosamente: Reporte_V8_parquet_epos_helio_18.pdf
