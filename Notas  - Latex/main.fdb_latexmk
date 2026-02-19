@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1762874804.65583 "main.bcf" "main.bbl" "main" 1771468327.33052 0
+["biber main"] 1762874804.65583 "main.bcf" "main.bbl" "main" 1771512446.91135 0
   "Referencias.bib" 1760822599.90602 685 3ae17c046b7e6f8007b37e7111f5b9ca ""
-  "main.bcf" 1771468327.17732 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
+  "main.bcf" 1771512446.72377 107098 45d43f2fce1392393f0d2b9c0232253c "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1771468324.22956 "main.tex" "main.pdf" "main" 1771468327.33089 2
+["pdflatex"] 1771512443.5856 "main.tex" "main.pdf" "main" 1771512446.91182 2
   "/etc/texmf/web2c/texmf.cnf" 1760822055.89896 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -219,11 +219,11 @@
   "Notas Iniciales/GZK.png" 1760823066.54925 88152 0da1bf67f668d5ae9474bd3a3d2d12ac ""
   "Notas Iniciales/X_max_para_light_y_heavy.png" 1760823068.3929 84597 8cd1b1bd711d77845bfef0c6b0589440 ""
   "Notas Iniciales/asymmetry_amplitude.png" 1760823064.21948 87277 57f9bd3c2a3e44db4e740ebe6b4cb364 ""
-  "Trabajo.tex" 1771468324.0682 56793 fffbeb6127cc53ed536df3e526750b55 ""
-  "main.aux" 1771468327.16932 7722 ef83f33bc472f4e2f6feb4691281e998 "pdflatex"
+  "Trabajo.tex" 1771512443.38431 64055 fc845ec85250369885cc3c1cd95e27af ""
+  "main.aux" 1771512446.71477 9336 55d2c25e77ffbea4dd03dffbd29a5894 "pdflatex"
   "main.bbl" 1762874805.63327 3920 7ec4411ea035d4e9582e43b7ebd27263 "biber main"
-  "main.out" 1771468327.17332 1414 9a25206659de336465fc4b33ecafba53 "pdflatex"
-  "main.run.xml" 1771468327.17932 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
+  "main.out" 1771512446.71877 4489 4416ceae414e3e4420a1531ecf60d70e "pdflatex"
+  "main.run.xml" 1771512446.72477 2306 628e0087c61ee8036d936d14edcd02fc "pdflatex"
   "main.tex" 1764697511.17072 3239 6931ce71df86564515470f55fc98a1f5 ""
   (generated)
   "main.aux"

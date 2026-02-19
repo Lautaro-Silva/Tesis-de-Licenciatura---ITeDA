@@ -711,3 +711,78 @@ Valores de $MF \ll 1$ a lo largo de estas matrices confirmarían empíricamente 
 	\item La asimetría geométrica es independiente de la escala de energía en el rango estudiado.
 	\item La respuesta del arreglo de detectores es altamente isotrópica, sin introducir modulaciones espurias asociadas a orientaciones preferenciales en el terreno.
 \end{itemize}
+
+
+\section{Planificación de Charla: Asimetrías Azimutales en UMD}
+
+\subsection{Objetivo General}
+Presentar la medición de la asimetría azimutal ($A_1$) en muones como una herramienta robusta para la discriminación de masa, validando primero una corrección geométrica crítica para el Infill y demostrando invarianzas físicas sistemáticas.
+
+\subsection{Estructura Narrativa de la Presentación}
+
+\subsubsection{Introducción y Definición (3 Slides $\rightarrow$ los dos plots de energía en una hoja)}
+
+\begin{itemize}
+	\item \textbf{Concepto:} Las lluvias inclinadas no son simétricas cuando estudiamos la asimetría temprano-tardía, a causa de que hay parte de la lluvia que atraviesa más atmósfera (y por ende interacciona más) que otra.
+	\item \textbf{El Observable:} Definir $S / \langle S \rangle = 1 + A_1 \cos(\phi - \phi_0)$ donde fijamos $\phi_0 = 0$.
+	\item \textbf{Dataset:} Mencionar que usamos simulaciones (SIBYLL, QGSJet, EPOS) y nos enfocamos en el \textit{Anillo Denso (90k)} como referencia y el \textit{Infill} tras corrección. Falta terminar de trabajar sobre el Infill.
+	\item Explicar que se hizo un estudio sistemático sobre las simulaciones en general, analizando criterios de calidad como evaluar si hay un sesgo sistemático sobre la energía del primario en la REC contra el MC (que se encontró para todos los datasets con un valor de $\approx -0.15$ en la escala logarítmica, es decir, subestima $0.15$ órdenes de magnitud) y que se hizo el mismo tipo de estudio con los ángulos $\theta$ y $\phi$ del eje del primario, donde no se encontró un sesgo significativo. \textbf{Mostrar los plots de resolución de energía}. Poner título de dataset, primario y modelo.
+\end{itemize}
+
+\subsubsection{La Validación Geométrica: ''El Fix de Euler'' (3 Slides $\rightarrow$ 3 plots de Euler, uno en cada hoja)}
+
+\textit{Objetivo: Ganar la confianza de la audiencia sobre la reconstrucción angular.}
+
+Aclarar que esto se mostrará con el dataset de SIB 17.5-18.0 Protón.
+\begin{enumerate}
+	\item \textbf{El Diagnóstico:} Mostrar Histograma \texttt{[Offline SP] - [Ground]}.
+	\begin{itemize}
+		\item \textit{Mensaje:} ''El pipeline estándar entregaba ángulos de suelo para el Infill, lavando la asimetría.''
+		\item \textit{Hipótesis:} Esto puede ser un problema general del código, es decir, un bug global de la reconstrucción estándar.
+		\item \textit{Demostración:} Plot donde se ven los residuos de la resta entre el ángulo que se supone que está en el plano de la lluvia (de cada estación) y el que está en el plano del piso que es una gaussiana centrada en cero con ancho de 4 grados.
+	\end{itemize}
+	\item \textbf{La Solución (Visual):} Mostrar Plot \textbf{''La Trompeta''} (Corrección vs $\theta$).
+	\begin{itemize}
+		\item \textit{Mensaje:} ''La corrección necesaria crece con el cenit, tal como predice la geometría 3D. Para lluvias muy verticales ($\theta \approx 0^\circ$) la deformación es casi cero, entonces no hay diferencia entre los dos métodos, pero ese efecto se exacerba para lluvias muy inclinadas.''
+	\end{itemize}
+	\item \textbf{La Confirmación:} Mostrar Plot \textbf{"La Serpiente"} (Corrección vs $\phi$).
+	\begin{itemize}
+		\item \textit{Mensaje:} "La razón por la que tenemos puntos en el centro de la 'trompeta' es porque hay detectores que, aun para las lluvias más deformadas, no se modifican angularmente (como en $0$, $\pi/2$, $\pi$, etc.). La corrección no es ruido, sigue una modulación física esperada."
+	\end{itemize}
+\end{enumerate}
+
+\subsubsection{Metodología de Ajuste del parámetro de asimetría $A_1$ (4 Slides $\rightarrow$ los 4 plots, uno por hoja)}
+\textit{Mostrar ejemplos de cómo se maneja el tema de los ajustes.}
+\begin{itemize}
+	\item Mostrar una tira de ajustes de algún bin $\theta$ (idealmente grande, donde se vea que la asimetría en el UMD es mayor que en el SD), y explicar que para el Anillo Denso la metodología fue separar los datos en bines de $\theta$ (se usaron 10 bines equiespaciados en $\sin^2(\theta)$). Una vez hecho eso, se grafican los datos en $\phi$ y se cuantifica la cantidad de muones normalizada en el bin polar. Sobre esa modulación sinusoidal se hace el ajuste $A_1$. Nuevamente, usando SIB 17.5-18.0 Protón.
+	\item Explicar que la causa de la mayor asimetría sobre el UMD que sobre el SD tiene que ver con que la componente EM (que es la que más contribuye al SD) se atenúa muchísimo a $\theta$ grande, cosa que no pasa con la componente muónica. \textbf{Acá mostrar el plot de la LDF (Sección 7 del reporte).}
+	\item Agregar el plot final que muestra cómo cambia la asimetría del UMD REC, UMD MC y SD REC en función de $\theta$.
+	\item \textbf{Plot Total con todos los datapoints:} Mostrar el plot global, haciendo la distinción entre primarios, energías y modelos.
+\end{itemize}
+
+\subsubsection{Robustez y Sistemáticos (2 Slides $\rightarrow$ los dos plots de la sección 8)}
+\textit{Objetivo: Demostrar que $A_1$ es físico y no instrumental.}
+
+Aclarar que esto se mostrará con el dataset de SIB 17.5-18.0 Protón. Aclarar en todos los plots qué bines de $\theta$ se están usando.
+\begin{itemize}
+	\item \textbf{Isotropía Azimutal:} Plot de $A_1$ vs $\phi_{in}$ (debe ser plano). Explicar que, como es esperado, no hay una variación del parámetro de asimetría si separamos las lluvias en función del ángulo $\phi$ de entrada del eje de la lluvia respecto al array. 
+	\item \textbf{Invarianza de Energía:} Plot de $A_1$ vs Energía (para un bin de $\theta$ fijo). Demostrar estabilidad en el rango $E = 10^{17.5 - 18.0} \text{ eV}$. El valor del parámetro de asimetría no debería ser muy dependiente de la energía a esta escala si subdividimos el dataset.
+\end{itemize}
+
+\subsubsection{Física de Alto Nivel: El "Money Plot" (3 Slides $\rightarrow$ dos plots para discriminación de masa y uno de modelos)}
+\textit{Objetivo: Vender la utilidad científica.}
+\begin{itemize}
+	\item \textbf{Evolución y Discriminación:}
+	\begin{itemize}
+		\item Se hace para el dataset de SIB 17.5-18.0.
+		\item Plot de $A_1$ vs $\theta$ para \textcolor{blue}{Protón} y \textcolor{red}{Hierro}, agregando un Eje Secundario (derecha) que muestre el \textbf{Merit Factor (MF)} calculado punto a punto.
+		\item \textbf{NUEVO:} Agregar, para el bin $\theta$ con mayor MF, un gráfico nuevo que incluya la muestra \textbf{Mix (Todos los primarios)} para visualizar la facilidad de distinción frente a algo que podría representar datos ciegos de campo.
+		\item \textit{Mensaje:} ''La separación se maximiza en ángulos inclinados ($50^\circ-60^\circ$), alcanzando un MF $> 2.5\sigma$. Es decir, para lluvias inclinadas este efecto es súper relevante y útil para distinguir primarios.''
+	\end{itemize}
+	
+	\item \textbf{Comparación de Modelos:} SIBYLL vs QGSJet para un mismo primario y energía (Helio 17.5-18.0).
+	\begin{itemize}
+		\item Plot de $A_1$ vs $\theta$ comparando modelos hadrónicos.
+		\item \textit{Mensaje:} "La asimetría en su tendencia global NO es hiper-sensible al modelo hadrónico usado para la simulación, lo que aporta confianza al observable, aunque muestra variaciones en la normalización que podrían servir para constreñir modelos."
+	\end{itemize}
+\end{itemize}
