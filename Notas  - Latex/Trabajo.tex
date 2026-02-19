@@ -613,7 +613,7 @@ Para validar la corrección, se graficó la diferencia entre el ángulo corregid
 
 Esta estructura confirma que la corrección geométrica está actuando precisamente donde el efecto de proyección es máximo. Al aplicar esta corrección, los perfiles de asimetría para el Infill recuperaron la modulación cosenoidal esperada.
 
-\subsection{Estado de Tareas (Updated)}
+\subsection*{3. Estado de Tareas (Updated)}
 
 A continuación se actualiza la lista de tareas pendientes basada en los últimos avances:
 
@@ -625,4 +625,89 @@ A continuación se actualiza la lista de tareas pendientes basada en los último
 	\item[\checkmark] \textbf{[COMPLETADO]} Reprocesamiento masivo (Bulk Processing): Ejecutar el pipeline \texttt{v12} validado sobre los 6 datasets completos (4 SIBYLL, 1 EPOS, 1 QGS).
 	\item[\checkmark] \textbf{[COMPLETADO]} Levantar por separado las componentes muonicas y EM para el SD
 	\item[\textbf{--}] \textbf{[PENDIENTE]} Análisis comparativo de $A_1$ (Amplitud de Asimetría) entre modelos hadrónicos usando los datos reprocesados. Para esto falta terminar de ver como hacer los plots para el infill.
+\end{itemize}
+
+
+\section*{Hoja de Ruta y Tareas Pendientes (Febrero 2026)}
+
+A partir de la validación de la corrección geométrica, se define la siguiente hoja de ruta para completar el análisis de la tesis:
+
+\subsection*{1. Refinamiento del Análisis (Anillo Denso)}
+\begin{itemize}
+	\item \textbf{Aumento de Granularidad en Theta:} Incrementar el número de bines de ángulo cenital (de 4 a 6 u 8) para los ajustes del Anillo Denso. Esto permitirá visualizar con mayor resolución la dependencia $A_1(\theta)$ (el ``Money Plot'').
+	\item \textbf{Validación Cruzada con MC:} Replicar los ajustes de asimetría utilizando exclusivamente las variables de Monte Carlo ($\phi_{MC}$ en lugar de $\phi_{REC}$) en el bin central. Esto cuantificará cuánto del ruido observado en los ajustes proviene de la resolución angular del detector.
+\end{itemize}
+
+\subsection*{2. Pruebas de Invarianza (Pruebas de Nulidad)}
+Para confirmar que la asimetría observada es de origen físico y no un artefacto del detector o del software, se realizarán los siguientes tests de estabilidad (``Null Tests''):
+
+\begin{enumerate}
+	\item \textbf{Invarianza con la Energía:} Fijando un rango de $\theta$, graficar $A_1$ vs Energía ($10^{17.5} - 10^{18}$ eV). \textit{Hipótesis:} La asimetría geométrica no debería depender fuertemente de la energía en este rango estrecho.  La idea es binear en energia.
+	\item \textbf{Isotropía Azimutal de Entrada:} Fijando $\theta$ y Energía, graficar $A_1$ vs $\phi_{input}$ (ángulo de arribo de la lluvia). \textit{Hipótesis:} La amplitud física $A_1$ debe ser independiente de la orientación del evento respecto al array (isotropía del detector). La idea es binear en phi.
+	\item \textbf{Invarianza de Modelo Hadronico:} Comprobar que no hay dependenica con el modelo hadronico usado.
+\end{enumerate}
+
+\subsection*{3. Estudios de Composición (Infill)}
+\begin{itemize}
+	\item \textbf{Dependencia con el Primario:} Una vez depurado el Infill, repetir los ajustes de $A_1(\theta)$ separando por primario (Protón vs Hierro) para evaluar la sensibilidad del parámetro de asimetría a la masa de la partícula primaria ($A$).
+	\item \textbf{Dependencia Radial:} Analizar cómo varía $A_1$ en función de la distancia al core ($r$) dentro del Infill, buscando el rango óptimo donde la señal muónica maximiza la asimetría sin saturación.
+\end{itemize}
+
+
+\section{Análisis Global y Factores de Mérito}
+\label{sec:analisis_global}
+
+Tras validar la reconstrucción geométrica y la robustez de los ajustes individuales de la asimetría azimutal, se procedió a consolidar los resultados obtenidos de múltiples bibliotecas de simulaciones Monte Carlo. El objetivo de este análisis global es evaluar la evolución de la amplitud de asimetría $A_1$ en función del ángulo cenital $\theta$, e investigar su dependencia con la masa del primario, la energía y el modelo de interacciones hadrónicas.
+
+\subsection{Evolución Global de la Asimetría}
+
+En la Figura \ref{fig:grand_finale} se presenta el panorama completo de la asimetría $A_1$ para el Anillo Denso del Underground Muon Detector (UMD). Se analizaron eventos en 10 bines de $\theta$, cubriendo el rango desde lluvias casi verticales hasta lluvias inclinadas ($\approx 65^{\circ}$).
+
+Se puede observar una clara tendencia creciente de $A_1$ a medida que aumenta la inclinación de la lluvia, confirmando el origen puramente geométrico-físico de la asimetría producto de la atenuación diferencial en la atmósfera. Además, se contrasta la señal reconstruida en el UMD ($N_\mu^{REC}$) con la asimetría a nivel de generador Monte Carlo ($N_\mu^{MC}$) y la señal total en el detector de superficie ($S_{tot}^{SD}$). La diferencia entre las curvas del UMD (MC vs. REC) permite visualizar el efecto de \textit{wash-out} o difuminación inducido por la resolución del detector.
+
+\begin{figure}[H]
+	\centering
+	% Reemplazar con el nombre de tu imagen generada
+	\includegraphics[width=0.9\textwidth]{Imagenes Trabajo/Grand_Finale_NoLines.png} 
+	\caption{Panorama global de la evolución de la amplitud de asimetría $A_1$ en función del rango angular cenital para distintos primarios (colores), modelos hadrónicos (formas) y detectores (estilos de relleno). Esta mal el eje de los angulos (van solo hasta 65 grados).}
+	\label{fig:grand_finale}
+\end{figure}
+
+\subsection{Sensibilidad a la Composición: Factor de Mérito (MF)}
+
+Para cuantificar el poder de discriminación del observable $A_1$ frente a diferentes poblaciones de eventos (por ejemplo, masa del primario o modelos hadrónicos), se adoptó el Factor de Mérito (MF, por sus siglas en inglés \textit{Merit Factor}). El MF mide la separación entre dos distribuciones estadísticas considerando sus valores medios y sus incertezas, y se define como:
+
+\begin{equation}
+	MF = \frac{|A_{1,a} - A_{1,b}|}{\sqrt{\sigma_a^2 + \sigma_b^2}}
+	\label{eq:merit_factor}
+\end{equation}
+
+Donde $A_{1,a}$ y $A_{1,b}$ son las amplitudes de asimetría ajustadas para las poblaciones $a$ y $b$, respectivamente, y $\sigma_a, \sigma_b$ son sus errores estadísticos asociados. Un valor de $MF \geq 1$ indica una separación de al menos $1\sigma$ entre las distribuciones.
+
+Para evaluar si la asimetría de los muones es sensible a la composición primaria de los rayos cósmicos, se calculó el MF aislando el modelo hadrónico (ej. SIBYLL 2.3d) y una energía fija ($\log_{10}(E/\text{eV}) = 17.5$), y contrastando las distribuciones gaussianas resultantes para Protón y Hierro (Figura \ref{fig:mf_masas}). 
+
+\begin{figure}[H]
+	\centering
+	% Reemplazar con el nombre de tu imagen generada
+	\includegraphics[width=0.8\textwidth]{Imagenes Trabajo/Plot_Discriminacion_Masas.png} 
+	\caption{Distribuciones de densidad de probabilidad para la amplitud $A_1$ de diferentes primarios. El eje secundario muestra el Factor de Mérito (MF) calculado respecto al Protón, ilustrando la capacidad de separación de masa.}
+	\label{fig:mf_masas}
+\end{figure}
+
+\subsection{Incertidumbre Sistemática de los Modelos Hadrónicos}
+
+De manera análoga, el Factor de Mérito permite evaluar la robustez de las predicciones teóricas. Manteniendo fija la masa del primario (ej. Helio) y la energía, se contrastaron los resultados de los modelos SIBYLL 2.3d y QGSJetII-04. 
+
+Una separación estadísticamente significativa (MF alto) indicaría una fuerte dependencia del observable con los detalles de las interacciones hadrónicas a altas energías. Por el contrario, un MF bajo sugiere que la asimetría medida es un rasgo robusto del desarrollo longitudinal y geométrico de la lluvia, poco afectado por las discrepancias fenomenológicas entre modelos.
+
+\subsection{Verificación de Invarianzas Físicas}
+
+Finalmente, la métrica del MF se extendió al análisis de posibles fuentes de error sistemático. Se exige teóricamente que, a un $\theta$ fijo, la asimetría azimutal sea invariante ante variaciones en la energía primaria de la lluvia y ante variaciones en el ángulo de arribo azimutal (isotropía del detector).
+
+Para comprobar esto de forma rigurosa, se construyeron matrices de Factor de Mérito comparando todos los pares cruzados de bines de energía y, de igual forma, todos los sectores azimutales de entrada ($\phi_{in}$). 
+
+Valores de $MF \ll 1$ a lo largo de estas matrices confirmarían empíricamente que:
+\begin{itemize}
+	\item La asimetría geométrica es independiente de la escala de energía en el rango estudiado.
+	\item La respuesta del arreglo de detectores es altamente isotrópica, sin introducir modulaciones espurias asociadas a orientaciones preferenciales en el terreno.
 \end{itemize}
