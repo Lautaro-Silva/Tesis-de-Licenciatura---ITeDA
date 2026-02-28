@@ -786,3 +786,78 @@ Aclarar que esto se mostrará con el dataset de SIB 17.5-18.0 Protón. Aclarar e
 		\item \textit{Mensaje:} "La asimetría en su tendencia global NO es hiper-sensible al modelo hadrónico usado para la simulación, lo que aporta confianza al observable, aunque muestra variaciones en la normalización que podrían servir para constreñir modelos."
 	\end{itemize}
 \end{itemize}
+
+
+\section{Reporte de Avance: UMD Foundations Meeting (Feb 2026)}
+
+El objetivo de la presentación fue mostrar los avances en la caracterización de la asimetría azimutal de la densidad de muones ($A_1$) utilizando el Underground Muon Detector (UMD) para la discriminación de masa primaria. 
+
+\subsection{Marco Teórico y Metodología}
+\begin{itemize}
+	\item Se partió del modelo de asimetría $S(r,\psi)=\overline{S}(1+\alpha(r)\cos\psi)$, donde la modulación surge de la atenuación longitudinal de la lluvia y un efecto geométrico por la divergencia de las partículas respecto al eje.
+	\item \textbf{Dataset:} Simulaciones con SIBYLL 2.3d, QGSJet II-04 y EPOS-LHC en el rango de energía $\log_{10}(E/\text{eV}) \in [17.5, 18.0]$.
+	\item \textbf{Validación:} Se verificó la calidad de la reconstrucción (Offline - UMD+SD750) obteniendo resoluciones estables para energía, ángulo zenital y un error azimutal de $\sigma \approx 2.2^\circ$.
+\end{itemize}
+
+\subsection{Resultados: Anillo Denso (450m)}
+\begin{itemize}
+	\item \textbf{UMD vs. SD:} El detector de muones (UMD) preserva la asimetría de manera significativamente mejor que el detector de superficie (SD) para todos los rangos angulares.
+	\item \textbf{Discriminación de Masa:} Se demostró una clara separación entre primarios (Protón vs. Hierro), especialmente en bines de alta inclinación ($40^\circ \le \theta < 60^\circ$). Se utilizó el Factor de Mérito (MF) como métrica, superando los $2.5\sigma$ en los bines óptimos.
+	\item \textbf{Sistemáticos:} Se confirmó la invarianza azimutal respecto a la dirección de llegada de la lluvia ($\phi_{in}$) y se observó una leve dependencia con la energía, presuntamente vinculada a la evolución longitudinal ($X_{max}$).
+\end{itemize}
+
+\subsection{El Problema de Coordenadas y el \textit{Euler Fix} (Infill)}
+\begin{itemize}
+	\item Se detectó un sesgo sistemático en la reconstrucción estándar (Offline) del ángulo azimutal en el Infill Array.
+	\item \textbf{Diagnóstico:} El valor nativo \texttt{GetAzimuthSP} colapsa a una proyección 2D plana, introduciendo una modulación senoidal artificial en los residuos (dependencia con $\theta$).
+	\item \textbf{Solución:} Implementación de una matriz de rotación basada en ángulos de Euler para alinear rigurosamente el plano reconstruido de la lluvia con las coordenadas topográficas, recuperando la señal física de la asimetría.
+\end{itemize}
+
+\subsection{Trabajo en Progreso (WIP)}
+\begin{itemize}
+	\item Análisis de la evolución lateral de la asimetría en el Infill ($40^\circ \le \theta < 60^\circ$) agrupada por distancia al \textit{core} ($r_{core}$).
+	\item Hacer mas finos los bines angulares
+\end{itemize}
+
+\section{Feedback y Plan de Acción (Comentarios de la Reunión)}
+
+A partir de las discusiones con Lorenzo, Juan, Fede, Joaquín y Darko, se establecieron los siguientes pasos a seguir para robustecer el análisis de la tesis:
+
+\subsection{Validación del Conteo de Muones vs. Sesgo de Ajuste (Lorenzo/Juan)}
+\begin{itemize}
+	\item \textbf{Control de Calidad:} Graficar un histograma del residuo relativo de la cantidad de muones: $\frac{N_\mu^{\text{REC}} - N_\mu^{\text{MC}}}{N_\mu^{\text{MC}}}$.
+	\item \textbf{Objetivo:} Demostrar que esta distribución está centrada en cero (la reconstrucción cuenta bien los muones) y que el sesgo observado en la asimetría proviene estrictamente del ajuste geométrico (problema de proyecciones y coordenadas) y no de una falla instrumental.
+	\item \textbf{Impacto en MF:} Revisar cómo este posible desfasaje afecta al cálculo del Factor de Mérito.
+	\item \textbf{Post:} Una vez hecho esto revisar a mano los fits para ver si la diferencia en la perfomance de la asimetría entre el REC y el MC es por la mala convergencia de los fits.
+\end{itemize}
+
+\subsection{Resolución del Core y Mezcla de Bines (Lorenzo)}
+\begin{itemize}
+	\item \textbf{True Core:} Para la validación del Infill y la evaluación de $N_\mu^{\text{REC}}$, utilizar la distancia al \textit{core} de la simulación (MC) en lugar del reconstruido. Esto evitará que la mala resolución del \textit{core} en el Infill introduzca ruido artificial por migración entre bines radiales (\textit{smearing}). Es decir, hacer una fila mas que sea esta combinación.
+	\item Enetender que quiso decir con \textit{Inclined REC}.
+\end{itemize}
+
+\subsection{Desacople de Señal del Detector de Superficie (Fede)}
+\begin{itemize}
+	\item \textbf{Componentes del SD:} En los perfiles azimutales del Infill (Gráficos de página 10), dividir la señal total del SD en sus componentes verdadera electromagnética (EM) y muónica (MC Truth).
+	\item \textbf{Objetivo:} Evaluar si la asimetría profunda observada en el UMD se repite en la componente muonica del SD. Adicionalmente, investigar los sesgos de reconstrucción (\textit{REC biases}) en lluvias muy inclinadas (entiendo que para la parte angular especialmente).
+\end{itemize}
+
+\subsection{Confirmación del Bug en Offline (Joaquín/Darko)}
+\begin{itemize}
+	\item \textbf{Issue de \texttt{GetAzimuthSP}:} Se acordó que la función nativa presenta inconsistencias para el Infill. La implementación manual del \textit{Euler Fix} se ratifica como la vía correcta para procesar los datos espaciales en esta región del arreglo.
+	\item \textbf{To do:} Revisar si este problema lo tienen también el \texttt{GetAzimuthSP} pero usando las coordenadas de UMD (creo recordar que en estas sims, los UMD no tenían los datos espaciales pero Darko dice que si...).
+\end{itemize}
+
+\subsection{Ajustes Estéticos y de Presentación (Juan)}
+\begin{itemize}
+	\item \textbf{Etiquetas:} Reemplazar los índices arbitrarios de los bines zenitales en el eje X por sus respectivos rangos angulares en grados ($\theta$).
+	\item \textbf{Estética:} Aumentar el tamaño de las tipografías para proyecciones.
+	\item \textbf{Bineado mas fino radial y angular}:  Explorar un bineado más fino en $\theta$ si la estadística de los datos lo permite (es importante chequear la estadística y con esto la convergencia de los fits).
+\end{itemize}
+
+\subsection{To Do General:}
+\begin{itemize}
+	\item Extender el análisis a los datos reales de campo.
+	\item Terminar de hacer el estudio respecto si es razonable la hipotesis de que tenemos mayor asimetría a mayor $X_{max}$.
+\end{itemize}
