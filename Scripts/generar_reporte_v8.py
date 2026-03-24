@@ -263,8 +263,8 @@ def run_analysis(pdf, folder_path):
     df_infill = df_new[df_new['counterId'] >= 100000].copy()
     if len(df_infill) > 0:
         vals_sp = ensure_degrees(df_infill['phi_plane_sp'], 'SP')
-        vals_ground = ensure_degrees(df_infill['phi_plane_ground'], 'Ground')
-        vals_euler = ensure_degrees(df_infill['phi_plane_euler'], 'Euler')
+        vals_ground = ensure_degrees(df_infill['phi_plane_ground_MC'], 'Ground')
+        vals_euler = ensure_degrees(df_infill['phi_plane_euler_MC_true_core'], 'Euler')
         vals_rec_phi = ensure_degrees(df_infill['phi_REC'], 'PhiRec')
         vals_theta_rec = ensure_degrees(df_infill['theta_REC'], 'ThetaRec')
 
@@ -527,7 +527,7 @@ def run_analysis(pdf, folder_path):
     df_sys = df_new[mask_sys].copy()
     
     # Preparar datos desacoplados
-    phi_e_rec = ensure_degrees(df_sys['phi_plane_euler'])
+    phi_e_rec = ensure_degrees(df_sys['phi_plane_euler_MC_true_core'])
     df_sys['phi_rec_cen'] = (phi_e_rec + 180) % 360 - 180
     if 'phi_plane_euler_MC' in df_sys.columns:
         phi_e_mc = ensure_degrees(df_sys['phi_plane_euler_MC'])
