@@ -1,0 +1,176 @@
+\documentclass[spanish,a4paper,11pt]{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+\usepackage[affil-it]{authblk}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{siunitx}
+\setlength{\parskip}{2mm} % {6mm}
+\usepackage{derivative}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{svg}
+\usepackage[font={footnotesize}, labelfont=bf]{caption}
+\usepackage{subcaption}
+\usepackage{chngcntr}
+\makeatletter
+\newcommand*{\centerfloat}{%
+	\parindent \z@
+	\leftskip \z@ \@plus 1fil \@minus \textwidth
+	\rightskip\leftskip
+	\parfillskip \z@skip}
+\makeatother
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\counterwithin{equation}{section}
+
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{appendix}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage[font=footnotesize, labelfont=bf, width=0.8\textwidth, justification=justified]{caption}
+\usepackage[pdfencoding=auto, psdextra]{hyperref}
+\usepackage{titlesec}
+\usepackage{csquotes}
+\usepackage[backend=biber, sorting=none]{biblatex}
+\usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Ñ}{{\~N}}1 {ñ}{{\~n}}1
+}
+
+\lstset{style=mystyle}
+\addbibresource{Referencias.bib}
+\pagestyle{fancy}
+\fancyhf{} % Limpia todos los encabezados y pies de página
+% Redefinimos el formato para que diga "1. Nombre de la sección" (sin mayúsculas forzadas)
+\renewcommand{\sectionmark}[1]{\markboth{\thesection.\ #1}{}}
+\lhead{\leftmark} % Imprime dinámicamente el nombre de la sección a la izquierda
+\rfoot{\thepage} % Número de página abajo a la derecha
+\renewcommand{\headrulewidth}{0.4pt} % Asegura la línea horizontal debajo del encabezado
+
+\begin{document}
+	\renewcommand{\listtablename}{Índice de tablas}
+	\renewcommand{\tablename}{Tabla}
+	
+	% ==========================================
+	% CARÁTULA ESTILO FCEN
+	% ==========================================
+	\begin{titlepage}
+		\centering
+		
+		% 1. Título principal arriba y en negrita
+		\vspace*{0.8cm}
+		{\LARGE \textbf{Asimetrías Azimutales de la Densidad de Muones en Lluvias Atmosféricas Extensas con el Detector Subterráneo de Muones del Observatorio Pierre Auger}\par}
+		
+		% 2. Tipo de documento
+		\vspace{1.5cm}
+		{\Large Tesis de Licenciatura en Ciencias Físicas\par}
+		
+		% 3. Autor
+		\vspace{1.5cm}
+		{\Large Lautaro Silva Pizzi\par}
+		
+		% 4. Directores y Lugar de trabajo
+		\vspace{2cm}
+		{\large	\textbf{Directores:} Dr. Juan Manuel Figueira y Dr. Federico Sánchez \\
+			[0.5cm] Instituto de Tecnologías en Detección y Astropartículas (ITeDA) - CNEA \par}
+		
+		% 5. Logos (Ajustar nombres de archivos y tamaño según necesites)
+		\vspace{1.5cm}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[height=4.5cm]{imagenes/UBA.png} \hspace{2cm} % Logo UBA
+			\includegraphics[height=4.5cm]{imagenes/logo-portada5-iteda.png}  % Logo ITeDA
+		\end{figure}
+		
+		% 6. Jerarquía institucional y fecha abajo de todo
+		\vfill
+		{\large 
+			Departamento de Física \\
+			Facultad de Ciencias Exactas y Naturales \\
+			Universidad de Buenos Aires \\[0.5cm]
+			Buenos Aires, Argentina \\
+			Agosto 2026 \par}
+		
+	\end{titlepage}
+	
+	% ==========================================
+	% RESUMEN (Página independiente)
+	% ==========================================
+	\newpage
+	\thispagestyle{empty}
+	\vspace*{2cm}
+	\begin{center}
+		\Large \textbf{Resumen}
+	\end{center}
+	\vspace{1cm}
+	Aquí va el resumen detallando el hallazgo del Sweet Spot en $\theta \approx 40^\circ - 55^\circ$, la discrepancia MC/REC, el uso del Survival Ratio ($N_\mu^{\mathrm{UMD}} / N_\mu^{\mathrm{SD}}$), y el poder discriminatorio de masa (Protón vs. Hierro) mediante el parámetro $A_1$.
+	
+	\vspace{1cm}
+	\noindent \textbf{Palabras clave:} Rayos Cósmicos, Observatorio Pierre Auger, UMD, Asimetría Azimutal, Composición de Masa.
+	
+	% ==========================================
+	% AGRADECIMIENTOS (Página independiente)
+	% ==========================================
+	\newpage
+	\thispagestyle{empty}
+	\vspace*{2cm}
+	\begin{center}
+		\Large \textbf{Agradecimientos}
+	\end{center}
+	\vspace{1cm}
+	Aquí van tus agradecimientos...
+	
+	% ==========================================
+	% ÍNDICES
+	% ==========================================
+	\newpage
+	\setcounter{page}{1} % Comienza a contar las páginas
+	\tableofcontents
+	\newpage
+	
+	% ==========================================
+	% INCLUSIÓN DE SECCIONES (CAPÍTULOS)
+	% ==========================================
+	\input{capitulos/01_introduccion.tex}
+	\input{capitulos/02_observatorio.tex}
+	\input{capitulos/03_fenomenologia.tex}
+	\input{capitulos/04_metodologia.tex}
+	\input{capitulos/05_anillo_denso.tex}
+	\input{capitulos/06_infill.tex}
+	\input{capitulos/07_datos_reales.tex}
+	\input{capitulos/08_conclusiones.tex}
+	
+	% ==========================================
+	% BIBLIOGRAFÍA
+	% ==========================================
+	\newpage
+	\printbibliography[heading=bibintoc, title={Referencias}]
+	
+\end{document}\documentclass[spanish,a4paper,11pt]{article}

@@ -3,3 +3,34 @@ venv/
 
 # Vscode
 .vscode/
+
+# --- ARCHIVOS TEMPORALES DE LATEX ---
+*.aux
+*.bbl
+*.blg
+*.brf
+*.bcf
+*.cb
+*.cb2
+*.dvi
+*.fls
+*.fmt
+*.fdb_latexmk
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+*.xml
+
+# Archivos temporales de MacOS (por las dudas si colaboras con alguien)
+.DS_Store

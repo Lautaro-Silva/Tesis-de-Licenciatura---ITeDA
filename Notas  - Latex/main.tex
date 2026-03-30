@@ -15,6 +15,9 @@
 \usepackage[font={footnotesize}, labelfont=bf]{caption}
 \usepackage{subcaption}
 \usepackage{chngcntr}
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{Referencias.bib}
+
 \makeatletter
 \newcommand*{\centerfloat}{%
   \parindent \z@
@@ -25,7 +28,6 @@
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
 \counterwithin{equation}{section}
-
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage[dvipsnames]{xcolor}
@@ -37,7 +39,6 @@
 \usepackage[pdfencoding=auto, psdextra]{hyperref}
 \usepackage{titlesec}
 \usepackage{csquotes}
-\usepackage[backend = biber,sorting = none]{biblatex}
 \usepackage{listings}
 \usepackage{xcolor}
 
@@ -115,8 +116,8 @@
 \input{Trabajo}
 \label{sec:Trabajo_Programacion}
 
-\section{Bilbliografia}
-\printbibliography[]
+\section{Bibliografia}
+\printbibliography[heading=none]
 \addcontentsline{toc}{section}{Referencias}
 
 \end{document}
