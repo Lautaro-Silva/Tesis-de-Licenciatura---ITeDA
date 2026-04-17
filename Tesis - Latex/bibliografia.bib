@@ -23,12 +23,53 @@
 	year = {2016}
 }
 
+% LOS DOS DE ARRIBA TODAVIA NO ESTAN EN NIGUN LADO PERO PODRIAN SER USADOS A FUTURO
+
 @phdthesis{BradfieldThesis,
 	author = {Bradfield, Fraser},
 	title = {{Extensive air shower asymmetry and cosmic ray mass composition with the upgraded Pierre Auger Observatory}},
 	school = {The University of Adelaide},
 	year = {2022},
 	note = {GAP-2022-023}
+}
+
+% --- MOTIVACION HISTORICA -
+
+@techreport{Pryke1998,
+	author = {Pryke, C.},
+	title = {Asymmetry of Air Showers at Ground Level},
+	institution = {Pierre Auger Observatory},
+	year = {1998},
+	type = {Internal Note},
+	number = {GAP-1998-034}
+}
+
+@techreport{Billoir2002,
+	author = {Billoir, P. and Da Silva, P.},
+	title = {Towards a Parametrization of the Lateral Distribution Function and its Asymmetries in the Surface Detector},
+	institution = {Pierre Auger Observatory},
+	year = {2002},
+	type = {Internal Note},
+	number = {GAP-2002-073}
+}
+
+% --- FUENTES DE ASIMETRIA ---
+
+@techreport{GAP2007_124,
+	author      = {H. Dembinski and T. Hebbeker and M. Leuthold},
+	title       = {{A comparison of Monte-Carlo generated Muon Maps with near horizontal SD showers}},
+	institution = {Pierre Auger Observatory},
+	number      = {GAP-2007-124},
+	year        = {2007}
+}
+
+@techreport{GAP2000_017,
+	author      = {Bertou, X. and Billoir, P.},
+	title       = {On the origin of the asymmetry of ground densities in inclined showers},
+	institution = {Pierre Auger Observatory},
+	year        = {2000},
+	type        = {Internal Note},
+	number      = {GAP-2000-017}
 }
 
 @article{Cazon2012,
@@ -42,46 +83,100 @@
 	doi = {10.1016/j.astropartphys.2012.05.017}
 }
 
-@techreport{GAP2002_074,
-	author = {Billoir, P. and Da Silva, P. and Bertou, X.},
-	title = {Checking the origin of the Asymmetry of the Surface Detector signals},
-	institution = {Pierre Auger Observatory},
-	year = {2002},
-	type = {Internal Note},
-	number = {GAP-2002-074}
-}
-
-@techreport{Billoir2002,
-	author = {Billoir, P. and Da Silva, P.},
-	title = {Towards a Parametrization of the Lateral Distribution Function and its Asymmetries in the Surface Detector},
-	institution = {Pierre Auger Observatory},
-	year = {2002},
-	type = {Internal Note},
-	number = {GAP-2002-073}
-}
-
-@techreport{Pryke1998,
-	author = {Pryke, C.},
-	title = {Asymmetry of Air Showers at Ground Level},
-	institution = {Pierre Auger Observatory},
-	year = {1998},
-	type = {Internal Note},
-	number = {GAP-1998-034}
-}
-
-@unpublished{Scornavacca2026,
-	author = {Scornavacca, M.},
+@unpublished{Scornavacche2026,
+	author = {Scornavacche, M.},
 	title = {Current work and plans for the inclined air showers reconstruction},
 	note = {Presentation at the Pierre Auger Collaboration Meeting, UMD Foundations},
-	month = {March},
 	year = {2026}
 }
 
-@techreport{GAP2000_017,
-	author      = {Bertou, X. and Billoir, P.},
-	title       = {On the origin of the asymmetry of ground densities in inclined showers},
-	institution = {Pierre Auger Observatory},
-	year        = {2000},
-	type        = {Internal Note},
-	number      = {GAP-2000-017}
+@article{collaboration_2014,
+	title={Reconstruction of inclined air showers detected with the Pierre Auger Observatory},
+	volume={2014},
+	DOI={10.1088/1475-7516/2014/08/019},
+	number={08},
+	journal={Journal of Cosmology and Astroparticle Physics},
+	publisher={IOP Publishing},
+	author={collaboration, The Pierre Auger},
+	year={2014},
+	month=aug, pages={019–019} }
+
+
+% --- LIBRERÍAS DE SIMULACIÓN (CORSIKA y OFFLINE) ---
+
+@techreport{heck1998corsika,
+	author      = {D. Heck and J. Knapp and J. N. Capdevielle and G. Schatz and T. Thouw},
+	title       = {{CORSIKA: A Monte Carlo Code to Simulate Extensive Air Showers}},
+	institution = {Forschungszentrum Karlsruhe},
+	number      = {FZKA 6019},
+	year        = {1998}
+}
+
+@article{argiro2007offline,
+	author  = {S. Argiro and others},
+	title   = {{The Offline Software Framework of the Pierre Auger Observatory}},
+	journal = {Nuclear Instruments and Methods in Physics Research Section A},
+	volume  = {580},
+	number  = {3},
+	pages   = {1485--1496},
+	year    = {2007},
+	doi     = {10.1016/j.nima.2007.07.010}
+}
+
+% --- MODELOS HADRÓNICOS (Historia y versiones recientes) ---
+
+@article{pierog2015epos,
+	author  = {T. Pierog and I. Karpenko and J. M. Katzy and E. Yatsenko and K. Werner},
+	title   = {{EPOS LHC: Test of hadronic interaction models using data from the LHC}},
+	journal = {Physical Review C},
+	volume  = {92},
+	number  = {3},
+	pages   = {034906},
+	year    = {2015},
+	doi     = {10.1103/PhysRevC.92.034906}
+}
+
+@article{riehn2020sibyll,
+	author  = {F. Riehn and R. Engel and A. Fedynitch and T. K. Gaisser and T. Stanev},
+	title   = {{Hadronic interaction model SIBYLL 2.3d and extensive air showers}},
+	journal = {Physical Review D},
+	volume  = {102},
+	number  = {6},
+	pages   = {063002},
+	year    = {2020},
+	doi     = {10.1103/PhysRevD.102.063002}
+}
+
+@article{ostapchenko2011qgsjet,
+	author  = {S. Ostapchenko},
+	title   = {{Monte Carlo treatment of hadronic interactions in enhanced Pomeron scheme: I. QGSJET-II model}},
+	journal = {Physical Review D},
+	volume  = {83},
+	number  = {1},
+	pages   = {014018},
+	year    = {2011},
+	doi     = {10.1103/PhysRevD.83.014018}
+}
+
+% Versiones nuevas QGSJET-II
+@misc{ostapchenko2024qgsjetiiimodelhighenergy,
+	title={QGSJET-III model of high energy hadronic interactions: II. Particle production and extensive air shower characteristics}, 
+	author={S. Ostapchenko},
+	year={2024},
+	eprint={2403.16106},
+	archivePrefix={arXiv},
+	primaryClass={hep-ph},
+	url={https://arxiv.org/abs/2403.16106}, 
+	doi     = {https://doi.org/10.48550/arXiv.2403.16106}
+}
+
+% --- LDF, INFILL Y RADIO DE REFERENCIA (450m) ---
+
+@article{auger2021infill,
+	author  = {{Pierre Auger Collaboration}},
+	title   = {{The energy spectrum of cosmic rays beyond the turn-down around $10^{17}$ eV as measured with the surface detector of the Pierre Auger Observatory}},
+	journal = {The European Physical Journal C},
+	year    = {2021},
+	doi     = {https://doi.org/10.48550/arXiv.2109.13400},
+	note    = {Describe la LDF del Infill y el uso de $S(450)$ como estimador de energía.}
 }
