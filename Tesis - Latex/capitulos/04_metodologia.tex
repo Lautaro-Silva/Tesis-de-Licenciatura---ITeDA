@@ -3,24 +3,63 @@
 \section{Simulación y Metodología de Análisis}
 \label{cap:metodologia}
 
-En este capítulo se detallan las herramientas computacionales y los criterios analíticos empleados para el estudio de las asimetrías azimutales. Se describe la cadena de simulación, desde la generación de la cascada atmosférica hasta la respuesta instrumental, y se validan los parámetros de reconstrucción fundamentales (energía y dirección) que garantizan la fidelidad de los resultados experimentales.
+En este capítulo se detallan las herramientas computacionales y los criterios analíticos empleados para el estudio de las asimetrías azimutales. Se describe la cadena de simulación y reconstrucción, la biblioteca de simulaciones usadas y se validan los parámetros de reconstrucción fundamentales (energía y dirección) que garantizan la fidelidad de los resultados experimentales.
 
-\subsection{Librerías de Simulación y Reconstrucción}
+\subsection{Librería de Simulaciones y Framework de Reconstrucción}
 
-El análisis de lluvias atmosféricas extensas (EAS) requiere de una cadena de simulación robusta que permita comparar las predicciones teóricas con las señales registradas. En este trabajo se utilizó una combinación de dos marcos de software fundamentales de la Colaboración Pierre Auger.
+El análisis de lluvias atmosféricas extensas (EAS) requiere de una cadena de simulación robusta que permita comparar las predicciones teóricas con las señales registradas, de manera de representar la física de la lluvia fidedignamente. La generación de lluvias mediante simulaciones Monte Carlo (MC) demanda recursos computacionales masivos. Por este motivo, para el desarrollo de este trabajo de tesis no se generaron simulaciones desde cero, sino que se recurrió a una producción oficial generada por la Colaboración Pierre Auger.
 
 \subsubsection{CORSIKA y Modelos Hadrónicos}
-Para la generación de las cascadas atmosféricas se empleó el código \texttt{CORSIKA} (COsmic Ray SImulations for KAscade) \cite{cite:85, cite:101}. Esta herramienta permite el seguimiento detallado de todas las partículas secundarias producidas por el primario en la atmósfera. Dado que la mayor incertidumbre en la física de las EAS reside en las interacciones hadrónicas a energías ultra-altas, se utilizaron librerías que cubren diversos modelos de alta energía, principalmente \texttt{EPOS-LHC}, \texttt{QGSJET-II.04} y \texttt{SIBYLL 2.3e/d} \cite{cite:35, cite:64, cite:463}. Estas simulaciones contemplan primarios de distinta naturaleza química, desde Protones hasta núcleos de Hierro, cubriendo el rango de interés para este estudio.
+Para la generación de las cascadas atmosféricas se empleó el código \texttt{CORSIKA} (COsmic Ray SImulations for KAscade) \cite{cite:85, cite:101}. Esta herramienta permite el seguimiento detallado de todas las partículas secundarias producidas por el primario en la atmósfera. Dado que la mayor incertidumbre en la física de las EAS reside en las interacciones hadrónicas a energías ultra-altas, se utilizaron librerías que cubren diversos modelos de alta energía, principalmente \texttt{EPOS-LHC}, \texttt{QGSJET} y \texttt{SIBYLL} \cite{cite:35, cite:64, cite:463}. Estas simulaciones contemplan primarios de distinta naturaleza química, desde protones hasta núcleos de hierro, cubriendo el rango de interés para este estudio.
 
 \subsubsection{El Framework \textit{Offline}}
-La respuesta de los detectores de superficie (SD) y el detector subterráneo de muones (UMD) se simula mediante el framework \texttt{Offline} de Auger \cite{cite:56, cite:83}. Este software procesa la salida de \texttt{CORSIKA} y simula procesos físicos como el efecto Cherenkov en los tanques de agua, la centelleo en los módulos del UMD y la electrónica de adquisición de datos. El resultado final son archivos en formato ADST (Advanced Data Summary Tree), que contienen tanto la información de la lluvia simulada (Monte Carlo o MC) como los parámetros recuperados por el algoritmo de reconstrucción (\textit{Reconstructed} o REC).
+La respuesta de los detectores de superficie (SD) y el detector subterráneo de muones (UMD) se simula mediante el framework \texttt{Offline} del Observatorio \cite{cite:56, cite:83}. Este software procesa la salida de \texttt{CORSIKA} (las partículas que alcanzan el nivel del suelo) y simula procesos físicos como la emisión de radiación Cherenkov en los tanques de agua, el centelleo en los módulos del UMD y la respuesta de la electrónica de adquisición, entre otras cosas. El resultado final se empaqueta en archivos de formato ADST (Advanced Data Summary Tree), los cuales contienen tanto la información intrínseca de la lluvia inyectada (Monte Carlo o MC) como los observables derivados por el algoritmo de reconstrucción (\textit{Reconstructed} o REC).
 
-\subsection{El Anillo Denso (Dense Ring)}
+\subsubsection{Producción Oficial y Disponibilidad de Datos}
+\label{sec:produccion_mc}
+
+La muestra analizada proviene de la producción denominada internamente \textit{Offline icrc2025-test7: SD-750 and UMD production for Auger}. Las cascadas originales fueron simuladas utilizando \texttt{CORSIKA} (v7.8010) y procesadas con el framework \texttt{Offline}.
+
+Para el tratamiento teórico del desarrollo longitudinal y la producción de muones en el régimen de ultra-alta energía, se utilizaron tres de los modelos fenomenológicos pos-LHC más actualizados: \texttt{EPOS LHC-R}, \texttt{Sibyll 2.3e} y \texttt{QGSJet-III.01}.
+
+La librería abarca un rango paramétrico amplio diseñado para el estudio del arreglo \textit{Infill} y el UMD. Sin embargo, por motivos de disponibilidad de acceso a los servidores en el momento de la extracción y estado de la producción de la colaboración, el conjunto de datos efectivo al que se tuvo acceso presenta variaciones en la completitud de sus lotes. El detalle de los archivos ADST extraídos se resume en el Cuadro \ref{tab:adst_datasets}.
+
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{llcccc}
+		\toprule
+		\textbf{Modelo Hadrónico} & \textbf{Rango de $\log_{10}(E/\mathrm{eV})$} & \textbf{Protón} & \textbf{Helio} & \textbf{Oxígeno} & \textbf{Hierro} \\
+		\midrule
+		\multirow{2}{*}{\textbf{SIBYLL 2.3e}} & $17.5 - 18.0$ & 20 (Full) & 20 (Full) & 20 (Full) & 20 (Full) \\
+		& $18.0 - 18.5$ & 1 & 12\textsuperscript{*} & 3 & 0 \\
+		\midrule
+		\multirow{2}{*}{\textbf{QGSJET-III.01}} & $17.5 - 18.0$ & - & 20 (Full) & - & 0 \\
+		& $18.0 - 18.5$ & - & 0 & - & - \\
+		\midrule
+		\multirow{2}{*}{\textbf{EPOS LHC-R}} & $17.5 - 18.0$ & - & 2 & - & - \\
+		& $18.0 - 18.5$ & - & 20 (Full) & - & 0 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Disponibilidad de ADSTs en la producción \textit{icrc2025-test7}. Los valores numéricos indican la cantidad de archivos disponibles por núcleo primario. Los ceros indican lotes vacíos en la producción, mientras que los guiones (-) señalan bines sin datos accesibles. En base a esta disponibilidad, el análisis fenomenológico principal de esta tesis se restringe a las simulaciones de \texttt{SIBYLL 2.3e} en el rango de energías de $10^{17.5}$ a $10^{18.0}$ eV. Se priorizó el uso de lotes con 20 ADSTs ($\approx 24,000$ lluvias por bin) para asegurar la convergencia de los ajustes armónicos. \textsuperscript{*}Dataset de Helio en alta energía identificado para análisis futuro.}
+	\label{tab:adst_datasets}
+\end{table}
+
+Para garantizar la homogeneidad en los ajustes de asimetría y el cálculo del factor de mérito, este trabajo se basa primordialmente en los lotes que cuentan con un set completo de 20 archivos ADST por primario para garantizar buena estadística. Cada uno de estos archivos contiene aproximadamente 1200 lluvias reconstruidas. Cabe destacar que, aunque la documentación interna de la colaboración (wiki) sugiere una capacidad nominal de 5000 lluvias por ADST, el conteo efectivo en los archivos procesados es menor. Esta diferencia se atribuye a los criterios de selección de eventos en el centro del anillo denso y a la exclusión de "jobs" fallidos.
+
+De manera preventiva, se identifica la existencia de un dataset de Helio en el rango de alta energía ($\log_{10}(E/\mathrm{eV}) \in [18.0, 18.5]$) compuesto por 12 archivos ADST. Si bien este lote no se incluyó en los resultados actuales debido a su menor estadística relativa, su análisis futuro permitirá extender la validación del parámetro $A_1$ hacia el régimen de energías superiores.
+
+También cabe destacar que el dataset de Helio de alta energía ($\log_{10}(E/\mathrm{eV}) \in [18.0, 18.5]$) correspondiente al modelo \texttt{EPOS LHC-R} fue analizado de manera exhaustiva, pero arrojó resultados anómalos o de difícil interpretación. Ante la imposibilidad de concluir empíricamente si dicho comportamiento responde a una característica física intrínseca del régimen de más alta energía o a un artefacto computacional (\textit{bug}) de esa serie de simulaciones, este lote fue excluido de parte de los resultados de este trabajo.
+
+Como se evidencia en el Cuadro \ref{tab:adst_datasets}, para asegurar una estadística robusta y simétrica en la comparación de composición de masa (Protón vs. Hierro), el análisis fenomenológico de esta tesis se centra, en una gran parte, en el subconjunto completo correspondiente al modelo \texttt{SIBYLL 2.3e} acotado hasta $\log_{10}(E/\mathrm{eV}) = 18.0$.
+
+\subsubsection{Respuesta Instrumental y el Anillo Denso (Dense Ring)}
 \label{sec:anillo_denso}
 
-Para aislar los efectos azimutales de las variaciones radiales de la Función de Distribución Lateral (LDF), se utiliza la configuración geométrica denominada \textit{Anillo Denso} \cite{cite:144, cite:502, cite:602}. 
+Para posibilitar el estudio puramente azimutal aislando la caída radial de la Función de Distribución Lateral (LDF), se requiere un control estricto de la geometría. Para lograr esto, se utiliza la configuración geométrica denominada \textit{Anillo Denso} \cite{cite:144, cite:502, cite:602}. 
 
-En simulaciones, esto consiste en rodear artificialmente el núcleo de la lluvia con una corona de estaciones ubicadas a una distancia fija $r$. Para el arreglo \textit{Infill} del Observatorio, el anillo denso se fija típicamente a $r = 450$~m \cite{cite:502, cite:602}. Esta metodología es fundamental para el control fenomenológico, ya que permite promediar la señal en bines de ángulo azimutal $\phi$ garantizando que cualquier modulación observada sea de origen físico (atenuación o geometría) y no un artefacto de la caída radial de la densidad de partículas.
+En las simulaciones, esto consiste en rodear artificialmente el núcleo de la lluvia con una corona de estaciones virtuales ubicadas a una distancia fija $r$. Esta producción oficial incorpora una metodología específica para lograrlo mediante un \textit{resampling} (remuestreo). Por cada lluvia individual generada en \texttt{CORSIKA}, el framework \texttt{Offline} ejecuta 5 iteraciones de reconstrucción distribuyendo detectores de manera concéntrica. 
+
+Este sobremuestreo espacial es lo que permite la construcción virtual del anillo. En cada evento reconstruido, la lluvia impacta en el centro de un arreglo poblado de estaciones ubicadas exactamente a una distancia radial fija en el plano de la lluvia (para el arreglo \textit{Infill}, en este caso $r = 450$~m \cite{cite:502, cite:602}). Esta configuración representa el entorno de control ideal: al fijar el radio, se garantiza que cualquier modulación en la densidad de partículas observada obedezca estrictamente a factores físicos (atenuación atmosférica o cinemática geométrica) dependientes del ángulo azimutal $\phi$, permitiendo realizar el ajuste armónico $S(\phi) = \langle S \rangle (1 + A_1 \cos\phi)$ sin artefactos introducidos por otras fuentes.
 
 \subsection{Performance y Calibración de la Reconstrucción}
 
