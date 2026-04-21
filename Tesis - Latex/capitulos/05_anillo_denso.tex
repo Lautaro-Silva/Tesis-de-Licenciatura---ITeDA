@@ -1,36 +1,134 @@
 % !TEX root = ../main.tex
 
-\section{Caracterización de la Asimetría en el Anillo Denso (\textit{Dense Ring})}
+\section{Caracterización de la Asimetría en el Anillo Denso}
 \label{sec:cap_anillo_denso}
+
+En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este entorno permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Ademas este estudio permite minimizar las flucturaciones estadísticas que se podrian presentar y hacer mas dificl este estudio, dado que la distribución física de las estaciones garantiza alta estadística. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la capacidad de este observable para la discriminación de la masa del rayo cósmico primario.
 
 \subsection{El Anillo Denso como entorno de control fenomenológico}
 \label{subsec:entorno_control}
 
+La configuración de Anillo Denso representa el escenario ideal para caracterizar la modulación azimutal. Al situar 12 estaciones virtuales a una distancia radial fija de $r = 450$~m en el plano de la lluvia, se garantiza que cualquier variación en la señal detectada sea independiente de la Función de Distribución Lateral (LDF). 
+
+En este contexto, la densidad de muones $S$ se modela mediante un ajuste armónico de primer orden:
+
+\begin{equation}
+	S(\phi) = \langle S \rangle (1 + A_1 \cos\phi)
+	\label{eq:ajuste_armonico}
+\end{equation}
+
+donde $\phi$ es el ángulo azimutal de la estación en el plano de la lluvia, $\langle S \rangle$ es la densidad media en el anillo y $A_1$ es la amplitud de la asimetría. Un valor de $A_1 > 0$ indica una dominancia del efecto de atenuación atmosférica (exceso de muones en la zona temprana o \textit{early}, $\phi = 0^\circ$), mientras que un $A_1 < 0$ reflejaría la dominancia de efectos geométricos y de divergencia (exceso en la zona tardía o \textit{late}, $\phi = \pm 180^\circ$). 
+
+Dado que a $r = 450$~m el sistema se encuentra fuera de la región de dominancia geométrica pura ($r < 200$~m), se espera que la contribución de los efectos de atenuación atmosférica sean mayores frente a los efectos de divergencia geométrica permitiendo una medición estable de $A_1$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5//Ajuste_UMD_REC_Bin9.pdf}
+	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para un evento de protón con el modelo hadrónico \texttt{Sibyll 2.3e}. Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$. }
+	\label{fig:ejemplo_ajuste}
+\end{figure}
+
+[INSERTAR CONCLUSIÓN SOBRE LA CALIDAD DE LOS AJUSTES EN EL ANILLO]
+
 \subsection{Estudios de Robustez}
 \label{subsec:robustez}
 
-\subsubsection{Invariancia azimutal de incidencia ($\phi_{\text{shower}}$)}
+Se estudio tambien el comportamiento del detector y el parámetro de asimetría, al enfrentarse a situaciones en las que, al ser circunstancia donde la fisica es la misma, especialmente hablando de los efectos de la atenuación atmosférica, no se espera ver cambios en su performance.
+
+\subsubsection{Invariancia azimutal de incidencia ($\phi_{shower}$)}
 \label{subsubsec:invariancia_phi}
+
+Para asegurar que la asimetría medida sea una propiedad intrínseca de la cascada y no un artefacto de la orientación del arreglo, se evaluó la estabilidad de $A_1$ en función del ángulo azimutal de entrada de la lluvia ($\phi_{\text{shower}}$). Al tratarse de un anillo denso ideal, la respuesta debería ser invariante ante rotaciones en el plano del suelo.
+
+ \begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/DenseRing_Systematics_Isotropy.pdf}
+	\caption{Amplitud $A_1$ en función del ángulo azimutal de la lluvia. Se observa la independencia del observable respecto a la dirección de arribo.}
+	\label{fig:robustez_phi}
+ \end{figure}
+
+Como se ve en la Figura \ref{fig:robustez_phi}, se analizo esto para el dataset de  el valor ajustado del paramtero de asimetraia $A_1$ no depende del angulo de incidencia de la lluvia, como era esperado. Esto es una buena prueba de estres para los fundamnetos del trabajo y que garantiza que se puede avanzar en el analisis
 
 \subsubsection{Independencia del modelo hadrónico}
 \label{subsubsec:independencia_modelo}
 
-\subsection{Dependencia de la amplitud $A_1$ con la energía primaria}
-\label{subsec:dependencia_energia}
+Analogamente, se comparó la evolución de $A_1$ utilizando diferentes librerías para las interacciones hadronicas, en este caso, \texttt{SIBYLL 2.3e}, \texttt{EPOS-LHC} y \texttt{QGSJET-II.04}. Aunque estos modelos predicen densidades totales de muones distintas (déficit muónico), la modulación relativa $A_1$ debe presentar una consistencia cualitativa que valide su uso como trazador de la composición.
+
+% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=0.8\textwidth]{figuras/comparacion_modelos.pdf}
+	% 	\caption{Comparación de $A_1$ para diferentes modelos hadrónicos. Se observa una tendencia sistemática común a pesar de las diferencias en la normalización de la densidad.}
+	% 	\label{fig:modelos_hadrónicos}
+	% \end{figure}
+
+[COMENTAR LAS DISCREPANCIAS O SIMILITUDES ENTRE MODELOS]
+
 
 \subsection{Efectos Sistemáticos: Discrepancias MC vs. REC}
 \label{subsec:mc_vs_rec}
 
-\subsection{Bias Direccional en la Reconstrucción (\textit{early} vs. \textit{late})}
+Un punto crítico de este estudio es la comparación entre la asimetría calculada con parámetros de Monte Carlo (MC) y la obtenida tras la reconstrucción (\textit{Offline}). La incertidumbre en la determinación del núcleo y los ángulos genera un lavado (\textit{smearing}) de la señal azimutal.
+
+% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=0.8\textwidth]{figuras/mc_vs_rec_a1.pdf}
+	% 	\caption{Comparación de la amplitud $A_1$ calculada con coordenadas MC vs REC.}
+	% 	\label{fig:mc_vs_rec}
+	% \end{figure}
+
+\subsubsection{Bias Direccional en la Reconstrucción (\textit{early} vs. \textit{late})}
 \label{subsec:bias_direccional}
 
-\subsection{Modelado del Bias: Implementación del \textit{Toy Model} empírico}
+Se identificó un sesgo sistemático en la reconstrucción que afecta de manera diferencial a las estaciones en posiciones \textit{early} ($\phi=0^\circ$) y \textit{late} ($\phi=180^\circ$). Este efecto es particularmente severo a bajas inclinaciones y distancias cortas al núcleo (Singularidad del Núcleo).
+
+\subsubsection{Modelado del Bias: Implementación del \textit{Toy Model} empírico}
 \label{subsec:toy_model}
+
+Para caracterizar el impacto del error de reconstrucción en la amplitud medida, se implementó un \textit{Toy Model}. Este modelo inyecta errores gaussianos en la posición del núcleo (basados en la resolución de $\sim 40$~m hallada en el Capítulo 4) sobre una lluvia ideal y evalúa la degradación resultante en $A_1$.
+
+% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=0.8\textwidth]{figuras/toy_model_results.pdf}
+	% 	\caption{Resultados del Toy Model: degradación de $A_1$ en función del error en la posición del núcleo.}
+	% 	\label{fig:toy_model}
+	% \end{figure}
+
+[EXPLICACIÓN DE CÓMO EL TOY MODEL EXPLICA EL BIAS REC]
+
+\subsection{Dependencia de la amplitud $A_1$ con la energía primaria}
+\label{subsec:dependencia_energia}
+
+Se analizó la evolución de la asimetría en el rango $\log_{10}(E/\text{eV}) \in [17.5, 18.0]$. Teóricamente, a mayor energía, el máximo de la lluvia ($X_{\text{max}}$) se produce más cerca del suelo, lo que debería impactar en la magnitud de la asimetría de atenuación.
+
+% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=0.8\textwidth]{figuras/evolucion_energia.pdf}
+	% 	\caption{Evolución de $A_1$ con la energía primaria para diferentes bines de $\theta$.}
+	% 	\label{fig:a1_vs_energia}
+	% \end{figure}
+
+[DESCRIPCIÓN DE LA DEPENDENCIA ENCONTRADA]
 
 \subsection{Discriminación de Masa Primaria: Protón vs. Hierro}
 \label{subsec:discriminacion_masa}
 
+Utilizando el entorno de control validado, se procedió a evaluar la separación entre primarios livianos (protones) y pesados (hierro). Debido a que las lluvias de hierro tienen un $X_{\text{max}}$ más alto, su asimetría de atenuación es sistemáticamente distinta a la del protón.
+
 \subsubsection{El Factor de Mérito ($MF$) y el \textit{Sweet Spot}}
 \label{subsubsec:sweet_spot}
+
+Se define el Factor de Mérito ($MF$) como el cociente entre la separación de las medias y la suma de sus desviaciones estándar. Se identificó un \textit{Sweet Spot} de discriminación en el rango angular $40^\circ \le \theta \le 55^\circ$.
+
+% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=0.8\textwidth]{figuras/factor_merito.pdf}
+	% 	\caption{Factor de Mérito en función de $\theta$. Se destaca la región de máxima separación (Sweet Spot).}
+	% 	\label{fig:mf_sweet_spot}
+	% \end{figure}
+
+En esta región, el $MF$ alcanza valores de $\approx 2.5$, lo que indica una capacidad de discriminación robusta que supera las incertidumbres de reconstrucción.
+
+
+
 
 \newpage
