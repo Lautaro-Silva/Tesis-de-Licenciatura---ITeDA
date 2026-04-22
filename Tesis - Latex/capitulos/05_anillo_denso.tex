@@ -3,7 +3,7 @@
 \section{Caracterización de la Asimetría en el Anillo Denso}
 \label{sec:cap_anillo_denso}
 
-En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este entorno permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Ademas este estudio permite minimizar las flucturaciones estadísticas que se podrian presentar y hacer mas dificl este estudio, dado que la distribución física de las estaciones garantiza alta estadística. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la capacidad de este observable para la discriminación de la masa del rayo cósmico primario.
+En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este marco permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Ademas este estudio permite minimizar las fluctuaciones estadísticas que se podrían presentar a causa de la distribución física de las estaciones, garantizando el alta estadística. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la capacidad de este observable para la discriminación de la masa del rayo cósmico primario.
 
 \subsection{El Anillo Denso como entorno de control fenomenológico}
 \label{subsec:entorno_control}
@@ -17,9 +17,14 @@ En este contexto, la densidad de muones $S$ se modela mediante un ajuste armóni
 	\label{eq:ajuste_armonico}
 \end{equation}
 
-donde $\phi$ es el ángulo azimutal de la estación en el plano de la lluvia, $\langle S \rangle$ es la densidad media en el anillo y $A_1$ es la amplitud de la asimetría. Un valor de $A_1 > 0$ indica una dominancia del efecto de atenuación atmosférica (exceso de muones en la zona temprana o \textit{early}, $\phi = 0^\circ$), mientras que un $A_1 < 0$ reflejaría la dominancia de efectos geométricos y de divergencia (exceso en la zona tardía o \textit{late}, $\phi = \pm 180^\circ$). 
+donde $\phi$ es el ángulo azimutal de la estación en el plano de la lluvia, $\langle S \rangle$ es la densidad media en el anillo y $A_1$ es la amplitud de la asimetría. Un valor de $A_1 > 0$ indica una dominancia del efecto de atenuación atmosférica (exceso de muones en la zona temprana, $\phi = 0^\circ$), mientras que un $A_1 < 0$ reflejaría la dominancia de efectos geométricos y de divergencia (exceso en la zona tardía, $\phi = \pm 180^\circ$). 
 
 Dado que a $r = 450$~m el sistema se encuentra fuera de la región de dominancia geométrica pura ($r < 200$~m), se espera que la contribución de los efectos de atenuación atmosférica sean mayores frente a los efectos de divergencia geométrica permitiendo una medición estable de $A_1$.
+
+
+En la Figura \ref{fig:ejemplo_ajuste} se puede ver un ejemplo del ajuste realizado sobre lluvias de protones con el modelo hadrónico \texttt{Sibyll 2.3e} con un angulo cenital $59.3^\circ < \theta_{shower} < 65^\circ$ usando el UMD y la cantidad de muones reconstruida. Se observan las doce estaciones virtuales simuladas en el Anillo Denso. Las barras de error corresponden a las fluctuaciones estadísticas que hay entre todas las lluvias, dentro de los ángulos definidos, y sobre estos datos se realiza el ajuste sinusoidal. Como se describió anteriormente, las lluvias están divididas en bines de igual ancho en $\sin^2 \theta$ dado que así se preservan los diferentes comportamientos de las lluvias a medida que estas son más inclinadas.
+
+Se puede ver que hay una diferencia de señal entre el maximo (en la zona temprana) y el minimo (en las zonas tardias) de $\pm 10\%$ en la modulo de la señal
 
 \begin{figure}[H]
 	\centering
@@ -27,8 +32,6 @@ Dado que a $r = 450$~m el sistema se encuentra fuera de la región de dominancia
 	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para un evento de protón con el modelo hadrónico \texttt{Sibyll 2.3e}. Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$. }
 	\label{fig:ejemplo_ajuste}
 \end{figure}
-
-[INSERTAR CONCLUSIÓN SOBRE LA CALIDAD DE LOS AJUSTES EN EL ANILLO]
 
 \subsection{Estudios de Robustez}
 \label{subsec:robustez}
