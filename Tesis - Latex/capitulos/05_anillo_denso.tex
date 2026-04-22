@@ -22,15 +22,22 @@ donde $\phi$ es el ángulo azimutal de la estación en el plano de la lluvia, $\
 Dado que a $r = 450$~m el sistema se encuentra fuera de la región de dominancia geométrica pura ($r < 200$~m), se espera que la contribución de los efectos de atenuación atmosférica sean mayores frente a los efectos de divergencia geométrica permitiendo una medición estable de $A_1$.
 
 
-En la Figura \ref{fig:ejemplo_ajuste} se puede ver un ejemplo del ajuste realizado sobre lluvias de protones con el modelo hadrónico \texttt{Sibyll 2.3e} con un angulo cenital $59.3^\circ < \theta_{shower} < 65^\circ$ usando el UMD y la cantidad de muones reconstruida. Se observan las doce estaciones virtuales simuladas en el Anillo Denso. Las barras de error corresponden a las fluctuaciones estadísticas que hay entre todas las lluvias, dentro de los ángulos definidos, y sobre estos datos se realiza el ajuste sinusoidal. Como se describió anteriormente, las lluvias están divididas en bines de igual ancho en $\sin^2 \theta$ dado que así se preservan los diferentes comportamientos de las lluvias a medida que estas son más inclinadas.
+En la Figura \ref{fig:ejemplo_ajuste} se puede ver un ejemplo del ajuste realizado sobre lluvias de protones con el modelo hadrónico \texttt{Sibyll 2.3e} con un angulo cenital $59.3^\circ < \theta_{shower} < 65^\circ$ usando el UMD y la cantidad de muones reconstruida ($N^{REC}_\mu$). Se observan las doce estaciones virtuales simuladas en el Anillo Denso donde las barras de error corresponden a la desviación desandar estadística de la media calculada a partir de todas las lluvias. Como se describió anteriormente, las lluvias están divididas en bines de igual ancho en $\sin^2 \theta$ dado que así se preservan los diferentes comportamientos de las lluvias a medida que estas son más inclinadas. Se puede ver ademas que hay una diferencia de señal entre el maximo (en la zona temprana) y el minimo (en las zonas tardias) de $\pm 7\%$ en la modulo de la señal teniendo así una diferencia en la cantidad media de muones del 14\%.
 
-Se puede ver que hay una diferencia de señal entre el maximo (en la zona temprana) y el minimo (en las zonas tardias) de $\pm 10\%$ en la modulo de la señal
+Este análisis se hizo tanto para la cantidad de muones reconstruida ($N^{REC}_\mu$) como para la cantidad de muones inyectados por CORSIKA o cantidad Monte Carlo ($N^{MC}_\mu$). A su vez, para poder extender la comparacion con la tesis de Bradfield, se realizo también este estudio con la cantidad de señal total de los detectores de superficie (SD). La comparativa de todos estos resultados, en todos los bines cenitales se puede ver en la FIgura \ref{fig:evolucion_asym_vs_theta}. Aca vale la pena hacer una pequeña distinción entre lo que se observa para el SD contra el UMD; donde en el UMD es la cantidad explicita de muones, el SD muestra la cantidad de señal total detectada en VEM o \textit{Vertical Muon Equivalent}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5//Ajuste_UMD_REC_Bin9.pdf}
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Ajuste_UMD_REC_Bin9.pdf}
 	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para un evento de protón con el modelo hadrónico \texttt{Sibyll 2.3e}. Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$. }
 	\label{fig:ejemplo_ajuste}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Evolucion_Asimetria_vs_Theta.pdf}
+	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para un evento de protón con el modelo hadrónico \texttt{Sibyll 2.3e}. Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$. }
+	\label{fig:evolucion_asym_vs_theta}
 \end{figure}
 
 \subsection{Estudios de Robustez}
