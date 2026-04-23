@@ -3,42 +3,80 @@
 \section{Caracterización de la Asimetría en el Anillo Denso}
 \label{sec:cap_anillo_denso}
 
-En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este marco permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Ademas este estudio permite minimizar las fluctuaciones estadísticas que se podrían presentar a causa de la distribución física de las estaciones, garantizando el alta estadística. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la capacidad de este observable para la discriminación de la masa del rayo cósmico primario.
+En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este marco permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Además, este estudio permite mitigar las fluctuaciones estadísticas que podrían presentarse debido a la distribución física irregular de las estaciones en el terreno, garantizando una alta estadística por bin azimutal. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la capacidad de este observable para la discriminación de la masa del rayo cósmico primario.
 
 \subsection{El Anillo Denso como entorno de control fenomenológico}
 \label{subsec:entorno_control}
 
 La configuración de Anillo Denso representa el escenario ideal para caracterizar la modulación azimutal. Al situar 12 estaciones virtuales a una distancia radial fija de $r = 450$~m en el plano de la lluvia, se garantiza que cualquier variación en la señal detectada sea independiente de la Función de Distribución Lateral (LDF). 
 
-En este contexto, la densidad de muones $S$ se modela mediante un ajuste armónico de primer orden:
+En este contexto, la densidad de partículas $S$ se modela mediante un ajuste armónico de primer orden:
 
 \begin{equation}
 	S(\phi) = \langle S \rangle (1 + A_1 \cos\phi)
 	\label{eq:ajuste_armonico}
 \end{equation}
 
-donde $\phi$ es el ángulo azimutal de la estación en el plano de la lluvia, $\langle S \rangle$ es la densidad media en el anillo y $A_1$ es la amplitud de la asimetría. Un valor de $A_1 > 0$ indica una dominancia del efecto de atenuación atmosférica (exceso de muones en la zona temprana, $\phi = 0^\circ$), mientras que un $A_1 < 0$ reflejaría la dominancia de efectos geométricos y de divergencia (exceso en la zona tardía, $\phi = \pm 180^\circ$). 
+donde $\phi$ es el ángulo azimutal de la estación en el plano de la lluvia, $\langle S \rangle$ es la densidad media en el anillo y $A_1$ es la amplitud de la asimetría. Como se discutió en el Capítulo 3, un valor de $A_1 > 0$ indica una dominancia del efecto de atenuación atmosférica (exceso en la zona temprana, $\phi = 0^\circ$), mientras que un $A_1 < 0$ reflejaría la dominancia de efectos geométricos y de divergencia radial (exceso en la zona tardía, $\phi = \pm 180^\circ$). 
 
-Dado que a $r = 450$~m el sistema se encuentra fuera de la región de dominancia geométrica pura ($r < 200$~m), se espera que la contribución de los efectos de atenuación atmosférica sean mayores frente a los efectos de divergencia geométrica permitiendo una medición estable de $A_1$.
+Dado que a $r = 450$~m el sistema se encuentra fuera de la región de dominancia geométrica pura ($r < 200$~m), se espera que la contribución de los efectos de atenuación atmosférica prevalezca frente a los efectos de divergencia, permitiendo una medición estable y positiva de $A_1$.
 
+En la Figura \ref{fig:ejemplo_ajuste} se presenta un ejemplo del ajuste realizado para una muestra de protones (modelo hadrónico \texttt{Sibyll 2.3e}) en el bin de mayor inclinación ($59.3^\circ < \theta_{\text{shower}} < 65^\circ$). Los datos corresponden a la cantidad de muones reconstruida por el UMD ($N^{\text{REC}}_\mu$). Se observan las doce estaciones virtuales equiespaciadas, donde las barras de error representan la desviación estándar estadística de la media. Se aprecia una modulación clara donde la diferencia de señal entre el máximo (región temprana) y el mínimo (región tardía) es de aproximadamente un 14\% ($\pm 7\%$ respecto a la media), confirmando una ruptura de simetría significativa para la componente muónica.
 
-En la Figura \ref{fig:ejemplo_ajuste} se puede ver un ejemplo del ajuste realizado sobre lluvias de protones con el modelo hadrónico \texttt{Sibyll 2.3e} con un angulo cenital $59.3^\circ < \theta_{shower} < 65^\circ$ usando el UMD y la cantidad de muones reconstruida ($N^{REC}_\mu$). Se observan las doce estaciones virtuales simuladas en el Anillo Denso donde las barras de error corresponden a la desviación desandar estadística de la media calculada a partir de todas las lluvias. Como se describió anteriormente, las lluvias están divididas en bines de igual ancho en $\sin^2 \theta$ dado que así se preservan los diferentes comportamientos de las lluvias a medida que estas son más inclinadas. Se puede ver ademas que hay una diferencia de señal entre el maximo (en la zona temprana) y el minimo (en las zonas tardias) de $\pm 7\%$ en la modulo de la señal teniendo así una diferencia en la cantidad media de muones del 14\%.
-
-Este análisis se hizo tanto para la cantidad de muones reconstruida ($N^{REC}_\mu$) como para la cantidad de muones inyectados por CORSIKA o cantidad Monte Carlo ($N^{MC}_\mu$). A su vez, para poder extender la comparacion con la tesis de Bradfield, se realizo también este estudio con la cantidad de señal total de los detectores de superficie (SD). La comparativa de todos estos resultados, en todos los bines cenitales se puede ver en la FIgura \ref{fig:evolucion_asym_vs_theta}. Aca vale la pena hacer una pequeña distinción entre lo que se observa para el SD contra el UMD; donde en el UMD es la cantidad explicita de muones, el SD muestra la cantidad de señal total detectada en VEM o \textit{Vertical Muon Equivalent}.
+Este análisis se extendió tanto a la cantidad de muones inyectados por CORSIKA ($N^{\text{MC}}_\mu$) como a la señal total registrada por los detectores de superficie (SD), permitiendo una comparación directa con estudios previos \cite{BradfieldThesis}. Es importante distinguir la naturaleza de los observables: mientras que el UMD cuantifica puramente la cantidad de muones, el SD registra la energía depositada total en unidades VEM (\textit{Vertical Equivalent Muon}) \cite{auger2015detector}. Esta es una unidad de energía normalizada propia del detector que considera la energía depositada de todas las partículas que atraviesan el SD, ya sean pertenecientes a la componente muónica como electromagnética de la lluvia. La evolución de $A_1$ para todos los bines cenitales se resume en la Figura \ref{fig:evolucion_asym_vs_theta}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Ajuste_UMD_REC_Bin9.pdf}
-	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para un evento de protón con el modelo hadrónico \texttt{Sibyll 2.3e}. Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$. }
+	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para eventos de protón (\texttt{Sibyll 2.3e}). Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$ según la Ec. \ref{eq:ajuste_armonico}.}
 	\label{fig:ejemplo_ajuste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Evolucion_Asimetria_vs_Theta.pdf}
-	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para un evento de protón con el modelo hadrónico \texttt{Sibyll 2.3e}. Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$. }
+	\caption{Evolución de la amplitud $A_1$ con su error en función de $\theta$ para el UMD (REC en azul, MC en verde) y el SD (rojo). Se observa la inversión de dominancia entre el SD y el UMD a altas inclinaciones.}
 	\label{fig:evolucion_asym_vs_theta}
 \end{figure}
+
+Al comparar las curvas, se observa que el SD presenta valores de asimetría significativamente mayores en bines de baja inclinación cenital, pero sufre un decaimiento abrupto a partir de $\theta_{\text{shower}} \gtrsim 50^\circ$. 
+
+Este comportamiento es consistente con la fenomenología de la cascada: en lluvias más verticales, la señal del SD está dominada por la componente electromagnética (electrones y fotones), que es órdenes de magnitud más numerosa que la muónica. La discrepancia en la magnitud de la asimetría entre el SD y el UMD se fundamenta en la naturaleza de los procesos de pérdida de energía de estas partículas secundarias. La componente electromagnética está gobernada por procesos de \textit{bremsstrahlung} y creación de pares. Estos procesos están caracterizados por una longitud de radiación muy corta en la atmósfera, lo que provoca una atenuación exponencial rápida tras superar el máximo de la cascada \cite{gaisser2016}. En contraste, los muones poseen una sección eficaz para la radiación de frenado mucho menor, dado que esta es inversamente proporcional al cuadrado de la masa. En consecuencia, pierden energía principalmente mediante ionización continua a una tasa mucho más baja y estable \cite{gaisser2016}. Esta diferencia en el poder de penetración explica por qué la amplitud $A_1$ es significativamente mayor en el SD (dominado por la atenuación abrupta de la componente EM) que en el UMD (que detecta puramente la componente muónica altamente penetrante).
+
+Sin embargo, a medida que aumenta la inclinación, el espesor atmosférico recorrido crece de forma no lineal, provocando que la componente EM sea casi totalmente absorbida antes de alcanzar el nivel del suelo. En este régimen de alta inclinación, la señal del SD pasa a estar dominada exclusivamente por muones, lo que explica la caída de la asimetría medida a niveles comparables o inferiores a los del UMD. El hecho de que el $A_1$ del SD caiga incluso por debajo de los valores del UMD se atribuye a la presencia de muones de baja energía. Tal como se demuestra en el modelo de transporte cinemático de Cazón et al. \cite{Cazon2012}, estos muones de baja energía dominan a grandes distancias del núcleo y a mayores ángulos cenitales, sufriendo mayores deflexiones y retrasos geométricos. Como consecuencia, estas partículas de baja energía tienden a poblar de manera asimétrica la región tardía, lavando la asimetría de atenuación atmosférica positiva que sí logran preservar los muones más energéticos filtrados por el blindaje del UMD.
+
+Finalmente, se observa una discrepancia sistemática entre los valores de asimetría $A_1$ obtenidos para los muones reconstruidos ($N^{\text{REC}}_\mu$) y los muones inyectados ($N^{\text{MC}}_\mu$) en el UMD. Esta diferencia, que indica un lavado o subestimación de la asimetría introducido por el framework de reconstrucción \textit{Offline}, será analizada en detalle en la sección \ref{subsec:mc_vs_rec}.
+
+\subsection{Efectos Sistemáticos: Discrepancias MC vs. REC}
+\label{subsec:mc_vs_rec}
+
+Como se describió anteriormente, aparece una diferencia sistemática entre los valores del parámetro de asimetría $A_1$ encontrados al usar las cantidades de muones reconstruidas contra las inyectadas en el UMD. Se procedió a analizar cuáles eran las razones para que aparezca dicha diferencia, dado que esta sección del trabajo se realizo en un contexto donde no contribuyen los errores en la reconstrucción del núcleo con el error de paralaje asociado a las estaciones.
+
+% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=0.8\textwidth]{figuras/mc_vs_rec_a1.pdf}
+	% 	\caption{Comparación de la amplitud $A_1$ calculada con coordenadas MC vs REC.}
+	% 	\label{fig:mc_vs_rec}
+	% \end{figure}
+
+\subsubsection{Bias Direccional en la Reconstrucción (\textit{early} vs. \textit{late})}
+\label{subsec:bias_direccional}
+
+Se identificó un sesgo sistemático en la reconstrucción que afecta de manera diferencial a las estaciones en posiciones \textit{early} ($\phi=0^\circ$) y \textit{late} ($\phi=180^\circ$). Este efecto es particularmente severo a bajas inclinaciones y distancias cortas al núcleo (Singularidad del Núcleo).
+
+\subsubsection{Modelado del Bias: Implementación del \textit{Toy Model} empírico}
+\label{subsec:toy_model}
+
+Para caracterizar el impacto del error de reconstrucción en la amplitud medida, se implementó un \textit{Toy Model}. Este modelo inyecta errores gaussianos en la posición del núcleo (basados en la resolución de $\sim 40$~m hallada en el Capítulo 4) sobre una lluvia ideal y evalúa la degradación resultante en $A_1$.
+
+% \begin{figure}[H]
+	% 	\centering
+	% 	\includegraphics[width=0.8\textwidth]{figuras/toy_model_results.pdf}
+	% 	\caption{Resultados del Toy Model: degradación de $A_1$ en función del error en la posición del núcleo.}
+	% 	\label{fig:toy_model}
+	% \end{figure}
+
+[EXPLICACIÓN DE CÓMO EL TOY MODEL EXPLICA EL BIAS REC]
 
 \subsection{Estudios de Robustez}
 \label{subsec:robustez}
@@ -72,38 +110,6 @@ Analogamente, se comparó la evolución de $A_1$ utilizando diferentes librería
 	% \end{figure}
 
 [COMENTAR LAS DISCREPANCIAS O SIMILITUDES ENTRE MODELOS]
-
-
-\subsection{Efectos Sistemáticos: Discrepancias MC vs. REC}
-\label{subsec:mc_vs_rec}
-
-Un punto crítico de este estudio es la comparación entre la asimetría calculada con parámetros de Monte Carlo (MC) y la obtenida tras la reconstrucción (\textit{Offline}). La incertidumbre en la determinación del núcleo y los ángulos genera un lavado (\textit{smearing}) de la señal azimutal.
-
-% \begin{figure}[H]
-	% 	\centering
-	% 	\includegraphics[width=0.8\textwidth]{figuras/mc_vs_rec_a1.pdf}
-	% 	\caption{Comparación de la amplitud $A_1$ calculada con coordenadas MC vs REC.}
-	% 	\label{fig:mc_vs_rec}
-	% \end{figure}
-
-\subsubsection{Bias Direccional en la Reconstrucción (\textit{early} vs. \textit{late})}
-\label{subsec:bias_direccional}
-
-Se identificó un sesgo sistemático en la reconstrucción que afecta de manera diferencial a las estaciones en posiciones \textit{early} ($\phi=0^\circ$) y \textit{late} ($\phi=180^\circ$). Este efecto es particularmente severo a bajas inclinaciones y distancias cortas al núcleo (Singularidad del Núcleo).
-
-\subsubsection{Modelado del Bias: Implementación del \textit{Toy Model} empírico}
-\label{subsec:toy_model}
-
-Para caracterizar el impacto del error de reconstrucción en la amplitud medida, se implementó un \textit{Toy Model}. Este modelo inyecta errores gaussianos en la posición del núcleo (basados en la resolución de $\sim 40$~m hallada en el Capítulo 4) sobre una lluvia ideal y evalúa la degradación resultante en $A_1$.
-
-% \begin{figure}[H]
-	% 	\centering
-	% 	\includegraphics[width=0.8\textwidth]{figuras/toy_model_results.pdf}
-	% 	\caption{Resultados del Toy Model: degradación de $A_1$ en función del error en la posición del núcleo.}
-	% 	\label{fig:toy_model}
-	% \end{figure}
-
-[EXPLICACIÓN DE CÓMO EL TOY MODEL EXPLICA EL BIAS REC]
 
 \subsection{Dependencia de la amplitud $A_1$ con la energía primaria}
 \label{subsec:dependencia_energia}
