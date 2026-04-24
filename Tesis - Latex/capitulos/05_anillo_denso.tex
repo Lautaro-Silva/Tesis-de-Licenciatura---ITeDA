@@ -23,7 +23,7 @@ Dado que a $r = 450$~m el sistema se encuentra fuera de la región de dominancia
 
 En la Figura \ref{fig:ejemplo_ajuste} se presenta un ejemplo del ajuste realizado para una muestra de protones (modelo hadrónico \texttt{Sibyll 2.3e}) en el bin de mayor inclinación ($59.3^\circ < \theta_{\text{shower}} < 65^\circ$). Los datos corresponden a la cantidad de muones reconstruida por el UMD ($N^{\text{REC}}_\mu$). Se observan las doce estaciones virtuales equiespaciadas, donde las barras de error representan la desviación estándar estadística de la media. Se aprecia una modulación clara donde la diferencia de señal entre el máximo (región temprana) y el mínimo (región tardía) es de aproximadamente un 14\% ($\pm 7\%$ respecto a la media), confirmando una ruptura de simetría significativa para la componente muónica.
 
-Este análisis se extendió tanto a la cantidad de muones inyectados por CORSIKA ($N^{\text{MC}}_\mu$) como a la señal total registrada por los detectores de superficie (SD), permitiendo una comparación directa con estudios previos \cite{BradfieldThesis}. Es importante distinguir la naturaleza de los observables: mientras que el UMD cuantifica puramente la cantidad de muones, el SD registra la energía depositada total en unidades VEM (\textit{Vertical Equivalent Muon}) \cite{auger2015detector}. Esta es una unidad de energía normalizada propia del detector que considera la energía depositada de todas las partículas que atraviesan el SD, ya sean pertenecientes a la componente muónica como electromagnética de la lluvia. La evolución de $A_1$ para todos los bines cenitales se resume en la Figura \ref{fig:evolucion_asym_vs_theta}.
+Este análisis se extendió usando tambien los datos de tanto la cantidad de muones inyectados por CORSIKA ($N^{\text{MC}}_\mu$) como la señal total registrada por los detectores de superficie (SD), permitiendo una comparación directa con estudios previos \cite{BradfieldThesis}. Es importante distinguir la naturaleza de los observables: mientras que el UMD cuantifica puramente la cantidad de muones, el SD registra la energía depositada total en unidades VEM (\textit{Vertical Equivalent Muon}) \cite{auger2015detector}. Esta es una unidad de energía normalizada propia del detector que considera la energía depositada de todas las partículas que atraviesan el SD, ya sean pertenecientes a la componente muónica como electromagnética de la lluvia. La evolución de $A_1$ para todos los bines cenitales se resume en la Figura \ref{fig:evolucion_asym_vs_theta}.
 
 \begin{figure}[H]
 	\centering
@@ -41,7 +41,7 @@ Este análisis se extendió tanto a la cantidad de muones inyectados por CORSIKA
 
 Al comparar las curvas, se observa que el SD presenta valores de asimetría significativamente mayores en bines de baja inclinación cenital, pero sufre un decaimiento abrupto a partir de $\theta_{\text{shower}} \gtrsim 50^\circ$. 
 
-Este comportamiento es consistente con la fenomenología de la cascada: en lluvias más verticales, la señal del SD está dominada por la componente electromagnética (electrones y fotones), que es órdenes de magnitud más numerosa que la muónica. La discrepancia en la magnitud de la asimetría entre el SD y el UMD se fundamenta en la naturaleza de los procesos de pérdida de energía de estas partículas secundarias. La componente electromagnética está gobernada por procesos de \textit{bremsstrahlung} y creación de pares. Estos procesos están caracterizados por una longitud de radiación muy corta en la atmósfera, lo que provoca una atenuación exponencial rápida tras superar el máximo de la cascada \cite{gaisser2016}. En contraste, los muones poseen una sección eficaz para la radiación de frenado mucho menor, dado que esta es inversamente proporcional al cuadrado de la masa. En consecuencia, pierden energía principalmente mediante ionización continua a una tasa mucho más baja y estable \cite{gaisser2016}. Esta diferencia en el poder de penetración explica por qué la amplitud $A_1$ es significativamente mayor en el SD (dominado por la atenuación abrupta de la componente EM) que en el UMD (que detecta puramente la componente muónica altamente penetrante).
+Este comportamiento es consistente con la fenomenología de la cascada: en lluvias más verticales, la señal del SD está dominada por la componente electromagnética (electrones y fotones), que es órdenes de magnitud más numerosa que la muónica. La discrepancia en la magnitud de la asimetría entre el SD y el UMD se fundamenta en la naturaleza de los procesos de pérdida de energía de estas partículas secundarias. La componente electromagnética está gobernada por procesos de \textit{bremsstrahlung} y creación de pares. Estos procesos están caracterizados por una longitud de radiación muy corta en la atmósfera, lo que provoca una atenuación exponencial rápida tras superar el máximo de la cascada. En contraste, los muones poseen una sección eficaz para la radiación de frenado mucho menor, dado que esta es inversamente proporcional al cuadrado de la masa. En consecuencia, pierden energía principalmente mediante ionización continua a una tasa mucho más baja y estable \cite{gaisser2016}. Esta diferencia en el poder de penetración explica por qué la amplitud $A_1$ es significativamente mayor en el SD (dominado por la atenuación abrupta de la componente EM) que en el UMD (que detecta puramente la componente muónica altamente penetrante).
 
 Sin embargo, a medida que aumenta la inclinación, el espesor atmosférico recorrido crece de forma no lineal, provocando que la componente EM sea casi totalmente absorbida antes de alcanzar el nivel del suelo. En este régimen de alta inclinación, la señal del SD pasa a estar dominada exclusivamente por muones, lo que explica la caída de la asimetría medida a niveles comparables o inferiores a los del UMD. El hecho de que el $A_1$ del SD caiga incluso por debajo de los valores del UMD se atribuye a la presencia de muones de baja energía. Tal como se demuestra en el modelo de transporte cinemático de Cazón et al. \cite{Cazon2012}, estos muones de baja energía dominan a grandes distancias del núcleo y a mayores ángulos cenitales, sufriendo mayores deflexiones y retrasos geométricos. Como consecuencia, estas partículas de baja energía tienden a poblar de manera asimétrica la región tardía, lavando la asimetría de atenuación atmosférica positiva que sí logran preservar los muones más energéticos filtrados por el blindaje del UMD.
 
@@ -52,12 +52,33 @@ Finalmente, se observa una discrepancia sistemática entre los valores de asimet
 
 Como se describió anteriormente, aparece una diferencia sistemática entre los valores del parámetro de asimetría $A_1$ encontrados al usar las cantidades de muones reconstruidas contra las inyectadas en el UMD. Se procedió a analizar cuáles eran las razones para que aparezca dicha diferencia, dado que esta sección del trabajo se realizo en un contexto donde no contribuyen los errores en la reconstrucción del núcleo con el error de paralaje asociado a las estaciones.
 
-% \begin{figure}[H]
-	% 	\centering
-	% 	\includegraphics[width=0.8\textwidth]{figuras/mc_vs_rec_a1.pdf}
-	% 	\caption{Comparación de la amplitud $A_1$ calculada con coordenadas MC vs REC.}
-	% 	\label{fig:mc_vs_rec}
-	% \end{figure}
+En principo se analizo si los ajustes realizados para obtener los valores de asimetria $A_1$ convergian de manera razonable. Para esto se estudio el factor de bondad de ajuste $\chi^2_\nu$ para todos los datos mostrados en la Figura \ref{fig:evolucion_asym_vs_theta}. Estos valores se pueden ver en la Figura \
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/muon_counting_validation.pdf}
+	\caption{Resido Relativo de la reconstruccion de muones comparado con los inyectados para todas las lluvias de protones realizadas con el modelo \texttt{Sibyll 2.3e} en el anillo denso. Se obtuvo una media casi cero con una resolución pequeña en valor absoluto.}
+	\label{fig:bias_umd_global}
+\end{figure}
+
+Se analizo como era el bias de la reconstrucción en al cantidad de muones analizando lso residuos de manera que
+
+\begin{equation}
+	\text{Residuo Relativo de Muones} = \frac{N^{REC}_\mu - N^{MC}_\mu}{N^{MC}_\mu}
+\end{equation}
+
+donde esta metrica permite analziar la proporcion de muones reconstrudios en comparacion con los inyectados, pero normalizada. Este estudio se puede ver en la Figura \ref{fig:bias_umd_global}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/muon_counting_validation.pdf}
+	\caption{Resido Relativo de la reconstruccion de muones comparado con los inyectados para todas las lluvias de protones realizadas con el modelo \texttt{Sibyll 2.3e} en el anillo denso. Se obtuvo una media casi cero con una resolución pequeña en valor absoluto.}
+	\label{fig:bias_umd_global}
+\end{figure}
+
+Vale la pena destacar que, aun cuando la distribución tiene una media casi cero con una buena resolución, se puede ver que la distribución no es simétrica respecto del cero. Esto es esperado dado que jamas se puede tener menos que el 100\% de los muones inyectados como reconstruidos, pero si se puede tener una mayor cantidad (como se ve en la Figura que ocurre que a veces se reconstruyen hasta 4 veces más muones que los inyectados). 
+
+Se intento ver si esta asimetria de la distribucion respecto del cero podia ser la causa de las diferencias entre la ampl;itud de asimetrai $A_1$ entre los datos REC y los datos MC. Para esto se construyo un modelo que a los datos MC se les sampleaba un valor random obtendio de la distribucion encontrada en la Figura \ref{fig:bias_umd_global} y se le restaba 
 
 \subsubsection{Bias Direccional en la Reconstrucción (\textit{early} vs. \textit{late})}
 \label{subsec:bias_direccional}
