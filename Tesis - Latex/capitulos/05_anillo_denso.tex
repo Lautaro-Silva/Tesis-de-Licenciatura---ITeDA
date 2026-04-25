@@ -50,54 +50,76 @@ Finalmente, se observa una discrepancia sistemática entre los valores de asimet
 \subsection{Efectos Sistemáticos: Discrepancias MC vs. REC}
 \label{subsec:mc_vs_rec}
 
-Como se describió anteriormente, aparece una diferencia sistemática entre los valores del parámetro de asimetría $A_1$ encontrados al usar las cantidades de muones reconstruidas contra las inyectadas en el UMD. Se procedió a analizar cuáles eran las razones para que aparezca dicha diferencia, dado que esta sección del trabajo se realizo en un contexto donde no contribuyen los errores en la reconstrucción del núcleo con el error de paralaje asociado a las estaciones.
+Como se evidenció en la Figura \ref{fig:evolucion_asym_vs_theta}, existe una diferencia sistemática persistente entre la amplitud de asimetría $A_1$ obtenida a partir de muones inyectados ($N^{\text{MC}}_\mu$) y muones reconstruidos ($N^{\text{REC}}_\mu$). Dado que este análisis se realiza utilizando la geometría controlada del Anillo Denso, se descartan errores de paralaje o de reconstrucción del núcleo como fuente de la discrepancia. Por lo tanto, el origen del sesgo debe buscarse en la respuesta del algoritmo de reconstrucción del UMD o en la validez de los ajustes.
 
-En principo se analizo si los ajustes realizados para obtener los valores de asimetria $A_1$ convergian de manera razonable. Para esto se estudio el factor de bondad de ajuste $\chi^2_\nu$ para todos los datos mostrados en la Figura \ref{fig:evolucion_asym_vs_theta}. Estos valores se pueden ver en la Figura \
+En primera instancia, se evaluó la convergencia y estabilidad de los ajustes armónicos mediante la métrica de bondad de ajuste $\chi^2_\nu$. Los resultados para todos los bines cenitales se presentan en la Figura \ref{fig:chi_cuadrado_reducido}.
+
+Para los datos del UMD, tanto en el nivel de simulación como de reconstrucción, se obtuvieron valores de $\chi^2_\nu \approx 1$. Esto confirma que el modelo armónico de primer orden describe adecuadamente la modulación muónica y que los ajustes son estadísticamente robustos. Esto permite descartar una inestabilidad del ajuste como la fuente de la diferencia ente los valores de asimetría del UMD.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/muon_counting_validation.pdf}
-	\caption{Resido Relativo de la reconstruccion de muones comparado con los inyectados para todas las lluvias de protones realizadas con el modelo \texttt{Sibyll 2.3e} en el anillo denso. Se obtuvo una media casi cero con una resolución pequeña en valor absoluto.}
-	\label{fig:bias_umd_global}
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Chi2_Reduced_Fits.pdf}
+	\caption{Bondad de ajuste $\chi^2_\nu$ para los bines cenitales. Se observa que los ajustes del UMD (REC y MC) se mantienen cercanos a la unidad, mientras que el SD presenta valores elevados debido a la alta precisión estadística de la muestra.}
+	\label{fig:chi_cuadrado_reducido}
 \end{figure}
 
-Se analizo como era el bias de la reconstrucción en al cantidad de muones analizando lso residuos de manera que
+Por el contrario, los ajustes del SD presentan valores de $\chi^2_\nu$ significativamente mayores (alcanzando un máximo de $\sim 10$). Este comportamiento no implica un fallo del modelo, sino que es consecuencia de la elevada estadística de la muestra (dado que la cantidad de partículas que llegan a los detectores es mucho mayor). Al ser el error de la media extremadamente pequeño, el test de $\chi^2$ se vuelve sensible a desviaciones de segundo orden o pequeñas asimetrías físicas que el modelo armónico simple no pretende capturar. La inspección visual del ajuste en el SD (ver Figura en el ANEXO) confirma que la curva describe la tendencia general de los datos con precisión, pero la rigurosidad estadística del $\chi^2$ penaliza los residuos mínimos que resultan significativos ante tan baja incertidumbre.
+
+Para investigar la discrepancia en $A_1$ dentro del UMD, se analizó el rendimiento del algoritmo de reconstrucción de muones a nivel de estación. Se definió el Residuo Relativo de Muones como:
 
 \begin{equation}
-	\text{Residuo Relativo de Muones} = \frac{N^{REC}_\mu - N^{MC}_\mu}{N^{MC}_\mu}
+	\text{Residuo Relativo} = \frac{N^{\text{REC}}_\mu - N^{\text{MC}}_\mu}{N^{\text{MC}}_\mu}
 \end{equation}
 
-donde esta metrica permite analziar la proporcion de muones reconstrudios en comparacion con los inyectados, pero normalizada. Este estudio se puede ver en la Figura \ref{fig:bias_umd_global}
+Esta métrica permite cuantificar el sesgo en el conteo de partículas de manera normalizada. La distribución de este residuo para la muestra de protones (\texttt{Sibyll 2.3e}) se muestra en la Figura \ref{fig:bias_umd_global}.
+
+Si bien la distribución está centrada cerca del cero con una resolución aceptable, presenta una asimetría marcada respecto del cero. Mientras que el error por sub-reconstrucción está limitado físicamente (el residuo no puede ser menor a -1), el algoritmo presenta una cola de sobre-reconstrucción donde el número de muones detectados puede superar ampliamente al inyectado. Este fenómeno de 'overcounting' es intrínseco a los algoritmos de reconstrucción.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/muon_counting_validation.pdf}
-	\caption{Resido Relativo de la reconstruccion de muones comparado con los inyectados para todas las lluvias de protones realizadas con el modelo \texttt{Sibyll 2.3e} en el anillo denso. Se obtuvo una media casi cero con una resolución pequeña en valor absoluto.}
+	\caption{Distribución del residuo relativo en la reconstrucción de muones. Aunque la media es cercana a cero, se observa una asimetría intrínseca con una cola extendida hacia la sobre-reconstrucción de partículas.}
 	\label{fig:bias_umd_global}
 \end{figure}
 
-Vale la pena destacar que, aun cuando la distribución tiene una media casi cero con una buena resolución, se puede ver que la distribución no es simétrica respecto del cero. Esto es esperado dado que jamas se puede tener menos que el 100\% de los muones inyectados como reconstruidos, pero si se puede tener una mayor cantidad (como se ve en la Figura que ocurre que a veces se reconstruyen hasta 4 veces más muones que los inyectados). 
+Se intento ver si esta asimetría de la distribución respecto del cero podía explicar las diferencias de la amplitud de asimetría $A_1$ entre los datos REC y los datos MC. Para esto se construyo un modelo que implementase la distribución encontrada en la Figura \ref{fig:bias_umd_global} en los datos. Sin embargo, este procedimiento solo inyectó ruido estadístico en los ajustes, sin lograr desplazar los valores de $A_1^{\text{MC}}$ hacia los niveles de $A_1^{\text{REC}}$. Este resultado negativo sugiere que el sesgo de reconstrucción no es uniforme, sino que posee una dependencia funcional con, por ejemplo, la posición de la estación o la densidad local de partículas.
 
-Se intento ver si esta asimetria de la distribucion respecto del cero podia ser la causa de las diferencias entre la ampl;itud de asimetrai $A_1$ entre los datos REC y los datos MC. Para esto se construyo un modelo que a los datos MC se les sampleaba un valor random obtendio de la distribucion encontrada en la Figura \ref{fig:bias_umd_global} y se le restaba 
-
-\subsubsection{Bias Direccional en la Reconstrucción (\textit{early} vs. \textit{late})}
+\subsubsection{Bias Direccional en la Reconstrucción (\textit{temprano} vs. \textit{tardío})}
 \label{subsec:bias_direccional}
 
-Se identificó un sesgo sistemático en la reconstrucción que afecta de manera diferencial a las estaciones en posiciones \textit{early} ($\phi=0^\circ$) y \textit{late} ($\phi=180^\circ$). Este efecto es particularmente severo a bajas inclinaciones y distancias cortas al núcleo (Singularidad del Núcleo).
+Se planteó la hipótesis de que el error de conteo del UMD no es uniforme, sino que presenta una dependencia con la región azimutal de la lluvia. Si el sobreconteo (\textit{overcounting}) es proporcionalmente mayor en las zonas de baja densidad ($\phi \approx \pm 180^\circ$) que en las de alta densidad ($\phi \approx 0^\circ$), el efecto resultante sería un aumento artificial del 'piso' de la señal tardía (\textit{late}). Esto reduciría la modulación relativa entre ambas regiones, resultando en una degradación sistemática de la amplitud $A_1$ reconstruida.
 
+Para verificar esta premisa, se estudió la evolución del valor medio del residuo relativo para lluvias inclinadas ($40^\circ \le \theta_{\text{shower}} \le 65^\circ$) particionando la muestra en 12 bines azimutales equiespaciados en el plano de la lluvia. Los resultados se presentan en la Figura \ref{fig:bias_direccional_rec}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{capitulos/imagenes_capitulos/cap5/directional_bias.pdf}
+	\caption{Distribución de la media del residuo relativo de reconstrucción en función del ángulo azimutal de la estación en el plano de la lluvia. Se evidencia un desempeño degradado en las regiones tardías ($\pm 180^\circ$), donde el sesgo de sobreconteo es máximamente superior al de la región temprana ($0^\circ$).}
+	\label{fig:bias_direccional_rec}
+\end{figure}
+	
+Como se observa, el algoritmo de reconstrucción presenta un sesgo positivo significativamente mayor en las regiones tardías. Físicamente, esto se debe a que en las zonas de menor densidad, cualquier fluctuación estadística o error en la deconvolución de trazas tiene un impacto relativo mucho mayor sobre el valor medio, elevando artificialmente la densidad de muones allí donde la atenuación atmosférica debería ser máxima. Este efecto actúa como un ruido coherente que 'lava' la asimetría física intrínseca de la cascada.
+	
 \subsubsection{Modelado del Bias: Implementación del \textit{Toy Model} empírico}
 \label{subsec:toy_model}
-
-Para caracterizar el impacto del error de reconstrucción en la amplitud medida, se implementó un \textit{Toy Model}. Este modelo inyecta errores gaussianos en la posición del núcleo (basados en la resolución de $\sim 40$~m hallada en el Capítulo 4) sobre una lluvia ideal y evalúa la degradación resultante en $A_1$.
-
-% \begin{figure}[H]
-	% 	\centering
-	% 	\includegraphics[width=0.8\textwidth]{figuras/toy_model_results.pdf}
-	% 	\caption{Resultados del Toy Model: degradación de $A_1$ en función del error en la posición del núcleo.}
-	% 	\label{fig:toy_model}
-	% \end{figure}
-
-[EXPLICACIÓN DE CÓMO EL TOY MODEL EXPLICA EL BIAS REC]
+	
+Con el fin de cuantificar si este sesgo direccional es suficiente para explicar la discrepancia observada entre los datos ideales y los reconstruidos, se implementó un \textit{Toy Model} de perturbación. El modelo toma las densidades muónicas de Monte Carlo ($N_{\mu}^{\text{MC}}$) en cada bin azimutal y les añade una contribución de error muestreada de una distribución gaussiana, cuyos parámetros ($\mu, \sigma$) se extrajeron directamente de las distribuciones de residuos segmentadas por $\phi$ (Figura \ref{fig:bias_direccional_rec}).
+	
+Este procedimiento permite evaluar la degradación de $A_1$ derivada exclusivamente del error de conteo direccional, aislándola de otras fuentes de incertidumbre como la reconstrucción del núcleo. La comparación entre las curvas originales y el resultado del modelo se detalla en la Figura \ref{fig:toy_model_results}.
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{capitulos/imagenes_capitulos/cap5/toy_model.pdf}
+	\caption{Comparación de la amplitud de asimetría $A_1$ para muones inyectados (verde), reconstruidos (azul) y el resultado del \textit{Toy Model} (naranja). El modelo basado en el sesgo de conteo direccional logra replicar la pérdida de asimetría observada en el detector, identificando dos regímenes diferenciados.}
+	\label{fig:toy_model_results}
+\end{figure}
+		
+El análisis de los resultados permite distinguir dos comportamientos bien definidos en función de la inclinación cenital:
+		
+\begin{itemize}
+	\item \textbf{Régimen cuasi-vertical ($\theta \lesssim 35^\circ$):} La amplitud de asimetría generada por el \textit{Toy Model} se superpone casi exactamente con la curva de reconstrucción $A_1^{\text{REC}}$. Esto constituye una evidencia robusta de que, en bines de baja inclinación, la totalidad de la pérdida de asimetría se origina en el sesgo de sobreconteo direccional del algoritmo de reconstrucción.
+	\item \textbf{Régimen de media y alta inclinación ($\theta \gtrsim 35^\circ$):} Si bien el sesgo de conteo logra explicar más del 50\% de la degradación frente a los datos ideales, la curva del \textit{Toy Model} comienza a divergir, no alcanzando a replicar la totalidad de la caída en $A_1^{\text{REC}}$. Esta diferencia remanente indica que, a medida que aumenta la inclinación, entran en juego efectos geométricos de segundo orden. En particular, uno de ellos es el \textit{cross-talk} que es de especial relevancia para las lluvias de alta inclinación que producen un sobrecuento de la cantidad de muones. 
+\end{itemize}
 
 \subsection{Estudios de Robustez}
 \label{subsec:robustez}

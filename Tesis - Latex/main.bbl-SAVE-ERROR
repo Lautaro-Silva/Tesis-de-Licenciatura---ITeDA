@@ -1,0 +1,648 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{GAP2007_124}{report}{}
+      \name{author}{3}{}{%
+        {{hash=1e274b18df0c95b29fd0bb3dac0b6946}{%
+           family={Dembinski},
+           familyi={D\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=7a2d44a5c42490d3f86d5cdfb8f7e482}{%
+           family={Hebbeker},
+           familyi={H\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=8918d7a34fe703e941b587763031b8de}{%
+           family={Leuthold},
+           familyi={L\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Pierre Auger Observatory}%
+      }
+      \strng{namehash}{d13582a5eea5685cc58ce960ad6cf370}
+      \strng{fullhash}{d13582a5eea5685cc58ce960ad6cf370}
+      \strng{bibnamehash}{d13582a5eea5685cc58ce960ad6cf370}
+      \strng{authorbibnamehash}{d13582a5eea5685cc58ce960ad6cf370}
+      \strng{authornamehash}{d13582a5eea5685cc58ce960ad6cf370}
+      \strng{authorfullhash}{d13582a5eea5685cc58ce960ad6cf370}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{GAP-2007-124}
+      \field{title}{{A comparison of Monte-Carlo generated Muon Maps with near horizontal SD showers}}
+      \field{type}{techreport}
+      \field{year}{2007}
+    \endentry
+    \entry{Pryke1998}{report}{}
+      \name{author}{1}{}{%
+        {{hash=5f7736d91bce802d1c8d473659acd074}{%
+           family={Pryke},
+           familyi={P\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Pierre Auger Observatory}%
+      }
+      \strng{namehash}{5f7736d91bce802d1c8d473659acd074}
+      \strng{fullhash}{5f7736d91bce802d1c8d473659acd074}
+      \strng{bibnamehash}{5f7736d91bce802d1c8d473659acd074}
+      \strng{authorbibnamehash}{5f7736d91bce802d1c8d473659acd074}
+      \strng{authornamehash}{5f7736d91bce802d1c8d473659acd074}
+      \strng{authorfullhash}{5f7736d91bce802d1c8d473659acd074}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{GAP-1998-034}
+      \field{title}{Asymmetry of Air Showers at Ground Level}
+      \field{type}{Internal Note}
+      \field{year}{1998}
+    \endentry
+    \entry{BradfieldThesis}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=4578c1a8047e40ce056de7124bb3ce70}{%
+           family={Bradfield},
+           familyi={B\bibinitperiod},
+           given={Fraser},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {The University of Adelaide}%
+      }
+      \strng{namehash}{4578c1a8047e40ce056de7124bb3ce70}
+      \strng{fullhash}{4578c1a8047e40ce056de7124bb3ce70}
+      \strng{bibnamehash}{4578c1a8047e40ce056de7124bb3ce70}
+      \strng{authorbibnamehash}{4578c1a8047e40ce056de7124bb3ce70}
+      \strng{authornamehash}{4578c1a8047e40ce056de7124bb3ce70}
+      \strng{authorfullhash}{4578c1a8047e40ce056de7124bb3ce70}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{GAP-2022-023}
+      \field{title}{{Extensive air shower asymmetry and cosmic ray mass composition with the upgraded Pierre Auger Observatory}}
+      \field{type}{phdthesis}
+      \field{year}{2022}
+    \endentry
+    \entry{Cazon2012}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=f24a1f948999c3adf9d407eeaedd02ad}{%
+           family={Cazón},
+           familyi={C\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{34343450b6edbc7977d0c71fcb84b4f8}
+      \strng{fullhash}{34343450b6edbc7977d0c71fcb84b4f8}
+      \strng{bibnamehash}{34343450b6edbc7977d0c71fcb84b4f8}
+      \strng{authorbibnamehash}{34343450b6edbc7977d0c71fcb84b4f8}
+      \strng{authornamehash}{34343450b6edbc7977d0c71fcb84b4f8}
+      \strng{authorfullhash}{34343450b6edbc7977d0c71fcb84b4f8}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astroparticle Physics}
+      \field{number}{1}
+      \field{title}{A model for the transport of muons in extensive air showers}
+      \field{volume}{36}
+      \field{year}{2012}
+      \field{pages}{211\bibrangedash 223}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.astropartphys.2012.05.017
+      \endverb
+    \endentry
+    \entry{GAP2000_017}{report}{}
+      \name{author}{2}{}{%
+        {{hash=81f1bcd00dd7bfc5774fe8b602ce0b2c}{%
+           family={Bertou},
+           familyi={B\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod}}}%
+        {{hash=f77d29a6a6e5f643d15d0e8db7156005}{%
+           family={Billoir},
+           familyi={B\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Pierre Auger Observatory}%
+      }
+      \strng{namehash}{feb59a8045b7f216ad51a7beeba34179}
+      \strng{fullhash}{feb59a8045b7f216ad51a7beeba34179}
+      \strng{bibnamehash}{feb59a8045b7f216ad51a7beeba34179}
+      \strng{authorbibnamehash}{feb59a8045b7f216ad51a7beeba34179}
+      \strng{authornamehash}{feb59a8045b7f216ad51a7beeba34179}
+      \strng{authorfullhash}{feb59a8045b7f216ad51a7beeba34179}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{GAP-2000-017}
+      \field{title}{On the origin of the asymmetry of ground densities in inclined showers}
+      \field{type}{Internal Note}
+      \field{year}{2000}
+    \endentry
+    \entry{Scornavacche2026}{unpublished}{}
+      \name{author}{1}{}{%
+        {{hash=27518c452ec26c9c055fc6533a7a2b05}{%
+           family={Scornavacche},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{27518c452ec26c9c055fc6533a7a2b05}
+      \strng{fullhash}{27518c452ec26c9c055fc6533a7a2b05}
+      \strng{bibnamehash}{27518c452ec26c9c055fc6533a7a2b05}
+      \strng{authorbibnamehash}{27518c452ec26c9c055fc6533a7a2b05}
+      \strng{authornamehash}{27518c452ec26c9c055fc6533a7a2b05}
+      \strng{authorfullhash}{27518c452ec26c9c055fc6533a7a2b05}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Presentation at the Pierre Auger Collaboration Meeting, UMD Foundations}
+      \field{title}{Current work and plans for the inclined air showers reconstruction}
+      \field{year}{2026}
+    \endentry
+    \entry{collaboration_2014}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6ff9d76ee201c926bc213d6f0cbd68f4}{%
+           family={collaboration},
+           familyi={c\bibinitperiod},
+           given={The\bibnamedelimb Pierre\bibnamedelima Auger},
+           giveni={T\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOP Publishing}%
+      }
+      \strng{namehash}{6ff9d76ee201c926bc213d6f0cbd68f4}
+      \strng{fullhash}{6ff9d76ee201c926bc213d6f0cbd68f4}
+      \strng{bibnamehash}{6ff9d76ee201c926bc213d6f0cbd68f4}
+      \strng{authorbibnamehash}{6ff9d76ee201c926bc213d6f0cbd68f4}
+      \strng{authornamehash}{6ff9d76ee201c926bc213d6f0cbd68f4}
+      \strng{authorfullhash}{6ff9d76ee201c926bc213d6f0cbd68f4}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Cosmology and Astroparticle Physics}
+      \field{month}{8}
+      \field{number}{08}
+      \field{title}{Reconstruction of inclined air showers detected with the Pierre Auger Observatory}
+      \field{volume}{2014}
+      \field{year}{2014}
+      \field{pages}{019\bibrangedash 019}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/1475-7516/2014/08/019
+      \endverb
+    \endentry
+    \entry{Billoir2002}{report}{}
+      \name{author}{2}{}{%
+        {{hash=f77d29a6a6e5f643d15d0e8db7156005}{%
+           family={Billoir},
+           familyi={B\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=20356cb4658c64ddac3eb1abced0081a}{%
+           family={Da\bibnamedelima Silva},
+           familyi={D\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Pierre Auger Observatory}%
+      }
+      \strng{namehash}{a4b77c6737ef74c8db9240dfeae1d34f}
+      \strng{fullhash}{a4b77c6737ef74c8db9240dfeae1d34f}
+      \strng{bibnamehash}{a4b77c6737ef74c8db9240dfeae1d34f}
+      \strng{authorbibnamehash}{a4b77c6737ef74c8db9240dfeae1d34f}
+      \strng{authornamehash}{a4b77c6737ef74c8db9240dfeae1d34f}
+      \strng{authorfullhash}{a4b77c6737ef74c8db9240dfeae1d34f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{GAP-2002-073}
+      \field{title}{Towards a Parametrization of the Lateral Distribution Function and its Asymmetries in the Surface Detector}
+      \field{type}{Internal Note}
+      \field{year}{2002}
+    \endentry
+    \entry{heck1998corsika}{report}{}
+      \name{author}{5}{}{%
+        {{hash=af5e95eba18d2fb9b0e58d606b26abe9}{%
+           family={Heck},
+           familyi={H\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=f959e9882e2d49a04fa4a6a59a995ac6}{%
+           family={Knapp},
+           familyi={K\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=046d4e46be6194f893544f59ec89198d}{%
+           family={Capdevielle},
+           familyi={C\bibinitperiod},
+           given={J.\bibnamedelimi N.},
+           giveni={J\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=3d718d3b4788491f30523e47bc5d4382}{%
+           family={Schatz},
+           familyi={S\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=e3bb56da99517c628608d7df3fe1018e}{%
+           family={Thouw},
+           familyi={T\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Forschungszentrum Karlsruhe}%
+      }
+      \strng{namehash}{9a11f39373d77189f572e63015ba14d1}
+      \strng{fullhash}{e5ed0af7ee7b686332d421d040b6bdaf}
+      \strng{bibnamehash}{9a11f39373d77189f572e63015ba14d1}
+      \strng{authorbibnamehash}{9a11f39373d77189f572e63015ba14d1}
+      \strng{authornamehash}{9a11f39373d77189f572e63015ba14d1}
+      \strng{authorfullhash}{e5ed0af7ee7b686332d421d040b6bdaf}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{FZKA 6019}
+      \field{title}{{CORSIKA: A Monte Carlo Code to Simulate Extensive Air Showers}}
+      \field{type}{techreport}
+      \field{year}{1998}
+    \endentry
+    \entry{pierog2015epos}{article}{}
+      \name{author}{5}{}{%
+        {{hash=9ca7f22393d225a3b322300072a5ecb8}{%
+           family={Pierog},
+           familyi={P\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=4db294178ce5b5763cc369ad8a5f9f9e}{%
+           family={Karpenko},
+           familyi={K\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=4932b9c66bfa946048b76aa4b8eede9d}{%
+           family={Katzy},
+           familyi={K\bibinitperiod},
+           given={J.\bibnamedelimi M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=6a7741251a4bae6135a5d0baf0f46eb0}{%
+           family={Yatsenko},
+           familyi={Y\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=8ad488076edc2791d95489ce059a8ad0}{%
+           family={Werner},
+           familyi={W\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{3463b71f633ca5451f0d92700309ce09}
+      \strng{fullhash}{5be7a7c4c7bfc0479939ebe40f64ecd3}
+      \strng{bibnamehash}{3463b71f633ca5451f0d92700309ce09}
+      \strng{authorbibnamehash}{3463b71f633ca5451f0d92700309ce09}
+      \strng{authornamehash}{3463b71f633ca5451f0d92700309ce09}
+      \strng{authorfullhash}{5be7a7c4c7bfc0479939ebe40f64ecd3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review C}
+      \field{number}{3}
+      \field{title}{{EPOS LHC: Test of hadronic interaction models using data from the LHC}}
+      \field{volume}{92}
+      \field{year}{2015}
+      \field{pages}{034906}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevC.92.034906
+      \endverb
+    \endentry
+    \entry{riehn2020sibyll}{article}{}
+      \name{author}{5}{}{%
+        {{hash=1156651c27a9e5e658a0fa682bfeb419}{%
+           family={Riehn},
+           familyi={R\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=4f0f1715be8da9b1d5a14aee1ca103fa}{%
+           family={Engel},
+           familyi={E\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f1f85ec7b0696bd7cfcbbb0e96ab2e19}{%
+           family={Fedynitch},
+           familyi={F\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=55e7d582133c5538d273e551f9f9a3c7}{%
+           family={Gaisser},
+           familyi={G\bibinitperiod},
+           given={T.\bibnamedelimi K.},
+           giveni={T\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=a89d832813db943450e366c9ff2564b7}{%
+           family={Stanev},
+           familyi={S\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{94b49c20c0932e88eb5ba6e763269942}
+      \strng{fullhash}{f96b518431c69ad3e2d5f8e791b68ed6}
+      \strng{bibnamehash}{94b49c20c0932e88eb5ba6e763269942}
+      \strng{authorbibnamehash}{94b49c20c0932e88eb5ba6e763269942}
+      \strng{authornamehash}{94b49c20c0932e88eb5ba6e763269942}
+      \strng{authorfullhash}{f96b518431c69ad3e2d5f8e791b68ed6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review D}
+      \field{number}{6}
+      \field{title}{{Hadronic interaction model SIBYLL 2.3d and extensive air showers}}
+      \field{volume}{102}
+      \field{year}{2020}
+      \field{pages}{063002}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevD.102.063002
+      \endverb
+    \endentry
+    \entry{ostapchenko2011qgsjet}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3ce8709b6fd26d08e7a8a7a5fa42cdc4}{%
+           family={Ostapchenko},
+           familyi={O\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{fullhash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{bibnamehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{authorbibnamehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{authornamehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{authorfullhash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review D}
+      \field{number}{1}
+      \field{title}{{Monte Carlo treatment of hadronic interactions in enhanced Pomeron scheme: I. QGSJET-II model}}
+      \field{volume}{83}
+      \field{year}{2011}
+      \field{pages}{014018}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevD.83.014018
+      \endverb
+    \endentry
+    \entry{argiro2007offline}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=838b2abb2bc636dff9b8a83a8a28f520}{%
+           family={Argiro},
+           familyi={A\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{9589c38e05f82dfd3b432413c462d7b1}
+      \strng{fullhash}{9589c38e05f82dfd3b432413c462d7b1}
+      \strng{bibnamehash}{9589c38e05f82dfd3b432413c462d7b1}
+      \strng{authorbibnamehash}{9589c38e05f82dfd3b432413c462d7b1}
+      \strng{authornamehash}{9589c38e05f82dfd3b432413c462d7b1}
+      \strng{authorfullhash}{9589c38e05f82dfd3b432413c462d7b1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nuclear Instruments and Methods in Physics Research Section A}
+      \field{number}{3}
+      \field{title}{{The Offline Software Framework of the Pierre Auger Observatory}}
+      \field{volume}{580}
+      \field{year}{2007}
+      \field{pages}{1485\bibrangedash 1496}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.nima.2007.07.010
+      \endverb
+    \endentry
+    \entry{ostapchenko2024qgsjetiiimodelhighenergy}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=3ce8709b6fd26d08e7a8a7a5fa42cdc4}{%
+           family={Ostapchenko},
+           familyi={O\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{fullhash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{bibnamehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{authorbibnamehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{authornamehash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \strng{authorfullhash}{3ce8709b6fd26d08e7a8a7a5fa42cdc4}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{hep-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{QGSJET-III model of high energy hadronic interactions: II. Particle production and extensive air shower characteristics}
+      \field{year}{2024}
+      \verb{doi}
+      \verb https://doi.org/10.48550/arXiv.2403.16106
+      \endverb
+      \verb{eprint}
+      \verb 2403.16106
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2403.16106
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2403.16106
+      \endverb
+    \endentry
+    \entry{auger2021infill}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3f284069ea5e3fed2c6b9b8f5325a27d}{%
+           family={{Pierre Auger Collaboration}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{fullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{bibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorbibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authornamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorfullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The European Physical Journal C}
+      \field{note}{Describe la LDF del Infill y el uso de $S(450)$ como estimador de energía.}
+      \field{title}{{The energy spectrum of cosmic rays beyond the turn-down around $10^{17}$ eV as measured with the surface detector of the Pierre Auger Observatory}}
+      \field{year}{2021}
+      \verb{doi}
+      \verb https://doi.org/10.48550/arXiv.2109.13400
+      \endverb
+    \endentry
+    \entry{auger2016muon_deficit}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3f284069ea5e3fed2c6b9b8f5325a27d}{%
+           family={{Pierre Auger Collaboration}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{fullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{bibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorbibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authornamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorfullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review Letters}
+      \field{number}{19}
+      \field{title}{{Testing Hadronic Interactions at Ultrahigh Energies with Air Showers Measured by the Pierre Auger Observatory}}
+      \field{volume}{117}
+      \field{year}{2016}
+      \field{pages}{192001}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.117.192001
+      \endverb
+    \endentry
+    \entry{auger2020umd_infill}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3f284069ea5e3fed2c6b9b8f5325a27d}{%
+           family={{Pierre Auger Collaboration}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{fullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{bibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorbibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authornamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorfullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \field{extraname}{3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The European Physical Journal C}
+      \field{number}{8}
+      \field{title}{{Direct measurement of the muonic content of extensive air showers between $2 \times 10^{17}$ and $2 \times 10^{18}$ eV at the Pierre Auger Observatory}}
+      \field{volume}{80}
+      \field{year}{2020}
+      \field{pages}{751}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1140/epjc/s10052-020-8055-y
+      \endverb
+    \endentry
+    \entry{auger2015detector}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3f284069ea5e3fed2c6b9b8f5325a27d}{%
+           family={{Pierre Auger Collaboration}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{fullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{bibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorbibnamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authornamehash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \strng{authorfullhash}{3f284069ea5e3fed2c6b9b8f5325a27d}
+      \field{extraname}{4}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nuclear Instruments and Methods in Physics Research Section A}
+      \field{title}{{The Pierre Auger Cosmic Ray Observatory}}
+      \field{volume}{798}
+      \field{year}{2015}
+      \field{pages}{172\bibrangedash 213}
+      \range{pages}{42}
+      \verb{doi}
+      \verb 10.1016/j.nima.2015.06.058
+      \endverb
+    \endentry
+    \entry{gaisser2016}{book}{}
+      \name{author}{3}{}{%
+        {{hash=55e7d582133c5538d273e551f9f9a3c7}{%
+           family={Gaisser},
+           familyi={G\bibinitperiod},
+           given={T.\bibnamedelimi K.},
+           giveni={T\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=4f0f1715be8da9b1d5a14aee1ca103fa}{%
+           family={Engel},
+           familyi={E\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=3e3b3324ed83b6460066ae2fe925a010}{%
+           family={Resconi},
+           familyi={R\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{e6c61b780e5aeac992b4dddfb8c4297f}
+      \strng{fullhash}{e6c61b780e5aeac992b4dddfb8c4297f}
+      \strng{bibnamehash}{e6c61b780e5aeac992b4dddfb8c4297f}
+      \strng{authorbibnamehash}{e6c61b780e5aeac992b4dddfb8c4297f}
+      \strng{authornamehash}{e6c61b780e5aeac992b4dddfb8c4297f}
+      \strng{authorfullhash}{e6c61b780e5aeac992b4dddfb8c4297f}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2nd}
+      \field{title}{{Cosmic Rays and Particle Physics}}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.1017/CBO9781139192194
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
