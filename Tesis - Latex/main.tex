@@ -1,46 +1,49 @@
-\documentclass[spanish,a4paper,11pt]{article}
+\documentclass[spanish,a4paper,12pt]{article}
+
+% ==========================================
+% 1. IDIOMA Y CODIFICACIÓN
+% ==========================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % Recomendado para caracteres acentuados
+\usepackage[spanish]{babel}
+\usepackage{csquotes} % Necesario para babel + biblatex
+
+% ==========================================
+% 2. MATEMÁTICAS Y FÍSICA
+% ==========================================
+\usepackage{amsmath} % SIEMPRE antes de newtxmath
+\usepackage{amssymb}
+\usepackage{newtxtext, newtxmath} % Recomendado para arXiv
+\usepackage{derivative}
+\usepackage{siunitx} % Excelente para unidades físicas
+
+% ==========================================
+% 3. DISEÑO Y FORMATO DE PÁGINA
+% ==========================================
+\usepackage[margin=2.5cm]{geometry}
+\setlength{\parskip}{2mm}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{appendix}
+\usepackage{chngcntr}
+
+% ==========================================
+% 4. GRÁFICOS, TABLAS Y FIGURAS
+% ==========================================
+\usepackage[dvipsnames]{xcolor}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[export]{adjustbox}
-\usepackage[affil-it]{authblk}
-\usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage[font=footnotesize, labelfont=bf, width=0.8\textwidth, justification=justified]{caption}
+\usepackage{subcaption}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{siunitx}
-\setlength{\parskip}{2mm} % {6mm}
-\usepackage{derivative}
-\usepackage[margin=2.5cm]{geometry}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{svg}
-\usepackage[font={footnotesize}, labelfont=bf]{caption}
-\usepackage{subcaption}
-\usepackage{chngcntr}
-\makeatletter
-\newcommand*{\centerfloat}{%
-	\parindent \z@
-	\leftskip \z@ \@plus 1fil \@minus \textwidth
-	\rightskip\leftskip
-	\parfillskip \z@skip}
-\makeatother
-\counterwithin{figure}{section}
-\counterwithin{table}{section}
-\counterwithin{equation}{section}
-
-\usepackage{geometry}
-\usepackage{fancyhdr}
-\usepackage[dvipsnames]{xcolor}
-\usepackage{appendix}
-\usepackage{multirow}
 \usepackage{longtable}
-\usepackage[font=footnotesize, labelfont=bf, width=0.8\textwidth, justification=justified]{caption}
-\usepackage[pdfencoding=auto, psdextra]{hyperref}
-\usepackage{titlesec}
-\usepackage{csquotes}
-\usepackage[backend=biber, sorting=none]{biblatex}
-\usepackage{listings}
 
+% ==========================================
+% 5. CÓDIGO FUENTE (LISTINGS)
+% ==========================================
+\usepackage{listings}
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -65,53 +68,75 @@
 	tabsize=2,
 	literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Ñ}{{\~N}}1 {ñ}{{\~n}}1
 }
-
 \lstset{style=mystyle}
-\addbibresource{bibliografia.bib}
-\pagestyle{fancy}
-\fancyhf{} % Limpia todos los encabezados y pies de página
-% Redefinimos el formato para que diga "1. Nombre de la sección" (sin mayúsculas forzadas)
-\renewcommand{\sectionmark}[1]{\markboth{\thesection.\ #1}{}}
-\lhead{\leftmark} % Imprime dinámicamente el nombre de la sección a la izquierda
-\rfoot{\thepage} % Número de página abajo a la derecha
-\renewcommand{\headrulewidth}{0.4pt} % Asegura la línea horizontal debajo del encabezado
 
+% ==========================================
+% 6. BIBLIOGRAFÍA
+% ==========================================
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{bibliografia.bib}
+
+% ==========================================
+% 7. MISCELÁNEOS E HIPERVÍNCULOS
+% ==========================================
+\usepackage[affil-it]{authblk}
+\usepackage[pdfencoding=auto, psdextra]{hyperref} % Debe ser el último paquete
+
+% ==========================================
+% MACROS Y CONFIGURACIONES
+% ==========================================
+\makeatletter
+\newcommand*{\centerfloat}{%
+	\parindent \z@
+	\leftskip \z@ \@plus 1fil \@minus \textwidth
+	\rightskip\leftskip
+	\parfillskip \z@skip}
+\makeatother
+
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\counterwithin{equation}{section}
+
+% Configuración de Fancyhdr
+\pagestyle{fancy}
+\fancyhf{} 
+\renewcommand{\sectionmark}[1]{\markboth{\thesection.\ #1}{}}
+\lhead{\leftmark} 
+\rfoot{\thepage} 
+\renewcommand{\headrulewidth}{0.4pt} 
+
+% ==========================================
+% INICIO DEL DOCUMENTO
+% ==========================================
 \begin{document}
 	\renewcommand{\listtablename}{Índice de tablas}
 	\renewcommand{\tablename}{Tabla}
 	
-	% ==========================================
-	% CARÁTULA ESTILO FCEN
-	% ==========================================
+	% --- CARÁTULA ESTILO FCEN ---
 	\begin{titlepage}
 		\centering
 		
-		% 1. Título principal arriba y en negrita
-		\vspace*{0.8cm}
+		\vspace*{0.3cm}
 		{\LARGE \textbf{Asimetrías Azimutales de la Densidad de Muones en Lluvias Atmosféricas Extensas con el Detector Subterráneo de Muones del Observatorio Pierre Auger}\par}
 		
-		% 2. Tipo de documento
 		\vspace{1.5cm}
 		{\Large Tesis de Licenciatura en Ciencias Físicas\par}
 		
-		% 3. Autor
-		\vspace{1.5cm}
+		\vspace{1cm}
 		{\Large Lautaro Silva Pizzi\par}
 		
-		% 4. Directores y Lugar de trabajo
-		\vspace{2cm}
-		{\large	\textbf{Directores:} Dr. Juan Manuel Figueira y Dr. Federico Sánchez \\
+		\vspace{1.5cm}
+		{\large	\textbf{Director:} Dr. Juan Manuel Figueira\\
+			\textbf{Co-Director:} Dr. Federico Sánchez \\
 			[0.5cm] Instituto de Tecnologías en Detección y Astropartículas (ITeDA) - CNEA \par}
 		
-		% 5. Logos (Ajustar nombres de archivos y tamaño según necesites)
 		\vspace{1.5cm}
 		\begin{figure}[H]
 			\centering
-			\includegraphics[height=4.5cm]{imagenes/UBA.png} \hspace{2cm} % Logo UBA
-			\includegraphics[height=4.5cm]{imagenes/logo-portada5-iteda.png}  % Logo ITeDA
+			\includegraphics[height=4.5cm]{imagenes/UBA.png} \hspace{2cm} 
+			\includegraphics[height=4.5cm]{imagenes/logo-portada5-iteda.png}  
 		\end{figure}
 		
-		% 6. Jerarquía institucional y fecha abajo de todo
 		\vfill
 		{\large 
 			Departamento de Física \\
@@ -122,9 +147,7 @@
 		
 	\end{titlepage}
 	
-	% ==========================================
-	% RESUMEN (Página independiente)
-	% ==========================================
+	% --- RESUMEN ---
 	\newpage
 	\thispagestyle{empty}
 	\vspace*{2cm}
@@ -137,9 +160,7 @@
 	\vspace{1cm}
 	\noindent \textbf{Palabras clave:} Rayos Cósmicos, Observatorio Pierre Auger, UMD, Asimetría Azimutal, Composición de Masa.
 	
-	% ==========================================
-	% AGRADECIMIENTOS (Página independiente)
-	% ==========================================
+	% --- AGRADECIMIENTOS ---
 	\newpage
 	\thispagestyle{empty}
 	\vspace*{2cm}
@@ -149,17 +170,13 @@
 	\vspace{1cm}
 	Aquí van tus agradecimientos...
 	
-	% ==========================================
-	% ÍNDICES
-	% ==========================================
+	% --- ÍNDICES ---
 	\newpage
-	\setcounter{page}{1} % Comienza a contar las páginas
+	\setcounter{page}{1} 
 	\tableofcontents
 	\newpage
 	
-	% ==========================================
-	% INCLUSIÓN DE SECCIONES (CAPÍTULOS)
-	% ==========================================
+	% --- CAPÍTULOS ---
 	\input{capitulos/01_introduccion.tex}
 	\input{capitulos/02_observatorio.tex}
 	\input{capitulos/03_fenomenologia.tex}
@@ -169,10 +186,8 @@
 	\input{capitulos/07_datos_reales.tex}
 	\input{capitulos/08_conclusiones.tex}
 	
-	% ==========================================
-	% BIBLIOGRAFÍA
-	% ==========================================
+	% --- BIBLIOGRAFÍA ---
 	\newpage
 	\printbibliography[heading=bibintoc, title={Referencias}]
 	
-\end{document}\documentclass[spanish,a4paper,11pt]{article}
+\end{document}

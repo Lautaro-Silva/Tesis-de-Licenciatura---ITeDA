@@ -5,7 +5,7 @@
 
 En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este marco permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Además, este estudio permite mitigar las fluctuaciones estadísticas que podrían presentarse debido a la distribución física irregular de las estaciones en el terreno, garantizando una alta estadística por bin azimutal. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la capacidad de este observable para la discriminación de la masa del rayo cósmico primario.
 
-\subsection{El Anillo Denso como entorno de control fenomenológico}
+\subsection{El Anillo Denso como entorno de control}
 \label{subsec:entorno_control}
 
 La configuración de Anillo Denso representa el escenario ideal para caracterizar la modulación azimutal. Al situar 12 estaciones virtuales a una distancia radial fija de $r = 450$~m en el plano de la lluvia, se garantiza que cualquier variación en la señal detectada sea independiente de la Función de Distribución Lateral (LDF). 
@@ -27,14 +27,14 @@ Este análisis se extendió usando tambien los datos de tanto la cantidad de muo
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Ajuste_UMD_REC_Bin9.pdf}
+	\includegraphics[width=0.8\textwidth]{capitulos/imagenes_capitulos/cap5/Ajuste_UMD_REC_Bin9.pdf}
 	\caption{Ejemplo del ajuste armónico aplicado a la densidad de muones en el Anillo Denso para eventos de protón (\texttt{Sibyll 2.3e}). Los puntos representan las 12 estaciones virtuales y la curva sólida el ajuste del parámetro $A_1$ según la Ec. \ref{eq:ajuste_armonico}.}
 	\label{fig:ejemplo_ajuste}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Evolucion_Asimetria_vs_Theta.pdf}
+	\includegraphics[width=0.95\textwidth]{capitulos/imagenes_capitulos/cap5/Evolucion_Asimetria_vs_Theta.pdf}
 	\caption{Evolución de la amplitud $A_1$ con su error en función de $\theta$ para el UMD (REC en azul, MC en verde) y el SD (rojo). Se observa la inversión de dominancia entre el SD y el UMD a altas inclinaciones.}
 	\label{fig:evolucion_asym_vs_theta}
 \end{figure}
@@ -84,7 +84,7 @@ Si bien la distribución está centrada cerca del cero con una resolución acept
 
 Se intento ver si esta asimetría de la distribución respecto del cero podía explicar las diferencias de la amplitud de asimetría $A_1$ entre los datos REC y los datos MC. Para esto se construyo un modelo que implementase la distribución encontrada en la Figura \ref{fig:bias_umd_global} en los datos. Sin embargo, este procedimiento solo inyectó ruido estadístico en los ajustes, sin lograr desplazar los valores de $A_1^{\text{MC}}$ hacia los niveles de $A_1^{\text{REC}}$. Este resultado negativo sugiere que el sesgo de reconstrucción no es uniforme, sino que posee una dependencia funcional con, por ejemplo, la posición de la estación o la densidad local de partículas.
 
-\subsubsection{Bias Direccional en la Reconstrucción (\textit{temprano} vs. \textit{tardío})}
+\subsubsection{Bias Direccional en la Reconstrucción}
 \label{subsec:bias_direccional}
 
 Se planteó la hipótesis de que el error de conteo del UMD no es uniforme, sino que presenta una dependencia con la región azimutal de la lluvia. Si el sobreconteo (\textit{overcounting}) es proporcionalmente mayor en las zonas de baja densidad ($\phi \approx \pm 180^\circ$) que en las de alta densidad ($\phi \approx 0^\circ$), el efecto resultante sería un aumento artificial del 'piso' de la señal tardía (\textit{late}). Esto reduciría la modulación relativa entre ambas regiones, resultando en una degradación sistemática de la amplitud $A_1$ reconstruida.
@@ -124,12 +124,12 @@ El análisis de los resultados permite distinguir dos comportamientos bien defin
 \subsection{Estudios de Robustez}
 \label{subsec:robustez}
 
-Se estudio tambien el comportamiento del detector y el parámetro de asimetría, al enfrentarse a situaciones en las que, al ser circunstancia donde la fisica es la misma, especialmente hablando de los efectos de la atenuación atmosférica, no se espera ver cambios en su performance.
+Se estudio también el comportamiento del detector y el parámetro de asimetría, al enfrentarse a situaciones en las que, al ser circunstancia donde la física es la misma especialmente en relacion con los efectos de la atenuación atmosférica, no se espera ver cambios en su performance.
 
 \subsubsection{Invariancia azimutal de incidencia ($\phi_{shower}$)}
 \label{subsubsec:invariancia_phi}
 
-Para asegurar que la asimetría medida sea una propiedad intrínseca de la cascada y no un artefacto de la orientación del arreglo, se evaluó la estabilidad de $A_1$ en función del ángulo azimutal de entrada de la lluvia ($\phi_{\text{shower}}$). Al tratarse de un anillo denso ideal, la respuesta debería ser invariante ante rotaciones en el plano del suelo.
+Para asegurar que la asimetría medida sea una propiedad intrínseca de la cascada y no un artefacto de la orientación del arreglo, se evaluó la estabilidad de $A_1$ en función del ángulo azimutal de entrada de la lluvia ($\phi_{\text{shower}}$). Al tratarse de un anillo denso ideal, la respuesta debería ser invariante ante rotaciones en el plano del suelo. Para esto se separaron los datos en 6 bines equiespaciados en funcion del angulo de incidencia de la lluvia y se repitio el análisis explicando en la sección \ref{subsec:entorno_control}.
 
  \begin{figure}[H]
 	\centering
@@ -138,12 +138,12 @@ Para asegurar que la asimetría medida sea una propiedad intrínseca de la casca
 	\label{fig:robustez_phi}
  \end{figure}
 
-Como se ve en la Figura \ref{fig:robustez_phi}, se analizo esto para el dataset de  el valor ajustado del paramtero de asimetraia $A_1$ no depende del angulo de incidencia de la lluvia, como era esperado. Esto es una buena prueba de estres para los fundamnetos del trabajo y que garantiza que se puede avanzar en el analisis
+En la Figura \ref{fig:robustez_phi} se analizo el dataset de protones con el modelo  \texttt{Sibyll 2.3e} para lluvias inclindas ($40^\circ < \theta < 60^\circ$). Se ve que el valor ajustado del paramtero de asimetría $A_1$ no depende del angulo de incidencia de la lluvia, como era esperado. Esto es una buena prueba de estrés para los fundamentos del trabajo y que garantiza que se puede avanzar en el análisis en pos de hacer discriminacion de masa
 
 \subsubsection{Independencia del modelo hadrónico}
 \label{subsubsec:independencia_modelo}
 
-Analogamente, se comparó la evolución de $A_1$ utilizando diferentes librerías para las interacciones hadronicas, en este caso, \texttt{SIBYLL 2.3e}, \texttt{EPOS-LHC} y \texttt{QGSJET-II.04}. Aunque estos modelos predicen densidades totales de muones distintas (déficit muónico), la modulación relativa $A_1$ debe presentar una consistencia cualitativa que valide su uso como trazador de la composición.
+Análogamente, se comparó la evolución de $A_1$ para un mismo primario y energía utilizando diferentes librerías para las interacciones hadrónicas. Dada la disponibilidad de datos se compararon las lluvias de helio con los modelos \texttt{SIBYLL 2.3e} y \texttt{EPOS-LHC}. Aunque no es obvio que ambos modelos deban predecir densidades totales de muones identicas (dado que puede haber un déficit muónico entre ellos), la modulación relativa $A_1$ debería presentar una consistencia cualitativa que valide su uso como trazador de la composición y que ademas permita combinar los resulatdos de ambas lluvias para lograr mayor estadística.
 
 % \begin{figure}[H]
 	% 	\centering
