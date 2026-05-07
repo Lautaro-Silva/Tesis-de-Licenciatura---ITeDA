@@ -45,7 +45,7 @@ Este comportamiento es consistente con la fenomenología de la cascada: en lluvi
 	\label{fig:evolucion_asym_vs_theta}
 \end{figure}
 
-Sin embargo, a medida que aumenta la inclinación, el espesor atmosférico recorrido crece de forma no lineal, provocando que la componente EM sea casi totalmente absorbida antes de alcanzar el nivel del suelo. En este régimen de alta inclinación, la señal del SD pasa a estar dominada exclusivamente por muones, lo que explica la caída de la asimetría medida a niveles comparables o inferiores a los del UMD. El hecho de que el $A_1$ del SD caiga incluso por debajo de los valores del UMD se atribuye a la presencia de muones de baja energía. Tal como se demuestra en el modelo de transporte cinemático de Cazón et al. \cite{Cazon2012}, estos muones de baja energía dominan a grandes distancias del núcleo y a mayores ángulos cenitales, sufriendo mayores deflexiones y retrasos geométricos. Como consecuencia, estas partículas de baja energía tienden a poblar de manera asimétrica la región tardía, lavando la asimetría de atenuación atmosférica positiva que sí logran preservar los muones más energéticos filtrados por el blindaje del UMD.
+Sin embargo, a medida que aumenta la inclinación, el espesor atmosférico recorrido crece de forma no lineal, provocando que la componente EM sea casi totalmente absorbida antes de alcanzar el nivel del suelo. En este régimen de alta inclinación, la señal del SD pasa a estar dominada exclusivamente por muones, lo que explica la caída de la asimetría medida a niveles comparables o inferiores a los del UMD. El hecho de que el $A_1$ del SD caiga incluso por debajo de los valores del UMD se atribuye a la presencia de muones de baja energía. Tal como se demuestra en el modelo de transporte cinemático \cite{Cazon2012}, estos muones de baja energía dominan a grandes distancias del núcleo y a mayores ángulos cenitales, sufriendo mayores deflexiones y retrasos geométricos. Como consecuencia, estas partículas de baja energía tienden a poblar de manera asimétrica la región tardía, lavando la asimetría de atenuación atmosférica positiva que sí logran preservar los muones más energéticos filtrados por el blindaje del UMD.
 
 Finalmente, se observa una discrepancia sistemática entre los valores de asimetría $A_1$ obtenidos para los muones reconstruidos ($N^{\text{REC}}_\mu$) y los muones inyectados ($N^{\text{MC}}_\mu$) en el UMD. Esta diferencia, que indica un lavado o subestimación de la asimetría introducido por el framework de reconstrucción \textit{Offline}, será analizada en detalle en la sección \ref{subsec:mc_vs_rec}.
 
@@ -75,7 +75,7 @@ Para investigar la discrepancia en $A_1$ dentro del UMD, se analizó el rendimie
 
 Esta métrica permite cuantificar el sesgo en el conteo de partículas de manera normalizada. La distribución de este residuo para la muestra de protones (\texttt{Sibyll 2.3e}) se muestra en la Figura \ref{fig:bias_umd_global}.
 
-Si bien la distribución está centrada cerca del cero con una resolución aceptable, presenta una asimetría marcada respecto del cero. Mientras que el error por sub-reconstrucción está limitado físicamente (el residuo no puede ser menor a -1), el algoritmo presenta una cola de sobre-reconstrucción donde el número de muones detectados puede superar ampliamente al inyectado. Este fenómeno de 'overcounting' es intrínseco a los algoritmos de reconstrucción.
+Si bien la distribución está centrada cerca del cero con una resolución aceptable, presenta una asimetría marcada respecto del cero. Mientras que el error por sub-reconstrucción está limitado físicamente (el residuo no puede ser menor a -1), el algoritmo presenta una cola de sobre-reconstrucción donde el número de muones detectados puede superar ampliamente al inyectado. Este fenómeno de 'sobreconteo' es intrínseco a los algoritmos de reconstrucción.
 
 \begin{figure}[H]
 	\centering
@@ -89,7 +89,7 @@ Se intento ver si esta asimetría de la distribución respecto del cero podía e
 \subsubsection{Bias Direccional en la Reconstrucción}
 \label{subsec:bias_direccional}
 
-Se planteó la hipótesis de que el error de conteo del UMD no es uniforme, sino que presenta una dependencia con la región azimutal de la lluvia. Si el sobreconteo (\textit{overcounting}) es proporcionalmente mayor en las zonas de baja densidad ($\phi \approx \pm 180^\circ$) que en las de alta densidad ($\phi \approx 0^\circ$), el efecto resultante sería un aumento artificial del 'piso' de la señal tardía (\textit{late}). Esto reduciría la modulación relativa entre ambas regiones, resultando en una degradación sistemática de la amplitud $A_1$ reconstruida.
+Se planteó la hipótesis de que el error de conteo del UMD no es uniforme, sino que presenta una dependencia con la región azimutal de la lluvia. Si el sobreconteo es proporcionalmente mayor en las zonas de baja densidad ($\phi \approx \pm 180^\circ$) que en las de alta densidad ($\phi \approx 0^\circ$), el efecto resultante sería un aumento artificial del 'piso' de la señal tardía. Esto reduciría la modulación relativa entre ambas regiones, resultando en una degradación sistemática de la amplitud $A_1$ reconstruida.
 
 Para verificar esta premisa, se estudió la evolución del valor medio del residuo relativo para lluvias inclinadas ($40^\circ \le \theta_{\text{shower}} \le 65^\circ$) particionando la muestra en 12 bines azimutales equiespaciados en el plano de la lluvia. Los resultados se presentan en la Figura \ref{fig:bias_direccional_rec}.
 
@@ -105,7 +105,7 @@ Como se observa, el algoritmo de reconstrucción presenta un sesgo positivo sign
 \subsubsection{Modelado del Bias: Implementación del \textit{Toy Model} empírico}
 \label{subsec:toy_model}
 
-Para caracterizar el impacto del error de reconstrucción en la amplitud medida y verificar si el sesgo direccional es suficiente para explicar la discrepancia observada entre los datos ideales y los reconstruidos, se implementó un \textit{Toy Model} de perturbación. Este modelo utiliza un enfoque de remuestreo empírico (\textit{Bootstrap}). 
+Para caracterizar el impacto del error de reconstrucción en la amplitud medida y verificar si el sesgo direccional es suficiente para explicar la discrepancia observada entre los datos ideales y los reconstruidos, se implementó un \textit{Toy Model} de perturbación. Este modelo utiliza un enfoque de remuestreo empírico computacional, conocido como \textit{Bootstrap} \cite{efron1979bootstrap}. 
 
 El algoritmo toma las densidades muónicas ideales ($N_{\mu}^{\text{MC}}$) en cada bin azimutal y les inyecta un factor de error extraído aleatoriamente de la distribución real de residuos relativos evaluada en la Figura \ref{fig:bias_direccional_rec} segmentados por $\phi$. Esta metodología garantiza dos condiciones físicas fundamentales: respeta estrictamente el límite de sub-reconstrucción (dado que el detector no puede reconstruir cantidades negativas de muones, el residuo empírico extraído siempre está acotado en un mínimo de $-1$), y captura con total fidelidad la cola asimétrica de sobreconteo característica del algoritmo del UMD. 
 
@@ -197,7 +197,10 @@ Como se observa en el panel superior, la evolución de la asimetría presenta un
 \subsection{Dependencia de la amplitud $A_1$ con la energía primaria}
 \label{subsec:dependencia_energia}
 
-Se analizó la evolución de la asimetría en el rango $\log_{10}(E/\text{eV}) \in [17.5, 18.0]$. Teóricamente, a mayor energía, el máximo de la lluvia ($X_{\text{max}}$) se produce más cerca del suelo, lo que debería impactar en la magnitud de la asimetría de atenuación.
+Se analizó la evolución del parámetro de asimetría al ir agrupando los datos en función de la energía que tenían en el rango $\log_{10}(E/\text{eV}) \in [17.5, 18.0]$. Inicialmente se planteo que e
+
+
+Teóricamente, a mayor energía, el máximo de la lluvia ($X_{\text{max}}$) se produce más cerca del suelo, lo que debería impactar en la magnitud de la asimetría de atenuación.
 
 % \begin{figure}[H]
 	% 	\centering
