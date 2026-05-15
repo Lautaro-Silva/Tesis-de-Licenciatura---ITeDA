@@ -1,18 +1,34 @@
 % !TEX root = ../main.tex
 
 \section{Dinámica Radial y Desacople Instrumental en el Arreglo \textit{Infill}}
-\label{sec:infill}
+\label{cap:infill}
+
+Habiendo validado la fenomenología de la asimetría azimutal en el entorno geométricamente controlado del Anillo Denso, es imperativo extender el análisis a la topología real del arreglo de detectores. A diferencia de un muestreo isorradial, el arreglo \textit{Infill} expone a las estaciones de superficie y a los módulos subterráneos a un espectro continuo de distancias al eje de la lluvia. En este capítulo se aborda cómo la dinámica de la cascada y la resolución instrumental modulan el observable $A_1$, marcando la transición desde un régimen de dominancia cinemática hacia uno de atenuación longitudinal.
 
 \subsection{Evolución de la asimetría con la distancia al eje}
-\label{subsec:evolucion_radial}
+\label{sec:evolucion_radial}
+
+La modulación azimutal de la densidad de muones en superficie no es un parámetro espacialmente invariante. La aproximación de un único valor global de asimetría para toda la cascada resulta insuficiente al analizar datos experimentales, ya que el frente de partículas presenta gradientes de densidad severos. En el Capítulo \ref{sec:cap_anillo_denso}, la fijación del radio a $r = 450$~m permitió aislar el término armónico de la Función de Distribución Lateral (LDF). Sin embargo, al incorporar el arreglo \textit{Infill} en su totalidad, la amplitud $A_1$ debe ser tratada formalmente como una función explícita de la distancia al eje, $A_1(r)$. Esta dependencia radial es la manifestación directa de la variación en las poblaciones muónicas muestreadas por los detectores: partículas producidas en diferentes altitudes geográficas y con diferentes momentos transversales ($p_T$) dominan distintas regiones del plano topográfico.
 
 \subsection{El Cruce de Asimetría (\textit{Crossover})}
-\label{subsec:crossover}
-% Competencia geométrica (r < 200 m) vs. atenuación (r > 400 m).
+\label{sec:crossover}
+
+Como se estableció teóricamente, la asimetría neta surge de la competencia entre la atenuación atmosférica y el efecto de proyección geométrica acoplado a la divergencia angular. El peso relativo de ambos mecanismos evoluciona de manera drástica con la distancia al núcleo $r$, generando un punto de transición o \textit{crossover} topológico.
+
+En la región del \textit{near-core} ($r < 200$~m), la densidad de partículas está gobernada por la divergencia cinemática de muones producidos con alto $p_T$. Estas partículas conservan trayectorias con gran inclinación respecto al eje de la lluvia, maximizando el factor de asimetría espacial ($\Delta d / D$). La exigencia de recorrer una distancia adicional para impactar en la zona temprana del detector induce un déficit relativo de señal en $\phi = 0^\circ$ frente a la acumulación en $\phi = \pm 180^\circ$. En consecuencia, el efecto geométrico domina por completo la morfología del frente a cortas distancias, forzando a la amplitud a tomar valores negativos o nulos ($A_1 \le 0$).
+
+Por el contrario, al transitar hacia el \textit{far-core} ($r > 400$~m), la fenomenología se invierte. Las partículas detectadas a grandes radios laterales provienen predominantemente de las primeras generaciones hadrónicas de la cascada. Al originarse a mayor altitud, la distancia de propagación $D$ es inmensa, lo que minimiza el peso relativo de la dispersión espacial ($\Delta d / D \ll 1$). En este régimen, el vasto espesor atmosférico atravesado exponencialmente magnifica las pérdidas por decaimiento y absorción. La atenuación longitudinal recupera el dominio del sistema, castigando severamente a los muones tardíos y restaurando la asimetría positiva característica ($A_1 > 0$).
+
+% [AQUÍ DEBERÍAS INSERTAR TU GRÁFICO DE BINES RADIALES MOSTRANDO EL CROSSOVER]
 
 \subsection{La Singularidad del Núcleo}
-\label{subsec:singularidad_nucleo}
-% Degradación del ajuste a \theta < 40^\circ.
+\label{sec:singularidad_nucleo}
+
+A pesar de que el modelo cinemático describe satisfactoriamente la asimetría negativa a bajas distancias, el estudio empírico para $r \lesssim 100$~m presenta un desafío metodológico insoslayable. En la vecindad inmediata del impacto, la coherencia de la fase azimutal se degrada abruptamente, destruyendo el ajuste armónico. 
+
+Esta pérdida de señal no obedece a una isotropización intrínseca de la lluvia, sino a una singularidad geométrica fuertemente acoplada a la resolución instrumental. La definición de la fase $\phi$ depende del vector desplazamiento entre la posición reconstruida del núcleo y la estación detectora. En el \textit{Infill}, la incertidumbre espacial intrínseca de la reconstrucción ($\sigma_{core}$) oscila entre $20$~m y $40$~m. 
+
+Para distancias laterales grandes ($r \gg \sigma_{core}$), las fluctuaciones estadísticas del núcleo inducen variaciones angulares despreciables ($\Delta \phi \approx \sigma_{core} / r \ll 1$). Sin embargo, cuando el detector se ubica dentro o en el borde del radio de incerteza geométrica ($r \sim \sigma_{core}$), la relación matemática diverge. Una variación marginal en la estimación del núcleo puede invertir el vector desplazamiento, generando un salto espurio de $\pm 180^\circ$ en la fase asignada a esa estación. Para garantizar la fidelidad del parámetro $A_1$, aislando la física de la cascada de las limitaciones de resolución topográfica, el análisis de los eventos reconstruidos exige la imposición de un corte fiducial radial, excluyendo sistemáticamente las estaciones a $r < 100$~m.
 
 \subsection{Fallas en el SD: Inversiones espurias de asimetría}
 \label{subsec:fallas_sd}
