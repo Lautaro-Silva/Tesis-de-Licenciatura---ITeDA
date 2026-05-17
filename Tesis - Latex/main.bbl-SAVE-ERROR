@@ -642,7 +642,125 @@
       \verb 10.1017/CBO9781139192194
       \endverb
     \endentry
+    \entry{efron1979bootstrap}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5470455fc7dceb3ccf6db38cb22a113d}{%
+           family={Efron},
+           familyi={E\bibinitperiod},
+           given={Bradley},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Institute of Mathematical Statistics}%
+      }
+      \strng{namehash}{5470455fc7dceb3ccf6db38cb22a113d}
+      \strng{fullhash}{5470455fc7dceb3ccf6db38cb22a113d}
+      \strng{bibnamehash}{5470455fc7dceb3ccf6db38cb22a113d}
+      \strng{authorbibnamehash}{5470455fc7dceb3ccf6db38cb22a113d}
+      \strng{authornamehash}{5470455fc7dceb3ccf6db38cb22a113d}
+      \strng{authorfullhash}{5470455fc7dceb3ccf6db38cb22a113d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of Statistics}
+      \field{number}{1}
+      \field{title}{Bootstrap methods: another look at the jackknife}
+      \field{volume}{7}
+      \field{year}{1979}
+      \field{pages}{1\bibrangedash 26}
+      \range{pages}{26}
+    \endentry
+    \entry{matthews2005}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b8496487137e1c924c88b2e4ea87601c}{%
+           family={Matthews},
+           familyi={M\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{b8496487137e1c924c88b2e4ea87601c}
+      \strng{fullhash}{b8496487137e1c924c88b2e4ea87601c}
+      \strng{bibnamehash}{b8496487137e1c924c88b2e4ea87601c}
+      \strng{authorbibnamehash}{b8496487137e1c924c88b2e4ea87601c}
+      \strng{authornamehash}{b8496487137e1c924c88b2e4ea87601c}
+      \strng{authorfullhash}{b8496487137e1c924c88b2e4ea87601c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astroparticle Physics}
+      \field{number}{5-6}
+      \field{title}{A Heitler model of extensive air showers}
+      \field{volume}{22}
+      \field{year}{2005}
+      \field{pages}{387\bibrangedash 397}
+      \range{pages}{11}
+    \endentry
+    \entry{yushkov2019mass}{inproceedings}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=e6f94c5f2b2fdd848be1567eea7234d4}{%
+           family={Yushkov},
+           familyi={Y\bibinitperiod},
+           given={Alexey},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SISSA Medialab}%
+      }
+      \strng{namehash}{f5af7ac6eecb56234f9dae15863a2b60}
+      \strng{fullhash}{f5af7ac6eecb56234f9dae15863a2b60}
+      \strng{bibnamehash}{f5af7ac6eecb56234f9dae15863a2b60}
+      \strng{authorbibnamehash}{f5af7ac6eecb56234f9dae15863a2b60}
+      \strng{authornamehash}{f5af7ac6eecb56234f9dae15863a2b60}
+      \strng{authorfullhash}{f5af7ac6eecb56234f9dae15863a2b60}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{36th International Cosmic Ray Conference (ICRC2019)}
+      \field{title}{{Mass composition of cosmic rays with energies above $10^{17.2}$~eV from the hybrid data of the Pierre Auger Observatory}}
+      \field{volume}{358}
+      \field{year}{2019}
+      \field{pages}{482}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.22323/1.358.0482
+      \endverb
+    \endentry
+    \entry{FlysEye1995}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=6564ed05e7dbca3830a44b37ea719b1a}{%
+           family={Bird},
+           familyi={B\bibinitperiod},
+           given={D.\bibnamedelimi J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4bf3236ea58d122a8695c8a7af015968}
+      \strng{fullhash}{4bf3236ea58d122a8695c8a7af015968}
+      \strng{bibnamehash}{4bf3236ea58d122a8695c8a7af015968}
+      \strng{authorbibnamehash}{4bf3236ea58d122a8695c8a7af015968}
+      \strng{authornamehash}{4bf3236ea58d122a8695c8a7af015968}
+      \strng{authorfullhash}{4bf3236ea58d122a8695c8a7af015968}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Detection of a Cosmic Ray with Measured Energy Well Beyond the	Expected Spectral Cuto Due to Cosmic Microwave Radiation}
+      \field{year}{1994}
+      \verb{doi}
+      \verb https://doi.org/10.48550/arXiv.astro-ph/9410067
+      \endverb
+    \endentry
   \enddatalist
+  \missing{bradfield2022}
 \endrefsection
 \endinput
 
