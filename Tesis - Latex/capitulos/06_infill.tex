@@ -3,6 +3,8 @@
 \section{Dinámica Radial y Desacople Instrumental en el Arreglo \textit{Infill}}
 \label{cap:infill}
 
+TODO TENTATIVO Y ES PARA TENER ALGO ESCRITO Y SON IDEAS DE QUE PODRIA PONER EN ESTAS SECCIONES
+
 Habiendo validado la fenomenología de la asimetría azimutal en el entorno geométricamente controlado del Anillo Denso, se extendió el análisis a la topología real del arreglo de detectores pero aun en el contexto de las simulaciones. A diferencia del Anillo Denso, el arreglo \textit{Infill} expone a las estaciones de superficie y a los módulos subterráneos a un espectro continuo de distancias al eje de la lluvia. En este capítulo se aborda cómo la dinámica de la cascada y la resolución instrumental modulan el observable $A_1$, marcando la transición desde un régimen de dominancia cinemática hacia uno de atenuación longitudinal.
 
 \subsection{Evolución de la asimetría con la distancia al eje}
@@ -19,7 +21,7 @@ En la región del \textit{near-core} ($r < 200$~m), la densidad de partículas e
 
 Por el contrario, al transitar hacia el \textit{far-core} ($r > 400$~m), la fenomenología se invierte. Las partículas detectadas a grandes radios laterales provienen predominantemente de las primeras generaciones hadrónicas de la cascada. Al originarse a mayor altitud, la distancia de propagación $D$ es inmensa, lo que minimiza el peso relativo de la dispersión espacial ($\Delta d / D \ll 1$). En este régimen, el vasto espesor atmosférico atravesado exponencialmente magnifica las pérdidas por decaimiento y absorción. La atenuación longitudinal recupera el dominio del sistema, castigando severamente a los muones tardíos y restaurando la asimetría positiva característica ($A_1 > 0$).
 
-% [AQUÍ DEBERÍAS INSERTAR TU GRÁFICO DE BINES RADIALES MOSTRANDO EL CROSSOVER]
+% [AQUÍ INSERTAR GRÁFICO: Bines radiales 0-200, 200-400, etc., mostrando cómo el A1 sube de valores bajos a altos.]
 
 \subsection{La Singularidad del Núcleo}
 \label{sec:singularidad_nucleo}
@@ -33,8 +35,37 @@ Para distancias laterales grandes ($r \gg \sigma_{core}$), las fluctuaciones est
 \subsection{Fallas en el SD: Inversiones espurias de asimetría}
 \label{subsec:fallas_sd}
 
-\subsection{Análisis del \textit{Survival Ratio} y validación del UMD}
-\label{subsec:survival_ratio}
-% N_\mu^{\mathrm{UMD}} / N_\mu^{\mathrm{SD}} y contaminación sub-GeV.
+La evaluación de la asimetría utilizando la señal total del Detector de Superficie expone una fenomenología inestable, caracterizada por inversiones espurias en la polaridad de la amplitud $A_1$. Este comportamiento no obedece a una dinámica intrínseca del desarrollo longitudinal, sino a un artefacto analítico derivado de la superposición de señales con derivadas espaciales opuestas.
+
+Como se demostró previamente, la componente electromagnética está regida por la atenuación atmosférica, generando sistemáticamente una asimetría positiva ($A_1 > 0$) fuertemente dependiente del gradiente local. En contrapartida, la componente muónica exhibe una asimetría negativa ($A_1 \le 0$) a cortas distancias, dominada por la divergencia geométrica. El tanque Cherenkov del SD registra la convolución de ambas poblaciones. En regiones de transición radial o ante fluctuaciones en la profundidad del máximo ($X_{max}$), el balance entre ambas componentes fluctúa severamente. La competencia entre un frente electromagnético brillante y un remanente muónico con fuerte divergencia provoca que la asimetría total del SD oscile e invierta su signo de manera no lineal, volviéndola un observable altamente ambiguo para inferir la composición primaria.
+
+El análisis riguroso de estas inversiones requiere una definición topológica estricta de la fase azimutal. El software estándar de reconstrucción frecuentemente entrega el ángulo geométrico proyectado sobre el relieve del suelo, lo cual introduce una deformación elíptica al evaluar frentes de partículas inclinados. Para suprimir este sesgo analítico y garantizar la fidelidad del estudio, se implementó manualmente una Rotación de Euler tridimensional en la versión v13 del \textit{pipeline} de procesamiento de datos. Esta transformación proyecta las coordenadas absolutas de cada estación directamente sobre el sistema de referencia perpendicular al eje de la lluvia. 
+
+Al evaluar la distribución angular en el plano verdadero de la cascada, queda en evidencia que las inversiones reportadas por el SD no son fluctuaciones estadísticas, sino el colapso predecible de un observable que mezcla regímenes cinemáticos incompatibles. El UMD elude esta falla de raíz: al aislar la componente muónica y suprimir la señal electromagnética, rompe la competencia de derivadas espaciales y entrega una evolución armónica coherente y predecible a lo largo de todo el arreglo \textit{Infill}.
+
+\subsection{El Impacto de la Reconstrucción: Difusión Angular (\textit{Smearing})}
+\label{subsec:smearing_reconstruccion}
+
+Más allá del corte fiducial, la utilización de la posición del núcleo y los ángulos de arribo reconstruidos por el SD introduce un efecto sistemático sobre la totalidad del arreglo. Al comparar los resultados empleando las variables verdaderas de Monte Carlo (Core MC) frente a las variables reconstruidas (Core REC), se observa una marcada borrosidad en los ajustes armónicos y una subestimación generalizada de la amplitud $A_1$.
+
+Este fenómeno responde a una difusión o \textit{smearing} angular. El error de reconstrucción propaga una incerteza continua en el azimut asignado a cada estación ($\Delta \phi = \phi_{REC} - \phi_{MC}$). Estadísticamente, esto implica que estaciones que físicamente pertenecen a la región temprana pura ($\phi \approx 0^\circ$) son erróneamente catalogadas con fases laterales, y viceversa. Esta mezcla espuria de poblaciones modera los máximos y mínimos de la distribución de densidad angular, actuando como un filtro pasa-bajos espacial que "plancha" la modulación cosenoidal subyacente. 
+
+Consecuentemente, los ajustes sobre los datos reconstruidos exhiben una menor convergencia y reportan un observable $A_1$ degradado. Este resultado subraya que la asimetría evaluada experimentalmente representa una cota inferior del verdadero contraste cinemático de la cascada.
+
+% [AQUÍ INSERTAR GRÁFICO: Mapas de asimetría / bines comparando Core MC vs Core REC evidenciando el efecto de difuminado]
+
+\subsection{Desacople Instrumental: El filtro cinemático de los Muones Blandos}
+\label{subsec:muones_blandos_toy_model}
+
+La dificultad para medir la asimetría muónica con la señal total del SD no radica únicamente en su sensibilidad a la componente electromagnética, sino en una contaminación intrínseca de su propio espectro muónico. El UMD opera bajo un umbral de energía de $E > 1$~GeV impuesto por el blindaje de $2.3$~m de tierra, mientras que el SD es sensible a la población total, incluyendo muones blandos (sub-GeV).
+
+El comportamiento divergente entre ambos instrumentos puede ser modelado analíticamente separando la cinemática de estas dos poblaciones. Los "muones duros", detectados por el UMD, son producidos predominantemente en las interacciones hadrónicas primarias a gran altitud ($L \approx 8$~km). Su gran distancia de propagación $D$ y alta energía minimizan las deflexiones, permitiendo que su distribución azimutal en el suelo conserve fielmente la memoria de su divergencia geométrica y de la atenuación de su componente madre.
+
+En contraste, los "muones blandos" registrados en exceso por el SD provienen de piones de baja energía que decaen en las etapas tardías de la cascada, en proximidad al nivel de observación ($L \approx 1.5$~km). Al tener un momento bajo e interactuar en una región de alta densidad atmosférica local, sufren deflexiones severas por el campo geomagnético que rotan su fase angular base ($\phi_0 \neq 0^\circ$). Simultáneamente, el drástico acortamiento del brazo de palanca $D$ dispara las asimetrías proyectivas, llevando al extremo la dependencia geométrica $\Delta d/D$. Bajo estas condiciones de contorno extremas, las pérdidas cinemáticas por decaimiento invierten la polaridad de la asimetría para esta población blanda.
+
+Esta superposición de señales dentro del tanque Cherenkov —muones duros con asimetría coherente mezclados con muones blandos rotados y desfasados— resulta en un observable altamente errático. El umbral pasivo de tierra del UMD actúa así como un filtro fenomenológico esencial: elimina la contaminación cinemática de las bajas altitudes, estabilizando el ajuste armónico y permitiendo una recuperación limpia del parámetro direccional $A_1$ de la lluvia original.
+
+% [AQUÍ INSERTAR GRÁFICO: El plot del Toy Model de tu Jupyter Notebook mostrando las curvas desfasadas de L=8000 vs L=1500]
+
 
 \newpage
