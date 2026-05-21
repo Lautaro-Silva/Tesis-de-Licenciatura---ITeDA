@@ -1,9 +1,11 @@
-xc% !TEX root = ../main.tex
+% !TEX root = ../main.tex
 
 \section{Rayos Cósmicos de Ultra-Alta Energía}
 \label{sec:introduccion}
 
 Los Rayos Cósmicos de Ultra-Alta Energía (\textit{UHECR}, por sus siglas en inglés) son las partículas más energéticas del universo observable que impactan contra la Tierra, superando los $10^{18}$~eV y llegando a alcanzar energías extremas del orden de los $10^{20}$~eV. Cuando estas partículas primarias interactúan con los núcleos en la alta atmósfera terrestre, inician una reacción en cadena que produce una cascada de partículas secundarias. Estas partículas se propagan hacia el suelo distribuyéndose en lo que se conoce como una Lluvia Atmosférica Extensa (\textit{EAS}, por sus siglas en inglés). 
+
+El flujo de los rayos es dependiente de la energía de los mismo, descendiendo desde varias partículas por $m^2$ por segundo (para energías del orden de $E \sim 10^{11}$) a una única partícula por $km^2$ por siglo (para energías mayores a $E > 10^{19}$). Como el flujos para los UHECRs es muy bajo, y su energía es varios ordenes de magnitud superior a la alcanzable en aceleradores de partículas, su estudio es de extrema dificultad.
 
 Actualmente, el estudio de los UHECRs es uno de los campos más activos de la astrofísica de partículas, enfocado en resolver tres grandes interrogantes que aún carecen de una respuesta definitiva: la identificación de sus fuentes de origen, los mecanismos astrofísicos capaces de acelerarlos a energías macroscópicas, y su composición química (la fracción de protones frente a núcleos más pesados).
 
@@ -17,14 +19,37 @@ Durante su viaje intergaláctico desde estas fuentes distantes hasta la Tierra, 
 
 El efecto GZK postula que los protones con energías superiores a $\sim 4 \times 10^{19}$~eV interactúan inelásticamente con los fotones del CMB a través de la fotoproducción de piones ($p + \gamma_{CMB} \to p + \pi^0$ ó $n + \pi^+$). A través de estas interacciones sucesivas, los protones ultra-energéticos pierden una fracción significativa de su energía hasta caer por debajo del umbral de interacción. Esto no impone un límite a la energía máxima que la partícula puede adquirir en su fuente, pero sí crea un "horizonte" de propagación (el radio GZK, de unos 50~Mpc), distancia después de la cual se entiende que ya se ha producido el efecto del corte. Esto produce una drástica supresión en el flujo de protones que observamos en la Tierra a esas energías.
 
-A pesar de la solidez matemática de la predicción GZK, hacia finales del siglo XX distintos experimentos (como AGASA) no observaron evidencias claras de esta supresión del espectro, desatando una profunda controversia. Esta anomalía, junto a la necesidad de dilucidar el origen, la composición y el espectro de los UHECRs, fue la motivación fundacional que impulsó la construcción de una nueva generación de instrumentos a una escala sin precedentes, culminando en la construcción del Observatorio Pierre Auger. Este experimento fue diseñado para implementar la detección híbrida, permitiendo medir distintas componentes de las lluvias extensas para minimizar las incertezas sistemáticas y ofrecer la estadística necesaria para resolver el misterio de los rayos cósmicos a las más altas energías.
+A pesar de la solidez matemática de la predicción GZK, hacia finales del siglo XX distintos experimentos no observaron evidencias claras de esta supresión del espectro, desatando una profunda controversia. Esta anomalía, junto a la necesidad de dilucidar el origen, la composición y el espectro de los UHECRs, fue la motivación fundacional que impulsó la construcción de una nueva generación de instrumentos a una escala sin precedentes, culminando en la construcción del Observatorio Pierre Auger. Este experimento fue diseñado para implementar la detección híbrida, permitiendo medir distintas componentes de las lluvias extensas para minimizar las incertezas sistemáticas y ofrecer la estadística necesaria para resolver el misterio de los rayos cósmicos a las más altas energías.
 
 El Observatorio Auger resolvió la paradoja inicial midiendo, con una precisión estadística muy grande, una abrupta supresión en el flujo por encima de los $4 \times 10^{19}$~eV \cite{augerSpectrum2020}, confirmando la existencia de un límite empírico. Sin embargo, las mediciones simultáneas del desarrollo longitudinal de las lluvias revelaron un cambio de paradigma: a estas energías extremas, la composición de los rayos cósmicos se torna progresivamente más pesada, estando dominada por núcleos de mayor masa similares al hierro \cite{augerComposition2017}, \cite{aloisio2017}.
 
-\subsection{El espectro de energía y composición}
+\subsection{El espectro de energía y composición química}
 \label{subsec:espectro}
 
-El flujo de rayos cósmicos que arriba a la Tierra sigue una distribución de ley de potencias de la forma $\Phi(E) \propto E^{-\gamma}$, donde el índice espectral $\gamma$ sufre variaciones en rangos de energía específicos, reflejando transiciones en el origen o en los mecanismos de propagación de las partículas. A energías ultra-altas, el espectro presenta dos características morfológicas fundamentales: el \textit{tobillo} (\textit{ankle}), un endurecimiento del espectro en $E \approx 5 \times 10^{18}$~eV ($\gamma$ pasa de $\sim 3.3$ a $\sim 2.6$), y una abrupta supresión del flujo por encima de los $4 \times 10^{19}$~eV. Esta supresión puede atribuirse al límite de Greisen-Zatsepin-Kuzmin (GZK), originado por la interacción de los protones con el fondo cósmico de microondas (CMB), o bien al agotamiento de la capacidad de aceleración máxima en las fuentes astrofísicas.
+El espectro de energía de rayos cósmicos que arriba a la Tierra permiten analizar y entender cuales son los mecanismos de aceleración y la composición de las partículas astrofísicas. El espectro describe como es el flujo de partículas que llegan a la Tierra en función de la energía y sigue una distribución de ley de potencias 
+
+\begin{equation}
+	\frac{dN}{dE} \propto E^{-\gamma} m^2 s^{-1} sr^{-1} eV^{-1}
+	\label{eq:espectro}
+\end{equation}
+
+
+donde N es el flujo de rayos cósmicos que arriban, E es su energia y $-\gamma$ el índice espectral. Como se observa en la ecuación \ref{eq:espectro}, el flujo depende del area de deteccion, el tiempo de deteccion y la porcion de angulo solido del detector. 
+
+
+The high-energy spectrum has three main features in which
+the index of the flux power law changes slightly as seen in Fig. 1.1: the “knee” (∼ 1015 eV),
+where a sequential drop out of elements [19] seems to occur, the “ankle” (∼ 5 × 1018 eV),
+where the transition from galactic to extra-galactic sources is historically assumed to take
+place [20] and the “spectrum suppression” (∼ 1019.5 eV), whose nature remains as an open
+question. Finally, a fourth feature (“second knee”) has also been reported at (∼ 1017 eV),
+which is assumed to be produced by a transition from light to heavier elements [21]. The
+interpretation of the spectrum features is still open, since these interpretations are strongly
+correlated to the choice of the astrophysical model used to describe the composition and
+origin of cosmic rays [22].
+
+
+A energías ultra-altas, el espectro presenta dos características morfológicas fundamentales: el \textit{tobillo} (\textit{ankle}), un endurecimiento del espectro en $E \approx 5 \times 10^{18}$~eV ($\gamma$ pasa de $\sim 3.3$ a $\sim 2.6$), y una abrupta supresión del flujo por encima de los $4 \times 10^{19}$~eV. Esta supresión puede atribuirse al límite de Greisen-Zatsepin-Kuzmin (GZK), originado por la interacción de los protones con el fondo cósmico de microondas (CMB), o bien al agotamiento de la capacidad de aceleración máxima en las fuentes astrofísicas.
 
 Determinar cuál de estos escenarios domina el corte espectral requiere un conocimiento preciso de la masa del rayo cósmico primario. Las mediciones recientes de la Colaboración Auger indican un comportamiento transicional en la composición: mientras que en la región del tobillo la radiación es predominantemente liviana (protones), a medida que la energía aumenta hacia la región de supresión, se observa un endurecimiento sistemático hacia núcleos más pesados (elementos del grupo del hierro). Esta medición empírica exige el desarrollo de herramientas de análisis cada vez más precisas para inferir la masa primaria evento a evento.
 
