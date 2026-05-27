@@ -3,14 +3,42 @@
 \section{El Observatorio Pierre Auger y la Detección Híbrida}
 \label{sec:observatorio}
 
-\subsection{El Detector de Superficie (SSD y WCD) y sensibilidades electromagnéticas}
+El Observatorio Pierre Auger, ubicado en la provincia de Mendoza, Argentina, es el experimento de rayos cósmicos más grande del mundo. 
+
+After initial conception by Jim Cronin and Alan Watson in 1991,
+construction of the observatory began in 2002 and was completed in 2008 [60]. The
+goal of the observatory is to study the energy spectrum, arrival directions and mass
+composition of UHECRs with high statistics
+
+
+Fue diseñado bajo el paradigma de la \textit{detección híbrida}, combinando un inmenso Arreglo de Superficie (SD) que muestrea las partículas de la cascada a nivel del suelo, con un Detector de Fluorescencia (FD) que observa la luz ultravioleta emitida por la excitación de las moléculas de nitrógeno atmosférico durante el desarrollo longitudinal de la lluvia. Esta complementariedad permite cruzar mediciones, reducir incertezas sistemáticas y obtener una reconstrucción geométrica y energética de alta precisión. Para el estudio detallado del frente de partículas que alcanza el suelo, el experimento cuenta con distintos sistemas de detección de superficie, cada uno con sensibilidades particulares a las componentes de la cascada.
+
+\subsection{El Detector de Superficie (SD) y sus sensibilidades}
 \label{subsec:ssd}
+
+El Arreglo de Superficie estándar está compuesto por 1660 detectores Cherenkov en agua (WCD, por sus siglas en inglés: \textit{Water Cherenkov Detector}) distribuidos en una red triangular con una separación de 1500~m, cubriendo un área de aproximadamente $3000\text{ km}^2$. Adicionalmente, el arreglo cuenta con una región más densa conocida como el \textit{Infill}, donde la separación entre estaciones se reduce a 750~m, bajando el umbral de energía de detección y permitiendo estudiar lluvias menos energéticas con mayor resolución espacial.
+
+Cada WCD consiste en un tanque cilíndrico de polietileno que contiene 12.000 litros de agua ultra-pura, instrumentado con tres tubos fotomultiplicadores (PMTs) que registran la luz Cherenkov emitida por las partículas relativistas al atravesar el volumen de agua. La unidad básica para cuantificar la señal depositada en estos detectores es el VEM (\textit{Vertical Equivalent Muon}), definido como la señal media producida por un muón atmosférico cruzando verticalmente el centro del tanque.
+
+El principal desafío analítico del WCD radica en su respuesta inclusiva. El volumen de agua es lo suficientemente profundo como para absorber la totalidad de la componente electromagnética incidente (electrones y fotones) y registrar simultáneamente el paso de los muones penetrantes. En consecuencia, el WCD entrega una señal total que es la convolución de ambas componentes ($S_{total} = S_{EM} + S_{\mu}$). Recientemente, como parte de la actualización AugerPrime, se han instalado Centelladores de Superficie (SSD) sobre cada tanque para ayudar a desempañar esta mezcla, dado que los centelladores plásticos delgados poseen una respuesta diferente a los fotones en comparación con el volumen de agua. Sin embargo, extraer un observable direccional puro a partir de señales convolucionadas sigue presentando ambigüedades fenomenológicas severas, especialmente debido a la rápida atenuación de la componente electromagnética frente a la dinámica cuasi-rectilínea de los muones.
 
 \subsection{El Underground Muon Detector (UMD / AMIGA)}
 \label{subsec:umd}
-% Aquí irá el énfasis sobre el blindaje de 2.3 m de tierra y el umbral de 1 GeV.
+
+Para sortear las limitaciones impuestas por la señal electromagnética de superficie, el observatorio instaló el Detector Subterráneo de Muones (UMD) en el marco de la extensión AMIGA (\textit{Auger Muons and Infill for the Ground Array}). El UMD está co-localizado con las estaciones WCD del arreglo \textit{Infill}, formando una red híbrida que permite medir independientemente la señal total en superficie y el contenido muónico puro de la misma lluvia cósmica.
+
+Cada estación del UMD está compuesta por módulos de centelladores plásticos enterrados junto a su tanque WCD asociado. La innovación fundamental de este detector es su blindaje pasivo: los módulos se encuentran bajo $2.3$~m de tierra local. Este espesor de suelo representa una profundidad de interacción de aproximadamente $\approx 540\text{ g/cm}^2$. 
+
+Este blindaje físico cumple un doble propósito analítico crucial para esta tesis. En primer lugar, absorbe de manera absoluta la componente electromagnética de la Lluvia Atmosférica Extensa, garantizando que ninguna señal de fotones o electrones contamine las mediciones. En segundo lugar, impone un umbral cinemático estricto: solo los muones con una energía superior a $E_\mu \gtrsim 1$~GeV son capaces de atravesar la capa de tierra y alcanzar los centelladores. De este modo, el UMD no solo aísla los muones, sino que filtra la población de "muones blandos" (sub-GeV) altamente dispersivos, entregando un muestreo puramente cinemático de muones duros que conservan fielmente la memoria direccional y espacial de las primeras generaciones hadrónicas de la cascada.
 
 \subsection{Geometría de las EAS y marco de referencia}
 \label{subsec:geometria_eas}
 
+La reconstrucción espacial de la lluvia y la definición del marco de referencia son pasos ineludibles para evaluar asimetrías azimutales de manera rigurosa. Macroscópicamente, la geometría de una Lluvia Atmosférica Extensa queda determinada por dos elementos: la posición del núcleo en la superficie (\textit{core}), de coordenadas geográficas $(x_c, y_c, z_c)$, y el eje de la lluvia, definido por el vector de arribo de la partícula primaria. Este vector se parametriza mediante el ángulo cenital $\theta$ (inclinación respecto a la vertical del lugar) y el ángulo azimutal $\Phi$ (dirección geográfica de proveniencia).
+
+Para estudiar el desarrollo del frente de partículas de forma simétrica, es matemáticamente imperativo definir el \textit{plano de la lluvia} (\textit{shower plane}). Este es el plano perpendicular al eje de arribo que contiene al núcleo de la cascada. En este sistema de referencia intrínseco, la posición de cualquier detector queda unívocamente determinada por su distancia al eje ($r$) y su fase azimutal relativa ($\phi$) en el plano de la lluvia, donde $\phi = 0^\circ$ se define convencionalmente como la región más temprana (\textit{early}) del frente al impactar contra el suelo, y $\phi = \pm 180^\circ$ como la región más tardía (\textit{late}).
+
+El paso del sistema de coordenadas topográficas de los detectores al sistema intrínseco de la lluvia introduce deformaciones proyectivas críticas. Variables de reconstrucción estándar provistas por el \textit{software} del observatorio (como, por ejemplo, las obtenidas mediante la rutina \texttt{GetAzimuthSP}) típicamente reportan las fases angulares proyectadas sobre el plano horizontal del suelo para las estaciones del arreglo \textit{Infill}. Para lluvias con inclinaciones moderadas o altas, el frente circular de la cascada interseca el terreno formando una elipse. Evaluar la densidad de partículas utilizando ángulos azimutales sobre el plano del suelo mezcla estaciones a diferentes distancias transversales al eje e introduce una falsa modulación geométrica que corrompe el análisis de asimetría física.
+
+Para evitar este sesgo sistemático, en este trabajo se descarta la utilización de ángulos de superficie proyectados. En su lugar, se implementa analíticamente una transformación tridimensional estricta (Rotación de Euler) evento a evento. Mediante el uso de los ángulos de arribo reconstruidos, el vector posición de cada módulo del UMD es trasladado al núcleo de la lluvia y sometido a una rotación espacial activa en $\theta$ y $\Phi$. Este procedimiento garantiza el mapeo ortogonal de las señales experimentales directamente sobre el plano propio de la cascada, aislando los efectos físicos genuinos de los artefactos de proyección topográfica.
 \newpage
