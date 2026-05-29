@@ -3,24 +3,79 @@
 \section{El Observatorio Pierre Auger y la Detección Híbrida}
 \label{sec:observatorio}
 
-El Observatorio Pierre Auger, ubicado en la provincia de Mendoza, Argentina, es el experimento de rayos cósmicos más grande del mundo. 
+El Observatorio Pierre Auger, ubicado en la provincia de Mendoza, Argentina, es el experimento de rayos cósmicos más grande del mundo. Tras su concepción inicial por los físicos Jim Cronin y Alan Watson en 1991, la construcción del observatorio comenzó en 2002 y se completó formalmente en 2008. El objetivo fundamental de este experimento es estudiar el espectro de energía, las direcciones de arribo y la composición de masa de los Rayos Cósmicos de Ultra-Alta Energía (UHECRs) con una estadística sin precedentes.
 
-After initial conception by Jim Cronin and Alan Watson in 1991,
-construction of the observatory began in 2002 and was completed in 2008 [60]. The
-goal of the observatory is to study the energy spectrum, arrival directions and mass
-composition of UHECRs with high statistics
+El observatorio fue diseñado bajo el paradigma de la \textit{detección híbrida}, combinando un inmenso Arreglo de Superficie (SD) que muestrea las partículas de la cascada a nivel del suelo, con un Detector de Fluorescencia (FD) que observa la luz ultravioleta emitida por la excitación de las moléculas de nitrógeno atmosférico durante el desarrollo longitudinal de la lluvia. Esta complementariedad permite cruzar mediciones, reducir incertezas sistemáticas y obtener una reconstrucción geométrica y energética de alta precisión. 
+
+Para estudiar las EAS a nivel del suelo, se implementó el Detector de Superficie (SD). Este consiste en un arreglo con un área total de $3000\text{ km}^2$, compuesto por 1660 detectores Cherenkov en agua (WCDs) dispuestos en una red triangular equilátera con una separación de $1500\text{ m}$ (denominada red SD-1500). Por su parte, el desarrollo de la lluvia en la atmósfera es observado mediante el Detector de Fluorescencia (FD), el cual está conformado por 24 telescopios de fluorescencia distribuidos en 4 edificios. 
+
+En la Figura \ref{fig:mapa_auger} se presenta la disposición espacial del SD y el FD. Cada estación de superficie está representada por un punto, mientras que en los bordes del arreglo se ubican los edificios del FD junto con las líneas que delimitan sus respectivos campos de visión sobre la atmósfera. El mapa también ilustra las regiones correspondientes a las distintas extensiones y mejoras del observatorio.
+
+El Detector de Superficie opera de manera continua, proporcionando una inmensa estadística y una apertura geométrica bien definida que resulta independiente de la energía, la composición de masa y los modelos de interacción hadrónica. En contraste, el FD requiere condiciones operativas estrictas, funcionando únicamente durante noches despejadas y sin luna, lo que reduce su ciclo de trabajo a aproximadamente un $10\%$. Sin embargo, el FD aporta beneficios invaluables a la reconstrucción híbrida, proporcionando una observación directa del $X_{max}$ y una medición calorimétrica de la energía primaria que es prácticamente independiente de los modelos teóricos.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap2/mapa_auger.png}
+	\caption{Mapa del Observatorio Pierre Auger. Se observa la cuadrícula del Arreglo de Superficie (SD) de $3000\text{ km}^2$ y la ubicación de los cuatro edificios del Detector de Fluorescencia (FD) en el perímetro, indicando sus campos de visión. También se destacan las zonas de mayor densidad de detectores como el arreglo \textit{Infill}. Obtendido de \cite{botti2019}}
+	\label{fig:mapa_auger}
+\end{figure}
+
+---
+
+\subsection{El Detector de Superficie (SD)}
+\label{subsec:sd}
+
+El Arreglo de Superficie estándar está compuesto por 1660 detectores Cherenkov en agua (WCD, por sus siglas en inglés: \textit{Water Cherenkov Detector}) distribuidos en una red triangular equilátera con una separación de 1500~m, cubriendo un área de aproximadamente $3000\text{ km}^2$. Adicionalmente, el arreglo cuenta con una región más densa conocida como el \textit{Infill}, donde la separación entre estaciones se reduce a 750~m, bajando el umbral de energía de detección y permitiendo estudiar lluvias menos energéticas con mayor resolución espacial. 
+
+Estos detectores fueron elegidos por su durabilidad, bajo costo y exposición casi uniforme a los rayos cósmicos primarios con ángulos cenitales inferiores a $60^\circ$. La elevación de cada tanque sobre el nivel del mar oscila entre 1340~m y 1610~m, con una altitud media aproximada de 1400~m.
+
+Físicamente, cada WCD consiste en un tanque cilíndrico de polietileno de 3.6~m de diámetro y 1.2~m de altura. Esta altura particular fue seleccionada mediante simulaciones para maximizar la señal depositada por los muones. En su interior, los tanques cuentan con un revestimiento sellado cuya superficie interna es altamente reflexiva, diseñada para reflejar la luz Cherenkov. Cada unidad contiene 12.000 litros de agua ultra-pura y está instrumentada con tres tubos fotomultiplicadores (PMTs) de 9 pulgadas. Los PMTs se encuentran ubicados en la parte superior del tanque y orientados hacia abajo, observando a través de ventanas transparentes de polietileno hacia el interior del volumen de agua.
+
+El principio de funcionamiento del detector se basa en el efecto Cherenkov, cuando una partícula cargada ultra-relativista de la cascada atraviesa el detector a una velocidad mayor que la velocidad de la luz en el agua, se produce radiación Cherenkov, cuyos fotones son recolectados por los PMTs. Las señales primarias medidas son luego convertidas a una unidad independiente de la estación conocida como VEM (\textit{Vertical Equivalent Muon}). Un VEM corresponde a la carga media registrada por un PMT a partir de la luz Cherenkov emitida por un muón atmosférico cruzando verticalmente el centro del tanque, definiendo la 'carga' como la integral temporal del pulso del fotomultiplicador \cite{auger2015}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap2/ssd.png}
+	\caption{Detectores Cherenkov en Agua en el Observatorio Pierre Auger junto a sus componentes principales. Obtendido de \cite{botti2019}}
+	\label{fig:ssd}
+\end{figure}
+
+Para garantizar su autonomía y sincronización, cada estación WCD opera de manera independiente. Cuentan con una antena GPS que proporciona una estampa temporal de alta precisión para cada evento, lo cual es indispensable para construir los eventos híbridos y reconstruir la dirección de arribo y la geometría geométrica de la lluvia. La electrónica local, los PMTs, el sistema de comunicación y el receptor GPS son alimentados por dos baterías que se recargan mediante paneles solares acoplados a la estructura del tanque. Una imagen del WCD con sus componentes principales se puede ver en la Figura \ref{fig:ssd}.
 
 
-Fue diseñado bajo el paradigma de la \textit{detección híbrida}, combinando un inmenso Arreglo de Superficie (SD) que muestrea las partículas de la cascada a nivel del suelo, con un Detector de Fluorescencia (FD) que observa la luz ultravioleta emitida por la excitación de las moléculas de nitrógeno atmosférico durante el desarrollo longitudinal de la lluvia. Esta complementariedad permite cruzar mediciones, reducir incertezas sistemáticas y obtener una reconstrucción geométrica y energética de alta precisión. Para el estudio detallado del frente de partículas que alcanza el suelo, el experimento cuenta con distintos sistemas de detección de superficie, cada uno con sensibilidades particulares a las componentes de la cascada.
+TODO LO QUE ESTA ACA ABAJO CREO Q NOOO
 
-\subsection{El Detector de Superficie (SD) y sus sensibilidades}
-\label{subsec:ssd}
 
-El Arreglo de Superficie estándar está compuesto por 1660 detectores Cherenkov en agua (WCD, por sus siglas en inglés: \textit{Water Cherenkov Detector}) distribuidos en una red triangular con una separación de 1500~m, cubriendo un área de aproximadamente $3000\text{ km}^2$. Adicionalmente, el arreglo cuenta con una región más densa conocida como el \textit{Infill}, donde la separación entre estaciones se reduce a 750~m, bajando el umbral de energía de detección y permitiendo estudiar lluvias menos energéticas con mayor resolución espacial.
+El principal desafío analítico del WCD radica en su respuesta inclusiva. El volumen de agua es lo suficientemente profundo como para absorber la totalidad de la componente electromagnética incidente (electrones y fotones) y registrar simultáneamente el paso de los muones penetrantes. En consecuencia, el WCD entrega una señal total que es la convolución de ambas componentes ($S_{total} = S_{EM} + S_{\mu}$). Recientemente, como parte de la actualización AugerPrime, se han instalado Centelladores de Superficie (SSD) sobre cada tanque para ayudar a desempañar esta mezcla, dado que los centelladores plásticos delgados poseen una respuesta diferente a los fotones en comparación con el volumen de agua. Sin embargo, extraer un observable direccional puro a partir de señales convolucionadas sigue presentando ambigüedades fenomenológicas severas, especialmente debido a la rápida atenuación de la componente electromagnética frente a la dinámica cuasi-rectilínea de los muones. (ESTE PARRAFO NO SE SI LO DEJARIA, PORQUIE PARA MI PRIERMO HAY QUE HABLAR DEL FD, LUEGO DE ENCHANCEMENTS Y AHI PONER AUGER PRIME CON EL SSD, AUMENTAR EL CICLO DEL FD:
 
-Cada WCD consiste en un tanque cilíndrico de polietileno que contiene 12.000 litros de agua ultra-pura, instrumentado con tres tubos fotomultiplicadores (PMTs) que registran la luz Cherenkov emitida por las partículas relativistas al atravesar el volumen de agua. La unidad básica para cuantificar la señal depositada en estos detectores es el VEM (\textit{Vertical Equivalent Muon}), definido como la señal media producida por un muón atmosférico cruzando verticalmente el centro del tanque.
+CITA: To improve statistics, and thus, the mass discrimination at the highest energies, the FD will
+be equipped with an additional run mode to extends its duty cycle, which currently is 19%.
+3.5. RADIO UPGRADE 25
+To this aim, PMT gains will be reduced to start the FD operation earlier in the evening till
+later in the morning, which will increment the FD duty cycle up to 29%. The procedure has
+been tested and shown to technically work while still collecting data of sufficient quality
+for FD reconstruction [73]. The effects of aging on the PMTs have also been examined and
+found to be acceptable for the expected lifetime of the Observatory.
 
-El principal desafío analítico del WCD radica en su respuesta inclusiva. El volumen de agua es lo suficientemente profundo como para absorber la totalidad de la componente electromagnética incidente (electrones y fotones) y registrar simultáneamente el paso de los muones penetrantes. En consecuencia, el WCD entrega una señal total que es la convolución de ambas componentes ($S_{total} = S_{EM} + S_{\mu}$). Recientemente, como parte de la actualización AugerPrime, se han instalado Centelladores de Superficie (SSD) sobre cada tanque para ayudar a desempañar esta mezcla, dado que los centelladores plásticos delgados poseen una respuesta diferente a los fotones en comparación con el volumen de agua. Sin embargo, extraer un observable direccional puro a partir de señales convolucionadas sigue presentando ambigüedades fenomenológicas severas, especialmente debido a la rápida atenuación de la componente electromagnética frente a la dinámica cuasi-rectilínea de los muones.
+
+AMIGA, ETC)
+
+\subsection{El Detector de Fluorescencia (FD)}
+\label{subsec:fd}
+
+Mientras que el Arreglo de Superficie mide la distribución lateral de las partículas que logran llegar al suelo, el Detector de Fluorescencia (FD) está diseñado para observar el desarrollo longitudinal de la cascada a medida que esta atraviesa la atmósfera[cite: 4]. El FD consta de 24 telescopios distribuidos en conjuntos de seis a lo largo de cuatro edificios perimetrales que observan el volumen de aire sobre el arreglo SD: Los Leones, Los Morados, Loma Amarilla y Coihueco[cite: 4].
+
+El principio de detección se basa en que las partículas cargadas de la lluvia excitan las moléculas de nitrógeno atmosférico a su paso. Al volver a su estado fundamental, estas moléculas emiten luz de fluorescencia de manera isotrópica, principalmente en el rango ultravioleta de longitud de onda[cite: 4]. Cada telescopio cuenta con un campo de visión de $30^\circ \times 30^\circ$ en azimut y elevación, garantizando una cobertura total de $180^\circ$ por cada sitio perimetral[cite: 4]. La luz recolectada de la atmósfera pasa a través de un filtro UV (que acepta longitudes de onda entre 290 y 410 nm) y es enfocada por un espejo esférico hacia una cámara compuesta por fotomultiplicadores (píxeles), los cuales registran las trazas de luz[cite: 4].
+
+La importancia fundamental del FD radica en que permite realizar una medición calorimétrica de la energía de la lluvia. La cantidad de luz de fluorescencia emitida es directamente proporcional a la energía depositada por las partículas secundarias en el aire. Al integrar el perfil de desarrollo longitudinal (típicamente parametrizado mediante la función de Gaisser-Hillas), se obtiene una estimación de la energía de la partícula primaria que es prácticamente independiente de los modelos de interacción hadrónica[cite: 4]. 
+
+A su vez, el perfil longitudinal proporciona una observación directa de la variable $X_{max}$[cite: 4]. Tal como se estableció teóricamente en la Sección \ref{subsec:eas_xmax}, este observable es el indicador experimental más sensible para determinar la composición de masa del rayo cósmico primario.
+
+A pesar de sus enormes beneficios analíticos, el FD posee una limitación instrumental ineludible: su bajo ciclo de trabajo (\textit{duty cycle}). Dado que la emisión de luz de fluorescencia es sumamente tenue, los telescopios solo pueden operar con eficiencia durante noches despejadas y con escasa o nula iluminación lunar[cite: 4]. Esto restringe el tiempo efectivo de observación a tan solo un $10-15\%$ del tiempo total del observatorio[cite: 4]. 
+
+Esta severa penalización estadística, especialmente crítica para eventos de ultra-alta energía que ya poseen un flujo intrínsecamente bajo, subraya la necesidad vital de desarrollar observables sensibles a la masa (como la asimetría azimutal) utilizando los detectores de superficie, los cuales operan con un ciclo de trabajo cercano al 100\%.
+
+
 
 \subsection{El Underground Muon Detector (UMD / AMIGA)}
 \label{subsec:umd}

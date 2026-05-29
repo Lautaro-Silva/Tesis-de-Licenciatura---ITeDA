@@ -1,0 +1,25 @@
+<ADSTReader xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- Base directory -->
+    <base> MdSd433DataReconstruction </base>
+
+    <!-- Target month -->
+    <year>  2025 </year>
+    <month> 12 </month>
+
+    <!-- Subset -->
+    <subset> PhaseIISPMTPhaseIIBeta </subset>
+
+    <!-- Export only T5 events -->
+    <onlyT5> 1 </onlyT5>
+
+    <!-- Export only events above an energy -->
+    <minLgE> 0 </minLgE>
+
+    <!-- Export only events above a shower size -->
+    <minLgSref> 0 </minLgSref>
+
+    <!-- Export only events with free beta -->
+    <onlyFreeBeta> 0 </onlyFreeBeta>
+
+</ADSTReader>

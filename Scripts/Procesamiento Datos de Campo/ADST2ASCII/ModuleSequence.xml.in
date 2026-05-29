@@ -1,0 +1,13 @@
+<sequenceFile>
+
+  <moduleControl>
+
+    <loop numTimes="1" pushEventToStack="yes">
+
+      <module> ADSTReader </module>
+
+    </loop>
+
+  </moduleControl>
+
+</sequenceFile>
