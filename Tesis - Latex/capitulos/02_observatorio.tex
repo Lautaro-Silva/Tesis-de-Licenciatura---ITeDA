@@ -16,14 +16,12 @@ El Detector de Superficie opera de manera continua, proporcionando una inmensa e
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap2/mapa_auger.png}
-	\caption{Mapa del Observatorio Pierre Auger. Se observa la cuadrícula del Arreglo de Superficie (SD) de $3000\text{ km}^2$ y la ubicación de los cuatro edificios del Detector de Fluorescencia (FD) en el perímetro, indicando sus campos de visión. También se destacan las zonas de mayor densidad de detectores como el arreglo \textit{Infill}. Obtendido de \cite{botti2019}}
+	\caption{Mapa del Observatorio Pierre Auger. Se observa la cuadrícula del Arreglo de Superficie (SD) de $3000\text{ km}^2$ y la ubicación de los cuatro edificios del Detector de Fluorescencia (FD) en el perímetro, indicando sus campos de visión. También se destacan las zonas de mayor densidad de detectores como el arreglo \textit{Infill}. Obtenido de \cite{botti2019}}
 	\label{fig:mapa_auger}
 \end{figure}
 
----
-
 \subsection{El Detector de Superficie (SD)}
-\label{subsec:sd}
+\label{subsec:ssd}
 
 El Arreglo de Superficie estándar está compuesto por 1660 detectores Cherenkov en agua (WCD, por sus siglas en inglés: \textit{Water Cherenkov Detector}) distribuidos en una red triangular equilátera con una separación de 1500~m, cubriendo un área de aproximadamente $3000\text{ km}^2$. Adicionalmente, el arreglo cuenta con una región más densa conocida como el \textit{Infill}, donde la separación entre estaciones se reduce a 750~m, bajando el umbral de energía de detección y permitiendo estudiar lluvias menos energéticas con mayor resolución espacial. 
 
@@ -31,69 +29,75 @@ Estos detectores fueron elegidos por su durabilidad, bajo costo y exposición ca
 
 Físicamente, cada WCD consiste en un tanque cilíndrico de polietileno de 3.6~m de diámetro y 1.2~m de altura. Esta altura particular fue seleccionada mediante simulaciones para maximizar la señal depositada por los muones. En su interior, los tanques cuentan con un revestimiento sellado cuya superficie interna es altamente reflexiva, diseñada para reflejar la luz Cherenkov. Cada unidad contiene 12.000 litros de agua ultra-pura y está instrumentada con tres tubos fotomultiplicadores (PMTs) de 9 pulgadas. Los PMTs se encuentran ubicados en la parte superior del tanque y orientados hacia abajo, observando a través de ventanas transparentes de polietileno hacia el interior del volumen de agua.
 
-El principio de funcionamiento del detector se basa en el efecto Cherenkov, cuando una partícula cargada ultra-relativista de la cascada atraviesa el detector a una velocidad mayor que la velocidad de la luz en el agua, se produce radiación Cherenkov, cuyos fotones son recolectados por los PMTs. Las señales primarias medidas son luego convertidas a una unidad independiente de la estación conocida como VEM (\textit{Vertical Equivalent Muon}). Un VEM corresponde a la carga media registrada por un PMT a partir de la luz Cherenkov emitida por un muón atmosférico cruzando verticalmente el centro del tanque, definiendo la 'carga' como la integral temporal del pulso del fotomultiplicador \cite{auger2015}.
+El principio de funcionamiento del detector se basa en el efecto Cherenkov, cuando una partícula cargada ultra-relativista de la cascada atraviesa el detector a una velocidad mayor que la velocidad de la luz en el agua, se produce radiación Cherenkov, cuyos fotones son recolectados por los PMTs. Las señales primarias medidas son luego convertidas a una unidad independiente de la estación conocida como VEM (\textit{Vertical Equivalent Muon}). Un VEM corresponde a la carga media registrada por un PMT a partir de la luz Cherenkov emitida por un muón atmosférico cruzando verticalmente el centro del tanque, definiendo la 'carga' como la integral temporal del pulso del fotomultiplicador \cite{auger2015detector}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap2/ssd.png}
-	\caption{Detectores Cherenkov en Agua en el Observatorio Pierre Auger junto a sus componentes principales. Obtendido de \cite{botti2019}}
+	\caption{Detectores Cherenkov en Agua en el Observatorio Pierre Auger junto a sus componentes principales. Obtenido de \cite{botti2019}}
 	\label{fig:ssd}
 \end{figure}
 
 Para garantizar su autonomía y sincronización, cada estación WCD opera de manera independiente. Cuentan con una antena GPS que proporciona una estampa temporal de alta precisión para cada evento, lo cual es indispensable para construir los eventos híbridos y reconstruir la dirección de arribo y la geometría geométrica de la lluvia. La electrónica local, los PMTs, el sistema de comunicación y el receptor GPS son alimentados por dos baterías que se recargan mediante paneles solares acoplados a la estructura del tanque. Una imagen del WCD con sus componentes principales se puede ver en la Figura \ref{fig:ssd}.
 
-
-TODO LO QUE ESTA ACA ABAJO CREO Q NOOO
-
-
-El principal desafío analítico del WCD radica en su respuesta inclusiva. El volumen de agua es lo suficientemente profundo como para absorber la totalidad de la componente electromagnética incidente (electrones y fotones) y registrar simultáneamente el paso de los muones penetrantes. En consecuencia, el WCD entrega una señal total que es la convolución de ambas componentes ($S_{total} = S_{EM} + S_{\mu}$). Recientemente, como parte de la actualización AugerPrime, se han instalado Centelladores de Superficie (SSD) sobre cada tanque para ayudar a desempañar esta mezcla, dado que los centelladores plásticos delgados poseen una respuesta diferente a los fotones en comparación con el volumen de agua. Sin embargo, extraer un observable direccional puro a partir de señales convolucionadas sigue presentando ambigüedades fenomenológicas severas, especialmente debido a la rápida atenuación de la componente electromagnética frente a la dinámica cuasi-rectilínea de los muones. (ESTE PARRAFO NO SE SI LO DEJARIA, PORQUIE PARA MI PRIERMO HAY QUE HABLAR DEL FD, LUEGO DE ENCHANCEMENTS Y AHI PONER AUGER PRIME CON EL SSD, AUMENTAR EL CICLO DEL FD:
-
-CITA: To improve statistics, and thus, the mass discrimination at the highest energies, the FD will
-be equipped with an additional run mode to extends its duty cycle, which currently is 19%.
-3.5. RADIO UPGRADE 25
-To this aim, PMT gains will be reduced to start the FD operation earlier in the evening till
-later in the morning, which will increment the FD duty cycle up to 29%. The procedure has
-been tested and shown to technically work while still collecting data of sufficient quality
-for FD reconstruction [73]. The effects of aging on the PMTs have also been examined and
-found to be acceptable for the expected lifetime of the Observatory.
-
-
-AMIGA, ETC)
-
 \subsection{El Detector de Fluorescencia (FD)}
 \label{subsec:fd}
 
-Mientras que el Arreglo de Superficie mide la distribución lateral de las partículas que logran llegar al suelo, el Detector de Fluorescencia (FD) está diseñado para observar el desarrollo longitudinal de la cascada a medida que esta atraviesa la atmósfera[cite: 4]. El FD consta de 24 telescopios distribuidos en conjuntos de seis a lo largo de cuatro edificios perimetrales que observan el volumen de aire sobre el arreglo SD: Los Leones, Los Morados, Loma Amarilla y Coihueco[cite: 4].
+Mientras que el Arreglo de Superficie mide la distribución lateral de las partículas que logran llegar al suelo, el Detector de Fluorescencia (FD) está diseñado para observar el desarrollo longitudinal de la cascada a medida que esta atraviesa la atmósfera. El FD consta de 24 telescopios distribuidos en conjuntos de seis a lo largo de cuatro edificios perimetrales que observan el volumen de aire sobre el arreglo SD: Los Leones, Los Morados, Loma Amarilla y Coihueco. En la Figura \ref{fig:fd_leones} se muestra una fotografía de las instalaciones del FD ubicadas en el sitio Los Leones.
 
-El principio de detección se basa en que las partículas cargadas de la lluvia excitan las moléculas de nitrógeno atmosférico a su paso. Al volver a su estado fundamental, estas moléculas emiten luz de fluorescencia de manera isotrópica, principalmente en el rango ultravioleta de longitud de onda[cite: 4]. Cada telescopio cuenta con un campo de visión de $30^\circ \times 30^\circ$ en azimut y elevación, garantizando una cobertura total de $180^\circ$ por cada sitio perimetral[cite: 4]. La luz recolectada de la atmósfera pasa a través de un filtro UV (que acepta longitudes de onda entre 290 y 410 nm) y es enfocada por un espejo esférico hacia una cámara compuesta por fotomultiplicadores (píxeles), los cuales registran las trazas de luz[cite: 4].
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap2/fd_leones.png}
+	\caption{Edificio del Detector de Fluorescencia (FD) ubicado en el sitio perimetral Los Leones sacada durante el día. Detrás del edificio esta la antena de comunicación. Además se aprecian las persianas abiertas debido a un mantenimiento. Obtenido de \cite{auger2015detector}.}
+	\label{fig:fd_leones}
+\end{figure}
 
-La importancia fundamental del FD radica en que permite realizar una medición calorimétrica de la energía de la lluvia. La cantidad de luz de fluorescencia emitida es directamente proporcional a la energía depositada por las partículas secundarias en el aire. Al integrar el perfil de desarrollo longitudinal (típicamente parametrizado mediante la función de Gaisser-Hillas), se obtiene una estimación de la energía de la partícula primaria que es prácticamente independiente de los modelos de interacción hadrónica[cite: 4]. 
+El principio de detección se basa en que las partículas cargadas de la lluvia excitan las moléculas de nitrógeno atmosférico a su paso. Al volver a su estado fundamental, estas moléculas emiten luz de fluorescencia de manera isotrópica, principalmente en el rango ultravioleta. Cada telescopio cuenta con un campo de visión de $30^\circ \times 30^\circ$ en azimut y elevación, garantizando una cobertura total de $180^\circ$ por cada sitio perimetral. 
 
-A su vez, el perfil longitudinal proporciona una observación directa de la variable $X_{max}$[cite: 4]. Tal como se estableció teóricamente en la Sección \ref{subsec:eas_xmax}, este observable es el indicador experimental más sensible para determinar la composición de masa del rayo cósmico primario.
+La intensidad de la luz de fluorescencia depende de la cantidad de partículas en la lluvia, lo cual está directamente relacionado con la energía de la partícula primaria. Por lo tanto, la intensidad de la señal registrada en los tubos fotomultiplicadores (PMTs) del FD opera como un estimador calorimétrico directo de la energía del rayo cósmico primario. A su vez, mediante el análisis detallado de los tiempos de arribo de los fotones a los distintos PMTs de la cámara, es posible determinar de forma independiente la dirección de arribo de la cascada.
 
-A pesar de sus enormes beneficios analíticos, el FD posee una limitación instrumental ineludible: su bajo ciclo de trabajo (\textit{duty cycle}). Dado que la emisión de luz de fluorescencia es sumamente tenue, los telescopios solo pueden operar con eficiencia durante noches despejadas y con escasa o nula iluminación lunar[cite: 4]. Esto restringe el tiempo efectivo de observación a tan solo un $10-15\%$ del tiempo total del observatorio[cite: 4]. 
+La importancia fundamental del FD radica en que permite realizar esta medición calorimétrica de la energía integrando el perfil de desarrollo longitudinal, obteniendo asi una estimación robusta. Además, este perfil longitudinal proporciona una observación directa de la profundidad del máximo de la lluvia, $X_{max}$. Tal como se estableció teóricamente en la Sección \ref{subsec:eas_xmax}, este observable es el indicador experimental más sensible para determinar la composición de masa del rayo cósmico.
 
-Esta severa penalización estadística, especialmente crítica para eventos de ultra-alta energía que ya poseen un flujo intrínsecamente bajo, subraya la necesidad vital de desarrollar observables sensibles a la masa (como la asimetría azimutal) utilizando los detectores de superficie, los cuales operan con un ciclo de trabajo cercano al 100\%.
+A pesar de sus enormes beneficios analíticos, el FD posee una limitación instrumental que es su bajo ciclo de trabajo (\textit{duty cycle}). Dado que la emisión de luz de fluorescencia es sumamente tenue, los telescopios solo pueden operar con eficiencia durante noches despejadas y con escasa o nula iluminación lunar. Esto restringe el tiempo efectivo de observación a tan solo un $15-19\%$ del tiempo operativo total del observatorio. 
 
+Esta severa penalización estadística, especialmente crítica para eventos de ultra-alta energía que ya poseen un flujo intrínsecamente bajo, subraya la necesidad vital de desarrollar observables sensibles a la masa (como la asimetría azimutal) utilizando exclusivamente los detectores de superficie, los cuales operan con un ciclo de trabajo continuo cercano al 100\%.
 
+\subsection{Actualizaciones del Observatorio}
+\label{subsec:enhancements}
 
-\subsection{El Underground Muon Detector (UMD / AMIGA)}
+Con el objetivo de extender el rango energético de detección y mejorar la capacidad del observatorio para discriminar la masa de los rayos cósmicos evento a evento, la Colaboración Auger ha implementado una serie de mejoras y actualizaciones sistemáticas a lo largo de los años. 
+
+Para reducir el umbral de energía del observatorio, se construyeron los telescopios HEAT (\textit{High Elevation Auger Telescopes}). Estos consisten en tres telescopios de fluorescencia adicionales capaces de inclinarse para observar ángulos de elevación mayores (entre $30^\circ$ y $60^\circ$), permitiendo registrar el desarrollo de lluvias de menor energía que alcanzan su máximo ($X_{max}$) a mayor altitud en la atmósfera. Además, para mejorar la estadística y la discriminación de masa a las energías más altas, se ha implementado un nuevo modo de operación para el FD que permite extender su ciclo de trabajo. Reduciendo la ganancia de los PMTs, es posible comenzar las mediciones más temprano al anochecer y finalizarlas más tarde al amanecer, incrementando el tiempo efectivo de observación del 19\% histórico a un 29\% aproximadamente.
+
+Simultáneamente, el observatorio se encuentra en la etapa de despliegue de su mayor actualización hasta la fecha, denominada \textit{AugerPrime}. El principal objetivo de AugerPrime es mejorar la separación de las componentes electromagnética y muónica a nivel del suelo en todo el arreglo de 1500~m. Para ello, se ha instalado un Centellador de Superficie (SSD, por sus siglas en inglés) de $3.8\text{ m}^2$ sobre cada tanque WCD. Dado que los centelladores plásticos delgados y el profundo volumen de agua del tanque responden de manera muy diferente a los fotones y electrones en comparación con los muones penetrantes, la señal combinada de ambos detectores permite desenredar estadísticamente las componentes de la lluvia. 
+
+Adicionalmente, AugerPrime incluye la instalación de antenas de radio sobre cada estación para medir la emisión electromagnética coherente de las cascadas. A diferencia del FD, las antenas de radio permiten medir la componente electromagnética de las EAS con un ciclo de trabajo cercano al 100\%. Por este motivo, y sumado a su bajo costo de implementación, la detección por radio se ha convertido en un pilar de esta actualización.
+
+Por otro lado, para complementar los estudios a menores energías, recientemente el arreglo de superficie se ha densificado aún más con la adición de 12 tanques intercalados dentro del arreglo de 750~m, formando una sub-red con un espaciamiento de 433~m (arreglo SD-433).
+
+Aunque estas mejoras son sustanciales para el arreglo a gran escala, la medición empírica directa y pura del contenido muónico exige un enfoque instrumental diferente, el cual se materializa en la extensión AMIGA.
+
+\subsection{AMIGA y el Detector Subterráneo de Muones (UMD)}
 \label{subsec:umd}
 
-Para sortear las limitaciones impuestas por la señal electromagnética de superficie, el observatorio instaló el Detector Subterráneo de Muones (UMD) en el marco de la extensión AMIGA (\textit{Auger Muons and Infill for the Ground Array}). El UMD está co-localizado con las estaciones WCD del arreglo \textit{Infill}, formando una red híbrida que permite medir independientemente la señal total en superficie y el contenido muónico puro de la misma lluvia cósmica.
+AMIGA (\textit{Auger Muons and Infill for the Ground Array}) es una extensión del observatorio diseñada específicamente para estudiar la transición entre los rayos cósmicos galácticos y extragalácticos (alrededor de $\sim 10^{17}$~eV). Como parte del despliegue de AugerPrime, el UMD está siendo extendido para operar de manera conjunta con los arreglos SD-750 y SD-433.
 
-Cada estación del UMD está compuesta por módulos de centelladores plásticos enterrados junto a su tanque WCD asociado. La innovación fundamental de este detector es su blindaje pasivo: los módulos se encuentran bajo $2.3$~m de tierra local. Este espesor de suelo representa una profundidad de interacción de aproximadamente $\approx 540\text{ g/cm}^2$. 
+El UMD constituye el núcleo experimental de esta tesis. Está compuesto por detectores de centelleo plástico enterrados junto a las estaciones WCD. Cada estación de detección muónica consta de tres módulos de $10\text{ m}^2$ cada uno, sumando un área total de detección de $30\text{ m}^2$ por posición. A su vez, cada módulo está segmentado finamente en 64 tiras de centellador. Estas tiras cuentan con fibras ópticas que conducen los fotones producidos por el paso de partículas cargadas hacia un arreglo de 64 fotomultiplicadores de silicio (SiPMs). 
 
-Este blindaje físico cumple un doble propósito analítico crucial para esta tesis. En primer lugar, absorbe de manera absoluta la componente electromagnética de la Lluvia Atmosférica Extensa, garantizando que ninguna señal de fotones o electrones contamine las mediciones. En segundo lugar, impone un umbral cinemático estricto: solo los muones con una energía superior a $E_\mu \gtrsim 1$~GeV son capaces de atravesar la capa de tierra y alcanzar los centelladores. De este modo, el UMD no solo aísla los muones, sino que filtra la población de "muones blandos" (sub-GeV) altamente dispersivos, entregando un muestreo puramente cinemático de muones duros que conservan fielmente la memoria direccional y espacial de las primeras generaciones hadrónicas de la cascada.
+La electrónica del UMD está diseñada para operar con una alta segmentación y resolución temporal, permitiendo medir directamente la densidad de partículas mediante una estrategia de conteo digital junto a un modo de integrar una señal.
 
-\subsection{Geometría de las EAS y marco de referencia}
-\label{subsec:geometria_eas}
+La innovación física fundamental del UMD radica en su blindaje pasivo. Los módulos de centelleo se encuentran enterrados a una profundidad de $2.3\text{ m}$ bajo el suelo local. Considerando la densidad de la tierra en el sitio del observatorio, esta profundidad representa una capa de atenuación geométrica de aproximadamente $540\text{ g/cm}^2$, lo que equivale dinámicamente a interponer más de media atmósfera adicional en el recorrido de las partículas.
 
-La reconstrucción espacial de la lluvia y la definición del marco de referencia son pasos ineludibles para evaluar asimetrías azimutales de manera rigurosa. Macroscópicamente, la geometría de una Lluvia Atmosférica Extensa queda determinada por dos elementos: la posición del núcleo en la superficie (\textit{core}), de coordenadas geográficas $(x_c, y_c, z_c)$, y el eje de la lluvia, definido por el vector de arribo de la partícula primaria. Este vector se parametriza mediante el ángulo cenital $\theta$ (inclinación respecto a la vertical del lugar) y el ángulo azimutal $\Phi$ (dirección geográfica de proveniencia).
+Este escudo de tierra cumple un doble propósito analítico vital:
 
-Para estudiar el desarrollo del frente de partículas de forma simétrica, es matemáticamente imperativo definir el \textit{plano de la lluvia} (\textit{shower plane}). Este es el plano perpendicular al eje de arribo que contiene al núcleo de la cascada. En este sistema de referencia intrínseco, la posición de cualquier detector queda unívocamente determinada por su distancia al eje ($r$) y su fase azimutal relativa ($\phi$) en el plano de la lluvia, donde $\phi = 0^\circ$ se define convencionalmente como la región más temprana (\textit{early}) del frente al impactar contra el suelo, y $\phi = \pm 180^\circ$ como la región más tardía (\textit{late}).
+\begin{enumerate}
+	\item \textbf{Absorción Electromagnética:} El espesor del blindaje supera ampliamente las longitudes de radiación requeridas para extinguir la componente electromagnética (electrones y fotones) de la lluvia. Esto garantiza que la señal registrada por el UMD corresponda a un frente muónico puro, eliminando por completo la convolución de señales ($S_{EM} + S_\mu$) que afecta y confunde a los detectores de superficie.
+	
+	\item \textbf{Umbral Cinemático (\textit{Muones Duros}):} La pérdida de energía por ionización que sufren los muones al atravesar los $2.3\text{ m}$ de tierra impone un umbral de energía estricto. Solo los muones con una energía superior a $E_\mu \gtrsim 1\text{ GeV}$ son capaces de alcanzar los detectores subterráneos. 
+\end{enumerate}
 
-El paso del sistema de coordenadas topográficas de los detectores al sistema intrínseco de la lluvia introduce deformaciones proyectivas críticas. Variables de reconstrucción estándar provistas por el \textit{software} del observatorio (como, por ejemplo, las obtenidas mediante la rutina \texttt{GetAzimuthSP}) típicamente reportan las fases angulares proyectadas sobre el plano horizontal del suelo para las estaciones del arreglo \textit{Infill}. Para lluvias con inclinaciones moderadas o altas, el frente circular de la cascada interseca el terreno formando una elipse. Evaluar la densidad de partículas utilizando ángulos azimutales sobre el plano del suelo mezcla estaciones a diferentes distancias transversales al eje e introduce una falsa modulación geométrica que corrompe el análisis de asimetría física.
+Este umbral cinemático actúa como un filtro fenomenológico invaluable. Al bloquear la población de muones blandos, el UMD muestrea exclusivamente los denominados muones duros, es decir de alta energía. Estas partículas altamente energéticas, nacidas en las primeras generaciones hadrónicas en la alta atmósfera, conservan trayectorias cuasi-rectilíneas. Por lo tanto, su distribución espacial en el suelo retiene de manera fiel la memoria direccional del eje de la lluvia y la dinámica de expansión geométrica de la cascada.
 
-Para evitar este sesgo sistemático, en este trabajo se descarta la utilización de ángulos de superficie proyectados. En su lugar, se implementa analíticamente una transformación tridimensional estricta (Rotación de Euler) evento a evento. Mediante el uso de los ángulos de arribo reconstruidos, el vector posición de cada módulo del UMD es trasladado al núcleo de la lluvia y sometido a una rotación espacial activa en $\theta$ y $\Phi$. Este procedimiento garantiza el mapeo ortogonal de las señales experimentales directamente sobre el plano propio de la cascada, aislando los efectos físicos genuinos de los artefactos de proyección topográfica.
+Es precisamente este aislamiento instrumental de los muones cinemáticamente puros lo que convierte al UMD en la herramienta ideal para superar las inversiones espurias del SD y estudiar la verdadera asimetría azimutal direccional de las lluvias atmosféricas extensas.
+
 \newpage
