@@ -1,11 +1,97 @@
+
 % !TEX root = ../main.tex
 
 \section{Dinámica Radial del Arreglo \textit{Infill} en Simulaciones}
 \label{cap:infill}
 
-TODO TENTATIVO Y ES PARA TENER ALGO ESCRITO Y SON IDEAS DE QUE PODRIA PONER EN ESTAS SECCIONES
+Habiendo validado la fenomenología de la asimetría azimutal en el entorno geométricamente controlado del Anillo Denso, se extendió el análisis a la topología real del arreglo de detectores pero aun utilizando simulaciones. A diferencia del Anillo Denso, el arreglo \textit{Infill} permite hacer un estudio sobre las estaciones de superficie y módulos enterrados reales pero analizando el comportamiento de la asimetría en un espectro continuo de distancias al eje de la lluvia.
 
-Habiendo validado la fenomenología de la asimetría azimutal en el entorno geométricamente controlado del Anillo Denso, se extendió el análisis a la topología real del arreglo de detectores pero aun en el contexto de las simulaciones. A diferencia del Anillo Denso, el arreglo \textit{Infill} expone a las estaciones de superficie y a los módulos subterráneos a un espectro continuo de distancias al eje de la lluvia. En este capítulo se aborda cómo la dinámica de la cascada y la resolución instrumental modulan el observable $A_1$, marcando la transición desde un régimen de dominancia cinemática hacia uno de atenuación longitudinal.
+Un objetivo central de esta etapa consistió en caracterizar el impacto de la reconstrucción instrumental sobre la preservación del observable $A_1$. Dado que en el entorno de simulaciones se tiene acceso simultáneo a la geometría verdadera de la lluvia (núcleo y ángulos Monte Carlo) y a su contraparte reconstruida, es posible evaluar el comportamiento del frente de partículas aislando la física subyacente de la degradación topográfica. En este capítulo se aborda cómo la dinámica de la cascada y la resolución del arreglo modulan la asimetría, marcando la transición desde un régimen de dominancia cinemática hacia uno de atenuación longitudinal.
+
+\subsection{Arreglo \textit{Infill} usando el núcleo y ángulos Monte Carlo}
+\label{subsec:infill_mc}
+
+Para comprender la evolución intrínseca de la modulación azimutal, el análisis inicial se ejecutó forzando al \textit{pipeline} de procesamiento a utilizar las coordenadas del núcleo y la dirección de arribo extraídas directamente del nivel Monte Carlo. Esto permite estudiar la respuesta pura de los detectores sin el sesgo del difuminado espacial.
+
+\subsubsection{Selección del bineado radial y evolución de la asimetría}
+% Acá discutimos la necesidad de no mezclar regímenes (ej. 0-200m)
+% Mostramos que el UMD puro se ajusta perfecto a un coseno (los chi-cuadrados)
+% Mostramos cómo el A1 sube de negativo a positivo (Crossover).
+
+\subsubsection{Competencia de observables: UMD frente al SD Total}
+% Comparamos la curva A1(r) del UMD vs la curva errática del SD.
+% Mostramos que a distancias grandes el SD hace "cosas raras".
+
+\subsubsection{Desglose de señales: La inversión de la asimetría muónica}
+% El gran descubrimiento: Rompemos el SD en Muones y EM.
+% Mostramos que el SD falla porque suma una EM muy positiva con Muones SD muy negativos.
+
+
+\subsection{Arreglo \textit{Infill} usando el núcleo y ángulos reconstruidos}
+\label{subsec:infill_rec}
+
+Al transicionar hacia las variables puramente reconstruidas (evaluando la asimetría en el plano definido por el ajuste del \textit{software} de superficie), la topología de la lluvia sufre deformaciones geométricas. Estas incertezas alteran drásticamente la fase azimutal asignada a cada estación.
+
+\subsubsection{Difuminado espacial (\textit{Smearing}) en el UMD}
+% Acá va el gráfico comparativo: Curva A1(r) del UMD en MC vs UMD en REC.
+% Explicamos cómo el error angular actúa como un filtro pasa-bajos, planchando la amplitud.
+
+\subsubsection{Robustez topográfica del observable electromagnético}
+% La conclusión que te sorprendió: Mostramos que la parte EM del SD casi no sufre el smearing.
+% Justificamos físicamente: La EM depende de la atenuación longitudinal (macroscópica), 
+% por lo que un error de 30m en el núcleo no borra el inmenso gradiente de la atmósfera.
+
+% ===================================================================
+% BLOQUE 3: TOY MODEL / FÍSICA
+% ===================================================================
+\subsection{Origen físico de las divergencias: El filtro cinemático}
+\label{subsec:toy_model_infill}
+
+La marcada diferencia de asimetrías entre la componente muónica medida por el UMD (asimetría positiva a grandes radios) y la registrada en superficie por el SD (asimetría negativa y divergente) exige una explicación analítica. Ambos sistemas detectan muones, pero muestrean poblaciones cinemáticamente opuestas.
+
+\subsubsection{Muones duros frente a muones blandos}
+% Metés el Toy Model.
+% Explicás que los 2.3m de tierra del UMD (umbral 1 GeV) filtran los muones blandos de baja altitud.
+% Explicás cómo los muones duros (producidos a L=8km) no sufren tanto la divergencia geométrica, 
+% mientras que los blandos en superficie arruinan la señal.
+
+---
+
+\section{Dinámica Radial del Arreglo \textit{Infill} en Simulaciones}
+\label{cap:infill}
+
+Habiendo validado la fenomenología de la asimetría azimutal en el entorno geométricamente controlado del Anillo Denso, se extendió el análisis a la topología real del arreglo de detectores pero aun en el contexto de las simulaciones. A diferencia del Anillo Denso, el arreglo \textit{Infill} permite hacer un estudio sobre las estaciones de superficie y módulos enterrados reales pero analizando el comportamiento de la asimetria en un espectro continuo de distancias al eje de la lluvia. En este capítulo se aborda cómo la dinámica de la cascada y la resolución instrumental modulan el observable $A_1$, marcando la transición desde un régimen de dominancia cinemática hacia uno de atenuación longitudinal.
+
+Cabe destacar que una gran parte del trabajo de esta etapa analizando los datos de simulaciones en el arreglo real se centro en intenra caracterizar como es el rendimiento de la reconstruccion al momento de analizar la asimetria azimutal. Dado que al estar en un contexto de simulaciones se tiene acceso al eje real Monte Carlo de la lluvia, como tambien a los angulos de incidencia reales, se puede ver como la reconstruccion afecta la capacidad de analizar esta asimetria. En toda esta seccion tambien va a empezar a estar en especial eje el problema de que la estadtisca no es la misma para todos los bines radiales por haber salido del contexto ideal.
+
+
+MI IDEA:
+
+HABLAR PRIMERO DE LA PARTE MC (CORE Y ANGULOS) QUE ES LA QUE MEJOR SE VE (SE PUEDE CAMBIAR EL ORDEN):
+
+1. MOSTRAR UNA COMPARACION DE LA PERFORMANCE DE UMD REC VS MC PARA X EJ 4 BINES RADIALES CON LOS AJUSTES -> ACA HABLARIA UN POCO DE LA DICUSICON DE COMO TIENE QUE SER LOS BINES Y QUE ES LO MEJOR, LO DE NO TENER MUY MALA ESTADISTCIA PERO NO MEZCALR PERAS CON MANZANAS. TAMBEIN HABLAR DEL PROBLEMA DE LOS BINES CERCAS DEL CORE
+
+2. DISCUTIR QUE ONDA LA COMPARACION UMD REC VS SD -> VER QUE PARA BINES RADIALES GRANDES EL SD EMPIEZA A ANDAR RARO Y SE DEJA DE VER CLARAMENTE LA ASIMETRIA
+
+3. DISCUITIR (Y REHACER EL ANALISIS) DE LO QUE PASA CUANDO SE DESGLOZA LA PARTE MUONICA Y EM DEL SD Y DISCUTIR LA INMVERSION DE LOS MUONES
+
+
+
+DESPUES PASAMOS A HABLAR DE LO MISMO PERO USANDO CORE Y ANGULOS REC
+
+ACA SE PUEDE MEZCLAR UN POCO LO DE DIVIDIR EN SUBSUB CAPTIRULOS PERO, DECIR Q NUEVAMENTE LA RECONSTRUCCION DE LA CANTIDAD DE MUONES NO AFECTA LA FENOMENOLOGIA DE COMO CAMBIA LA ASIMETRIA (TAL VEZ SOLO UN POCO EN MAGINTUD IGUAL Q ANTES), PERO QUE PARA AMBOS DEJAMOS DE VER ASIMETRIA (HABLAR BIEN DE CUANDO)
+
+DECIR QUE SE REPITE LO MISMO CUANDO SE COMAPRA UMD CON SD PERO QUE AHORA SE LLEGO A UNA CONCLUSION QUE SORPENDIO EN EL DESLGOSE DEL SD. QUE AUN EN LA RE4CONSTRUCCION SE VE SIEMPRE SUPER SIGNIFICATIVO QUE PARA EL SD EM SE VE LA ASIMETRIA RE FUERTTE Y CON MUY POCO ERROR PARA TODOS LOS BINES RADIALES
+
+
+
+Y RECIEN DESPUES DE TODO ESTO PASARIA A HABLAR DE LA COMPARACION DE LA PREFORMANCE DEL REC VS MC EN CORE Y ANGULOS, PPALMENTE HABLANDO DEL UMD. ACA NO ME QUEDA CLARO COMO HARIA ESTA COMPARACION TODAVIA
+
+Y HABRIA QUE VER SI SE PUEDE METER ALGO DE LA JUSTIFICAICON DE LA INVERSION DE ASIMETRIA EN EL SD CAUSADDA POR LA INVERSION DE ASIMETRIA DE LA PARTE MUONICA DEL SD QUE SE VE EN TANTO REC COMO MC. UNA EXPLCAICION, UN TOY MODEL O ALGO ASI
+
+
+
+ 
 
 \subsection{Evolución de la asimetría con la distancia al eje}
 \label{sec:evolucion_radial}
