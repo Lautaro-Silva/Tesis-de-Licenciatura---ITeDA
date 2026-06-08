@@ -13,18 +13,91 @@ Un objetivo central de esta etapa consistió en caracterizar el impacto de la re
 
 Para comprender la evolución intrínseca de la modulación azimutal, el análisis inicial se ejecutó forzando al \textit{pipeline} de procesamiento a utilizar las coordenadas del núcleo y la dirección de arribo extraídas directamente del nivel Monte Carlo. Esto permite estudiar la respuesta pura de los detectores sin el sesgo del difuminado espacial.
 
+
+
+---
+
+ESTA SUBSECCION CREO QUE PODRIA BORRARSE E IR DIRECTAMENTE SEGUIDA DEL PARRAFITO DE ARRIBA
+
 \subsubsection{Selección del bineado radial y evolución de la asimetría}
-% Acá discutimos la necesidad de no mezclar regímenes (ej. 0-200m)
-% Mostramos que el UMD puro se ajusta perfecto a un coseno (los chi-cuadrados)
-% Mostramos cómo el A1 sube de negativo a positivo (Crossover).
+\label{subsubsec:bineado_mc}
+
+La fuerte dependencia radial de los mecanismos que modulan la densidad de partículas exige una selección topográfica rigurosa. En las proximidades inmediatas al impacto, la divergencia cinemática extrema y el fuerte gradiente de la Función de Distribución Lateral (LDF) inducen fluctuaciones severas en la densidad. Promediar esta región junto con zonas más lejanas en un único bin radial ancho resulta contraproducente, ya que superpone regímenes fenomenológicos contradictorios e infla artificialmente la varianza del ajuste.
+
+Por este motivo, se adoptó un bineado radial dinámico de $\Delta r = 150$~m, aplicando simultáneamente un corte que excluye la región del \textit{near-core} ($r < 150$~m). Esta segmentación demostró ser el equilibrio óptimo entre pureza fenomenológica y robustez estadística. Al ajustar la densidad de muones registrada por el UMD a la función armónica \ref{eq:ajuste_armonico}, los valores del estadístico de bondad de ajuste ($\chi^2/\text{ndf}$) obtenidos orbitan valores cercanos a la unidad a lo largo de todo el arreglo. Esta convergencia estadística demuestra de manera contundente que, aislando correctamente las coronas radiales, la modulación azimutal muónica se describe a la perfección mediante un dipolo simple, descartando la presencia de deformaciones de orden superior.
+
+ACA FALTA HABLAR DE ALGO RESPECTO AL BINEADO ANGULAR. 
+
+
+
+ESTE PARRAFO LO SACARIA Y PONDIRA ALGO COMO ESTO:
+
+""
+
+Habiendo comprendido la transición radial de la asimetría y establecido los criterios de bondad de ajuste en ventanas específicas, se procedió a realizar un barrido sistemático sobre todo el espacio de parámetros de la cascada. El objetivo de este análisis global es cuantificar cómo evoluciona la amplitud del dipolo muónico ($A_1$) en función de la distancia al eje ($r$) y el ángulo cenital de la lluvia ($\theta$). 
+
+Para garantizar la pureza fenomenológica y evitar la migración de bines inducida por el difuminado instrumental, esta primera etapa exploratoria se realizó utilizando exclusivamente la geometría verdadera (Monte Carlo) tanto para la posición del núcleo como para los ángulos de incidencia. Se adoptó un bineado radial de $\Delta r = 150$~m (excluyendo la región divergente de $r < 150$~m) y bines angulares de $\Delta \theta = 10^\circ$ (con un bin final ampliado para lluvias muy inclinadas, $50^\circ \leq \theta < 65^\circ$). Las grillas completas con los ajustes armónicos y sus respectivos valores de $\chi^2/\text{ndf}$ para cada celda del espacio de fases se reportan en el Anexo \ref{anexo:ajustes_mc}.
+
+""
+
+En este marco de alta fidelidad, la amplitud $A_1$ extraída para el UMD exhibe un claro \textit{crossover} direccional. En los primeros bines ajustables, la asimetría presenta valores nulos o marginalmente negativos, dominados por la dispersión geométrica. Sin embargo, al transitar hacia el \textit{far-core}, la atenuación longitudinal recupera el dominio absoluto del sistema, forzando a la amplitud a crecer de manera monótona hacia valores fuertemente positivos.
+
+% [AQUÍ INSERTAR GRÁFICO: Ajustes de bondad (Fit + Residuos) y/o Curva de A1(r) del UMD]
+
+
+
+DESPUES PONDRIA ALGO DE LO QUE ESTA ACA
+
+En la Figura \ref{fig:a1_vs_r_theta_mc} se sintetizan los resultados de este barrido, presentando la evolución de la asimetría muónica para distintas inclinaciones.
+
+% [ACÁ VA LA FIGURA GENERADA POR EL CÓDIGO PYTHON DE ABAJO]
+
+El comportamiento observado confirma las predicciones del modelo de competencia cinemática-atenuación:
+
+\begin{itemize}
+	\item \textbf{Régimen Vertical ($0^\circ \leq \theta < 10^\circ$):} Como es esperable por simetría geométrica, las lluvias cuasi-verticales no exhiben una dirección temprana o tardía privilegiada frente a la atenuación atmosférica. La modulación azimutal es nula ($A_1 \approx 0$) a lo largo de todo el arreglo.
+	
+	\item \textbf{Régimen Intermedio ($10^\circ \leq \theta < 40^\circ$):} A medida que la lluvia se inclina, la diferencia de recorrido geométrico y la atenuación atmosférica transversal comienzan a romper la simetría. El observable $A_1$ adquiere valores positivos progresivamente mayores en el \textit{far-core}, estabilizando su ajuste a partir de los $150$~m y manteniendo coherencia estadística hasta distancias de $1350$~m.
+	
+	\item \textbf{Régimen Inclinado ($40^\circ \leq \theta < 65^\circ$):} Para ángulos cenitales grandes, la profundidad atmosférica atravesada se incrementa drásticamente ($X \propto 1/\cos\theta$). El gradiente longitudinal se vuelve el mecanismo dominante absoluto de la cascada, magnificando la amplitud $A_1$. En estas condiciones extremas, la coherencia de la asimetría es tan robusta que el ajuste sobrevive incluso en la periferia más lejana del arreglo \textit{Infill} ($1350 - 1500$~m).
+\end{itemize}
+
+Estos resultados demuestran que, en ausencia de incertezas de reconstrucción, la asimetría muónica es un observable altamente sensible a la inclinación y evolución longitudinal de la cascada, estableciendo una cota teórica superior para lo que el arreglo UMD puede aspirar a medir en condiciones experimentales.
+
+DDESPUES DE HABLAR ESPECIFICAMENTE DE LO QUE PASA EN EL UMD HABLARIA DE QUE ES LO QUE PASA POR EJEMPLO ENTRE LA PARTE REC Y MC DE LA CANTIDAD DE MUONES. MERAMENTE PARA COMENTAR QUE SUCEDE EL IMISMO FENOMNEO DE LA MANGINTUD DE LA ASIMETRIA A CAUSA DE LO QUE YA SE HABLO EN LA SECCION DEL ANILLO DENSO
+
 
 \subsubsection{Competencia de observables: UMD frente al SD Total}
-% Comparamos la curva A1(r) del UMD vs la curva errática del SD.
-% Mostramos que a distancias grandes el SD hace "cosas raras".
+\label{subsubsec:umd_vs_sd_mc}
+
+ACA REMARCAR DEVYUELTA QUE ESTAMOS EN LA PARTE MC DE ANGULOS Y CORE PERO HABLAR DE LO QUE SICEDE CON LA UNVERSION
+
+Con la fenomenología muónica pura caracterizada y validada, el siguiente paso analítico consistió en contrastar este comportamiento ideal frente a la señal total registrada por los tanques Cherenkov en superficie (medida en unidades VEM). 
+
+Al replicar el procedimiento de extracción de asimetría sobre la señal del SD Total, la curva resultante $A_1(r)$ expone una inestabilidad severa. Mientras que el UMD exhibe una transición suave y predecible hacia una asimetría positiva a grandes distancias, el observable del SD fluctúa erráticamente. En el régimen donde la atenuación debería garantizar un exceso temprano de partículas, el SD Total reporta asimetrías deprimidas e incluso inversiones espurias de polaridad. 
+
+Esta divergencia de observables, evaluada bajo las mismas condiciones geométricas ideales de Monte Carlo, descarta que las fallas del SD se deban exclusivamente a problemas de reconstrucción. La inestabilidad es intrínseca a la señal recogida por el tanque de agua, lo que sugiere que este detector está integrando poblaciones de partículas con comportamientos direccionales incompatibles.
+
+% [AQUÍ INSERTAR GRÁFICO: Curvas superpuestas de A1(r) para el UMD vs SD Total]
 
 \subsubsection{Desglose de señales: La inversión de la asimetría muónica}
-% El gran descubrimiento: Rompemos el SD en Muones y EM.
-% Mostramos que el SD falla porque suma una EM muy positiva con Muones SD muy negativos.
+\label{subsubsec:desglose_sd}
+
+ESTA PARTE TODAVIA ES MUY TENTAIVIA PORQUE NO SE QUE MIERDA ES LO QUE PASA NI QUE TENEMOS COMO MODELADO DE ESTA COSA. ADMEAS HAY UNA COSA RARA QUE PARA BINES RADIALES GRANDES HASTA PARA LA PARTE DEL SD MUONICA PRIMERO CRESE LA ANTIASIMETRIA Y LUEGO VUELVE A BAJAR
+
+Para revelar el origen físico de la falla del Detector de Superficie, se aprovechó la trazabilidad de las simulaciones Monte Carlo para desglosar la señal VEM total en sus dos componentes formativas: la componente electromagnética (electrones y fotones) y la componente muónica medida en superficie.
+
+Al evaluar la asimetría de manera independiente para cada población, se descubre una competencia destructiva masiva. Por un lado, la componente electromagnética del SD exhibe una asimetría fuertemente positiva en todo el espectro radial. Dado que estas partículas se regeneran y absorben continuamente, su densidad está acoplada casi instantáneamente al perfil de desarrollo longitudinal, convirtiéndolas en un trazador puro de la atenuación atmosférica.
+
+Por otro lado, la asimetría de los muones registrados por el SD resulta marcadamente negativa a distancias considerables del núcleo. Es aquí donde radica el mayor hallazgo de esta comparación: el SD registra muones con una marcada asimetría negativa, mientras que los muones medidos simultáneamente por el UMD exhiben asimetría positiva. 
+
+En consecuencia, el SD Total falla porque es la suma matemática de dos derivadas espaciales opuestas: un frente electromagnético brillante y temprano sumado a un enjambre muónico superficial fuertemente tardío. Esta convolución destruye el observable. A su vez, la discrepancia polarizada entre los muones del SD y los muones del UMD subraya un hecho insoslayable: la mera detección de muones no es suficiente para estudiar la direccionalidad de la cascada. Se requiere de un filtro cinemático estricto, rol que cumple el blindaje de tierra del UMD, para suprimir a los muones superficiales y recobrar la coherencia física de la asimetría direccional.
+
+% [AQUÍ INSERTAR GRÁFICO: Desglose del SD (EM positiva, Muones negativos) vs UMD (positivo)]
+
+
+---
+
 
 
 \subsection{Arreglo \textit{Infill} usando el núcleo y ángulos reconstruidos}
