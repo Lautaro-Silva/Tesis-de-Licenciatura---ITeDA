@@ -24,7 +24,7 @@
 \setlength{\parskip}{2mm}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
-\usepackage{appendix}
+\usepackage[title]{appendix}
 \usepackage{chngcntr}
 
 % ==========================================
@@ -39,6 +39,7 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{longtable}
+\usepackage{pdflscape}
 
 % ==========================================
 % 5. CÓDIGO FUENTE (LISTINGS)
@@ -255,6 +256,16 @@
 	\input{capitulos/06_infill.tex}
 	\input{capitulos/07_datos_reales.tex}
 	\input{capitulos/08_conclusiones.tex}
+	
+	% --- ANEXOS ---
+	\newpage
+	\begin{appendices}
+		% Renombramos "Apéndice" a "Anexo" para que coincida con tu texto y la norma
+		\renewcommand{\appendixname}{Anexo}
+		
+		% Llamamos al archivo separado
+		\input{capitulos/09_anexos.tex}
+	\end{appendices}
 	
 	% --- BIBLIOGRAFÍA ---
 	\newpage
