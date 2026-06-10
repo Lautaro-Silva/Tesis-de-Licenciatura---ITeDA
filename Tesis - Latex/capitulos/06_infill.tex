@@ -39,27 +39,37 @@ El comportamiento observado confirma las predicciones del modelo de competencia 
 
 Estos resultados demuestran que, en ausencia de incertezas geométricas instrumentales, la asimetría muónica es un observable altamente sensible a la evolución longitudinal de la cascada, estableciendo una cota teórica superior para lo que el UMD puede aspirar a medir en condiciones experimentales. Cabe destacar que el dominio radial evaluado no es uniforme, sino que ha sido adaptado a la cinemática de cada franja cenital. La extensión de las curvas fue delimitada aplicando un criterio de selección riguroso: el análisis se restringe exclusivamente a aquellas regiones donde la métrica de bondad de ajuste ($\chi^2/\text{ndf}$) y la inspección fenomenológica visual garantizan la robustez y fidelidad estadística del observable.
 
-Es pertinente destacar que, al replicar este mismo análisis sustituyendo la cantidad de muones inyectada ($N_\mu^{\mathrm{MC}}$) por la cantidad reconstruida por el algoritmo del UMD ($N_\mu^{\mathrm{REC}}$), pero manteniendo el núcleo y los ángulos Monte Carlo, la fenomenología global se conserva de forma idéntica. Como se ilustra en la Figura \ref{fig:umd_rec_vs_mc_theta} para un rango cenital de referencia, la principal consecuencia de introducir la respuesta de la reconstrucción de la cantidad de muones es una atenuación en la magnitud absoluta de la asimetría, sin alterar su forma fundamental ni las transiciones radiales discutidas, igual que sucedía en la sección \ref{subsec:mc_vs_rec}.
+Es pertinente destacar que, al replicar este mismo análisis sustituyendo la cantidad de muones inyectada ($N_\mu^{\mathrm{MC}}$) por la cantidad reconstruida por el algoritmo del UMD ($N_\mu^{\mathrm{REC}}$), pero manteniendo el núcleo y los ángulos Monte Carlo, la fenomenología global se conserva de forma idéntica. Como se ilustra en la Figura \ref{fig:umd_rec_vs_mc_theta} para  el rango cenital de referencia de $40^\circ \leq \theta < 50^\circ$, la principal consecuencia de introducir la respuesta de la reconstrucción de la cantidad de muones es una atenuación en la magnitud absoluta de la asimetría, sin alterar su forma fundamental ni las transiciones radiales discutidas, igual que sucedía en la sección \ref{subsec:mc_vs_rec}.
 
-% [ACÁ VA LA FIGURA DE COMPARACIÓN N_MU_REC VS N_MU_MC PARA UN BIN DE THETA]
-% \begin{figure}[htbp] ... \label{fig:umd_rec_vs_mc_theta} ... \end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_Asymmetry_MC_vs_REC.pdf}
+	\caption{Comparación de la amplitud de asimetría $A_1$ obtenida a partir del número de muones inyectado ($N_\mu^{\mathrm{MC}}$) frente al número de muones reconstruido ($N_\mu^{\mathrm{REC}}$) para el rango cenital de referencia de $40^\circ \leq \theta < 50^\circ$. Ambas se realizan fijando las coordenadas a nivel Monte Carlo. Se observa que la respuesta instrumental del detector introduce una atenuación sistemática y uniforme en la magnitud de la asimetría, preservando estrictamente la evolución radial y las propiedades fenomenológicas del observable.}
+	\label{fig:umd_rec_vs_mc_theta}
+\end{figure}
 
 \subsubsection{Competencia de observables: UMD frente al SD Total}
 \label{subsubsec:umd_vs_sd_mc}
 
-Con la fenomenología muónica del UMD caracterizada, el siguiente paso analítico consistió en contrastar este comportamiento frente a la señal total registrada por los tanques Cherenkov en superficie. Resulta importante realizar una distinción fundamental respecto a las variables físicas analizadas: mientras que el detector subterráneo proporciona un conteo directo del número de partículas incidentes, el SD registra la energía depositada en el volumen de agua, calibrada en unidades VEM. Para garantizar la validez fenomenológica de este contraste, se mantuvo estrictamente la geometría Monte Carlo, asegurando que cualquier divergencia observada se deba puramente a la naturaleza de la señal detectada a nivel del suelo.
+Con la fenomenología muónica del UMD caracterizada, el siguiente paso analítico consistió en contrastar este comportamiento frente a la señal total registrada por los tanques Cherenkov en superficie. Resulta importante realizar una distinción fundamental respecto a las variables físicas analizadas: mientras que el detector subterráneo proporciona un conteo directo del número de partículas muónicas incidentes, el SD registra la energía depositada en el volumen de agua, calibrada en unidades VEM. Para garantizar la validez fenomenológica de este contraste, se mantuvo estrictamente la geometría Monte Carlo, asegurando que cualquier divergencia observada se deba puramente a la naturaleza de la señal detectada a nivel del suelo.
 
-Al extraer la amplitud de asimetría sobre la señal del SD Total, la curva resultante $A_1(r, \theta)$ expone un comportamiento espacial sistemáticamente distinto al del detector subterráneo. Como se evidencia en la Figura \ref{fig:umd_vs_sd_mc}, mientras que el UMD exhibe un crecimiento suave y monótono hacia una asimetría positiva a grandes distancias, el observable del SD presenta una pronunciada inversión fenomenológica. En el régimen donde el gradiente atmosférico debería garantizar una marcada asimetría positiva, la amplitud del SD Total alcanza un máximo local, comienza a suprimirse y finalmente se invierte, adoptando valores de asimetría fuertemente negativos en la periferia del centro de la lluvia.
+Si analizamos para el bin radial que incluye $\sim 450$~m se puede ver que, análogamente como sucedía para el Anillo Denso, la asimetría detectada por el SD es significativamente mayor a la del UMD. Esto permite ver que los analisis realizados en ambos marcos son comparables y consistentes.
+
+Al extraer la amplitud de asimetría sobre la señal del SD, la curva resultante $A_1(r, \theta)$ expone un comportamiento espacial sistemáticamente distinto al del detector subterráneo. Como se evidencia en la Figura \ref{fig:umd_vs_sd_mc}, mientras que el UMD exhibe un crecimiento suave hacia una asimetría positiva a grandes distancias (aun en este rango cenital donde se ve un amecetamiento), el observable del SD presenta una pronunciada inversión fenomenológica. En el régimen donde el gradiente atmosférico debería garantizar una marcada asimetría positiva, la amplitud del SD alcanza un máximo local, comienza a suprimirse y finalmente se invierte, adoptando valores de asimetría fuertemente negativos en la periferia del centro de la lluvia. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_vs_SD_Total_Asymmetry.pdf}
+	\caption{Comparación de la evolución radial de la amplitud de asimetría $A_1$ entre la componente muónica pura del UMD y la señal total registrada por los tanques del SD en superficie, evaluada para el rango cenital de referencia de $30^\circ \leq \theta < 40^\circ$. Ambas curvas fueron extraídas fijando la geometría real de Monte Carlo. Se evidencia el comportamiento divergente de los observables: mientras que el UMD presenta un incremento monótono condicionado por la atenuación, la señal del SD Total exhibe una severa disminucion de la asimetría que culmina en una inversión (asimetría negativa) en el \textit{far-core}.}
+	\label{fig:umd_vs_sd_mc}
+\end{figure}
 
 Esta divergencia direccional demuestra que la inversión geométrica no es un artefacto de reconstrucción, sino una propiedad física intrínseca de la cascada registrada a nivel del suelo, sugiriendo que el tanque Cherenkov integra poblaciones de partículas con asimetrías diametralmente opuestas.
-
-% [ACÁ VA EL GRÁFICO: Curvas superpuestas de A1(r) para el UMD vs SD Total]
-% \begin{figure}[htbp] ... \label{fig:umd_vs_sd_mc} ... \end{figure}
 
 \subsubsection{Desglose de señales: La inversión de la asimetría muónica}
 \label{subsubsec:desglose_sd}
 
-Para revelar el origen físico del comportamiento anómalo del Detector de Superficie, se aprovechó la trazabilidad de las simulaciones para desglosar la señal VEM total en sus dos componentes formativas: la componente electromagnética (electrones y fotones) y la componente muónica medida a nivel del suelo. Cabe advertir que el modelado exacto de esta dinámica se encuentra en una etapa de validación teórica, dado que presenta dependencias no lineales complejas en los confines del arreglo.
+Para entender el origen físico del comportamiento anómalo del Detector de Superficie al compararse con el Subterráneo, se aprovechó la trazabilidad de las simulaciones para desglosar la señal VEM total en sus dos componentes formativas: la componente electromagnética (electrones y fotones) y la componente muónica medida a nivel del suelo. Cabe destacar que hay una diferencia en la caracterización de las componentes por separado frente a la señal total. La señal declarada como SD Total, es la combinación de ambas componentes pero ademas es la obtenida por la reconstrucción. Frente a eso, las componentes por separado que se van a analizar en esta sección representan las cantidades de partículas inyectadas que llegan al tqnque de superficie, es decir cantdiades de partículas Monte Carlo. A su vez, cabe advertir que el modelado exacto de esta dinámica se encuentra en una etapa de validación teórica.
 
 Al evaluar la asimetría de manera independiente para cada población, se descubre una competencia espacial masiva, ilustrada en la Figura \ref{fig:desglose_sd_mc}. Por un lado, la componente electromagnética del SD exhibe una asimetría fuertemente positiva en todo el espectro radial. Dado que estas partículas se regeneran y absorben continuamente, su densidad está acoplada casi instantáneamente al perfil de desarrollo longitudinal, convirtiéndolas en un trazador puro de la atenuación atmosférica.
 
@@ -67,8 +77,12 @@ Por otro lado, la asimetría de los muones registrados por el SD exhibe el compo
 
 En consecuencia, la inversión de polaridad observada en la señal del SD Total es el resultado determinista de sumar dos derivadas espaciales opuestas: un frente electromagnético asimétrico temprano y un enjambre muónico superficial asimétrico tardío. Esta convolución destructiva oscurece el observable global. A su vez, la discrepancia polarizada entre los muones del SD y los muones del UMD subraya un hecho insoslayable: la mera detección de la componente muónica no es suficiente para aislar la direccionalidad global de la cascada. Se requiere de un filtro cinemático estricto, rol que cumple la barrera de atenuación pasiva del UMD, para suprimir la contribución de los muones blandos superficiales y recobrar la coherencia física de la asimetría.
 
-% [ACÁ VA EL GRÁFICO: Desglose del SD (EM positiva, Muones negativos) vs UMD (positivo)]
-% \begin{figure}[htbp] ... \label{fig:desglose_sd_mc} ... \end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/SD_Desglose_Componentes_vs_UMD.pdf}
+	\caption{Desglose de la asimetría azimutal para las componentes inyectadas a nivel del suelo frente a la respuesta del detector subterráneo ($30^\circ \leq \theta < 40^\circ$). La asimetría electromagnética del SD (naranja) exhibe un comportamiento marcadamente positivo acoplado a la evolución longitudinal. En contraste, los muones superficiales registrados por el SD (verde) presentan una pronunciada asimetría negativa. La combinación destructiva de estas dos poblaciones genera la inestabilidad de la señal total en superficie, validando al mismo tiempo la necesidad del blindaje del UMD (azul) para aislar la direccionalidad muónica pura de la cascada.}
+	\label{fig:desglose_sd_mc}
+\end{figure}
 
 % [COMENTARIOS Y CONCLUSIONES FINALES PENDIENTES]
 
