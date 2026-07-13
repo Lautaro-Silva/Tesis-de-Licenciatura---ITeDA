@@ -92,6 +92,24 @@ La comparación con el UMD valida empíricamente este modelo analítico. La barr
 
 En conclusión, este desglose poblacional demuestra de manera irrefutable que la mera detección de la componente muónica en superficie no es suficiente para estudiar la direccionalidad global de la cascada. Se requiere de la atenuación de la tierra para suprimir los artefactos geométricos introducidos por la cinemática de baja energía, estableciéndose al UMD como un instrumento fenomenológicamente superior para aislar la asimetría longitudinal.
 
+\subsection{Modelado Fenomenológico Analítico-Monte Carlo del Filtro Cinemático}
+
+Si bien el análisis de simulaciones con el framework \textit{Offline} ha demostrado de manera contundente la degradación sistemática de la asimetría azimutal en el Detector de Superficie (SD) y su preservación en el Detector Subterráneo de Muones (UMD), el origen íntimo de esta competencia fenomenológica requiere un abordaje de primeros principios. Las simulaciones estándar empaquetadas (ADST) carecen de la granularidad necesaria para rastrear la cinemática de producción individual de cada partícula antes de su propagación por el medio.
+
+Como extensión natural y fundamental de este trabajo, se propone el desarrollo de un propagador \textit{Fast-Monte Carlo} que acople la producción hadrónica exacta con el transporte analítico de los muones. La hoja de ruta para este modelo fenomenológico se estructura en las siguientes etapas:
+
+\begin{enumerate}
+	\item \textbf{Extracción del Espectro de Producción Original:} Se generarán simulaciones dedicadas en CORSIKA sin el proceso de difuminado topográfico del detector. El objetivo es extraer directamente la función de distribución tridimensional en el punto de decaimiento del mesón progenitor: $F(X, E_i, p_T)$, donde $X$ es la profundidad atmosférica de generación, $E_i$ la energía inicial y $p_T$ el momento transversal heredado.
+	
+	\item \textbf{Propagación Analítica y Transporte:} En lugar de utilizar una Función de Distribución Lateral (LDF) genérica y simétrica, se propagará cada muón hacia el suelo utilizando el modelo de transporte cinemático formalizado por L. Cazón et al. (2012). Esta etapa aplicará las pérdidas continuas de energía por ionización ($dE/dX$) según la isoterma atmosférica local y la probabilidad de supervivencia por decaimiento ($W_{\mathrm{decay}}$), acopladas al mapeo del ángulo sólido que rige la divergencia de la cascada.
+	
+	\item \textbf{Implementación de Umbrales Instrumentales:} Al obtener la energía final residual a nivel del suelo ($E_f$), se aplicarán funciones escalón para emular los diferentes detectores: un umbral blando ($E_f > 0.3$ GeV) para la señal Cherenkov del SD, y un umbral duro ($E_f > 1.0$ GeV) correspondiente al blindaje pasivo de 2.3 m de tierra del UMD.
+\end{enumerate}
+
+Este marco de trabajo permitirá demostrar analíticamente cómo el espectro de baja energía (altamente divergente) infla de manera espuria el Jacobiano de proyección espacial, forzando la asimetría negativa ($A_1 < 0$) en el régimen \textit{far-core} del SD. Simultáneamente, probará desde las ecuaciones de transporte que la barrera de atenuación del UMD filtra las trayectorias de bajo momento longitudinal, anulando la divergencia geométrica y revelando únicamente la asimetría positiva intrínseca al desarrollo longitudinal de la lluvia.
+
+
+
 ---
 
 
