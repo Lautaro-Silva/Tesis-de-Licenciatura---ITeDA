@@ -42,223 +42,63 @@ La ruptura de la simetría circular detallada anteriormente es el resultado de l
 \subsubsection{Atenuación atmosférica}
 \label{subsubsec:atenuacion}
 
-La atenuación longitudinal es consecuencia de la evolución de la cascada a través del medio. Como se estableció en la Sección \ref{subsec:simetria_ruptura}, las partículas en la región tardía deben atravesar una profundidad atmosférica mayor que aquellas en la región temprana. Este es el efecto dominante que afecta a la componente muónica de las lluvias detectadas en el UMD en el rango angular estudiado.
+La atenuación longitudinal es consecuencia de la evolución de la cascada a través del medio. Como se estableció en la Sección \ref{subsec:simetria_ruptura}, las partículas en la región tardía deben atravesar una profundidad atmosférica mayor que aquellas en la región temprana cuando la lluvia esta inclinada, es decir, no es estrictamente vertical. Esto se puede entender al considerar que la parte temprana de la lluvia impacta contra el suelo '\textit{antes}' que la tardía, y por ende esta ultima atraviesa más atmósfera. Este es el efecto dominante que afecta a la componente muónica de las lluvias detectadas en el UMD en el rango angular estudiado.
 
 Dado que la cascada evoluciona y se absorbe a medida que penetra en la atmósfera, este camino extra resulta en un vaciamiento relativo de partículas en la zona tardía. Físicamente, la atenuación genera un exceso de densidad de muones en la dirección $\phi = 0^\circ$ temprana respecto de la zona tardía. Este fenómeno ha sido ampliamente documentado en simulaciones y datos experimentales del SD \cite{Pryke1998, BradfieldThesis}. Vale aclarar que este fenómeno ocurre tanto para la componente electromagnética como la muónica pero con mayor magnitud para la componente EM, razón por la cual este mecanismo ya estaba caracterizado.
 
-Si bien los muones poseen un gran poder de penetración y menor sección eficaz de interacción que la componente de $e^{-}/\gamma$, no son inmunes a este efecto. A grandes distancias del núcleo ($r > 400 \text{ m}$), el espectro muónico está dominado por partículas de menor energía (muones blandos) \cite{Cazon2012}. En este régimen, la probabilidad de decaimiento aumenta sensiblemente con el trayecto adicional hacia la región tardía, consolidando la atenuación atmosférica como el efecto dominante para la componente muónica pura. En este contexto, el blindaje de tierra de 2.3 m del UMD cumple un rol fundamental: actúa como un filtro cinemático que elimina los muones sub-GeV que han sufrido atenuaciones extremas, permitiendo una medición más limpia de la asimetría intrínseca de los muones que logran penetrar el suelo.
+Si bien los muones poseen un gran poder de penetración y menor sección eficaz de interacción que la componente de $e^{-}/\gamma$, el efecto tiene un impacto relevante para esta componente de la lluvia. A grandes distancias del núcleo ($r > 400 \text{ m}$), el espectro muónico está dominado por partículas de menor energía (muones blandos) \cite{Cazon2012}. En este régimen, la probabilidad de decaimiento aumenta sensiblemente con el trayecto adicional hacia la región tardía, consolidando la atenuación atmosférica como el efecto dominante para la componente muónica pura. En este contexto, el blindaje de tierra de 2.3 m del UMD cumple un rol fundamental: actúa como un filtro cinemático que elimina los muones sub-GeV que han sufrido atenuaciones extremas como también a la componente EM, permitiendo una medición más limpia de la asimetría intrínseca de los muones que logran penetrar el suelo.
 
 \subsubsection{Efectos geométricos}
 \label{subsubsec:divergencia}
 
-El segundo fenómeno es de naturaleza geométrica y cinemática, y surge de la íntima relación entre la distribución angular intrínseca de las partículas y su divergencia radial respecto al eje de la lluvia.
+El segundo fenómeno es de naturaleza puramente geométrica y cinemática. Surge de la relación entre la distribución angular intrínseca de las partículas y las distancias que deben recorrer para impactar en el plano del suelo.
 
-Para comprender este efecto, primero es necesario analizar la cinemática de producción. Los muones se generan a partir del decaimiento de hadrones (principalmente piones y kaones) que poseen un momento transverso finito ($p_T$) respecto al eje de la cascada. En las interacciones hadrónicas, el espectro de $p_T$ está fuertemente acotado, con un valor medio $\langle p_T \rangle \approx 0.4 \text{ GeV}/c$, prácticamente independiente de la energía primaria \cite{Cazon2012}. Dado que la energía longitudinal $E$ de las partículas es inmensamente mayor ($p_L \gg p_T$), el ángulo de divergencia de salida $\alpha \approx p_T c / E$ resulta ser muy pequeño. Físicamente, esto confina a la inmensa mayoría de los muones a un haz estrechamente colimado, provocando que la densidad angular de emisión, $\frac{dN}{d\Omega}$, decaiga de forma abrupta (exponencialmente) al alejarse del eje.
-
-Al propagar este haz colimado hacia el suelo, la densidad de partículas observada en un detector puede expresarse de manera simplificada mediante el modelo analítico de divergencia radial \cite{GAP2000_017}:
-
-\begin{equation}
-	S(d, \alpha) \propto \frac{1}{d^2} \frac{dN}{d\Omega}(\alpha)
-\end{equation}
-
-donde $d$ es la distancia geométrica total de vuelo desde el punto de producción hasta el detector.
-
-En una lluvia inclinada, la geometría impone que para alcanzar una \textbf{misma} distancia radial $r$ en el plano de la lluvia, la distancia de propagación es mayor para la región tardía que para la temprana ($d_{tardio} > d_{temprano}$). Esto fuerza geométricamente a que el ángulo de emisión necesario para impactar en la zona tardía sea estrictamente menor ($\alpha_{tardio} < \alpha_{temprano}$). Un esquema geométrico se puede ver en la Figura \ref{fig:divergencia_angular} donde se puede ver que para radios iguales se necesitan ángulos mucho mayores en la región temprana que en la tardía.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.8\textwidth]{capitulos/imagenes_capitulos/cap3/divergencia_angular.png} 
-	\caption{Esquema geométrico de cómo es la dispersión de las partículas con el ángulo de emisión respecto al eje de la lluvia $\alpha$ (en la imagen llamado $\beta$). Se ve que para un mismo ángulo de emisión, se alcanza una región mucho más tardía que temprana.}
-	\label{fig:divergencia_angular}
-\end{figure}
-
-
-Aquí es donde la cinemática de producción ($p_T$) se vuelve determinante: como $\frac{dN}{d\Omega}$ decae exponencialmente con $\alpha$, la drástica reducción del ángulo de emisión requerido para la zona tardía compensa con creces el factor de atenuación puramente espacial por dispersión esférica ($1/d^2$). En consecuencia, la región tardía termina muestreando una porción del haz original intrínsecamente mucho más densa. 
-
-Este fenómeno de proyección induce un exceso de densidad de partículas en $\phi = \pm 180^\circ$ que compite de manera directa contra el vaciamiento producido por la atenuación atmosférica. En la componente muónica, la amplitud de este efecto geométrico presenta diferencias fundamentales respecto a la componente electromagnética. Esto se debe a que los muones, al poseer una masa aproximadamente 200 veces mayor que los electrones, sufren una dispersión múltiple de Coulomb y pérdidas de energía por radiación (\textit{bremsstrahlung}) mucho menores en la atmósfera. Mientras que la cascada electromagnética se ensancha y difumina continuamente a medida que interactúa con el aire, los muones viajan en trayectorias casi rectilíneas desde su punto de producción. Como consecuencia, mantienen una correlación angular más estrecha con la dirección del hadrón progenitor, resultando en una distribución lateral más `rígida' que preserva fielmente la cinemática original y la geometría de la lluvia \cite{Cazon2012}. No obstante, a distancias cercanas al núcleo ($r < 200$ m), donde el gradiente de densidad angular $\frac{dN}{d\Omega}$ es máximo, el efecto de divergencia radial es capaz de compensar e incluso invertir el signo de la asimetría total, fenómeno que será analizado en los resultados de esta tesis.
-
----
-
-\subsubsection{Efectos geométricos}
-\label{subsubsec:divergencia}
-
-El segundo fenómeno es de naturaleza geométrica y cinemática, y surge de la íntima relación entre la distribución angular intrínseca de las partículas y su divergencia radial respecto al eje de la lluvia[cite: 4].
-
-En la cascada hadrónica, los muones nacen a una cierta altura $z$ producto del decaimiento de piones y kaones[cite: 4]. En este proceso, heredan un momento longitudinal $p_z$ y un momento transversal $p_t$[cite: 4]. De acuerdo con el modelo cinemático descrito por L. Cazón et al. (2012), este momento transversal induce un ángulo de divergencia polar $\alpha$ respecto al eje de la lluvia[cite: 4]. La relación trigonométrica fundamental está dada por $\sin \alpha \simeq c p_t / E$[cite: 4]. Bajo la aproximación de ángulos pequeños, el radio de impacto de un muón en el plano ortogonal (\textit{Shower Plane}) es proporcional a su divergencia[cite: 4]:
-\begin{equation}
-	r = z \tan \alpha \approx z \sin \alpha \approx z \left( \frac{c p_t}{E} \right) \approx z \left( \frac{p_t}{p_z} \right)
-\end{equation}
-
-Esta relación revela una dicotomía fenomenológica fundamental. Existen dos poblaciones distintas de muones que pueden poblar el régimen \textit{far-core}[cite: 4]:
-\begin{itemize}
-	\item \textbf{Población A (Alta Energía):} Muones producidos a gran altura con un momento longitudinal inmenso ($p_z \gg p_t$)[cite: 4]. Su ángulo de divergencia $\alpha$ es minúsculo (están altamente colimados), pero debido a la enorme distancia recorrida logran abrirse hasta grandes radios[cite: 4].
-	\item \textbf{Población B (Baja Energía):} Muones producidos más cerca del suelo con un momento longitudinal bajo ($p_z \sim p_t$)[cite: 4]. Su ángulo de divergencia $\alpha$ es muy grande, lo que les permite alcanzar grandes radios rápidamente[cite: 4].
-\end{itemize}
-
-Es imperativo notar que la distribución de energía inicial $E_i$ está fuertemente dominada por muones de baja energía, ya que el espectro sigue una ley de potencias $E_i^{-2.6}$[cite: 4]. Esta ley fuertemente decreciente garantiza fenomenológicamente que la Población B domina abrumadoramente en número dentro de la cascada[cite: 4].
-
-Cuando una lluvia incidente penetra la atmósfera de manera inclinada ($\theta > 0^\circ$), la divergencia masiva de la Población B interactúa con la geometría plana del suelo[cite: 4]. C. Pryke demostró que el frente de la lluvia se modela correctamente como un cono divergente, no como un cilindro[cite: 4]. Al intersecar este cono con un plano inclinado, la distancia de propagación difiere fuertemente: el lado temprano ($\phi = 0^\circ$) recorre menos distancia espacial que el lado tardío ($\phi = 180^\circ$)[cite: 4]. 
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.8\textwidth]{capitulos/imagenes_capitulos/cap3/divergencia_angular.png} 
-	\caption{Esquema geométrico de cómo es la dispersión de las partículas con el ángulo de emisión respecto al eje de la lluvia $\alpha$ (en la imagen llamado $\beta$). Se ve que para un mismo ángulo de emisión, se alcanza una región mucho más tardía que temprana.}
-	\label{fig:divergencia_angular}
-\end{figure}
-
-Para cuantificar esta excentricidad remanente, Bertou y Billoir desarrollaron una derivación analítica[cite: 4]. La modulación espuria aparente introducida por el mapeo espacial fue cuantificada mediante un término asimétrico $\mathcal{A}_{geo}$[cite: 4]:
-\begin{equation}
-	\mathcal{A}_{geo}(r, \Phi) = \left\langle \frac{p_r(r)}{-p_z(r)} \right\rangle \tan \theta \cos \Phi
-\end{equation}
-donde $p_r$ es la componente radial del momento[cite: 4]. La implicancia de esta ecuación es crítica: la asimetría puramente geométrica escala directamente con la tangente del ángulo de divergencia ($\langle p_r / -p_z \rangle \approx \tan \alpha$)[cite: 4].
-
-Como la Población B domina el espectro, al aumentar drásticamente la divergencia en función de $r$, el término $\langle p_r / -p_z \rangle$ se vuelve enorme[cite: 4]. Esto genera un exceso artificial de partículas mapeadas en el lado tardío que compite de manera directa contra el vaciamiento producido por la atenuación atmosférica[cite: 4]. Este efecto geométrico es el responsable de invertir la asimetría total observada hacia valores fuertemente negativos ($A_1 \ll 0$), dominando por completo a grandes radios[cite: 4].
-
----
-
-\subsubsection{Efectos geométricos}
-\label{subsubsec:divergencia}
-
-El segundo fenómeno es de naturaleza geométrica y cinemática, y surge de la íntima relación entre la distribución angular intrínseca de las partículas y su divergencia radial respecto al eje de la lluvia.
-
-Para comprender este efecto, primero es necesario analizar la cinemática de producción. Los muones se generan a partir del decaimiento de hadrones (principalmente piones y kaones) que poseen un momento transverso finito ($p_T$) respecto al eje de la cascada. En las interacciones hadrónicas, el espectro de $p_T$ está fuertemente acotado, con un valor medio $\langle p_T \rangle \approx 0.4 \text{ GeV}/c$, prácticamente independiente de la energía primaria \cite{Cazon2012}. Dado que la energía longitudinal $E$ de las partículas es inmensamente mayor ($p_L \gg p_T$), el ángulo de divergencia de salida $\alpha \approx p_T c / E$ resulta ser muy pequeño.
-
-Al relacionar esta apertura con la altura de producción $z$, el radio de impacto de un muón en el plano ortogonal (\textit{Shower Plane}) es proporcional a su divergencia:
-\begin{equation}
-	r = z \tan \alpha \approx z \sin \alpha \approx z \left( \frac{c p_T}{E} \right) \approx z \left( \frac{p_T}{p_z} \right)
-\end{equation}
-
-Esta relación revela una dicotomía fenomenológica fundamental. Existen dos poblaciones distintas de muones que pueden poblar el régimen \textit{far-core}:
-\begin{itemize}
-	\item \textbf{Población A (Alta Energía):} Muones producidos a gran altura con un momento longitudinal inmenso ($p_z \gg p_T$). Su ángulo de divergencia $\alpha$ es minúsculo (están altamente colimados), pero debido a la enorme distancia recorrida logran abrirse hasta grandes radios.
-	\item \textbf{Población B (Baja Energía):} Muones producidos más cerca del suelo con un momento longitudinal bajo ($p_z \sim p_T$). Su ángulo de divergencia $\alpha$ es muy grande, lo que les permite alcanzar grandes radios rápidamente.
-\end{itemize}
-
-Es imperativo notar que la distribución de energía inicial $E_i$ está fuertemente dominada por muones de baja energía, ya que el espectro sigue una ley de potencias $E_i^{-2.6}$ \cite{Cazon2012}. Esta ley fuertemente decreciente garantiza fenomenológicamente que la Población B domina abrumadoramente en número dentro de la cascada.
-
-Físicamente, esto confina a los muones más energéticos a un haz estrechamente colimado, pero la gran mayoría diverge. Al propagar este haz hacia el suelo, la densidad de partículas observada en un detector puede expresarse de manera simplificada mediante el modelo analítico de divergencia radial \cite{GAP2000_017}:
-\begin{equation}
-	S(d, \alpha) \propto \frac{1}{d^2} \frac{dN}{d\Omega}(\alpha)
-\end{equation}
-donde $d$ es la distancia geométrica total de vuelo desde el punto de producción hasta el detector.
-
-En una lluvia inclinada, la geometría impone que para alcanzar una \textbf{misma} distancia radial $r$ en el plano de la lluvia, la distancia de propagación es mayor para la región tardía que para la temprana ($d_{tardio} > d_{temprano}$). Esto fuerza geométricamente a que el ángulo de emisión necesario para impactar en la zona tardía sea estrictamente menor ($\alpha_{tardio} < \alpha_{temprano}$). Un esquema geométrico se puede ver en la Figura \ref{fig:divergencia_angular} donde se puede ver que para radios iguales se necesitan ángulos mucho mayores en la región temprana que en la tardía.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{capitulos/imagenes_capitulos/cap3/divergencia_angular.png} 
-	\caption{Esquema geométrico de cómo es la dispersión de las partículas con el ángulo de emisión respecto al eje de la lluvia $\alpha$ (en la imagen llamado $\beta$). Se ve que para un mismo ángulo de emisión, se alcanza una región mucho más tardía que temprana.}
-	\label{fig:divergencia_angular}
-\end{figure}
-
-Aquí es donde la cinemática de producción ($p_T$) se vuelve determinante: como $\frac{dN}{d\Omega}$ decae exponencialmente con $\alpha$, la drástica reducción del ángulo de emisión requerido para la zona tardía compensa con creces el factor de atenuación puramente espacial por dispersión esférica ($1/d^2$). En consecuencia, la región tardía termina muestreando una porción del haz original intrínsecamente mucho más densa. 
-
-Para cuantificar esta excentricidad remanente, Bertou y Billoir desarrollaron una derivación analítica evaluando los momentos de las partículas \cite{GAP2000_017}. La modulación espuria aparente introducida por el mapeo espacial fue cuantificada mediante el término asimétrico $\mathcal{A}_{geo}$:
-\begin{equation}
-	\mathcal{A}_{geo}(r, \Phi) = \left\langle \frac{p_r(r)}{-p_z(r)} \right\rangle \tan \theta \cos \Phi
-\end{equation}
-donde $p_r$ es la componente radial del momento. La implicancia de esta ecuación es crítica: la asimetría puramente geométrica escala directamente con la tangente del ángulo de divergencia ($\langle p_r / -p_z \rangle \approx \tan \alpha$). Al estar la cascada dominada en número por la Población B (donde $p_z$ es pequeño), el término $\langle p_r / -p_z \rangle$ se vuelve enorme y explota a grandes distancias radiales.
-
-Este fenómeno de proyección induce un exceso de densidad de partículas en $\phi = \pm 180^\circ$ que compite de manera directa contra el vaciamiento producido por la atenuación atmosférica. En la componente muónica, la amplitud de este efecto geométrico presenta diferencias fundamentales respecto a la componente electromagnética. Esto se debe a que los muones, al poseer una masa aproximadamente 200 veces mayor que los electrones, sufren una dispersión múltiple de Coulomb y pérdidas de energía por radiación (\textit{bremsstrahlung}) mucho menores en la atmósfera. Mientras que la cascada electromagnética se ensancha y difumina continuamente a medida que interactúa con el aire, los muones viajan en trayectorias casi rectilíneas desde su punto de producción. Como consecuencia, mantienen una correlación angular más estrecha con la dirección del hadrón progenitor, resultando en una distribución lateral más `rígida' que preserva fielmente la cinemática original y la geometría de la lluvia \cite{Cazon2012}. No obstante, a distancias cercanas al núcleo ($r < 200$ m), donde el gradiente de densidad angular $\frac{dN}{d\Omega}$ es máximo, el efecto de divergencia radial es capaz de compensar e incluso invertir el signo de la asimetría total, fenómeno que será analizado en los resultados de esta tesis.
-
----
-
-\subsubsection{Efectos geométricos}
-\label{subsubsec:divergencia}
-
-El segundo fenómeno es de naturaleza geométrica y cinemática, y surge de la íntima relación entre la distribución angular intrínseca de las partículas y su divergencia radial respecto al eje de la lluvia.
-
-Para comprender este efecto, primero es necesario analizar la cinemática de producción. En la cascada hadrónica, los muones nacen a una cierta altura $z$ producto del decaimiento de piones y kaones[cite: 4]. En este proceso, heredan un momento longitudinal $p_z$ y un momento transversal $p_t$[cite: 4]. De acuerdo con el modelo cinemático descrito por L. Cazón et al., este momento transversal induce un ángulo de divergencia polar $\alpha$ respecto al eje de la lluvia[cite: 4]. La relación trigonométrica fundamental está dada por $\sin \alpha \simeq c p_t / E$[cite: 4]. Bajo la aproximación de ángulos pequeños, el radio de impacto de un muón en el plano ortogonal (\textit{Shower Plane}) es proporcional a su divergencia[cite: 4]:
+Para comprender este efecto, primero es necesario analizar la cinemática de producción de muones. En la cascada hadrónica, los muones nacen a una cierta altura $z$ producto del decaimiento de piones y kaones. En este proceso, heredan un momento longitudinal $p_z$ y un momento transversal $p_t$. De acuerdo con el modelo cinemático descrito por L. Cazón \textit{et al.} \cite{Cazon2012}, este momento transversal provoca que el muón salga disparado con un ángulo de apertura polar $\alpha$ respecto al eje de la lluvia. La relación trigonométrica fundamental está dada por $\sin \alpha \simeq c p_t / E$. Bajo la aproximación de ángulos pequeños, la distancia radial $r$ a la que impactará el muón en el plano ortogonal (plano de la lluvia) depende de este ángulo de apertura:
 
 \begin{equation}
 	r = z \tan \alpha \approx z \sin \alpha \approx z \left( \frac{c p_t}{E} \right) \approx z \left( \frac{p_t}{p_z} \right)
 \end{equation}
 
-Esta relación revela una dicotomía fenomenológica fundamental. Existen dos poblaciones distintas de muones que pueden poblar el régimen \textit{far-core}[cite: 4]:
-\begin{itemize}
-	\item \textbf{Población A (Alta Energía):} Muones producidos a gran altura con un momento longitudinal inmenso ($p_z \gg p_t$)[cite: 4]. Su ángulo de divergencia $\alpha$ es minúsculo (están altamente colimados), pero debido a la enorme distancia recorrida logran abrirse hasta grandes radios[cite: 4].
-	\item \textbf{Población B (Baja Energía):} Muones producidos más cerca del suelo con un momento longitudinal bajo ($p_z \sim p_t$)[cite: 4]. Su ángulo de divergencia $\alpha$ es muy grande, lo que les permite alcanzar grandes radios rápidamente[cite: 4].
-\end{itemize}
-
-Es imperativo notar que la distribución de energía inicial $E_i$ está fuertemente dominada por muones de baja energía, ya que el espectro sigue una ley de potencias $E_i^{-2.6}$[cite: 4]. Esta ley fuertemente decreciente garantiza fenomenológicamente que la Población B domina abrumadoramente en número dentro de la cascada[cite: 4].
-
-Físicamente, esto confina a los muones más energéticos a un haz estrechamente colimado, pero la gran mayoría (baja energía) diverge. Al propagar este haz hacia el suelo, la densidad de partículas observada en un detector puede expresarse de manera simplificada mediante el modelo analítico de divergencia radial:
-
-\begin{equation}
-	S(d, \alpha) \propto \frac{1}{d^2} \frac{dN}{d\Omega}(\alpha)
-\end{equation}
-donde $d$ es la distancia geométrica total de vuelo desde el punto de producción hasta el detector.
-
-En una lluvia inclinada, la geometría impone que para alcanzar una \textbf{misma} distancia radial $r$ en el plano de la lluvia, la distancia de propagación es mayor para la región tardía que para la temprana ($d_{tardio} > d_{temprano}$). Esto fuerza geométricamente a que el ángulo de emisión necesario para impactar en la zona tardía sea estrictamente menor ($\alpha_{tardio} < \alpha_{temprano}$). Un esquema geométrico se puede ver en la Figura \ref{fig:divergencia_angular} donde se puede ver que para radios iguales se necesitan ángulos mucho mayores en la región temprana que en la tardía.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{capitulos/imagenes_capitulos/cap3/divergencia_angular.png} 
-	\caption{Esquema geométrico de cómo es la dispersión de las partículas con el ángulo de emisión respecto al eje de la lluvia $\alpha$ (en la imagen llamado $\beta$). Se ve que para un mismo ángulo de emisión, se alcanza una región mucho más tardía que temprana.}
-	\label{fig:divergencia_angular}
-\end{figure}
-
-Aquí es donde la cinemática de producción ($p_t$) se vuelve determinante: como $\frac{dN}{d\Omega}$ decae exponencialmente con $\alpha$, la drástica reducción del ángulo de emisión requerido para la zona tardía compensa con creces el factor de atenuación puramente espacial por dispersión esférica ($1/d^2$). En consecuencia, la región tardía termina muestreando una porción del haz original intrínsecamente mucho más densa. 
-
-Como advirtió Billoir, un evento puramente simétrico en el sistema de referencia de la lluvia resulta en un efecto asimétrico al proyectarse en el plano del suelo, ya que las partículas que impactan en la región temprana se observan más verticales que aquellas en la región tardía[cite: 5]. Para cuantificar esta asimetría remanente, Bertou y Billoir desarrollaron una derivación analítica evaluando los momentos de las partículas[cite: 4, 5]. La modulación espuria aparente introducida por el mapeo espacial fue cuantificada mediante el término asimétrico $\mathcal{A}_{geo}$[cite: 4]:
-
-\begin{equation}
-	\mathcal{A}_{geo}(r, \Phi) = \left\langle \frac{p_r(r)}{-p_z(r)} \right\rangle \tan \theta \cos \Phi
-\end{equation}
-donde $p_r$ es la componente radial del momento y $p_z$ la longitudinal[cite: 4, 5]. La implicancia de esta ecuación es crítica: la asimetría puramente geométrica escala directamente con la tangente del ángulo de divergencia ($\langle p_r / -p_z \rangle \approx \tan \alpha$)[cite: 4]. Como demostró Billoir, la divergencia radial de las partículas se incrementa severamente con la distancia $r$[cite: 5]. Al estar la cascada dominada en número por la Población B (donde $p_z$ es pequeño y la divergencia es enorme), el término $\langle p_r / -p_z \rangle$ explota a grandes distancias.
-
-Este fenómeno de proyección induce un exceso de densidad de partículas en $\phi = \pm 180^\circ$ que compite de manera directa contra el vaciamiento producido por la atenuación atmosférica. En la componente muónica, la amplitud de este efecto geométrico presenta diferencias fundamentales respecto a la componente electromagnética. Esto se debe a que los muones, al poseer una masa aproximadamente 200 veces mayor que los electrones, sufren una dispersión múltiple de Coulomb y pérdidas de energía por radiación (\textit{bremsstrahlung}) mucho menores en la atmósfera. Mientras que la cascada electromagnética se ensancha y difumina continuamente a medida que interactúa con el aire, los muones viajan en trayectorias casi rectilíneas desde su punto de producción. Como consecuencia, mantienen una correlación angular más estrecha con la dirección del hadrón progenitor, resultando en una distribución lateral más `rígida' que preserva fielmente la cinemática original y la geometría de la lluvia \cite{Cazon2012}. No obstante, a distancias cercanas al núcleo ($r < 200$ m), donde el gradiente de densidad angular $\frac{dN}{d\Omega}$ es máximo, el efecto de divergencia radial es capaz de compensar e incluso invertir el signo de la asimetría total, fenómeno que será analizado en los resultados de esta tesis.
-
----
-
-\subsubsection{Efectos geométricos}
-\label{subsubsec:divergencia}
-
-El segundo fenómeno es de naturaleza geométrica y cinemática, y surge de la íntima relación entre la distribución angular intrínseca de las partículas y su divergencia radial respecto al eje de la lluvia[cite: 4].
-
-Para comprender este efecto, primero es necesario analizar la cinemática de producción. En la cascada hadrónica, los muones nacen a una cierta altura $z$ producto del decaimiento de piones y kaones[cite: 4]. En este proceso, heredan un momento longitudinal $p_z$ y un momento transversal $p_t$[cite: 4]. De acuerdo con el modelo cinemático descrito por L. Cazón et al., este momento transversal induce un ángulo de divergencia polar $\alpha$ respecto al eje de la lluvia[cite: 4]. La relación trigonométrica fundamental está dada por $\sin \alpha \simeq c p_t / E$[cite: 4]. Bajo la aproximación de ángulos pequeños, el radio de impacto de un muón en el plano ortogonal (\textit{Shower Plane}) es proporcional a su divergencia[cite: 4]:
-
-\begin{equation}
-	r = z \tan \alpha \approx z \sin \alpha \approx z \left( \frac{c p_t}{E} \right) \approx z \left( \frac{p_t}{p_z} \right)
-\end{equation}
-
-Esta relación revela una dicotomía fenomenológica fundamental. Existen dos poblaciones distintas de muones que pueden poblar el régimen \textit{far-core}[cite: 4]:
-\begin{itemize}
-	\item \textbf{Población A (Alta Energía):} Muones producidos a gran altura con un momento longitudinal inmenso ($p_z \gg p_t$)[cite: 4]. Su ángulo de divergencia $\alpha$ es minúsculo (están altamente colimados), pero debido a la enorme distancia recorrida logran abrirse hasta grandes radios[cite: 4].
-	\item \textbf{Población B (Baja Energía):} Muones producidos más cerca del suelo con un momento longitudinal bajo ($p_z \sim p_t$)[cite: 4]. Su ángulo de divergencia $\alpha$ es muy grande, lo que les permite alcanzar grandes radios rápidamente[cite: 4].
-\end{itemize}
-
-Es imperativo notar que la distribución de energía inicial $E_i$ está fuertemente dominada por muones de baja energía, ya que el espectro sigue una ley de potencias $E_i^{-2.6}$[cite: 4]. Esta ley fuertemente decreciente garantiza fenomenológicamente que la Población B domina abrumadoramente en número dentro de la cascada[cite: 4].
-
-Físicamente, esto confina a los muones más energéticos a un haz estrechamente colimado, mientras que la gran mayoría (los de baja energía) diverge. Al propagar este haz hacia el suelo, la densidad de partículas $S$ en un detector se deduce directamente de la conservación del flujo en un ángulo sólido $d\Omega$. Dado que el área transversal interceptada por el haz crece con el cuadrado de la distancia geométrica total de vuelo ($dA = d^2 d\Omega$), la densidad de partículas observada decae como $1/d^2$, lo que puede expresarse de manera simplificada mediante el modelo analítico de divergencia radial[cite: 5]:
+Al propagar el haz de partículas hacia el suelo, la densidad de muones $S$ que registrará un detector depende de dos factores cinemáticos que compiten entre sí. Por un lado, la densidad espacial cae con el cuadrado de la distancia geométrica recorrida ($1/d^2$), dado que el área transversal interceptada crece esféricamente como $dA = d^2 d\Omega$. Por otro lado, la cantidad de partículas emitidas en una dirección dada, $\frac{dN}{d\Omega}(\alpha)$, \textbf{decae abruptamente} a medida que se exigen ángulos $\alpha$ cada vez más extremos. Esto ocurre porque el espectro del momento transversal $p_t$ está fuertemente acotado por la cinemática de las interacciones hadrónicas (decayendo exponencialmente $\propto p_t \times \exp(-p_t/Q)$) \cite{Cazon2012}. De manera simplificada, la densidad en el suelo se expresa como:
 
 \begin{equation}
 	S(d, \alpha) \propto \frac{1}{d^2} \frac{dN}{d\Omega}(\alpha)
 \end{equation}
 
-En una lluvia inclinada, la geometría impone que para alcanzar una \textbf{misma} distancia radial $r$ en el plano de la lluvia, la distancia de propagación es mayor para la región tardía que para la temprana ($d_{tardio} > d_{temprano}$). Esto fuerza geométricamente a que el ángulo de emisión necesario para impactar en la zona tardía sea estrictamente menor ($\alpha_{tardio} < \alpha_{temprano}$). Un esquema geométrico se puede ver en la Figura \ref{fig:divergencia_angular} donde se puede ver que para radios iguales se necesitan ángulos mucho mayores en la región temprana que en la tardía.
+En una lluvia inclinada, la geometría del sistema impone que para alcanzar una misma distancia radial $r$ en el plano de la lluvia, la región tardía se encuentra físicamente más lejos del punto de producción que la región temprana ($d_{tardio} > d_{temprano}$).
+
+Esto obliga geométricamente a que el ángulo de emisión necesario para impactar en la zona tardía sea estrictamente menor ($\alpha_{tardio} < \alpha_{temprano}$). Dicho de manera más intuitiva, como la región temprana de la lluvia impacta contra el suelo primero, el muón recorre poca distancia (en la imagen $d_u$) y por ende requiere un ángulo $\alpha$ grande para alcanzar el radio $r$. Inversamente, como la región tardía impacta más lejos, le basta con un ángulo $\alpha$ significativamente más pequeño para alcanzar el mismo radio $r$. Este esquema se ilustra en la Figura \ref{fig:divergencia_angular}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{capitulos/imagenes_capitulos/cap3/divergencia_angular.png} 
-	\caption{Esquema geométrico de cómo es la dispersión de las partículas con el ángulo de emisión respecto al eje de la lluvia $\alpha$ (en la imagen llamado $\beta$). Se ve que para un mismo ángulo de emisión, se alcanza una región mucho más tardía que temprana.}
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap3/efecto_geo_luce_icrc2021.png} 
+	\caption{Esquema geométrico de la dispersión de las partículas. Debido a la inclinación, para alcanzar un mismo radio $r$ en el plano de la lluvia, la región tardía requiere un ángulo de emisión $\alpha$ (en la imagen $\delta_d$) mucho menor que la región temprana (en la imagen $\delta_u$). Obtenido de \cite{Luce_ICRC2021}}
 	\label{fig:divergencia_angular}
 \end{figure}
 
-Aquí es donde la cinemática de producción ($p_t$) se vuelve determinante: como $\frac{dN}{d\Omega}$ decae exponencialmente con $\alpha$, la drástica reducción del ángulo de emisión requerido para la zona tardía compensa con creces el factor de atenuación puramente espacial por dispersión esférica ($1/d^2$). En consecuencia, la región tardía termina muestreando una porción del haz original intrínsecamente mucho más densa. 
+Aquí es donde la distribución angular se vuelve determinante. Como la zona tardía requiere un ángulo $\alpha$ menor, queda alineada con una porción del haz intrínsecamente más densa. Dicho de otra manera, como $\alpha \approx p_t / p_z$, pedirle a un muón que tenga un ángulo $\alpha$ extremo implica exigirle un valor de $p_t$ estadísticamente  improbable. Esta masiva ganancia estadística de partículas al exigir un $\alpha$ menor compensa con creces la pérdida de densidad causada por la lejanía espacial (el factor $1/d^2$). En consecuencia, se proyecta un fuerte exceso artificial de densidad sobre la región tardía ($\phi = \pm 180^\circ$).
 
-Como advirtió Billoir, un evento puramente simétrico en el sistema de referencia de la lluvia resulta en un efecto asimétrico al proyectarse en el plano del suelo, ya que las partículas que impactan en la región temprana se observan más verticales que aquellas en la región tardía[cite: 5]. Para cuantificar esta asimetría remanente, Bertou y Billoir desarrollaron una derivación analítica evaluando los momentos de las partículas[cite: 4, 5]. La modulación espuria aparente introducida por el mapeo espacial fue cuantificada mediante el término asimétrico $\mathcal{A}_{geo}$[cite: 4]:
+Como advirtió Billoir, un evento puramente simétrico en el sistema de referencia de la lluvia resulta en un efecto asimétrico al proyectarse en el plano del suelo. Para cuantificar esta excentricidad remanente, Bertou y Billoir desarrollaron una derivación analítica evaluando los momentos de las partículas \cite{GAP2000_017}. La modulación espuria aparente introducida por el mapeo espacial fue cuantificada mediante el término asimétrico $\mathcal{A}_{geo}$ que es lo que llamamos efecto geométrico:
 
 \begin{equation}
 	\mathcal{A}_{geo}(r, \Phi) = \left\langle \frac{p_r(r)}{-p_z(r)} \right\rangle \tan \theta \cos \Phi
+	\label{eq:efecto_geo}
 \end{equation}
-donde $p_r$ es la componente radial del momento y $p_z$ la longitudinal[cite: 4, 5]. La implicancia de esta ecuación es crítica: la asimetría puramente geométrica escala directamente con la tangente del ángulo de divergencia ($\langle p_r / -p_z \rangle \approx \tan \alpha$)[cite: 4]. Como demostró Billoir, la divergencia radial de las partículas se incrementa severamente con la distancia $r$[cite: 5]. Al estar la cascada dominada en número por la Población B (donde $p_z$ es pequeño y la divergencia es enorme), el término $\langle p_r / -p_z \rangle$ explota a grandes distancias.
 
-Este fenómeno de proyección induce un exceso de densidad de partículas en $\phi = \pm 180^\circ$ que compite de manera directa contra el vaciamiento producido por la atenuación atmosférica. En la componente muónica, la amplitud de este efecto geométrico presenta diferencias fundamentales respecto a la componente electromagnética. Esto se debe a que los muones, al poseer una masa aproximadamente 200 veces mayor que los electrones, sufren una dispersión múltiple de Coulomb y pérdidas de energía por radiación (\textit{bremsstrahlung}) mucho menores en la atmósfera. Mientras que la cascada electromagnética se ensancha y difumina continuamente a medida que interactúa con el aire, los muones viajan en trayectorias casi rectilíneas desde su punto de producción. Como consecuencia, mantienen una correlación angular más estrecha con la dirección del hadrón progenitor, resultando en una distribución lateral más `rígida' que preserva fielmente la cinemática original y la geometría de la lluvia \cite{Cazon2012}. 
+donde $p_r$ es la componente radial del momento y $p_z$ la longitudinal. La implicancia de esta ecuación es crítica, la asimetría geométrica escala directamente con la tangente del ángulo de divergencia porque $\langle p_r / -p_z \rangle \approx \tan \alpha$. Además el valor de esta asimetría que tiene el mismo comportamiento funcional azimutal que la atenuación atmosférica, posee signo opuesto necesariamente.
 
-La existencia de este fuerte sesgo puramente topológico plantea un desafío, pero revela también una oportunidad experimental vinculada a los umbrales de detección. Si un instrumento es capaz de imponer un corte de energía lo suficientemente estricto, actuaría como un filtro cinemático. Al eliminar por completo a la abundante Población B, el detector aislaría exclusivamente las trayectorias altamente colimadas de la Población A. Bajo esta restricción donde el momento longitudinal es inmenso ($p_z \gg p_r$), el artefacto de proyección colapsa matemáticamente a cero ($\lim_{p_z \to \infty} \mathcal{A}_{geo} \to 0$)[cite: 4]. Esta anulación analítica del efecto geométrico es el principio fundamental que subyace a las mediciones realizadas con detectores confinados bajo blindajes pasivos, fenómeno que será analizado en los resultados de esta tesis.
+Es precisamente en la evaluación de este término donde se hace necesario distinguir la composición espectral de la cascada, la cual exhibe una dicotomía fenomenológica en la componente muónica al considerar un radio fijo:
 
----
+\begin{itemize}
+	\item \textbf{Población A (Alta Energía):} Muones producidos a gran altura con un momento longitudinal inmenso ($p_z \gg p_t$). Su ángulo de divergencia $\alpha$ es minúsculo, resultando en un cociente $\langle p_r / -p_z \rangle$ muy cercano a cero.
+	\item \textbf{Población B (Baja Energía):} Muones producidos más cerca del suelo con un momento longitudinal bajo ($p_z \sim p_t$). Su divergencia $\alpha$ es masiva, lo que provoca que el término asimétrico de Billoir explote a grandes distancias con signo negativo.
+\end{itemize}
+
+Es imperativo notar que el espectro de energía inicial $E_i$ de los muones decae fuertemente siguiendo una ley de potencias $E_i^{-2.6}$ \cite{Cazon2012}. Esto significa que la cascada está abrumadoramente dominada en número por la Población B de baja energía. Al estar la lluvia inundada por esta población altamente divergente, el factor geométrico escala de manera drástica con el radio y domina por completo la señal en detectores de superficie que no posean un umbral de energía.
+
+Este fenómeno compite de manera directa contra el vaciamiento producido por la atenuación atmosférica, forzando la asimetría total observada hacia valores fuertemente negativos. A diferencia de la componente electromagnética (que se ensancha y difumina por dispersión múltiple de Coulomb a medida que interactúa con la atmósfera), los muones viajan en trayectorias casi rectilíneas por ser casi 200 veces más masivos.
+
+La existencia de este fuerte artefacto topológico plantea un desafío, pero también revela una oportunidad experimental vinculada a los umbrales de detección. Si un instrumento es capaz de imponer un corte de energía estricto, actuaría como un filtro cinemático. Al eliminar por completo a la abundante Población B, aislaría exclusivamente las trayectorias colimadas de la Población A. Bajo esta restricción analítica donde $p_z \gg p_r$, el efecto geométrico de proyección colapsa matemáticamente a cero ($\lim_{p_z \to \infty} \mathcal{A}_{geo} \to 0$). Esta anulación analítica del efecto geométrico es el principio fundamental que subyace al desempeño del Detector Subterráneo de Muones y que será abordado en los resultados de esta tesis.
 
 \subsubsection{Efectos por el campo geomagnético terrestre}
 \label{subsubsec:geomagnetico}
