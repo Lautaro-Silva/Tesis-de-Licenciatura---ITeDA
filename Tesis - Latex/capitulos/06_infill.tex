@@ -3,7 +3,7 @@
 \section{Dinámica Radial del Arreglo \textit{Infill} en Simulaciones}
 \label{cap:infill}
 
-Habiendo validado la fenomenología de la asimetría azimutal en el entorno geométricamente controlado del Anillo Denso, se extendió el análisis a la topología real del arreglo de detectores pero aun utilizando simulaciones. A diferencia del Anillo Denso, el arreglo \textit{Infill} permite hacer un estudio sobre las estaciones de superficie y módulos enterrados reales, analizando el comportamiento de la asimetría en un espectro continuo de distancias al eje de la lluvia. Cabe destacar que, para mantener la coherencia con los estudios previos, la mayor parte del análisis desarrollado en esta sección utiliza exclusivamente la biblioteca de simulaciones de lluvias primarias de protones en el rango de energía de $\log_{10}(E/\mathrm{eV}) \in [17.5, 18.0]$.
+Habiendo validado la fenomenología de la asimetría azimutal en el entorno geométricamente controlado del Anillo Denso, se extendió el análisis a la topología real del arreglo de detectores pero aun utilizando simulaciones. A diferencia del Anillo Denso, el arreglo \textit{Infill} o arreglo regular de $750~m$, permite hacer un estudio sobre las estaciones de superficie y módulos enterrados reales, analizando el comportamiento de la asimetría en un espectro continuo de distancias al eje de la lluvia. Cabe destacar que, para mantener la coherencia con los estudios previos, la mayor parte del análisis desarrollado en esta sección utiliza exclusivamente la biblioteca de simulaciones de lluvias primarias de protones en el rango de energía de $\log_{10}(E/\mathrm{eV}) \in [17.5, 18.0]$.
 
 Un objetivo central de esta etapa consistió en caracterizar el impacto de la reconstrucción instrumental sobre la preservación del observable $A_1$. Dado que en el entorno de simulaciones se tiene acceso simultáneo a la geometría verdadera de la lluvia (núcleo y ángulos Monte Carlo) y a su contraparte reconstruida, es posible evaluar el comportamiento del frente de partículas aislando la física subyacente de la degradación topográfica asociada a los errores sistematicos conocidos propios de la reconstrucción. En este capítulo se aborda cómo la dinámica de la cascada y la resolución del arreglo modulan la asimetría, marcando la transición desde un régimen de dominancia cinemática hacia uno de atenuación longitudinal.
 
@@ -118,34 +118,49 @@ La hoja de ruta propuesta para implementar este modelo en futuras investigacione
 
 Una vez concretado en trabajos posteriores, este marco permitirá demostrar de forma completamente analítica cómo el espectro de baja energía, al poseer ángulos de divergencia masivos, dispara el término geométrico $\langle p_r / -p_z \rangle$ forzando la asimetría negativa ($A_1 < 0$) en el \textit{far-core}. Simultáneamente, probará desde las ecuaciones fundamentales de transporte que la barrera de atenuación del UMD filtra las trayectorias de bajo momento longitudinal, anulando la distorsión proyectiva de manera determinista y revelando únicamente la asimetría positiva intrínseca al desarrollo longitudinal de la lluvia.
 
----
+\subsection{Arreglo \textit{Infill} usando la geometría reconstruida}
+\label{subsec:infill_rec}
 
+Habiendo caracterizado la fenomenología pura de la cascada utilizando el escenario ideal (núcleo y ángulos Monte Carlo), el análisis se traslada en el contexto de simulaciones al entorno experimental más realista posible. En esta sección, el cálculo de las coordenadas y fases azimutales en el plano de la lluvia se realiza utilizando la posición del centro de impacto y los ángulos de arribo reportados por el algoritmo de reconstrucción del Observatorio (geometría \textit{REC}).
 
-MI IDEA:
+Al igual que en el estudio con geometría ideal, la transición de utilizar la cantidad de muones inyectados ($N_\mu^{\mathrm{MC}}$) a la de muones reconstruidos por la electrónica del UMD ($N_\mu^{\mathrm{REC}}$) conserva la forma de la evolución de la asimetría, solo afectando débilmente su magnitud debido a los sesgos direccionales del algoritmo. Sin embargo, al introducir la incertidumbre espacial de la \textbf{geometría reconstruida}, el panorama fenomenológico cambia drásticamente para todos los detectores: la modulación azimutal se ve severamente comprometida, perdiéndose la capacidad de detectar asimetría en diversas regiones radiales.
 
-HABLAR PRIMERO DE LA PARTE MC (CORE Y ANGULOS) QUE ES LA QUE MEJOR SE VE (SE PUEDE CAMBIAR EL ORDEN):
+El análisis sistemático de los ajustes armónicos sobre los datos reconstruidos permite mapear de manera transparente los límites resolutivos y estadísticos del arreglo \textit{Infill} al menos en el marco de simulaciones:
 
-1. MOSTRAR UNA COMPARACION DE LA PERFORMANCE DE UMD REC VS MC PARA X EJ 4 BINES RADIALES CON LOS AJUSTES -> ACA HABLARIA UN POCO DE LA DICUSICON DE COMO TIENE QUE SER LOS BINES Y QUE ES LO MEJOR, LO DE NO TENER MUY MALA ESTADISTCIA PERO NO MEZCALR PERAS CON MANZANAS. TAMBEIN HABLAR DEL PROBLEMA DE LOS BINES CERCAS DEL CORE
+\begin{itemize}
+	\item \textbf{Régimen cuasi-vertical ($0^\circ \le \theta < 20^\circ$):} La asimetría es físicamente marginal y la reconstrucción apenas logra identificar modulaciones débiles en un rango acotado ($450 \le r \le 1050\text{ m}$). Fuera de esta ventana, las fluctuaciones dominan sobre el gradiente direccional.
+	
+	\item \textbf{Régimen de transición ($20^\circ \le \theta < 40^\circ$):} Se establece una clara ventana de máxima fidelidad fenomenológica entre los $650\text{ m}$ y los $1200\text{ m}$. Los ajustes armónicos convergen con valores de $\chi^2/\mathrm{ndf}$ estables y barras de error acotadas pero la magnitud de la asimetria es baja y y no sigue el comportamiento esperado de aumentar a medida que el bin radial aumenta. Para distancias superiores ($r > 1200\text{ m}$), la densidad muónica decae drásticamente.
+	
+	\item \textbf{Régimen de alta inclinación ($50^\circ \le \theta < 65^\circ$):} Debido a la inmensa proyección del disco muónico sobre el suelo para lluvias rasantes, la estadística de conteo se mantiene elevada a grandes distancias. Esto permite que el ajuste armónico sobreviva con notable estabilidad y magnitud desde los $600\text{ m}$ hasta la periferia más lejana del arreglo ($1500\text{ m}$), consolidando a este rango como el escenario óptimo para el estudio de asimetrías de atenuación en el \textit{far-core}.
+\end{itemize}
 
-
-
-LISTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-
-
-
-2. DISCUTIR QUE ONDA LA COMPARACION UMD REC VS SD -> VER QUE PARA BINES RADIALES GRANDES EL SD EMPIEZA A ANDAR RARO Y SE DEJA DE VER CLARAMENTE LA ASIMETRIA
-
-
-
-LISTOOOOOOOOOOOOO
-
-
-
-3. DISCUITIR (Y REHACER EL ANALISIS) DE LO QUE PASA CUANDO SE DESGLOZA LA PARTE MUONICA Y EM DEL SD Y DISCUTIR LA INMVERSION DE LOS MUONES
+Este fenómeno de degradación responde a una difusión o \textit{smearing} angular. La incertidumbre espacial intrínseca en la determinación del núcleo del arreglo \textit{Infill} ($\sigma_{core} \approx 20 - 40$~m) propaga un error continuo en el cálculo del azimut asignado a cada estación ($\Delta \phi$). Estadísticamente, esto implica que estaciones que físicamente pertenecen a la región temprana pura ($\phi \approx 0^\circ$) son erróneamente catalogadas con fases laterales, y viceversa. Esta mezcla espuria de poblaciones modera los máximos y mínimos de la distribución de densidad, actuando como un filtro pasa-bajos espacial que "plancha" la modulación cosenoidal. El efecto es especialmente destructivo cerca del núcleo ($r \lesssim 400$~m), donde un leve corrimiento del centro de impacto invierte por completo el vector de posición, justificando la necesidad estricta del corte fiducial aplicado.
 
 
 
-LISTOOOOOOOOOO
+\subsubsection{Resiliencia de la componente electromagnética en la reconstrucción}
+
+Al repetir el análisis de competencia entre el UMD y el SD, pero ahora sujetos a la degradación geométrica de la reconstrucción, emerge una conclusión inesperada al desglosar la señal del tanque Cherenkov. 
+
+A pesar de que el \textit{smearing} angular destruye gran parte de la modulación en la componente muónica del UMD y del SD, el ajuste armónico sobre la componente electromagnética (SD EM) revela que esta preserva una asimetría fuertemente positiva y altamente significativa a lo largo de todos los bines radiales evaluados. Aún bajo los efectos de la incertidumbre topográfica, la señal EM se ajusta con barras de error estadístico notablemente pequeñas.
+
+Esta excepcional resiliencia no implica que los fotones y electrones sean inmunes al error de reconstrucción, sino que es una consecuencia directa de su abrumadora abundancia estadística. La componente electromagnética es órdenes de magnitud más numerosa que la muónica y experimenta un gradiente de atenuación longitudinal sumamente pronunciado. La asimetría física generada por este vaciamiento atmosférico es tan profunda y estadísticamente rica que logra sobreponerse a la "borrosidad" espacial introducida por el desplazamiento del núcleo.
+
+\subsubsection{La supervivencia de la asimetría geométrica muónica}
+
+Por el contrario, la inversión de la asimetría del observable total del SD hacia valores negativos en el \textit{far-core} se sigue manifestando con total contundencia en los datos reconstruidos. Esta inversión encuentra su justificación en la naturaleza de la parte muónica del SD.
+
+Como se desarrolló en la sección analítica, la asimetría negativa es impulsada por la población de muones blandos que inunda los detectores de superficie. Debido a su enorme divergencia ($p_t \sim p_z$), el término de asimetría geométrica de Billoir ($\mathcal{A}_{geo} \propto \langle p_r / -p_z \rangle$) explota a grandes distancias radiales. La compresión geométrica sufrida por esta porción del haz en la región tardía es tan masiva que el exceso de partículas sobrevive sin problemas al difuminado de la reconstrucción angular. De esta forma, un frente electromagnético positivo (resistente por su altísima estadística) compite contra un fondo de muones blandos fuertemente negativos (resistentes por la escala masiva de su divergencia). El resultado de esta convolución es la caída y posterior inversión a valores negativos del SD Total, confirmando que este artefacto no es una falla de Monte Carlo, sino un obstáculo experimental empírico.
+
+\subsection{Comparación de performance: UMD Monte Carlo vs. UMD Reconstruido}
+\label{subsec:comparacion_performance_umd}
+
+Habiendo justificado el comportamiento del SD, el foco recae finalmente sobre la performance del Detector Subterráneo de Muones frente a las incertezas de la reconstrucción. Al comparar directamente los ajustes obtenidos para el UMD utilizando la geometría Monte Carlo contra aquellos obtenidos con la geometría Reconstruida, se consolida una métrica del poder resolutivo del instrumento.
+
+% ACÁ PODÉS INSERTAR LA COMPARACIÓN DE PERFORMANCE DEL UMD. 
+% Sugerencia de cómo engancharlo:
+La comparativa evidencia que, si bien el UMD logra filtrar cinemáticamente a la población blanda y aislar la asimetría positiva en el mundo ideal, la introducción de los errores de reconstrucción del arreglo de superficie (Core REC) impone una cota experimental a la amplitud observable. La difusión angular "achata" las curvas de $A_1$, indicando que las asimetrías medidas experimentalmente representarán sistemáticamente un límite inferior (\textit{lower bound}) de la verdadera polaridad de la cascada. Maximizar la precisión algorítmica en la ubicación del núcleo resulta, por lo tanto, tan determinante para medir la atenuación como lo es el propio blindaje del detector.
 
 
 ---
