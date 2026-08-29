@@ -73,12 +73,12 @@ Main file: `Tesis - Latex/main.tex` → `\input`s `capitulos/01..09_*.tex` in or
 
 Note this is distinct from the *dense-ring* bootstrap toy model in `validacion_rec_muones.ipynb`, which **did** work and is written up successfully in Ch. 5.
 
-## 7. Two confirmed framework bugs (already fixed — don't rediscover or reintroduce)
+## 7. Framework bug history — one real, one ruled out
 
 Documented in `Notas  - Latex/Trabajo.tex`:
 
-1. **Dense Ring φ double-subtraction** (~Nov 2025): the reader was subtracting the shower azimuth twice for Dense Ring stations, since `GetAzimuthSP()` already returns the shower-plane-relative angle for those synthetic stations. Washed the asymmetry out to noise. Fixed in pipeline v7.
-2. **Infill `GetAzimuthSP()` bug** (~Jan–Feb 2026): for real Infill array stations, Auger Offline's `GetAzimuthSP()` returns *ground-plane* angles, not true shower-plane angles — confirmed as a genuine Offline framework issue (not an analysis bug) with collaborators Fede/Joaquín/Darko. Fixed by implementing a manual 3D Euler rotation in `readADST_surface_v11`/`v12`, validated via a "trumpet/butterfly" correction-magnitude-vs-θ plot.
+1. **Dense Ring φ double-subtraction** (~Nov 2025, real bug, fixed): the reader was subtracting the shower azimuth twice for Dense Ring stations, since `GetAzimuthSP()` already returns the shower-plane-relative angle for those synthetic stations. Washed the asymmetry out to noise. Fixed in pipeline v7.
+2. **Infill `GetAzimuthSP()` — investigated, then ruled out, not a live issue** (~Jan–Feb 2026): at the time, `GetAzimuthSP()` was suspected of returning ground-plane angles instead of true shower-plane angles for real Infill stations, and a manual 3D Euler-rotation workaround (`readADST_surface_v11`/`v12`) was built around that suspicion. This line of investigation was subsequently tested and found to be **not actually a problem** — `GetAzimuthSP()` behaves correctly, and this deprecated concern only survives in `Trabajo.tex` because that work path was abandoned early, before the retest. **Do not treat this as a confirmed Offline bug or reintroduce the Euler-rotation workaround on the assumption it's still needed** — verify current behavior directly if azimuth-convention issues resurface, rather than trusting the old notes entry.
 
 ## 8. Code/data pipeline (`Scripts/`)
 
