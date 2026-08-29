@@ -27,7 +27,7 @@ This session runs on the **institute's shared server**, not a disposable sandbox
 - **Never touch paths outside this repo** — in particular, do not modify anything under the Auger Offline installation (referenced e.g. in `SDenseStationList.xml`'s schema path) or any other user's home/workspace directory that may appear in configs or scripts.
 - **Be mindful of shared compute.** The ADST→parquet pipelines use `multiprocessing.Pool` across many workers, and CORSIKA/Offline runs can be long and I/O-heavy. Don't launch large parallel jobs or long-running batch processing without flagging the expected cost and asking first — other people share this machine's CPU/disk.
 - **Treat internal collaboration server paths/usernames as sensitive.** `Scripts/Procesamiento_Datos_Campo/ADST2ASCII/run.sh` and `ADSTReader.cc` hardcode an internal Auger data-server path containing a collaborator's username. Don't paste it verbatim into chat, commits, or any shared output — refer to it generically ("the internal collaboration data server path in `run.sh`").
-- **Git:** only commit/push when explicitly asked, following the global git-safety rules (no `--no-verify`, no amending published commits, always show `git status`/`diff` before committing).
+- **Git: always ask for explicit permission before `git add`, `commit`, or `push` in this repo.** The user reviews all of Claude's output — code, analysis, comments, thesis text — before it enters version control, precisely so nothing wrong or half-baked gets pushed. Make the edits, describe what changed, and wait for the user to say go-ahead before staging/committing/pushing — don't run those commands on an implicit "sounds good" or as part of finishing a task unprompted.
 
 ## 4. Repository map
 
