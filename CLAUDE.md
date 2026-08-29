@@ -4,10 +4,10 @@ Context file for Claude sessions working in this repo. Read this fully before do
 
 ## 1. Project identity
 
-**Title:** "Asimetrías Azimutales de la Densidad de Muones en Lluvias Atmosféricas Extensas con el Detector Subterráneo de Muones del Observatorio Pierre Auger" (Bachelor's thesis, Licenciatura en Ciencias Físicas, FCEN-UBA).
+**Title:** "Asimetrías Azimutales de la Densidad de Muones en Lluvias Atmosféricas Extensas con el Detector Subterráneo de Muones del Observatorio Pierre Auger" (Licenciatura en Ciencias Físicas, FCEN-UBA — a Licenciatura from UBA is the Argentine equivalent of a Master's degree, not a Bachelor's).
 
 - **Author:** Lautaro Silva Pizzi (lautarosilvapizzi@gmail.com)
-- **Director:** Dr. Juan Manuel Figueira (CONICET/UNLAM) · **Co-director:** Dr. Federico Sánchez (CONICET/UNSAM)
+- **Director:** Dr. Juan Manuel Figueira (CONICET/UNSAM) · **Co-director:** Dr. Federico Sánchez (CONICET/UNSAM)
 - **Institution:** ITeDA (CNEA-CONICET-UNSAM), Centro Atómico Constituyentes
 - **Cover date in the LaTeX source:** Agosto 2026 — the thesis is at/near its intended submission time now.
 
