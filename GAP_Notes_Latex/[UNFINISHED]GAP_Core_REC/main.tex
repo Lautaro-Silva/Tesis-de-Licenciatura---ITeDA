@@ -1,0 +1,96 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{setspace}
+\geometry{a4paper, margin=2.5cm}
+\onehalfspacing
+
+\title{GAP: A study on core reconstruction bias and how it attenuates the early-late asymmetry}
+\author{Lautaro Silva Pizzi, Juan Manuel Figueira and Federico Sánchez \\ Pierre Auger Observatory}
+\date{August, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    % [Draft your abstract here. Summarize the core problem: standard reconstruction algorithms induce systematic errors that wash out the true azimuthal asymmetry (A_1) of the muon density.]
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+% NARRATIVE THREAD: Briefly establish the context of azimuthal asymmetries in Extensive Air Showers (EAS) and clearly state the core problem. The goal is to highlight that standard reconstruction algorithms induce systematic errors that wash out the true azimuthal asymmetry (A_1) of the muon density.
+
+% KEY CONCEPTS & ARGUMENTS:
+% - Extensive air showers exhibit an intrinsic azimuthal asymmetry in their particle density footprint at ground level.
+% - The standard reconstruction algorithm assumes the Lateral Distribution Function (LDF) is strictly symmetric azimuthally.
+% - This note investigates how imposing this symmetric LDF onto a physically asymmetric muon distribution drives systematic biases in both counting and core positioning.
+
+
+\section{Phenomenological Context and Methodology}
+\label{sec:context_methodology}
+% NARRATIVE THREAD: Rapidly define the physical source of the asymmetry and establish the "Dense Ring" as the controlled environment used to measure it. Since this was covered in a previous note, keep it concise.
+
+% KEY CONCEPTS & ARGUMENTS:
+% - Define the early region (\phi \approx 0^\circ) and the late region (\phi \approx \pm 180^\circ) in the shower plane.
+% - Highly inclined showers feature a late-region density excess due to low-energy, highly divergent muons.
+% - The Underground Muon Detector (UMD) acts as a kinematic filter to isolate the true positive attenuation asymmetry.
+% - To evaluate this without interference from the radial LDF fall-off, the analysis employs a Dense Ring configuration: 12 virtual stations at a fixed radius of r = 450 m.
+% - The asymmetry is parameterized using a first-order harmonic: 
+%   \begin{equation}
+%       S(\phi) = \langle S \rangle (1 + A_1 \cos\phi)
+%   \end{equation}
+
+
+\section{Motivation: The Attenuation of the Reconstructed $A_1$ Amplitude}
+\label{sec:motivation}
+% NARRATIVE THREAD: Present the primary observation that drives the rest of the paper. We show the discrepancy between the true and reconstructed signals, setting up the central question: Is this loss of asymmetry driven by a failure in core positioning?
+
+% KEY CONCEPTS & ARGUMENTS:
+% - A persistent, systematic discrepancy exists between the A_1 amplitude extracted from injected Monte Carlo muons (N_\mu^{MC}) and the muons reported by the reconstruction algorithm (N_\mu^{REC}).
+% - The reconstructed asymmetry is artificially dampened, indicating a "washout" effect.
+% - This section sets the stage to dissect whether this degradation originates from local counting errors or a global geometric misalignment of the shower core.
+
+
+\section{Evaluation of Reconstruction Biases: Directional Counting vs. Geometric Core Shift}
+\label{sec:biases}
+% NARRATIVE THREAD: This is the analytical core of the paper. We systematically test the sources of the A_1 attenuation shown in Section 3. We first test a directional counting bias using an empirical Toy Model. When that fails to explain the behavior at high inclinations, we pivot to the spatial component: the core shift driven by the symmetric LDF conflict.
+
+\subsection{The Directional Counting Bias and the Empirical Toy Model}
+\label{subsec:toy_model}
+% KEY CONCEPTS & ARGUMENTS:
+% - Analysis of the reconstruction algorithm reveals a tendency to systematically overestimate muons in the low-density late region.
+% - An empirical Toy Model using Bootstrap resampling is introduced to inject this directional counting noise into the ideal MC data.
+% - The Toy Model successfully reproduces the degradation of A_1 for quasi-vertical showers (\theta \le 35^\circ), but it fails to explain the massive loss of asymmetry for highly inclined showers (\theta \ge 35^\circ).
+
+\subsection{The Geometric Core Shift: The Symmetric LDF Conflict}
+\label{subsec:core_shift}
+% KEY CONCEPTS & ARGUMENTS:
+% - Because the Toy Model fails at high inclinations, a spatial error must be present. The reconstruction minimizer attempts to fit a symmetric LDF to a physically asymmetric signal (the late-region excess).
+% - To achieve convergence, the algorithm alters the spatial variable, systematically dragging the reconstructed core toward the late region.
+
+\subsection{Coupled Degradation Effects}
+\label{subsec:coupled_effects}
+% KEY CONCEPTS & ARGUMENTS:
+% - This core displacement causes "azimuthal smearing" (mixing early and late signals by calculating angles from a false center).
+% - It triggers non-linear feedback in the UMD muon counting algorithms.
+% - Ultimately, the physical asymmetry is mathematically absorbed by the spatial displacement, washing out the true A_1 amplitude.
+
+
+\section{Summary and Conclusions}
+\label{sec:conclusions}
+% NARRATIVE THREAD: Synthesize how the combination of counting bias and geometric bias artificially absorbs the physical asymmetry.
+
+% KEY CONCEPTS & ARGUMENTS:
+% - The loss of the A_1 amplitude is not a physical absence of signal, but a two-fold algorithmic artifact.
+% - The imposition of a symmetric LDF onto a physically asymmetric cascade forces a core shift, which acts as the primary mechanism for asymmetry degradation at high zenith angles.
+
+\newpage
+\bibliographystyle{unsrt} 
+\bibliography{bibliografia}
+
+\end{document}

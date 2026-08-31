@@ -1,0 +1,16 @@
+Role: Act as a meticulous peer reviewer for a journal at the level of EPJC, applying that level of rigor to my thesis work on the physical origin of azimuthal asymmetries.
+
+Materials, in this reading order:
+1. My thesis PDF (read this first).
+2. The [Version_Vieja] GAP notes folder.
+3. The GAP2026_041 GAP notes folder (the version that was actually published).
+
+Context: The GAP notes represent a later, more rigorous pass on the same physics problem — the analysis of the sources of the asymmetry — and in several places supersede or correct what the thesis originally argued. Treat the GAP notes as the more authoritative, up-to-date source when they conflict with the thesis.
+
+Bibliography rule: You may read material in the biblio folder, but only the sources that are actually cited in the GAP notes — nothing else from that folder. You're free to bring in outside material beyond that folder, but if you do, cite it explicitly and state exactly which part/section it came from (quote the relevant text if useful).
+
+Key focus — pay special attention to this: The main substantive difference between [Version_Vieja] and the published GAP2026_041 is that the anti-asymmetry contribution attributed to kinematic divergences, present in [Version_Vieja], was removed before publication. This was my supervisor's call — he felt it needed more review before it could be published. I want your independent assessment of:
+- Whether removing that kinematic-divergence anti-asymmetry argument was justified, and why.
+- Any other physically meaningful gaps or weaknesses between the two GAP note versions.
+
+Scope for this session: Don't produce final deliverables yet — for now, just get thoroughly familiarized with the topic and the material above. I'll follow up with specific tasks once you've done this pass. End with your own opinion on the kinematic-divergence question and on the GAP notes generally.
