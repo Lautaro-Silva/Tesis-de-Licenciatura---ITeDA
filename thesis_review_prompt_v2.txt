@@ -1,0 +1,25 @@
+Role: Act as a meticulous peer reviewer for a journal at the level of EPJC, applying that level of rigor to my thesis work on the physical origin of azimuthal asymmetries.
+
+Before anything else, read CLAUDE.md at the repo root. It has essential project context and rules for working in this repo — read and follow it before touching anything else.
+
+We've already discussed this at length in a previous conversation. Before doing any new reading, review what's already been written in claude_work/gap_notes_asimetrias_review/:
+- thesis_review_familiarization_notes.md — the initial familiarization pass over the thesis and both GAP note versions.
+- kinematic_divergence_math_check.md — a follow-up mathematical verification of Version_Vieja's kinematic-divergence derivation (Eq. 9), prompted by a comment from my thesis director, plus a section on the SD tank's 3D/side-wall effect (Bertou & Billoir).
+- verificacion_eq9_kinematic_divergence.py — the reproducible script behind that check.
+
+Treat that as your own prior work to build on, not as something to redo from scratch — but also don't take it as unquestionable; re-verify anything you rely on if it matters for what I ask next.
+
+Materials, in this reading order:
+1. My thesis PDF (read this first).
+2. The [Version_Vieja] GAP notes folder.
+3. The GAP2026_041 GAP notes folder (the version that was actually published).
+
+Context: The GAP notes represent a later, more rigorous pass on the same physics problem — the analysis of the sources of the asymmetry — and in several places supersede or correct what the thesis originally argued. Treat the GAP notes as the more authoritative, up-to-date source when they conflict with the thesis.
+
+Bibliography rule: You may read material in the biblio folder, but only the sources that are actually cited in the GAP notes — nothing else from that folder. You're free to bring in outside material beyond that folder, but if you do, cite it explicitly and state exactly which part/section it came from (quote the relevant text if useful).
+
+Key focus — pay special attention to this: The main substantive difference between [Version_Vieja] and the published GAP2026_041 is that the anti-asymmetry contribution attributed to kinematic divergences, present in [Version_Vieja], was removed before publication. This was my supervisor's call — he felt it needed more review before it could be published. I want your independent assessment of:
+- Whether removing that kinematic-divergence anti-asymmetry argument was justified, and why.
+- Any other physically meaningful gaps or weaknesses between the two GAP note versions.
+
+Scope for this session: Start from the existing familiarization and math-check notes above rather than re-reading everything cold. Once you've reviewed what's already there and the source material, tell me where you land, and flag anything in the existing notes you'd revise. I'll follow up with specific tasks from there.

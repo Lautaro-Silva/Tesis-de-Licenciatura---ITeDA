@@ -4,6 +4,12 @@ venv/
 # Vscode
 .vscode/
 
+# Jupyter notebook checkpoint save-states
+.ipynb_checkpoints/
+
+# Claude Code session state (worktrees, jobs, plans) - not project deliverables
+.claude/
+
 # --- ARCHIVOS TEMPORALES DE LATEX ---
 *.aux
 *.bbl
