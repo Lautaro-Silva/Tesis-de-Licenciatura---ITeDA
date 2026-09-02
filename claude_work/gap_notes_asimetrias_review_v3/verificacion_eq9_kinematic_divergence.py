@@ -56,29 +56,6 @@ sign split is physical -- reproduced with both Dense Ring and Infill topologies,
 REC geometry -- and pushed back that no positive explanation for the SD had been
 offered):
 
-  6. In-flight atmospheric multiple Coulomb scattering (v4, prompted by the author asking
-     for a plausible physical mechanism, checked against new bibliography): Grieder
-     (2010, "Extensive Air Showers", Sec. 3.1) treats Coulomb scattering of muons DURING
-     PROPAGATION as a mechanism distinct from and additive to production-kinematics
-     scattering -- something absent from every analytic model used in this whole
-     investigation (Cazon's, Version_Vieja's, and this script's Secs. 1-5), all of which
-     assume ballistic straight-line propagation. Late-region muons traverse ~25% more
-     slant depth than early-region ones at the reference point (two independent
-     geometric estimates agree to 3%), so they accumulate more scattering -- which,
-     convolved properly (an exponential-tilt argument, verified against direct numerical
-     convolution) with Cazon's angular distribution, multiplicatively boosts the
-     late/early density ratio. Quantified with the standard Highland RMS (Gaussian-core)
-     formula, the boost is only ~1-2% across the relevant energy range -- an order of
-     magnitude too small on its own to turn the pure-kinematic term's early-favouring
-     prediction into the implied ~-0.13 true-flux inversion. This does NOT rule the
-     mechanism out: the Highland formula describes only the Gaussian CORE of the Moliere
-     scattering distribution, and Grieder's own text distinguishes this "narrow-angle"
-     regime from a separate "wide-angle" tail (rare large single scatters) that the RMS
-     estimate cannot capture -- exactly the kind of rare, high-leverage tail population
-     that already broke the naive spectrum-weighted integral in point 5 above. Untested
-     here; the direct, cheap way to check it is empirical (compare each muon's actual
-     simulated ground-arrival direction to Cazon's production-kinematics-only prediction
-     in the existing MC), not a fourth analytic toy model.
   4. Because the tank's own geometric term cancels EXACTLY for the muon VEM signal (see
      3. above), the VEM signal is theoretically a clean, undistorted tracer of the true
      incident muon flux ratio -- letting the true-flux A1 be backed out of the reported
@@ -297,55 +274,6 @@ def kinematic_growth_rate(r, D, theta_deg, Q):
 
 
 # ---------------------------------------------------------------------------
-# 6. In-flight atmospheric multiple-Coulomb-scattering hypothesis (v4)
-# ---------------------------------------------------------------------------
-X0_AIR = 36.62      # g/cm^2, radiation length of air (standard value)
-M_MU = 0.10566      # GeV, muon rest mass
-
-
-def slant_depth(theta_loc_rad, D, theta_deg, X_ground=880.0, alt_ground_km=1.4,
-                 H=7.25, X0_sea=1030.0):
-    """Vertical atmospheric depth traversed from production altitude to ground
-    (isothermal exponential atmosphere, scale height H), converted to slant depth
-    along the actual arrival direction theta_loc. Cross-checked against the exact
-    geometry's own d_early/d_late ratio in the docstring/notes -- the two agree to ~3%,
-    an independent sanity check of this simplified atmosphere model."""
-    D_km = D / 1000.0
-    alt_prod_km = alt_ground_km + D_km * np.cos(np.radians(theta_deg))
-    X_prod = X0_sea * np.exp(-alt_prod_km / H)
-    vertical_depth = X_ground - X_prod
-    return vertical_depth / np.cos(theta_loc_rad)
-
-
-def highland_theta0(E_GeV, X_gcm2, X0=X0_AIR):
-    """Highland (Gaussian-core) multiple-Coulomb-scattering RMS angle, general to any
-    charged particle via its own momentum/velocity (standard PDG-level formula; Grieder
-    2010 Eq. 4.34-4.35 gives the same result derived for electrons, but the formula only
-    depends on the SCATTERED particle's own p, beta, not its identity)."""
-    p = np.sqrt(max(E_GeV ** 2 - M_MU ** 2, 1e-9))
-    beta = p / E_GeV
-    t = X_gcm2 / X0
-    return (0.0136 / (beta * p)) * np.sqrt(t) * (1 + 0.038 * np.log(t))  # radians
-
-
-def scattering_boost_factor(E_GeV, r, D, theta_deg, Q):
-    """Multiplicative boost to the late/early kinematic ratio from the DIFFERENCE in
-    scattering width between regions (derived via an exponential-tilt/convolution
-    argument on Cazon's locally-exponential angular distribution, k = E/Q):
-    boost = exp(k^2 (sigma_late^2 - sigma_early^2) / 2). Verified against a direct
-    numerical Gaussian convolution (see kinematic_divergence_math_check.md / this
-    session's chat record for the cross-check)."""
-    _, _, ae, al, tle, tll, _, _ = factors(r, D, theta_deg)
-    X_e = slant_depth(tle, D, theta_deg)
-    X_l = slant_depth(tll, D, theta_deg)
-    sigma_e = highland_theta0(E_GeV, X_e)
-    sigma_l = highland_theta0(E_GeV, X_l)
-    k = E_GeV / Q
-    boost = np.exp(k ** 2 * (sigma_l ** 2 - sigma_e ** 2) / 2)
-    return boost, X_e, X_l, sigma_e, sigma_l
-
-
-# ---------------------------------------------------------------------------
 def main():
     symbolic_check()
 
@@ -442,32 +370,7 @@ def main():
     print("  the power-law falloff. This retracts the hypothesis that a high-energy tail")
     print("  above E* explains the true-flux inversion in point 4 above: it does not survive")
     print("  spectrum-weighting. The true origin of that inversion is NOT identified by any")
-    print("  mechanism checked in this script.\n")
-
-    print("=== 6. In-flight atmospheric scattering: does it supply the missing boost? ===")
-    D6 = 7500.0
-    _, _, ae6, al6, tle6, tll6, _, _ = factors(r, D6, theta_deg)
-    X_e6 = slant_depth(tle6, D6, theta_deg)
-    X_l6 = slant_depth(tll6, D6, theta_deg)
-    print(f"  theta_loc: early={np.degrees(tle6):.1f} deg, late={np.degrees(tll6):.1f} deg")
-    print(f"  production-kinematic alpha: early={np.degrees(ae6):.2f} deg, late={np.degrees(al6):.2f} deg")
-    print(f"  slant depth traversed: early={X_e6:.0f} g/cm2, late={X_l6:.0f} g/cm2, "
-          f"ratio={X_l6/X_e6:.3f}\n")
-    print(f"  {'E_mu (GeV)':>10} {'sigma_e (deg)':>14} {'sigma_l (deg)':>14} {'boost factor':>14}")
-    for E in (0.3, 0.5, 1.0, 1.5, 2.0, 3.0, 5.0):
-        boost, Xe, Xl, se, sl = scattering_boost_factor(E, r, D6, theta_deg, 0.20)
-        print(f"  {E:10.1f} {np.degrees(se):14.2f} {np.degrees(sl):14.2f} {boost:14.4f}")
-    print("\n  Boost factors are ~1.01-1.02 across the whole relevant energy range -- an")
-    print("  order of magnitude too small to turn the pure-kinematic term's early-favouring")
-    print("  prediction into the implied ~-0.13 true-flux inversion (point 4) on its own.")
-    print("  This is the Gaussian-CORE (Highland RMS) estimate only -- it does not capture")
-    print("  the non-Gaussian wide-angle Moliere tail (Grieder 2010, Sec. 3.1: 'narrow-angle")
-    print("  multiple scattering accounts for the bulk of the [deflections]', implying a")
-    print("  separate, rarer wide-angle population exists) which could still matter, given")
-    print("  this investigation has twice already found rare high-leverage tails break naive")
-    print("  bulk/RMS estimates (see point 5). Untested here -- the direct, cheap check is")
-    print("  empirical: compare each muon's actual simulated ground-arrival direction to")
-    print("  Cazon's production-kinematics-only prediction in the existing MC.")
+    print("  mechanism checked in this script.")
 
 
 if __name__ == "__main__":
