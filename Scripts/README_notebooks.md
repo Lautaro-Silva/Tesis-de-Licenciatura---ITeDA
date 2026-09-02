@@ -1,24 +1,28 @@
-# Notebooks activos: formato `.py` (jupytext, percent)
+# Notebooks activos: `.py` + `.ipynb` emparejados (jupytext, percent)
 
-Los notebooks de análisis activos de este repositorio se editan como ficheros `.py`
-en formato *percent* de [jupytext](https://jupytext.readthedocs.io/), no como `.ipynb`.
-Un `.ipynb` con las mismas celdas sigue existiendo en disco para poder ejecutarlas
-interactivamente, pero **no está trackeado en git** — es un artefacto local.
+Los notebooks de análisis activos de este repositorio existen como un par de archivos
+emparejados con [jupytext](https://jupytext.readthedocs.io/): un `.py` en formato
+*percent* y un `.ipynb`. **Los dos están trackeados en git.**
 
-## Por qué
+**Claude edita el `.py`, nunca el `.ipynb` directamente.** El usuario trabaja de forma
+interactiva abriendo y ejecutando el `.ipynb` en JupyterLab; sus salidas (figuras,
+tablas) son artefactos reales de la tesis. Cualquier cambio de código pasa por el `.py`
+— texto plano, diffeable, sin salidas embebidas — y se sincroniza hacia el `.ipynb` con
+jupytext (automáticamente si se abre el `.py` en Jupyter/VS Code con la extensión
+activa, o manualmente, ver más abajo).
+
+## Por qué el `.py`, si el `.ipynb` igual se trackea
 
 Un `.ipynb` es JSON, y cada celda ejecutada guarda su salida (figuras en base64,
 tablas, texto) dentro del mismo archivo. Varios notebooks de este repo llegaron a
 pesar varios MB casi enteramente por esas salidas — `plots_seccion_6.ipynb` llegó a
-tener 12.4 MB de 12.5 MB en salidas guardadas. Eso hace que:
-
-- cualquier herramienta que edite el archivo como texto tenga que procesar ese JSON
-  completo, incluidas las imágenes codificadas;
-- los diffs de git sean ilegibles (una imagen en base64 no se puede revisar);
-- el repositorio crezca de forma acumulativa con cada commit que reejecuta el notebook.
-
-El `.py` en formato percent contiene solo el código, marcado con `# %%` por celda —
-texto plano, diffeable, sin salidas.
+tener 12.4 MB de 12.5 MB en salidas guardadas. Editar o revisar ese JSON directamente
+(imágenes codificadas incluidas) es lento e ilegible. El `.py` da un source de código
+limpio y diffeable para ese propósito. **Lo que no se intenta ya es sacar el `.ipynb`
+de git** — ver la advertencia en `CLAUDE.md` §8: hacerlo borra el archivo del disco de
+cualquier otro checkout que haga `git pull`, pase lo que diga `.gitignore` — eso le pasó
+al usuario una vez (2026-09-02) y no se repite. El costo aceptado es que los diffs de
+git sobre el `.ipynb` van a incluir cambios de salida cuando se re-ejecuten celdas.
 
 ## Cómo trabajar con ellos
 
@@ -37,12 +41,11 @@ sincronizar manualmente desde la terminal:
 venv/bin/jupytext --sync Scripts/nombre_del_notebook.py
 ```
 
-**El `.ipynb` es local, no se commitea.** Está en `.gitignore` explícitamente (por
-ruta, no con un patrón `*.ipynb` global — los notebooks históricos en `Codigo Viejo/`,
-`Test Iniciales/`, etc. siguen trackeados tal cual). Si el `.ipynb` de un notebook
-activo se borra o no existe (por ejemplo, en un clon nuevo del repo), abrir el `.py`
-en Jupyter lo regenera vacío de salidas; hay que volver a ejecutarlo para tener las
-figuras.
+**El `.ipynb` está trackeado, igual que el `.py`.** Después de editar el `.py` (Claude)
+o de reejecutar celdas en Jupyter (el usuario), conviene sincronizar y comitear ambos
+juntos para que no queden desalineados en git. Si por algún motivo el `.ipynb` de un
+notebook activo llega a faltar (clon nuevo sin ese archivo, por ejemplo), no hay que
+regenerarlo vacío: ya está en el repo, solo hay que traerlo con git.
 
 **Las figuras que importan para la tesis se guardan a disco**, no solo como salida
 de celda — buscar las llamadas a `plt.savefig(...)` dentro de cada notebook. Nota:
