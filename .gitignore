@@ -7,6 +7,21 @@ venv/
 # Jupyter notebook checkpoint save-states
 .ipynb_checkpoints/
 
+# Active notebooks: tracked as .py (jupytext percent format), see Scripts/README_notebooks.md.
+# The paired .ipynb (same cells, plus outputs) stays local for interactive use and is not
+# tracked. Listed explicitly by path -- NOT a global *.ipynb pattern -- so the historical/
+# deprecated notebooks elsewhere in Scripts/ stay tracked as-is.
+/Scripts/plots_seccion_6.ipynb
+/Scripts/validacion_rec_muones.ipynb
+/Scripts/analisis_infill_sims.ipynb
+/Scripts/validacion_asimetria_infill_sd_mu_v2.ipynb
+/Scripts/Presentacion_Foundations/presentacion_feb_2026_v2.ipynb
+/Scripts/Procesamiento_ADST_v8-2.ipynb
+/Scripts/Procesamiento_ADST_Campo_v9.ipynb
+/Scripts/Procesamiento_Datos_Campo/Procesamiento_Datos_Campo_v1.ipynb
+/Scripts/Procesamiento_Datos_Campo/Analisis_Preliminar_DatosCampo_Phase1.ipynb
+/Scripts/Procesamiento_Datos_Campo/Analisis_Preliminar_DatosCampo_Phase2.ipynb
+
 # Claude Code session state (worktrees, jobs, plans) - not project deliverables
 .claude/
 
