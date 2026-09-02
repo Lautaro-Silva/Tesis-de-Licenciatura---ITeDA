@@ -601,6 +601,263 @@ def fig_f5_gallery(df_clean, top_cells):
 
 
 # ---------------------------------------------------------------------------
+# Parameter-space tester: add logE as a THIRD scanned axis alongside (r, theta).
+#
+# Motivation (user feedback on the first version of this audit): the sweep
+# above lumps every event with logE>=17.0 into one energy bin per (r,theta)
+# cell. Since the spectrum falls steeply (F3a: ~90% of events sit below
+# logE=17.5), that single energy-integrated bin is dominated by the LOW-energy
+# population. If the physical asymmetry genuinely grows with energy (as
+# established elsewhere in the thesis, e.g. the Dense Ring iron-vs-helium
+# comparison in Ch.5's lab notebook), a positive high-energy signal can be
+# invisible -- or even sign-flipped -- once diluted by a much larger
+# low-energy sample that may carry a different (e.g. exposure-bias-dominated)
+# behavior. This section re-runs the same fit machinery with logE as an
+# explicit third axis, so the question "which (r, theta, E) corner shows the
+# asymmetry" can actually be answered instead of assumed.
+# ---------------------------------------------------------------------------
+ENERGY_EDGES = [17.0, 17.5, 18.0, 18.5, 19.5]  # last bin widened: very little
+                                                # statistics above logE~19.
+
+# The preliminary notebook's own final plot (Analisis_Preliminar_DatosCampo_
+# Phase2.ipynb, Cell 22) used this exact cut and found a POSITIVE A1. Kept
+# here as a named constant so the "replication cell" figure/table can quote
+# it directly instead of a magic tuple.
+PRELIM_NOTEBOOK_CUT = {"E_lo": 18.0, "E_hi": 18.5, "theta_lo": 40.0, "theta_hi": 60.0,
+                        "r_lo": 750.0, "r_hi": 1050.0}
+
+
+def run_sweep_3d(df_clean, facts):
+    log("Running full A1(r, theta, logE) parameter-space sweep ...")
+    r_edges = np.arange(150, 1651, 150)
+    theta_edges = [0, 10, 20, 30, 40, 50, 65]
+    phi_bins = np.linspace(-180, 180, 13)
+    phi_centers = 0.5 * (phi_bins[1:] + phi_bins[:-1])
+
+    results = []
+    for sub in SUBSETS:
+        dsub = df_clean[df_clean["subset"] == sub]
+        for ei in range(len(ENERGY_EDGES) - 1):
+            elo, ehi = ENERGY_EDGES[ei], ENERGY_EDGES[ei + 1]
+            de = dsub[(dsub["logE_REC"] >= elo) & (dsub["logE_REC"] < ehi)]
+            if de.empty:
+                continue
+            for ti in range(len(theta_edges) - 1):
+                tlo, thi = theta_edges[ti], theta_edges[ti + 1]
+                dth = de[(de["theta_REC"] >= tlo) & (de["theta_REC"] < thi)]
+                if dth.empty:
+                    continue
+                for ri in range(len(r_edges) - 1):
+                    rlo, rhi = r_edges[ri], r_edges[ri + 1]
+                    cell = dth[(dth["r_core"] >= rlo) & (dth["r_core"] < rhi)]
+                    if cell.empty:
+                        continue
+                    fit = cell_bootstrap_fit(cell, phi_bins, phi_centers, n_boot=200)
+                    if fit is None:
+                        continue
+                    fit.update({"subset": sub, "r_lo": rlo, "r_hi": rhi,
+                                "theta_lo": tlo, "theta_hi": thi, "E_lo": elo, "E_hi": ehi})
+                    results.append(fit)
+    log(f"3D sweep produced {len(results)} valid (r,theta,E,subset) cells "
+        f"out of {len(SUBSETS)*(len(ENERGY_EDGES)-1)*(len(theta_edges)-1)*(len(r_edges)-1)} possible")
+    facts["sweep3d_n_cells"] = len(results)
+    facts["sweep3d"] = results
+    return pd.DataFrame(results)
+
+
+def rank_paramspace(sweep3d_df, facts, chi2_max=3.0, top_n=10):
+    log("Ranking parameter-space cells by fit-quality-gated significance ...")
+    if sweep3d_df.empty:
+        facts["paramspace_top_positive"] = []
+        facts["paramspace_top_negative"] = []
+        return sweep3d_df
+
+    s = sweep3d_df.copy()
+    s["sig"] = s["A1"] / s["A1_err"].replace(0, np.nan)  # signed significance
+    gated = s[(s["chi2_ndf"] < chi2_max) & (s["chi2_ndf"] > 0)].copy()
+    log(f"  {len(gated)}/{len(s)} cells pass the chi2/ndf<{chi2_max} quality gate")
+
+    cols = ["subset", "E_lo", "E_hi", "theta_lo", "theta_hi", "r_lo", "r_hi",
+            "A1", "A1_err", "B1", "B1_err", "chi2_ndf", "n_events", "sig"]
+
+    top_pos = gated[gated["sig"] > 0].sort_values("sig", ascending=False).head(top_n)
+    top_neg = gated[gated["sig"] < 0].sort_values("sig", ascending=True).head(top_n)
+
+    def clean_records(sub_df):
+        recs = []
+        for _, row in sub_df[cols].iterrows():
+            recs.append({
+                "subset": str(row["subset"]),
+                "E_lo": float(row["E_lo"]), "E_hi": float(row["E_hi"]),
+                "theta_lo": float(row["theta_lo"]), "theta_hi": float(row["theta_hi"]),
+                "r_lo": float(row["r_lo"]), "r_hi": float(row["r_hi"]),
+                "A1": float(row["A1"]), "A1_err": float(row["A1_err"]),
+                "B1": float(row["B1"]), "B1_err": float(row["B1_err"]),
+                "chi2_ndf": float(row["chi2_ndf"]), "n_events": int(row["n_events"]),
+                "sig": float(row["sig"]),
+            })
+        return recs
+
+    facts["paramspace_quality_gate_chi2_max"] = chi2_max
+    facts["paramspace_n_pass_gate"] = int(len(gated))
+    facts["paramspace_n_total"] = int(len(s))
+    facts["paramspace_top_positive"] = clean_records(top_pos)
+    facts["paramspace_top_negative"] = clean_records(top_neg)
+    return gated
+
+
+def replicate_prelim_cut(df_clean, facts):
+    """Re-fit the EXACT cut used in the preliminary notebook's final plot
+    (logE in [18.0,18.5), theta in [40,60), r in [750,1050)), per subset, with
+    this audit's improved methodology (two-harmonic + event bootstrap + chi2),
+    so it is directly comparable to this audit's other numbers."""
+    log("Replicating the preliminary notebook's exact cut with bootstrap+chi2 ...")
+    phi_bins = np.linspace(-180, 180, 13)
+    phi_centers = 0.5 * (phi_bins[1:] + phi_bins[:-1])
+    c = PRELIM_NOTEBOOK_CUT
+    out = {}
+    for sub in SUBSETS:
+        cell = df_clean[(df_clean["subset"] == sub) &
+                         (df_clean["logE_REC"] >= c["E_lo"]) & (df_clean["logE_REC"] < c["E_hi"]) &
+                         (df_clean["theta_REC"] >= c["theta_lo"]) & (df_clean["theta_REC"] < c["theta_hi"]) &
+                         (df_clean["r_core"] >= c["r_lo"]) & (df_clean["r_core"] < c["r_hi"])]
+        fit = cell_bootstrap_fit(cell, phi_bins, phi_centers, n_boot=400,
+                                  min_count_per_bin=10, min_bins_present=6)
+        out[sub] = fit  # may be None if still too sparse
+    facts["replication_of_preliminary_cut"] = {"cut": c, "results": out}
+    return out
+
+
+def fig_paramspace_grid(sweep3d_df):
+    if sweep3d_df.empty:
+        log("3D sweep empty -- skipping parameter-space grid figure.")
+        return
+    log("Rendering parameter-space grid (A1 vs r, faceted by subset x energy bin) ...")
+    n_e = len(ENERGY_EDGES) - 1
+    fig, axes = plt.subplots(len(SUBSETS), n_e, figsize=(4.6 * n_e, 4.2 * len(SUBSETS)),
+                              sharex=True, sharey=True)
+    theta_bands = sorted(sweep3d_df[["theta_lo", "theta_hi"]].drop_duplicates().values.tolist())
+    cmap = plt.cm.plasma(np.linspace(0.05, 0.85, len(theta_bands)))
+
+    for i, sub in enumerate(SUBSETS):
+        for j in range(n_e):
+            elo, ehi = ENERGY_EDGES[j], ENERGY_EDGES[j + 1]
+            ax = axes[i, j] if len(SUBSETS) > 1 else axes[j]
+            cell = sweep3d_df[(sweep3d_df["subset"] == sub) &
+                               (sweep3d_df["E_lo"] == elo) & (sweep3d_df["E_hi"] == ehi)]
+            for (tlo, thi), c in zip(theta_bands, cmap):
+                st = cell[(cell["theta_lo"] == tlo) & (cell["theta_hi"] == thi)].sort_values("r_lo")
+                if st.empty:
+                    continue
+                r_mid = 0.5 * (st["r_lo"] + st["r_hi"])
+                ax.errorbar(r_mid, st["A1"], yerr=st["A1_err"], fmt="o-", color=c, lw=1.2, ms=3.5,
+                            label=f"θ {tlo:.0f}-{thi:.0f}°")
+            ax.axhline(0, color="k", lw=0.7)
+            if i == 0:
+                ax.set_title(f"logE ∈ [{elo},{ehi})")
+            if j == 0:
+                ax.set_ylabel(f"{sub}\nA1")
+            if i == len(SUBSETS) - 1:
+                ax.set_xlabel("r (m)")
+    axes.flat[0].legend(fontsize=6.5, ncol=2, loc="upper left")
+    fig.suptitle("Parameter-space sweep: A1 vs. r, faceted by energy bin (rows = subset)")
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT_DIR, "f7_paramspace_grid.png"))
+    plt.close(fig)
+
+
+def fig_paramspace_heatmap(sweep3d_df):
+    if sweep3d_df.empty:
+        return
+    log("Rendering theta x logE significance heatmap (r-marginalized) ...")
+    s = sweep3d_df.copy()
+    s["sig"] = s["A1"] / s["A1_err"].replace(0, np.nan)
+    gated = s[(s["chi2_ndf"] < 3) & (s["chi2_ndf"] > 0)]
+
+    theta_edges = [0, 10, 20, 30, 40, 50, 65]
+    theta_bands = [f"{theta_edges[i]}-{theta_edges[i+1]}" for i in range(len(theta_edges) - 1)]
+    e_bands = [f"{ENERGY_EDGES[i]}-{ENERGY_EDGES[i+1]}" for i in range(len(ENERGY_EDGES) - 1)]
+
+    fig, axes = plt.subplots(1, len(SUBSETS), figsize=(6.5 * len(SUBSETS), 5.2))
+    if len(SUBSETS) == 1:
+        axes = [axes]
+    for ax, sub in zip(axes, SUBSETS):
+        grid = np.full((len(theta_bands), len(e_bands)), np.nan)
+        for i, tlo in enumerate(theta_edges[:-1]):
+            for j, elo in enumerate(ENERGY_EDGES[:-1]):
+                cell = gated[(gated["subset"] == sub) & (gated["theta_lo"] == tlo) & (gated["E_lo"] == elo)]
+                if not cell.empty:
+                    # best-|significance| r-bin for this (theta,E) cell, signed
+                    best = cell.loc[cell["sig"].abs().idxmax()]
+                    grid[i, j] = best["sig"]
+        im = ax.imshow(grid, cmap="RdBu_r", vmin=-6, vmax=6, aspect="auto", origin="lower")
+        ax.set_xticks(range(len(e_bands)))
+        ax.set_xticklabels(e_bands, rotation=30, fontsize=8)
+        ax.set_yticks(range(len(theta_bands)))
+        ax.set_yticklabels(theta_bands, fontsize=8)
+        ax.set_xlabel("logE band")
+        ax.set_ylabel("θ band (deg)")
+        ax.set_title(f"{sub}\nbest |A1|/A1_err per (θ,E), best r-bin, χ²/ndf<3 only")
+        for i in range(len(theta_bands)):
+            for j in range(len(e_bands)):
+                if not np.isnan(grid[i, j]):
+                    ax.text(j, i, f"{grid[i,j]:.1f}", ha="center", va="center", fontsize=7.5,
+                            color="white" if abs(grid[i, j]) > 3 else "black")
+        plt.colorbar(im, ax=ax, label="signed significance (best r-bin)")
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT_DIR, "f8_paramspace_heatmap.png"))
+    plt.close(fig)
+
+
+def fig_replication(df_clean, repl_results):
+    valid = {k: v for k, v in repl_results.items() if v is not None}
+    if not valid:
+        log("Replication cut produced no valid fit in either subset -- skipping figure.")
+        return
+    log("Rendering replication-cell figure (preliminary notebook's exact cut) ...")
+    phi_bins = np.linspace(-180, 180, 13)
+    phi_centers = 0.5 * (phi_bins[1:] + phi_bins[:-1])
+    c = PRELIM_NOTEBOOK_CUT
+
+    fig, axes = plt.subplots(1, len(valid), figsize=(5.2 * len(valid), 4.6))
+    if len(valid) == 1:
+        axes = [axes]
+    for ax, (sub, fit) in zip(axes, valid.items()):
+        cell = df_clean[(df_clean["subset"] == sub) &
+                         (df_clean["logE_REC"] >= c["E_lo"]) & (df_clean["logE_REC"] < c["E_hi"]) &
+                         (df_clean["theta_REC"] >= c["theta_lo"]) & (df_clean["theta_REC"] < c["theta_hi"]) &
+                         (df_clean["r_core"] >= c["r_lo"]) & (df_clean["r_core"] < c["r_hi"])]
+        phi_deg = np.rad2deg(cell["phi_plane_sp"].to_numpy())
+        pb_idx = np.digitize(phi_deg, phi_bins) - 1
+        y = cell["nMuones_REC"].to_numpy()
+        bin_sum = np.bincount(pb_idx, weights=y, minlength=12)
+        bin_n = np.bincount(pb_idx, minlength=12).astype(float)
+        ok = bin_n >= 5
+        y_mean = np.divide(bin_sum, bin_n, out=np.full(12, np.nan), where=bin_n > 0)
+        y_sem = np.full(12, np.nan)
+        for j in range(12):
+            m = pb_idx == j
+            if m.sum() > 1:
+                y_sem[j] = y[m].std(ddof=1) / np.sqrt(m.sum())
+        norm = np.nanmean(y_mean[ok])
+        ax.errorbar(phi_centers[ok], y_mean[ok] / norm, yerr=y_sem[ok] / norm, fmt="o", color="mediumblue",
+                    capsize=3, ms=6)
+        phi_plot = np.linspace(-180, 180, 200)
+        model = 1 + fit["A1"] * np.cos(np.deg2rad(phi_plot)) + fit["B1"] * np.sin(np.deg2rad(phi_plot))
+        ax.plot(phi_plot, model, "-", color="firebrick", lw=2)
+        ax.axhline(1, color="k", ls="--", lw=0.8, alpha=0.6)
+        ax.set_title(f"{sub}\nlogE∈[18.0,18.5) θ∈[40,60) r∈[750,1050)\n"
+                     f"A1={fit['A1']:.3f}±{fit['A1_err']:.3f}  B1={fit['B1']:.3f}±{fit['B1_err']:.3f}  "
+                     f"χ²/ndf={fit['chi2_ndf']:.1f}  N_ev={fit['n_events']}", fontsize=9)
+        ax.set_xlabel("phi_SP (deg)")
+    axes[0].set_ylabel("rho_mu / <rho_mu>")
+    fig.suptitle("Replication of the preliminary notebook's cut, with bootstrap errors + chi2/ndf")
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT_DIR, "f9_replication_cell.png"))
+    plt.close(fig)
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main():
@@ -635,6 +892,13 @@ def main():
     sweep_df = run_sweep(df_clean, facts)
     top_cells = fig_sweep(sweep_df)
     fig_f5_gallery(df_clean, top_cells)
+
+    sweep3d_df = run_sweep_3d(df_clean, facts)
+    rank_paramspace(sweep3d_df, facts)
+    fig_paramspace_grid(sweep3d_df)
+    fig_paramspace_heatmap(sweep3d_df)
+    repl_results = replicate_prelim_cut(df_clean, facts)
+    fig_replication(df_clean, repl_results)
 
     with open(os.path.join(OUT_DIR, "stats.json"), "w") as f:
         json.dump(facts, f, indent=2, default=str)

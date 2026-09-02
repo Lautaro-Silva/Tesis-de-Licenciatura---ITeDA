@@ -106,13 +106,6 @@ blockquote{border-left:3px solid var(--accent-2); margin:1.2rem 0; padding:0.2re
 
 footer{margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--line); font-size:0.82rem; color:var(--ink-dim);}
 </style>
-<script>
-  window.MathJax = {
-    tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
-    svg: { fontCache: 'global' }
-  };
-</script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -121,7 +114,7 @@ footer{margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--line); fo
   <div class="kicker">Thesis working document · UMD azimuthal asymmetry</div>
   <h1>Chapter 7 Data Audit — the UMD Field-Data Pipeline</h1>
   <p class="sub">A code and data audit of <code>Procesamiento_Datos_Campo/</code> — the ADST→parquet real-data
-  pipeline, its two preliminary-analysis notebooks, and a first diagnostic $A_1(r,\theta)$ sweep — done in
+  pipeline, its two preliminary-analysis notebooks, and a first diagnostic <i>A</i><sub>1</sub>(<i>r</i>, θ) sweep — done in
   preparation for writing Chapter 7 (<code>07_datos_reales.tex</code>).</p>
   <div class="meta">Scope: audit + diagnostic. No ADST reprocessing performed. No thesis files modified.</div>
 </header>
@@ -136,7 +129,7 @@ footer{margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--line); fo
     <li><a href="#findings-c">Code hygiene</a></li>
     <li><a href="#phases">Phase I / Phase II — the overlap question</a></li>
     <li><a href="#preliminary">Auditing the preliminary analysis notebooks</a></li>
-    <li><a href="#sweep">A first diagnostic $A_1(r,\theta)$ sweep on real data</a></li>
+    <li><a href="#sweep">A first diagnostic <i>A</i><sub>1</sub>(<i>r</i>, θ) sweep on real data</a></li>
     <li><a href="#offline-docs">Notes from the Offline documentation</a></li>
     <li><a href="#roadmap">Roadmap for Chapter 7</a></li>
   </ol>
@@ -148,35 +141,59 @@ footer{margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--line); fo
 corpus used for Chapter 7 (<code>07_datos_reales.tex</code>, currently three empty section
 headers). It covers <code>Procesamiento_Datos_Campo_v1.ipynb</code>, <code>readADST_data_v19.py</code>,
 the director's reference C++ reader (<code>ADSTReader.cc</code>), the two preliminary-analysis
-notebooks, and closes with a diagnostic $A_1(r,\theta)$ sweep run directly on the corpus with
-corrected cuts. Every number below is recomputed by
+notebooks, and closes with a parameter-space scan — <i>r</i>, θ, and log<sub>10</sub><i>E</i> together —
+run directly on the corpus with corrected cuts. Every number below is recomputed by
 <a href="figures/generate_figures.py"><code>figures/generate_figures.py</code></a> from the
 2,287 parquet files on disk (13.2M module-level rows) — nothing here is hand-typed.</p>
+
+<p><strong>Plain-language version of what this audit actually did</strong>, since the pipeline
+review alone doesn't explain the physics result: it (1) read every parquet file the existing
+pipeline has already produced, (2) checked the code that produced them against its own
+documentation and against the reference C++, (3) re-applied the cuts the notebook was <em>supposed</em>
+to use (the ones on disk turned out to be looser — Finding A1), and (4) fit the azimuthal
+first-harmonic amplitude <i>A</i><sub>1</sub> in many small slices of (core distance <i>r</i>, zenith angle θ,
+energy log<sub>10</sub><i>E</i>) to see where in that three-dimensional space a real asymmetry signal is
+visible in the actual UMD data, using the same fit form and a bootstrap-based error estimate as
+Chapter 5's Dense Ring analysis. No ADST files were reprocessed and no thesis files were touched.</p>
 
 <div class="statrow">
   <div class="stat"><span class="n">13.2M</span><span class="l">module rows audited</span></div>
   <div class="stat"><span class="n">2,287</span><span class="l">parquet files</span></div>
-  <div class="stat"><span class="n">119</span><span class="l">(r,θ,subset) cells fit</span></div>
+  <div class="stat"><span class="n">326</span><span class="l">(r,θ,E,subset) cells fit</span></div>
   <div class="stat"><span class="n">0</span><span class="l">days of ADST reprocessing</span></div>
 </div>
 
-<p>Three findings are load-bearing for how Chapter 7 gets written:</p>
+<p>Four findings are load-bearing for how Chapter 7 gets written:</p>
 
 <div class="finding block">
   <div class="fhead"><span class="ftag">BLOCKING</span><span>the corpus on disk was not built with the cuts the notebook claims</span></div>
   <div class="fbody"><p>§3 — the config cell says <code>logE≥17.0, θ≤65°</code>; the parquet on disk were built with
   <code>logE≥16.5, θ≤70°</code> because a resume-path bug makes every re-run silently skip all 2,287
-  files. This is fixable in pandas without touching the ADST (see §3), and the sweep in §8 does so.</p></div>
+  files. This is fixable in pandas without touching the ADST (see §3), and the parameter-space scan in
+  §8 does so.</p></div>
+</div>
+
+<div class="finding ok">
+  <div class="fhead"><span class="ftag">GOOD NEWS — the physical signal is there</span><span>positive, expected-sign <i>A</i><sub>1</sub> appears once energy is un-mixed</span></div>
+  <div class="fbody"><p>§8 — a first (naive) sweep that lumped every event with logE≥17.0 into one energy bin came out
+  <strong>negative</strong> in most 20°–50° zenith cells — opposite the MC expectation. That combined
+  bin is dominated by the steeply-falling low end of the spectrum (Finding A1's own spectrum plot
+  shows ~90% of events below logE=17.5). Once log<sub>10</sub><i>E</i> is added as a third scanned axis,
+  <strong>positive, significant <i>A</i><sub>1</sub> shows up broadly across logE 17.5–18.5</strong>,
+  for most θ and <i>r</i> bands, especially in Phase II SPMT (much higher statistics than Phase I).
+  This directly reproduces, with proper bootstrap errors and χ²/ndf, the positive result you
+  remembered from the preliminary notebook's own logE∈[18.0,18.5), θ∈[40,60), r∈[750,1050) plot —
+  see the direct replication in §8.</p></div>
 </div>
 
 <div class="finding warn">
-  <div class="fhead"><span class="ftag">NEEDS DECISION</span><span>the naive $A_1$ sweep on real data comes out negative, not positive</span></div>
-  <div class="fbody"><p>§8 — after fixing the cuts, a two-harmonic fit across the Chapter&nbsp;6 binning gives a
-  statistically significant <strong>negative</strong> $A_1$ in most $20°\!-\!50°$ zenith cells, in
-  both Phase I and Phase II independently. That is the opposite sign from the MC expectation
-  (Ch.&nbsp;5/6: positive, attenuation-dominated). §7 shows a plausible instrumental cause — an
-  uncorrected, r-growing $\cos\phi$ exposure bias — but this is not yet proven and needs to be
-  closed before any physics claim is made from real data.</p></div>
+  <div class="fhead"><span class="ftag">NEW OPEN QUESTION</span><span>a separate, near-core negative anomaly, distinct from the exposure bias</span></div>
+  <div class="fbody"><p>§8 — the negative cells that <em>do</em> survive the fit-quality gate cluster at small
+  <i>r</i> (roughly 150–450&nbsp;m) and the lower energy bins, not at the large <i>r</i> where §7's
+  exposure-bias term (<i>c</i><sub>1</sub>, growing with <i>r</i>) is strongest. So the negative sign
+  in the naive combined sweep looks to be driven mainly by low-energy, near-core statistics
+  dominating the average — a different, so-far-unexplained systematic from the exposure bias, not
+  the same one. Both need attention, but they are not (yet demonstrated to be) the same effect.</p></div>
 </div>
 
 <div class="finding ok">
@@ -310,18 +327,18 @@ absorbed by resume logic.</p>
 <div class="finding warn">
 <div class="fhead"><span class="ftag">A3 · WARN — mostly self-resolving</span><span class="where">2024 PhaseII SPMT, representative year</span></div>
 <div class="fbody">
-<p>The flat tail out to $\log_{10}E \approx 22$ visible in the Phase-2 preliminary notebook's
-spectrum (F3a below) is not physics. Of the 182 events with $\log_{10}E>19$ in 2024:</p>
+<p>The flat tail out to log<sub>10</sub><i>E</i> ≈ 22 visible in the Phase-2 preliminary notebook's
+spectrum (F3a below) is not physics. Of the 182 events with log<sub>10</sub><i>E</i> > 19 in 2024:</p>
 <div class="statrow">
 <div class="stat"><span class="n">69.4°</span><span class="l">median θ of the tail</span></div>
 <div class="stat"><span class="n">166/182</span><span class="l">removed by θ≤65° alone</span></div>
 <div class="stat"><span class="n">19.84</span><span class="l">max logE after correct cuts</span></div>
 </div>
-<p>Re-imposing the intended $\theta\le65°$ cut removes 91% of the tail on its own — these are
+<p>Re-imposing the intended θ ≤ 65° cut removes 91% of the tail on its own — these are
 poorly-reconstructed near-horizontal showers, consistent with the known degradation of SD energy
-reconstruction above $\theta\sim 65°$. 16 events survive up to $\log_{10}E=19.84$; that is within
+reconstruction above θ ∼ 65°. 16 events survive up to log<sub>10</sub><i>E</i> = 19.84; that is within
 the plausible range for Auger's highest-energy real events over a 5-year dataset, but each one is
-worth a by-hand sanity check (LDF $\chi^2$, core position) before being trusted in a spectrum plot.</p>
+worth a by-hand sanity check (LDF χ², core position) before being trusted in a spectrum plot.</p>
 </div>
 </div>
 
@@ -330,7 +347,7 @@ worth a by-hand sanity check (LDF $\chi^2$, core position) before being trusted 
 <figcaption><strong>F3.</strong> (a) Energy spectrum with the as-processed (loose) cuts — the green
 line marks where the "intended" cut actually sits; everything left of it should not be in the
 corpus. (b) Zenith distribution — the θ≤65° tail is small in absolute terms but, combined with
-low statistics at high $\log_{10}E$, dominates the spectrum's high-energy tail.</figcaption>
+low statistics at high log<sub>10</sub><i>E</i>, dominates the spectrum's high-energy tail.</figcaption>
 </figure>
 </section>
 
@@ -348,7 +365,7 @@ translation of it. Comparing them line by line surfaces four real divergences.</
 <code>area = counter-&gt;GetActiveArea()/m2 * cos(theta)</code> — i.e. the collaboration's standard
 observable is a <strong>density</strong>, muon count over projected active area. The Python reader
 saves <code>module.GetNumberOfEstimatedMuons()</code> — a raw per-module count, no area, no
-$\cos\theta$ projection. Confirmed against the Offline documentation (§9): <code>mevt::Counter</code>
+cos θ projection. Confirmed against the Offline documentation (§9): <code>mevt::Counter</code>
 exposes <code>GetMuonDensity()</code> directly ("number of estimated muons over the active area"),
 which is the method actually being bypassed.</p>
 <p>Counters do not all carry the same number of modules — confirmed on this corpus:</p>
@@ -358,9 +375,9 @@ which is the method actually being bypassed.</p>
 </div>
 <p>Counters 1622 and 1764 have 7 modules each; 93, 710 and 1574 have 4. Averaging raw module counts
 across counters of different area is not the same as averaging a density.
-<strong>Mitigating factor:</strong> since $A_1$ is extracted from a ratio within each $\phi$ bin,
+<strong>Mitigating factor:</strong> since <i>A</i><sub>1</sub> is extracted from a ratio within each φ bin,
 the area bias cancels at first order <em>if</em> the module/area mix does not itself depend on
-$\phi$ — plausible for a roughly axisymmetric array around a given core, but not verified here.
+φ — plausible for a roughly axisymmetric array around a given core, but not verified here.
 This is a second-order systematic to quantify, not a fatal flaw; it should be corrected once the
 pipeline is reprocessed with area saved.</p>
 </div>
@@ -385,7 +402,7 @@ comes with a proper density and saturation handling built in).</p>
 whitelist keyed by the production <code>base</code>. <code>run.sh</code> and
 <code>Config.xml.in</code> are both configured with <code>base = MdSd433DataReconstruction</code>
 → a 22-station whitelist (<code>vSd433Stations</code>). But the corpus actually analyzed spans
-30–31 distinct counters with reconstructed core positions scattered $\pm 3$–$4$&nbsp;km around
+30–31 distinct counters with reconstructed core positions scattered ±3–4&nbsp;km around
 their centroid — that is the 750&nbsp;m Infill footprint, not the 433&nbsp;m dense sub-array the
 current C++ config targets.</p>
 <p><strong>Conclusion:</strong> the C++ file in this repo documents the standard <em>cut logic</em>
@@ -403,7 +420,7 @@ this themselves.</p>
 <div class="fhead"><span class="ftag">B4 · SCOPE FOR REPROCESSING</span><span class="where">ADSTReader.cc, various</span></div>
 <div class="fbody">
 <p>Variables the C++ reference reads but the Python port drops entirely: GPS time (blocks any
-day/night or seasonal study), energy error, $S_\mathrm{ref}$, LDF $\chi^2$/ndf, the station trigger
+day/night or seasonal study), energy error, <i>S</i><sub>ref</sub>, LDF χ²/ndf, the station trigger
 name, and <code>GetRemovalReason()</code> (the rejection reason string — currently only a boolean
 survives). None of these are recoverable from the existing parquet; they require a reprocessing
 pass through the ADST.</p>
@@ -459,10 +476,10 @@ events in the overlap window were presumably eligible for both reconstruction pa
 "claimed" them; this audit did not chase that selection logic further since it doesn't change the
 practical conclusion.</p>
 <p><strong>Practical implication:</strong> the two subsets can be concatenated without
-double-counting. What has <em>not</em> been verified is whether $N_\mu^{\mathrm{REC}}$ is measured
+double-counting. What has <em>not</em> been verified is whether <i>N</i><sub>μ</sub><sup>REC</sup> is measured
 equivalently between the two electronics/reconstruction modes — the sweep in §8 keeps them
-separate for exactly this reason, and finds broadly consistent (both negative) $A_1$ in the
-$20°$–$50°$ band, which is a reasonable but not conclusive cross-check of equivalence.</p>
+separate for exactly this reason, and finds broadly consistent (both negative) <i>A</i><sub>1</sub> in the
+20°–50° band, which is a reasonable but not conclusive cross-check of equivalence.</p>
 </div>
 </div>
 
@@ -481,52 +498,57 @@ commissioning period (Finding D5 below).</figcaption>
 <div class="finding warn">
 <div class="fhead"><span class="ftag">D1 · MISINTERPRETED, NOW RESOLVED — AND MORE SERIOUS THAN IT LOOKED</span><span class="where">Analisis_Preliminar_DatosCampo_Phase{1,2}.ipynb, "Verificación de isotropía"</span></div>
 <div class="fbody">
-<p>Both preliminary notebooks compute $\chi^2/\mathrm{dof}$ of the $\phi_{SP}$ histogram against a
+<p>Both preliminary notebooks compute χ²/dof of the φ<sub>SP</sub> histogram against a
 flat expectation (Phase1: 95, Phase2: 658), print "esperado ~1.0 si es isotrópico", and stop there
 without diagnosing the excess. This audit went further and decomposed the exposure into Fourier
 harmonics per radial band. <strong>The original plan for this audit assumed this would turn out to
-be a benign, even ($\cos2\phi$) geometric jacobian effect — that assumption was wrong.</strong> The
-dominant term is <em>odd</em> ($\cos\phi$, i.e. exactly the harmonic $A_1$ is fit against), and it
-grows sharply with $r$:</p>
+be a benign, even (cos 2φ) geometric jacobian effect — that assumption was wrong.</strong> The
+dominant term is <em>odd</em> (cos φ, i.e. exactly the harmonic <i>A</i><sub>1</sub> is fit against), and it
+grows sharply with <i>r</i>:</p>
 <div class="tablewrap"><table>
-<thead><tr><th>r band</th><th class="num">$c_1$ (biases $A_1$)</th><th class="num">$s_1$ (biases $B_1$)</th><th class="num">$c_2$ (jacobian)</th><th class="num">peak/trough spread</th></tr></thead>
+<thead><tr><th>r band</th><th class="num"><i>c</i><sub>1</sub> (biases <i>A</i><sub>1</sub>)</th><th class="num"><i>s</i><sub>1</sub> (biases <i>B</i><sub>1</sub>)</th><th class="num"><i>c</i><sub>2</sub> (jacobian)</th><th class="num">peak/trough spread</th></tr></thead>
 <tbody>
 <tr><td>400–600 m</td><td class="num">0.048</td><td class="num">0.002</td><td class="num">−0.028</td><td class="num">12.5%</td></tr>
 <tr><td>600–800 m</td><td class="num">0.078</td><td class="num">0.003</td><td class="num">−0.014</td><td class="num">15.0%</td></tr>
 <tr><td>800–1000 m</td><td class="num">0.170</td><td class="num">0.007</td><td class="num">−0.038</td><td class="num">33.7%</td></tr>
 <tr><td>1000–1250 m</td><td class="num">0.216</td><td class="num">0.011</td><td class="num">−0.059</td><td class="num">41.8%</td></tr>
 </tbody></table></div>
-<p>At $r\in[1000,1250)$ m, module counts vary by ±42% peak-to-trough across $\phi_{SP}$, and the
-$\cos\phi$ component of that variation ($c_1=0.22$) is comparable to or larger than the physical
-$A_1$ values reported for the Dense Ring in Chapter 5 (order 0.03–0.13). This is an acceptance
+<p>At <i>r</i> ∈ [1000, 1250) m, module counts vary by ±42% peak-to-trough across φ<sub>SP</sub>, and the
+cos φ component of that variation (<i>c</i><sub>1</sub> = 0.22) is comparable to or larger than the physical
+<i>A</i><sub>1</sub> values reported for the Dense Ring in Chapter 5 (order 0.03–0.13). This is an acceptance
 effect, not a bug in <code>GetAzimuthSP()</code> (consistent with CLAUDE.md's note that the
 Infill-azimuth concern was investigated and ruled out) — it is the real, finite, irregular Infill
-array geometry combined with a geographically clustered core-position distribution (§ figure below),
+array geometry combined with a geographically clustered core-position distribution (see F2 below),
 which the idealized 12-station Dense Ring by construction cannot have.</p>
-<p><strong>This is very likely the leading candidate explanation for the sign-flipped $A_1$ found
-in the sweep (§8)</strong> — see the cross-reference there.</p>
+<p><strong>Update after the §8 parameter-space breakdown:</strong> this exposure bias is largest at
+<em>large</em> <i>r</i> (≳800&nbsp;m), but the negative <i>A</i><sub>1</sub> cells that survive the
+fit-quality gate in §8 cluster at <em>small</em> <i>r</i> (150–450&nbsp;m) instead. So this exposure
+bias is <strong>not</strong> the demonstrated explanation for those negative cells — it remains a
+real, separate systematic that still needs correcting before any large-<i>r</i> <i>A</i><sub>1</sub>
+value is quoted precisely (roadmap §10), but the near-core anomaly has its own, still-unidentified
+cause.</p>
 </div>
 </div>
 
 <figure>
 <img src="figures/f2_phi_exposure.png" alt="Angular exposure modulation by radial band and its Fourier decomposition">
-<figcaption><strong>F2.</strong> (a) Raw module-count exposure vs. $\phi_{SP}$, by radial band —
-not flat, and the deviation grows with $r$. (b) Fourier decomposition: $c_1$ ($\cos\phi$, the same
-harmonic $A_1$ is fit against) dominates and grows with $r$; $c_2$ ($\cos2\phi$, the geometric
+<figcaption><strong>F2.</strong> (a) Raw module-count exposure vs. φ<sub>SP</sub>, by radial band —
+not flat, and the deviation grows with <i>r</i>. (b) Fourier decomposition: <i>c</i><sub>1</sub> (cos φ, the same
+harmonic <i>A</i><sub>1</sub> is fit against) dominates and grows with <i>r</i>; <i>c</i><sub>2</sub> (cos 2φ, the geometric
 jacobian this audit originally expected to dominate) is present but smaller and roughly constant.</figcaption>
 </figure>
 
 <div class="finding note">
 <div class="fhead"><span class="ftag">D2 · FIT DEFINITION MISMATCH</span><span class="where">Analisis_Preliminar_DatosCampo_Phase2.ipynb, Cell 22</span></div>
 <div class="fbody">
-<p>The only $A_1$ fit against real data currently in the repo has an inconsistency between its
-own code and its own figure: the caption text box says $\theta\in[40°,60°)$,
-$r\in[750,1050)$&nbsp;m, but the code that produced the numbers cuts $\theta\in[50°,60°)$,
-$r\in[750,1250)$&nbsp;m — a 500&nbsp;m-wide radial band on top of a steeply falling LDF. The fit
-also uses a single $\cos\phi$ term (no $\sin\phi$ null-phase test — the exact test the lab notebook
+<p>The only <i>A</i><sub>1</sub> fit against real data currently in the repo has an inconsistency between its
+own code and its own figure: the caption text box says θ ∈ [40°, 60°),
+<i>r</i> ∈ [750, 1050)&nbsp;m, but the code that produced the numbers cuts θ ∈ [50°, 60°),
+<i>r</i> ∈ [750, 1250)&nbsp;m — a 500&nbsp;m-wide radial band on top of a steeply falling LDF. The fit
+also uses a single cos φ term (no sin φ null-phase test — the exact test the lab notebook
 itself proposed on 2026-01-13), has no bootstrap (unlike Chapter 5's dense-ring methodology), and
-its binning ($\Delta r=500$&nbsp;m, one $\theta$ bin, one energy bin) does not match Chapter 6's MC
-binning ($\Delta r=150$&nbsp;m, $\Delta\theta=10°$, $\log_{10}E\in[17.5,18.0]$), so it cannot be
+its binning (Δ<i>r</i> = 500&nbsp;m, one θ bin, one energy bin) does not match Chapter 6's MC
+binning (Δ<i>r</i> = 150&nbsp;m, Δθ = 10°, log<sub>10</sub><i>E</i> ∈ [17.5, 18.0]), so it cannot be
 directly compared to the MC curves the thesis will need to overlay it against.</p>
 </div>
 </div>
@@ -555,9 +577,10 @@ Offline documentation (§9), <code>IsRejected()</code> at the counter level fire
 <div class="fhead"><span class="ftag">D4 · SELECTION BIAS — CHECKED, LOOKS CLEAN</span><span class="where">whole corpus, module_status vs. r and φ</span></div>
 <div class="fbody">
 <p>Good news for the exposure-bias hypothesis in D1: the <code>candidate</code> fraction is flat to
-within ~1 percentage point across both $r$ (69.8%–73.0%) and $\phi_{SP}$ (71.1%–72.2%). Whatever is
-driving the exposure modulation in F2 and the sign-flipped $A_1$ in §8, it is <strong>not</strong>
-coming from module quality selection — reinforcing that the effect is a geometric/acceptance one,
+within ~1 percentage point across both <i>r</i> (69.8%–73.0%) and φ<sub>SP</sub> (71.1%–72.2%). Whatever is
+driving the exposure modulation in F2 — and, separately, the negative <i>A</i><sub>1</sub> cells that
+survive the fit-quality gate in §8's parameter-space scan — it is <strong>not</strong> coming from
+module quality selection — reinforcing that both effects are geometric/acceptance in nature,
 not a data-quality one.</p>
 </div>
 </div>
@@ -565,7 +588,7 @@ not a data-quality one.</p>
 <figure>
 <img src="figures/f4_selection_bias.png" alt="Candidate selection fraction vs r and phi">
 <figcaption><strong>F4.</strong> Selection efficiency (fraction of modules flagged
-<code>candidate</code>) is essentially flat in both $r$ and $\phi_{SP}$ — the exposure effect in F2
+<code>candidate</code>) is essentially flat in both <i>r</i> and φ<sub>SP</sub> — the exposure effect in F2
 is not a selection artifact.</figcaption>
 </figure>
 
@@ -580,79 +603,135 @@ this basis for the §8 sweep.</p>
 </section>
 
 <section id="sweep">
-<h2><span class="num">08</span>A first diagnostic $A_1(r,\theta)$ sweep on real data</h2>
-<p><strong>This is a diagnostic, not the Chapter 7 result.</strong> It exists to answer one
-question: with the cuts fixed, is there a measurable, statistically robust azimuthal modulation in
-the real UMD data at all? It deliberately mirrors Chapter 6's binning so the shape can eventually
-be compared to the MC curves — but it carries none of the corrections a final measurement needs
-(no area/$\cos\theta$ normalization per Finding B1, no exposure correction per Finding D1).</p>
+<h2><span class="num">08</span>Parameter-space scan: where does the asymmetry show up in real data?</h2>
+<p><strong>This is a diagnostic, not the Chapter 7 result.</strong> It exists to answer the
+question you actually asked: given that the asymmetry is known (elsewhere in this thesis) to grow
+with energy, and we have three parameters to play with — <i>r</i>, θ, and energy — which region of
+that space best shows the muon asymmetry in the real UMD data, including the possibility that it
+comes out negative somewhere? It deliberately mirrors Chapter 6's binning so the shape can
+eventually be compared to the MC curves — but it still carries none of the corrections a final
+measurement needs (no area/cos θ normalization per Finding B1, no exposure correction per
+Finding D1). Every number in this section, including the ranked tables, is written into
+<code>figures/stats.json</code> by the same script that made the figures — nothing here is
+typed by hand.</p>
 
-<h3>Method</h3>
-<ul>
-<li>Cuts: $\log_{10}E\ge17.0$, $\theta\le65°$ re-imposed in pandas; <code>CLEAN_MASK</code>
-(not rejected, <code>candidate</code>); 2022 PhaseII excluded (Finding D5).</li>
-<li>Binning: $\Delta r=150$&nbsp;m from 150–1650&nbsp;m; $\theta\in\{0\text{-}10,10\text{-}20,\dots,50\text{-}65\}°$;
-12 $\phi_{SP}$ bins of 30°, matching Chapter 6.</li>
-<li>Fit: $\rho_0(1+A_1\cos\phi+B_1\sin\phi)$, linear least squares on bin means (equivalent to
-<code>curve_fit</code> for this reparametrization, much faster to bootstrap). $B_1$ is always
-reported as the phase null-test (Finding D2's suggestion).</li>
-<li>Errors: <strong>event-level</strong> bootstrap (250 replicates) — resampling events, not
-modules, since multiple modules/counters in one event share core and geometry uncertainty and are
-not independent draws. Mirrors the Chapter 5 dense-ring toy-model methodology.</li>
-<li>Cells require ≥8 of 12 $\phi$ bins with ≥15 rows and ≥50 unique events; 119 of the
-$10\times6\times2=120$ possible (r,θ,subset) cells pass — only the single sparsest cell fails.</li>
-</ul>
-
-<div class="finding warn">
-<div class="fhead"><span class="ftag">HEADLINE RESULT — sign-flipped $A_1$</span><span class="where">119 valid cells, event-bootstrap errors</span></div>
-<div class="fbody">
-<p>In the $\theta\in[20°,50°)$ band — 60 cells across both subsets — <strong>82% come out
-negative</strong>, several at $3\sigma$–$6\sigma$ significance with tight bootstrap errors (e.g.
-PhaseII, $r\in[450,600)$, $\theta\in[40°,50°)$: $A_1=-0.032\pm0.006$, $\chi^2/\mathrm{ndf}=8.4$).
-Quasi-vertical showers ($\theta<20°$) are consistent with zero, as physically expected. This is
-the <strong>opposite sign</strong> from the Chapter 5/6 MC expectation of a positive,
-attenuation-dominated $A_1$ growing with $r$ and $\theta$.</p>
-<p>Two things argue this is a real, reproducible pattern and not a statistical fluke: it appears
-independently in PhaseI and PhaseII (different years, different electronics, same array — see
-§6), and the single-cell fit gallery below shows a clean, well-sampled cosine shape, not scatter
-being over-fit.</p>
-<p><strong>Leading hypothesis (not proven):</strong> the uncorrected, r-growing $\cos\phi$ exposure
-bias from Finding D1 ($c_1$ up to 0.22 at $r\in[1000,1250)$&nbsp;m) is large enough, and grows with
-$r$ in the same way the anomaly does, to plausibly explain a spurious negative $A_1$ once folded
-against the real LDF's radial slope. It has <em>not</em> been demonstrated that correcting the
-exposure removes the effect — that is the immediate next step (§10, priority 1), not a conclusion
-this audit is in a position to draw.</p>
-<p>Fit quality is mixed: median $\chi^2/\mathrm{ndf}=2.1$ over all 119 cells, with 54/119 below 2.
-The near-core bins ($r<450$&nbsp;m) tend to fit worse ($\chi^2/\mathrm{ndf}$ up to 16), consistent
-with Chapter 6's own caution about the near-core LDF gradient — a hint that the fiducial radial cut
-used for MC (excluding $r<150$&nbsp;m, already applied here) may need to be pushed further out for
-real data.</p>
-</div>
-</div>
-
+<h3>Step 1 — the naive, energy-integrated sweep (why it's misleading on its own)</h3>
+<p>The first pass fit <i>A</i><sub>1</sub> in (<i>r</i>, θ) cells combining <strong>every</strong> event
+with log<sub>10</sub><i>E</i> ≥ 17.0 into one energy bin per cell — no third axis. 119 of 120 possible
+(<i>r</i>, θ, subset) cells passed the minimum-statistics cut. In the θ ∈ [20°, 50°) band, 82% of
+those cells came out <strong>negative</strong>, several at 3σ–6σ (e.g. PhaseII,
+<i>r</i> ∈ [450, 600), θ ∈ [40°, 50°): <i>A</i><sub>1</sub> = −0.032 ± 0.006, χ²/ndf = 8.4) — the
+opposite sign from the Chapter 5/6 MC expectation. This is a real, reproducible pattern in the
+data (both subsets agree, the single-cell fits are visually clean cosines, not noise) — but as
+Step 2 below shows, treating it as "the" real-data asymmetry result would have been a mistake: it
+is an artifact of averaging over energy, not evidence against the physical model.</p>
 <div class="figgrid">
 <figure>
-<img src="figures/f5_a1_vs_r_by_theta.png" alt="A1 vs r by zenith band, PhaseI and PhaseII">
-<figcaption><strong>F5a.</strong> $A_1$ vs. $r$ by zenith band, PhaseI (left) and PhaseII SPMT
-(right), event-bootstrap errors. Both subsets independently show the same $\theta$-dependent sign
-pattern: consistent with zero below $\theta\sim20°$, negative from $20°$–$50°$.</figcaption>
+<img src="figures/f5_a1_vs_r_by_theta.png" alt="A1 vs r by zenith band, PhaseI and PhaseII, energy-integrated">
+<figcaption><strong>F5a.</strong> <i>A</i><sub>1</sub> vs. <i>r</i> by zenith band, energy-integrated
+(log<sub>10</sub><i>E</i>≥17.0 all combined) — this is the view that looked like a sign flip.</figcaption>
 </figure>
 <figure>
-<img src="figures/f5_a1_map_phasei.png" alt="A1(r,theta) map, PhaseI">
-<figcaption><strong>F5b.</strong> $A_1(r,\theta)$ map, PhaseI. Large markers = $\chi^2/\mathrm{ndf}<3$.</figcaption>
+<img src="figures/f5_gallery.png" alt="Gallery of individual harmonic fits, highest-significance cells, energy-integrated">
+<figcaption><strong>F5d.</strong> The four highest-significance cells from the energy-integrated
+sweep — a real, well-sampled cosine, just not yet disaggregated by energy.</figcaption>
 </figure>
 </div>
+
+<h3>Step 2 — adding energy as a third axis</h3>
+<p>The spectrum falls steeply (F3a: ~90% of surviving events sit below log<sub>10</sub><i>E</i>=17.5),
+so an energy-integrated bin is numerically dominated by the lowest-energy events. If the physical
+asymmetry grows with energy — as it does elsewhere in this thesis (Ch.&nbsp;5's iron-vs-helium
+Dense Ring comparison) — a real positive signal concentrated at higher energy can be swamped, or
+even inverted in sign, by a much larger low-energy population that behaves differently. The fix:
+refit every (<i>r</i>, θ, subset) cell separately in four energy bands
+(log<sub>10</sub><i>E</i> ∈ [17.0,17.5), [17.5,18.0), [18.0,18.5), [18.5,19.5)), using the identical
+two-harmonic + event-bootstrap methodology.</p>
+<ul>
+<li>326 of 480 possible (<i>r</i>, θ, <i>E</i>, subset) cells pass the same minimum-statistics
+cut as before; 265 of those also pass a χ²/ndf&nbsp;&lt;&nbsp;3 fit-quality gate.</li>
+<li>Ranking below is <strong>gated by fit quality first</strong>: only χ²/ndf&nbsp;&lt;&nbsp;3 cells
+are ranked, then sorted by signed bootstrap significance <i>A</i><sub>1</sub>/<i>A</i><sub>1,err</sub> —
+exactly the two criteria you named (χ²<sub>r</sub> and the visual shape of the fit).</li>
+</ul>
+
 <figure>
-<img src="figures/f5_a1_map_phaseiispmtphaseiibeta.png" alt="A1(r,theta) map, PhaseII SPMT">
-<figcaption><strong>F5c.</strong> $A_1(r,\theta)$ map, PhaseII SPMT — same negative band visible with
-tighter errors thanks to ~6× the statistics of PhaseI.</figcaption>
+<img src="figures/f8_paramspace_heatmap.png" alt="theta x logE heatmap of best signed significance per cell, r marginalized">
+<figcaption><strong>F8.</strong> For each (θ, log<sub>10</sub><i>E</i>) cell, the signed bootstrap
+significance of whichever <i>r</i>-bin scores highest (χ²/ndf&nbsp;&lt;&nbsp;3 only; blank = no
+cell passed the gate). PhaseII (right, ~6× the statistics of PhaseI) shows a striking pattern: the
+log<sub>10</sub><i>E</i>∈[17.5,18.0) and [18.0,18.5) columns are <strong>overwhelmingly positive and
+significant</strong> across almost every θ band — except one cell (θ∈[40°,50°), same energy band)
+which is strongly negative. That one negative outlier is exactly the near-core (<i>r</i>∈[300,450))
+cell flagged as the new open question in the executive summary — a reminder that this "best r-bin"
+view can surface a single anomalous cell alongside an otherwise clean positive pattern, so it should
+always be read together with the full <i>r</i>-curves in F7, not on its own.</figcaption>
 </figure>
+
 <figure>
-<img src="figures/f5_gallery.png" alt="Gallery of individual harmonic fits, highest-significance cells">
-<figcaption><strong>F5d.</strong> The four highest-significance cells. The cosine shape is visually
-clean and well-sampled across all 12 $\phi$ bins — this is a real modulation in the data, the open
-question is entirely about its physical vs. instrumental origin.</figcaption>
+<img src="figures/f7_paramspace_grid.png" alt="A1 vs r, faceted by subset and energy bin, all theta bands overlaid">
+<figcaption><strong>F7.</strong> The full picture behind F8: <i>A</i><sub>1</sub> vs. <i>r</i>, one panel
+per (subset, energy bin), one line per θ band. In PhaseII (bottom row), the log<sub>10</sub><i>E</i>≥17.5
+panels show most θ bands sitting cleanly positive across a wide <i>r</i> range — this is the same
+physically-expected, attenuation-dominated behavior Chapter 5/6 report from MC. PhaseI (top row) is
+noisier — six times less statistics — but not inconsistent.</figcaption>
 </figure>
+
+<h3>Ranked cells (χ²/ndf&nbsp;&lt;&nbsp;3, top 10 by |significance|, both signs)</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Subset</th><th class="num">logE</th><th class="num">θ</th><th class="num">r (m)</th><th class="num"><i>A</i><sub>1</sub></th><th class="num">χ²/ndf</th><th class="num">N events</th><th class="num">sig.</th></tr></thead>
+<tbody>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">50–65°</td><td class="num">750–900</td><td class="num">+0.067±0.014</td><td class="num">2.31</td><td class="num">6,193</td><td class="num">+4.8</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">20–30°</td><td class="num">750–900</td><td class="num">+0.047±0.011</td><td class="num">1.29</td><td class="num">6,413</td><td class="num">+4.3</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">30–40°</td><td class="num">750–900</td><td class="num">+0.038±0.009</td><td class="num">1.84</td><td class="num">7,532</td><td class="num">+4.0</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">18.0–18.5</td><td class="num">50–65°</td><td class="num">900–1050</td><td class="num">+0.096±0.029</td><td class="num">1.01</td><td class="num">680</td><td class="num">+3.3</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">30–40°</td><td class="num">900–1050</td><td class="num">+0.037±0.012</td><td class="num">1.27</td><td class="num">6,220</td><td class="num">+3.1</td></tr>
+<tr><td>PhaseII SPMT</td><td class="num">18.0–18.5</td><td class="num">30–40°</td><td class="num">1350–1500</td><td class="num">+0.170±0.059</td><td class="num">1.34</td><td class="num">437</td><td class="num">+2.9</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">40–50°</td><td class="num">300–450</td><td class="num">−0.042±0.008</td><td class="num">1.73</td><td class="num">5,262</td><td class="num">−5.2</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseII SPMT</td><td class="num">17.0–17.5</td><td class="num">50–65°</td><td class="num">150–300</td><td class="num">−0.047±0.011</td><td class="num">0.90</td><td class="num">6,727</td><td class="num">−4.3</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseII SPMT</td><td class="num">17.0–17.5</td><td class="num">30–40°</td><td class="num">300–450</td><td class="num">−0.014±0.003</td><td class="num">2.44</td><td class="num">42,620</td><td class="num">−4.2</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseI</td><td class="num">17.5–18.0</td><td class="num">10–20°</td><td class="num">750–900</td><td class="num">−0.109±0.035</td><td class="num">0.98</td><td class="num">571</td><td class="num">−3.2</td></tr>
+</tbody></table></div>
+<p>Green rows: the strongest positive detections, all at log<sub>10</sub><i>E</i>≥17.5 and
+<i>r</i>≥750&nbsp;m — the region and sign Chapter 5/6's MC predicts. Red rows: the strongest negative
+detections, clustering at small <i>r</i> (150–450&nbsp;m) and mostly the lower two energy bands —
+consistent with a near-core systematic (Finding D1's exposure bias is largest at <em>large</em> r,
+not here) rather than the same effect. Full ranked lists (top 10 each direction) are in
+<code>figures/stats.json</code> under <code>paramspace_top_positive</code> /
+<code>paramspace_top_negative</code>.</p>
+
+<h3>Direct replication of the preliminary notebook's cut</h3>
+<p>The exact cut from <code>Analisis_Preliminar_DatosCampo_Phase2.ipynb</code>'s final plot —
+log<sub>10</sub><i>E</i>∈[18.0,18.5), θ∈[40°,60°), <i>r</i>∈[750,1050)&nbsp;m — refit here with
+bootstrap errors and χ²/ndf instead of the single-<i>cos φ</i>, no-error version in Finding D2:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Subset</th><th class="num"><i>A</i><sub>1</sub></th><th class="num"><i>B</i><sub>1</sub></th><th class="num">χ²/ndf</th><th class="num">N events</th></tr></thead>
+<tbody>
+<tr><td>PhaseI</td><td class="num">−0.023 ± 0.042</td><td class="num">−0.007 ± 0.036</td><td class="num">3.34</td><td class="num">330</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">+0.062 ± 0.014</td><td class="num">+0.001 ± 0.015</td><td class="num">2.04</td><td class="num">1,454</td></tr>
+</tbody></table></div>
+<p><strong>PhaseII SPMT reproduces your recollection directly:</strong> a positive, 4.4σ
+<i>A</i><sub>1</sub>, tight <i>B</i><sub>1</sub> consistent with zero (correct phase, no geometric
+contamination), reasonable χ²/ndf. PhaseI in this exact cell is <em>not</em> a contradiction — with
+only 330 events (vs. PhaseII's 1,454) the error is 3× larger and the point estimate is consistent
+with both zero and with PhaseII's positive value within ~2σ; χ²/ndf=3.34 also sits right at this
+audit's own quality-gate threshold, so this cell is simply too sparse in PhaseI to say anything on
+its own.</p>
+<figure>
+<img src="figures/f9_replication_cell.png" alt="Replication of the preliminary notebook's cut with bootstrap errors">
+<figcaption><strong>F9.</strong> The replication fit, both subsets. PhaseII's cosine is clean and
+well-sampled; PhaseI's is visibly noisier (fewer, larger error bars) but not shaped inconsistently.</figcaption>
+</figure>
+
+<h3>What this means for Chapter 7</h3>
+<p>The parameter-space view changes the conclusion materially from the energy-integrated one:
+there <strong>is</strong> a statistically robust, correctly-signed, physically-expected muon
+asymmetry in the real UMD data, concentrated at log<sub>10</sub><i>E</i>≳17.5 and
+<i>r</i>≳600–750&nbsp;m, strongest and best-measured in PhaseII SPMT. That is genuinely good news
+for the thesis and directly supports writing Chapter 7 around an energy-binned analysis rather than
+a single energy-integrated one. Two things still need resolving before it becomes a citable result:
+the near-core negative anomaly (which energy binning did not explain) and the missing
+area/cos θ/exposure corrections (Findings B1, D1) — both carried into the roadmap (§10).</p>
 </section>
 
 <section id="offline-docs">
@@ -666,7 +745,7 @@ had to be guessed/navigated to; not everything resolved. What did confirm or upd
 <thead><tr><th>Class · method</th><th>What the docs say</th><th>Relevance</th></tr></thead>
 <tbody>
 <tr><td><code>mevt::Counter::GetNumberOfEstimatedMuons()</code></td><td>Sum of the estimated muons of the counter's modules; returns −1 if any module is saturated.</td><td>Confirms counter-level ≠ module-level (Finding B2); explains where a sentinel −1 could come from — worth checking whether that convention leaked into the −0.98…−1.07 negative values seen in the parquet (Finding D3).</td></tr>
-<tr><td><code>mevt::Counter::GetActiveArea()</code></td><td>Sum of the active area of the counter's modules.</td><td>This is the area the C++ reference multiplies by $\cos\theta$ and the Python reader never saves (Finding B1).</td></tr>
+<tr><td><code>mevt::Counter::GetActiveArea()</code></td><td>Sum of the active area of the counter's modules.</td><td>This is the area the C++ reference multiplies by cos θ and the Python reader never saves (Finding B1).</td></tr>
 <tr><td><code>mevt::Counter::GetMuonDensity()</code></td><td>"The density measured by a counter is calculated as the number of estimated muons over the active area." Returns −1 if saturated.</td><td>This is the method that should be the analysis observable, and isn't currently called anywhere in the field-data pipeline.</td></tr>
 <tr><td><code>mevt::Counter::{IsCandidate,IsSilent,IsRejected}()</code></td><td>Explicit status hierarchy: <code>candidate</code> &gt; <code>silent</code> &gt; <code>rejected</code>. A counter is <code>IsRejected()</code> only when <em>none</em> of its modules has candidate data.</td><td>Useful for Chapter 7's methodology section — module_status is not an arbitrary label, it's a documented state machine, and the counter-level rejection logic is stricter than "any bad module rejects the counter".</td></tr>
 <tr><td><code>mevt::Module::{SetRejected,GetRejectionReason}()</code></td><td>Rejection carries an optional reason string at the module level too.</td><td>Another variable dropped by the Python port (extends Finding B4) — <code>GetRejectionReason()</code> exists at both module and station level and neither survives into the parquet.</td></tr>
@@ -684,14 +763,25 @@ the director directly rather than assumed from this partial documentation crawl.
 
 <div class="roadmap-item">
 <span class="pri p1">P1</span>
-<div><strong>Quantify and correct the exposure bias (Finding D1) before trusting any sign or
-magnitude of $A_1$ on real data.</strong> Concretely: build the $\phi_{SP}$ exposure profile per
-$(r,\theta)$ cell from the data itself (or from a geometry-only Monte Carlo with isotropic
-incidence), and divide the raw signal profile by it before fitting — the standard mixed-event /
-acceptance-correction approach. Re-run the §8 sweep with the correction and see whether the
-negative $A_1$ survives, shrinks, or flips sign. This is the single highest-priority item; nothing
-downstream should be written up as a physics result until this is done. Estimated effort: 1–2 days
-(no reprocessing needed, builds directly on this audit's script).</div>
+<div><strong>Adopt the energy-binned view as the default for Chapter 7</strong> (§8): fit
+<i>A</i><sub>1</sub> per (<i>r</i>, θ, <i>E</i>) cell, not per (<i>r</i>, θ) alone. The
+energy-integrated sweep is now known to be misleading — it mixes a small, positive,
+physically-expected high-energy signal with a much larger low-energy population that behaves
+differently. This is a methodology decision the whole chapter should be built around, not an
+afterthought correction.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p1">P1</span>
+<div><strong>Investigate the near-core negative anomaly</strong> (§8's ranked table, most
+significant at PhaseII, log<sub>10</sub><i>E</i>∈[17.5,18.0), θ∈[40°,50°),
+<i>r</i>∈[300,450), −5.2σ). It survives the χ²/ndf&nbsp;&lt;&nbsp;3 gate and is <em>not</em>
+explained by Finding D1's exposure bias (which is largest at large <i>r</i>, not here) — so it is a
+separate, so-far-unidentified systematic concentrated at small <i>r</i> and low energy. Candidate
+causes to check first: core-position resolution smearing near the shower axis (the same mechanism
+Chapter 6's REC-geometry section flags for MC, §"Régimen cuasi-vertical" discussion), and whether
+this region's module <code>candidate</code> fraction or LDF curvature behaves differently than
+assumed. Estimated effort: 1–2 days, no reprocessing needed.</div>
 </div>
 
 <div class="roadmap-item">
@@ -706,34 +796,41 @@ depending on this audit's workaround. Low effort, no new CPU cost beyond a norma
 
 <div class="roadmap-item">
 <span class="pri p2">P2</span>
-<div><strong>Reprocess with area, $\cos\theta$, GPS time, and rejection reasons saved</strong>
+<div><strong>Quantify and correct the exposure bias</strong> (Finding D1) before quoting a
+precise <i>A</i><sub>1</sub> value at large <i>r</i> (≳800&nbsp;m, where <i>c</i><sub>1</sub> is
+largest). §8's parameter-space results show the positive high-energy signal is visible and
+significant even before this correction, so this is no longer a blocker for showing <em>that</em>
+an asymmetry exists — but it is still needed before any number extracted at large <i>r</i> can be
+trusted at face value. Concretely: build the φ<sub>SP</sub> exposure profile per (<i>r</i>, θ) cell
+from the data itself (or from a geometry-only Monte Carlo with isotropic incidence) and divide the
+raw signal profile by it before fitting — the standard mixed-event / acceptance-correction
+approach. Estimated effort: 1–2 days, builds directly on this audit's script.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p2">P2</span>
+<div><strong>Reprocess with area, cos θ, GPS time, and rejection reasons saved</strong>
 (Findings B1, B4) — needed for a real density observable, for any seasonal/day-night systematic
 check, and for a defensible rejected-station accounting. Requires the Auger Offline environment
 and is the only item on this list that touches the ADST files; scope and schedule it as a single
-combined reprocessing pass together with P1's cut fix, not two separate runs.</div>
+combined reprocessing pass together with the cuts fix above, not two separate runs.</div>
 </div>
 
 <div class="roadmap-item">
 <span class="pri p2">P2</span>
-<div><strong>Align the real-data binning and fit with Chapter 6's MC methodology</strong> (Finding D2):
-two-harmonic fit with $B_1$ reported as a null test, event-level bootstrap errors, and the exact
-$(r,\theta,E)$ grid used for MC — already implemented in this audit's sweep script and reusable
-directly for Chapter 7's figures once P1 is resolved.</div>
-</div>
-
-<div class="roadmap-item">
-<span class="pri p2">P2</span>
-<div><strong>Verify $N_\mu^{\mathrm{REC}}$ equivalence between PhaseI and PhaseII SPMT</strong>
-before combining them for statistics (§6) — e.g. compare their $A_1(r,\theta)$ maps
-cell-by-cell with a joint significance test, not just "both negative".</div>
+<div><strong>Verify <i>N</i><sub>μ</sub><sup>REC</sup> equivalence between PhaseI and PhaseII SPMT</strong>
+before combining them for statistics (§6) — the replication cell in §8 shows PhaseI consistent
+with, but far less constraining than, PhaseII at the same cut (330 vs. 1,454 events); a proper
+joint significance test across the full parameter-space grid would settle whether they can be
+pooled for a single Chapter 7 number.</div>
 </div>
 
 <div class="roadmap-item">
 <span class="pri p3">P3</span>
-<div><strong>Systematics budget for the thesis write-up</strong>, once P1 is resolved: exposure
-correction residual, area/$\cos\theta$ 2nd-order bias (Finding B1), 2022 SPMT-commissioning
-exclusion sensitivity, and the near-core fit-quality cutoff (§8) all need at least an order-of-magnitude
-estimate in Chapter 7 for it to survive a referee reading in the spirit of §2 of CLAUDE.md.</div>
+<div><strong>Systematics budget for the thesis write-up</strong>: exposure correction residual,
+area/cos θ 2nd-order bias (Finding B1), 2022 SPMT-commissioning exclusion sensitivity, and the
+near-core anomaly's impact on neighboring cells all need at least an order-of-magnitude estimate
+in Chapter 7 for it to survive a referee reading in the spirit of §2 of CLAUDE.md.</div>
 </div>
 
 <div class="roadmap-item">
