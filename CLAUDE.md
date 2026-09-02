@@ -86,12 +86,20 @@ Documented in `Notas  - Latex/Trabajo.tex`:
 
 **Data flow:** ADST (Auger Offline ROOT format) → PyROOT reader (parallelized via `multiprocessing.Pool`) → parquet → pandas/numpy analysis → harmonic fit (`scipy.optimize.curve_fit`) for A1 → matplotlib figures / auto-generated PDF reports (fpdf2 + pdfplumber).
 
-**Active notebooks are `.py` files (jupytext, percent format), not `.ipynb`.** See
-`Scripts/README_notebooks.md` for the full rationale and workflow. In short: the `.ipynb`
-outputs (base64 figures) made the files too heavy to edit as text and bloated git; the `.py`
-is the tracked source of truth, opens as a normal cell-by-cell notebook in JupyterLab/VS Code
-(with jupytext installed in `venv/`), and a paired local `.ipynb` (gitignored) holds outputs.
-When editing one of these, edit the `.py` — that's what's in git.
+**Active notebooks are paired `.py` + `.ipynb` (jupytext, percent format). Both are tracked
+in git. Claude edits only the `.py` — never write to the `.ipynb` directly.** See
+`Scripts/README_notebooks.md` for the full workflow. The `.ipynb` outputs (base64 figures)
+made these files heavy and unpleasant to edit as raw text, which is why the `.py` — plain
+Python with `# %%` cell markers — is what Claude reads and edits. But the user's own
+workflow is interactive: they open and run the `.ipynb` in JupyterLab, and its outputs
+(figures, tables) are real thesis artifacts they don't want silently deleted by a git
+operation in some other checkout. **Do not `git rm --cached` these `.ipynb` files or add
+them to `.gitignore`** — that was tried once (2026-09-02) and it deleted the user's local
+figures the moment they pulled the change into their own checkout, because `git rm --cached`
+only spares the working tree in the repo where it's run; every other checkout that pulls the
+resulting commit has the file removed from disk too, regardless of `.gitignore`. Keeping
+both tracked means the `.ipynb` half of a commit diff is large/unreadable when outputs
+change — that's an accepted tradeoff, not a bug to fix by untracking it again.
 
 **Active / current** (build on these):
 - `Scripts/Procesamiento_ADST_v8-2.py`, `Scripts/Procesamiento_ADST_Campo_v9.py` — main MC ADST→parquet pipelines.

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 7 Data Audit — UMD Field-Data Pipeline</title>
+<style>
+:root{
+  --bg:#f7f5f0; --bg-panel:#ffffff; --ink:#1c1a17; --ink-dim:#5a564e;
+  --line:#e2ddd2; --accent:#8a3b2b; --accent-2:#2c5f6b;
+  --sev-block:#8a3b2b; --sev-block-bg:#fbeee9;
+  --sev-warn:#a5690f; --sev-warn-bg:#fbf1de;
+  --sev-note:#2c5f6b; --sev-note-bg:#e9f2f2;
+  --sev-ok:#3b6e3b; --sev-ok-bg:#eaf3ea;
+  --code-bg:#efeae0; --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171512; --bg-panel:#211e1a; --ink:#eee8dd; --ink-dim:#b7ae9d;
+    --line:#3a352c; --accent:#e08a70; --accent-2:#7ec7d6;
+    --sev-block:#e08a70; --sev-block-bg:#3a241d;
+    --sev-warn:#e0b158; --sev-warn-bg:#3a2f16;
+    --sev-note:#7ec7d6; --sev-note-bg:#173036;
+    --sev-ok:#8fce8f; --sev-ok-bg:#1c2e1c;
+    --code-bg:#2a271f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171512; --bg-panel:#211e1a; --ink:#eee8dd; --ink-dim:#b7ae9d;
+  --line:#3a352c; --accent:#e08a70; --accent-2:#7ec7d6;
+  --sev-block:#e08a70; --sev-block-bg:#3a241d;
+  --sev-warn:#e0b158; --sev-warn-bg:#3a2f16;
+  --sev-note:#7ec7d6; --sev-note-bg:#173036;
+  --sev-ok:#8fce8f; --sev-ok-bg:#1c2e1c;
+  --code-bg:#2a271f;
+}
+*{box-sizing:border-box;}
+body{background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.6; margin:0;}
+.wrap{max-width:920px; margin:0 auto; padding:2.5rem 1.5rem 6rem;}
+header.hero{padding:2.5rem 0 2rem; border-bottom:1px solid var(--line); margin-bottom:2.5rem;}
+header.hero .kicker{font-family:var(--mono); font-size:0.78rem; letter-spacing:0.09em; text-transform:uppercase; color:var(--accent-2);}
+header.hero h1{font-family:var(--serif); font-size:2.15rem; margin:0.35rem 0 0.6rem; line-height:1.25;}
+header.hero p.sub{color:var(--ink-dim); font-size:1.02rem; max-width:70ch; margin:0;}
+header.hero .meta{margin-top:1.1rem; font-size:0.85rem; color:var(--ink-dim); font-family:var(--mono);}
+
+h2{font-family:var(--serif); font-size:1.5rem; margin-top:3rem; padding-top:0.2rem; border-top:1px solid var(--line); padding-top:1.6rem;}
+h2 .num{color:var(--accent-2); font-family:var(--mono); font-size:0.95rem; margin-right:0.5rem;}
+h3{font-family:var(--serif); font-size:1.18rem; margin-top:2rem;}
+p{max-width:74ch;}
+a{color:var(--accent-2);}
+code, .mono{font-family:var(--mono); font-size:0.88em; background:var(--code-bg); padding:0.1em 0.35em; border-radius:4px;}
+pre{background:var(--code-bg); padding:0.9rem 1rem; border-radius:8px; overflow-x:auto; font-size:0.82rem; line-height:1.5;}
+pre code{background:none; padding:0;}
+
+table{border-collapse:collapse; width:100%; margin:1.2rem 0; font-size:0.92rem;}
+th,td{text-align:left; padding:0.5rem 0.7rem; border-bottom:1px solid var(--line);}
+th{font-family:var(--mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-dim);}
+td.num, th.num{text-align:right; font-family:var(--mono);}
+.tablewrap{overflow-x:auto;}
+
+.card{background:var(--bg-panel); border:1px solid var(--line); border-radius:10px; padding:1.3rem 1.4rem; margin:1.3rem 0;}
+figure{margin:1.6rem 0;}
+figure img{width:100%; height:auto; border-radius:8px; border:1px solid var(--line); background:#fff;}
+figure svg{width:100%; height:auto; border-radius:8px; border:1px solid var(--line); background:var(--bg-panel);}
+figcaption{font-size:0.85rem; color:var(--ink-dim); margin-top:0.5rem;}
+
+.finding{border-radius:10px; border:1px solid var(--line); margin:1.1rem 0; overflow:hidden;}
+.finding .fhead{display:flex; align-items:baseline; gap:0.6rem; padding:0.8rem 1.1rem; font-family:var(--mono); font-size:0.82rem;}
+.finding .fbody{padding:0.2rem 1.1rem 1rem;}
+.finding .ftag{font-weight:700; padding:0.1rem 0.5rem; border-radius:5px; font-size:0.72rem; letter-spacing:0.03em;}
+.finding.block .fhead{background:var(--sev-block-bg);}
+.finding.block .ftag{background:var(--sev-block); color:#fff;}
+.finding.warn .fhead{background:var(--sev-warn-bg);}
+.finding.warn .ftag{background:var(--sev-warn); color:#1c1a17;}
+.finding.note .fhead{background:var(--sev-note-bg);}
+.finding.note .ftag{background:var(--sev-note); color:#fff;}
+.finding.ok .fhead{background:var(--sev-ok-bg);}
+.finding.ok .ftag{background:var(--sev-ok); color:#fff;}
+.finding .where{color:var(--ink-dim);}
+
+.stat{display:inline-block; margin:0.3rem 1.4rem 0.3rem 0;}
+.stat .n{font-family:var(--serif); font-size:1.7rem; display:block;}
+.stat .l{font-size:0.78rem; color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.03em;}
+.statrow{margin:1rem 0 1.5rem;}
+
+.toc{background:var(--bg-panel); border:1px solid var(--line); border-radius:10px; padding:1.2rem 1.5rem;}
+.toc ol{margin:0.3rem 0 0; padding-left:1.3rem;}
+.toc a{text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+.verified{color:var(--sev-ok); font-weight:600;}
+.suspected{color:var(--sev-warn); font-weight:600;}
+
+blockquote{border-left:3px solid var(--accent-2); margin:1.2rem 0; padding:0.2rem 1rem; color:var(--ink-dim); font-style:italic;}
+
+.figgrid{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
+@media (max-width:700px){.figgrid{grid-template-columns:1fr;}}
+
+.roadmap-item{display:flex; gap:1rem; margin:1.1rem 0; align-items:flex-start;}
+.roadmap-item .pri{font-family:var(--mono); font-size:0.75rem; padding:0.15rem 0.5rem; border-radius:5px; white-space:nowrap; margin-top:0.15rem;}
+.pri.p1{background:var(--sev-block-bg); color:var(--sev-block);}
+.pri.p2{background:var(--sev-warn-bg); color:var(--sev-warn);}
+.pri.p3{background:var(--sev-note-bg); color:var(--sev-note);}
+
+footer{margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--line); font-size:0.82rem; color:var(--ink-dim);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Thesis working document · UMD azimuthal asymmetry</div>
+  <h1>Chapter 7 Data Audit — the UMD Field-Data Pipeline</h1>
+  <p class="sub">A code and data audit of <code>Procesamiento_Datos_Campo/</code> — the ADST→parquet real-data
+  pipeline, its two preliminary-analysis notebooks, and a first diagnostic <i>A</i><sub>1</sub>(<i>r</i>, θ) sweep — done in
+  preparation for writing Chapter 7 (<code>07_datos_reales.tex</code>).</p>
+  <div class="meta">Scope: audit + diagnostic. No ADST reprocessing performed. No thesis files modified.</div>
+</header>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#summary">Executive summary</a></li>
+    <li><a href="#pipeline">The data pipeline, as built</a></li>
+    <li><a href="#findings-a">Blocking findings — the on-disk cuts</a></li>
+    <li><a href="#findings-b">Divergences from the reference C++ reader</a></li>
+    <li><a href="#findings-c">Code hygiene</a></li>
+    <li><a href="#phases">Phase I / Phase II — the overlap question</a></li>
+    <li><a href="#preliminary">Auditing the preliminary analysis notebooks</a></li>
+    <li><a href="#sweep">A first diagnostic <i>A</i><sub>1</sub>(<i>r</i>, θ) sweep on real data</a></li>
+    <li><a href="#offline-docs">Notes from the Offline documentation</a></li>
+    <li><a href="#roadmap">Roadmap for Chapter 7</a></li>
+  </ol>
+</nav>
+
+<section id="summary">
+<h2><span class="num">01</span>Executive summary</h2>
+<p>This document audits the pipeline that turns raw Auger UMD ADST files into the parquet
+corpus used for Chapter 7 (<code>07_datos_reales.tex</code>, currently three empty section
+headers). It covers <code>Procesamiento_Datos_Campo_v1.ipynb</code>, <code>readADST_data_v19.py</code>,
+the director's reference C++ reader (<code>ADSTReader.cc</code>), the two preliminary-analysis
+notebooks, and closes with a parameter-space scan — <i>r</i>, θ, and log<sub>10</sub><i>E</i> together —
+run directly on the corpus with corrected cuts. Every number below is recomputed by
+<a href="figures/generate_figures.py"><code>figures/generate_figures.py</code></a> from the
+2,287 parquet files on disk (13.2M module-level rows) — nothing here is hand-typed.</p>
+
+<p><strong>Plain-language version of what this audit actually did</strong>, since the pipeline
+review alone doesn't explain the physics result: it (1) read every parquet file the existing
+pipeline has already produced, (2) checked the code that produced them against its own
+documentation and against the reference C++, (3) re-applied the cuts the notebook was <em>supposed</em>
+to use (the ones on disk turned out to be looser — Finding A1), and (4) fit the azimuthal
+first-harmonic amplitude <i>A</i><sub>1</sub> in many small slices of (core distance <i>r</i>, zenith angle θ,
+energy log<sub>10</sub><i>E</i>) to see where in that three-dimensional space a real asymmetry signal is
+visible in the actual UMD data, using the same fit form and a bootstrap-based error estimate as
+Chapter 5's Dense Ring analysis. No ADST files were reprocessed and no thesis files were touched.</p>
+
+<div class="statrow">
+  <div class="stat"><span class="n">13.2M</span><span class="l">module rows audited</span></div>
+  <div class="stat"><span class="n">2,287</span><span class="l">parquet files</span></div>
+  <div class="stat"><span class="n">326</span><span class="l">(r,θ,E,subset) cells fit</span></div>
+  <div class="stat"><span class="n">0</span><span class="l">days of ADST reprocessing</span></div>
+</div>
+
+<p>Four findings are load-bearing for how Chapter 7 gets written:</p>
+
+<div class="finding block">
+  <div class="fhead"><span class="ftag">BLOCKING</span><span>the corpus on disk was not built with the cuts the notebook claims</span></div>
+  <div class="fbody"><p>§3 — the config cell says <code>logE≥17.0, θ≤65°</code>; the parquet on disk were built with
+  <code>logE≥16.5, θ≤70°</code> because a resume-path bug makes every re-run silently skip all 2,287
+  files. This is fixable in pandas without touching the ADST (see §3), and the parameter-space scan in
+  §8 does so.</p></div>
+</div>
+
+<div class="finding ok">
+  <div class="fhead"><span class="ftag">GOOD NEWS — the physical signal is there</span><span>positive, expected-sign <i>A</i><sub>1</sub> appears once energy is un-mixed</span></div>
+  <div class="fbody"><p>§8 — a first (naive) sweep that lumped every event with logE≥17.0 into one energy bin came out
+  <strong>negative</strong> in most 20°–50° zenith cells — opposite the MC expectation. That combined
+  bin is dominated by the steeply-falling low end of the spectrum (Finding A1's own spectrum plot
+  shows ~90% of events below logE=17.5). Once log<sub>10</sub><i>E</i> is added as a third scanned axis,
+  <strong>positive, significant <i>A</i><sub>1</sub> shows up broadly across logE 17.5–18.5</strong>,
+  for most θ and <i>r</i> bands, especially in Phase II SPMT (much higher statistics than Phase I).
+  This directly reproduces, with proper bootstrap errors and χ²/ndf, the positive result you
+  remembered from the preliminary notebook's own logE∈[18.0,18.5), θ∈[40,60), r∈[750,1050) plot —
+  see the direct replication in §8.</p></div>
+</div>
+
+<div class="finding warn">
+  <div class="fhead"><span class="ftag">NEW OPEN QUESTION</span><span>a separate, near-core negative anomaly, distinct from the exposure bias</span></div>
+  <div class="fbody"><p>§8 — the negative cells that <em>do</em> survive the fit-quality gate cluster at small
+  <i>r</i> (roughly 150–450&nbsp;m) and the lower energy bins, not at the large <i>r</i> where §7's
+  exposure-bias term (<i>c</i><sub>1</sub>, growing with <i>r</i>) is strongest. So the negative sign
+  in the naive combined sweep looks to be driven mainly by low-energy, near-core statistics
+  dominating the average — a different, so-far-unexplained systematic from the exposure bias, not
+  the same one. Both need attention, but they are not (yet demonstrated to be) the same effect.</p></div>
+</div>
+
+<div class="finding ok">
+  <div class="fhead"><span class="ftag">GOOD NEWS</span><span>Phase I / Phase II can be concatenated safely</span></div>
+  <div class="fbody"><p>§6 — despite 15 months of nominal date overlap, the two subsets share
+  <strong>zero</strong> event IDs over the same ~30 stations: they are disjoint production streams,
+  not duplicate reconstructions. No double-counting risk from combining them.</p></div>
+</div>
+
+<p>The rest of this document lays out every finding with its evidence, severity, and suggested
+fix, then closes with a prioritized roadmap for Chapter 7 (§10).</p>
+</section>
+
+<section id="pipeline">
+<h2><span class="num">02</span>The data pipeline, as built</h2>
+<p>Before the findings, the map. Boxes are pipeline stages; the annotations under each arrow are
+cuts actually applied at that stage, verified against the code — not the notebook's claims.</p>
+
+<figure>
+<svg viewBox="0 0 1360 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-dim)"/>
+    </marker>
+  </defs>
+
+  <!-- C++ reference side box -->
+  <rect x="300" y="18" width="260" height="86" rx="8" fill="var(--sev-warn-bg)" stroke="var(--sev-warn)" stroke-width="1.3" stroke-dasharray="5,3"/>
+  <text x="430" y="40" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--sev-warn)">ADSTReader.cc (director's ref.)</text>
+  <text x="430" y="58" text-anchor="middle" font-size="11" fill="var(--ink-dim)">cuts ported to Python;</text>
+  <text x="430" y="72" text-anchor="middle" font-size="11" fill="var(--ink-dim)">station whitelist (IsStationInBase)</text>
+  <text x="430" y="86" text-anchor="middle" font-size="11" fill="var(--ink-dim)">and area/cosθ norm. NOT ported</text>
+  <line x1="430" y1="104" x2="430" y2="150" stroke="var(--sev-warn)" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Row of main boxes -->
+  <rect x="20"  y="150" width="220" height="92" rx="8" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="1.3"/>
+  <text x="130" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">ADST .root files</text>
+  <text x="130" y="203" text-anchor="middle" font-size="11" fill="var(--ink-dim)">collaboration data server</text>
+  <text x="130" y="218" text-anchor="middle" font-size="11" fill="var(--ink-dim)">v4r2, PhaseI + PhaseII SPMT</text>
+
+  <rect x="300" y="150" width="260" height="92" rx="8" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="1.3"/>
+  <text x="430" y="177" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">readADST_surface_data_v19</text>
+  <text x="430" y="195" text-anchor="middle" font-size="11" fill="var(--ink-dim)">PyROOT, Offline env, Pool(12)</text>
+  <text x="430" y="212" text-anchor="middle" font-size="11" fill="var(--sev-block)" font-weight="600">on-disk cuts: logE≥16.5, θ≤70°</text>
+  <text x="430" y="227" text-anchor="middle" font-size="10.5" fill="var(--ink-dim)">(notebook cell claims 17.0 / 65°)</text>
+
+  <rect x="600" y="150" width="220" height="92" rx="8" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="1.3"/>
+  <text x="710" y="177" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">.parquet corpus</text>
+  <text x="710" y="195" text-anchor="middle" font-size="11" fill="var(--ink-dim)">2,287 files · 447 MB</text>
+  <text x="710" y="212" text-anchor="middle" font-size="11" fill="var(--ink-dim)">1 row / UMD module / event</text>
+  <text x="710" y="227" text-anchor="middle" font-size="10.5" fill="var(--ink-dim)">module_status kept, not filtered</text>
+
+  <rect x="860" y="150" width="240" height="92" rx="8" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="1.3"/>
+  <text x="980" y="177" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">Preliminary analysis</text>
+  <text x="980" y="195" text-anchor="middle" font-size="11" fill="var(--ink-dim)">Analisis_Preliminar_DatosCampo</text>
+  <text x="980" y="212" text-anchor="middle" font-size="11" fill="var(--ink-dim)">Phase1.ipynb / Phase2.ipynb</text>
+  <text x="980" y="227" text-anchor="middle" font-size="10.5" fill="var(--ink-dim)">CLEAN_MASK applied here</text>
+
+  <rect x="1140" y="150" width="200" height="92" rx="8" fill="var(--sev-block-bg)" stroke="var(--sev-block)" stroke-width="1.6"/>
+  <text x="1240" y="177" text-anchor="middle" font-size="13" font-weight="700" fill="var(--sev-block)">Chapter 7</text>
+  <text x="1240" y="195" text-anchor="middle" font-size="11" fill="var(--sev-block)">07_datos_reales.tex</text>
+  <text x="1240" y="212" text-anchor="middle" font-size="11" fill="var(--sev-block)" font-weight="600">not started</text>
+  <text x="1240" y="227" text-anchor="middle" font-size="10.5" fill="var(--sev-block)">this audit is the input</text>
+
+  <line x1="240" y1="196" x2="298" y2="196" stroke="var(--ink-dim)" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="560" y1="196" x2="598" y2="196" stroke="var(--ink-dim)" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="820" y1="196" x2="858" y2="196" stroke="var(--ink-dim)" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <line x1="1100" y1="196" x2="1138" y2="196" stroke="var(--ink-dim)" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+  <!-- resume bug annotation -->
+  <rect x="20" y="280" width="820" height="100" rx="8" fill="var(--sev-note-bg)" stroke="var(--sev-note)" stroke-width="1.2"/>
+  <text x="40" y="304" font-size="12" font-weight="700" fill="var(--sev-note)">Resume bug (Cell 10): looks for OUTPUT_DIR/&lt;file&gt;.parquet (flat);</text>
+  <text x="40" y="322" font-size="12" fill="var(--sev-note)">the worker (Cell 8) actually writes to OUTPUT_DIR/&lt;year&gt;/&lt;month&gt;/&lt;file&gt;.parquet.</text>
+  <text x="40" y="340" font-size="12" fill="var(--sev-note)">Cell 10 always reports "0 already processed" — but the worker's own (correct) path check</text>
+  <text x="40" y="358" font-size="12" fill="var(--sev-note)">then skips every file anyway. Net effect: changing the cuts in Cell 4 never regenerates anything.</text>
+
+  <rect x="860" y="280" width="480" height="100" rx="8" fill="var(--sev-warn-bg)" stroke="var(--sev-warn)" stroke-width="1.2"/>
+  <text x="880" y="304" font-size="12" font-weight="700" fill="var(--sev-warn)">This audit's fix (§3, §8):</text>
+  <text x="880" y="324" font-size="12" fill="var(--sev-warn)">re-impose logE≥17.0, θ≤65°, and CLEAN_MASK</text>
+  <text x="880" y="342" font-size="12" fill="var(--sev-warn)">in pandas on the existing parquet — no ADST</text>
+  <text x="880" y="360" font-size="12" fill="var(--sev-warn)">reprocessing needed for this step.</text>
+</svg>
+<figcaption><strong>F6.</strong> The pipeline as it actually runs, with the cuts verified at each
+stage. The dashed side-box is the director's C++ reference reader — useful for the cut logic, but
+not the code that produced these particular ADST (see Finding B3).</figcaption>
+</figure>
+</section>
+
+<section id="findings-a">
+<h2><span class="num">03</span>Blocking findings — the on-disk cuts</h2>
+
+<div class="finding block">
+<div class="fhead"><span class="ftag">A1 · BLOCKING</span><span class="where">Procesamiento_Datos_Campo_v1.ipynb, Cell 4 vs. the two log files in the output dir</span></div>
+<div class="fbody">
+<p><strong>The corpus was not built with the cuts the notebook's config cell shows.</strong>
+<code>log_procesamiento_20260623_113512.txt</code> records the actual run:
+<code>logE≥16.5, θ≤70.0</code>, processing all 2,287 files successfully.
+<code>log_procesamiento_20260821_093232.txt</code> — after the config cell was edited to
+<code>logE≥17.0, θ≤65.0</code> — processed <strong>zero</strong> files (see Finding A2). The parquet
+on disk are therefore the June run, not what the notebook currently displays.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Subset</th><th class="num">N events (raw)</th><th class="num">max θ</th><th class="num">frac θ&gt;65°</th><th class="num">frac logE&lt;17.0</th><th class="num">max logE</th></tr></thead>
+<tbody>
+<tr><td>PhaseI</td><td class="num">136,570</td><td class="num">69.8°</td><td class="num">0.03%</td><td class="num">37.9%</td><td class="num">20.42</td></tr>
+<tr><td>PhaseII SPMT</td><td class="num">803,130</td><td class="num">70.0°</td><td class="num">0.31%</td><td class="num">44.7%</td><td class="num">22.19</td></tr>
+</tbody></table></div>
+<p><strong>Fix:</strong> the looser on-disk cuts are a superset of the intended ones, so — unlike a
+missing-variable problem — this one is fully recoverable in pandas: re-impose
+<code>logE≥17.0 &amp; θ≤65.0</code> before analysis (done throughout §7-8 of this report). No ADST
+reprocessing is required for the energy/angle cuts themselves. Reprocessing would only be needed
+to recover variables never saved in the first place (Finding B4).</p>
+</div>
+</div>
+
+<div class="finding block">
+<div class="fhead"><span class="ftag">A2 · BLOCKING</span><span class="where">Cell 10 (resume search) vs. Cell 8 (process_file_wrapper_data)</span></div>
+<div class="fbody">
+<p>Cell 10's resume check looks for <code>OUTPUT_DIR/&lt;file&gt;.parquet</code> (flat). The worker
+in Cell 8 actually writes to <code>OUTPUT_DIR/&lt;year&gt;/&lt;month&gt;/&lt;file&gt;.parquet</code>.
+So Cell 10 always reports "0 already processed, 2,296 pending" — but the worker has its own
+(correct) existence check on the real nested path, and skips every file that's already there. Net
+effect observed in the logs: editing the cuts in Cell 4 and re-running produced
+<strong>0 processed, 2,287 "already exists"</strong> — the new cuts silently never took effect.</p>
+<p><strong>Fix:</strong> make Cell 10's glob recursive (<code>**/*.parquet</code>) so the reported
+resume count is honest, and — more importantly — either delete stale outputs or add a
+config-hash suffix to the output filename so a cut change is force-visible instead of silently
+absorbed by resume logic.</p>
+</div>
+</div>
+
+<div class="finding warn">
+<div class="fhead"><span class="ftag">A3 · WARN — mostly self-resolving</span><span class="where">2024 PhaseII SPMT, representative year</span></div>
+<div class="fbody">
+<p>The flat tail out to log<sub>10</sub><i>E</i> ≈ 22 visible in the Phase-2 preliminary notebook's
+spectrum (F3a below) is not physics. Of the 182 events with log<sub>10</sub><i>E</i> > 19 in 2024:</p>
+<div class="statrow">
+<div class="stat"><span class="n">69.4°</span><span class="l">median θ of the tail</span></div>
+<div class="stat"><span class="n">166/182</span><span class="l">removed by θ≤65° alone</span></div>
+<div class="stat"><span class="n">19.84</span><span class="l">max logE after correct cuts</span></div>
+</div>
+<p>Re-imposing the intended θ ≤ 65° cut removes 91% of the tail on its own — these are
+poorly-reconstructed near-horizontal showers, consistent with the known degradation of SD energy
+reconstruction above θ ∼ 65°. 16 events survive up to log<sub>10</sub><i>E</i> = 19.84; that is within
+the plausible range for Auger's highest-energy real events over a 5-year dataset, but each one is
+worth a by-hand sanity check (LDF χ², core position) before being trusted in a spectrum plot.</p>
+</div>
+</div>
+
+<figure>
+<img src="figures/f3_spectrum_theta.png" alt="Energy spectrum and zenith distribution, on-disk vs intended cuts">
+<figcaption><strong>F3.</strong> (a) Energy spectrum with the as-processed (loose) cuts — the green
+line marks where the "intended" cut actually sits; everything left of it should not be in the
+corpus. (b) Zenith distribution — the θ≤65° tail is small in absolute terms but, combined with
+low statistics at high log<sub>10</sub><i>E</i>, dominates the spectrum's high-energy tail.</figcaption>
+</figure>
+</section>
+
+<section id="findings-b">
+<h2><span class="num">04</span>Divergences from the reference C++ reader</h2>
+<p><code>ADSTReader.cc</code>/<code>.h</code> is the director's reference implementation of the
+standard Auger quality cuts. <code>readADST_data_v19.py</code> (and the notebook's Cell 6, which
+is a second, independently-edited copy of the same function — see Finding C2) is a Python
+translation of it. Comparing them line by line surfaces four real divergences.</p>
+
+<div class="finding warn">
+<div class="fhead"><span class="ftag">B1 · SYSTEMATIC (2nd order)</span><span class="where">ADSTReader.cc:314-327 vs. readADST_data_v19.py</span></div>
+<div class="fbody">
+<p>The C++ reference computes <code>Nmu = counter-&gt;GetNumberOfMuons()</code> and
+<code>area = counter-&gt;GetActiveArea()/m2 * cos(theta)</code> — i.e. the collaboration's standard
+observable is a <strong>density</strong>, muon count over projected active area. The Python reader
+saves <code>module.GetNumberOfEstimatedMuons()</code> — a raw per-module count, no area, no
+cos θ projection. Confirmed against the Offline documentation (§9): <code>mevt::Counter</code>
+exposes <code>GetMuonDensity()</code> directly ("number of estimated muons over the active area"),
+which is the method actually being bypassed.</p>
+<p>Counters do not all carry the same number of modules — confirmed on this corpus:</p>
+<div class="statrow">
+<div class="stat"><span class="n">1–7</span><span class="l">modules per counter (median 3)</span></div>
+<div class="stat"><span class="n">10 / 62</span><span class="l">counters with ≠3 modules</span></div>
+</div>
+<p>Counters 1622 and 1764 have 7 modules each; 93, 710 and 1574 have 4. Averaging raw module counts
+across counters of different area is not the same as averaging a density.
+<strong>Mitigating factor:</strong> since <i>A</i><sub>1</sub> is extracted from a ratio within each φ bin,
+the area bias cancels at first order <em>if</em> the module/area mix does not itself depend on
+φ — plausible for a roughly axisymmetric array around a given core, but not verified here.
+This is a second-order systematic to quantify, not a fatal flaw; it should be corrected once the
+pipeline is reprocessed with area saved.</p>
+</div>
+</div>
+
+<div class="finding note">
+<div class="fhead"><span class="ftag">B2 · DOCUMENT</span><span class="where">ADSTReader.cc:317-320 vs. readADST_data_v19.py:184-232</span></div>
+<div class="fbody">
+<p><code>GetNumberOfMuons()</code> is a <em>counter</em>-level quantity (the sum over that counter's
+modules, per the Offline docs — see §9). <code>GetNumberOfEstimatedMuons()</code> as used in the
+Python reader is a <em>module</em>-level quantity. The two are not interchangeable and Chapter 7
+needs to state explicitly which level the analysis uses and why (module-level gives finer
+azimuthal sampling per counter; counter-level matches the collaboration's standard observable and
+comes with a proper density and saturation handling built in).</p>
+</div>
+</div>
+
+<div class="finding warn">
+<div class="fhead"><span class="ftag">B3 · DOCUMENT IN THE THESIS</span><span class="where">ADSTReader.cc:539-544, run.sh, Config.xml.in</span></div>
+<div class="fbody">
+<p><code>ADSTReader::IsStationInBase()</code> restricts the C++ reader's output to a hardcoded
+whitelist keyed by the production <code>base</code>. <code>run.sh</code> and
+<code>Config.xml.in</code> are both configured with <code>base = MdSd433DataReconstruction</code>
+→ a 22-station whitelist (<code>vSd433Stations</code>). But the corpus actually analyzed spans
+30–31 distinct counters with reconstructed core positions scattered ±3–4&nbsp;km around
+their centroid — that is the 750&nbsp;m Infill footprint, not the 433&nbsp;m dense sub-array the
+current C++ config targets.</p>
+<p><strong>Conclusion:</strong> the C++ file in this repo documents the standard <em>cut logic</em>
+(6T5, energy, zenith, rejection flags) faithfully, but it is not literally the code/config that
+produced the <code>v4r2</code> ADST used here, and its station whitelist was correctly <em>not</em>
+ported to the Python reader (porting it would have wrongly restricted the Infill analysis to 22
+stations). This should be stated explicitly in Chapter 7's methodology — "cuts were translated
+from the collaboration's standard reader; the station-base restriction does not apply here because
+this analysis targets the full 750&nbsp;m Infill array" — so a referee doesn't have to reconstruct
+this themselves.</p>
+</div>
+</div>
+
+<div class="finding note">
+<div class="fhead"><span class="ftag">B4 · SCOPE FOR REPROCESSING</span><span class="where">ADSTReader.cc, various</span></div>
+<div class="fbody">
+<p>Variables the C++ reference reads but the Python port drops entirely: GPS time (blocks any
+day/night or seasonal study), energy error, <i>S</i><sub>ref</sub>, LDF χ²/ndf, the station trigger
+name, and <code>GetRemovalReason()</code> (the rejection reason string — currently only a boolean
+survives). None of these are recoverable from the existing parquet; they require a reprocessing
+pass through the ADST.</p>
+</div>
+</div>
+</section>
+
+<section id="findings-c">
+<h2><span class="num">05</span>Code hygiene</h2>
+
+<div class="finding note">
+<div class="fhead"><span class="ftag">C1 · DEAD CODE</span><span class="where">readADST_data_v19.py:44, 63-65; Notebook Cell 6/8</span></div>
+<div class="fbody"><p><code>skip_rejected_stations</code> is declared, documented ("Saltear estaciones SD
+marcadas como rechazadas"), and threaded through <code>partial()</code> → the worker → the reader
+— and never once read inside the function body. The actual station-rejection filtering happens
+downstream in analysis via <code>CLEAN_MASK</code>. Harmless today because nothing depends on it,
+but it should either be wired up or removed so a future reader doesn't assume it does something.</p></div>
+</div>
+
+<div class="finding note">
+<div class="fhead"><span class="ftag">C2 · DIVERGED DUPLICATE</span><span class="where">readADST_data_v19.py vs. Procesamiento_Datos_Campo_v1.ipynb Cell 6</span></div>
+<div class="fbody"><p>The standalone <code>.py</code> module (<code>max_theta_deg=60.0</code> default, no
+<code>verbose</code> flag) and the notebook's own copy of the same function (<code>max_theta_deg=65.0</code>,
+has <code>verbose</code>) have drifted apart. The notebook does not import the <code>.py</code>
+file — it redefines the function locally, so the <code>.py</code> module is unused, silently
+out of date, and would mislead anyone who imports it expecting it to match production behavior.
+Recommend deleting it or making the notebook import it, so there is exactly one source of truth.</p></div>
+</div>
+</section>
+
+<section id="phases">
+<h2><span class="num">06</span>Phase I / Phase II — the overlap question</h2>
+<p>This is the question the user asked to have resolved first: PhaseI (2021-04 → 2023-04) and
+PhaseII SPMT (2022-02 → 2026-05) overlap for 15 months. Are they two reconstructions of the same
+events, or something else?</p>
+
+<div class="finding ok">
+<div class="fhead"><span class="ftag">RESOLVED</span><span class="where">verified on the parquet corpus, 15 shared months (2022-02 → 2023-04)</span></div>
+<div class="fbody">
+<div class="tablewrap"><table>
+<thead><tr><th></th><th class="num">Events in overlap window</th><th class="num">Stations (sdId)</th></tr></thead>
+<tbody>
+<tr><td>PhaseI</td><td class="num">30,630</td><td class="num">30</td></tr>
+<tr><td>PhaseII SPMT</td><td class="num">58,689</td><td class="num">31</td></tr>
+<tr><td>Shared</td><td class="num"><strong>0</strong> event_id</td><td class="num">30 stations in common</td></tr>
+</tbody></table></div>
+<p><strong>Interpretation:</strong> the two subsets run over essentially the same physical array
+(30 of 31 stations shared) but capture <em>disjoint</em> sets of triggered events. They are
+different production reconstructions/electronics modes (<code>PhaseI</code> vs.
+<code>PhaseIISPMTPhaseIIBeta</code> — full subset list in <code>run.sh</code>), coexisting because
+the UMD electronics upgrade was rolled out gradually rather than switched over on one date. Some
+events in the overlap window were presumably eligible for both reconstruction paths and only one
+"claimed" them; this audit did not chase that selection logic further since it doesn't change the
+practical conclusion.</p>
+<p><strong>Practical implication:</strong> the two subsets can be concatenated without
+double-counting. What has <em>not</em> been verified is whether <i>N</i><sub>μ</sub><sup>REC</sup> is measured
+equivalently between the two electronics/reconstruction modes — the sweep in §8 keeps them
+separate for exactly this reason, and finds broadly consistent (both negative) <i>A</i><sub>1</sub> in the
+20°–50° band, which is a reasonable but not conclusive cross-check of equivalence.</p>
+</div>
+</div>
+
+<figure>
+<img src="figures/f1_coverage_timeline.png" alt="Temporal coverage by production subset">
+<figcaption><strong>F1.</strong> Events/month by subset (as-processed, loose cuts). The shaded band
+is the 15-month nominal overlap — despite the visual overlap, the two curves are drawn from
+almost entirely disjoint events. PhaseII SPMT's low 2022 months are the detector's SPMT-electronics
+commissioning period (Finding D5 below).</figcaption>
+</figure>
+</section>
+
+<section id="preliminary">
+<h2><span class="num">07</span>Auditing the preliminary-analysis notebooks</h2>
+
+<div class="finding warn">
+<div class="fhead"><span class="ftag">D1 · MISINTERPRETED, NOW RESOLVED — AND MORE SERIOUS THAN IT LOOKED</span><span class="where">Analisis_Preliminar_DatosCampo_Phase{1,2}.ipynb, "Verificación de isotropía"</span></div>
+<div class="fbody">
+<p>Both preliminary notebooks compute χ²/dof of the φ<sub>SP</sub> histogram against a
+flat expectation (Phase1: 95, Phase2: 658), print "esperado ~1.0 si es isotrópico", and stop there
+without diagnosing the excess. This audit went further and decomposed the exposure into Fourier
+harmonics per radial band. <strong>The original plan for this audit assumed this would turn out to
+be a benign, even (cos 2φ) geometric jacobian effect — that assumption was wrong.</strong> The
+dominant term is <em>odd</em> (cos φ, i.e. exactly the harmonic <i>A</i><sub>1</sub> is fit against), and it
+grows sharply with <i>r</i>:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>r band</th><th class="num"><i>c</i><sub>1</sub> (biases <i>A</i><sub>1</sub>)</th><th class="num"><i>s</i><sub>1</sub> (biases <i>B</i><sub>1</sub>)</th><th class="num"><i>c</i><sub>2</sub> (jacobian)</th><th class="num">peak/trough spread</th></tr></thead>
+<tbody>
+<tr><td>400–600 m</td><td class="num">0.048</td><td class="num">0.002</td><td class="num">−0.028</td><td class="num">12.5%</td></tr>
+<tr><td>600–800 m</td><td class="num">0.078</td><td class="num">0.003</td><td class="num">−0.014</td><td class="num">15.0%</td></tr>
+<tr><td>800–1000 m</td><td class="num">0.170</td><td class="num">0.007</td><td class="num">−0.038</td><td class="num">33.7%</td></tr>
+<tr><td>1000–1250 m</td><td class="num">0.216</td><td class="num">0.011</td><td class="num">−0.059</td><td class="num">41.8%</td></tr>
+</tbody></table></div>
+<p>At <i>r</i> ∈ [1000, 1250) m, module counts vary by ±42% peak-to-trough across φ<sub>SP</sub>, and the
+cos φ component of that variation (<i>c</i><sub>1</sub> = 0.22) is comparable to or larger than the physical
+<i>A</i><sub>1</sub> values reported for the Dense Ring in Chapter 5 (order 0.03–0.13). This is an acceptance
+effect, not a bug in <code>GetAzimuthSP()</code> (consistent with CLAUDE.md's note that the
+Infill-azimuth concern was investigated and ruled out) — it is the real, finite, irregular Infill
+array geometry combined with a geographically clustered core-position distribution (see F2 below),
+which the idealized 12-station Dense Ring by construction cannot have.</p>
+<p><strong>Update after the §8 parameter-space breakdown:</strong> this exposure bias is largest at
+<em>large</em> <i>r</i> (≳800&nbsp;m), but the negative <i>A</i><sub>1</sub> cells that survive the
+fit-quality gate in §8 cluster at <em>small</em> <i>r</i> (150–450&nbsp;m) instead. So this exposure
+bias is <strong>not</strong> the demonstrated explanation for those negative cells — it remains a
+real, separate systematic that still needs correcting before any large-<i>r</i> <i>A</i><sub>1</sub>
+value is quoted precisely (roadmap §10), but the near-core anomaly has its own, still-unidentified
+cause.</p>
+</div>
+</div>
+
+<figure>
+<img src="figures/f2_phi_exposure.png" alt="Angular exposure modulation by radial band and its Fourier decomposition">
+<figcaption><strong>F2.</strong> (a) Raw module-count exposure vs. φ<sub>SP</sub>, by radial band —
+not flat, and the deviation grows with <i>r</i>. (b) Fourier decomposition: <i>c</i><sub>1</sub> (cos φ, the same
+harmonic <i>A</i><sub>1</sub> is fit against) dominates and grows with <i>r</i>; <i>c</i><sub>2</sub> (cos 2φ, the geometric
+jacobian this audit originally expected to dominate) is present but smaller and roughly constant.</figcaption>
+</figure>
+
+<div class="finding note">
+<div class="fhead"><span class="ftag">D2 · FIT DEFINITION MISMATCH</span><span class="where">Analisis_Preliminar_DatosCampo_Phase2.ipynb, Cell 22</span></div>
+<div class="fbody">
+<p>The only <i>A</i><sub>1</sub> fit against real data currently in the repo has an inconsistency between its
+own code and its own figure: the caption text box says θ ∈ [40°, 60°),
+<i>r</i> ∈ [750, 1050)&nbsp;m, but the code that produced the numbers cuts θ ∈ [50°, 60°),
+<i>r</i> ∈ [750, 1250)&nbsp;m — a 500&nbsp;m-wide radial band on top of a steeply falling LDF. The fit
+also uses a single cos φ term (no sin φ null-phase test — the exact test the lab notebook
+itself proposed on 2026-01-13), has no bootstrap (unlike Chapter 5's dense-ring methodology), and
+its binning (Δ<i>r</i> = 500&nbsp;m, one θ bin, one energy bin) does not match Chapter 6's MC
+binning (Δ<i>r</i> = 150&nbsp;m, Δθ = 10°, log<sub>10</sub><i>E</i> ∈ [17.5, 18.0]), so it cannot be
+directly compared to the MC curves the thesis will need to overlay it against.</p>
+</div>
+</div>
+
+<div class="finding warn">
+<div class="fhead"><span class="ftag">D3 · SIGNAL SANITY</span><span class="where">whole corpus, module_status=='candidate' rows</span></div>
+<div class="fbody">
+<div class="statrow">
+<div class="stat"><span class="n">37.6%</span><span class="l">candidate rows with nMuones_REC == 0</span></div>
+<div class="stat"><span class="n">0.73%</span><span class="l">candidate rows negative (min −1.07)</span></div>
+</div>
+<p>Zero is a physically valid outcome (no muon crossed the module) so the high zero fraction alone
+is not alarming — but negative reconstructed muon counts among rows explicitly flagged
+"candidate" (the framework's own highest-quality label) need an explanation before Chapter 7
+treats <code>candidate</code> as synonymous with "trustworthy". Also worth noting:
+<code>module_status</code> only ever takes the values <code>candidate</code>/<code>rejected</code>
+across the entire 13.2M-row corpus — <code>silent</code> and <code>saturated</code> never appear,
+so the corresponding branches in the reader are currently dead code for this dataset. Per the
+Offline documentation (§9), <code>IsRejected()</code> at the counter level fires when
+<em>no</em> module has candidate data — worth double-checking that the module-level
+<code>rejected</code> flag isn't being set more aggressively than intended.</p>
+</div>
+</div>
+
+<div class="finding note">
+<div class="fhead"><span class="ftag">D4 · SELECTION BIAS — CHECKED, LOOKS CLEAN</span><span class="where">whole corpus, module_status vs. r and φ</span></div>
+<div class="fbody">
+<p>Good news for the exposure-bias hypothesis in D1: the <code>candidate</code> fraction is flat to
+within ~1 percentage point across both <i>r</i> (69.8%–73.0%) and φ<sub>SP</sub> (71.1%–72.2%). Whatever is
+driving the exposure modulation in F2 — and, separately, the negative <i>A</i><sub>1</sub> cells that
+survive the fit-quality gate in §8's parameter-space scan — it is <strong>not</strong> coming from
+module quality selection — reinforcing that both effects are geometric/acceptance in nature,
+not a data-quality one.</p>
+</div>
+</div>
+
+<figure>
+<img src="figures/f4_selection_bias.png" alt="Candidate selection fraction vs r and phi">
+<figcaption><strong>F4.</strong> Selection efficiency (fraction of modules flagged
+<code>candidate</code>) is essentially flat in both <i>r</i> and φ<sub>SP</sub> — the exposure effect in F2
+is not a selection artifact.</figcaption>
+</figure>
+
+<div class="finding note">
+<div class="fhead"><span class="ftag">D5 · EXCLUDE FROM ANALYSIS</span><span class="where">PhaseIISPMTPhaseIIBeta, 2022</span></div>
+<div class="fbody">
+<p>2022 shows 83.5% SD-station rejection, versus 22.8%/28.8% in 2023/2024 — consistent with SPMT
+electronics commissioning rather than a stable data-taking period. 12,852 events were excluded on
+this basis for the §8 sweep.</p>
+</div>
+</div>
+</section>
+
+<section id="sweep">
+<h2><span class="num">08</span>Parameter-space scan: where does the asymmetry show up in real data?</h2>
+<p><strong>This is a diagnostic, not the Chapter 7 result.</strong> It exists to answer the
+question you actually asked: given that the asymmetry is known (elsewhere in this thesis) to grow
+with energy, and we have three parameters to play with — <i>r</i>, θ, and energy — which region of
+that space best shows the muon asymmetry in the real UMD data, including the possibility that it
+comes out negative somewhere? It deliberately mirrors Chapter 6's binning so the shape can
+eventually be compared to the MC curves — but it still carries none of the corrections a final
+measurement needs (no area/cos θ normalization per Finding B1, no exposure correction per
+Finding D1). Every number in this section, including the ranked tables, is written into
+<code>figures/stats.json</code> by the same script that made the figures — nothing here is
+typed by hand.</p>
+
+<h3>Step 1 — the naive, energy-integrated sweep (why it's misleading on its own)</h3>
+<p>The first pass fit <i>A</i><sub>1</sub> in (<i>r</i>, θ) cells combining <strong>every</strong> event
+with log<sub>10</sub><i>E</i> ≥ 17.0 into one energy bin per cell — no third axis. 119 of 120 possible
+(<i>r</i>, θ, subset) cells passed the minimum-statistics cut. In the θ ∈ [20°, 50°) band, 82% of
+those cells came out <strong>negative</strong>, several at 3σ–6σ (e.g. PhaseII,
+<i>r</i> ∈ [450, 600), θ ∈ [40°, 50°): <i>A</i><sub>1</sub> = −0.032 ± 0.006, χ²/ndf = 8.4) — the
+opposite sign from the Chapter 5/6 MC expectation. This is a real, reproducible pattern in the
+data (both subsets agree, the single-cell fits are visually clean cosines, not noise) — but as
+Step 2 below shows, treating it as "the" real-data asymmetry result would have been a mistake: it
+is an artifact of averaging over energy, not evidence against the physical model.</p>
+<div class="figgrid">
+<figure>
+<img src="figures/f5_a1_vs_r_by_theta.png" alt="A1 vs r by zenith band, PhaseI and PhaseII, energy-integrated">
+<figcaption><strong>F5a.</strong> <i>A</i><sub>1</sub> vs. <i>r</i> by zenith band, energy-integrated
+(log<sub>10</sub><i>E</i>≥17.0 all combined) — this is the view that looked like a sign flip.</figcaption>
+</figure>
+<figure>
+<img src="figures/f5_gallery.png" alt="Gallery of individual harmonic fits, highest-significance cells, energy-integrated">
+<figcaption><strong>F5d.</strong> The four highest-significance cells from the energy-integrated
+sweep — a real, well-sampled cosine, just not yet disaggregated by energy.</figcaption>
+</figure>
+</div>
+
+<h3>Step 2 — adding energy as a third axis</h3>
+<p>The spectrum falls steeply (F3a: ~90% of surviving events sit below log<sub>10</sub><i>E</i>=17.5),
+so an energy-integrated bin is numerically dominated by the lowest-energy events. If the physical
+asymmetry grows with energy — as it does elsewhere in this thesis (Ch.&nbsp;5's iron-vs-helium
+Dense Ring comparison) — a real positive signal concentrated at higher energy can be swamped, or
+even inverted in sign, by a much larger low-energy population that behaves differently. The fix:
+refit every (<i>r</i>, θ, subset) cell separately in four energy bands
+(log<sub>10</sub><i>E</i> ∈ [17.0,17.5), [17.5,18.0), [18.0,18.5), [18.5,19.5)), using the identical
+two-harmonic + event-bootstrap methodology.</p>
+<ul>
+<li>326 of 480 possible (<i>r</i>, θ, <i>E</i>, subset) cells pass the same minimum-statistics
+cut as before; 265 of those also pass a χ²/ndf&nbsp;&lt;&nbsp;3 fit-quality gate.</li>
+<li>Ranking below is <strong>gated by fit quality first</strong>: only χ²/ndf&nbsp;&lt;&nbsp;3 cells
+are ranked, then sorted by signed bootstrap significance <i>A</i><sub>1</sub>/<i>A</i><sub>1,err</sub> —
+exactly the two criteria you named (χ²<sub>r</sub> and the visual shape of the fit).</li>
+</ul>
+
+<figure>
+<img src="figures/f8_paramspace_heatmap.png" alt="theta x logE heatmap of best signed significance per cell, r marginalized">
+<figcaption><strong>F8.</strong> For each (θ, log<sub>10</sub><i>E</i>) cell, the signed bootstrap
+significance of whichever <i>r</i>-bin scores highest (χ²/ndf&nbsp;&lt;&nbsp;3 only; blank = no
+cell passed the gate). PhaseII (right, ~6× the statistics of PhaseI) shows a striking pattern: the
+log<sub>10</sub><i>E</i>∈[17.5,18.0) and [18.0,18.5) columns are <strong>overwhelmingly positive and
+significant</strong> across almost every θ band — except one cell (θ∈[40°,50°), same energy band)
+which is strongly negative. That one negative outlier is exactly the near-core (<i>r</i>∈[300,450))
+cell flagged as the new open question in the executive summary — a reminder that this "best r-bin"
+view can surface a single anomalous cell alongside an otherwise clean positive pattern, so it should
+always be read together with the full <i>r</i>-curves in F7, not on its own.</figcaption>
+</figure>
+
+<figure>
+<img src="figures/f7_paramspace_grid.png" alt="A1 vs r, faceted by subset and energy bin, all theta bands overlaid">
+<figcaption><strong>F7.</strong> The full picture behind F8: <i>A</i><sub>1</sub> vs. <i>r</i>, one panel
+per (subset, energy bin), one line per θ band. In PhaseII (bottom row), the log<sub>10</sub><i>E</i>≥17.5
+panels show most θ bands sitting cleanly positive across a wide <i>r</i> range — this is the same
+physically-expected, attenuation-dominated behavior Chapter 5/6 report from MC. PhaseI (top row) is
+noisier — six times less statistics — but not inconsistent.</figcaption>
+</figure>
+
+<h3>Ranked cells (χ²/ndf&nbsp;&lt;&nbsp;3, top 10 by |significance|, both signs)</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Subset</th><th class="num">logE</th><th class="num">θ</th><th class="num">r (m)</th><th class="num"><i>A</i><sub>1</sub></th><th class="num">χ²/ndf</th><th class="num">N events</th><th class="num">sig.</th></tr></thead>
+<tbody>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">50–65°</td><td class="num">750–900</td><td class="num">+0.067±0.014</td><td class="num">2.31</td><td class="num">6,193</td><td class="num">+4.8</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">20–30°</td><td class="num">750–900</td><td class="num">+0.047±0.011</td><td class="num">1.29</td><td class="num">6,413</td><td class="num">+4.3</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">30–40°</td><td class="num">750–900</td><td class="num">+0.038±0.009</td><td class="num">1.84</td><td class="num">7,532</td><td class="num">+4.0</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">18.0–18.5</td><td class="num">50–65°</td><td class="num">900–1050</td><td class="num">+0.096±0.029</td><td class="num">1.01</td><td class="num">680</td><td class="num">+3.3</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">30–40°</td><td class="num">900–1050</td><td class="num">+0.037±0.012</td><td class="num">1.27</td><td class="num">6,220</td><td class="num">+3.1</td></tr>
+<tr><td>PhaseII SPMT</td><td class="num">18.0–18.5</td><td class="num">30–40°</td><td class="num">1350–1500</td><td class="num">+0.170±0.059</td><td class="num">1.34</td><td class="num">437</td><td class="num">+2.9</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseII SPMT</td><td class="num">17.5–18.0</td><td class="num">40–50°</td><td class="num">300–450</td><td class="num">−0.042±0.008</td><td class="num">1.73</td><td class="num">5,262</td><td class="num">−5.2</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseII SPMT</td><td class="num">17.0–17.5</td><td class="num">50–65°</td><td class="num">150–300</td><td class="num">−0.047±0.011</td><td class="num">0.90</td><td class="num">6,727</td><td class="num">−4.3</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseII SPMT</td><td class="num">17.0–17.5</td><td class="num">30–40°</td><td class="num">300–450</td><td class="num">−0.014±0.003</td><td class="num">2.44</td><td class="num">42,620</td><td class="num">−4.2</td></tr>
+<tr style="background:var(--sev-block-bg)"><td>PhaseI</td><td class="num">17.5–18.0</td><td class="num">10–20°</td><td class="num">750–900</td><td class="num">−0.109±0.035</td><td class="num">0.98</td><td class="num">571</td><td class="num">−3.2</td></tr>
+</tbody></table></div>
+<p>Green rows: the strongest positive detections, all at log<sub>10</sub><i>E</i>≥17.5 and
+<i>r</i>≥750&nbsp;m — the region and sign Chapter 5/6's MC predicts. Red rows: the strongest negative
+detections, clustering at small <i>r</i> (150–450&nbsp;m) and mostly the lower two energy bands —
+consistent with a near-core systematic (Finding D1's exposure bias is largest at <em>large</em> r,
+not here) rather than the same effect. Full ranked lists (top 10 each direction) are in
+<code>figures/stats.json</code> under <code>paramspace_top_positive</code> /
+<code>paramspace_top_negative</code>.</p>
+
+<h3>Direct replication of the preliminary notebook's cut</h3>
+<p>The exact cut from <code>Analisis_Preliminar_DatosCampo_Phase2.ipynb</code>'s final plot —
+log<sub>10</sub><i>E</i>∈[18.0,18.5), θ∈[40°,60°), <i>r</i>∈[750,1050)&nbsp;m — refit here with
+bootstrap errors and χ²/ndf instead of the single-<i>cos φ</i>, no-error version in Finding D2:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Subset</th><th class="num"><i>A</i><sub>1</sub></th><th class="num"><i>B</i><sub>1</sub></th><th class="num">χ²/ndf</th><th class="num">N events</th></tr></thead>
+<tbody>
+<tr><td>PhaseI</td><td class="num">−0.023 ± 0.042</td><td class="num">−0.007 ± 0.036</td><td class="num">3.34</td><td class="num">330</td></tr>
+<tr style="background:var(--sev-ok-bg)"><td>PhaseII SPMT</td><td class="num">+0.062 ± 0.014</td><td class="num">+0.001 ± 0.015</td><td class="num">2.04</td><td class="num">1,454</td></tr>
+</tbody></table></div>
+<p><strong>PhaseII SPMT reproduces your recollection directly:</strong> a positive, 4.4σ
+<i>A</i><sub>1</sub>, tight <i>B</i><sub>1</sub> consistent with zero (correct phase, no geometric
+contamination), reasonable χ²/ndf. PhaseI in this exact cell is <em>not</em> a contradiction — with
+only 330 events (vs. PhaseII's 1,454) the error is 3× larger and the point estimate is consistent
+with both zero and with PhaseII's positive value within ~2σ; χ²/ndf=3.34 also sits right at this
+audit's own quality-gate threshold, so this cell is simply too sparse in PhaseI to say anything on
+its own.</p>
+<figure>
+<img src="figures/f9_replication_cell.png" alt="Replication of the preliminary notebook's cut with bootstrap errors">
+<figcaption><strong>F9.</strong> The replication fit, both subsets. PhaseII's cosine is clean and
+well-sampled; PhaseI's is visibly noisier (fewer, larger error bars) but not shaped inconsistently.</figcaption>
+</figure>
+
+<h3>What this means for Chapter 7</h3>
+<p>The parameter-space view changes the conclusion materially from the energy-integrated one:
+there <strong>is</strong> a statistically robust, correctly-signed, physically-expected muon
+asymmetry in the real UMD data, concentrated at log<sub>10</sub><i>E</i>≳17.5 and
+<i>r</i>≳600–750&nbsp;m, strongest and best-measured in PhaseII SPMT. That is genuinely good news
+for the thesis and directly supports writing Chapter 7 around an energy-binned analysis rather than
+a single energy-integrated one. Two things still need resolving before it becomes a citable result:
+the near-core negative anomaly (which energy binning did not explain) and the missing
+area/cos θ/exposure corrections (Findings B1, D1) — both carried into the roadmap (§10).</p>
+</section>
+
+<section id="offline-docs">
+<h2><span class="num">09</span>Notes from the Offline documentation</h2>
+<p>Cross-checked against
+<a href="https://web.iap.kit.edu/augeroracle-doc/Offline/html/" target="_blank" rel="noopener">web.iap.kit.edu/augeroracle-doc/Offline</a>
+(Doxygen, AugerOfflineFramework). The landing page doesn't index classes by name, so specific pages
+had to be guessed/navigated to; not everything resolved. What did confirm or update findings above:</p>
+
+<div class="tablewrap"><table>
+<thead><tr><th>Class · method</th><th>What the docs say</th><th>Relevance</th></tr></thead>
+<tbody>
+<tr><td><code>mevt::Counter::GetNumberOfEstimatedMuons()</code></td><td>Sum of the estimated muons of the counter's modules; returns −1 if any module is saturated.</td><td>Confirms counter-level ≠ module-level (Finding B2); explains where a sentinel −1 could come from — worth checking whether that convention leaked into the −0.98…−1.07 negative values seen in the parquet (Finding D3).</td></tr>
+<tr><td><code>mevt::Counter::GetActiveArea()</code></td><td>Sum of the active area of the counter's modules.</td><td>This is the area the C++ reference multiplies by cos θ and the Python reader never saves (Finding B1).</td></tr>
+<tr><td><code>mevt::Counter::GetMuonDensity()</code></td><td>"The density measured by a counter is calculated as the number of estimated muons over the active area." Returns −1 if saturated.</td><td>This is the method that should be the analysis observable, and isn't currently called anywhere in the field-data pipeline.</td></tr>
+<tr><td><code>mevt::Counter::{IsCandidate,IsSilent,IsRejected}()</code></td><td>Explicit status hierarchy: <code>candidate</code> &gt; <code>silent</code> &gt; <code>rejected</code>. A counter is <code>IsRejected()</code> only when <em>none</em> of its modules has candidate data.</td><td>Useful for Chapter 7's methodology section — module_status is not an arbitrary label, it's a documented state machine, and the counter-level rejection logic is stricter than "any bad module rejects the counter".</td></tr>
+<tr><td><code>mevt::Module::{SetRejected,GetRejectionReason}()</code></td><td>Rejection carries an optional reason string at the module level too.</td><td>Another variable dropped by the Python port (extends Finding B4) — <code>GetRejectionReason()</code> exists at both module and station level and neither survives into the parquet.</td></tr>
+<tr><td><code>sdet::Station</code> (geometry class)</td><td>No <code>GetAzimuthSP</code>/<code>GetSPDistance</code> found on this particular class page — those are event-level (<code>sevt::Station</code> or the reconstruction classes), not detector-geometry.</td><td>Did not resolve the exact class; not needed to re-open CLAUDE.md's already-closed conclusion that <code>GetAzimuthSP()</code> behaves correctly for Infill (§7 of CLAUDE.md).</td></tr>
+</tbody></table></div>
+
+<blockquote>Anything not explicitly confirmed above (in particular the precise saturation semantics
+at module level, and the exact class backing <code>GetAzimuthSP()</code>) should be verified with
+the director directly rather than assumed from this partial documentation crawl.</blockquote>
+</section>
+
+<section id="roadmap">
+<h2><span class="num">10</span>Roadmap for Chapter 7</h2>
+<p>Ordered by what blocks the next step, not by how interesting each item is.</p>
+
+<div class="roadmap-item">
+<span class="pri p1">P1</span>
+<div><strong>Adopt the energy-binned view as the default for Chapter 7</strong> (§8): fit
+<i>A</i><sub>1</sub> per (<i>r</i>, θ, <i>E</i>) cell, not per (<i>r</i>, θ) alone. The
+energy-integrated sweep is now known to be misleading — it mixes a small, positive,
+physically-expected high-energy signal with a much larger low-energy population that behaves
+differently. This is a methodology decision the whole chapter should be built around, not an
+afterthought correction.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p1">P1</span>
+<div><strong>Investigate the near-core negative anomaly</strong> (§8's ranked table, most
+significant at PhaseII, log<sub>10</sub><i>E</i>∈[17.5,18.0), θ∈[40°,50°),
+<i>r</i>∈[300,450), −5.2σ). It survives the χ²/ndf&nbsp;&lt;&nbsp;3 gate and is <em>not</em>
+explained by Finding D1's exposure bias (which is largest at large <i>r</i>, not here) — so it is a
+separate, so-far-unidentified systematic concentrated at small <i>r</i> and low energy. Candidate
+causes to check first: core-position resolution smearing near the shower axis (the same mechanism
+Chapter 6's REC-geometry section flags for MC, §"Régimen cuasi-vertical" discussion), and whether
+this region's module <code>candidate</code> fraction or LDF curvature behaves differently than
+assumed. Estimated effort: 1–2 days, no reprocessing needed.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p1">P1</span>
+<div><strong>Fix the pipeline bugs that make cuts silently not apply</strong> (Findings A1, A2): make
+the resume check recursive and honest, and re-run the ADST→parquet step once with the intended
+cuts baked in on disk (not just re-imposed in pandas at analysis time) so the corpus stops
+depending on this audit's workaround. Low effort, no new CPU cost beyond a normal processing pass
+— but per CLAUDE.md, flag the expected wall-clock/CPU cost to the user before launching a
+2,287-file <code>Pool(12)</code> run.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p2">P2</span>
+<div><strong>Quantify and correct the exposure bias</strong> (Finding D1) before quoting a
+precise <i>A</i><sub>1</sub> value at large <i>r</i> (≳800&nbsp;m, where <i>c</i><sub>1</sub> is
+largest). §8's parameter-space results show the positive high-energy signal is visible and
+significant even before this correction, so this is no longer a blocker for showing <em>that</em>
+an asymmetry exists — but it is still needed before any number extracted at large <i>r</i> can be
+trusted at face value. Concretely: build the φ<sub>SP</sub> exposure profile per (<i>r</i>, θ) cell
+from the data itself (or from a geometry-only Monte Carlo with isotropic incidence) and divide the
+raw signal profile by it before fitting — the standard mixed-event / acceptance-correction
+approach. Estimated effort: 1–2 days, builds directly on this audit's script.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p2">P2</span>
+<div><strong>Reprocess with area, cos θ, GPS time, and rejection reasons saved</strong>
+(Findings B1, B4) — needed for a real density observable, for any seasonal/day-night systematic
+check, and for a defensible rejected-station accounting. Requires the Auger Offline environment
+and is the only item on this list that touches the ADST files; scope and schedule it as a single
+combined reprocessing pass together with the cuts fix above, not two separate runs.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p2">P2</span>
+<div><strong>Verify <i>N</i><sub>μ</sub><sup>REC</sup> equivalence between PhaseI and PhaseII SPMT</strong>
+before combining them for statistics (§6) — the replication cell in §8 shows PhaseI consistent
+with, but far less constraining than, PhaseII at the same cut (330 vs. 1,454 events); a proper
+joint significance test across the full parameter-space grid would settle whether they can be
+pooled for a single Chapter 7 number.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p3">P3</span>
+<div><strong>Systematics budget for the thesis write-up</strong>: exposure correction residual,
+area/cos θ 2nd-order bias (Finding B1), 2022 SPMT-commissioning exclusion sensitivity, and the
+near-core anomaly's impact on neighboring cells all need at least an order-of-magnitude estimate
+in Chapter 7 for it to survive a referee reading in the spirit of §2 of CLAUDE.md.</div>
+</div>
+
+<div class="roadmap-item">
+<span class="pri p3">P3</span>
+<div><strong>Document the C++-vs-Python divergences explicitly in the methodology section</strong>
+(Finding B3) — the station-whitelist non-application and the "reference, not production, code"
+caveat should be one paragraph in Chapter 7 rather than left implicit.</div>
+</div>
+</section>
+
+<footer>
+Generated by an automated audit of the repository's real-data pipeline. Figures and all numeric
+claims are reproducible via <code>figures/generate_figures.py</code> against the parquet corpus
+described in CLAUDE.md §10/§12. No ADST files were reprocessed and no thesis or pipeline source
+files were modified in the course of this audit.
+</footer>
+
+</div>
+</body>
+</html>

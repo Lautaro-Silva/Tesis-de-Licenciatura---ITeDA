@@ -1,0 +1,12 @@
+base_ref = HEAD
+
+[OK   ] Scripts/plots_seccion_6.ipynb  <->  Scripts/plots_seccion_6.py  (37 celdas, fuente identica)
+[OK   ] Scripts/validacion_rec_muones.ipynb  <->  Scripts/validacion_rec_muones.py  (15 celdas, fuente identica)
+[OK   ] Scripts/analisis_infill_sims.ipynb  <->  Scripts/analisis_infill_sims.py  (13 celdas, fuente identica)
+[OK   ] Scripts/validacion_asimetria_infill_sd_mu_v2.ipynb  <->  Scripts/validacion_asimetria_infill_sd_mu_v2.py  (13 celdas, fuente identica)
+[OK   ] Scripts/Presentacion_Foundations/presentacion_feb_2026_v2.ipynb  <->  Scripts/Presentacion_Foundations/presentacion_feb_2026_v2.py  (19 celdas, fuente identica)
+[OK   ] Scripts/Procesamiento_ADST_v8-2.ipynb  <->  Scripts/Procesamiento_ADST_v8-2.py  (17 celdas, fuente identica)
+[OK   ] Scripts/Procesamiento_ADST_Campo_v9.ipynb  <->  Scripts/Procesamiento_ADST_Campo_v9.py  (13 celdas, fuente identica)
+[OK   ] Scripts/Procesamiento_Datos_Campo/Procesamiento_Datos_Campo_v1.ipynb  <->  Scripts/Procesamiento_Datos_Campo/Procesamiento_Datos_Campo_v1.py  (14 celdas, fuente identica)
+[OK   ] Scripts/Procesamiento_Datos_Campo/Analisis_Preliminar_DatosCampo_Phase1.ipynb  <->  Scripts/Procesamiento_Datos_Campo/Analisis_Preliminar_DatosCampo_Phase1.py  (23 celdas, fuente identica)
+[OK   ] Scripts/Procesamiento_Datos_Campo/Analisis_Preliminar_DatosCampo_Phase2.ipynb  <->  Scripts/Procesamiento_Datos_Campo/Analisis_Preliminar_DatosCampo_Phase2.py  (25 celdas, fuente identica)
