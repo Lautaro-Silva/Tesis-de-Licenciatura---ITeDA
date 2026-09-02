@@ -27,8 +27,9 @@ This session runs on the **institute's shared server**, not a disposable sandbox
 - **Never touch paths outside this repo** — in particular, do not modify anything under the Auger Offline installation (referenced e.g. in `SDenseStationList.xml`'s schema path) or any other user's home/workspace directory that may appear in configs or scripts.
 - **Be mindful of shared compute.** The ADST→parquet pipelines use `multiprocessing.Pool` across many workers, and CORSIKA/Offline runs can be long and I/O-heavy. Don't launch large parallel jobs or long-running batch processing without flagging the expected cost and asking first — other people share this machine's CPU/disk.
 - **Treat internal collaboration server paths/usernames as sensitive.** `Scripts/Procesamiento_Datos_Campo/ADST2ASCII/run.sh` and `ADSTReader.cc` hardcode an internal Auger data-server path containing a collaborator's username. Don't paste it verbatim into chat, commits, or any shared output — refer to it generically ("the internal collaboration data server path in `run.sh`").
-- **Git: always ask for explicit permission before `git add`, `commit`, or `push` in this repo.** The user reviews all of Claude's output — code, analysis, comments, thesis text — before it enters version control, precisely so nothing wrong or half-baked gets pushed. Make the edits, describe what changed, and wait for the user to say go-ahead before staging/committing/pushing — don't run those commands on an implicit "sounds good" or as part of finishing a task unprompted.
-- **Never push directly to `main`.** Once a push is authorized, it must go to a separate branch (e.g. `claude/<short-description>`) so the user can review the diff and merge it themselves via a pull request on GitHub — never commit or push straight to `main`. If a change ends up committed on local `main` before this is realized, move it: branch off the current `main` tip, push that branch, then reset local `main` back to match `origin/main`.
+- **Always work on a separate branch (e.g. `claude/<short-description>`), never on local `main`.** This applies from the start of any task that will touch tracked files — don't make edits on `main` and only branch off at push time. If a change ends up committed on local `main` before this is realized, move it: branch off the current `main` tip, push that branch, then reset local `main` back to match `origin/main`.
+- **Get changes ready — edits made, staged if useful, described to the user — and then wait for the user's explicit command before running `git add`, `commit`, or `push`.** The user reviews all of Claude's output — code, analysis, comments, thesis text — before it enters version control, precisely so nothing wrong or half-baked gets committed. Don't run those commands on an implicit "sounds good" or as part of finishing a task unprompted; wait for an explicit go-ahead.
+- **Never push to `main`, ever — always push the branch.** Once the user gives the go-ahead, push the branch from the first bullet so they can review the diff and merge it themselves via a pull request on GitHub.
 
 ## 4. Repository map
 
@@ -72,7 +73,7 @@ Main file: `Tesis - Latex/main.tex` → `\input`s `capitulos/01..09_*.tex` in or
 
 `Scripts/Intento Toy Model para Inversion Fallido/` (`mc_model_muonic_divergence_v1.ipynb`, `v2.ipynb`) was a phenomenological Fast-MC muon propagator meant to explain, from first-principles kinematics, the SD-signal azimuthal asymmetry "inversion" at large core distance described in `06_infill.tex`. It generated muons analytically (gamma-distributed production height, power-law energy, transverse momentum) with geometric + relativistic-decay weighting, rather than tracking real per-particle production kinematics from CORSIKA. It did not reproduce the discrepancy convincingly. Git commit `6d6b97b` ("update de que no voy a poder hacer el modelo MC para explicar la discrepancia") records the author concluding this approach is out of scope for the thesis; `06_infill.tex` now frames it as deferred future work (4-step roadmap: extract F(X,E,p_t) from dedicated CORSIKA runs → propagate via Cazón's transport model → project geometrically → apply instrumental thresholds). **If asked to revisit this, first read that section of `06_infill.tex` and the two notebooks — the core limitation was data availability (ADST gives only the ground footprint, not per-muon production kinematics), not a fixable bug.**
 
-Note this is distinct from the *dense-ring* bootstrap toy model in `validacion_rec_muones.ipynb`, which **did** work and is written up successfully in Ch. 5.
+Note this is distinct from the *dense-ring* bootstrap toy model in `validacion_rec_muones.py`, which **did** work and is written up successfully in Ch. 5.
 
 ## 7. Framework bug history — one real, one ruled out
 
@@ -85,12 +86,19 @@ Documented in `Notas  - Latex/Trabajo.tex`:
 
 **Data flow:** ADST (Auger Offline ROOT format) → PyROOT reader (parallelized via `multiprocessing.Pool`) → parquet → pandas/numpy analysis → harmonic fit (`scipy.optimize.curve_fit`) for A1 → matplotlib figures / auto-generated PDF reports (fpdf2 + pdfplumber).
 
+**Active notebooks are `.py` files (jupytext, percent format), not `.ipynb`.** See
+`Scripts/README_notebooks.md` for the full rationale and workflow. In short: the `.ipynb`
+outputs (base64 figures) made the files too heavy to edit as text and bloated git; the `.py`
+is the tracked source of truth, opens as a normal cell-by-cell notebook in JupyterLab/VS Code
+(with jupytext installed in `venv/`), and a paired local `.ipynb` (gitignored) holds outputs.
+When editing one of these, edit the `.py` — that's what's in git.
+
 **Active / current** (build on these):
-- `Scripts/Procesamiento_ADST_v8-2.ipynb`, `Scripts/Procesamiento_ADST_Campo_v9.ipynb` — main MC ADST→parquet pipelines.
-- `Scripts/Procesamiento_Datos_Campo/` — the **real-data pipeline**, most actively maintained (updated through Aug 2026): `ADST2ASCII/` (compiled Auger Offline C++ user module reading raw production ADST from the collaboration's data server, cuts configured in `Config.xml.in`), `readADST_data_v19.py` (Python/pandas port of the same cuts: `readADST_surface_data_v19(fname, only_6T5=True, min_logE=17.0, max_theta_deg=60.0, ...)`), plus notebooks for orchestration (`Procesamiento_Datos_Campo_v1.ipynb`) and exploratory analysis (`Analisis_Preliminar_DatosCampo_Phase1/Phase2.ipynb`).
-- `Scripts/analisis_infill_sims.ipynb`, `Scripts/validacion_asimetria_infill_sd_mu_v2.ipynb`, `Scripts/validacion_rec_muones.ipynb` (best-documented notebook, has the working dense-ring toy model), `Scripts/plots_seccion_6.ipynb` (largest, most recently modified — generates the Ch. 6 figures).
-- `Scripts/Presentacion_Foundations/presentacion_feb_2026_v2.ipynb` — curated highlight-reel figures for an Auger "Foundations" collaboration-meeting talk.
-- `Scripts/Pruebas Infill/` — debugging notebooks for the φ-convention bug (§6.2 above); useful if similar geometry bugs resurface.
+- `Scripts/Procesamiento_ADST_v8-2.py`, `Scripts/Procesamiento_ADST_Campo_v9.py` — main MC ADST→parquet pipelines.
+- `Scripts/Procesamiento_Datos_Campo/` — the **real-data pipeline**, most actively maintained (updated through Aug 2026): `ADST2ASCII/` (compiled Auger Offline C++ user module reading raw production ADST from the collaboration's data server, cuts configured in `Config.xml.in`), `readADST_data_v19.py` (Python/pandas port of the same cuts: `readADST_surface_data_v19(fname, only_6T5=True, min_logE=17.0, max_theta_deg=60.0, ...)`), plus notebooks for orchestration (`Procesamiento_Datos_Campo_v1.py`) and exploratory analysis (`Analisis_Preliminar_DatosCampo_Phase1/Phase2.py`).
+- `Scripts/analisis_infill_sims.py`, `Scripts/validacion_asimetria_infill_sd_mu_v2.py`, `Scripts/validacion_rec_muones.py` (best-documented notebook, has the working dense-ring toy model), `Scripts/plots_seccion_6.py` (largest, most recently modified — generates the Ch. 6 figures).
+- `Scripts/Presentacion_Foundations/presentacion_feb_2026_v2.py` — curated highlight-reel figures for an Auger "Foundations" collaboration-meeting talk.
+- `Scripts/Pruebas Infill/` — debugging notebooks (still `.ipynb`, not converted) for the φ-convention bug (§6.2 above); useful if similar geometry bugs resurface.
 
 **Deprecated / historical** (provenance only, do not build on): `Scripts/Codigo Viejo V1/`, `Codigo Viejo V2/`, `Scripts/Cosas Random Mayo 2026/`, `Scripts/Test Iniciales/`, `Scripts/Reportes Viejos/`. `Scripts/Reportes Feb 2026/` holds the current valid PDF reports.
 
@@ -108,7 +116,7 @@ Documented in `Notas  - Latex/Trabajo.tex`:
 
 ## 10. Environment
 
-- Python venv at `venv/` (Python 3.12.3). Has: numpy, pandas, scipy, matplotlib, seaborn, scikit-learn, pyarrow, fpdf2, pdfplumber, jupyter/jupyterlab, ipython. **Does NOT have PyROOT or uproot.**
+- Python venv at `venv/` (Python 3.12.3). Has: numpy, pandas, scipy, matplotlib, seaborn, scikit-learn, pyarrow, fpdf2, pdfplumber, jupyter/jupyterlab, ipython, jupytext. **Does NOT have PyROOT or uproot.**
 - ADST/ROOT reading requires the separate **Auger Offline environment**, sourced outside this venv (`AUGEROFFLINEROOT` env var, `source .../this-auger-offline.sh`, `aug_set_version offline 4.0.1-icrc23-prod1-root6`, manual `ROOT.gSystem.Load(".../libRecEventKG.so")`). Don't assume `venv/bin/python` alone can open ADST files — check which environment/kernel a notebook actually needs before running it.
 - Local dataset paths hardcoded in some notebooks (e.g. `/home/lsilva/Github/ADST_Alexey_module_v9/`, `parquet_sib_proton_17/`) are this machine's own paths, not portable — expected to need re-pointing if run elsewhere, not a bug.
 
@@ -132,5 +140,5 @@ Documented in `Notas  - Latex/Trabajo.tex`:
 - Work plan: `Plan_de_trabajo_tesis_de_licenciatura_02.pdf`.
 - Informal lab notebook: `Notas  - Latex/Trabajo.tex`.
 - Real-data pipeline: `Scripts/Procesamiento_Datos_Campo/readADST_data_v19.py`, `Scripts/Procesamiento_Datos_Campo/ADST2ASCII/`.
-- Most recent analysis notebook: `Scripts/plots_seccion_6.ipynb`.
+- Most recent analysis notebook: `Scripts/plots_seccion_6.py`.
 - Dense-ring geometry config: `SDenseStationList.xml`.
