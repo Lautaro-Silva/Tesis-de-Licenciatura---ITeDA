@@ -1,0 +1,161 @@
+% BORRADOR -- no es el archivo del capitulo real. Propuesta de cambios para
+% "Tesis - Latex/capitulos/03_fenomenologia.tex", generada en la revision de
+% claude_work/gap_notes_asimetrias_review_v4/ (ver ese folder para el contexto
+% completo: notas de familiarizacion, chequeo matematico del termino de
+% divergencia cinematica, y el notebook explicativo). No compila de forma
+% independiente fuera de "Tesis - Latex/" (usa imagenes y bibliografia de ese
+% arbol). Compilado y verificado sin errores contra el arbol real antes de
+% guardarse aqui como borrador.
+%
+% !TEX root = ../main.tex
+
+\section{Fenomenología de las Asimetrías Azimutales en EAS}
+\label{sec:fenomenologia}
+
+La reconstrucción estándar de eventos se basa en el supuesto de que la densidad de partículas y específicamente de muones de una lluvia atmosférica extensa (EAS) presenta una simetría circular en el plano perpendicular a su eje de propagación en el plano de la lluvia. Sin embargo, esta hipótesis sólo es estrictamente válida para lluvias verticales. Para lluvias inclinadas, la simetría en el plano de la lluvia se rompe de manera sistemática, dando lugar a patrones en la densidad de muones que presentan una fuerte dependencia con el ángulo azimutal ($\phi$).
+
+En este capítulo se describe el origen físico de esta asimetría, originada por la competencia entre la atenuación longitudinal de la cascada, efectos puramente cinemáticos de divergencia (geométricos) y el efecto del campo geomagnético terrestre, y se define el formalismo matemático utilizado para su parametrización armónica.
+
+\subsection{El plano de la lluvia y la ruptura de simetría}
+\label{subsec:simetria_ruptura}
+
+Para estudiar la distribución espacial de las partículas, es imperativo distinguir entre el sistema de referencia topográfico y el sistema intrínseco de la cascada. Los detectores del Observatorio Pierre Auger se encuentran fijos sobre la superficie terrestre, definiendo el \textit{plano del suelo} (o \textit{ground plane}). Sin embargo, la física del desarrollo de la cascada posee simetría cilíndrica (en su aproximación de orden cero) respecto a su propio eje de propagación. El plano perpendicular a este eje es como se define el \textit{plano de la lluvia} (o \textit{shower plane}).
+
+A lo largo de todo este trabajo, las coordenadas espaciales utilizadas para caracterizar la densidad de partículas, la distancia radial al núcleo ($r$) y el ángulo azimutal ($\phi$), están estrictamente definidas sobre el plano de la lluvia. Para obtenerlas, las posiciones de las estaciones activadas en el terreno se proyectan geométricamente sobre este plano transversal al eje, tal como se esquematiza en la Figura \ref{fig:plano_lluvia}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{capitulos/imagenes_capitulos/cap3/esquema_lluvia.png} 
+	\caption{Esquema geométrico de una Lluvia Atmosférica Extensa (EAS). Se ilustra la proyección de las posiciones de los detectores desde el plano del suelo hacia el plano de la lluvia, definiendo las coordenadas intrínsecas $r$ y el ángulo azimutal $\phi$ (en el dibujo escrita como $\zeta$) del plano de la lluvia.}
+	\label{fig:plano_lluvia}
+\end{figure}
+
+En el caso ideal de una lluvia estrictamente vertical ($\theta = 0^\circ$), ambos planos coinciden de manera exacta. En esta configuración, la distancia de vuelo que recorren las partículas desde el punto de primera interacción hasta alcanzar el nivel del suelo depende exclusivamente de la distancia radial al núcleo ($r$). Por lo tanto, los detectores ubicados a una misma distancia $r$ registrarán, en promedio, idénticas densidades de muones, reflejando una simetría circular independiente del ángulo azimutal ($\phi$).
+
+Sin embargo, cuando el rayo cósmico primario incide con un ángulo cenital $\theta > 0^\circ$, el plano de la lluvia deja de ser paralelo al plano del suelo. Esta inclinación geométrica rompe inherentemente la simetría del sistema respecto al observador terrestre.
+
+Para comprender esta ruptura geométrica, es necesario analizar la intersección del frente de la lluvia con la superficie del arreglo. Al inclinar la cascada, los detectores ubicados a una misma distancia radial $r$ en el plano de la lluvia ya no se encuentran a la misma distancia física del centro de la lluvia en el plano del suelo, ni tampoco del máximo de desarrollo de la lluvia ($X_{max}$). Por ende las distintas partículas que componen la lluvia no son recorren caminos idénticos antes de impactar contra el suelo. Esto define dos regiones azimutales extremas y fundamentales para el análisis de asimetrías:
+
+\begin{itemize}
+	\item \textbf{Región Temprana ($\phi \approx 0^\circ$):} Corresponde a la sección del frente de lluvia que se encuentra más cerca de la superficie topográfica (el suelo) y, por ende, impacta primero contra el arreglo de detectores. Las partículas que arriban a esta zona tienen el camino geométrico más corto y recorren la menor cantidad de atmósfera.
+	\item \textbf{Región Tardía ($\phi \approx \pm 180^\circ$):} Corresponde a la sección diametralmente opuesta del frente, la cual se encuentra `elevada' respecto al suelo. Las partículas en esta dirección deben continuar propagándose a través de la atmósfera después de que el lado \textit{temprano} ya ha impactado, acumulando una distancia atravesada en la atmósfera significativamente mayor antes de ser detectadas y por ende siendo más atenuadas.
+\end{itemize}
+
+Esta diferencia estructural de origen geométrico en las distancias de propagación para un mismo radio $r$ justifica junto a otras razones, los fenómenos físicos responsables de modular la densidad de muones, los cuales se describen a continuación.
+
+\subsection{Origen físico de la modulación azimutal}
+\label{subsec:origen_fisico}
+
+La ruptura de la simetría circular detallada anteriormente es el resultado de la superposición de tres mecanismos físicos y cinemáticos que actúan sobre la cascada durante su desarrollo y propagación.  Si bien la asimetría dominante en este trabajo es de tipo \textit{temprano-tardía}, es fundamental caracterizar cada una de las 3 contribuciones \cite{GAP2007_124} para comprender la firma total de la densidad de muones a nivel del suelo.
+
+\subsubsection{Atenuación atmosférica}
+\label{subsubsec:atenuacion}
+
+La atenuación longitudinal es consecuencia de la evolución de la cascada a través del medio. Como se estableció en la Sección \ref{subsec:simetria_ruptura}, las partículas en la región tardía deben atravesar una profundidad atmosférica mayor que aquellas en la región temprana cuando la lluvia esta inclinada, es decir, no es estrictamente vertical. Esto se puede entender al considerar que la parte temprana de la lluvia impacta contra el suelo '\textit{antes}' que la tardía, y por ende esta ultima atraviesa más atmósfera. Este es el efecto dominante que afecta a la componente muónica de las lluvias detectadas en el UMD en el rango angular estudiado.
+
+Dado que la cascada evoluciona y se absorbe a medida que penetra en la atmósfera, este camino extra resulta en un vaciamiento relativo de partículas en la zona tardía. Físicamente, la atenuación genera un exceso de densidad de muones en la dirección $\phi = 0^\circ$ temprana respecto de la zona tardía. Este fenómeno ha sido ampliamente documentado en simulaciones y datos experimentales del SD \cite{Pryke1998, BradfieldThesis}. Vale aclarar que este fenómeno ocurre tanto para la componente electromagnética como la muónica pero con mayor magnitud para la componente EM, razón por la cual este mecanismo ya estaba caracterizado.
+
+Si bien los muones poseen un gran poder de penetración y menor sección eficaz de interacción que la componente de $e^{-}/\gamma$, el efecto tiene un impacto relevante para esta componente de la lluvia. A grandes distancias del núcleo ($r > 400 \text{ m}$), el espectro muónico está dominado por partículas de menor energía (muones blandos) \cite{Cazon2012}. En este régimen, la probabilidad de decaimiento aumenta sensiblemente con el trayecto adicional hacia la región tardía, consolidando la atenuación atmosférica como el efecto dominante para la componente muónica pura. En este contexto, el blindaje de tierra de 2.3 m del UMD cumple un rol fundamental: actúa como un filtro cinemático que elimina los muones sub-GeV que han sufrido atenuaciones extremas como también a la componente EM, permitiendo una medición más limpia de la asimetría intrínseca de los muones que logran penetrar el suelo. Cabe aclarar que el umbral $E_\mu \gtrsim 1\,\mathrm{GeV}/\cos\theta$ está definido estrictamente en términos del ángulo cenital global $\theta$ de la lluvia; en rigor, el espesor de suelo efectivamente atravesado depende del ángulo de incidencia \textit{local} en cada módulo, $\theta_{loc}$, que difiere sistemáticamente entre la región temprana y la tardía por la misma razón geométrica discutida en la Sección \ref{subsubsec:divergencia}. Este umbral, por lo tanto, introduce en principio una modulación azimutal puramente instrumental, no atribuible a la atenuación atmosférica en sí, cuya magnitud no ha sido cuantificada en este trabajo.
+
+\subsubsection{Efectos geométricos}
+\label{subsubsec:divergencia}
+
+El segundo grupo de mecanismos es de naturaleza puramente geométrica y cinemática, y en realidad comprende dos efectos físicamente distintos que conviene separar desde el principio: (i) la proyección geométrica de un flujo de partículas ya colimado en torno al eje sobre un plano de suelo inclinado, formalizada por Bertou y Billoir \cite{GAP2000_017}; y (ii) la divergencia cinemática propiamente dicha, asociada a la distancia \textit{finita} entre el punto de producción de los muones y el suelo, formalizada por Cazón \textit{et al.} \cite{Cazon2012}. Ambos efectos actúan simultáneamente, pero, como se muestra a continuación, poseen comportamientos de signo cualitativamente distintos, y no distinguirlos con cuidado ha sido, en las etapas iniciales de este trabajo, fuente de confusión.
+
+\paragraph{Proyección geométrica del flujo (Bertou \& Billoir).}
+
+Como advirtió Billoir, un evento puramente simétrico en el sistema de referencia de la lluvia resulta en un efecto asimétrico al proyectarse en el plano del suelo. Para cuantificar esta excentricidad remanente, Bertou y Billoir desarrollaron una derivación analítica evaluando los momentos de las partículas \cite{GAP2000_017}. La modulación espuria aparente introducida por el mapeo espacial fue cuantificada mediante el término asimétrico $\mathcal{A}_{geo}$, que es lo que llamamos efecto de proyección geométrica:
+
+\begin{equation}
+	\mathcal{A}_{geo}(r, \Phi) = \left\langle \frac{p_r(r)}{-p_z(r)} \right\rangle \tan \theta \cos \Phi
+	\label{eq:efecto_geo}
+\end{equation}
+
+donde $p_r$ es la componente radial del momento y $p_z$ la longitudinal, con la convención de que $p_z < 0$ para partículas descendentes (de modo que $-p_z > 0$). Dado que $p_r > 0$, $-p_z > 0$ y $\tan\theta > 0$, el cociente $\langle p_r/-p_z \rangle$ es \textbf{estrictamente positivo}: $\mathcal{A}_{geo}$ posee necesariamente el \textbf{mismo} signo que la atenuación atmosférica, con un máximo en la región temprana ($\phi = 0^\circ$). Conviene remarcar este punto explícitamente porque es fácil malinterpretarlo: la proyección geométrica de Billoir actúa de manera \textit{aditiva} con la atenuación, nunca en su contra, y por sí sola jamás puede generar un exceso de densidad en la región tardía. Como $\langle p_r/-p_z\rangle \approx \tan\alpha$, esta asimetría además \textit{crece} (se vuelve más positiva, no negativa) cuanto mayor es la divergencia angular $\alpha$ de la población de muones considerada.
+
+Sin embargo, tal como fue reportado empíricamente por Bradfield \cite{BradfieldThesis} y modelado cuantitativamente por Luce \textit{et al.} \cite{Luce_ICRC2021}, la señal del SD exhibe a grandes distancias del núcleo una inversión de signo de $A_1$ —un exceso de densidad en la región \textit{tardía}— que $\mathcal{A}_{geo}$, siendo estrictamente positiva, no puede explicar por construcción. Esto exige un tercer mecanismo, de naturaleza física distinta a la proyección geométrica local: la divergencia cinemática de la emisión de muones.
+
+\subsubsection{Divergencia cinemática de la emisión de muones}
+\label{subsubsec:divergencia_cinematica}
+
+A diferencia de $\mathcal{A}_{geo}$, que describe cómo un flujo de partículas ya colimado en torno al eje se proyecta sobre un plano de suelo inclinado, este efecto surge de comparar, para una \textbf{misma} distancia radial $r$ en el plano de la lluvia, la distancia \textit{física} $d$ que un muón debe recorrer desde su punto de producción hasta alcanzar la región temprana o la tardía.
+
+Para comprender este efecto es necesario analizar primero la cinemática de producción de muones. En la cascada hadrónica, los muones nacen a una distancia $D$ sobre el eje de la lluvia, producto del decaimiento de piones y kaones. En este proceso heredan un momento longitudinal $p_z$ y un momento transversal $p_t$, que provoca que el muón salga disparado con un ángulo de apertura polar $\alpha$ respecto al eje, dado por $\sin\alpha \simeq cp_t/E$ \cite{Cazon2012}.
+
+Al propagar el haz de partículas hacia el suelo, la densidad de muones $S$ que registrará un detector depende de dos factores que compiten entre sí. Por un lado, la densidad espacial cae con el cuadrado de la distancia geométrica recorrida ($1/d^2$), dado que el área transversal interceptada crece esféricamente como $dA = d^2 d\Omega$. Por otro lado, la cantidad de partículas emitidas en una dirección dada, $dN/d\Omega(\alpha)$, decae a medida que se exigen ángulos $\alpha$ más extremos, porque el espectro del momento transversal está acotado por la cinemática de las interacciones hadrónicas, $dN/dp_t \propto p_t \exp(-p_t/Q)$ \cite{Cazon2012}. Combinando ambos factores, la densidad en el suelo se expresa como:
+
+\begin{equation}
+	S(d, \alpha) \propto \frac{1}{d^2} \frac{dN}{d\Omega}(\alpha),
+	\label{eq:asym_a1_previa}
+\end{equation}
+
+y, sustituyendo la relación cinemática $\sin\alpha \simeq cp_t/E$ en $dN/dp_t$, la distribución angular de emisión resulta:
+
+\begin{equation}
+	\frac{dN}{d\Omega}(\alpha) \propto \cos\alpha \, \exp\left(-\frac{E \sin\alpha}{cQ}\right),
+	\label{eq:cazon_dNdOmega}
+\end{equation}
+
+En una lluvia inclinada, alcanzar una misma distancia radial $r$ en el plano de la lluvia exige que la región tardía se encuentre físicamente más lejos del punto de producción que la región temprana ($d_{tardio} > d_{temprano}$), y por lo tanto que el ángulo de emisión requerido sea estrictamente menor ($\alpha_{tardio} < \alpha_{temprano}$): como la región temprana impacta contra el suelo primero, el muón recorre poca distancia y necesita un ángulo $\alpha$ grande para alcanzar el radio $r$; la región tardía, al impactar más lejos, requiere un ángulo significativamente menor. Este esquema se ilustra en la Figura \ref{fig:divergencia_angular}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap3/efecto_geo_luce_icrc2021.png}
+	\caption{Esquema geométrico de la dispersión de las partículas. Debido a la inclinación, para alcanzar un mismo radio $r$ en el plano de la lluvia, la región tardía requiere un ángulo de emisión $\alpha$ (en la imagen $\delta_d$) mucho menor que la región temprana (en la imagen $\delta_u$). Obtenido de \cite{Luce_ICRC2021}}
+	\label{fig:divergencia_angular}
+\end{figure}
+
+Combinando la Ec.~\ref{eq:cazon_dNdOmega} con la dilución espacial $S \propto d^{-2}\,dN/d\Omega$ de la Ec.~\ref{eq:asym_a1_previa}, el cociente de densidades entre ambas regiones resulta:
+
+\begin{equation}
+	\frac{S_{tardio}}{S_{temprano}} \approx \underbrace{\left(\frac{d_{temprano}}{d_{tardio}}\right)^2}_{\text{espacial, siempre} < 1} \cdot \underbrace{\left(\frac{\cos\alpha_{tardio}}{\cos\alpha_{temprano}}\right)}_{\text{espacio de fases, siempre} > 1} \cdot \underbrace{\exp\left(\frac{(\sin\alpha_{temprano} - \sin\alpha_{tardio})\,E}{cQ}\right)}_{\text{ganancia cinemática, siempre} > 1}.
+	\label{eq:asym_kinematic_ratio}
+\end{equation}
+
+El primer factor es puramente geométrico —la dilución del flujo por la distancia finita al punto de producción, un efecto emparentado con pero distinto de $\mathcal{A}_{geo}$— y favorece siempre a la región temprana. El tercer factor es el \textit{único} de los tres que depende de la energía del muón, y es el candidato natural para explicar un eventual exceso tardío. Su comportamiento con $E$ es central para esta tesis: la derivada de este término respecto de $E$,
+
+\begin{equation}
+	\frac{d}{dE}\exp\left(\frac{(\sin\alpha_{temprano}-\sin\alpha_{tardio})E}{cQ}\right) = \frac{\sin\alpha_{temprano}-\sin\alpha_{tardio}}{cQ}\cdot(\ldots) \;>\; 0 \qquad (\text{pues } \alpha_{temprano} > \alpha_{tardio}\text{ siempre}),
+\end{equation}
+
+es \textbf{estrictamente positiva}: la ganancia cinemática es una función \textit{monótonamente creciente} de la energía del muón. Es próxima a la unidad (sin efecto neto) cerca de $E \to 0$ y sólo se vuelve apreciable una vez que $E$ es suficientemente alta. Existe, por lo tanto, una energía de cruce $E^*$ —dependiente de $(r,\theta,D,Q)$— por debajo de la cual la Ec.~\ref{eq:asym_kinematic_ratio} favorece a la región temprana (domina el término espacial) y por encima de la cual favorece a la región tardía (domina el término exponencial).
+
+Esto obliga a revisar con cuidado la asignación fenomenológica de las poblaciones muónicas introducidas más arriba:
+
+\begin{itemize}
+	\item \textbf{Población A (Alta Energía):} muones con $p_z \gg p_t$ y ángulo de divergencia $\alpha$ pequeño. Al ser $E$ suficientemente alta, es esta población —no la de baja energía— la que puede en principio activar la ganancia cinemática exponencial y favorecer a la región tardía.
+	\item \textbf{Población B (Baja Energía):} muones con $p_z \sim p_t$ y divergencia $\alpha$ grande. Al ser $E$ pequeña, la ganancia exponencial de la Ec.~\ref{eq:asym_kinematic_ratio} es despreciable ($\approx 1$) y el término espacial —siempre favorable a la región temprana— domina el cociente: esta población, lejos de generar por sí sola el exceso tardío, contribuye con el mismo signo que la atenuación atmosférica y que $\mathcal{A}_{geo}$.
+\end{itemize}
+
+Determinar en qué régimen de $(E,D,r,\theta)$ se satisface efectivamente $E > E^*$ para la población de muones dominante en cada detector no es una consecuencia automática de la Ec.~\ref{eq:cazon_dNdOmega}: requiere una evaluación cuantitativa explícita, dado que $E^*$ resulta comparable al propio umbral de detección del UMD para las distancias de producción típicas citadas en la literatura ($D \sim 5$–$10$~km \cite{Cazon2012, GAP2000_017}). Este mecanismo compite entonces, de manera no trivial, tanto con la atenuación atmosférica como con $\mathcal{A}_{geo}$: sólo si la población dominante en un detector se encuentra por encima de $E^*$ puede llegar a revertir el signo de la asimetría total.
+
+La existencia de este mecanismo plantea una oportunidad experimental vinculada a los umbrales de detección, aunque de manera más sutil de lo que sugeriría una lectura superficial de la Ec.~\ref{eq:cazon_dNdOmega}: un instrumento con un corte de energía estricto no elimina ``el'' efecto geométrico en su conjunto —$\mathcal{A}_{geo}$, como se mostró, jamás cambia de signo—, sino que remueve específicamente la porción de la ganancia cinemática exponencial asociada a las energías por encima (o por debajo) del umbral. El blindaje de tierra de $2.3$~m del UMD, que impone un umbral efectivo $E_\mu \gtrsim 1\,\mathrm{GeV}/\cos\theta$, es relevante en este sentido, pero determinar si dicho umbral mantiene efectivamente a la población muónica remanente por debajo de $E^*$ para los radios y ángulos cenitales de interés de este trabajo —o si, por el contrario, se solapa con él— requiere la evaluación cuantitativa que se presenta en el Capítulo 6, al contrastar la fenomenología del UMD con la inversión de signo observada en el SD.
+
+\subsubsection{Efectos por el campo geomagnético terrestre}
+\label{subsubsec:geomagnetico}
+
+Finalmente, la simetría se ve alterada por la acción de la fuerza de Lorentz sobre la componente cargada de la lluvia. El campo geomagnético terrestre ($\vec{B}$) induce una deflexión en la trayectoria de los muones según la relación $\vec{F} = q(\vec{v} \times \vec{B})$, separando lateralmente a los muones de cargas opuestas ($\mu^+$ y $\mu^-$).
+
+Esta deflexión introduce una distorsión sistemática que se superpone a la asimetría temprano-tardía. Dado que el Observatorio Pierre Auger recibe lluvias con una distribución uniforme en el ángulo azimutal de incidencia ($\phi_{shower}$), el vector de la fuerza de Lorentz varía su orientación relativa respecto al plano de la lluvia en cada evento. Sin un filtrado o corrección por dirección de arribo, este fenómeno actúa como una fuente de ruido coherente que dispersa los valores de densidad medidos. En el marco de un ajuste armónico global, esta dispersión se manifiesta como una reducción espuria en la amplitud del parámetro $A_1$, subestimando la asimetría real inducida por la atenuación y la geometría. Para el rango de energías y ángulos cenitales aquí abordados, este efecto se considera de segundo orden.
+
+Sin embargo, en el régimen de lluvias extremadamente inclinadas ($\theta > 80^\circ$), el largo camino atmosférico permite separaciones espaciales masivas entre muones positivos y negativos, convirtiendo a la deflexión magnética en el mecanismo dominante de asimetría. Estudios recientes presentados en la Reunión de la Colaboración Pierre Auger por M. Scornavacche \cite{Scornavacche2026} y otros \cite{collaboration_2014}, demuestran que esta deformación de los mapas muónicos es una herramienta potente para la discriminación de masa primaria en eventos horizontales, lo que resalta la importancia de caracterizar correctamente todas las fuentes de asimetría para complementar el análisis en lluvias de inclinación intermedia presentado en este trabajo.
+
+\subsection{Parametrización armónica de primer orden}
+\label{subsec:parametrizacion}
+
+Para cuantificar esta ruptura de simetría en la Función de Distribución Lateral (LDF), Billoir et al. \cite{Billoir2002} propusieron la inclusión de una parametrización de modulación cosinusoidal. Siguiendo este formalismo, la densidad de partículas (o la señal del detector) en el plano de la lluvia se modela como una función armónica de primer orden:
+
+\begin{equation}
+	S(r,\phi) = \langle S(r) \rangle \left( 1 + A_1(r, \theta) \cos\phi \right)
+	\label{eq:asimetria_a1}
+\end{equation}
+
+donde $\langle S(r) \rangle$ es la densidad promedio a la distancia $r$ para una lluvia completamente simétrica, $A_1$ representa la amplitud de la asimetría temprano-tardía, y $\phi$ es el ángulo azimutal de las estaciones en el plano de la lluvia. Un valor de $A_1 > 0$ indica dominancia de la atenuación atmosférica (pico en la región temprano), mientras que un $A_1 < 0$ señala la dominancia de efectos geométricos (pico en la región tardía).
+
+Un objetivo central de este trabajo es también caracterizar la sensibilidad del parámetro $A_1$ respecto a la naturaleza del primario y la energía de la lluvia. Esta exploración es fundamental, ya que la amplitud de la asimetría está intrínsecamente vinculada al estado de desarrollo de la cascada y, por ende, constituye un estimador independiente de la composición de masa. Es importante destacar que esta parametrización asume que el mecanismo dominante en el rango de detección del UMD es la atenuación atmosférica, lo que se traduce en valores de $A_1$ positivos. Bajo esta premisa, y en concordancia con la metodología empleada para los detectores de superficie WCD y SSD \cite{BradfieldThesis}, se optó por fijar la fase de la modulación en $\phi_0 = 0$. Esta restricción impone que el eje de simetría de la asimetría coincida con la línea temprano-tardía, maximizando la sensibilidad del ajuste al desarrollo longitudinal de la lluvia.
+
+Históricamente, el estudio de asimetrías azimutales en el Observatorio Pierre Auger se ha centrado en las señales medidas por el Detector de Superficie (SD) por ser el detector inicial del Observatorio. Los primeros estudios fenomenológicos como los de Pryke \cite{Pryke1998} y Billoir et al. \cite{Billoir2002} identificaron los patrones de asimetría en estaciones Cherenkov. Recientemente, con la actualización AugerPrime, Bradfield \cite{BradfieldThesis} realizó análisis sistemáticos utilizando los detectores de superficie centelladores (SSD) combinados con los WCD, corroborando la utilidad de estas asimetrías para estudios de composición de masa.
+
+Sin embargo, debido a que la señal del SD está invariablemente dominada por la componente electromagnética a los ángulos cenitales considerados, la magnitud intrínseca y la fenomenología de la asimetría temprano-tardía para una señal pura de muones duros ha permanecido inexplorada y no necesariamente esperamos que se comporte de manera estrictamente análoga. Abordar este vacío utilizando las capacidades del UMD como detector específicamente de muones, es el propósito central de los siguientes capítulos.
+
+\newpage
