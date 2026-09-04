@@ -757,69 +757,146 @@ print(f"Implied TRUE incident-flux A1      = {A1_flux:+.3f}")
 # deconvolution.
 
 # %% [markdown]
-# ## 8. Does kinematic divergence survive being averaged over a real muon spectrum?
+# ## 8. Averaging over a real muon spectrum — done correctly
 #
-# Section 3 evaluated the ratio at *one* fixed muon energy at a time. Real
-# muon populations are not monochromatic — they follow something close to a
-# power-law spectrum $dN/dE \propto E^{-\gamma}$ (Cazón quotes $\gamma\approx
-# 2.6$ near production). The natural next question: does the **net**,
-# properly-averaged effect over that whole realistic mixture actually favour
-# late, once you account for the fact that only a rare, exponentially
-# shrinking tail of muons sits above $E^*$?
+# **This section replaces an earlier, incorrect version of itself.** The first
+# attempt computed an *average of ratios*,
+# $\langle\rho(E)\rangle = \int E^{-\gamma}\rho(E)dE / \int E^{-\gamma}dE$,
+# weighting each energy by the **raw production spectrum**. Its own docstring
+# stated the flaw plainly: it *"assumes the early-region density at each E is
+# simply proportional to N(E)"*. That is exactly wrong — the early region
+# demands the **larger** emission angle, so it is exponentially harder to
+# populate at *every* energy. Weighting both regions by the same $E^{-\gamma}$
+# throws away precisely the selection effect the whole mechanism is about, and
+# it is what produced that version's runaway divergence at large $E_{max}$.
 #
-# $$\left\langle \rho(E) \right\rangle
-# = \frac{\int_{E_{min}}^{E_{max}} E^{-\gamma}\,\rho(E)\,dE}{\int_{E_{min}}^{E_{max}} E^{-\gamma}\,dE}$$
+# The correct object is a **ratio of integrals**, each weighting an energy by
+# how many muons of that energy actually *arrive in that region*:
 #
-# where $\rho(E)$ is exactly the `ratio(E, ...)` function from Section 3, and
-# the weighting `E^-γ` says "there are many more low-energy muons than
-# high-energy ones, weight the average accordingly."
+# $$\frac{S_{tardio}}{S_{temprano}} = \frac{d_{temprano}^{2}}{d_{tardio}^{2}}\cdot
+# \frac{\int N(E)\,f(\alpha_{tardio}|E)\,dE}{\int N(E)\,f(\alpha_{temprano}|E)\,dE}$$
+#
+# ### The second fix: the ADF's own energy-dependent normalisation
+#
+# Deriving the angular distribution properly from $P(p_t)\propto p_t e^{-p_t/Q}$
+# with $\sin\alpha = cp_t/E$ (rather than quoting the shape alone) gives a
+# **normalised** distribution carrying a $k^2$ prefactor:
+#
+# $$f(\alpha|E) = \frac{dN}{d\Omega}(\alpha|E) = \frac{k^{2}}{2\pi}\,
+# \frac{\cos\alpha\;e^{-k\sin\alpha}}{1-e^{-k}(1+k)}, \qquad k \equiv \frac{E}{cQ}$$
+#
+# That $k^2$ **cancels in the late/early ratio at fixed $E$** — which is why
+# dropping it never affected $E^*$ in Section 3 — but it emphatically does
+# **not** cancel once you integrate over an energy spectrum, because it
+# reweights *which* energies dominate. Physically: a high-energy muon squeezes
+# its emission into a solid angle $\sim1/k^2$, so per muon it delivers $k^2$
+# times more density in whatever direction it does go. Including it turns the
+# effective weight from $E^{-\gamma}$ into roughly $E^{2-\gamma}$.
 
 # %%
-def spectrum_weighted_kinematic_A1(r, D, theta_deg, Q, gamma, E_min, E_max):
-    num = quad(lambda E: E ** (-gamma) * ratio(E, r, D, theta_deg, Q), E_min, E_max, limit=200)[0]
-    den = quad(lambda E: E ** (-gamma), E_min, E_max, limit=200)[0]
-    rho_avg = num / den
-    return A1_from_ratio(rho_avg), rho_avg
+def adf(alpha, E, Q):
+    """Properly normalised angular distribution dN/dOmega(alpha | E)."""
+    k = E / Q
+    norm = 1.0 - np.exp(-k) * (1.0 + k)
+    return (k ** 2 / (2 * np.pi)) * np.cos(alpha) * np.exp(-k * np.sin(alpha)) / max(norm, 1e-12)
 
+
+def region_weight(alpha, d, Q, gamma, E_min, E_max):
+    """What actually ARRIVES in one region: integral over the muon spectrum of
+    N(E) x f(alpha|E) / d^2. Integrated in log E for robustness over decades."""
+    f = lambda u: np.exp(u) * (np.exp(u) ** (-gamma)) * adf(alpha, np.exp(u), Q) / d ** 2
+    return quad(f, np.log(E_min), np.log(E_max), limit=500)[0]
+
+
+def spectrum_weighted_A1(r, D, theta_deg, Q, gamma, E_min, E_max):
+    d_e_, d_l_, ae_, al_, _, _, _, _ = factors(r, D, theta_deg)
+    W_e = region_weight(ae_, d_e_, Q, gamma, E_min, E_max)
+    W_l = region_weight(al_, d_l_, Q, gamma, E_min, E_max)
+    return A1_from_ratio(W_l / W_e)
+
+
+print("Numerical stability (the old version ran away here; this one does not):")
+for Emax_t in (5.0, 20.0, 100.0, 2000.0, 20000.0):
+    a1 = spectrum_weighted_A1(r_ref, D_ref, theta_ref, 0.20, 2.6, 0.155, Emax_t)
+    print(f"  E_max={Emax_t:8.0f} GeV -> A1 = {a1:+.4f}")
+print("  -> genuinely convergent: high-E muons are exponentially suppressed in BOTH")
+print("     regions, so they can never dominate the average.\n")
+
+# %% [markdown]
+# ### The decisive test: vary only the detection threshold
+#
+# With the calculation fixed, the model makes a sharp, directly checkable
+# prediction. The SD sees essentially the whole muon flux (Cazón's own floor,
+# $E_{th}=0.155$ GeV); the UMD's overburden cuts at
+# $E_\mu\gtrsim1\,\mathrm{GeV}/\cos\theta$. Changing *nothing but that
+# threshold* asks the model which detector should show the more positive $A_1$.
+
+# %%
+E_SD, E_UMD = 0.155, 1.0 / np.cos(np.radians(theta_ref))
+Emins = np.array([0.155, 0.3, 0.5, 1.0, E_UMD, 2.0, 3.0, 5.0])
 
 fig, ax = plt.subplots(figsize=(6.5, 4))
-Emaxs = np.linspace(1, 100, 60)
 for gamma, color in zip([2.0, 2.6, 3.0], ["#e34948", "#eb6834", "#2a78d6"]):
-    A1s = [spectrum_weighted_kinematic_A1(r_ref, D_ref, theta_ref, 0.20, gamma, 0.05, Emax)[0] for Emax in Emaxs]
-    ax.plot(Emaxs, A1s, color=color, label=f"gamma={gamma}")
+    A1s = [spectrum_weighted_A1(r_ref, D_ref, theta_ref, 0.20, gamma, Em, 2000.0) for Em in Emins]
+    ax.plot(Emins, A1s, "o-", color=color, label=f"gamma={gamma}")
 ax.axhline(0, color="gray", lw=0.8)
-ax.set_xlabel(r"upper integration cutoff $E_{max}$ (GeV)")
-ax.set_ylabel(r"spectrum-weighted implied $A_1$")
-ax.set_title("Stays EARLY-favouring over any physically bounded range")
+ax.axvline(E_SD, color="k", ls=":", lw=1)
+ax.axvline(E_UMD, color="k", ls="--", lw=1)
+ax.text(E_SD * 1.05, -0.25, "SD", fontsize=9)
+ax.text(E_UMD * 1.05, -0.25, "UMD", fontsize=9)
+ax.set_xscale("log")
+ax.set_xlabel(r"muon energy threshold $E_{min}$ (GeV)")
+ax.set_ylabel(r"spectrum-weighted $A_1$ (kinematic term only)")
+ax.set_title("Raising the threshold makes $A_1$ MORE late-favouring, not less")
 ax.legend()
 plt.tight_layout()
 plt.show()
 
-k = (np.sin(ae) - np.sin(al)) / 0.20
-print(f"Asymptotic growth rate k = {k:.4f} /GeV  (ratio(E) ~ exp(k E) at large E,")
-print("beats ANY power-law spectrum eventually -- the flip seen far to the right")
-print("of the plot above is this toy model's unbounded exponential finally winning")
-print("against an unphysically extended power law, not a real physical prediction.)")
+for gamma in (2.0, 2.6, 3.0):
+    a_sd = spectrum_weighted_A1(r_ref, D_ref, theta_ref, 0.20, gamma, E_SD, 2000.0)
+    a_umd = spectrum_weighted_A1(r_ref, D_ref, theta_ref, 0.20, gamma, E_UMD, 2000.0)
+    print(f"  gamma={gamma:.1f}: SD-like A1={a_sd:+.3f}   UMD-like A1={a_umd:+.3f}   "
+          f"(UMD - SD) = {a_umd - a_sd:+.3f}")
+print("\n  Observed (both GAP notes, Table 2, r=1200 m): SD-Muon(MC) = -0.10, UMD = +0.11")
+print("  i.e. the DATA has UMD MORE positive than SD by ~0.21; the model says LESS,")
+print("  by ~0.14. The kinematic mechanism predicts the detector ordering BACKWARDS.")
 
 # %% [markdown]
-# **Reading this plot:** over any energy range a real muon spectrum actually
-# populates (up to ~20 GeV, generously), the spectrum-weighted term stays
-# **early-favouring** for every spectral index tried. It only crosses zero
-# once the integral is extended to tens-to-hundreds of GeV — energies no
-# physically-motivated ground-level muon spectrum at these radii/primary
-# energies has appreciable flux at, and only because the toy exponential ADF
-# grows without bound ($\rho(E)\sim e^{kE}$), which necessarily beats *any*
-# power-law falloff eventually. That crossover is the toy model being
-# extrapolated outside where it was calibrated, not a discovery.
+# ### Total prediction per detector, folding in each one's geometric response
+
+# %%
+A1_flat_umd, A1_tank_count, _ = tank_response(r_ref, D_ref, theta_ref)
+to_ratio = lambda a1: (1 - a1) / (1 + a1)
+for gamma in (2.0, 2.6, 3.0):
+    kin_sd = spectrum_weighted_A1(r_ref, D_ref, theta_ref, 0.20, gamma, E_SD, 2000.0)
+    kin_umd = spectrum_weighted_A1(r_ref, D_ref, theta_ref, 0.20, gamma, E_UMD, 2000.0)
+    A1_sd = A1_from_ratio(to_ratio(kin_sd) * to_ratio(A1_tank_count))
+    A1_umd = A1_from_ratio(to_ratio(kin_umd) * to_ratio(A1_flat_umd))
+    print(f"  gamma={gamma:.1f}: SD predicted {A1_sd:+.3f} (observed -0.10)   |   "
+          f"UMD predicted {A1_umd:+.3f} (observed +0.11)")
+
+# %% [markdown]
+# **What this establishes, and it is sharper than the earlier version claimed:**
 #
-# **This retracts a hypothesis worth naming honestly**: that a rare
-# high-energy tail above $E^*$ might dominate a properly-weighted average and
-# explain the SD's inversion after all. Checked directly, it doesn't survive.
-# Kinematic divergence — evaluated at a single energy (Section 3) or
-# averaged over a realistic spectrum (this section) — does not produce a
-# net late-favouring effect for the true muon flux, only for individual
-# high-energy muons considered in isolation, of which there are too few to
-# matter.
+# 1. **The divergence was an artifact.** Done correctly the integral is stable
+#    over four decades in $E_{max}$. The earlier "retraction" of the
+#    high-energy-tail hypothesis was reached via a broken calculation; the
+#    conclusion survives, but the reasoning behind it did not.
+# 2. **Low energy does not buy a large asymmetry.** The low-$E$ population does
+#    dominate the arriving flux, but yields $A_1\approx+0.16$ at the reference
+#    point, driven by the $1/d^2$ dilution — because at low $E$ the angular
+#    distribution is too broad to resolve the ~2° gap between the two required
+#    angles at all.
+# 3. **Raising the threshold drives $A_1$ *down*, crossing zero near 2 GeV.**
+#    So the model predicts the UMD (high threshold) should be *less*
+#    early-favouring than the SD — the opposite of the measured ordering. This
+#    is a much more specific failure than "the mechanism is too small": as
+#    formulated, it points the wrong way between detectors.
+# 4. **Combined with each detector's own geometry, the UMD comes out right
+#    (+0.13 predicted vs. +0.11 observed) and the SD badly wrong (+0.19 vs.
+#    −0.10).** The framework therefore accounts for the UMD without difficulty
+#    and fails *only* on the SD — localising the unexplained physics exactly
+#    where every other check in this notebook has already pointed.
 
 # %% [markdown]
 # ## 9. A candidate with the right sign, quantified honestly: in-flight atmospheric scattering
@@ -1011,11 +1088,19 @@ print("\nReported empirical Delta_A1 over this same energy window (thesis Fig. '
 # | Candidate mechanism | Section | Result |
 # |---|---|---|
 # | Kinematic divergence, Population B attribution | 3 | Wrong population — early-favouring below E* |
-# | Kinematic divergence, spectrum-weighted | 8 | Still early-favouring over any physically bounded range |
+# | Kinematic divergence, spectrum-weighted (corrected) | 8 | +0.16 early-favouring; predicts the UMD/SD ordering **backwards** |
 # | Tank/track-length (GAP-2026-041 §6) | 5 | Contributes exactly zero to VEM, not negative |
 # | Tank aperture on raw count | 5 | Early-favouring (+0.03), not negative |
 # | In-flight atmospheric scattering | 9 | Right sign, ~1-2% — an order of magnitude short on its own |
 # | UMD A1 increasing with primary energy (Ch. 5 hypothesis) | 10a | Right sign, ~40-65% of the reported magnitude |
+#
+# Section 8's corrected treatment sharpens the overall verdict considerably.
+# Folding the spectrum-weighted kinematic term together with each detector's
+# own geometric response predicts **UMD $+0.13$ (observed $+0.11$)** but
+# **SD $+0.19$ (observed $-0.10$)**. The framework assembled here therefore
+# accounts for the UMD essentially correctly, and fails *only* on the SD —
+# a much more localised statement of what is missing than "no mechanism
+# works".
 #
 # **None of the analytically-tractable mechanisms checked here produces a
 # late-favouring net effect anywhere near the size the simulation reports
