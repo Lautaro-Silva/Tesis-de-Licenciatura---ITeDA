@@ -1,0 +1,148 @@
+################################################################################
+# Section 2 -- Armbruster/Luce linearised bracket vs exact geometry
+################################################################################
+Reference point: r=1200.0 m, D=7.5 km, theta=35.0 deg,  eps*tan(theta)=0.1120
+
+  '+2' (1/d^2 solid angle):    linearised +0.2241   exact +0.2158
+  '+1' (flat plane / A_geo):   linearised +0.1120   exact +0.1092
+       Bertou-Billoir A_geo = <p_r/-p_z> tan(theta) ~ (r/d) tan(theta) = 0.1120
+       => IDENTICAL to the linearised '+1' aperture term. Not an extra contribution.
+  WCD tank particle count:     linearised +0.0340   exact +0.0315   (N_det=0.304)
+  WCD tank muon VEM:           exact +0.0000  (Cauchy mean-chord theorem, exact)
+
+  Linearised-vs-exact agreement on the largest term ('+2'): 3.7% relative error
+  at eps=0.160 -- the O(eps^2) expansion is doing well even at this far-core point.
+
+=== Required bracket value B = a/(eps*tan(theta)) to reproduce GAP-2026-041 Table 2 ===
+(B = 2 - gamma + d/lambda; B<0 needs gamma > 2 + d/lambda, i.e. a VERY steep local ADF)
+
+ -- D = 5.0 km --
+    r= 450 m: B_required(SDmu) = +0.79
+    r= 800 m: B_required(SDmu) = +0.36
+    r=1200 m: B_required(SDmu) = -0.60
+ -- D = 7.5 km --
+    r= 450 m: B_required(SDmu) = +1.19
+    r= 800 m: B_required(SDmu) = +0.54
+    r=1200 m: B_required(SDmu) = -0.89
+ -- D = 10.0 km --
+    r= 450 m: B_required(SDmu) = +1.59
+    r= 800 m: B_required(SDmu) = +0.71
+    r=1200 m: B_required(SDmu) = -1.19
+
+################################################################################
+# Section 3 -- Muon 'attenuation' sign correction (Bertou & Billoir Fig. 1)
+################################################################################
+B&B Fig. 1 muon curve (10^19 eV, their own explicit MC): rho_mu(X)/rho_mu(900) = {np.int64(900): np.float64(1.0), np.int64(1000): np.float64(1.09), np.int64(1100): np.float64(1.21), np.int64(1200): np.float64(1.27)}
+Fitted as rho ~ exp(+(X-900)/Lambda): Lambda_growth = +1217 g/cm^2 (positive = GROWING with depth)
+This is the OPPOSITE sign to a normal attenuation length -- both GAP notes assume muon
+'attenuation' is early-favoring like the EM component; B&B's own muon-isolated MC says no,
+over exactly the depth range relevant here (900-1200 g/cm^2 sea-level-equivalent).
+
+Cross-check: Armbruster's lambda=36 km (a GEOMETRIC length, muon range) converts to ~3780 g/cm^2 near ground -- consistent order of magnitude with |Lambda_growth| above (1217 g/cm^2), i.e. the two 'attenuation' pictures are comparably strong, just
+opposite in sign for the muon channel specifically.
+A crude linearised bracket estimate (using the geometric-length-to-grammage conversion
+above rather than an actual slant-depth calculation) suggested this swing might be
+'comparable' to the gap in Section 2's table -- that estimate mixed a linearised bracket
+with an exact geometry inconsistently and OVERSTATED the effect. Section 7 below redoes
+this properly (real slant depths, combined multiplicatively with the corrected spectrum-
+weighted kinematic term from the explainer notebook) and finds a smaller, more honest number.
+
+################################################################################
+# Section 4 -- Q uncertainty (Cazon 2012 explicitly rejects a single Q)
+################################################################################
+Verified median/Q factor for dN/dpt~(pt/Q^2)exp(-pt/Q): median = 1.6783 * Q
+  Cazon Fig. 8 median c*pt = 0.20 GeV  =>  Q = 0.119 GeV  (NOT the often-quoted 0.20 GeV)
+  Cazon Fig. 8 median c*pt = 0.21 GeV  =>  Q = 0.125 GeV  (NOT the often-quoted 0.20 GeV)
+  Cazon Fig. 8 median c*pt = 0.22 GeV  =>  Q = 0.131 GeV  (NOT the often-quoted 0.20 GeV)
+Cazon (2012) itself: 'the different correlations of pt with Ei and X must be included...'
+-- rejects a single fixed Q as inadequate. Any E* computed from one Q, one D is a point
+estimate inside a genuinely broad, correlated distribution (h(X) FWHM ~600-700 g/cm^2).
+
+################################################################################
+# Section 5 -- Real-MC acceptance audit (icrc2025-test7, SIBYLL 2.3e proton)
+################################################################################
+=== Reproduction of GAP-2026-041 Table 2 (theta in [30,40)) ===
+Published: r=450 UMD +0.10 SDmu +0.05 SDem +0.40 (typ. unc. <=0.02)
+           r=800 +0.12/+0.04/+0.45 | r=1200 +0.11/-0.10/+0.44
+
+ r-bin (m)       N |         A1_UMD        A1_SDmu        A1_SDem         A1_VEM
+       450   31071 |       +0.0989       +0.0676       +0.4001       +0.1200
+       800   51750 |       +0.1061       +0.0394       +0.4519       +0.1070
+      1200   33312 |       +0.0682       -0.0931       +0.4195       -0.0566
+      1600    5511 |       +0.0177       -0.1040       +0.4885       -0.1815
+
+=== A1-equivalent modulation of the raw STATION COUNT per phi bin ===
+(A uniform, unbiased array would give exactly 0. This is NOT a density
+ measurement -- it is how lopsided the SAMPLE of real 750 m-array
+ stations projecting into each shower-plane phi bin is, at fixed r.)
+
+     theta     r~450     r~800    r~1200    r~1600
+     20-30    -0.008   +0.010   +0.190   +0.319
+     30-40    -0.022   +0.040   +0.359   +0.575
+     40-50    +0.010   +0.141   +0.588   +0.539
+     50-65    +0.040   +0.222   +0.315   -0.136
+
+=== Correlation of the acceptance modulation with the reported density signal ===
+  corr(A1_accept, A1_umd) = -0.083  (p=6.03e-01, n=42)
+  corr(A1_accept, A1_sd) = -0.894  (p=1.56e-15, n=42)
+
+  (Correlation alone does not establish causation -- see Section 6, which
+   runs the direct causal test.)
+
+################################################################################
+# Section 6 -- Decisive test: does equalising exposure change the reported A1?
+################################################################################
+r~1200 m, theta 30-40 (Table 2 reference point) (rows/bin: min=1680, max=3591, N_total=33312)
+  standard (unequal-N):  A1_SDmu = -0.0945   A1_UMD = +0.0670
+  equal-N/bin (300 boot): A1_SDmu = -0.0943 +/- 0.0040   A1_UMD = +0.0660 +/- 0.0106
+  shift:  SDmu +0.0002   UMD -0.0010
+
+r~800 m, theta 30-40 (small-effect control) (rows/bin: min=3915, max=4551, N_total=51750)
+  standard (unequal-N):  A1_SDmu = +0.0397   A1_UMD = +0.1063
+  equal-N/bin (300 boot): A1_SDmu = +0.0398 +/- 0.0012   A1_UMD = +0.1064 +/- 0.0020
+  shift:  SDmu +0.0001   UMD +0.0001
+
+r~1600 m, theta 30-40 (largest acceptance bias) (rows/bin: min=171, max=756, N_total=5511)
+  standard (unequal-N):  A1_SDmu = -0.1052   A1_UMD = +0.0334
+  equal-N/bin (300 boot): A1_SDmu = -0.1034 +/- 0.0144   A1_UMD = +0.0369 +/- 0.0661
+  shift:  SDmu +0.0018   UMD +0.0035
+
+VERDICT: shifts are all within noise (<0.001) despite acceptance modulations up to +/-0.6 and
+a strong correlation (Section 5) between A1_accept and A1_SDmu across (theta,r) cells. The
+correlation is real but NOT causal for the unweighted-mean estimator used by the pipeline --
+the reported SD-muon inversion is not an artifact of non-uniform station sampling.
+
+################################################################################
+# Section 7 -- RETRACTED: the B&B muon-attenuation-sign candidate
+################################################################################
+This section's 'no attenuation' column reproduces claude_work/kinematic_divergence_explainer_
+and_thesis_updates/explainer_kinematic_divergence_simulator.py Section 8's own combined
+prediction (prior work, not this session's) as a cross-check -- that part is trustworthy.
+
+The '+B&B muon attenuation' columns are KEPT BELOW FOR RECORD ONLY, NOT AS A FINDING.
+Two problems, found by the author's direct questioning of the physics, retract this candidate:
+  1. Population/threshold mismatch: B&B's Fig.1 is raw AIRES particle output -- essentially
+     the ENTIRE muon spectrum, the SD's own near-zero-threshold population -- not the UMD's
+     hard >1.22 GeV threshold population. Applying the same factor to the UMD (as done below,
+     and as the previous version of this report did in its headline numbers) mixes a
+     population the UMD never sees into the UMD's own prediction.
+  2. Likely double-counting: B&B's own text ('total decreases, but spread increases')
+     describes lateral spread of the muon population with depth -- i.e. very plausibly the
+     SAME physics as the kinematic-divergence term already in the 'no attenuation' combination
+     above (properly spectrum-weighted, prior work). Adding B&B's cruder, energy-integrated
+     number on top double-counts that physics with the opposite sign from the better source.
+  (A third, secondary problem: B&B's calibration depths, 900-1200 g/cm2 vertical for a
+   10^19-10^20 eV VERTICAL shower, sit above this reference point's own slant depths, 568-708
+   g/cm2 for a 10^17.5-18 eV, 35deg shower -- an extrapolation + unjustified energy transfer.)
+
+ gamma  no attenuation (TRUSTED, prior work)   +B&B (RETRACTED, see above)
+gamma=2.0  SD=+0.151 UMD=+0.110                          |  SD=+0.095 UMD=+0.053  (DO NOT CITE)
+gamma=2.6  SD=+0.191 UMD=+0.133                          |  SD=+0.135 UMD=+0.076  (DO NOT CITE)
+gamma=3.0  SD=+0.205 UMD=+0.145                          |  SD=+0.150 UMD=+0.088  (DO NOT CITE)
+
+observed: SD=-0.10  UMD=+0.11
+
+VERDICT: no candidate mechanism found across this session, or any of the five prior passes,
+survives scrutiny as an independent, correctly-attributed contribution to the SD gap -- not
+even partially. See report.md Section 3 for the full reasoning and what would need to be done
+(population-matched, depth-correct re-measurement) before this idea could be revisited.
