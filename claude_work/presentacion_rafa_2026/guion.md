@@ -8,18 +8,18 @@ entirely in Spanish.
 
 The metropolis theme auto-inserts a one-line "section title" slide for every `\section{}`
 in the source — this is theme default behavior, not something added deliberately. There
-are 9 of them (one per "Bloque"), so the PDF has 43 pages for 34 written content frames.
+are 10 of them (one per "Bloque"), so the PDF has 45 pages for 35 written content frames.
 Treat each divider as a **5–10 second beat**, not a talking point — just say the block
 title aloud while it's on screen and move on. They're useful as visual chapter markers
-for the audience but add up to ~1–1.5 min if lingered on.
+for the audience but add up to ~1 min if lingered on.
 
-## Per-slide timing (34 content frames, target ≈24 min; + ~1 min of divider beats ≈ 25 min)
+## Per-slide timing (35 content frames, subtotal ≈26.4 min; + ~1 min of divider beats)
 
 | Slide (frame title) | min |
 |---|---|
 | Portada | 0.3 |
 | ¿Qué son los UHECR? | 0.75 |
-| El espectro de energía | 0.75 |
+| Espectro de energía | 0.75 |
 | El problema abierto: composición de masa | 0.75 |
 | Anatomía de una lluvia | 0.75 |
 | El Observatorio Pierre Auger | 1.0 |
@@ -39,22 +39,24 @@ for the audience but add up to ~1–1.5 min if lingered on.
 | A₁(r,θ) del UMD (Infill) | 1.0 |
 | El hallazgo: inversión de signo del SD | 1.25 |
 | Desglosando la señal del SD | 1.25 |
-| ¿Qué explica cada detector? | 1.0 |
-| Lo que se descartó | 1.25 |
+| ¿Qué explica la inversión del SD? | 1.25 |
+| **NUEVO** El núcleo se corre en el eje temprano-tardío | 1.25 |
+| **NUEVO** Por qué: LDF simétrica + \emph{Toy Model} | 1.25 |
 | Primera señal en datos reales | 1.25 |
 | El sistemático a resolver | 1.0 |
 | Notas GAP de la Colaboración | 0.75 |
 | Conclusiones | 0.75 |
 | ¡Gracias! | 0.1 |
-| **Subtotal** | **24.9** |
+| **Subtotal** | **26.4** |
 
-Plus ~1 min of section-divider beats ⇒ **≈26 min total** — a touch over the 25-min slot.
-Trim about a minute with these cuts, in order: fold "Robustez del observable" into one
-sentence on the prior slide (saves 0.75), skip "AugerPrime" entirely — it isn't
-load-bearing for what follows (saves 0.5), and speed through the section-divider beats
-in under 5s each rather than 10s. That reaches ~25 min with the block titles still voiced.
-If more room is needed, trim "Lo que se descartó" to just the summary block, skipping the
-three bullets (the backup slide has the full table if an advisor asks).
+Plus ~1 min of section-divider beats ⇒ **≈27.5 min total** — about 2.5 min over the
+25-min slot. This is the direct cost of promoting the core-reconstruction-bias story
+(two new slides, ~2.5 min) from backup into the main talk — see the note below on why
+that trade was made deliberately. Claw back time with the same two cuts as before, in
+order: fold "Robustez del observable" into one sentence on the prior slide (saves 0.75),
+skip "AugerPrime" entirely (saves 0.5). That still leaves ~26.2 min; if the advisors want
+it tighter, the next candidate to compress is "Desglosando la señal del SD" (the table
+can be introduced verbally instead of read bullet-by-bullet).
 
 ## Talking points per block (what to actually say, not just read off the slide)
 
@@ -80,14 +82,31 @@ deliver it with confidence. The MF≈2.5 number is real but say explicitly it's 
 **idealized upper bound** (fixed-geometry Dense Ring) before moving on, so it isn't
 over-read.
 
-**Bloque 6 (Infill / SD inversion).** The most novel result. On "¿Qué explica cada
-detector?": be plain that the UMD side is solved and the SD side is not — this is the
-deliberately honest framing agreed on for this talk, matching the reduced claim in
+**Bloque 6 (Infill / SD inversion).** The most novel physics result. On "¿Qué explica la
+inversión del SD?": be plain that the UMD side is solved and the SD side is not — this is
+the deliberately honest framing agreed on for this talk, matching the reduced claim in
 `unified_asymmetry_model_v1/report.md`. It survives a skeptical question far better than
-either overclaiming a mechanism or hiding the ≈0.29 gap. If an advisor pushes on "what IS
-the mechanism then," the answer is on the backup slide: eight candidates evaluated,
-none survives quantitatively; current best lead is whether the SD's own MC-truth muon
-count already carries an unrepresented detector-level selection.
+either overclaiming a mechanism or hiding the ≈0.29 gap. Land it on the door-open line
+("hacen falta más efectos... ¿qué más está pasando a lo largo de este mismo eje?") — it's
+the hook into the next block, not a dead end. If an advisor pushes on "what IS the
+mechanism then," the answer is on the backup slide: eight candidates evaluated, none
+survives quantitatively; current best lead is whether the SD's own MC-truth muon count
+already carries an unrepresented detector-level selection.
+
+**Bloque: Un segundo sistemático (el sesgo del núcleo).** This block exists because you
+asked for it explicitly: the core-reconstruction bias is not new to Auger, but that it's
+*systematically aligned with the early-late axis itself* is. Say that distinction out
+loud on the first of these two slides — it's the whole point of promoting this out of
+backup. The causal chain to land clearly: Offline's LDF is fit assuming azimuthal
+symmetry → real signal isn't symmetric → the fitter's only free handle left is the core
+position → it drags the core toward the late region → that drag independently washes out
+the very $A_1$ being measured. The Toy Model slide's number is the payoff: bootstrap
+injection of the directional counting residual reproduces the REC/MC gap *exactly* below
+$\theta\approx35°$, and accounts for just over half of it above — the remainder is the
+geometric core-shift shown on the previous slide, which the Toy Model alone (a purely
+directional-counting model, no spatial displacement) can't capture. This pairs with the
+in-prep GAP note on core-reconstruction bias, named explicitly on the GAP-notes slide
+right after.
 
 **Bloque 7 (Datos reales).** Flag clearly that this is a preliminary audit output, not
 written into the thesis yet (Cap. 7 is still empty headers) — say so out loud, don't let
@@ -109,4 +128,11 @@ and check its resolving power for mass discrimination. Close on the concrete nex
   Dense Ring bound; REC-geometry core smearing degrades it (Ch. 6 §6.2). Already flagged
   on slide 18's small-print note.
 - *"How confident are you in the 4.8σ real-data number?"* — Explicitly preliminary,
-  single cell, exposure correction not yet applied; that's exactly why slide 25 exists.
+  single cell, exposure correction not yet applied; that's exactly why the exposure
+  systematic slide right after it exists.
+- *"Isn't core-reconstruction bias already known? What's actually new here?"* — The bias
+  itself, yes. What's new is that it isn't generic scatter: it's systematically aligned
+  with the same early-late axis the physics analysis depends on, which is why it partly
+  masquerades as (and partly compounds) a loss of physical asymmetry rather than just
+  adding noise. That's the whole reason it's now a main-talk slide instead of a backup
+  footnote, and the subject of the second, in-prep GAP note.
