@@ -27,42 +27,55 @@
 \setbeamerfont{itemize/enumerate subbody}{size=\small}
 \setbeamerfont{block title}{size=\normalsize}
 \setbeamerfont{block body}{size=\small}
-\setbeamerfont{institute}{size=\scriptsize}
-\setbeamerfont{date}{size=\scriptsize}
-\setbeamerfont{title}{size=\Large}
-\setbeamerfont{subtitle}{size=\small}
 \setlength{\itemsep}{2pt}
 
 % --- Insignias de estado del resultado (MC vs. datos reales) ---
+% Ancladas a la esquina de la página vía tikz overlay: posición fija sin
+% importar cuánto contenido haya arriba en el frame.
 \newcommand{\badgeMC}{%
-  \vspace{-2.35em}\begin{flushright}
-  \colorbox{itedaTeal}{\textcolor{white}{\scriptsize\textbf{SIMULACIONES (MC)}}}
-  \end{flushright}\vspace{0.6em}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, xshift=-0.35cm, yshift=-0.9cm, fill=itedaTeal,
+      rounded corners=1pt, inner sep=4pt] at (current page.north east)
+      {\scriptsize\textcolor{white}{\textbf{SIMULACIONES (MC)}}};
+  \end{tikzpicture}%
 }
 \newcommand{\badgeDATA}{%
-  \vspace{-2.35em}\begin{flushright}
-  \colorbox{itedaOrange}{\textcolor{white}{\scriptsize\textbf{DATOS REALES --- PRELIMINAR}}}
-  \end{flushright}\vspace{0.6em}%
-}
-
-\newcommand{\fuente}[1]{{\tiny\color{itedaGray} Fuente: #1}}
-
-\title{Asimetrías Azimutales de la Densidad de Muones}
-\subtitle{Detector Subterráneo de Muones del Observatorio Pierre Auger}
-\author{Lautaro Silva Pizzi}
-\institute{ITeDA (CNEA-CONICET-UNSAM), Lic.\ en Ciencias Físicas FCEN-UBA
-  --- Directores: Dr.\ J.\ M.\ Figueira, Dr.\ F.\ Sánchez}
-\date{RAFA 2026}
-\titlegraphic{%
-  \includegraphics[height=0.9cm]{logo_uba.png}\hspace{0.5cm}%
-  \includegraphics[height=0.8cm]{logo_iteda.png}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, xshift=-0.35cm, yshift=-0.9cm, fill=itedaOrange,
+      rounded corners=1pt, inner sep=4pt] at (current page.north east)
+      {\scriptsize\textcolor{white}{\textbf{DATOS REALES --- PRELIMINAR}}};
+  \end{tikzpicture}%
 }
 
 \begin{document}
 
 % ============================================================
 \begin{frame}[plain]
-  \maketitle
+  \begin{center}
+    \includegraphics[height=1.6cm]{logo_uba.png}\hspace{1.3cm}%
+    \includegraphics[height=1.4cm]{logo_iteda.png}
+
+    \vspace{1.0em}
+    {\LARGE\bfseries Asimetrías Azimutales de la Densidad de Muones}
+
+    \vspace{0.35em}
+    {\LARGE\bfseries en Lluvias Atmosféricas Extensas con el UMD}
+
+    \vspace{0.55em}
+    {\color{itedaOrange}\rule{0.55\textwidth}{1pt}}
+
+    \vspace{0.9em}
+    {\Large Lautaro Silva Pizzi}
+
+    \vspace{0.5em}
+    {\normalsize ITeDA (CNEA-CONICET-UNSAM) --- Lic.\ en Ciencias Físicas, FCEN-UBA}
+
+    \vspace{0.2em}
+    {\normalsize Directores: Dr.\ Juan Manuel Figueira, Dr.\ Federico Sánchez}
+
+    \vspace{0.8em}
+    {\small\bfseries\color{itedaTeal} RAFA 2026}
+  \end{center}
 \end{frame}
 
 % ============================================================
@@ -74,33 +87,33 @@
       \begin{itemize}
         \item Partículas cargadas de origen astrofísico que llegan a la Tierra con
           energías $E > 10^{18}$~eV, hasta $\sim 10^{20}$~eV.
-        \item Miles de millones de veces más energéticas que lo alcanzable en el LHC.
-        \item \alert{Flujo extremadamente bajo}: de varias partículas/m$^2$/s a
-          \alert{$\sim$1 partícula por km$^2$ por \emph{siglo}} a $E>10^{19}$~eV.
+        \item Hasta \textbf{7 órdenes de magnitud} por encima de la energía
+          alcanzada en el LHC ($\sim$10~TeV).
+        \item \alert{Flujo extremadamente bajo}: de varias partículas/m$^2$/s
+          ($E\sim10^{11}$~eV) a \alert{$\sim$1 partícula por km$^2$ por
+          \emph{siglo}} ($E>10^{19}$~eV).
         \item Tres preguntas abiertas: \textbf{origen}, \textbf{mecanismo de aceleración}
           y \textbf{composición química}.
       \end{itemize}
     \column{0.44\textwidth}
       \includegraphics[width=\textwidth]{espectro_completo.jpg}
   \end{columns}
-  \fuente{PDG 2018, vía Tesis Cap.\ 1}
 \end{frame}
 
-\begin{frame}{El espectro de energía: una regla casi pura}
+\begin{frame}{Espectro de energía}
   \begin{columns}[T]
     \column{0.42\textwidth}
       \begin{itemize}
-        \item $J(E)\propto E^{-\gamma}$, con estructuras finas: \emph{rodilla}
-          ($\sim3\times10^{15}$~eV), \emph{segunda rodilla} ($\sim10^{17}$~eV),
-          \emph{tobillo} ($\sim5\times10^{18}$~eV).
-        \item Supresión de flujo por encima de $4\times10^{19}$~eV, confirmada por
-          Auger con \alert{significancia $>20\sigma$} (corte GZK).
+        \item El espectro de energía $J(E)\propto E^{-\gamma}$, con estructuras
+          finas: \emph{rodilla} ($\sim3\times10^{15}$~eV), \emph{segunda
+          rodilla} ($\sim10^{17}$~eV), \emph{tobillo} ($\sim5\times10^{18}$~eV).
+        \item Supresión de flujo por encima de $4\times10^{19}$~eV, confirmada
+          por Auger con alta significancia estadística.
         \item Pero el \textbf{espectro no dice de qué está hecho} el rayo cósmico.
       \end{itemize}
     \column{0.54\textwidth}
       \includegraphics[width=\textwidth]{espectro_uhecr.png}
   \end{columns}
-  \fuente{PDG 2024, datos Auger + Telescope Array, vía Tesis Cap.\ 1}
 \end{frame}
 
 \begin{frame}{El problema abierto: composición de masa}
@@ -120,7 +133,6 @@
       \centering
       \includegraphics[width=\textwidth,height=5.2cm,keepaspectratio]{x_max.jpg}
   \end{columns}
-  \fuente{Yushkov 2019, vía Tesis Cap.\ 5}
 \end{frame}
 
 \begin{frame}{Anatomía de una lluvia: dos componentes muy distintas}
@@ -139,7 +151,6 @@
       \centering
       \includegraphics[width=\textwidth,height=4.6cm,keepaspectratio]{eas.png}
   \end{columns}
-  \fuente{Haungs 2003, vía Tesis Cap.\ 1}
 \end{frame}
 
 % ============================================================
@@ -160,14 +171,13 @@
       \centering
       \includegraphics[width=\textwidth,height=5.3cm,keepaspectratio]{mapa_auger.png}
   \end{columns}
-  \fuente{Botti 2019, vía Tesis Cap.\ 2}
 \end{frame}
 
-\begin{frame}{AugerPrime: separando las dos componentes}
+\begin{frame}{AugerPrime}
   \begin{columns}[T]
     \column{0.5\textwidth}
       \begin{itemize}
-        \item Actualización en curso del Observatorio.
+        \item La gran actualización del Observatorio, ya desplegada.
         \item Un \textbf{Centellador de Superficie} (SSD, $3.8$~m$^2$) sobre cada
           tanque Cherenkov: responde distinto a fotones/electrones que a muones.
         \item La combinación WCD+SSD permite \emph{desenredar estadísticamente}
@@ -177,7 +187,6 @@
       \centering
       \includegraphics[width=\textwidth,height=4.8cm,keepaspectratio]{ssd.png}
   \end{columns}
-  \fuente{Botti 2019, vía Tesis Cap.\ 2}
 \end{frame}
 
 \begin{frame}{AMIGA y el Detector Subterráneo de Muones (UMD)}
@@ -185,8 +194,8 @@
     \column{0.48\textwidth}
       \begin{itemize}
         \item \textbf{Enterrado 2.3~m} junto a cada tanque de superficie
-          $\Rightarrow \sim$\textbf{540~g/cm$^2$} de tierra --- más de media
-          atmósfera adicional.
+          $\Rightarrow \sim$\textbf{540~g/cm$^2$} de tierra --- el equivalente
+          a una atmósfera terrestre completa adicional.
         \item 3 módulos centelladores de 10~m$^2$ c/u, 64 tiras por módulo,
           lectura con fotomultiplicadores de silicio (SiPM).
         \item Parte de la extensión \emph{Infill} (750~m) del arreglo, apuntando
@@ -195,7 +204,6 @@
     \column{0.48\textwidth}
       \includegraphics[width=\textwidth]{umd.png}
   \end{columns}
-  \fuente{Botti 2019, vía Tesis Cap.\ 2}
 \end{frame}
 
 \begin{frame}{¿Por qué el UMD es un detector distinto?}
@@ -204,9 +212,11 @@
       \item \textbf{Absorción electromagnética total}: 2.3~m de tierra extinguen
         por completo $e^\pm/\gamma$. La señal del UMD es un frente
         \alert{muónico puro} --- sin la convolución $S_{EM}+S_\mu$ del SD.
-      \item \textbf{Umbral cinemático}: sólo llegan muones con
-        $E_\mu \gtrsim 1$~GeV$/\cos\theta$. El UMD selecciona la población de
-        muones \emph{duros}, nacidos en las primeras generaciones hadrónicas.
+      \item \textbf{Umbral cinemático}: sólo atraviesan la tierra los muones
+        que llegan al \textbf{nivel del suelo} con $E_\mu \gtrsim 1$~GeV$/\cos\theta$
+        (antes de cruzar los 2.3~m). El UMD selecciona así la población de
+        muones de \emph{alta energía}, nacidos en las primeras generaciones
+        hadrónicas.
     \end{enumerate}
   \end{block}
   \vspace{0.5em}
@@ -237,7 +247,6 @@
     \column{0.46\textwidth}
       \includegraphics[width=\textwidth]{esquema_lluvia.jpeg}
   \end{columns}
-  \fuente{GAP-2026-041}
 \end{frame}
 
 \begin{frame}{Mecanismo 1: atenuación atmosférica}
@@ -257,22 +266,23 @@
   \begin{columns}[T]
     \column{0.52\textwidth}
       \begin{itemize}
-        \item Los muones nacen con un ángulo de apertura $\alpha$ respecto al eje
-          de la lluvia (momento transverso $p_t$ del decaimiento $\pi/K$).
-        \item Al proyectar un haz \emph{isótropo} sobre un plano
-          \textbf{inclinado}, la región tardía queda geométricamente más
-          lejos del punto de producción --- requiere un $\alpha$ menor.
-        \item Bertou \& Billoir (GAP-2000-017) cuantifican este término de
-          proyección $\mathcal{A}_{geo}$.
+        \item Haz de muones isótropo, pero lluvia inclinada: el
+          \textbf{ángulo de incidencia sobre el suelo} es distinto en la
+          región temprana y la tardía ($\theta_{\text{early}}\neq
+          \theta_{\text{late}}$, misma $r$).
+        \item Esa diferencia cambia el área efectiva que cada estación
+          subtiende --- un efecto \textbf{puramente geométrico de
+          proyección}, no de dispersión angular de los muones.
+        \item Bertou \& Billoir (GAP-2000-017) cuantifican este término
+          $\mathcal{A}_{geo}$.
       \end{itemize}
     \column{0.44\textwidth}
       \centering
-      \includegraphics[width=\textwidth,height=4.4cm,keepaspectratio]{efecto_geo.png}
+      \includegraphics[width=\textwidth,height=3.7cm,keepaspectratio]{efecto_geo.png}
   \end{columns}
-  \vspace{0.2em}
   \begin{block}{Signo}
     \small Para un plano ideal, la proyección geométrica \textbf{también} da
-    $A_1 > 0$ (GAP-2026-041, \S2.2) --- ambos mecanismos suman igual.
+    $A_1 > 0$ (GAP-2026-041, \S2.2).
   \end{block}
 \end{frame}
 
@@ -300,13 +310,11 @@
 \begin{frame}{De CORSIKA a un valor de $A_1$}
   \begin{center}
   \begin{tikzpicture}[node distance=0.55cm, every node/.style={font=\small}]
-    \node[draw, rounded corners, fill=itedaTeal, text=white, minimum width=2.3cm, minimum height=0.9cm] (c) {CORSIKA};
-    \node[draw, rounded corners, fill=itedaTeal, text=white, minimum width=2.3cm, minimum height=0.9cm, right=of c] (o) {Offline};
-    \node[draw, rounded corners, fill=itedaTeal, text=white, minimum width=2.3cm, minimum height=0.9cm, right=of o] (p) {parquet};
-    \node[draw, rounded corners, fill=itedaOrange, text=white, minimum width=2.6cm, minimum height=0.9cm, right=of p] (a) {ajuste $A_1(r,\theta)$};
+    \node[draw, rounded corners, fill=itedaTeal, text=white, minimum width=2.6cm, minimum height=0.9cm] (c) {CORSIKA};
+    \node[draw, rounded corners, fill=itedaTeal, text=white, minimum width=2.6cm, minimum height=0.9cm, right=of c] (o) {Offline};
+    \node[draw, rounded corners, fill=itedaOrange, text=white, minimum width=2.9cm, minimum height=0.9cm, right=of o] (a) {ajuste $A_1(r,\theta)$};
     \draw[-{Latex}] (c) -- (o);
-    \draw[-{Latex}] (o) -- (p);
-    \draw[-{Latex}] (p) -- (a);
+    \draw[-{Latex}] (o) -- (a);
   \end{tikzpicture}
   \end{center}
   \begin{itemize}
@@ -333,10 +341,9 @@
   \begin{itemize}
     \item Energía: subestimación sistemática $\mu\approx-0.14$ en $\Delta\log_{10}E$
       (\emph{muon deficit} de los modelos hadrónicos), $\sigma\approx0.11$.
-    \item Ángulos: sesgos $<0.05^\circ$, resoluciones $\lesssim2.2^\circ$ ---
-      no introducen modulación espuria en $A_1$.
+    \item Ángulo cenital $\theta$: sesgo $<0.05^\circ$, resolución
+      $\sigma\approx0.6^\circ$ --- no introduce modulación espuria en $A_1$.
   \end{itemize}
-  \fuente{Tesis Cap.\ 4}
 \end{frame}
 
 % ============================================================
@@ -358,10 +365,9 @@
           $\chi^2_\nu\approx1$.
       \end{itemize}
   \end{columns}
-  \fuente{Tesis Cap.\ 5}
 \end{frame}
 
-\begin{frame}{$A_1$ vs.\ $\theta$: UMD y SD invierten su jerarquía}
+\begin{frame}{$A_1$ vs.\ $\theta$: UMD y SD cruzan de dominancia}
   \badgeMC
   \begin{columns}[T]
     \column{0.55\textwidth}
@@ -372,23 +378,23 @@
           que el UMD.
         \item $\theta \gtrsim 50^\circ$: la componente EM se absorbe casi por
           completo --- el SD cae \textbf{por debajo} del UMD.
-        \item El UMD crece suave y establemente en todo el rango.
+        \item El UMD crece de forma suave y estable, con una leve caída
+          recién en los bines más inclinados.
       \end{itemize}
   \end{columns}
-  \fuente{GAP-2026-041 / Tesis Cap.\ 5}
 \end{frame}
 
 \begin{frame}{Robustez del observable}
   \badgeMC
   \begin{columns}[T]
     \column{0.33\textwidth}
-      \centering\footnotesize Invariancia en $\phi_{shower}$\\
+      \centering
       \includegraphics[width=\textwidth]{densering_sys_isotropy.pdf}
     \column{0.33\textwidth}
-      \centering\footnotesize Independencia energética\\
+      \centering
       \includegraphics[width=\textwidth]{densering_sys_energy.pdf}
     \column{0.33\textwidth}
-      \centering\footnotesize Independencia del modelo hadrónico\\
+      \centering
       \includegraphics[width=\textwidth]{hadronic_uncertainty_helium.pdf}
   \end{columns}
   \begin{itemize}
@@ -396,7 +402,6 @@
       linealmente con $E$ ($\Delta A_1\approx0.015$), y es estable entre
       SIBYLL~2.3e y QGSJET-III (dentro de $\pm10\%$).
   \end{itemize}
-  \fuente{Tesis Cap.\ 5}
 \end{frame}
 
 \begin{frame}{Discriminación de masa: protón vs.\ hierro}
@@ -407,17 +412,19 @@
     \column{0.46\textwidth}
       \begin{itemize}
         \item $\langle A_1^{\text{p}}\rangle > \langle A_1^{\text{Fe}}\rangle$
-          sistemáticamente --- $X_{\max}$ más profundo (protón) $\Rightarrow$
-          frente muónico más concentrado espacialmente.
+          sistemáticamente.
+        \item \emph{Hipótesis interpretativa} (a confirmar): un $X_{\max}$
+          más profundo (protón) concentraría espacialmente más el frente
+          muónico.
         \item Factor de Mérito
           $MF=\dfrac{|\langle A_1^p\rangle-\langle A_1^{Fe}\rangle|}
           {\sqrt{\sigma_p^2+\sigma_{Fe}^2}}$.
         \item \alert{\emph{Sweet spot}: $MF\approx2.5$ en $\theta=40^\circ$--$55^\circ$.}
       \end{itemize}
   \end{columns}
-  \small Nota: valor del Anillo Denso, geometría ideal --- una \textbf{cota superior}.
-  La reconstrucción real degrada este número (ver más adelante).
-  \fuente{Tesis Cap.\ 5}
+  \small Nota: este valor corresponde al Anillo Denso con geometría ideal
+  --- es una \textbf{cota superior}. La reconstrucción real (Bloque 6)
+  reduce esta separación.
 \end{frame}
 
 % ============================================================
@@ -436,7 +443,6 @@
           monótono, sin saturación, robusto hasta 1500~m.
       \end{itemize}
   \end{columns}
-  \fuente{Tesis Cap.\ 6 / GAP-2026-041}
 \end{frame}
 
 \begin{frame}{El hallazgo central: la inversión de signo del SD}
@@ -446,15 +452,14 @@
       \includegraphics[width=\textwidth]{umd_vs_sd_total_asymmetry.pdf}
     \column{0.4\textwidth}
       \begin{itemize}
-        \item $30^\circ\le\theta<40^\circ$, geometría MC.
         \item UMD: crecimiento monótono positivo.
         \item SD Total: máximo local $\sim700$~m, cruza a
           \alert{negativo} más allá de $\sim1$~km.
         \item Ya reportado por la Colaboración para el SD; \textbf{primera vez}
-          contrastado directamente contra una señal muónica pura.
+          contrastado directamente contra la señal puramente muónica del
+          UMD.
       \end{itemize}
   \end{columns}
-  \fuente{GAP-2026-041, Tabla 3}
 \end{frame}
 
 \begin{frame}{Desglosando la señal del SD}
@@ -468,10 +473,10 @@
         \toprule
         & $r{=}450$ & $r{=}800$ & $r{=}1200$~m\\
         \midrule
-        SD--EM & $+0.40$ & $+0.45$ & $+0.44$\\
-        SD--$\mu$ & $+0.05$ & $+0.04$ & \alert{$-0.10$}\\
-        SD Total & $+0.11$ & $+0.09$ & \alert{$-0.08$}\\
-        UMD $N_\mu$ & $+0.10$ & $+0.12$ & $+0.11$\\
+        \textcolor{itedaOrange}{\textbf{SD--EM}} & $+0.40$ & $+0.45$ & $+0.44$\\
+        \textcolor{plotGreen}{\textbf{SD--$\mu$}} & $+0.05$ & $+0.04$ & \textbf{\textcolor{plotGreen}{$-0.10$}}\\
+        \textcolor{plotMaroon}{\textbf{SD Total}} & $+0.11$ & $+0.09$ & \textbf{\textcolor{plotMaroon}{$-0.08$}}\\
+        \textcolor{plotBlue}{\textbf{UMD $N_\mu$}} & $+0.10$ & $+0.12$ & $+0.11$\\
         \bottomrule
       \end{tabular}
       \vspace{0.4em}
@@ -480,10 +485,9 @@
         \item Muones \emph{de superficie} (sin umbral): son los que invierten.
       \end{itemize}
   \end{columns}
-  \fuente{GAP-2026-041, Tabla 3}
 \end{frame}
 
-\begin{frame}{¿Qué explica cada detector?}
+\begin{frame}{¿Qué explica la inversión del SD?}
   \begin{block}{El UMD sí está explicado}
     Divergencia cinemática ponderada por espectro + proyección geométrica sobre
     un plano enterrado \textbf{reproducen} el valor medido:
@@ -491,34 +495,60 @@
   \end{block}
   \begin{alertblock}{El SD sigue siendo una pregunta abierta}
     El mismo marco predice para el SD $+0.19$ --- el dato mide $-0.10$.
-    \textbf{Diferencia $\approx0.29$, y de signo equivocado.}
+    \textbf{Diferencia $\approx0.29$, y de signo equivocado.} Esto
+    reemplaza la explicación de ``filtro cinemático / Población~B''
+    escrita originalmente en la tesis, que ordena los detectores al revés.
   \end{alertblock}
-  \vspace{0.3em}
-  \small Esta comparación reemplaza la explicación de ``filtro cinemático /
-  Población~B'' escrita originalmente en la tesis: verificada
-  cuantitativamente, esa cuenta ordena los dos detectores al revés.
+  \vspace{0.4em}
+  \centering
+  \alert{Hacen falta más efectos para explicar al SD.} Ocho mecanismos
+  evaluados y descartados cuantitativamente hasta ahora (backup) ---
+  ¿qué más está pasando a lo largo de este mismo eje temprano-tardío?
 \end{frame}
 
-\begin{frame}{Lo que se descartó como explicación de la inversión}
-  \small
-  \begin{itemize}
-    \item \textbf{No es} un artefacto de muestreo: igualar el número de
-      estaciones por bin de $\phi$ (\emph{bootstrap}) desplaza $A_1$ en
-      $<0.002$ --- la inversión sobrevive intacta.
-    \item \textbf{No es} el efecto de paredes laterales del tanque Cherenkov en
-      la longitud de trayectoria: por el teorema de la cuerda media de Cauchy,
-      ese término da exactamente \textbf{cero}, no negativo.
-    \item \textbf{No es}, por sí sola, la divergencia cinemática de muones
-      blandos: ponderada correctamente por el espectro de producción, favorece
-      la región \emph{temprana}, no la tardía.
-  \end{itemize}
-  \begin{block}{Lo que queda}
-    Seis mecanismos evaluados y descartados cuantitativamente (ver backup).
-    La física residual que invierte el SD \textbf{aún no está identificada}
-    ---candidato más prometedor: una definición a nivel de detector de
-    ``muón incidente'' en el volumen del tanque que el modelo de plano ideal
-    no captura.
-  \end{block}
+% ============================================================
+\section{Un segundo sistemático: el sesgo del núcleo}
+
+\begin{frame}{El núcleo reconstruido se corre a lo largo del eje temprano-tardío}
+  \badgeMC
+  \begin{columns}[T]
+    \column{0.55\textwidth}
+      \includegraphics[width=\textwidth]{error_radial_azimut.jpg}
+    \column{0.4\textwidth}
+      \begin{itemize}
+        \item $\Delta r = r_{MC}-r_{REC}$ vs.\ $\phi_{MC}$ de la estación,
+          estaciones reales del \textit{Infill}.
+        \item Región temprana ($\phi\approx0^\circ$): $\Delta r<0$ ---
+          el núcleo reconstruido queda \textbf{más lejos}.
+        \item Región tardía ($\phi\approx\pm180^\circ$): $\Delta r>0$ ---
+          queda \textbf{más cerca}.
+      \end{itemize}
+  \end{columns}
+  \vspace{0.3em}
+  \alert{El sesgo de reconstrucción del núcleo ya era conocido; que esté
+  sistemáticamente alineado con el eje temprano-tardío, no.}
+\end{frame}
+
+\begin{frame}{Por qué: una LDF simétrica ajustada a una señal asimétrica}
+  \badgeMC
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+      \begin{itemize}
+        \item \textit{Offline} ajusta la LDF asumiéndola \textbf{simétrica
+          en $\phi$}, pero la señal real no lo es.
+        \item El único grado de libertad para absorber ese exceso/déficit
+          es la \textbf{posición del núcleo} --- y lo arrastra hacia la
+          región tardía.
+        \item \emph{Toy Model}: \emph{bootstrap} sobre el residuo de
+          sobreconteo direccional, inyectado sobre $N_\mu^{MC}$.
+      \end{itemize}
+    \column{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=4.6cm,keepaspectratio]{toy_model.pdf}
+  \end{columns}
+  \small Reproduce \textbf{exactamente} la caída de $A_1$ para
+  $\theta\lesssim35^\circ$; explica $>50\%$ para $\theta\gtrsim35^\circ$ ---
+  el resto es, precisamente, el corrimiento geométrico de la figura anterior.
 \end{frame}
 
 % ============================================================
@@ -540,7 +570,6 @@
           (aún sin escribir) --- pipeline de datos de campo ya operativo.
       \end{itemize}
   \end{columns}
-  \fuente{Auditoría de datos de campo, PhaseII SPMT}
 \end{frame}
 
 \begin{frame}{El sistemático a resolver antes de citar este número}
@@ -575,9 +604,9 @@
   \end{block}
   \vspace{0.3em}
   \begin{block}{En preparación}
-    Sesgo de reconstrucción del núcleo y cómo atenúa la asimetría medida
-    ($\sigma_{\text{core}}\approx20$--40~m, modelo \emph{bootstrap} de
-    conteo direccional).
+    El sesgo de reconstrucción del núcleo y su alineación sistemática con el
+    eje temprano-tardío ($\sigma_{\text{core}}\approx20$--40~m) --- el
+    resultado que acabamos de ver.
   \end{block}
 \end{frame}
 
@@ -628,7 +657,6 @@
     \bottomrule
   \end{tabular}
   \vspace{0.3em}
-  \fuente{claude\_work/unified\_asymmetry\_model\_v1/report.md}
 \end{frame}
 
 \begin{frame}{Backup: bondad de ajuste UMD vs.\ SD}
@@ -642,23 +670,13 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Backup: el \emph{Toy Model} del sesgo de reconstrucción}
+\begin{frame}{Backup: el sesgo de conteo direccional que alimenta el \emph{Toy Model}}
   \badgeMC
-  \begin{columns}[T]
-    \column{0.5\textwidth}
-      \centering
-      \includegraphics[width=\textwidth,height=4.3cm,keepaspectratio]{toy_model.pdf}
-    \column{0.46\textwidth}
-      \centering
-      \includegraphics[width=\textwidth,height=4.3cm,keepaspectratio]{directional_bias.pdf}
-  \end{columns}
-  \begin{itemize}\small
-    \item \emph{Bootstrap} sobre el residuo de conteo direccional (sobreconteo
-      mayor en la región tardía, de baja densidad).
-    \item Reproduce \textbf{exactamente} la degradación de $A_1$ para
-      $\theta\lesssim35^\circ$; explica $>50\%$ para $\theta\gtrsim35^\circ$
-      --- el resto requiere incluir el corrimiento espacial del núcleo.
-  \end{itemize}
+  \centering
+  \includegraphics[width=0.55\textwidth,height=4.6cm,keepaspectratio]{directional_bias.pdf}
+  \small El residuo relativo de reconstrucción de muones es sistemáticamente
+  mayor en la región tardía (baja densidad) que en la temprana --- este
+  residuo, segmentado por $\phi$, es lo que se inyecta en el \emph{Toy Model}.
 \end{frame}
 
 \begin{frame}{Backup: validación del conteo de muones}
