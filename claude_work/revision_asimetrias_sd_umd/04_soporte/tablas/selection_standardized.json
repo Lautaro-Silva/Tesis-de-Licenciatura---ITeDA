@@ -1,0 +1,26 @@
+{
+  "cells": 28,
+  "rows": 28030,
+  "parents": 960,
+  "valid_bootstraps": 500,
+  "method": "Positive exponential parent-cluster multiplier bootstrap; secondary diagnostic.",
+  "target": "Fixed empirical all-station covariate distribution; common support in all azimuth bins.",
+  "all": {
+    "A": 0.06948452738244563,
+    "sd": 0.009539814043040601,
+    "low": 0.05163593260272353,
+    "high": 0.08895611038873921
+  },
+  "selected": {
+    "A": -0.10948045529622141,
+    "sd": 0.01283903143177136,
+    "low": -0.1348010828298746,
+    "high": -0.0841441445656086
+  },
+  "difference": {
+    "A": -0.17896498267866706,
+    "sd": 0.011490727503246381,
+    "low": -0.19959070199558182,
+    "high": -0.15708659269918723
+  }
+}

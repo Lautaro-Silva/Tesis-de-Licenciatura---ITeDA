@@ -1,0 +1,181 @@
+% !TEX root = preview.tex
+% BORRADOR: conserva figuras existentes y agrega el control de seleccion.
+% Los resultados nuevos provienen de ../04_soporte/tablas/.
+% Los estudios aun no realizados se indican como pendientes, no como resultados.
+
+\section{Dinámica Radial del Arreglo \textit{Infill} en Simulaciones}
+\label{cap:infill}
+
+El estudio del Anillo Denso se extiende a la geometría del arreglo \textit{Infill}, con separación nominal de $750$~m entre estaciones. Esta configuración permite estudiar la evolución de la asimetría sobre un intervalo de distancias al eje, utilizando las posiciones de los detectores de superficie y de los módulos enterrados. La muestra principal corresponde a protones simulados con \texttt{SIBYLL 2.3e} en el intervalo $17.5\leq\log_{10}(E_0/\mathrm{eV})<18.0$.
+
+Se distinguen tres niveles: la población de partículas que ingresa a la simulación del detector, la respuesta y selección de estaciones, y la geometría empleada para calcular $r$ y $\phi$. Utilizar núcleo y ángulos Monte Carlo elimina el error de reconstrucción de esas coordenadas, pero no elimina una selección instrumental aplicada antes de extraer los conteos. Esta distinción resulta central para interpretar la inversión del coeficiente muónico del SD a grandes distancias. Se mantiene la convención $A_1>0$ para exceso temprano ($\phi=0$) y $A_1<0$ para exceso tardío ($\phi=\pm\pi$).
+
+\subsection{Arreglo \textit{Infill} usando el núcleo y ángulos Monte Carlo}
+\label{subsec:infill_mc}
+
+El análisis inicial utiliza las coordenadas verdaderas del núcleo y la dirección de arribo Monte Carlo. Se calculan las posiciones de las estaciones en el plano de la lluvia y se ajustan sus perfiles azimutales. El conteo de verdad Monte Carlo y el conteo reconstruido se comparan manteniendo fija esa geometría.
+
+Para limitar la mezcla de densidades diferentes se excluye la región $r<150$~m y se emplea el bineado radial de los análisis originales, con intervalos de referencia de $150$~m y adaptaciones según la muestra disponible. La motivación del corte cercano al núcleo es el fuerte gradiente radial y la sensibilidad a cambios de posición, no una demostración de divergencia angular extrema en esa región. El azimut se divide en doce intervalos de $30^\circ$ y la inclinación en bandas de referencia de $10^\circ$, con la banda final $50^\circ\leq\theta<65^\circ$.
+
+Las grillas de perfiles, ajustes e indicadores de bondad de ajuste se presentan en el Anexo~\ref{anexo:ajustes_infill_mc}. Un valor de $\chi^2/\mathrm{ndf}$ cercano a la unidad indica compatibilidad con el primer armónico bajo las incertidumbres adoptadas. No excluye términos adicionales por debajo de la sensibilidad disponible. La elección de intervalos y cualquier exclusión basada en la calidad del ajuste deben explicitarse para no confundir detectabilidad con ausencia física de asimetría.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap6/Global_A1_vs_R_Theta_MC.pdf}
+\caption{Evolución radial de $A_1$ en UMD para distintas inclinaciones, utilizando geometría Monte Carlo y la muestra de estaciones del análisis. El uso de coordenadas verdaderas no elimina las condiciones de selección de esa muestra.}
+\label{fig:a1_vs_r_theta_mc}
+\end{figure}
+
+La Figura~\ref{fig:a1_vs_r_theta_mc} muestra una modulación pequeña para lluvias cuasi-verticales y valores predominantemente positivos al aumentar la inclinación. En bandas intermedias aparecen cambios de pendiente y una posible estabilización radial; en las más inclinadas se observa un crecimiento más marcado. Estos comportamientos son resultados del observable seleccionado. No permiten asignar por su signo una dominancia exclusiva a atenuación, ni identificar una estructura puntual de la curva como una transición física sin contrastar incertidumbres y mezclas dentro de cada bin.
+
+La comparación entre $N_\mu^{\mathrm{MC}}$ y $N_\mu^{\mathrm{REC}}$ para $40^\circ\leq\theta<50^\circ$, conservando la geometría Monte Carlo, se muestra en la Figura~\ref{fig:umd_rec_vs_mc_theta}. Se mantiene la tendencia radial general y cambia la amplitud. La respuesta direccional del conteo estudiada en el Anillo Denso ofrece un antecedente para interpretar la diferencia, pero no reemplaza una validación específica del Infill.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_Asymmetry_MC_vs_REC.pdf}
+\caption{Asimetría obtenida con el número de muones Monte Carlo y reconstruido, manteniendo núcleo y ángulos Monte Carlo, para $40^\circ\leq\theta<50^\circ$. La comparación examina el cambio de conteo dentro de la muestra seleccionada.}
+\label{fig:umd_rec_vs_mc_theta}
+\end{figure}
+
+\subsubsection{Competencia de observables: UMD frente al SD Total}
+\label{subsubsec:umd_vs_sd_mc}
+
+El UMD proporciona un conteo de muones filtrados por el suelo, mientras que SD Total corresponde a señal reconstruida y calibrada en VEM. El contraste utiliza geometría Monte Carlo, pero conserva las diferencias de respuesta y selección entre observables. Cerca del radio del Anillo Denso se observa un comportamiento cualitativamente comparable al de ese estudio. A mayores distancias, la evolución difiere: el UMD permanece predominantemente positivo y la señal del SD decrece hasta adoptar valores negativos en la muestra presentada.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_vs_SD_Total_Asymmetry.pdf}
+\caption{Comparación de UMD y señal total SD para $30^\circ\leq\theta<40^\circ$, con coordenadas Monte Carlo. La inversión del SD se refiere al observable y a la selección utilizados, no a una medición incondicional de la densidad muónica al suelo.}
+\label{fig:umd_vs_sd_mc}
+\end{figure}
+
+El uso de la geometría verdadera demuestra que un error en la posición del núcleo no es necesario para observar esta inversión. No demuestra que se trate de una propiedad de la población muónica antes de la selección de estaciones. Para establecer esa interpretación debe examinarse qué contiene el conteo Monte Carlo y en qué estaciones se conserva.
+
+\subsubsection{Desglose de observables: conteos muónicos y electromagnéticos}
+\label{subsubsec:desglose_sd}
+
+La información de simulación permite estudiar separadamente los conteos de muones y de partículas electromagnéticas asociados al SD. Estos conteos no constituyen una descomposición de la señal VEM en unidades de señal: sumarlos no reproduce SD Total, dado que cada especie y trayectoria posee una respuesta distinta.
+
+En la Figura~\ref{fig:desglose_sd_mc}, el conteo electromagnético presenta un coeficiente positivo, mientras que el conteo muónico del SD invierte su signo a grandes distancias. La componente electromagnética es compatible con una preferencia temprana asociada al desarrollo de la cascada, sin ser un trazador exclusivo de absorción. El coeficiente muónico negativo demuestra que la inversión aparece también en conteos de partículas identificadas como muones, pero todavía no indica si surge en la población previa a la selección o en su promedio condicionado.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap6/SD_Desglose_Componentes_vs_UMD.pdf}
+\caption{Coeficientes de los conteos Monte Carlo del SD frente al UMD para $30^\circ\leq\theta<40^\circ$. Los conteos SD corresponden a estaciones retenidas por el procesamiento. Su signo negativo a grandes radios no se atribuye en esta figura a un mecanismo de propagación específico.}
+\label{fig:desglose_sd_mc}
+\end{figure}
+
+La explicación por un término geométrico necesariamente negativo de muones blandos no es compatible con la Ec.~\ref{eq:efecto_geo}: para flujo radial saliente y descendente, $p_r/(-p_z)>0$. La distribución angular puede favorecer el lado tardío, pero debe competir con la dilución, la supervivencia y la apertura del detector, como se explicó en la Sección~\ref{subsubsec:divergencia_cinematica}. Por otra parte, el corte de alcance del UMD no equivale al límite $p_z\rightarrow-\infty$ y no anula matemáticamente la geometría. El contraste de signos entre instrumentos no valida esas dos afirmaciones.
+
+\subsection{Control de la selección de estaciones del SD}
+\label{subsec:control_seleccion_sd}
+
+\subsubsection{Qué representa el conteo Monte Carlo}
+
+El lector utilizado para construir los archivos de análisis requiere que exista una estación reconstruida del SD asociada al contador UMD antes de extraer el conteo de muones SD. La condición implementada mediante \texttt{HasStation(sdId)} selecciona así las estaciones que aportan los valores de \texttt{GetNumberOfMuons()}. Es posible tener un conteo de verdad correcto y, simultáneamente, una media condicionada por la reconstrucción de estaciones.
+
+La inspección de la implementación local correspondiente a \texttt{icrc2025-test7} muestra que ese contador se incrementa para candidatos identificados como muón o antimuón cuya trayectoria recta intercepta geométricamente el volumen de agua, antes de la propagación detallada en Geant4. El incremento no aplica un umbral óptico o de señal Cherenkov. Se trata de un conteo posterior a la regeneración de partículas de la lluvia, no de una suma directa de los pesos originales de CORSIKA ni de un registro de cada cruce efectivamente realizado dentro de Geant4.
+
+En particular, la producción de secundarios dentro del agua no añade directamente muones a ese contador previo. El agua sí interviene en la señal y puede afectar la probabilidad de retener la estación. La identificación del contador y la selección que actúa sobre sus registros son, por tanto, cuestiones distintas. La auditoría de código se refiere a la implementación local inspeccionada; la coincidencia exacta de los conteos ADST y parquet constituye un control adicional del observable, no una certificación binaria de toda la producción.
+
+\subsubsection{Comparación directa antes y después de la condición de presencia}
+
+Los ADST originales contienen estaciones simuladas aunque no exista su correspondiente estación SD reconstruida. Se utilizó esta información para repetir el cálculo con y sin la condición de presencia, manteniendo las coordenadas Monte Carlo. El control comprende veinte archivos de la producción de protones \texttt{SIBYLL 2.3e}, con $17.5\leq\log_{10}(E_0/\mathrm{eV})<18.0$ y $30^\circ\leq\theta<40^\circ$. Cada estación SD se cuenta una sola vez por evento y archivo, evitando su repetición por los módulos UMD asociados.
+
+Se ajusta $1+A_1\cos\phi$ a las doce medias azimutales normalizadas, sin ponderar el ajuste por el error de cada media. Ésta es la definición adoptada para el control y debe distinguirse de ajustes con otra ponderación. Se mantienen idénticos el observable y el procedimiento a ambos lados de la comparación. La selección de estaciones reconstruidas reproduce exactamente los conteos muónicos y electromagnéticos presentes en el parquet para los registros emparejados.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ccc}
+\toprule
+$r$ en el plano de la lluvia [m] & $A_1$ antes de selección & $A_1$ después de selección\\
+\midrule
+$[300,600)$   & $+0.0691$ & $+0.0691$\\
+$[650,950)$   & $+0.0618$ & $+0.0397$\\
+$[1050,1400)$ & $+0.0676$ & $-0.0945$\\
+$[1400,1800)$ & $+0.0580$ & $-0.1052$\\
+\bottomrule
+\end{tabular}
+\caption{Control de selección para conteos muónicos SD. ``Antes'' incluye las estaciones simuladas disponibles en los eventos ADST escritos; no todos los eventos originalmente generados ni una población previa a la regeneración. ``Después'' aplica la presencia de estación SD reconstruida. Son intervalos de control, no una sustitución del bineado de las figuras anteriores.}
+\label{tab:seleccion_sd_a1}
+\end{table}
+
+En $1050\leq r<1400$~m, la muestra pasa de $28030$ a $11104$ ocurrencias de estación. La diferencia es
+\begin{equation}
+\Delta A_1\equiv A_1^{\mathrm{seleccionado}}-A_1^{\mathrm{previo}}
+=-0.1622,
+\qquad \mathrm{IC}_{95\%}=[-0.1784,-0.1453].
+\label{eq:resultado_seleccion_sd}
+\end{equation}
+El intervalo se obtiene con un \textit{bootstrap} pareado: se remuestrean los mismos grupos de lluvias progenitoras para los dos cálculos, agrupando reutilizaciones mediante los identificadores disponibles. Se utilizaron $800$ réplicas y $960$ grupos operativos; esta agrupación no sustituye una identificación completa de la genealogía de CORSIKA. Los intervalos de los coeficientes previo y seleccionado son, respectivamente, $[0.0494,0.0843]$ y $[-0.1161,-0.0750]$.
+
+Este control establece que aplicar la condición de presencia induce la inversión del conteo medio en la muestra y región estudiadas. No requiere postular una densidad muónica previa con signo negativo. Tampoco equivale a reproducir analíticamente toda la magnitud del conteo anterior a la selección. En particular, comparar una predicción de flujo no seleccionado con el coeficiente seleccionado y atribuir su diferencia completa a un nuevo proceso atmosférico mezcla dos observables.
+
+La prueba es diferente de modificar aleatoriamente la cantidad de registros de cada bin azimutal dentro de una muestra ya seleccionada. Ese remuestreo estudia la estadística del promedio; aquí cambia qué estaciones, y con qué contenidos muónicos, contribuyen a él. La Ec.~\ref{eq:conteo_condicionado} describe exactamente esta distinción.
+
+\subsubsection{Interpretación física de la selección: hipótesis y alcance}
+
+Una interpretación físicamente motivada conecta la selección con la contribución electromagnética a la señal del tanque. En el lado temprano, una mayor contribución electromagnética puede ayudar a retener estaciones con pocos muones. En el lado tardío, con menor contribución electromagnética, la retención puede favorecer estaciones con una fluctuación muónica positiva. El promedio de muones por estación retenida puede ser entonces mayor en el lado tardío aun cuando el promedio previo sea mayor en el temprano.
+
+Este efecto no representa una inversión de la absorción de muones ni una producción adicional de muones en el agua. Es el acoplamiento entre las partículas de la cascada, la respuesta del tanque y la selección del conjunto promediado. La atenuación electromagnética puede intervenir indirectamente al modificar la señal que favorece la retención. No se confunden electrones con muones: cambia la composición de la muestra de estaciones cuyos muones se cuentan.
+
+La inversión al aplicar \texttt{HasStation} es un resultado directo del control. La cadena particular de ayuda electromagnética y enriquecimiento muónico es una hipótesis interpretativa; este ensayo no separa causalmente cada condición de disparo, lectura y reconstrucción ni demuestra que la componente electromagnética sea su único origen. Para hacerlo se necesitan los estados intermedios de selección y sus correlaciones con señal y conteos.
+
+\subsection{Por qué la comparación con el UMD no es una simple resta de umbrales}
+\label{subsec:umd_poblacion_seleccion}
+
+El UMD selecciona por alcance a través del suelo y cuenta cruces en centelladores, mientras que el conteo SD auditado registra candidatos que interceptan el tanque antes de la simulación detallada del agua. No son la misma población ni la misma apertura. El suelo modifica los pesos de energía y dirección; no elimina de forma exacta los términos geométricos ni convierte el signo positivo del UMD en una prueba de dominancia de atenuación.
+
+Además, los muones que contribuyen al conteo del SD están directamente relacionados con la señal del tanque que interviene en la selección. Un muón que atraviesa un módulo enterrado cercano no es, en general, el mismo que atraviesa el tanque. La correlación de la selección con ambos conteos puede ser diferente, aunque persisten correlaciones por pertenecer a la misma lluvia. Esto proporciona una explicación plausible de por qué el conteo SD seleccionado puede invertir sin que el UMD lo haga con igual intensidad. No establece independencia estadística entre UMD y selección SD.
+
+El control previo a la selección no pudo repetirse de forma equivalente para UMD con los resúmenes disponibles. En el archivo piloto, los módulos con información de inyección poblada estaban asociados a estaciones SD reconstruidas. La inspección de la cadena de escritura identifica una vía por la cual la ausencia de canales electrónicos, dependiente del disparo SD, deja sin serializar la información de los centelladores simulados. Un registro ausente no demuestra cero muones inyectados. Por ello no se asignan ceros a esos módulos para construir una supuesta densidad UMD previa a la selección.
+
+La ausencia de una inversión comparable en el UMD continúa siendo una propiedad del observable estudiado. Es compatible con sus distintos pesos de transporte y respuesta, y con una correlación diferente con la selección, pero todavía no constituye una demostración causal completa de cada contribución.
+
+\subsubsection{Controles pendientes y límites del modelado de producción}
+\label{subsec:fast_mc}
+
+El intento previo de un propagador fenomenológico no proporcionó una explicación cuantitativa concluyente. Su limitación principal fue la falta de distribuciones conjuntas de cinemática de producción, no una demostración de que un mecanismo propuesto debiera funcionar. Se distinguen ahora controles con requisitos de información diferentes:
+
+\begin{enumerate}
+\item Con los conteos SD originales se puede ampliar el control de selección a otras energías, inclinaciones y primarios. El resultado presentado no se extrapola automáticamente a esas regiones ni al Anillo Denso.
+\item Para aislar el papel de cada condición instrumental se necesitan indicadores de disparo, lectura y reconstrucción asociados a los conteos y señales de las mismas estaciones. No hacen falta alturas de producción para esta prueba.
+\item Para el control UMD se requiere conservar el número de muones por módulo antes de la electrónica, junto con el área y un indicador explícito que distinga simulación con cero cruces de información ausente. Si esa información no fue escrita en los ADST, no puede recuperarse mediante un cambio de lectura de esos resúmenes; debe buscarse en salidas previas conservadas o incorporarse en una producción posterior.
+\item Sólo una predicción de transporte desde producción requiere la distribución conjunta $F(X,E_i,p_t,\ldots)$ y sus correlaciones. Las listas de partículas al suelo pueden servir para controles de energía y dirección incidentes, pero no reconstruyen por sí solas esa distribución inicial. Un futuro modelo deberá incluir supervivencia, geometría y respuesta sin duplicar términos, y contrastarse tanto antes como después de la selección.
+\end{enumerate}
+
+Esta jerarquía evita exigir una nueva simulación de producción para resolver una pregunta que ya puede examinarse a nivel de estaciones. Tampoco promete que un futuro modelo de muones blandos deba producir una inversión específica.
+
+\subsection{Arreglo \textit{Infill} usando la geometría reconstruida}
+\label{subsec:infill_rec}
+
+Se reemplazan ahora el núcleo y los ángulos Monte Carlo por los reconstruidos. Las diferencias resultantes incluyen cambios de radio y azimut asignados a cada estación y migraciones entre intervalos. El contraste debe conservar, cuando sea posible, las mismas estaciones para no atribuir a coordenadas un cambio de selección.
+
+En las comparaciones originales, el conteo reconstruido del UMD mantiene en términos generales las tendencias del conteo Monte Carlo cuando se fija la geometría. Al cambiar también las coordenadas, la extracción se degrada en varias regiones, sobre todo donde la amplitud es pequeña o la mezcla radial es importante. Las ventanas de utilidad experimental deben determinarse con las incertidumbres y la calidad de los perfiles, sin asumir que la asimetría deba crecer monótonamente con radio o inclinación.
+
+Un error aleatorio de fase, independiente del conteo y simétrico alrededor de cero, atenúa el primer armónico por el factor $\langle\cos\Delta\phi\rangle$. Esa imagen de \textit{smearing} permite entender una posible reducción. Sin embargo, los errores de núcleo reales también desplazan radios y pueden estar correlacionados con señal y selección. En presencia de esos efectos, $A_1^{\mathrm{REC}}$ no es una cota inferior universal de $A_1^{\mathrm{MC}}$ y la geometría Monte Carlo tampoco define una cota superior universal.
+
+\subsubsection{Componente electromagnética y significancia del ajuste}
+
+Los perfiles electromagnéticos conservan una modulación positiva visible en las comparaciones con geometría reconstruida. Una amplitud mayor y una incertidumbre menor pueden permitir detectarla incluso si existe atenuación geométrica de su armónico. Tener más partículas reduce parte de la incertidumbre estadística, pero no elimina un sesgo sistemático ni revierte por sí solo el \textit{smearing}. Por ello, la persistencia de significancia no equivale a inmunidad frente al error de coordenadas.
+
+\subsubsection{Persistencia del signo negativo en la muestra SD}
+
+La persistencia de una inversión en las curvas SD con geometría reconstruida tampoco exige una divergencia negativa de muones blandos. La muestra conserva condiciones de selección sensibles a la señal. El control con geometría verdadera ya mostró una inversión inducida por selección en el conteo muónico; cambiar las coordenadas puede modificar su amplitud sin eliminarla. La contribución de este mecanismo al SD Total debe evaluarse como señal, con sus propios pesos de respuesta, y no mediante una suma de conteos muónicos y electromagnéticos.
+
+\subsection{Comparación MC--REC y alcance de los resultados}
+\label{subsec:comparacion_performance_umd}
+
+Una comparación sistemática del UMD debe distinguir el cambio de conteo a geometría fija del cambio de geometría a conteo fijo, manteniendo una muestra emparejada y documentando las migraciones radiales. Es preferible estudiar diferencias de coeficientes con sus covarianzas; un cociente pierde estabilidad cuando la amplitud Monte Carlo es cercana a cero. El remuestreo debe agrupar las estaciones de la misma lluvia y sus reutilizaciones.
+
+Los resultados presentados establecen una dependencia radial e instrumental del observable temprano--tardío y, en la región auditada, un cambio de signo del conteo muónico SD al aplicar la selección de estaciones. No establecen una inversión universal de la densidad muónica no seleccionada ni una explicación completa del UMD mediante un único mecanismo atmosférico. La sensibilidad a masa y energía en el Infill requiere controles específicos y no se deduce directamente de la ventana favorable del Anillo Denso.
+
+% PENDIENTES EDITORIALES: no se han convertido en resultados inventados.
+% 1. Completar la comparacion emparejada MC/REC de geometria y de conteo.
+% 2. Documentar numericamente las ventanas radiales utilizables y sus cortes.
+% 3. Evaluar energia y primario con estadistica suficiente y mezcla controlada.
+% 4. Comprobar estabilidad por azimut de arribo en las bandas del Infill.
+% 5. Obtener el resumen UMD previo a seleccion y aislar las etapas del trigger SD.
+% Las notas de trabajo originales siguen intactas en el capitulo de la tesis.
+
+\newpage

@@ -1,0 +1,64 @@
+{
+  "03_fenomenologia": {
+    "original_figures": 2,
+    "draft_figures": 2,
+    "all_original_figures_preserved": true,
+    "all_graphics_exist": true,
+    "source_sha256": "a4d6ab249acbfaf98680a9e7465101a617372283ce16b1c1a488c3be7b4df8a5",
+    "draft_sha256": "2902c17eb4cd10d2ba29e43cc8da21062f96b843681611bd82dc33e3c09f8567"
+  },
+  "05_anillo_denso": {
+    "original_figures": 13,
+    "draft_figures": 13,
+    "all_original_figures_preserved": true,
+    "all_graphics_exist": true,
+    "source_sha256": "e131d26060ceeadf2cc3576daf546ad888f0eb71369286a8ef899b6422b933dd",
+    "draft_sha256": "579a32709457820891023378f8178fa1037ae842d0cabab3bf5957a3240819d9"
+  },
+  "06_infill": {
+    "original_figures": 4,
+    "draft_figures": 4,
+    "all_original_figures_preserved": true,
+    "all_graphics_exist": true,
+    "source_sha256": "78179cb4688875f3a78de09cf131951ed09b0f676890e3cfea444276f2921bb0",
+    "draft_sha256": "8a2d2e1838819db90aaf24298a8e138441d978f41db1452cfdb296a4c4d40943"
+  },
+  "unresolved_labels_in_full_preview": [],
+  "missing_draft_citation_keys": [],
+  "new_numbers_match_final_audit": true,
+  "numeric_provenance": [
+    {
+      "lo": 300,
+      "hi": 600,
+      "before": 0.06913837028190177,
+      "after": 0.06913837028190177,
+      "difference": 0.0
+    },
+    {
+      "lo": 650,
+      "hi": 950,
+      "before": 0.06175453340245028,
+      "after": 0.03972384305176951,
+      "difference": -0.022030690350680775
+    },
+    {
+      "lo": 1050,
+      "hi": 1400,
+      "before": 0.06763789315285965,
+      "after": -0.09452701645838728,
+      "difference": -0.1621649096112469
+    },
+    {
+      "lo": 1400,
+      "hi": 1800,
+      "before": 0.05795344937702714,
+      "after": -0.10520943574199108,
+      "difference": -0.16316288511901822
+    }
+  ],
+  "source_outputs_sha256": {
+    "selection_closure_fits.csv": "435d901dcf42a24442e4700404e2d020290c115b99df8c87f5e9654a35709376",
+    "selection_paired_bootstrap.csv": "8e5c7f591372420f66cd649bba17b168c7381c0178a14657fd8a0c179c577639"
+  },
+  "protected_source_files_checked": 17
+}

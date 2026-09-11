@@ -1,0 +1,13 @@
+{
+  "python_syntax": true,
+  "full_raw_sample_and_matching": true,
+  "selection_sign_and_parquet_equality": true,
+  "exact_selection_identity": true,
+  "paired_bootstrap": true,
+  "covariate_standardization": true,
+  "umd_missing_truth_not_zero": true,
+  "geometry_and_adf": true,
+  "report_placeholders_and_math_delimiters": true,
+  "html_local_links_and_anchors": true,
+  "report_manifest": true
+}

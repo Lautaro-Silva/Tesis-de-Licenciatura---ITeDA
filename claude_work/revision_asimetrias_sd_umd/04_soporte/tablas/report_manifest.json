@@ -1,0 +1,10 @@
+{
+  "../plantillas/report.template.md": "e5657cb0c5438705a254420f5d6be8076111266475c61b920da1020884c8bd12",
+  "../../01_fisica/report.md": "9a3be0907d52501c2e5f6aaa6bde21034afc1ac751f7893425302d6d2d2d8b08",
+  "../../01_fisica/report.html": "19f7d3c2e7572649200413a1bc528f488737f859fef2d0c3e34a919b48a7a9cb",
+  "../figuras/selection_audit.svg": "10988eac42cfda3cfe9ab282cde0c5e6a925230503ed38ccc7ffd1318bf95bd0",
+  "selection_closure_fits.csv": "435d901dcf42a24442e4700404e2d020290c115b99df8c87f5e9654a35709376",
+  "selection_paired_bootstrap.csv": "8e5c7f591372420f66cd649bba17b168c7381c0178a14657fd8a0c179c577639",
+  "selection_standardized.json": "856fae4286068eb08089c1517256e2300bca711ae77613e2ac463647eb59b862",
+  "umd_selection_check.json": "9e98910ad180218881ea52ade24cdfd7ba0167cacd81f17a400dcbcf34ca81ce"
+}

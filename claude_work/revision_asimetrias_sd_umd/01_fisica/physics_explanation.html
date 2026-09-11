@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The physical effects behind SD–UMD asymmetry</title><script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script><style>
+  
+  :root{
+    --paper:#f9f9f7; --surface:#fcfcfb; --surface-2:#f1f1ee;
+    --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+    --rule:#e1e0d9; --axis:#c3c2b7;
+    --accent:#4a3aa7; --accent-soft:#efecfa; --accent-ink:#ffffff;
+    --early:#c0392b; --early-soft:#fbe7e6;
+    --late:#2a5fb0; --late-soft:#e6eefb;
+    --good:#0c8a3e; --good-soft:#e3f7e3;
+    --bad:#c0392b; --bad-soft:#fdece2;
+    --warn:#b5790a; --warn-soft:#fdf1de;
+    --shadow: 0 1px 2px rgba(11,11,11,.04), 0 8px 24px -12px rgba(11,11,11,.12);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0d0d0d; --surface:#17171a; --surface-2:#1f1f22;
+      --ink:#f4f4f2; --ink-2:#c3c2b7; --ink-3:#8b897f;
+      --rule:#2c2c2a; --axis:#3a3a37;
+      --accent:#9085e9; --accent-soft:#241f3d; --accent-ink:#0d0d0d;
+      --early:#e07267; --early-soft:#2e1a1a;
+      --late:#6d9cdd; --late-soft:#152537;
+      --good:#3fc23f; --good-soft:#12250f;
+      --bad:#e07267; --bad-soft:#2c1d13;
+      --warn:#e0b567; --warn-soft:#2c2413;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0d0d0d; --surface:#17171a; --surface-2:#1f1f22;
+    --ink:#f4f4f2; --ink-2:#c3c2b7; --ink-3:#8b897f;
+    --rule:#2c2c2a; --axis:#3a3a37;
+    --accent:#9085e9; --accent-soft:#241f3d; --accent-ink:#0d0d0d;
+    --early:#e07267; --early-soft:#2e1a1a;
+    --late:#6d9cdd; --late-soft:#152537;
+    --good:#3fc23f; --good-soft:#12250f;
+    --bad:#e07267; --bad-soft:#2c1d13;
+    --warn:#e0b567; --warn-soft:#2c2413;
+  }
+
+  *{box-sizing:border-box;}
+  body{ background:var(--paper); color:var(--ink); margin:0;
+    font-family:'Source Serif 4', Georgia, serif; font-size:17px; line-height:1.65; }
+  .wrap{ max-width:860px; margin:0 auto; padding:56px 24px 120px; }
+
+  h1,h2,h3{ font-family:'Fraunces', Georgia, serif; font-weight:600; color:var(--ink); }
+  h1{ font-size:2.1rem; line-height:1.2; margin:0 0 8px; }
+  .subtitle{ font-family:'Archivo',sans-serif; font-size:.95rem; color:var(--ink-3); margin:0 0 40px; }
+  h2{ font-size:1.45rem; margin:52px 0 16px; padding-top:20px; border-top:1px solid var(--rule); }
+  h2 .num{ color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.85em; margin-right:10px; }
+  h3{ font-size:1.1rem; margin:28px 0 10px; color:var(--ink); }
+  p{ margin:0 0 16px; }
+  a{ color:var(--accent); }
+  strong{ color:var(--ink); }
+  em{ font-style:italic; }
+  ul,ol{ margin:0 0 16px; padding-left:1.4em; }
+  li{ margin-bottom:6px; }
+  code{ font-family:'JetBrains Mono',monospace; font-size:.85em; background:var(--surface-2);
+    padding:.1em .35em; border-radius:4px; color:var(--ink); }
+
+  .kicker{ font-family:'Archivo',sans-serif; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    font-size:.72rem; color:var(--accent); margin-bottom:10px; }
+
+  .callout{ background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+    padding:20px 24px; margin:20px 0; box-shadow:var(--shadow); }
+  .callout.good{ border-color:var(--good); background:var(--good-soft); }
+  .callout.bad{ border-color:var(--bad); background:var(--bad-soft); }
+  .callout.warn{ border-color:var(--warn); background:var(--warn-soft); }
+  .callout p:last-child{ margin-bottom:0; }
+  .callout .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.75rem;
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; display:block; }
+  .callout.good .label{ color:var(--good); }
+  .callout.bad .label{ color:var(--bad); }
+  .callout.warn .label{ color:var(--warn); }
+
+  .verdict-box{ background:var(--accent-soft); border:1px solid var(--accent); border-radius:12px;
+    padding:24px 28px; margin:28px 0; }
+  .verdict-box .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.78rem;
+    color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; display:block; }
+
+  table{ width:100%; border-collapse:collapse; margin:20px 0; font-size:.9rem; }
+  th,td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); font-variant-numeric:tabular-nums; }
+  th{ font-family:'Archivo',sans-serif; font-weight:600; font-size:.75rem; text-transform:uppercase;
+    letter-spacing:.03em; color:var(--ink-3); border-bottom:2px solid var(--axis); }
+  td.num, th.num{ text-align:right; font-family:'JetBrains Mono',monospace; }
+  tr:hover td{ background:var(--surface-2); }
+  .pos{ color:var(--early); } .neg{ color:var(--late); }
+  .table-wrap{ overflow-x:auto; }
+
+  .eq{ background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+    padding:18px 22px; margin:18px 0; text-align:center; overflow-x:auto; }
+
+  .tag{ display:inline-block; font-family:'Archivo',sans-serif; font-size:.7rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:5px; margin-right:6px; }
+  .tag.established{ background:var(--good-soft); color:var(--good); }
+  .tag.model{ background:var(--warn-soft); color:var(--warn); }
+  .tag.hyp{ background:var(--surface-2); color:var(--ink-2); }
+  .tag.new{ background:var(--accent-soft); color:var(--accent); }
+  .tag.prior{ background:var(--late-soft); color:var(--late); }
+  .tag.dead{ background:var(--bad-soft); color:var(--bad); }
+
+  .footnote{ font-size:.85rem; color:var(--ink-3); }
+  .repro{ font-family:'JetBrains Mono',monospace; font-size:.85rem; background:var(--surface);
+    border:1px solid var(--rule); border-radius:8px; padding:16px 18px; overflow-x:auto; }
+
+  .toc{ background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:20px 24px; margin:24px 0; }
+  .toc .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.75rem; text-transform:uppercase;
+    letter-spacing:.05em; color:var(--ink-3); margin-bottom:10px; display:block; }
+  .toc ol{ margin:0; padding-left:1.2em; columns:1; }
+  .toc a{ text-decoration:none; }
+  .toc a:hover{ text-decoration:underline; }
+
+  .correction{ background:var(--warn-soft); border:2px solid var(--warn); border-radius:12px;
+    padding:22px 26px; margin:0 0 36px; }
+  .correction .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.78rem;
+    color:var(--warn); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; display:block; }
+
+.wrap{max-width:1080px} img{max-width:100%;height:auto} blockquote{border-left:3px solid var(--accent);margin-left:0;padding:14px 22px;background:var(--surface)} .eq{font-size:.95em} .toc{font-size:.9em} @media print{body{background:white;color:black}.wrap{padding:0;max-width:none} h2{break-after:avoid}table,.eq{break-inside:avoid}}</style></head><body><main class="wrap"><h1>What changed in the physical explanation of the SD–UMD asymmetry?</h1>
+<h2>The answer first</h2>
+<p>I did not discover an additional atmospheric interaction that creates a late-side muon excess. The new ingredient was <strong>selection through the surface detector's response</strong>. It can turn an early-favoring incident population into a late-favoring <em>mean muon count among retained stations</em>, without moving or creating any muons.</p>
+<p>Your original three ingredients remain relevant: atmospheric survival, geometric projection, and kinematic divergence. However, they must be separated correctly. In particular, the Bertou–Billoir projection coefficient is not the same thing as the late-favoring angular-distribution effect.</p>
+<p>This note explains the mechanisms, not their fitted magnitudes. It introduces no new toy-model calculation. The numerical tests, precise source audit and their limitations remain in <a href="report.md">the full report</a>.</p>
+<p>Convention throughout: the same shower-plane radius is compared on the early side, <span>\(\phi=0\)</span>, and late side, <span>\(\phi=\pi\)</span>. Positive <span>\(A_1\)</span> means an early excess; negative means a late excess. “Late” is a spatial region here, not a label for delayed secondary pulses.</p>
+<h2>1. Atmospheric attenuation: what survives the extra path?</h2>
+<p>Compare a fixed population of produced muons propagating along an early and a late path. In the usual inclined-shower geometry, the late path is longer and traverses more atmosphere. Muons can decay in flight, lose energy, stop, or arrive below the energy needed to penetrate the soil.</p>
+<p>These <strong>passive survival and range losses favor the early side</strong>. No sign reversal of muon absorption was introduced in the new analysis. Low-energy muons are generally more vulnerable to decay and range losses, but the contributing energy and production-distance distributions must be conditioned on the observation point.</p>
+<p>For the electromagnetic cascade after its maximum, the extra depth generally depletes the ordinary EM component strongly. That supplies an early–late difference in the <em>tank's selecting signal</em>, even if the muon intensity changes much less. EM particles are also regenerated, so “every EM count measures only attenuation” is too strong.</p>
+<p>Two qualifications matter for your earlier interpretation:</p>
+<ul>
+<li>An early UMD excess does <strong>not</strong>, by its sign alone, show that atmospheric attenuation dominates it. Geometric projection can have the same sign.</li>
+<li>A measured change of local muon density with atmospheric depth is not a pure survival probability. It includes lateral transport into/out of that radius, possible new production, and energy-cut effects. Adding that entire derivative as “attenuation” on top of a divergence calculation can count the spreading twice.</li>
+</ul>
+<p>Thus the passive attenuation intuition is sound; the claims of dominance and of an independent negative attenuation term are not established.</p>
+<h2>2. Geometric projection: how much detector area does the muon flux see?</h2>
+<p>The local muon directions are not exactly parallel to the shower axis. Consequently, the ground plane intercepts the outward-moving flux differently on opposite sides of an inclined shower.</p>
+<p>For the plane-projection effect, using an upward shower-axis coordinate and appropriate shower-normal crossing-flux weighting,</p>
+<div class="eq">\[
+A_{\rm geo}=\left\langle\frac{p_r}{-p_z}\right\rangle\tan\theta.
+\]</div>
+<p>For the usual outward-moving, descending population, <span>\(p_r&gt;0\)</span> and <span>\(p_z&lt;0\)</span>. This contribution is <strong>positive: early-favoring</strong>. Making <span>\(-p_z\)</span> smaller does not turn a positive ratio negative. Inward radial momenta can exist, but a net negative signed radial-flow contribution must be demonstrated; it does not follow from low energy.</p>
+<p>This directly contradicts the wording in the current thesis that a small longitudinal momentum makes the Bertou–Billoir term “explode” with negative sign. It also contradicts identifying that expression with the late-favoring ADF effect discussed next. If the divergence becomes large, the small-angle/first-harmonic approximation may itself fail; an extrapolation outside that limit is not evidence of an inversion.</p>
+<p>A useful picture is a horizontal plate: for a common axial source, early-arriving trajectories are more vertical, so the plate presents a larger projected area to them. Merely projecting a circular footprint into an ellipse is not itself this effect: for an ideal parallel beam, a consistent shower-plane coordinate/area projection does not generate the claimed first harmonic.</p>
+<h3>What changes for a water tank?</h3>
+<p>The tank has a top and side walls. A more inclined late-side trajectory sees less top area but more side area. The side contribution therefore opposes the top-only early preference. <strong>That does not imply that their sum is late-favoring.</strong> Their balance depends on direction and tank geometry.</p>
+<p>There is another distinction between <em>counts</em> and <em>signal</em>. A through-going muon crossing more water produces more light, but the mean water path and projected aperture compensate for an ideal uniform through-going flux:</p>
+<div class="eq">\[
+A_{\rm projected}\,\langle\ell_{\rm water}\rangle=V_{\rm water}.
+\]</div>
+<p>This cancels that particular aperture dependence in the ideal muonic signal. It does not cancel the incident flux asymmetry, and it does not apply without qualification to stopping tracks or thresholded signals. It also does not create additional incident muons. Armbruster's original signal derivation uses this cancellation; the muon-count observable must instead retain its own aperture.</p>
+<h2>3. Kinematic divergence: which emission angles populate the same radius?</h2>
+<p>This is the genuine late-favoring possibility already present in your work.</p>
+<p>Take a muon source on the shower axis. To reach a fixed radius:</p>
+<ul>
+<li>The early trajectory travels a shorter distance, so it needs a larger emission angle relative to the axis.</li>
+<li>The late trajectory travels farther, so it can reach the same radius with a smaller emission angle.</li>
+</ul>
+<p>The angular distribution is usually denser closer to the shower axis. The late point therefore samples a more populated part of that angular distribution. <strong>This angular-distribution contribution favors the late side.</strong></p>
+<p>But a second effect acts simultaneously: the more distant late point suffers greater inverse-square dilution. That contribution favors the early side. For an illustrative fixed source and momentum, before aperture and survival are applied,</p>
+<div class="eq">\[
+\frac{\rho_{\rm late}}{\rho_{\rm early}}
+=\underbrace{\left(\frac{L_{\rm early}}{L_{\rm late}}\right)^2}_{\text{favors early}}
+\underbrace{\frac{f(\alpha_{\rm late})}{f(\alpha_{\rm early})}}_{\text{favors late if }f\text{ decreases}}.
+\]</div>
+<p>Here <span>\(f=dN/d\Omega\)</span>. The <strong>combined divergence/ADF effect has no universal sign</strong>. A late excess requires the angular gain to exceed the spatial dilution and the other early-favoring contributions. Your description of the competing factors is physically meaningful; the assertion that the angular gain necessarily overwhelms the others is the unsupported step.</p>
+<h3>Why “soft muons are more divergent” is not sufficient</h3>
+<p>Soft muons generally have broader angular distributions. But the asymmetry is controlled by the <em>relative change</em> of the distribution between two nearby angles, not just by its width. A broad, fairly flat distribution can change little between those angles. A narrower distribution sampled in its steep tail can change strongly.</p>
+<p>The separable transverse-momentum law used in the previous calculations gives</p>
+<div class="eq">\[
+f(\alpha\mid p)\propto\cos\alpha\,
+\exp[-(p/Q)\sin\alpha].
+\]</div>
+<p>At fixed geometry and fixed transverse-momentum scale, its exponential late/early gain grows with momentum, not with decreasing momentum. This statement does not determine a full shower's asymmetry: real production distances, energies and survival weights are correlated. It does show why one cannot deduce “soft muons cause the inversion, and the soil removes it” from angular width alone.</p>
+<p>Also distinguish production energy from ground energy. A soft ground muon may have been produced with appreciably more energy. A UMD ground threshold cannot be substituted directly for a production-energy threshold.</p>
+<h2>4. The original physical effects in one expression</h2>
+<p>For a fixed illustrative source/momentum contribution, write the unselected count as</p>
+<div class="eq">\[
+N_d(\phi)\propto
+\underbrace{P_{\rm survival}(\phi)}_{\text{passive attenuation}}
+\underbrace{\mathcal A_d(\vartheta(\phi))}_{\text{detector projection}}
+\underbrace{\frac{f(\alpha(\phi))}{L(\phi)^2}}_{\text{ADF and spatial dilution}}.
+\]</div>
+<p>For a shower, sum/integrate these contributions with the joint production distribution and detector-specific energy/range response. The factors multiply for each contribution; their harmonic amplitudes add only to first order when the modulations are sufficiently small.</p>
+<p>This expression contains the three mechanisms you asked about. It contains no new atmospheric process. The inverse-square factor must not be added again if already included in the divergence calculation, and the plate-projection factor must not be added again after using the projected plate area.</p>
+<p>With a local power-law ADF, the familiar bracket makes the separation visible:</p>
+<div class="eq">\[
+A_{1,d}\simeq
+\left[\underbrace{2}_{\text{dilution}}
+-\underbrace{\gamma_{\rm ADF}}_{\text{angular preference}}
++\underbrace{D/\lambda}_{\text{passive attenuation}}
++\underbrace{\kappa_d}_{\text{aperture}}\right]
+\frac{r}{D}\tan\theta.
+\]</div>
+<p>This is a small-angle, fixed-source approximation with a passive exponential survival law, not a general fitted shower law. For an ideal plate the aperture coefficient is unity; for ideal through-going muon signal it vanishes after the chord cancellation; tank counts require their own coefficient. Armbruster's signal bracket has the inverse-square contribution, not an already-included plate-aperture contribution.</p>
+<h2>5. What I added: the same atmosphere can select different tank populations</h2>
+<p>Your plotted SD truth mean is calculated only for stations with a reconstructed SD partner. A tank's ability to enter that sample depends on its response to <strong>both muons and the electromagnetic component</strong>.</p>
+<p>The physical interpretation to test is:</p>
+<ol>
+<li>Early stations receive a larger EM contribution.</li>
+<li>That EM contribution can help a station satisfy the signal/trigger conditions even when its local muon count is small.</li>
+<li>Late stations receive less EM help.</li>
+<li>Among late stations, retaining a station can then preferentially select those with a larger muon contribution.</li>
+<li>Consequently, retained late stations can have a larger <em>mean muon count per retained station</em>, even when the unselected late-side muon intensity is smaller.</li>
+</ol>
+<p><strong>There are not necessarily more muons on the late side. There can be fewer retained late stations, with those retained stations being more muon-rich.</strong> This is the central distinction.</p>
+<p>It is not a fluctuation caused merely by having unequal numbers of stations per azimuth bin. It changes <em>which particle populations</em> survive the selection. Nor does it mean EM particles were incorrectly counted as muons. The muon truth counts can be exact while the stations carrying those counts are selected through an EM-sensitive instrument.</p>
+<p>The mathematical distinction is simply</p>
+<div class="eq">\[
+\underbrace{\mathbb E[N_\mu\mid\phi]}_{\text{before station selection}}
+\ne
+\underbrace{\mathbb E[N_\mu\mid\phi,\ \text{station retained}]}_{\text{plotted selected mean}}.
+\]</div>
+<p><strong>Established by the preceding raw-ADST test:</strong> applying the station-presence condition changes the sign in the tested sample. <strong>Physically motivated interpretation, not yet separately established:</strong> the EM-help/muon-enrichment sequence above explains why such a condition can produce that direction of change. The audit has not isolated a particular trigger algorithm or demonstrated that EM help is the only contributor. The truth accessor itself is an upstream geometric muon counter, not a water-light counter.</p>
+<p>Thus the new ingredient is <em>shower physics coupled to detector response and selection</em>, not a fourth propagation mechanism. Atmospheric attenuation can even participate indirectly: an early EM advantage can help generate a late excess in the selected muon mean. This does not reverse the sign of muon survival losses.</p>
+<h2>6. What this means for UMD</h2>
+<p>Soil removes the EM component and imposes an energy/range filter on muons. UMD also samples a different sensitive area and underground crossing population. These are genuine physical differences. They change the geometric, angular and survival weights, but they do not prove that geometric effects vanish or that attenuation must dominate.</p>
+<p>The SD muons contribute directly to the tank signal used for station selection. Muons counted underground need not contribute to that same tank signal: a muon hitting a nearby buried module is not generally the muon that triggered the tank. Consequently, selection can correlate much more directly with the tank's own count than with the underground count. Correlations through the common shower and local particle density still exist; independence has not been established.</p>
+<p>This is a plausible reason why the <strong>selected SD count</strong> can invert without a corresponding UMD inversion. It is not yet a complete causal explanation of the UMD coefficient. The UMD pilot found that untriggered scintillator truth is not populated in the relevant ADST summaries, so its pre-selection counterpart cannot be inferred by treating missing records as zero.</p>
+<h2>7. What to retain, and what to withdraw, from the old narrative</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Statement</th>
+<th>Physical verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extra passive propagation losses favor early over late.</td>
+<td>Retain, for a fixed produced population.</td>
+</tr>
+<tr>
+<td>Nonparallel muon trajectories generate a plane-projection effect.</td>
+<td>Retain, with the signed-momentum convention.</td>
+</tr>
+<tr>
+<td>A smaller emission angle can make the late point sample a denser angular population.</td>
+<td>Retain.</td>
+</tr>
+<tr>
+<td>That angular advantage must overpower spatial dilution.</td>
+<td>Not established; it is a competition.</td>
+</tr>
+<tr>
+<td>Small longitudinal momentum makes the usual outward-flow projection coefficient negative.</td>
+<td>Incorrect sign argument.</td>
+</tr>
+<tr>
+<td>Soil filtering proves the late-favoring contribution disappears in UMD.</td>
+<td>Not established.</td>
+</tr>
+<tr>
+<td>A negative SD truth-count harmonic proves negative unselected ground density.</td>
+<td>Incorrect when station selection is uncontrolled.</td>
+</tr>
+<tr>
+<td>A positive UMD harmonic proves attenuation dominates.</td>
+<td>Not established from the sign alone.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Bottom line:</strong> the old mechanisms can produce a genuine physical competition at ground. What the new work added was a demonstrated change of the sampled observable under detector selection. It did not establish a new atmospheric source of late muons, or prove that the old low-energy-divergence narrative explains this inversion.</p>
+<h2>Sources and scope</h2>
+<p>The comparison above was checked against the current thesis Chapters 3 and 6, the prior <a href="../../gap_notes_asimetrias_review_v4/kinematic_divergence_math_check.md">kinematic check</a>, and the exact source audit in the <a href="report.md">full report</a>. The old documents contain claims that were subsequently corrected; citing them here identifies the argument under review, not blanket endorsement.</p>
+<ul>
+<li>Bertou &amp; Billoir, GAP-2000-017, plane/top/side projection discussion: internal GAP note, used with explicit sign conventions.</li>
+<li>Armbruster, GAP-2020-066 / Bachelor thesis, §2.4, Eqs. (2.12)–(2.21): distinguishes particle counts from muon track-length signal. Its Eq. (2.33) is the signal bracket.</li>
+<li>Cazon et al. (2012), <em>Astroparticle Physics</em> 36, 211–223, §§2–4: production distributions and transport. The separable angular law above is an approximation, not the full correlated 2012 model. <a href="https://doi.org/10.1016/j.astropartphys.2012.05.017">DOI</a></li>
+<li>IceCube Collaboration (2022), <em>Physical Review D</em> 106, 032010, §IV.B, Eqs. (4)–(6): independently illustrates why track-length response and low-signal trigger efficiency must enter a tank-based muon analysis. It does not establish the specific Auger selection mechanism or license transferring IceTop thresholds to UMD. <a href="https://arxiv.org/pdf/2201.12635">Author manuscript</a></li>
+</ul>
+<p>No thesis/GAP files were changed. No new simulation or magnitude scan was run for this explanation.</p>
+</main></body></html>

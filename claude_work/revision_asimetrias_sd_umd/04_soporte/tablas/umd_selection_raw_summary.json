@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root",
+      "events": 1198,
+      "selected": 240,
+      "sd_occurrences": 5296,
+      "missing_sim_counter": 1786
+    }
+  ],
+  "rows": 5507,
+  "elapsed_s": 33.79949951078743
+}

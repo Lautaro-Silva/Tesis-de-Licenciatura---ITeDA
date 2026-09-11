@@ -1,0 +1,102 @@
+[
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.parquet",
+    "bytes": 5225443,
+    "rows": 78960
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.parquet",
+    "bytes": 5278022,
+    "rows": 79710
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.parquet",
+    "bytes": 5269817,
+    "rows": 79305
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.parquet",
+    "bytes": 5236946,
+    "rows": 79020
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.parquet",
+    "bytes": 5228288,
+    "rows": 79305
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.parquet",
+    "bytes": 5275609,
+    "rows": 79950
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.parquet",
+    "bytes": 5294259,
+    "rows": 80331
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.parquet",
+    "bytes": 5287334,
+    "rows": 79953
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.parquet",
+    "bytes": 5279804,
+    "rows": 79749
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.parquet",
+    "bytes": 5271264,
+    "rows": 79746
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.parquet",
+    "bytes": 5255944,
+    "rows": 79443
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.parquet",
+    "bytes": 5266630,
+    "rows": 79416
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.parquet",
+    "bytes": 5262113,
+    "rows": 79488
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.parquet",
+    "bytes": 5259404,
+    "rows": 79641
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.parquet",
+    "bytes": 5279597,
+    "rows": 79731
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.parquet",
+    "bytes": 5247278,
+    "rows": 79437
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.parquet",
+    "bytes": 5236537,
+    "rows": 79074
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.parquet",
+    "bytes": 5245749,
+    "rows": 79266
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.parquet",
+    "bytes": 5194192,
+    "rows": 78669
+  },
+  {
+    "file": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.parquet",
+    "bytes": 5236505,
+    "rows": 79293
+  }
+]

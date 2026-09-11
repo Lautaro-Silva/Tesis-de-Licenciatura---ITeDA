@@ -1,0 +1,10 @@
+{
+  "legacy_SD_endpoint": 0.1907496575250268,
+  "legacy_SD_Fourier": 0.1930792319730531,
+  "raw_all_A1": 0.0676378931528596,
+  "raw_selected_A1": -0.0945270164583872,
+  "selection_shift": -0.1621649096112468,
+  "endpoint_benchmark_minus_raw_all": 0.12311176437216718,
+  "Fourier_benchmark_minus_raw_all": 0.12544133882019348,
+  "qualification": "Nominal analytic point versus finite-bin Monte Carlo; not a unique physical term decomposition."
+}

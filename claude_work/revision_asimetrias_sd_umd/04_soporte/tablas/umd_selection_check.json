@@ -1,0 +1,13 @@
+{
+  "files": 1,
+  "raw_module_records": 5507,
+  "non_SDrec_populated_module_records": 0,
+  "matched_parquet_module_rows": 7632,
+  "missing_retained_sim_module_rows": 2125,
+  "nonzero_parquet_for_missing_module": 0,
+  "mu_count_mismatches": 0,
+  "all_SD_occurrences": 5296,
+  "non_SDrec_occurrences": 2752,
+  "total_retained_muons": 21768.0,
+  "conclusion": "Unselected UMD truth is not recoverable from populated scintillator summaries in this pilot. Do not zero-fill absent unselected counters/modules."
+}

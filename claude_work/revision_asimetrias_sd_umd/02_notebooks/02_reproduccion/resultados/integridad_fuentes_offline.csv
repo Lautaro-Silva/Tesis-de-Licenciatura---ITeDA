@@ -1,0 +1,14 @@
+fuente_Offline,existe,contenido_igual_a_instantanea
+Framework/SEvent/StationSimData.cc,True,True
+Framework/SEvent/StationSimData.h,True,True
+Framework/SEvent/Station.cc,True,True
+Framework/SDetector/Station.cc,True,True
+Modules/General/RecDataWriterNG/SD2ADST.cc,True,True
+Modules/SdSimulation/CachedShowerRegeneratorOG/CachedShowerRegenerator.cc,True,True
+Modules/SdSimulation/G4StationSimulator/G4StationSimulator.cc,True,True
+Modules/General/RecDataWriterNG/MD2ADST.cc,True,True
+ADST/RecEvent/src/GenStation.h,True,True
+Modules/MdSimulation/MdOptoElectronicSimulator/MdOptoElectronicSimulator.cc,True,True
+Framework/MEvent/Module.h,True,True
+ADST/RecEvent/src/MdSimCounter.h,True,True
+ADST/RecEvent/src/MdSimScintillator.h,True,True

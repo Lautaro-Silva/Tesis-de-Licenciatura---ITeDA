@@ -1,0 +1,9 @@
+campo,valor
+Tabla por estación utilizada,/home/lsilva/Github/Tesis-de-Licenciatura---ITeDA/claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_counts_fast.csv
+"SHA256 de esa tabla (identidad del insumo, no prueba física)",8a62ff0737dd6f6f2322782398c61e8bd37fb13cc464988056845ac6e69663a1
+Archivos representados,20
+Filas ADST analizadas,106280
+Réplicas bootstrap por banda,800
+Relectura opcional de ROOT activada en este Run All,False
+Segundos del recorrido del notebook,18.85
+Salidas nuevas,/home/lsilva/Github/Tesis-de-Licenciatura---ITeDA/claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports

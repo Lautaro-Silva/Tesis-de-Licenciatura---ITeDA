@@ -1,0 +1,155 @@
+% !TEX root = preview.tex
+% BORRADOR: propuesta de reemplazo; no modifica el capitulo original.
+% Contexto y limites: README.md. No contiene una calibracion numerica nueva.
+
+\section{Fenomenología de las Asimetrías Azimutales en EAS}
+\label{sec:fenomenologia}
+
+La simetría circular de la densidad de partículas en el plano perpendicular al eje de una lluvia atmosférica extensa constituye una aproximación útil para su reconstrucción. En lluvias inclinadas, las diferencias de propagación entre regiones del frente y la distribución de direcciones de las partículas producen desviaciones sistemáticas respecto de esta aproximación. A su vez, el observable medido depende de la geometría del detector, de su respuesta y de las condiciones que determinan qué estaciones ingresan al análisis.
+
+En este capítulo se distinguen la atenuación atmosférica, la proyección geométrica y la divergencia cinemática. Estos mecanismos no tienen necesariamente signos opuestos entre sí, ni el signo de la asimetría total identifica por sí solo cuál domina. Se introduce además la distinción entre la distribución de muones incidentes y el conteo medio en una muestra de estaciones seleccionadas, necesaria para interpretar la comparación entre SD y UMD.
+
+\subsection{El plano de la lluvia y la ruptura de simetría}
+\label{subsec:simetria_ruptura}
+
+Las posiciones de los detectores se definen inicialmente sobre el terreno. Para estudiar la estructura transversal de la cascada se proyectan sobre el plano perpendicular a su eje, denominado \textit{plano de la lluvia}. En este trabajo, tanto el radio $r$ como el azimut $\phi$ se refieren a ese plano; $r$ no es la distancia horizontal al núcleo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{capitulos/imagenes_capitulos/cap3/esquema_lluvia.png}
+\caption{Proyección de las posiciones del suelo al plano de la lluvia. El azimut denotado por $\zeta$ en el esquema corresponde a $\phi$ en este trabajo.}
+\label{fig:plano_lluvia}
+\end{figure}
+
+Se adopta $\phi=0$ para la región \textit{temprana} y $\phi=\pm\pi$ para la región \textit{tardía}. A igual radio en el plano de la lluvia y para una misma fuente sobre el eje, el trayecto hasta el lado temprano es menor. La palabra ``tardía'' identifica aquí una región espacial, no una selección de partículas por su tiempo de llegada. En la aproximación de una cascada vertical y axialmente simétrica, sin campo magnético ni anisotropías instrumentales, no existe una dirección temprano--tardía privilegiada.
+
+Una construcción geométrica permite precisar estas afirmaciones. Sea $D$ la distancia, medida sobre el eje, desde una fuente puntual de muones hasta su intersección con el suelo. Para un eje inclinado un ángulo $\theta$ respecto de la vertical, se define
+\begin{equation}
+\delta=r\tan\theta\cos\phi,\qquad
+L=\sqrt{(D-\delta)^2+r^2},\qquad
+\sin\alpha=\frac{r}{L}.
+\label{eq:geometria_fuente_muonica}
+\end{equation}
+Aquí $L$ es la longitud del trayecto y $\alpha$ el ángulo de emisión respecto del eje descendente. Para los puntos considerados aguas abajo de la fuente, $L_{\mathrm{T}}>L_{\mathrm{E}}$ y $\alpha_{\mathrm{T}}<\alpha_{\mathrm{E}}$, donde E y T denotan temprano y tardío. Esta construcción exacta para una fuente puntual se utiliza para comprender los signos, no para sustituir la distribución extendida de producción de una lluvia real.
+
+\subsection{Origen físico de la modulación azimutal}
+\label{subsec:origen_fisico}
+
+\subsubsection{Atenuación atmosférica}
+\label{subsubsec:atenuacion}
+
+Para una población de muones ya producida, el trayecto adicional hacia el lado tardío incrementa las pérdidas de energía, la probabilidad de decaimiento y la posibilidad de no alcanzar el detector o su umbral. Estos procesos de supervivencia y alcance favorecen la región temprana. En particular, la supervivencia frente al decaimiento puede escribirse como
+\begin{equation}
+P_{\mathrm{dec}}=\exp\left[-\int_0^L
+\frac{\mathrm{d}s}{\beta(s)\gamma(s)c\tau_\mu}\right],
+\end{equation}
+donde la energía y, por lo tanto, $\beta\gamma$, cambian durante la propagación \cite{Cazon2012}. La comparación supone condiciones de producción equivalentes; no identifica automáticamente el balance de toda la población que alcanza un radio determinado.
+
+La componente electromagnética ordinaria, observada después del máximo de desarrollo, suele ser más sensible al espesor atmosférico adicional \cite{Pryke1998,BradfieldThesis}. Sin embargo, sus procesos de regeneración impiden interpretar cualquier variación local como absorción pura. También para los muones debe distinguirse la pérdida de una población del cambio de su \emph{densidad local}: esta última incluye transporte lateral hacia dentro o hacia fuera del intervalo radial, producción adicional y efectos del corte energético. Agregar una derivada empírica de densidad con la profundidad como una nueva ``atenuación'', después de modelar explícitamente la divergencia, puede contar dos veces la redistribución lateral.
+
+El suelo sobre el UMD suprime fuertemente la componente electromagnética y selecciona los muones con alcance suficiente para llegar al centellador \cite{UMD_Design2016}. El filtro depende de la energía a nivel del suelo y de la dirección local de incidencia. No equivale a seleccionar directamente la energía de producción, ni demuestra que la atenuación atmosférica domine la asimetría remanente. En particular, un exceso temprano también puede provenir de la proyección geométrica.
+
+\subsubsection{Proyección geométrica y apertura del detector}
+\label{subsubsec:divergencia}
+
+Las direcciones locales de los muones no son exactamente paralelas al eje de la lluvia. Por ello, la relación entre el flujo que atraviesa un plano normal al eje y el que intercepta una superficie horizontal depende del azimut. Con el eje longitudinal orientado hacia arriba, de modo que $p_z<0$ para partículas descendentes, el término de proyección de Bertou y Billoir se expresa como \cite{GAP2000_017}
+\begin{equation}
+A_{\mathrm{geo}}(r)=
+\left\langle\frac{p_r}{-p_z}\right\rangle\tan\theta,
+\qquad
+\mathcal A_{\mathrm{geo}}(r,\phi)=A_{\mathrm{geo}}(r)\cos\phi.
+\label{eq:efecto_geo}
+\end{equation}
+El promedio corresponde al flujo de cruce del plano normal al eje. $p_r$ es la componente radial \emph{con signo}, no el módulo del momento transversal. Para el flujo habitualmente divergente, dirigido hacia afuera, $p_r>0$ y este término es positivo: favorece la región temprana. Reducir $-p_z$ no convierte ese cociente en negativo. Una contribución radial entrante puede existir, pero su importancia debe medirse y no se deduce de que los muones sean poco energéticos.
+
+La interpretación en términos de apertura es directa. Para la fuente de la Ec.~\ref{eq:geometria_fuente_muonica}, el ángulo cenital local $\vartheta$ satisface $\cos\vartheta=D\cos\theta/L$. Las trayectorias tempranas son más verticales y presentan mayor área proyectada sobre una placa horizontal. No se trata simplemente de convertir un círculo en una elipse: la proyección consistente de coordenadas y áreas de un haz perfectamente paralelo no genera por sí sola este dipolo.
+
+En un tanque cilíndrico vertical de radio $R$ y altura $H$, el área que intercepta trayectorias rectas descendentes es
+\begin{equation}
+\mathcal A_{\mathrm{tanque}}(\vartheta)
+=\pi R^2\cos\vartheta+2RH\sin\vartheta.
+\label{eq:apertura_tanque}
+\end{equation}
+La tapa favorece las direcciones más verticales y el lateral las más inclinadas. El lateral se opone así a la preferencia temprana de una placa, pero no implica que la suma sea necesariamente negativa. Para el UMD intervienen además el transporte a través del suelo y la condición de cruce del centellador.
+
+También debe distinguirse conteo de señal. Para un flujo uniforme de muones que atraviesan completamente un volumen, con señal proporcional a la longitud de traza, se cumple $\mathcal A_{\mathrm{proy}}\langle\ell\rangle=V$. La mayor apertura y la menor longitud media se compensan en esa contribución ideal a la señal. Esto no anula la asimetría del flujo incidente, ni se aplica sin correcciones a muones que se detienen o a señales seleccionadas por umbral. Una expresión para señal muónica no puede trasladarse sin más al número de muones interceptados.
+
+\subsubsection{Divergencia cinemática y distribución angular}
+\label{subsubsec:divergencia_cinematica}
+
+Los muones se producen principalmente en decaimientos de mesones y heredan una distribución de momentos longitudinales y transversales \cite{Cazon2012}. Si $p$ es el módulo del momento en producción, entonces $p_t=p\sin\alpha$. En la aproximación relativista y de ángulo pequeño, una fuente a distancia axial $D$ da $r\simeq D\alpha\simeq Dcp_t/E_i$. Esta relación involucra la energía inicial $E_i$, no la energía residual al llegar al detector.
+
+Para alcanzar el mismo radio, la región tardía requiere un ángulo de emisión menor. Si la distribución angular $f(\alpha)=\mathrm{d}N/\mathrm{d}\Omega$ decrece con $\alpha$, el lado tardío toma partículas de una dirección más poblada. Ésta es una contribución genuinamente favorable al lado tardío, distinta del término de proyección de la Ec.~\ref{eq:efecto_geo}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap3/efecto_geo_luce_icrc2021.png}
+\caption{Comparación de ángulos de emisión para alcanzar un mismo radio en las regiones temprana y tardía. La región tardía requiere un ángulo menor. El esquema de \cite{Luce_ICRC2021} ilustra esta diferencia, pero no establece por sí solo el signo neto de la densidad.}
+\label{fig:divergencia_angular}
+\end{figure}
+
+Simultáneamente, el mayor recorrido tardío produce una dilución espacial mayor. Antes de incorporar supervivencia y apertura, la contribución de una fuente puntual es proporcional a $f(\alpha)/L^2$. Por lo tanto,
+\begin{equation}
+\frac{[f/L^2]_{\mathrm{T}}}{[f/L^2]_{\mathrm{E}}}
+=\left(\frac{L_{\mathrm{E}}}{L_{\mathrm{T}}}\right)^2
+\frac{f(\alpha_{\mathrm{T}})}{f(\alpha_{\mathrm{E}})}.
+\label{eq:competencia_divergencia}
+\end{equation}
+El primer factor favorece la región temprana; el segundo favorece la tardía cuando $f$ es decreciente. La ganancia angular no supera necesariamente a la dilución. En consecuencia, el signo de la contribución cinemática conjunta depende de la pendiente angular local y de las poblaciones que realmente llegan al detector.
+
+Esta distinción también puede formularse sin imponer una ley de potencias angular. Para la aproximación separable $\mathrm{d}N/\mathrm{d}p_t\propto p_t\exp(-p_t/Q)$, a momento total fijo y emisión uniforme en azimut, el cambio de variables da
+\begin{equation}
+f(\alpha\mid p)\propto\cos\alpha\,
+\exp\left[-\frac{p}{Q}\sin\alpha\right],
+\qquad 0\leq\alpha<\frac{\pi}{2}.
+\label{eq:adf_cazon}
+\end{equation}
+El factor $\cos\alpha$ proviene del jacobiano y la normalización depende de $p$. La ecuación es una consecuencia de esa aproximación al espectro transversal, no una distribución universal para cualquier energía y profundidad de producción \cite{Cazon2012}. A geometría y $Q$ fijos, la ganancia exponencial tardía crece con $p$. Una distribución más ancha de muones blandos no implica una mayor variación \emph{relativa} entre los dos ángulos. Tampoco se deduce la afirmación inversa para la lluvia completa: deben integrarse las correlaciones entre producción, energía, momento transversal y supervivencia.
+
+\subsubsection{Efectos por el campo geomagnético terrestre}
+\label{subsubsec:geomagnetico}
+
+La fuerza de Lorentz, $\vec F=q\vec v\times\vec B$, desvía en sentidos opuestos a los muones de cargas diferentes. La distorsión depende de la dirección de arribo, de la rigidez y del trayecto recorrido; resulta especialmente relevante para lluvias muy inclinadas \cite{GAP2007_124,collaboration_2014}. Su orientación no coincide en general con el eje temprano--tardío. Promediar direcciones de arribo puede reducir algunas contribuciones, pero no garantiza una reducción universal de $A_1$. En este trabajo no se utiliza el campo magnético como explicación demostrada de una inversión de signo; aislarlo requiere controles por dirección de arribo o simulaciones comparables con y sin campo.
+
+\subsection{De la población incidente al observable seleccionado}
+\label{subsec:respuesta_seleccion}
+
+Para una contribución de fuente y momento fijos, los mecanismos anteriores pueden organizarse esquemáticamente como
+\begin{equation}
+\mathrm{d}\overline N_d(\phi)\propto
+P_{\mathrm{surv}}(\phi)\,
+\mathcal A_d(\vartheta(\phi))\,
+\frac{f(\alpha(\phi))}{L(\phi)^2}\,
+\mathcal T_d(E_f,\vartheta)\,\mathrm{d}W.
+\label{eq:marco_muonico}
+\end{equation}
+$\mathrm{d}W$ representa el peso de producción, $E_f$ la energía al suelo y $\mathcal T_d$ la transmisión y eficiencia de conteo propias del detector. En una lluvia real se integra sobre la distribución conjunta de producción y transporte. La expresión rectilínea es una organización de factores, no una solución completa que incluya dispersión y campo magnético. Los factores se multiplican para cada contribución; sumar sus amplitudes sólo es una aproximación de primer orden. No debe agregarse otra proyección si ya está incluida en $\mathcal A_d$, ni otra dilución si ya se utilizó $f/L^2$.
+
+Finalmente, una muestra de estaciones retenidas no mide necesariamente el promedio anterior. Sea $R=1$ la condición de ingreso de una estación al análisis y $b$ un intervalo de posición y parámetros de lluvia. Entonces
+\begin{equation}
+\mathrm{E}[N_\mu\mid R=1,b]
+=\mathrm{E}[N_\mu\mid b]\,
+\frac{\epsilon_{N,b}}{\epsilon_b},\qquad
+\epsilon_b=P(R=1\mid b),\quad
+\epsilon_{N,b}=\frac{\mathrm{E}[N_\mu\mathbf 1_R\mid b]}{\mathrm{E}[N_\mu\mid b]}.
+\label{eq:conteo_condicionado}
+\end{equation}
+La identidad vale para probabilidades y medias no nulas en los denominadores. Si la retención depende del contenido de partículas, el cociente de eficiencias puede variar con el azimut y cambiar incluso el signo de la modulación del promedio seleccionado.
+
+Una posibilidad física es que la contribución electromagnética temprana ayude a retener tanques con pocos muones, mientras que, con menor ayuda electromagnética, los tanques tardíos retenidos sean preferentemente ricos en muones. No se crean ni se desplazan muones hacia el lado tardío: cambia la población de estaciones sobre la que se calcula la media. Esta interpretación de la selección se distingue de la demostración de su efecto neto, presentada en la Sección~\ref{subsec:control_seleccion_sd}. El uso de conteos de verdad Monte Carlo no elimina el condicionamiento si esos conteos se leen únicamente en estaciones que satisfacen una condición instrumental.
+
+\subsection{Parametrización armónica de primer orden}
+\label{subsec:parametrizacion}
+
+Siguiendo la parametrización utilizada en estudios del SD \cite{Billoir2002,BradfieldThesis}, se ajusta
+\begin{equation}
+S(r,\phi)=S_0(r)\left[1+A_1(r,\theta)\cos\phi\right].
+\label{eq:asimetria_a1}
+\end{equation}
+$S$ representa la densidad, el conteo medio o la señal, según el observable declarado. $S_0$ es su normalización azimutal y $A_1$ un coeficiente con signo: $A_1>0$ indica exceso temprano; $A_1<0$, exceso tardío. Ninguno de estos signos identifica de forma exclusiva un mecanismo.
+
+Fijar el eje de la modulación en $\phi=0$ permite medir su componente temprano--tardía sin imponer que $A_1$ sea positivo. No excluye la existencia de un término proporcional a $\sin\phi$ ni de armónicos superiores. Su relevancia debe evaluarse mediante residuos, incertidumbres y controles adicionales, no únicamente por la apariencia cosinusoidal del perfil.
+
+Los siguientes capítulos caracterizan este coeficiente en UMD y SD y examinan su sensibilidad a energía y masa. El UMD aporta acceso a una población muónica filtrada por el suelo; el SD mide una respuesta diferente, sensible también a la componente electromagnética. Su comparación resulta informativa precisamente porque no son observables intercambiables. La interpretación requiere separar producción y transporte, respuesta local y selección de estaciones.
+
+\newpage
