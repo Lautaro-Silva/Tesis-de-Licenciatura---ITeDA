@@ -3,9 +3,9 @@
 - Archivos originales inventariados: 163.
 - Archivos científicos/documentales trasladados y presentes en la entrega: 129.
 - Originales comprobados dentro de la copia recuperable local: 163.
-- Fuentes Python con sintaxis válida: 26.
+- Fuentes Python con sintaxis válida: 27.
 - Notebooks sincronizados con su .py, ejecutados y sin errores: 3.
-- Enlaces locales de documentos verificados: 80.
+- Enlaces locales de documentos verificados: 95.
 - Tablas CSV contrastadas con los originales: 35; columnas numéricas sin cambios a tolerancia 1e-10 absoluta/relativa.
 - Archivos Offline con huella comprobada sin modificaciones: 13.
 

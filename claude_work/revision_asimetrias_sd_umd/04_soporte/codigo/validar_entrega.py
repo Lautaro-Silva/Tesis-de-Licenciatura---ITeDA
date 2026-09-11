@@ -26,7 +26,7 @@ delivered = [row for row in inventory if row['entrega_git'] == 'True']
 for row in delivered:
     assert (REPO / row['destino']).is_file(), row['destino']
 sources = list(PACKAGE.rglob('*.py'))
-sources = [p for p in sources if '99_archivo_local' not in p.parts]
+sources = [p for p in sources if '99_archivo_local' not in p.parts and '.ipynb_checkpoints' not in p.parts]
 for source in sources:
     ast.parse(source.read_text(), filename=str(source))
 
@@ -64,10 +64,13 @@ def check_link(target, document):
 
 markdown = MarkdownIt('commonmark').enable('table')
 for document in PACKAGE.rglob('*'):
-    if '99_archivo_local' in document.parts or document.suffix not in {'.html', '.md'}:
+    if ('99_archivo_local' in document.parts or '.ipynb_checkpoints' in document.parts
+        or document.suffix not in {'.html', '.md'}):
         continue
     # Template links are relative to its rendered physics report.
     location = PACKAGE / '01_fisica/report.md' if document.name == 'report.template.md' else document
+    if document.name == 'resumen_direccion.template.md':
+        location = PACKAGE / 'RESUMEN_PARA_DIRECCION.md'
     parser = LinkParser()
     parser.feed(markdown.render(document.read_text()) if document.suffix == '.md' else document.read_text())
     for target in parser.links:

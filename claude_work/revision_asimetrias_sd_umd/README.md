@@ -4,6 +4,10 @@
 Jupyter, empezá por [INICIO.html](INICIO.html). No hace falta recorrer los CSV,
 JSON ni los scripts de auditoría para entender los resultados.
 
+**Para mostrar al director:** [resumen de una página (PDF)](RESUMEN_PARA_DIRECCION.pdf)
+· [HTML](RESUMEN_PARA_DIRECCION.html) · [texto editable (Markdown)](RESUMEN_PARA_DIRECCION.md).
+Separa el resultado demostrado, la hipótesis física y lo que sigue abierto.
+
 ## Qué abrir según tu pregunta
 
 | Quiero… | Abrir |
