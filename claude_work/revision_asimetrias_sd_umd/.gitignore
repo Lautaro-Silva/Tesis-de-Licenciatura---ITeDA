@@ -1,0 +1,4 @@
+# Local preservation of originals and disposable intermediates, not deliverables.
+99_archivo_local/
+__pycache__/
+.ipynb_checkpoints/

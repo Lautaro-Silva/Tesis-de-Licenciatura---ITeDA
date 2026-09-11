@@ -1,0 +1,13 @@
+{
+  "files": [
+    {
+      "source": "SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root",
+      "events_read": 1198,
+      "zenith_selected": 240,
+      "infill_simstations": 52320,
+      "stations_with_particles": 15534
+    }
+  ],
+  "rows": 5296,
+  "elapsed_s": 325.5699620032683
+}

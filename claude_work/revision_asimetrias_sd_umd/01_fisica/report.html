@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SD–UMD asymmetry: forensic physics and selection audit</title>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]},svg:{fontCache:"global"}};</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+<style>
+  
+  :root{
+    --paper:#f9f9f7; --surface:#fcfcfb; --surface-2:#f1f1ee;
+    --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+    --rule:#e1e0d9; --axis:#c3c2b7;
+    --accent:#4a3aa7; --accent-soft:#efecfa; --accent-ink:#ffffff;
+    --early:#c0392b; --early-soft:#fbe7e6;
+    --late:#2a5fb0; --late-soft:#e6eefb;
+    --good:#0c8a3e; --good-soft:#e3f7e3;
+    --bad:#c0392b; --bad-soft:#fdece2;
+    --warn:#b5790a; --warn-soft:#fdf1de;
+    --shadow: 0 1px 2px rgba(11,11,11,.04), 0 8px 24px -12px rgba(11,11,11,.12);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0d0d0d; --surface:#17171a; --surface-2:#1f1f22;
+      --ink:#f4f4f2; --ink-2:#c3c2b7; --ink-3:#8b897f;
+      --rule:#2c2c2a; --axis:#3a3a37;
+      --accent:#9085e9; --accent-soft:#241f3d; --accent-ink:#0d0d0d;
+      --early:#e07267; --early-soft:#2e1a1a;
+      --late:#6d9cdd; --late-soft:#152537;
+      --good:#3fc23f; --good-soft:#12250f;
+      --bad:#e07267; --bad-soft:#2c1d13;
+      --warn:#e0b567; --warn-soft:#2c2413;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0d0d0d; --surface:#17171a; --surface-2:#1f1f22;
+    --ink:#f4f4f2; --ink-2:#c3c2b7; --ink-3:#8b897f;
+    --rule:#2c2c2a; --axis:#3a3a37;
+    --accent:#9085e9; --accent-soft:#241f3d; --accent-ink:#0d0d0d;
+    --early:#e07267; --early-soft:#2e1a1a;
+    --late:#6d9cdd; --late-soft:#152537;
+    --good:#3fc23f; --good-soft:#12250f;
+    --bad:#e07267; --bad-soft:#2c1d13;
+    --warn:#e0b567; --warn-soft:#2c2413;
+  }
+
+  *{box-sizing:border-box;}
+  body{ background:var(--paper); color:var(--ink); margin:0;
+    font-family:'Source Serif 4', Georgia, serif; font-size:17px; line-height:1.65; }
+  .wrap{ max-width:860px; margin:0 auto; padding:56px 24px 120px; }
+
+  h1,h2,h3{ font-family:'Fraunces', Georgia, serif; font-weight:600; color:var(--ink); }
+  h1{ font-size:2.1rem; line-height:1.2; margin:0 0 8px; }
+  .subtitle{ font-family:'Archivo',sans-serif; font-size:.95rem; color:var(--ink-3); margin:0 0 40px; }
+  h2{ font-size:1.45rem; margin:52px 0 16px; padding-top:20px; border-top:1px solid var(--rule); }
+  h2 .num{ color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:.85em; margin-right:10px; }
+  h3{ font-size:1.1rem; margin:28px 0 10px; color:var(--ink); }
+  p{ margin:0 0 16px; }
+  a{ color:var(--accent); }
+  strong{ color:var(--ink); }
+  em{ font-style:italic; }
+  ul,ol{ margin:0 0 16px; padding-left:1.4em; }
+  li{ margin-bottom:6px; }
+  code{ font-family:'JetBrains Mono',monospace; font-size:.85em; background:var(--surface-2);
+    padding:.1em .35em; border-radius:4px; color:var(--ink); }
+
+  .kicker{ font-family:'Archivo',sans-serif; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    font-size:.72rem; color:var(--accent); margin-bottom:10px; }
+
+  .callout{ background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+    padding:20px 24px; margin:20px 0; box-shadow:var(--shadow); }
+  .callout.good{ border-color:var(--good); background:var(--good-soft); }
+  .callout.bad{ border-color:var(--bad); background:var(--bad-soft); }
+  .callout.warn{ border-color:var(--warn); background:var(--warn-soft); }
+  .callout p:last-child{ margin-bottom:0; }
+  .callout .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.75rem;
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; display:block; }
+  .callout.good .label{ color:var(--good); }
+  .callout.bad .label{ color:var(--bad); }
+  .callout.warn .label{ color:var(--warn); }
+
+  .verdict-box{ background:var(--accent-soft); border:1px solid var(--accent); border-radius:12px;
+    padding:24px 28px; margin:28px 0; }
+  .verdict-box .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.78rem;
+    color:var(--accent); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; display:block; }
+
+  table{ width:100%; border-collapse:collapse; margin:20px 0; font-size:.9rem; }
+  th,td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); font-variant-numeric:tabular-nums; }
+  th{ font-family:'Archivo',sans-serif; font-weight:600; font-size:.75rem; text-transform:uppercase;
+    letter-spacing:.03em; color:var(--ink-3); border-bottom:2px solid var(--axis); }
+  td.num, th.num{ text-align:right; font-family:'JetBrains Mono',monospace; }
+  tr:hover td{ background:var(--surface-2); }
+  .pos{ color:var(--early); } .neg{ color:var(--late); }
+  .table-wrap{ overflow-x:auto; }
+
+  .eq{ background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+    padding:18px 22px; margin:18px 0; text-align:center; overflow-x:auto; }
+
+  .tag{ display:inline-block; font-family:'Archivo',sans-serif; font-size:.7rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:5px; margin-right:6px; }
+  .tag.established{ background:var(--good-soft); color:var(--good); }
+  .tag.model{ background:var(--warn-soft); color:var(--warn); }
+  .tag.hyp{ background:var(--surface-2); color:var(--ink-2); }
+  .tag.new{ background:var(--accent-soft); color:var(--accent); }
+  .tag.prior{ background:var(--late-soft); color:var(--late); }
+  .tag.dead{ background:var(--bad-soft); color:var(--bad); }
+
+  .footnote{ font-size:.85rem; color:var(--ink-3); }
+  .repro{ font-family:'JetBrains Mono',monospace; font-size:.85rem; background:var(--surface);
+    border:1px solid var(--rule); border-radius:8px; padding:16px 18px; overflow-x:auto; }
+
+  .toc{ background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:20px 24px; margin:24px 0; }
+  .toc .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.75rem; text-transform:uppercase;
+    letter-spacing:.05em; color:var(--ink-3); margin-bottom:10px; display:block; }
+  .toc ol{ margin:0; padding-left:1.2em; columns:1; }
+  .toc a{ text-decoration:none; }
+  .toc a:hover{ text-decoration:underline; }
+
+  .correction{ background:var(--warn-soft); border:2px solid var(--warn); border-radius:12px;
+    padding:22px 26px; margin:0 0 36px; }
+  .correction .label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:.78rem;
+    color:var(--warn); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; display:block; }
+
+.wrap{max-width:1080px} img{max-width:100%;height:auto} blockquote{border-left:3px solid var(--accent);margin-left:0;padding:14px 22px;background:var(--surface)} .eq{font-size:.95em} .toc{font-size:.9em} @media print{body{background:white;color:black}.wrap{padding:0;max-width:none} h2{break-after:avoid}table,.eq{break-inside:avoid}}</style></head><body><main class="wrap"><h1>SD–UMD azimuthal asymmetry: a transport and observable audit</h1>
+<p>Referee-style working report • 10 September 2026 • SIBYLL 2.3e proton, icrc2025-test7</p>
+<nav class="toc" aria-label="Contents"><strong>Contents</strong><ol><li><a href="#verdict">Verdict</a></li><li><a href="#1-observable-signs-and-units">1. Observable, signs, and units</a></li><li><a href="#2-what-the-code-actually-counts">2. What the code actually counts</a></li><li><a href="#3-real-mc-tests-selection-is-not-exposure">3. Real-MC tests: selection is not exposure</a></li><li><a href="#4-one-consistent-physical-framework">4. One consistent physical framework</a></li><li><a href="#5-cazon-based-adf-stronger-derivation-limited-numerical-claim">5. Cazon-based ADF: stronger derivation, limited numerical claim</a></li><li><a href="#6-wider-literature-mechanisms-assessed-outside-the-original-citation-loop">6. Wider literature: mechanisms assessed outside the original citation loop</a></li><li><a href="#7-answers-to-q1-q4">7. Answers to Q1–Q4</a></li><li><a href="#8-ranked-next-checks-and-actual-availability">8. Ranked next checks and actual availability</a></li><li><a href="#9-proposed-thesis-text-deliberately-conservative">9. Proposed thesis text — deliberately conservative</a></li><li><a href="#10-reproducibility-reading-scope-and-limits">10. Reproducibility, reading scope and limits</a></li></ol></nav><h2 id="verdict">Verdict</h2>
+<p>The investigation changes the question. The negative SD coefficient in the existing parquet is <strong>not a measurement of the unconditional incident-muon density</strong>. The reader requires an SD reconstructed station before retaining its truth count. Directly reading the original ADST, including simulated stations that fail this requirement, provides a counterfactual test of that selection. Its result is reported below, together with a paired shower bootstrap. This is different from the already-settled unequal-bin-population bootstrap: selection changes a conditional mean; merely reducing the number of rows within an already-selected bin does not.</p>
+<p><strong>Established result, all 20 matched production files:</strong> at 1050–1400 m and 30–40°, the SD truth-count coefficient changes from <strong>+0.0676 before station-reconstruction selection to −0.0945 afterward</strong>. The paired difference is <strong>−0.1622</strong>, with a parent-shower bootstrap 95% interval <strong>[−0.1784, −0.1453]</strong>. Positive means early excess. The selected value reproduces the parquet exactly; the pre-selection coefficient is positive. Thus the sign inversion is induced by this selection in the tested production, without requiring negative pre-selection SD station-count asymmetry.</p>
+<p>The source audit also resolves the most sharply posed detector question. <code>GetNumberOfMuons()</code> is an upstream <strong>injected-trajectory intersection counter</strong>, not a Cherenkov-response-weighted count. Water-generated muons, optical thresholds, capture, and reconstructed signal cuts do not enter its increment. However, water response and station reconstruction can affect whether that count appears in the parquet. These two statements are compatible and must not be conflated.</p>
+<p>There is still no validated, parameter-free analytic prediction of both detectors from production physics. The old SD prediction remains an inadequate model benchmark, not a proof that an additional atmospheric mechanism of amplitude −0.29 exists. In particular, the old calculation extrapolates a production power law into an energy range where Cazon explicitly rejects it, neglects decay and energy loss, and uses ground-detector thresholds as production-energy limits. Its UMD agreement is numerically reproducible but not a validation of those assumptions.</p>
+<p><strong>Recommended thesis decision:</strong> retain the measured detector-observable comparison, but do not present the selected SD sign inversion as an established inversion of the unconditional ground muon density. Include the sample-selection audit before drawing a transport conclusion. Retain a compact, clearly conditional derivation of the competing geometric/ADF terms; remove claims that the present analytic model quantitatively explains both detectors, or has already isolated a new late-favoring atmospheric effect.</p>
+<p>Throughout this report, <strong>established</strong> means an exact identity, a source-code fact within the audited implementation, or a directly computed MC result. <strong>Model inference</strong> means a result conditional on explicit assumptions. <strong>Hypothesis</strong> means a mechanism not causally identified by the available test. No atmospheric-production simulation was launched.</p>
+<h2 id="1-observable-signs-and-units">1. Observable, signs, and units</h2>
+<p>We use</p>
+<div class="eq">\[
+\rho(r,\phi)=\rho_0(r)[1+A_1(r)\cos\phi],\qquad
+\phi=0\ \text{early},\quad \phi=\pi\ \text{late}.
+\tag{1}
+\]</div>
+<p>Thus positive <span class="math">\(A_1\)</span> is an early excess. Shower-plane radius, not horizontal ground radius, is held fixed. The production-facing shower axis points upward. With its ground projection chosen along positive horizontal <span class="math">\(x\)</span>, a point on that side is below the axis and is the early point. The reader rotates the station-minus-true-core vector by <span class="math">\(-\varphi_{\rm shower}\)</span> and <span class="math">\(-\theta\)</span>; its unshifted azimuth has this convention. The stored Euler column contains an extra <span class="math">\(+\pi\)</span>, which we undo. This agrees with <code>plots_seccion_6.py</code> without using the observed sign to calibrate it. The raw ADST/parquet comparison checks the angles numerically.</p>
+<p>For a general azimuthal distribution, the Fourier coefficient is</p>
+<div class="eq">\[
+A_1=\frac{2\int_{-\pi}^{\pi}\rho(\phi)\cos\phi\,d\phi}
+{\int_{-\pi}^{\pi}\rho(\phi)\,d\phi}.
+\tag{2}
+\]</div>
+<p>The endpoint contrast <span class="math">\(C=[\rho(0)-\rho(\pi)]/[\rho(0)+\rho(\pi)]\)</span> equals <span class="math">\(A_1\)</span> only for an appropriate first-harmonic shape. The previous analytic scripts primarily report <span class="math">\(C\)</span>; the parquet uses a fit to twelve bin means. Both quantities are calculated here. Their small numerical difference cannot explain the SD discrepancy.</p>
+<p>The reported GAP-note comparison at nominal <span class="math">\(r\simeq1200\,\mathrm m,\theta\simeq35^\circ\)</span> is UMD <span class="math">\(+0.11\)</span>, SD truth-muon count <span class="math">\(−0.10\)</span>. Those are reported benchmark values, not a new fit of identical bins. Our principal reproducible far-radius sample is <span class="math">\(1050\le r&lt;1400\,\mathrm m\)</span>, <span class="math">\(30\le\theta&lt;40^\circ\)</span>, <span class="math">\(17.5\le\log_{10}(E_0/\mathrm{eV})&lt;18.0\)</span>, matching the previous verification script. Additional narrower bins are in <code>mc_fits.csv</code>.</p>
+<p>Energy symbols are kept distinct: <span class="math">\(E_i\)</span> is total energy at production, <span class="math">\(E_f\)</span> total energy at ground, and <span class="math">\(T=E-m_\mu c^2\)</span> kinetic energy. The total-energy floor <span class="math">\(0.155\,\mathrm{GeV}\)</span> used in the previous illustrative integral is not a measured WCD detection threshold, nor an independent audit of this production's CORSIKA energy-cut card. For example, with the illustrative optical index <span class="math">\(n=1.33\)</span>, the Cherenkov condition gives <span class="math">\(p_{\rm Ch}=0.1205\,\mathrm{GeV}/c\)</span>, <span class="math">\(E_{\rm Ch}=0.1603\,\mathrm{GeV}\)</span>. Neither is an additional cut in the audited SD truth counter. See PDG §34.7.1, Eq. (34.41), and <code>derivation_checks.py</code>. <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-passage-particles-matter.pdf">PDG, Passage of Particles Through Matter</a></p>
+<p>The detector material scales are not interchangeable: the nominal SD water height used here is <span class="math">\(1.2\,\mathrm m\)</span>, approximately <span class="math">\(120\,\mathrm{g\,cm^{-2}}\)</span> vertically, while the illustrative UMD soil column is <span class="math">\(540\,\mathrm{g\,cm^{-2}}\)</span>. Water light production affects SD signals and selection, not its pre-water truth increment; soil transport directly affects the UMD crossing count. A threshold inferred from a WCD signal analysis therefore cannot be assigned to the UMD or silently added to <code>GetNumberOfMuons()</code>.</p>
+<h2 id="2-what-the-code-actually-counts">2. What the code actually counts</h2>
+<h3 id="2-1-sd-the-increment-occurs-before-the-water-simulation">2.1 SD: the increment occurs before the water simulation</h3>
+<p>The locally available source tree <code>/opt/build/AugerOffline-icrc2025-test7</code> establishes this chain:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Source and operation</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ground-particle regeneration</td>
+<td><code>CachedShowerRegeneratorOG/CachedShowerRegenerator.cc</code>, around lines 570–638: projected injection area divided by projected resampling area; Poisson cloning or weight-dependent direct injection; <code>station.AddParticle(newParticle)</code></td>
+<td>The count is after shower-particle regeneration, not a direct sum of original CORSIKA weights.</td>
+</tr>
+<tr>
+<td>Geometry gate</td>
+<td><code>Framework/SEvent/Station.cc:316–338</code>: <code>dStation.IsHit(position,direction)</code> then <code>CountParticle</code></td>
+<td>The intended straight trajectory must intersect the WCD water volume.</td>
+</tr>
+<tr>
+<td>Species count</td>
+<td><code>Framework/SEvent/StationSimData.cc:43–57</code>: increment for muon or antimuon</td>
+<td>No energy, optical, signal, timing, or source-ancestry test occurs here.</td>
+</tr>
+<tr>
+<td>ADST serialization</td>
+<td><code>Modules/General/RecDataWriterNG/SD2ADST.cc:478–496</code></td>
+<td><code>GenStation</code> receives that integer count.</td>
+</tr>
+<tr>
+<td>Parquet selection</td>
+<td><code>Scripts/Procesamiento_ADST_v8-2.py:176–211</code></td>
+<td>A reconstructed SD partner is required before its simulated count is extracted.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The exact source hashes are in <code>offline_source_manifest.json</code>. The ADST header reports a generic development version rather than a uniquely identifying build hash; the production-directory tag and source-tree tag agree, but this is not a binary provenance proof. The exact raw/parquet count agreement supplies an independent observable-level check.</p>
+<p>The phrase <em>tank-boundary count</em> needs refinement. <code>Station::IsHit</code> tests an extrapolated line against the water cylinder before Geant4 propagates the candidate. It does not wait for a physical Geant4 crossing and could count an incident candidate whose subsequent interaction prevents that crossing. It also includes injected background muons if an upstream background injector is enabled. These qualifications do not turn it into a light-response counter. Station-level thinning of the particle list occurs separately: <code>AddParticle</code> stores/thins the simulation list, while <code>CountParticle</code> counts the candidate intersection. A stored particle list therefore need not reproduce the integer count without checking its thinning and geometry.</p>
+<h3 id="2-2-umd-a-different-plane-transport-and-first-crossing-definition">2.2 UMD: a different plane, transport, and first-crossing definition</h3>
+<p><code>G4StationSimulator.cc:505–535</code> stores particles entering UMD scintillators. A muon increments <code>GetNumberOfInjectedMuons()</code> unless its source is <code>eCornerClipping</code>; repeat/adjacent-strip crossings are counted separately. <code>MD2ADST.cc</code> serializes this quantity. The parquet sums it over the channels of each retained module. Thus the UMD observable includes propagation through soil and a crossing convention that the SD pre-Geant4 intersection counter does not share.</p>
+<p>This audit also corrects an overly broad suspicion in earlier notes: summing scintillator counts does <strong>not automatically</strong> double-count strip corner clippers, because the implementation explicitly distinguishes them. A proof of uniqueness across every module would require following the tagging logic and matching particle identities, not merely inspecting the accessor.</p>
+<p>The same reconstructed-SD requirement selects the UMD rows. It does not follow that it biases UMD counts by the same amount. The SD count is directly associated with particles that generate the selecting tank signal; the underground count samples another area and a harder, soil-transported population. Their correlations with the selection differ.</p>
+<h3 id="2-3-the-attempted-umd-counterfactual-missing-truth-is-not-zero">2.3 The attempted UMD counterfactual: missing truth is not zero</h3>
+<p>The bounded one-file extraction contains 5,507 populated simulation-module records, <strong>all associated with reconstructed SD stations</strong>. Its truth totals reproduce all 7,632 corresponding parquet module rows after using the reader’s zero convention for the 2,125 absent retained-module summaries; every such retained parquet count is zero. In contrast, 2,752 SD simulation-station occurrences without reconstructed partners have no populated UMD module records. That is not evidence that their true underground injection is zero.</p>
+<p>The source explains a concrete information-loss path. <code>MdOptoElectronicSimulator.cc:572–584</code> skips the module/channel path if the associated WCD has no accepted trigger and <code>forcedSDTrigger</code> is false. The inspected production header has <code>forcedSDTrigger = 0</code>. <code>G4StationSimulator::AddInjectedParticle</code> makes simulation scintillators, not electronic channels. Crucially, <code>MD2ADST::MakeSimCounter</code>, lines 610–618, serializes scintillator truth by iterating <strong>event channels</strong>, not all simulation scintillators. An existing simulated counter with no channels can therefore become an ADST object with an empty scintillator vector even after particles entered its soil/scintillator simulation.</p>
+<p><strong>Established:</strong> this pilot cannot support a pre-selection UMD harmonic by reading these summaries and zero-filling missing objects. <strong>Source-based inference:</strong> the trigger/channel serialization path can discard the required truth. It is not a proof that every missing counter contained an injected muon. A pre-electronics count summary, or serialization independent of channel creation, is the minimal remedy. The pilot and exact retained-count validation are reproducible with <code>umd_selection_read.py</code> and <code>umd_selection_check.py</code>.</p>
+<h2 id="3-real-mc-tests-selection-is-not-exposure">3. Real-MC tests: selection is not exposure</h2>
+<h3 id="3-1-reproduction-and-robustness-of-the-existing-parquet">3.1 Reproduction and robustness of the existing parquet</h3>
+<p>The scripts read only the supplied proton parquet directory and use true-core geometry. The twenty files contain a modest columnar dataset. The selected zenith/infill sample contains 156,633 module rows. The broad far-radius bin contains 33,312 module rows, representing 11,104 SD station occurrences. The SD count is repeated on the module rows; deduplicating by file, event and SD ID leaves its fitted central value unchanged.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Check, far-radius sample</th>
+<th style="text-align:right">UMD <span class="math">\(A_1\)</span></th>
+<th style="text-align:right">SD truth muons <span class="math">\(A_1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Twelve bin means, unweighted harmonic fit</td>
+<td style="text-align:right">+0.0670</td>
+<td style="text-align:right">−0.0945</td>
+</tr>
+<tr>
+<td>Common joint radius/energy/zenith distribution</td>
+<td style="text-align:right">+0.1220</td>
+<td style="text-align:right">−0.0858</td>
+</tr>
+<tr>
+<td>Conservative parent-shower bootstrap, standard deviation of unweighted result</td>
+<td style="text-align:right">0.0176</td>
+<td style="text-align:right">0.0115</td>
+</tr>
+</tbody>
+</table></div>
+<p>The standardization uses twenty-eight joint cells: two energy intervals, seven radius intervals, and two zenith intervals, all with support in every azimuth bin. It is not a correction for stations absent from the parquet. It shows why the UMD benchmark should not be compared to an uncontrolled broad-bin mixture. It does not erase the SD inversion. The standardized coefficients have no bootstrap uncertainty assigned in this report; do not borrow the uncertainty from the unstandardized fit.</p>
+<p>The conservative bootstrap groups repeated library-shower identifiers across files, rather than treating all module rows or reconstructed reuses as independent. There are 959 such groups in the far sample. Their identifiers are not a complete CORSIKA provenance certificate, so this is a conservative operational grouping. The SD confidence interval remains entirely negative. <code>parent_cluster_bootstrap.json</code> contains the quantiles. The SD sign is negative in each of four primary-azimuth quadrants, with central coefficients between −0.113 and −0.071; this does not exclude every geomagnetic contribution, but disfavors an explanation requiring only one arrival-direction sector.</p>
+<h3 id="3-2-the-counterfactual-available-in-the-original-adst">3.2 The counterfactual available in the original ADST</h3>
+<p>The ADST contains <code>GenStation</code> entries even when no <code>SdRecStation</code> is present. We read those entries directly, derive radius/azimuth from detector geometry and the true core, and then apply precisely the station-presence condition used by the parquet reader. Physical SD IDs are used: for example SD 4002 corresponds to UMD counter 104002. The initial diagnostic mistakenly applied the UMD ID threshold to SD IDs; that unsuccessful pass yielded no selected stations and is not used as physics evidence. The corrected reader and its column-pruned implementation agree exactly on the pilot file.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Shower-plane radius [m]</th>
+<th style="text-align:right">All simulated SD stations: A₁</th>
+<th style="text-align:right">Retained/parquet: A₁</th>
+<th style="text-align:right">Difference</th>
+<th style="text-align:right">All / retained stations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>300–600</td>
+<td style="text-align:right">+0.0691</td>
+<td style="text-align:right">+0.0691</td>
+<td style="text-align:right">+0.0000</td>
+<td style="text-align:right">10,357 / 10,357</td>
+</tr>
+<tr>
+<td>650–950</td>
+<td style="text-align:right">+0.0618</td>
+<td style="text-align:right">+0.0397</td>
+<td style="text-align:right">−0.0220</td>
+<td style="text-align:right">17,730 / 17,250</td>
+</tr>
+<tr>
+<td>1050–1400</td>
+<td style="text-align:right">+0.0676</td>
+<td style="text-align:right">−0.0945</td>
+<td style="text-align:right">−0.1622</td>
+<td style="text-align:right">28,030 / 11,104</td>
+</tr>
+<tr>
+<td>1400–1800</td>
+<td style="text-align:right">+0.0580</td>
+<td style="text-align:right">−0.1052</td>
+<td style="text-align:right">−0.1632</td>
+<td style="text-align:right">38,432 / 1,837</td>
+</tr>
+</tbody>
+</table></div>
+<p>The raw extraction contains 106,280 station occurrences in the audited radius range; 51,031 match retained parquet stations, with zero muon-count or EM-count mismatches and numerical agreement of radius/azimuth. In the far bin, the pre-selection 95% interval is [+0.0494, +0.0843], and the retained interval is [−0.1161, −0.0750]. The paired difference has bootstrap standard deviation 0.0087, using 960 parent-shower groups and 800 resamples. The confidence intervals are statistical, conditional on this production and grouping; they do not include hadronic-model or source-provenance uncertainty. The independently bootstrapped parquet interval in §3.1 differs slightly because its observed parent set and random resamples differ.</p>
+<p><strong>Covariate control:</strong> standardizing both raw samples to the same empirical distribution over 28 radius/energy/zenith cells gives +0.0695 before selection and −0.1095 afterward. The difference, −0.1790, is not erased by phase-space mixing. The secondary uncertainty diagnostic uses positive exponential parent-cluster weights to avoid conditioning a multinomial bootstrap on sparsely populated cells remaining nonempty. The primary quoted confidence interval remains the unstandardized paired result. <code>selection_narrow_bins.csv</code> also tests separate radial/zenith halves and a bin 1150–1250 m, 34–36°; the central SD sign changes from positive to negative in each. No separate significance claim is assigned to every narrower-bin fit.</p>
+<p><img src="../04_soporte/figuras/selection_audit.svg" alt="The measured SD selection effect, with positive A1 denoting an early excess." /></p>
+<p>The plotted uncertainties on the radial coefficients are parent-cluster bootstrap standard deviations. The azimuth-bin profiles are descriptive bin means; no independent-bin error bars are implied. Every curve is generated from the stored audit tables by <code>build_report.py</code>.</p>
+<p>These are interventions on the <em>analysis selection of an already-simulated sample</em>: no shower or detector parameter was changed. This establishes the effect of applying that selection to this production. It does not identify a particular electronic trigger algorithm as the sole cause; <code>HasStation</code> represents the net upstream path to an ADST reconstructed-station object. Separate trigger/rejection flags are needed to split that path into individual causes.</p>
+<p>The all-simulated-station result is still conditional on the shower events written to this ADST production and its regeneration/array configuration. It is not a measurement on all thrown CORSIKA showers and is not a direct ground-particle tally independent of detector regeneration. Those qualifications limit the word <em>unconditional</em> to <strong>station reconstruction within the available ADST events</strong>.</p>
+<h3 id="3-3-exact-selection-identity-and-paired-uncertainty">3.3 Exact selection identity and paired uncertainty</h3>
+<p>Let <span class="math">\(R\)</span> denote row retention, <span class="math">\(N\)</span> the SD truth count, and <span class="math">\(b\)</span> an azimuth bin within the stated phase-space bin. Define</p>
+<div class="eq">\[
+\epsilon_b=P(R=1\mid b),\qquad
+\epsilon_{N,b}=\frac{E[N\,1_R\mid b]}{E[N\mid b]}.
+\]</div>
+<p>Then, without a Poisson assumption,</p>
+<div class="eq">\[
+E[N\mid R=1,b]
+=E[N\mid b]\frac{\epsilon_{N,b}}{\epsilon_b}.
+\tag{3}
+\]</div>
+<p>The numerator is muon-weighted retention, the denominator station retention. <code>selection_closure_bins.csv</code> verifies Eq. (3) in each bin. It is an accounting identity, not an independent predictive fit. The nontrivial evidence is the measured change when previously absent stations are restored. The paired bootstrap uses the same resampled parent showers on both sides, and therefore estimates the uncertainty of that change directly.</p>
+<p>For small harmonic distortions,</p>
+<div class="eq">\[
+A_{1,\rm selected}\simeq A_{1,\rm all}
++A_{1,\epsilon_N}-A_{1,\epsilon}.
+\tag{4}
+\]</div>
+<p>Equation (4) is only a linear interpretation; the numerical closure uses full binwise ratios. Reweighting retained rows to equal azimuthal sample size leaves their conditional means unchanged and cannot undo Eq. (3). Consequently the previous bootstrap result is preserved in its proper, narrower scope.</p>
+<h3 id="3-4-a-physically-motivated-selection-model">3.4 A physically motivated selection model</h3>
+<p>Here is a concrete mechanism capable of the requested sign and scale, without introducing an atmospheric loss of negative sign. It is <strong>a model inference</strong>, motivated by the SD selecting signal and by the explicit trigger-efficiency treatment in the IceTop muon-density likelihood, not a fitted description of Auger electronics. IceCube Collaboration, <em>Phys. Rev. D</em> 106, 032010 (2022), §IV.B, Eqs. (4)–(6), models muon track lengths and low-signal acceptance. The load-bearing excerpt is: “the reduced efficiency for detecting low signals, caused by the discriminator trigger in each detector.” This factor is explicit in Eq. (6). IceTop tank/snow thresholds are not transferred to UMD or to the SD truth accessor. <a href="https://arxiv.org/pdf/2201.12635">IceTop analysis</a></p>
+<p>Assume <span class="math">\(N\sim\operatorname{Poisson}(\mu(\phi))\)</span>, and an independent EM-related station acceptance probability <span class="math">\(e(\phi)\)</span>. In the simplest limiting model a station is retained if at least one muon is present or the EM condition succeeds. Then</p>
+<div class="eq">\[
+\epsilon(\phi)=1-[1-e(\phi)]e^{-\mu(\phi)},\qquad
+E[N\mid R=1,\phi]=\frac{\mu(\phi)}{\epsilon(\phi)}.
+\tag{5}
+\]</div>
+<p>An early EM excess can make station retention more asymmetric than the underlying muon intensity. Late stations that survive selection become more muon-rich. In this model the negative sign is a <em>conditional-composition effect</em>, not extra late muons produced by the tank.</p>
+<p>More explicitly, let <span class="math">\(\mu=\mu_0[1+a\cos\phi]\)</span> and <span class="math">\(e=e_0[1+b\cos\phi]\)</span>. For small (a,b), with <span class="math">\(\epsilon_0=1-(1-e_0)e^{-\mu_0}\)</span>,</p>
+<div class="eq">\[
+A_{1,\mathrm{selected}}\simeq a-
+\frac{e^{-\mu_0}[(1-e_0)\mu_0a+e_0b]}{\epsilon_0}.
+\tag{5a}
+\]</div>
+<p>For <span class="math">\(e_0&gt;0\)</span>, the linearized inversion condition is</p>
+<div class="eq">\[
+b&gt;\frac{a}{e_0}\{e^{\mu_0}-(1-e_0)(1+\mu_0)\}.
+\tag{5b}
+\]</div>
+<p>The admissible parameter domain is <span class="math">\(\mu_0&gt;0\)</span>, <span class="math">\(0&lt;e_0&lt;1\)</span>, <span class="math">\(|a|\le1\)</span>, <span class="math">\(|b|\le1\)</span>, and <span class="math">\(e_0[1+|b|]\le1\)</span>. Equations (5a)–(5b) apply only to the small-harmonic limit; for large <span class="math">\(b\)</span>, use the exact positive probabilities in Eq. (5), as in the example below. This is an explicit range/criterion, not a free negative attenuation coefficient.</p>
+<p>For the explicitly illustrative parameters</p>
+<div class="eq">\[
+\mu=0.6(1+0.19\cos\phi),\qquad
+e=0.35(1+0.8\cos\phi),
+\]</div>
+<p>the exact Fourier coefficient changes from <span class="math">\(+0.1900\)</span> to <span class="math">\(−0.1287\)</span>. An underground count independent of the selecting tank counts at fixed shower state retains its assigned <span class="math">\(+0.13\)</span>. This provides an existence example of an SD-specific shift larger than −0.29. The independence is an assumption, not an established property of the actual UMD. These parameters were not obtained from the parquet, and their mean selected count does not match the data: do not present this as a quantitative Auger fit. The actual validation is the nonparametric ADST selection test above.</p>
+<p>If a muon independently triggers with probability <span class="math">\(0&lt;q&lt;1\)</span>, thinning the Poisson distribution gives</p>
+<div class="eq">\[
+\epsilon=1-(1-e)e^{-q\mu},\qquad
+E[N\mid R]=\mu\left[1+\frac{(1-e)q e^{-q\mu}}{\epsilon}\right].
+\tag{6}
+\]</div>
+<p>This makes the mechanism continuous, not a peculiarity of a discontinuous one-muon cut. It is strongest at low occupancies and partial acceptance, and disappears when station retention is independent of local particle content or approaches unity. Applying a high <em>observed station signal</em> cut is not by itself a clean test: it imposes another condition on the same outcome. Prefer an independent efficient event selection followed by inclusion of all simulated station counts.</p>
+<h2 id="4-one-consistent-physical-framework">4. One consistent physical framework</h2>
+<h3 id="4-1-production-transport-detector-response-and-selection">4.1 Production, transport, detector response, and selection</h3>
+<p>Let <span class="math">\(F_q(X,E_i,\mathbf p_t,\mathbf x_\perp,t_i\mid H)\)</span> describe muon production for shower state <span class="math">\(H\)</span>, including charge, off-axis production and correlations. Let <span class="math">\(K_q\)</span> be the transport kernel to ground, including energy loss, decay, scattering and magnetic bending. It produces the incident phase-space intensity <span class="math">\(J_q(E_f,\Omega,\mathbf x,t\mid H)\)</span>. For an unselected detector observable,</p>
+<div class="eq">\[
+M_d(\mathbf x\mid H)=\sum_q\int J_q(E_f,\Omega,\mathbf x,t\mid H)
+\,\mathcal R_d(E_f,\Omega,t,\ldots)\,dE_f\,d\Omega\,dt.
+\tag{7}
+\]</div>
+<p>Here the SD count response includes the geometric intersection and regeneration definition; the UMD response includes transport through soil and its first-crossing definition; a VEM signal requires a light/track-length response. For a selected stochastic shower-detector realization, the observable is instead</p>
+<div class="eq">\[
+\overline M_{d,R}(b)=\frac{E[M_d\,1_R\mid b]}{P(R=1\mid b)}.
+\tag{8}
+\]</div>
+<p>One cannot replace the numerator by <span class="math">\(E[M_d]P(R)\)</span> unless their conditional independence is demonstrated. An independent atmospheric <em>source</em> such as a distinct photonuclear muon population belongs in <span class="math">\(F\)</span>; extra spreading belongs in <span class="math">\(K\)</span>; water-secondary response belongs in <span class="math">\(\mathcal R\)</span>, and sample retention belongs in <span class="math">\(R\)</span>. This assignment prevents counting a mechanism twice under different names.</p>
+<h3 id="4-2-exact-point-source-geometry-and-its-domain">4.2 Exact point-source geometry and its domain</h3>
+<p>For a source at axial distance <span class="math">\(D\)</span>, write</p>
+<div class="eq">\[
+\delta=r\tan\theta\cos\phi,\quad
+L=\sqrt{(D-\delta)^2+r^2},\quad
+\sin\alpha=\frac rL,\quad
+\cos\vartheta=\frac{D\cos\theta}{L}.
+\tag{9}
+\]</div>
+<p><span class="math">\(\vartheta\)</span> is the local incidence zenith, not the primary zenith. At the benchmark, <span class="math">\(L_{\rm early}=6767.0\,\mathrm m&lt;L_{\rm late}=8426.1\,\mathrm m\)</span>; the early flux is more vertical. For an angular density <span class="math">\(f=dN/d\Omega\)</span>, the intensity per area normal to the ray is <span class="math">\(f/L^2\)</span>. Multiplying by the detector's projected area gives counts:</p>
+<div class="eq">\[
+M_{\rm plate}\propto \frac f{L^2}A_p\cos\vartheta,
+\qquad
+M_{\rm tank}\propto \frac f{L^2}
+[\pi R^2\cos\vartheta+2RH\sin\vartheta].
+\tag{10}
+\]</div>
+<p>For uniform through-going tracks with signal proportional to path length, the chord identity <span class="math">\(A_{\rm proj}\langle\ell\rangle=V\)</span> instead gives <span class="math">\(S_\mu\propto fV/L^2\)</span>. Stopping tracks, energy-dependent light yield, signal windows and reconstruction invalidate using that identity as an exact detector-response model for every event.</p>
+<h3 id="4-3-what-is-and-is-not-the-1-geometric-term">4.3 What is, and is not, the “+1” geometric term</h3>
+<p>For a stationary cylindrically symmetric local phase-space distribution, flux through a tilted plane gives</p>
+<div class="eq">\[
+A_{\rm geo}=\left\langle\frac{p_r}{-p_z}\right\rangle_{\rm crossing}\tan\theta.
+\tag{11}
+\]</div>
+<p>The subscript specifies crossing-flux weighting through the shower-normal plane, with <span class="math">\(p_z\)</span> measured along the upward shower axis; an unqualified average of a ratio need not equal a ratio of unweighted means. <span class="math">\(p_r\)</span> is the signed radial component, not the positive magnitude <span class="math">\(p_t\)</span>. Descending muons can have <span class="math">\(p_r&lt;0\)</span>. In a small-angle ballistic point-source limit Eq. (11) is the plate-aperture <span class="math">\(+1\)</span> contribution, approximately <span class="math">\((r/D)\tan\theta\)</span>. Do not add it again after using the plate area in Eq. (10).</p>
+<p><strong>An important correction to the premise:</strong> Armbruster's original Eq. (2.33), inherited by Luce, is derived for approximately muon-dominated <strong>VEM signal</strong> after cancellation of area and mean chord length in Eqs. (2.14)–(2.21). Its <span class="math">\(+2\)</span> comes from the expansion of <span class="math">\(L^{-2}\)</span>, explicitly Eq. (2.29). It does not contain a separate plate-aperture <span class="math">\(+1\)</span>. Adding Eq. (11) to an already plate-weighted count double-counts projection; treating Armbruster's signal bracket as though it already contained the plate aperture is a different mistake. The reference is Lukas Armbruster, <em>Asymmetries of the Lateral Distribution of Particles at the Ground</em>, Bachelor thesis, circulated as GAP-2020-066, §§2.4–2.6; not a peer-reviewed muon-count derivation.</p>
+<p>With <span class="math">\(\epsilon=(r/D)\tan\theta\)</span>, small angles, <span class="math">\(f\propto\alpha^{-\gamma_{\rm ADF}}\)</span>, and passive attenuation <span class="math">\(P=e^{-L/\lambda}\)</span>, Eq. (10) gives</p>
+<div class="eq">\[
+A_{1,d}\simeq[2-\gamma_{\rm ADF}+D/\lambda+\kappa_d]\epsilon,
+\tag{12}
+\]</div>
+<p>where <span class="math">\(\kappa=0\)</span> for the ideal through-going VEM signal, (1) for a horizontal plate, and for tank counts</p>
+<div class="eq">\[
+\kappa_{\rm tank}=\frac{a\cos\vartheta-b\cos^2\vartheta/\sin\vartheta}
+{a\cos\vartheta+b\sin\vartheta},\quad a=\pi R^2,\ b=2RH.
+\tag{13}
+\]</div>
+<p>At finite (r/D), put <span class="math">\(L_0=\sqrt{D^2+r^2}\)</span>, <span class="math">\(\eta=Dr\tan\theta/L_0^2\)</span>, and define <span class="math">\(s=-\partial\ln f/\partial\ln\sin\alpha\)</span>. The derivative at the transverse azimuth is <span class="math">\(\partial\ln M_d/\partial\cos\phi=\eta(2-s+\kappa_d)+\partial\ln P/\partial\cos\phi\)</span>, with detector-energy-boundary terms if the response threshold varies. The benchmark gives <span class="math">\(\eta=0.10924\)</span>, <span class="math">\(\kappa_{\rm tank}=0.3180\)</span>. In the no-loss local-slope model, SD <span class="math">\(−0.10\)</span> requires <span class="math">\(s\simeq3.2335\)</span>; passive attenuation would require an even steeper ADF. This is a diagnostic requirement, not a measured production slope.</p>
+<h3 id="4-4-attenuation-and-divergence-cannot-be-added-indiscriminately">4.4 Attenuation and divergence cannot be added indiscriminately</h3>
+<p>Muon decay survival is</p>
+<div class="eq">\[
+P_{\rm surv}=\exp\left[-\frac{m_\mu c^2}{c\tau_\mu}
+\int_0^L\frac{ds}{p(s)c}\right],\qquad
+\frac{dE}{dX}=-(a+bE).
+\tag{14}
+\]</div>
+<p>At fixed production phase-space point, shortening the path increases survival: its isolated contribution is early-favoring. But conditioning on arrival radius, ground energy and detector passage changes the contributing production population. The derivative of that population is not captured by a universal fitted attenuation length.</p>
+<p>The same point can be expressed through a continuity equation for density <span class="math">\(n\)</span> in a plane advancing along the shower:</p>
+<div class="eq">\[
+\partial_s n+\nabla_\perp\cdot\mathbf j_\perp=Q_\mu-\mathcal L_\mu.
+\tag{15}
+\]</div>
+<p>The fixed-radius longitudinal derivative includes outward transport. If one uses an empirical <span class="math">\(\partial_s n\)</span> obtained from densities at successive depths, it already includes lateral divergence. Adding another ballistic divergence term counts that contribution twice unless a source/loss/transport decomposition has been measured. Energy-thresholded versions of Eq. (15) also contain an energy-space boundary flux. This is why neither Bertou–Billoir Fig. 1 nor an unrelated muon attenuation length can be transferred to the UMD population or appended to the previous integral as a new negative loss term.</p>
+<h2 id="5-cazon-based-adf-stronger-derivation-limited-numerical-claim">5. Cazon-based ADF: stronger derivation, limited numerical claim</h2>
+<h3 id="5-1-normalized-angular-law">5.1 Normalized angular law</h3>
+<p>For the separable illustrative distribution</p>
+<div class="eq">\[
+\frac{dN}{dp_t}\propto p_t e^{-p_t/Q},\qquad 0\le p_t\le p,
+\]</div>
+<p>the change <span class="math">\(p_t=p\sin\alpha\)</span>, <span class="math">\(d\Omega=2\pi\sin\alpha\,d\alpha\)</span> gives</p>
+<div class="eq">\[
+f(\alpha\mid p)=\frac{k^2}{2\pi Z(k)}\cos\alpha\,e^{-k\sin\alpha},
+\quad k=p/Q,\quad Z(k)=1-e^{-k}(1+k).
+\tag{16}
+\]</div>
+<p>The angular integral is unity; <code>unit_checks.json</code> checks it independently. The local logarithmic slope is <span class="math">\(s=\tan^2\alpha+k\sin\alpha\)</span>. For a mixture, the derivative is the <strong>arrival-contribution-weighted mean</strong> of those slopes, including the appropriate survival and response weights. Averaging fixed-energy early/late ratios with a bare energy spectrum is not equivalent.</p>
+<p>The proper straight-line integral is schematically</p>
+<div class="eq">\[
+M_d(r,\phi)=\int dX\,dE_i\;
+\frac{h(X)g_X(E_i)f_X(\alpha\mid E_i)}{L(X,\phi)^2}
+P(E_i,X,\phi)\,\mathcal A_d(E_f,\vartheta,\ldots).
+\tag{17}
+\]</div>
+<p>The nonseparable form is Cazon et al., <em>Astroparticle Physics</em> 36 (2012) 211–223, Eqs. (2), (5), (25)–(26), with their correlated <span class="math">\(f_X(E_i,cp_t)\)</span>. Equation (16) is a useful separable approximation, not the full 2012 model. Their §2 explicitly says: “At low energies the single power law clearly does not work.” Their §3 includes energy loss, decay, magnetic deflection and multiple scattering. The full model cannot be represented accurately by citing only its earlier separable <span class="math">\(p_t\)</span> ansatz. <a href="https://doi.org/10.1016/j.astropartphys.2012.05.017">Cazon et al., DOI</a></p>
+<h3 id="5-2-reproduction-of-the-decisive-prior-benchmark">5.2 Reproduction of the decisive prior benchmark</h3>
+<p>Using exactly the prior assumptions <span class="math">\(D=7500\,\mathrm m\)</span>, <span class="math">\(Q=0.2\,\mathrm{GeV}/c\)</span>, <span class="math">\(g(E_i)\propto E_i^{-2.6}\)</span>, <span class="math">\(p c\simeq E_i\)</span>, upper limit <span class="math">\(2000\,\mathrm{GeV}\)</span>, no atmospheric transport, and the two old lower energy limits:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Observable</th>
+<th style="text-align:right">Endpoint contrast</th>
+<th style="text-align:right">Full-azimuth Fourier <span class="math">\(A_1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SD count, lower limit 0.155 GeV</td>
+<td style="text-align:right">+0.19075</td>
+<td style="text-align:right">+0.19308</td>
+</tr>
+<tr>
+<td>UMD plate count, lower limit <span class="math">\(\sec35^\circ\\)</span> GeV</td>
+<td style="text-align:right">+0.13283</td>
+<td style="text-align:right">+0.13345</td>
+</tr>
+</tbody>
+</table></div>
+<p>This reproduces the important earlier result. The multiplicative endpoint factor needed to change the SD contrast to −0.10 is −0.28531, not exactly the additive difference −0.29075. The old untransported SD integral has median contributing production energy <span class="math">\(0.3283\,\mathrm{GeV}\)</span>, and a fraction (0.8287) below <span class="math">\(1\,\mathrm{GeV}\)</span> at the transverse azimuth. These are properties of that integral, <strong>not measured ground-muon energies</strong>. Its low-energy population cannot simply travel the assumed axial distance unchanged.</p>
+<h3 id="5-3-explicit-transport-sensitivity-not-another-unsupported-fast-mc">5.3 Explicit transport sensitivity—not another unsupported Fast MC</h3>
+<p><code>transport_checks.py</code> performs deterministic quadrature, not shower generation. It uses a fixed axial source, the normalized <span class="math">\(p_t\)</span> law with exact <span class="math">\(p=\sqrt{E_i^2-m_\mu^2}\)</span>, an exponential atmosphere with ground vertical depth <span class="math">\(860\,\mathrm{g\,cm^{-2}}\)</span> and scale height <span class="math">\(7400\,\mathrm m\)</span>, constant <span class="math">\(a=0.002\,\mathrm{GeV}\,(\mathrm{g\,cm^{-2}})^{-1}\)</span>, and numerical decay integration along the path. It integrates over <strong>ground</strong> energy with <span class="math">\(E_i=E_f+a\Delta X\)</span>. The UMD illustration uses <span class="math">\(T_{f,\min}=a\,540/\cos\vartheta\\)</span>, and contrasts this with a threshold fixed at the primary zenith. These are stated model inputs, not fitted atmospheric or soil calibrations.</p>
+<p>The production spectrum is varied as <span class="math">\(g(E_i)\propto(E_i+E_b)^{-2.6}\)</span>, with <span class="math">\(E_b=0,0.5,2\,\mathrm{GeV}\)</span>; the turnover merely probes the failure of the unbroken power law. We scan <span class="math">\(D=4,7.5,12\,\mathrm{km}\)</span>, <span class="math">\(Q=0.12,0.2,0.3\,\mathrm{GeV}/c\)</span>, and both threshold conventions. No point in this scan gives negative SD <span class="math">\(A_1\)</span>: the range is +0.0333 to +0.3507. This is <strong>not</strong> an exhaustive exclusion of correlated production distributions.</p>
+<p>At <span class="math">\(D=7.5\,\mathrm{km},Q=0.2\,\mathrm{GeV}/c,E_b=0\)</span>, the SD coefficient is +0.1976; the UMD coefficient changes from +0.1550 with fixed zenith threshold to +0.2710 with local-incidence threshold. With <span class="math">\(E_b=2\,\mathrm{GeV}\)</span> these become +0.0865, +0.0954 and +0.1778 respectively. The angle-dependent threshold is early-favoring because the early overburden is shorter. This example demonstrates sensitivity, not a replacement quantitative explanation of the UMD. The quadrature convergence table varies the energy grid; it is not an uncertainty estimate for the assumed production model.</p>
+<p><strong>Q3 answer:</strong> deriving the ADF from <span class="math">\(p_t\)</span> rather than imposing a power law improves the physical justification and tells us exactly which slope and weights matter. When applied under the same assumptions, it changes only justification—the prior corrected numbers survive. A genuinely more complete Cazon calculation changes the inputs and correlations, and can change predictions; the required joint production distribution is not in the parquet. We have not manufactured it.</p>
+<h2 id="6-wider-literature-mechanisms-assessed-outside-the-original-citation-loop">6. Wider literature: mechanisms assessed outside the original citation loop</h2>
+<h3 id="6-1-directional-projection-and-threshold-dependent-transport">6.1 Directional projection and threshold-dependent transport</h3>
+<p>Arsene, Roth and Sima (2020), <em>Astroparticle Physics</em> 121, 102452, §II, Eq. (1), use individual muon directions to project from ground to the normal plane and apply threshold-dependent survival weights. Their abstract states: “A simple orthogonal projection of the muon coordinates onto this plane distorts the azimuthal symmetry in the shower plane.” Their attenuation parameter is fitted to restore symmetry, and has units of inverse length, unlike Armbruster's attenuation <strong>length</strong>. This supports a ground-momentum remapping test, not an independently predicted extra term. Their momentum thresholds and higher primary energies must not be silently identified with either present detector. The paper's quoted WCD threshold is not an accessor-level truth-count cut. <a href="https://arxiv.org/pdf/2004.04461">Peer-reviewed paper, author manuscript</a></p>
+<p>Sima et al. (2009), FZKA-7464, §§3–4, already warn that an effective attenuation coefficient can absorb projection distortion. A short load-bearing sentence is: “The situation is reversed at larger radii.” Its context is the radial reversal of projection bias, not negative muon absorption. Their azimuth convention has early at <span class="math">\(\Psi=\pi\)</span>, so coefficients must be reversed to use Eq. (1). Sima et al. (2011), <em>NIM A</em> 638, 147–156, subsequently treat incidence-dependent conversion of scintillator energy deposits to particle density. These are real external checks on observable definition and double counting, not numerical UMD corrections. <a href="https://publikationen.bibliothek.kit.edu/270075846/3815472">Research report</a>, <a href="https://iris.unito.it/handle/2318/97896?mode=complete">peer-reviewed publication record and abstract</a></p>
+<h3 id="6-2-geomagnetic-transport">6.2 Geomagnetic transport</h3>
+<p>Rebel et al. (2008), <em>J. Phys. G</em> 35, 085203, §§3–4, compare charge-separated muon densities and simulations with the field switched off. They state: “At larger distances also attenuation effects get evident.” The figures also demonstrate strong arrival-direction dependence of charge asymmetries. This is a legitimate SD-soft/UMD-hard discriminator. However, for equal positive/negative populations, the leading opposite displacements cancel in the charge sum; a charge excess produces a first-order dipole tied to the projected field, not automatically to early–late. Tilted-plane coupling and unequal charge spectra can leave residuals. The quadrant test above disfavors a purely one-sector explanation but is not a field-off exclusion. Field-off showers or charge/energy-resolved ground momenta would be decisive; no new field-off simulation was run. Karlsruhe thresholds and magnetic geometry are not transferred to Auger. <a href="https://arxiv.org/pdf/0806.4739">Peer-reviewed paper, author manuscript</a></p>
+<h3 id="6-3-multiple-scattering-distinguish-angular-smearing-from-a-spatial-flux-calculation">6.3 Multiple scattering: distinguish angular smearing from a spatial flux calculation</h3>
+<p>PDG §34.3, Eqs. (34.15)–(34.18), gives projected angular broadening and distinguishes it from spatial displacement; “Less frequent ‘hard’ scatters produce non-Gaussian tails.” Smearing only an angular exponential at fixed energy is not a complete prediction for ground density. Energy loss, lever arms, survival, and position–direction correlations matter. <a href="https://pdg.lbl.gov/2024/reviews/rpp2024-rev-passage-particles-matter.pdf">PDG review</a></p>
+<p>For an illustrative isotropic two-dimensional Gaussian spatial convolution with per-coordinate variance <span class="math">\(v\)</span> and local density <span class="math">\(n\propto r^{-p}\)</span>, the small-smearing expansion gives <span class="math">\(n_{\rm smeared}/n\simeq1+p^2v/(2r^2)\)</span>. A late increase in variance therefore gives endpoint contrast change <span class="math">\(\Delta C\simeq-p^2(v_L-v_E)/(4r^2)\)</span>. At <span class="math">\(p=3,r=1200\,\mathrm m\)</span>, a change −0.2853 requires <span class="math">\(v_L-v_E\simeq1.826\times10^5\,\mathrm{m^2}\)</span>. That is a demanding diagnostic scale, and the expansion itself becomes marginal there; it is not a rigorous upper bound. Cazon §3.4 found spatial-profile effects negligible in its tested large-radius regime, but that result cannot establish a universal bound on this production's SD–UMD angular acceptance. A dedicated per-ground-muon transport/response comparison remains necessary before assigning a residual to scattering.</p>
+<h3 id="6-4-a-genuinely-different-soft-population-photonuclear-ancestors">6.4 A genuinely different soft population: photonuclear ancestors</h3>
+<p>Müller and Roth, PoS(ICRC2015)419, §3, explicitly tag photonuclear and muon-pair ancestors. They report: “We find that only a fraction of 6 − 11% of the muons arriving at ground originate from preceding photonuclear reactions.” Their distributions show this population becoming relatively more important at low energy. This is a physically motivated population that can be suppressed by soil, and hence is a new candidate for a threshold-dependent difference. It is not water-generated; it enters the atmospheric source distribution. Crucially, the paper does not supply its early–late harmonic at our radius/zenith/primary energy. Its total fraction is not a bound on its local soft fraction. <a href="https://pos.sissa.it/236/419/pdf">Conference proceeding</a></p>
+<p>Martynenko (2026), <em>Phys. Rev. D</em> 113, 083026, §II, Eq. (1), supplies a more recent longitudinal response formulation for photonuclear muon production. Its explicit limitation is: “For simplicity, only the longitudinal dimension (parametrized by slant depth) is considered.” Its adopted muon threshold and lack of a lateral/azimuthal prediction prevent using it to close this discrepancy. This search result expands the bibliography but does not furnish the missing first harmonic. <a href="https://arxiv.org/pdf/2512.12481">Peer-reviewed article manuscript</a></p>
+<p>For two nonnegative populations each described by a pure first harmonic, <span class="math">\(A=(1-f)A_0+fA_s\)</span>. Starting from +0.19075 and requiring −0.10, even the limiting <span class="math">\(A_s=-1\)</span> needs <span class="math">\(f\ge0.2442\)</span>. This bound concerns the <strong>local detector-weighted fraction</strong>, not the total-shower fraction. It also assumes pure-cosine component shapes; arbitrary higher-harmonic distributions have different Fourier bounds. Without an ancestry-resolved local measurement, neither claiming this mechanism explains the inversion nor excluding it from a global fraction is justified.</p>
+<p>This is not automatically an additive missing population. If <span class="math">\(F\)</span> is extracted from a full CORSIKA muon-production record, its photonuclear descendants may already be present. One must split that distribution by ancestry, not add a second copy. The legacy smooth spectrum may misweight this soft population, but its omission has not been demonstrated. The candidate is therefore a tagged-population diagnostic, not a validated correction term.</p>
+<p>There is a further semantic mismatch: Luce §2.2 assigns photoproduced muons to its EM-history component, and electrons/photons from muon decay to its muon-history signal component. <code>GetNumberOfMuons()</code> instead classifies particle species. Luce's negative muon-<em>signal</em> coefficient is therefore neither the same response nor exactly the same population as the present SD truth count. This alone does not explain the data; it invalidates a direct quantitative identification.</p>
+<h3 id="6-5-albedo-water-production-and-local-hadronic-feed">6.5 Albedo, water production and local hadronic feed</h3>
+<p>Bowers et al. (2021), <em>Geophysical Research Letters</em>, study delayed neutron bursts from air-shower interactions in the ground. Such work establishes that near-ground material can affect delayed detector signals. It does not establish extra atmospheric muons in the present truth counter, and a late <strong>arrival time</strong> is not the spatial late region. Post-injection water/soil secondaries cannot increment the upstream SD counter identified in §2. They could modify a reconstructed selection or the underground detector response. <a href="https://doi.org/10.1029/2020GL090033">Peer-reviewed albedo study</a></p>
+<p>Ave et al. (2017), <em>Astroparticle Physics</em> 87, 23–39, §§2–3, explicitly convolve particle energy/direction distributions with different detectors, including underground scintillators, and separate a low-energy-hadron EM component. This paper is already in the repository, but its treatment is broader than the exhausted sign argument. It reinforces the need to distinguish muon species, muon-related EM signal and detector response. Its fitted <span class="math">\(f_{\rm mod}\)</span> is not an independent analytic explanation of a truth-count harmonic. <a href="https://doi.org/10.1016/j.astropartphys.2016.11.008">Ave et al., DOI</a></p>
+<p>Grieder, <em>Extensive Air Showers</em> (Springer, 2010; textbook), §2.11.1, emphasizes detector-medium transition effects: “Thus, the same measurement made with different detectors may yield different results.” His §5.2.3, Eq. (5.4), separates ionization and radiative muon losses; §§6.3.3–6.3.5, Eqs. (6.5)–(6.15), distinguish shower-rate attenuation from particle-number absorption. These distinctions reinforce the response/selection decomposition; none provides a transferable local late-favoring muon-count coefficient. <a href="../../../Bibliografia/Papers%20sin%20citar/Grieder2010.pdf">Repository copy</a></p>
+<h3 id="6-6-regeneration-and-upstream-simulation-selection">6.6 Regeneration and upstream simulation selection</h3>
+<p>Billoir (2008), <em>Astroparticle Physics</em> 30, 270–285, treats ground-detector particle regeneration and possible bias from finite sampling regions. The publisher's summary states: “As the sampling region cannot be arbitrarily small, both these simplifications induce a bias.” This is an additional, numerically distinct stage between CORSIKA ground particles and the audited SD count. The local implementation explicitly cites the paper and GAP-2015-086 for weight-dependent resampling. I found the latter citation in source, not an accessible authenticated copy of that GAP note; I do not claim to have reviewed it. Its presence motivates comparison of original weighted ground particles with regenerated candidates, not an allegation that this implementation is biased. <a href="https://doi.org/10.1016/j.astropartphys.2008.10.002">Peer-reviewed paper</a></p>
+<h2 id="7-answers-to-q1-q4">7. Answers to Q1–Q4</h2>
+<p><strong>Q1 — Can a defensible late-favoring effect of the needed size exist?</strong> Not as an established additional atmospheric term of −0.29. A detector-sample conditioning term can have that scale mathematically; Eqs. (5)–(6) give an explicit existence model. Its actual measured contribution here is about −0.162, sufficient to invert the simulated SD station-count coefficient. The old +0.19 versus −0.10 comparison combined an unselected approximate flux calculation with a selected detector observable. The remaining approximate-model overprediction of the pre-selection coefficient, about +0.13 using its Fourier coefficient, is not solved by the selection identity. These differences are diagnostics across a nominal analytic point and a finite-bin measurement, not a uniquely additive decomposition of atmospheric mechanisms. No external literature examined here supplies a validated, population-matched atmospheric addition that closes the whole analytic gap without fitting unmeasured inputs.</p>
+<p><strong>Q2 — Why is UMD different, and what is the SD counter?</strong> The counter is a pre-water trajectory-intersection count, with regeneration and upstream injection definitions; it is not a hidden VEM or water-threshold count. Its <em>sample</em> is selected through a water-detector reconstruction. Local SD muons participate in the selecting signal, whereas the harder, spatially distinct underground population can have a different conditional correlation with that selection. This supplies a credible detector-specific explanation of why the negative selected SD coefficient need not appear in UMD, but the UMD correlation has not been measured before selection: the raw pilot exposes a trigger-dependent serialization limitation (§2.3). Soil threshold, aperture and atmospheric weighting remain genuine differences. The old UMD numerical agreement should be retained as a benchmark, not asserted as a validated isolation of its physical origin.</p>
+<p><strong>Q3 — Does a <span class="math">\(p_t\)</span>-derived ADF help?</strong> Yes for definitions and weighting, and it reproduces the existing corrected calculation. Under unchanged assumptions it improves justification, not the numerical verdict. A realistic <span class="math">\(F(X,E_i,p_t)\)</span>, ground-energy selection and transport kernel can change the numbers, but require inputs absent from the parquet. Ground momentum lists, now verified to exist in the ADST pilot, enable several tests short of knowing that production distribution.</p>
+<p><strong>Q4 — What minimum output would settle the issue?</strong> The cheapest decisive output for the selection hypothesis is already available: for every simulated station in each written event, its geometry, true shower geometry, truth muon count, and whether a reconstructed partner exists. The present scripts extract it. No per-muon production kinematics is needed. For a physical ground-transport explanation, the required additional output depends on which question remains; the ranked plan below avoids asking for production data unnecessarily.</p>
+<h2 id="8-ranked-next-checks-and-actual-availability">8. Ranked next checks and actual availability</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Check and minimum information</th>
+<th>Available now?</th>
+<th>Production kinematics?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Compare all simulated SD stations with precisely matched parquet stations; parent-paired bootstrap; standardize radius/energy/zenith</td>
+<td>Executed here from existing ADST and parquet</td>
+<td>No</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Separate local trigger, reconstruction, rejected/silent status, MD partner existence and module/channel retention</td>
+<td>ADST accessor/source support exists; the parquet lacks several flags</td>
+<td>No</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UMD injected counts before/after the same station selection, including all physical modules and true zeros</td>
+<td>Pilot executed: unselected scintillator truth is not populated. Requires pre-electronics summary or writer iterating simulation scintillators independently of channels; see §2.3</td>
+<td>No</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Energy- and incidence-resolved SD counts at a common virtual plane, with and without a UMD-like ground-energy/range filter</td>
+<td>SD particle lists are populated in the pilot; use <code>GenStation.GetParticles()</code> with geometry and thinning audit</td>
+<td>No</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Directional remapping to the shower-normal plane and comparison with orthogonal projection, both with identical ground-energy cuts</td>
+<td>Ground positions and momenta suffice for geometric remapping; finite-path survival correction needs an explicit model</td>
+<td>No for remapping; not necessarily for short-segment transport</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Original weighted CORSIKA footprint versus regenerated station candidates, checking finite-area and weight effects</td>
+<td>Requires locating the production's input particle files or an existing pre-regeneration dump; not established by the parquet</td>
+<td>No</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Charge-resolved and shower-azimuth-resolved transport; ancestry-resolved photonuclear fraction and harmonic</td>
+<td>Charge/type information exists in the SD particle schema; ancestry is not supplied by this list</td>
+<td>Ancestry required for photonuclear tagging, not necessarily full production kinematics</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Fully predictive Cazon transport integral or validated fast propagation with source correlations</td>
+<td>Requires the joint <span class="math">\(X,E_i,\mathbf p_t,\mathbf x_\perp\)</span> distribution and relevant parent history</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table></div>
+<p>Particle storage was enabled in the inspected production header. In the fully read pilot, 15,534 of 52,320 inspected physical SD simulation-station occurrences had nonempty particle lists; this includes many far-away empty stations and is not a detector efficiency. Within the broad far-radius sample, particle lists were nonempty in about 98.94% of station occurrences, and station thinning/used weight were unity. Some list particles miss the water tank because the shared injection cylinder also covers associated detectors. <code>GetParticles()</code> is therefore not itself a water-hit muon list: reapply the intersection geometry and verify conservation against the integer count. It supplies ground/injection kinematics, <strong>not</strong> the missing joint muon production kinematics from the abandoned Fast-MC attempt.</p>
+<p>For threshold comparisons, filter by a common <strong>ground</strong> energy or range and preserve local incidence dependence. Do not subtract <code>nMuones_MC</code> from <code>sd_nMuons_MC</code>: they count different areas, planes and realizations. For causal response checks, virtual-detector reweighting on the <em>same ground muons</em> is preferable to comparing unrelated count fluctuations.</p>
+<p>The raw count-only reader was validated against a full-branch pilot; selective ROOT branches reduce I/O drastically. A full particle-level or MD-scintillator extraction can be substantially more expensive and should remain a bounded single-file pilot until its cost and branch coverage are measured. No large parallel processing was launched in this review. The remaining high-cost request is justified only if the lower-cost comparisons leave a genuine ground-transport residual.</p>
+<p>For the UMD specifically, the minimum new product is one pre-electronics injected-muon total per physical module, with module area, station ID, and explicit simulation/zero status. If full pre-writer Offline events survive, a corrected serialization may suffice. If only these ADSTs survive, lost untriggered scintillator contents cannot be reconstructed from an empty vector: a bounded detector-level replay from retained injection particles or original production inputs is needed. This is not a new atmospheric Fast MC and does not need production height–energy–angle tuples. Merely changing the ADST-reading Python cannot recover fields the writer omitted.</p>
+<h2 id="9-proposed-thesis-text-deliberately-conservative">9. Proposed thesis text — deliberately conservative</h2>
+<blockquote>
+<p>La amplitud azimutal del conteo muónico asociado al detector de superficie se vuelve negativa a grandes distancias al eje en la muestra analizada, mientras que el conteo del detector subterráneo mantiene un exceso en la región temprana. Estas magnitudes no corresponden a una misma población de muones ni a una misma respuesta instrumental. Además, la muestra utilizada exige la existencia de una estación SD reconstruida. Una verificación directa con las estaciones simuladas almacenadas en los ADST muestra que esta condición modifica la amplitud del conteo muónico y puede inducir una inversión de signo en la muestra seleccionada. Por lo tanto, el resultado no debe interpretarse, sin controlar dicha selección, como una inversión de la densidad muónica incidente no condicionada a la reconstrucción de la estación. La proyección geométrica, la distribución angular de emisión y el transporte atmosférico proporcionan un marco cualitativo consistente, pero la aproximación analítica implementada no constituye una predicción cuantitativa validada para ambos detectores.</p>
+</blockquote>
+<blockquote>
+<p>En los veinte archivos de protones SIBYLL 2.3e de esta verificación, para <span class="math">\(1050\le r&lt;1400\,\mathrm m\)</span>, <span class="math">\(30\le\theta&lt;40^\circ\)</span> y <span class="math">\(17.5\le\log_{10}(E_0/\mathrm{eV})&lt;18.0\)</span>, el coeficiente SD pasa de +0.0676 antes de exigir una estación reconstruida a −0.0945 después de esa condición. La diferencia es −0.1622, con intervalo bootstrap del 95% [−0.1784, −0.1453], remuestreando lluvias progenitoras y manteniendo juntas sus reutilizaciones. El valor posterior coincide exactamente con el obtenido del parquet. La comparación se limita a los eventos escritos en esta producción y no elimina sus posibles selecciones a nivel de evento ni los efectos de regeneración de partículas.</p>
+</blockquote>
+<p>This proposed block does not claim that all real-data asymmetries or all Luce muon-signal inversions are selection artifacts. It should be reviewed with the director before inclusion.</p>
+<h2 id="10-reproducibility-reading-scope-and-limits">10. Reproducibility, reading scope and limits</h2>
+<p><code>README.md</code> gives commands. <code>verify.py</code> reproduces the legacy integral and parquet fits; <code>transport_checks.py</code> gives the deterministic transport scan; <code>statistical_checks.py</code> and <code>parent_bootstrap.py</code> provide standardization and uncertainty checks; <code>read_adst_audit.py</code> is the full-particle-list pilot; <code>adst_counts_fast.py</code> is the validated count-only reader; <code>selection_closure.py</code> performs matching, exact binwise selection closure and paired bootstraps; <code>selection_robustness.py</code> controls joint covariates and narrower bins; <code>umd_selection_read.py</code> and <code>umd_selection_check.py</code> establish the underground serialization limit and reproduce retained counts; <code>adst_metadata.py</code> inspects only non-sensitive header fields; <code>derivation_checks.py</code> generates analytic scale checks and source hashes. <code>build_report.py</code> generates this Markdown and its HTML from the same template and numerical outputs. CSV/JSON tables contain unrounded values.</p>
+<p>The requested prior review Markdown files, the complete long explainer script, its spectrum correction and draft chapters, the unified report and verification script, both group GAP-note versions, and the reviewable thesis chapters were read. Load-bearing geometry, normalization, source meanings and numeric results were rechecked rather than inherited. Bertou–Billoir's PDF has a broken text encoding; its relevant pages were inspected as rendered images. The wider search covered KASCADE/Grande projection, charge and threshold work; IceTop detector-likelihood methodology; photonuclear muon production, including a recent article; near-ground albedo; particle transport; and regeneration. Relevant sections of Grieder and longer theses were inspected selectively. The repository Gaisser copy did not yield searchable text and is not used as evidence here. The Sima 2011 and Billoir 2008 journal records were accessible as abstracts/summaries, not fully inspected article texts. This report does not claim to have read every page of every PDF in <code>Bibliografia/</code>.</p>
+<p>The verdict is not a theorem excluding every atmospheric mechanism. It is a sharper separation of an observed selected-sample effect, an actual reconstruction-selection contribution, a limited analytic approximation, and the remaining measurements needed for a transport explanation. No thesis/GAP source was edited, and no commit or push was made.</p>
+<p class="footnote">Generated from the same Markdown and audited numerical tables. Equations use MathJax from a CDN; the Markdown retains the original TeX.</p></main></body></html>

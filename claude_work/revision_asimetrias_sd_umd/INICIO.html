@@ -1,0 +1,142 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Revisión de asimetrías SD–UMD — inicio</title><style>body{margin:0;background:#f5f7fa;color:#172738;font:17px/1.65 system-ui,sans-serif}
+main{max-width:1100px;margin:36px auto;padding:36px;background:white;border-radius:12px}
+h1,h2{color:#194e70;line-height:1.25}h2{margin-top:2em}a{color:#126ba3}
+table{border-collapse:collapse;width:100%;font-size:.93em}td,th{border-bottom:1px solid #d8e2e9;padding:10px;text-align:left}
+pre{overflow:auto;background:#edf2f6;padding:18px}code{font-size:.9em}strong{color:#163e5b}
+@media(max-width:700px){main{padding:18px;margin:0}table{display:block;overflow:auto}}
+</style><main><h1>Revisión de asimetrías SD–UMD</h1>
+<p>Ésta es la carpeta única de entrega de esta conversación. Para navegar sin abrir
+Jupyter, empezá por <a href="INICIO.html">INICIO.html</a>. No hace falta recorrer los CSV,
+JSON ni los scripts de auditoría para entender los resultados.</p>
+<h2>Qué abrir según tu pregunta</h2>
+<table>
+<thead>
+<tr>
+<th>Quiero…</th>
+<th>Abrir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entender atenuación, geometría, divergencia y qué añadió la revisión</td>
+<td><a href="01_fisica/physics_explanation.html">Explicación física</a></td>
+</tr>
+<tr>
+<td>Entender de dónde salen los datos y qué hace el requisito de reconstrucción</td>
+<td><a href="02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.ipynb">Notebook 1: selección paso a paso</a> · <a href="02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.html">HTML</a></td>
+</tr>
+<tr>
+<td>Reproducir exactamente mi gráfico de cuatro componentes</td>
+<td><a href="02_notebooks/02_reproduccion/reproducir_desglose_sd.ipynb">Notebook 2: reproducción</a> · <a href="02_notebooks/02_reproduccion/reproducir_desglose_sd.html">HTML</a></td>
+</tr>
+<tr>
+<td>Ver si el SD sin ese requisito coincide con UMD</td>
+<td><a href="02_notebooks/03_sd_vs_umd/comparar_sd_umd.ipynb">Notebook 3: comparación directa</a> · <a href="02_notebooks/03_sd_vs_umd/comparar_sd_umd.html">HTML</a></td>
+</tr>
+<tr>
+<td>Revisar propuestas para los capítulos 3, 5 y 6</td>
+<td><a href="03_borradores_tesis/README.md">Guía de borradores</a> · <a href="03_borradores_tesis/preview.pdf">Vista previa PDF</a></td>
+</tr>
+<tr>
+<td>Examinar derivaciones, literatura externa y auditoría de Offline</td>
+<td><a href="01_fisica/report.html">Informe completo</a> · <a href="01_fisica/report.md">Markdown</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Conclusión actual y alcance</h2>
+<p>Retirar el requisito de presencia de estación SD reconstruida elimina la inversión
+del conteo SD en la muestra auditada. No demuestra que Offline reconstruya mal:
+demuestra que ese requisito cambia la población promediada, incluso al usar
+conteos y coordenadas MC.</p>
+<p>La comparación más reciente muestra compatibilidad estadística entre el SD antes
+de ese requisito y la curva UMD original a grandes radios, pero <strong>no reproduce
+toda la curva UMD</strong>. El UMD conserva su selección original. No se dispone de
+conteos UMD previos a selección válidos para todas las estaciones descartadas.
+No hay que rellenar esa información ausente con ceros físicos.</p>
+<p>Los números y sus intervalos están en <a href="02_notebooks/03_sd_vs_umd/RESULTADO.md">el resultado de la comparación directa</a>.
+En toda la entrega, A₁ positivo significa exceso temprano; negativo, exceso tardío.</p>
+<h2>Organización</h2>
+<pre><code class="language-text">revision_asimetrias_sd_umd/
+├── README.md + INICIO.html      Punto de entrada; no duplican los análisis
+├── 01_fisica/                  Explicación conceptual e informe técnico
+├── 02_notebooks/
+│   ├── 01_seleccion/            Procedencia, selección y controles
+│   ├── 02_reproduccion/         Tu gráfico original, sin cambiar el estimador
+│   └── 03_sd_vs_umd/            Comparación directa que faltaba
+├── 03_borradores_tesis/         Tres capítulos completos, diffs y preview
+├── 04_soporte/
+│   ├── codigo/                 Auditoría, verificadores y generadores
+│   ├── tablas/                 Insumos ADST y resultados numéricos previos
+│   ├── figuras/                Figura del informe técnico
+│   ├── plantillas/             Plantilla y estilo del informe
+│   ├── referencias/            PDF original para el cotejo numérico
+│   └── organizacion/           Inventario y comprobaciones del traslado
+└── 99_archivo_local/            Copia recuperable y cachés; no se publica en Git
+</code></pre>
+<p>Cada notebook tiene su <code>.py</code> editable, <code>.ipynb</code> ejecutado y <code>.html</code> para lectura.
+Sus figuras y tablas están en <code>resultados/</code> (o <code>exports/</code> en el recorrido inicial).
+Son formatos de un mismo análisis, no tres versiones científicas distintas.</p>
+<h2>Qué figura es cuál — no mezclar sus números</h2>
+<table>
+<thead>
+<tr>
+<th>Figura de referencia</th>
+<th>Definición</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="02_notebooks/03_sd_vs_umd/resultados/SD_sin_corte_vs_UMD.pdf">Comparación SD–UMD</a></td>
+<td>Bins originales de 150 m, ajuste ponderado; errores bootstrap pareados</td>
+<td><strong>La figura principal para la pregunta más reciente</strong></td>
+</tr>
+<tr>
+<td><a href="02_notebooks/02_reproduccion/resultados/SD_Desglose_Componentes_vs_UMD_reproducido.pdf">Cuatro componentes originales</a></td>
+<td>Filas originales por módulo; mismos SEM y ajuste de <code>plots_seccion_6.py</code></td>
+<td>Reproducción literal del gráfico entregado por el autor</td>
+</tr>
+<tr>
+<td><a href="02_notebooks/02_reproduccion/resultados/SD_antes_despues_mismos_bins.pdf">SD muones y EM antes/después</a></td>
+<td>Mismos bins y ajuste ponderado, una fila por SD; errores formales</td>
+<td>Control adicional de la reproducción</td>
+</tr>
+<tr>
+<td><a href="02_notebooks/01_seleccion/exports/05_evolucion_radial.pdf">Evolución inicial de selección</a></td>
+<td>Bandas más anchas, ajuste no ponderado y bootstrap</td>
+<td>Explicación inicial de cómo se identificó la inversión</td>
+</tr>
+</tbody>
+</table>
+<p>No se eliminaron curvas de distintas definiciones como si fueran duplicados.
+Las versiones PDF y PNG son exportaciones complementarias; las imágenes dentro
+del notebook/HTML permiten leerlo sin depender de una galería externa.</p>
+<p>Los borradores y el informe físico preceden a la comparación directa más reciente.
+Se preserva su contenido científico: el control de bandas anchas que citan no debe
+reemplazarse silenciosamente por números de otro ajuste.</p>
+<h2>Reproducir y editar</h2>
+<p>Desde la raíz del repositorio, con el <code>venv</code> existente:</p>
+<pre><code class="language-bash">venv/bin/jupyter lab
+</code></pre>
+<p>Abrí el notebook deseado y ejecutá sus celdas. Los tres recorridos principales
+leen tablas existentes; <strong>no lanzan ROOT, Offline ni simulaciones nuevas</strong>.
+Necesitan el parquet original en la ruta indicada al comienzo de cada notebook.
+La extracción SD ya está guardada una sola vez en <code>04_soporte/tablas/</code>.</p>
+<p>Para editar, modificá el <code>.py</code> y sincronizá con <code>venv/bin/jupytext --sync ruta/al/cuaderno.py</code>.
+No borres ni ignores el <code>.ipynb</code>: conserva las salidas que el autor necesita.
+El lector ROOT es opcional y está documentado en el notebook 1; no ejecutarlo para
+una simple lectura de resultados. La auditoría antigua queda en soporte, no es
+la ruta recomendada para empezar ni un procesamiento automático.</p>
+<h2>Conservación y seguridad</h2>
+<p>Los cinco directorios de esta conversación se trasladaron aquí. No se tocaron
+los análisis previos <code>gap_notes_asimetrias_review_v4</code>,
+<code>kinematic_divergence_explainer_and_thesis_updates</code> ni <code>unified_asymmetry_model_v1</code>.
+Tampoco se modificaron la tesis original, las notas GAP, Offline, datos de
+producción ni configuraciones del instituto.</p>
+<p>Se conserva un <a href="04_soporte/organizacion/inventario_traslado.csv">inventario de origen, destino y huella de contenido</a>.
+Los originales completos y los intermedios están recuperables localmente en
+<code>99_archivo_local/</code>; se excluyen del commit para no duplicar toda la entrega.
+No se eliminó trabajo científico para reducir el número de archivos.</p>
+<p>Los cambios ajenos ya presentes en el repositorio quedan fuera de este commit.
+La validación de rutas y resultados está en <a href="04_soporte/organizacion/VALIDACION.md">VALIDACION.md</a>.</p>
+</main></html>

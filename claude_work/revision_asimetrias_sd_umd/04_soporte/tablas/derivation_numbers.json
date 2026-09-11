@@ -1,0 +1,20 @@
+{
+  "eta": 0.10923674543053195,
+  "kappa_SD": 0.31804173242284955,
+  "aperture_SD_A1": 0.032316679827520595,
+  "aperture_plate_A1": 0.1095347794233549,
+  "inverse_square_A1": 0.21840596753784905,
+  "required_effective_ADF_slope_no_loss": 3.233484604744545,
+  "minimum_pure_cosine_added_fraction": 0.24417362263143538,
+  "missing_factor_endpoint": -0.2853074281049895,
+  "required_scattering_variance_difference": 182596.75398719328,
+  "water_Cherenkov_momentum_GeV": 0.1204949924099044,
+  "water_Cherenkov_total_energy_GeV": 0.16025833990517285,
+  "early_distance_m": 6766.999539772398,
+  "late_distance_m": 8426.135184462055,
+  "toy_mu_before": 0.19000000000000022,
+  "toy_mu_after": -0.12867724247471352,
+  "toy_selection_A": 0.30812851630644394,
+  "toy_UMD_independent_A": 0.13,
+  "toy_mean_mu_selected": 0.9668059238863678
+}

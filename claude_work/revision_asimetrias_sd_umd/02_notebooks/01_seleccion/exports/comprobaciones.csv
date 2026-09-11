@@ -1,0 +1,8 @@
+comprobación,pasa
+"A1 de referencia, 300–600 m",True
+"A1 de referencia, 650–950 m",True
+"A1 de referencia, 1050–1400 m",True
+"A1 de referencia, 1400–1800 m",True
+Conteos ADST y parquet emparejados idénticos,True
+A1 del corte HasStation coincide con parquet,True
+Identidad de selección por bin,True

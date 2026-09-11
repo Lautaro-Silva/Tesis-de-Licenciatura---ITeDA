@@ -1,0 +1,11 @@
+# Local preview build intermediates only; source drafts and PDF remain visible.
+preview.aux
+preview.bbl
+preview.bcf
+preview.blg
+preview.log
+preview.out
+preview.run.xml
+preview.toc
+preview.synctex.gz
+__pycache__/

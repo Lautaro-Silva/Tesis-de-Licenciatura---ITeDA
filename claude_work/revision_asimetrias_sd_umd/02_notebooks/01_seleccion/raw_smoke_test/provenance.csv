@@ -1,0 +1,2 @@
+source,input_path,input_bytes,events_read,events_in_zenith_band,station_rows,elapsed_seconds
+SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root,/srv/data/Malargue/icrc2025/test7/IdealMC_CORSIKA/MdSdInfill_CORSIKA78010_FLUKA/SIB23e/17.5_18.0/proton/SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root,9723803016,50,9,200,6.788848038762808
