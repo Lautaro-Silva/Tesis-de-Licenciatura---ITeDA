@@ -96,6 +96,7 @@
       \end{itemize}
     \column{0.51\textwidth}
       \centering
+      \vspace{0.8em}
       \includegraphics[width=\textwidth]{espectro_completo.jpg}
   \end{columns}
 \end{frame}
@@ -132,7 +133,8 @@
       \end{itemize}
     \column{0.52\textwidth}
       \centering
-      \includegraphics[width=\textwidth,height=4.6cm,keepaspectratio]{x_max.jpg}
+      \vspace{0.6em}
+      \includegraphics[width=\textwidth,height=4.4cm,keepaspectratio]{x_max.jpg}
   \end{columns}
 \end{frame}
 
@@ -150,7 +152,8 @@
       \end{itemize}
     \column{0.52\textwidth}
       \centering
-      \includegraphics[width=\textwidth,height=4.8cm,keepaspectratio]{eas.png}
+      \vspace{0.6em}
+      \includegraphics[width=\textwidth,height=4.4cm,keepaspectratio]{eas.png}
   \end{columns}
 \end{frame}
 
@@ -247,7 +250,8 @@
       \end{itemize}
     \column{0.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth,height=4.6cm,keepaspectratio]{esquema_lluvia.jpeg}
+      \vspace{0.6em}
+      \includegraphics[width=\textwidth,height=4.2cm,keepaspectratio]{esquema_lluvia.jpeg}
   \end{columns}
 \end{frame}
 
@@ -289,7 +293,7 @@
 
 \begin{frame}{El observable: el primer armónico azimutal}
   \begin{equation*}
-    S(r,\phi) = \langle S(r) \rangle \big(1 + A_1(r,\theta)\cos\phi\big)
+    S(r,\phi,\theta) = \langle S(r,\theta) \rangle \big(1 + A_1(r,\theta)\cos\phi\big)
   \end{equation*}
   \begin{itemize}
     \item $A_1 > 0$: exceso temprano; $A_1 < 0$: exceso tardío --- requiere
@@ -324,7 +328,7 @@
     \item Dos topologías de evaluación:
     \begin{itemize}
       \item \textbf{Anillo Denso}: 12 estaciones virtuales a $r=450$~m fijo,
-        cada $30^\circ$ --- entorno de control, sin LDF.
+        cada $30^\circ$ --- entorno de control.
       \item \textbf{Infill}: arreglo real de 750~m, espectro continuo de $r$.
     \end{itemize}
   \end{itemize}
@@ -411,9 +415,9 @@
 \begin{frame}{Discriminación de masa: protón vs.\ hierro}
   \badgeMC
   \begin{columns}[c]
-    \column{0.5\textwidth}
+    \column{0.58\textwidth}
       \includegraphics[width=\textwidth]{mass_discrimination_mf.pdf}
-    \column{0.46\textwidth}
+    \column{0.38\textwidth}
       \begin{itemize}
         \item $\langle A_1^{\text{p}}\rangle > \langle A_1^{\text{Fe}}\rangle$
           sistemáticamente.
@@ -497,16 +501,34 @@
 % ============================================================
 \section{Un segundo sistemático: el sesgo del núcleo}
 
+\begin{frame}{Motivación}
+  \badgeMC
+  \begin{columns}[c]
+    \column{0.42\textwidth}
+      \textbf{Motivación}: ¿por qué $A_1^{REC}$ pierde magnitud respecto
+      a $A_1^{MC}$?
+
+      \vspace{0.8em}
+      El residuo de conteo de muones tiene \textbf{media cercana a cero},
+      pero su distribución no es simétrica: cola de sobre-reconstrucción,
+      mayor en la región tardía.
+    \column{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=5.4cm,keepaspectratio]{muon_counting_validation.pdf}
+  \end{columns}
+\end{frame}
+
 \begin{frame}{El núcleo reconstruido se corre a lo largo del eje temprano-tardío}
   \badgeMC
+  \vspace{-0.6em}
   \begin{columns}[T]
     \column{0.55\textwidth}
       \centering
-      \includegraphics[width=\textwidth,height=4.4cm,keepaspectratio]{error_radial_azimut.jpg}
+      \includegraphics[width=\textwidth,height=5.1cm,keepaspectratio]{error_radial_azimut.jpg}
     \column{0.4\textwidth}
       \begin{itemize}\small
-        \item Eje vertical: \textbf{error en la posición del núcleo}
-          reconstruido respecto a la posición real de Monte Carlo
+        \item \textbf{Error en la posición del núcleo} reconstruido
+          respecto a la posición real de Monte Carlo
           ($\Delta r = r_{MC}-r_{REC}$), vs.\ $\phi_{MC}$ de la estación.
         \item Región temprana ($\phi\approx0^\circ$): $\Delta r<0$ ---
           el núcleo queda \textbf{más lejos}.
@@ -514,31 +536,26 @@
           queda \textbf{más cerca}.
       \end{itemize}
   \end{columns}
+  \vspace{-0.6em}
+  \begin{center}
   \small\alert{Este alineamiento sistemático del sesgo de reconstrucción
   con el eje temprano-tardío es uno de los resultados centrales de este
   análisis.}
+  \end{center}
 \end{frame}
 
 \begin{frame}{Por qué: una LDF simétrica ajustada a una señal asimétrica}
   \badgeMC
-  \small\textbf{Motivación}: ¿por qué $A_1^{REC}$ pierde magnitud respecto
-  a $A_1^{MC}$?
-  \begin{columns}[T]
-    \column{0.37\textwidth}
+  \begin{columns}[c]
+    \column{0.44\textwidth}
       \begin{itemize}\small
         \item \textit{Offline} ajusta la LDF asumiéndola \textbf{simétrica
           en $\phi$}; el único grado de libertad para absorber el
           exceso/déficit real es la \textbf{posición del núcleo}.
-        \item El residuo de conteo tiene \textbf{media cercana a cero},
-          pero su distribución no es simétrica: cola de
-          sobre-reconstrucción, mayor en la región tardía.
       \end{itemize}
-    \column{0.3\textwidth}
+    \column{0.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth,height=3.2cm,keepaspectratio]{muon_counting_validation.pdf}
-    \column{0.3\textwidth}
-      \centering
-      \includegraphics[width=\textwidth,height=3.2cm,keepaspectratio]{toy_model.pdf}
+      \includegraphics[width=\textwidth,height=4.8cm,keepaspectratio]{toy_model.pdf}
   \end{columns}
   \small \emph{Toy Model} (\emph{bootstrap} sobre ese residuo, inyectado
   sobre $N_\mu^{MC}$): reproduce \textbf{exactamente} la caída de $A_1$
