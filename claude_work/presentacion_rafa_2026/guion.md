@@ -8,11 +8,11 @@ current revision, addressing a full pass of the author's own review.**
 ## Structure note: automatic section dividers
 
 The metropolis theme auto-inserts a one-line "section title" slide for every `\section{}`
-in the source — theme default behavior. There are 9 of them now, so the PDF has 41 pages
-for 32 written content frames. Treat each divider as a **5–10 second beat** — just say the
+in the source — theme default behavior. There are 9 of them now, so the PDF has 42 pages
+for 33 written content frames. Treat each divider as a **5–10 second beat** — just say the
 block title aloud and move on.
 
-## Per-slide timing (32 content frames, subtotal ≈23.8 min; + ~0.9 min of divider beats ≈ 24.7 min)
+## Per-slide timing (33 content frames, subtotal ≈24.8 min; + ~0.9 min of divider beats ≈ 25.7 min)
 
 | Slide (frame title) | min |
 |---|---|
@@ -39,16 +39,19 @@ block title aloud and move on.
 | El hallazgo: inversión de signo del SD | 1.25 |
 | Desglosando la señal del SD | 1.25 |
 | **¿Qué explica la inversión del SD?** (blank — see note) | 0.1 |
+| Motivación (residuo de conteo, nuevo) | 1.0 |
 | El núcleo se corre en el eje temprano-tardío | 1.25 |
-| Por qué: LDF simétrica + \emph{Toy Model} | 1.25 |
+| Por qué: LDF simétrica + \emph{Toy Model} | 1.0 |
 | Primera señal en datos reales (merged) | 1.5 |
 | Conclusiones | 0.75 |
 | ¡Gracias! | 0.1 |
-| **Subtotal** | **23.8** |
+| **Subtotal** | **24.8** |
 
-Plus ~0.9 min of section-divider beats ⇒ **≈24.7 min total** — comfortably inside the
-25-min slot, with room to spare if the blank slide (see below) gets filled back in with
-brief content. No fallback cuts needed at the moment, unlike the prior revision.
+Plus ~0.9 min of section-divider beats ⇒ **≈25.7 min total** — a touch over the 25-min
+slot now that "Motivación" was split out as its own frame, but well within normal margin
+of error and still lighter than earlier revisions. If it needs trimming, the blank
+"¿Qué explica la inversión del SD?" slide (see below) is the natural place to make up
+the time either way, once it's decided whether to fill it or cut it.
 
 ## ⚠️ The blank slide
 
