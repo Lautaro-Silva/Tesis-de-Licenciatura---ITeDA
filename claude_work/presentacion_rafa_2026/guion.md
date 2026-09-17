@@ -8,11 +8,11 @@ current revision, addressing a full pass of the author's own review.**
 ## Structure note: automatic section dividers
 
 The metropolis theme auto-inserts a one-line "section title" slide for every `\section{}`
-in the source — theme default behavior. There are 9 of them now, so the PDF has 42 pages
-for 33 written content frames. Treat each divider as a **5–10 second beat** — just say the
+in the source — theme default behavior. There are 9 of them now, so the PDF has 44 pages
+for 35 written content frames. Treat each divider as a **5–10 second beat** — just say the
 block title aloud and move on.
 
-## Per-slide timing (33 content frames, subtotal ≈24.8 min; + ~0.9 min of divider beats ≈ 25.7 min)
+## Per-slide timing (35 content frames, subtotal ≈28.7 min; + ~0.9 min of divider beats ≈ 29.6 min)
 
 | Slide (frame title) | min |
 |---|---|
@@ -28,6 +28,8 @@ block title aloud and move on.
 | El plano de la lluvia | 1.0 |
 | Mecanismo 1: atenuación | 0.75 |
 | Mecanismo 2: proyección geométrica | 1.0 |
+| **NUEVO** Mecanismo 3: divergencia cinemática (Cazón) | 1.25 |
+| **NUEVO** ¿Positivo o negativo? La energía de cruce | 1.5 |
 | El observable armónico | 0.75 |
 | De CORSIKA a un valor de A₁ | 0.75 |
 | Validación de la reconstrucción | 0.75 |
@@ -38,32 +40,41 @@ block title aloud and move on.
 | A₁(r,θ) del UMD (Infill) | 1.0 |
 | El hallazgo: inversión de signo del SD | 1.25 |
 | Desglosando la señal del SD | 1.25 |
-| **¿Qué explica la inversión del SD?** (blank — see note) | 0.1 |
-| Motivación (residuo de conteo, nuevo) | 1.0 |
+| ¿Qué explica la inversión del SD? (HasStation, preliminar) | 1.25 |
+| Motivación (residuo de conteo) | 1.0 |
 | El núcleo se corre en el eje temprano-tardío | 1.25 |
 | Por qué: LDF simétrica + \emph{Toy Model} | 1.0 |
 | Primera señal en datos reales (merged) | 1.5 |
 | Conclusiones | 0.75 |
 | ¡Gracias! | 0.1 |
-| **Subtotal** | **24.8** |
+| **Subtotal** | **28.7** |
 
-Plus ~0.9 min of section-divider beats ⇒ **≈25.7 min total** — a touch over the 25-min
-slot now that "Motivación" was split out as its own frame, but well within normal margin
-of error and still lighter than earlier revisions. If it needs trimming, the blank
-"¿Qué explica la inversión del SD?" slide (see below) is the natural place to make up
-the time either way, once it's decided whether to fill it or cut it.
+Plus ~0.9 min of section-divider beats ⇒ **≈29.6 min total** — this is now noticeably
+over the 25-min slot (~4.5 min), the direct cost of the two new Cazón/kinematic-divergence
+slides (~2.75 min) on top of filling in the former blank slide (+1.15 min vs. its old
+placeholder). If time is tight, the cleanest single cut is the "¿Positivo o negativo?"
+slide's three-factor equation walkthrough — the punchline (mostly positive, but not enough
+to explain the SD alone) can be stated in one sentence while flipping past it, with the
+full derivation available if an audience member asks. The two long-standing fallback cuts
+(skip "Robustez del observable," skip "AugerPrime") still apply on top of that if needed.
 
-## ⚠️ The blank slide
+## What's on slides 15–16 and 23 now (all added across recent rounds)
 
-"¿Qué explica la inversión del SD?" is **intentionally empty** (title only) — the author
-asked for the previous content removed pending a redesign, and there wasn't time before
-the conference to write a replacement. As currently built, the talk will show a blank
-slide with just that title between "Desglosando la señal del SD" and "El núcleo se corre."
-**This needs the author's attention before presenting**: either skip past it quickly with
-a one-line spoken bridge ("todavía no sabemos qué explica esto del lado del SD — sigamos"),
-or drop the frame from the `.tex` entirely if there's no time to design real content for
-it. Either is a two-minute fix; just don't present it blank without a plan for what to say
-when it comes up.
+- **Mecanismo 3 / "¿Positivo o negativo?"** (new this round): the Cazón kinematic-
+  divergence derivation — muon production kinematics, the angular emission spectrum
+  (ADF), and the three-factor early/late density ratio. The key, slightly
+  counter-intuitive result: the kinematic-gain term is *positive* (early-favoring, same
+  sign as attenuation) across most of the relevant muon energy range, and only flips
+  negative above a threshold energy $E^*$ of a few GeV — contrary to the original
+  "kinematic filter" story in the thesis text. This is presented as settled, correctly-
+  derived physics (teal "DESARROLLO ANALÍTICO" badge) — distinct from the orange
+  "HIPÓTESIS" badge on slide 23, which is a live, unverified lead.
+- **"¿Qué explica la inversión del SD?"** (filled in two rounds ago): the `HasStation`
+  selection-bias finding — before the SD reconstruction-selection flag, the SD's muonic
+  count tracks the UMD's positive asymmetry; after the flag, it inverts, while the EM
+  component is essentially unaffected. Orange "HIPÓTESIS — EN VERIFICACIÓN" badge — the
+  author was still actively checking this as of the last update, so don't present it as
+  confirmed.
 
 ## Talking points per block
 

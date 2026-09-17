@@ -53,6 +53,13 @@
       {\scriptsize\textcolor{white}{\textbf{HIPÓTESIS --- EN VERIFICACIÓN}}};
   \end{tikzpicture}%
 }
+\newcommand{\badgeMATH}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, xshift=-0.35cm, yshift=-0.9cm, fill=itedaTeal,
+      rounded corners=1pt, inner sep=4pt] at (current page.north east)
+      {\scriptsize\textcolor{white}{\textbf{DESARROLLO ANALÍTICO}}};
+  \end{tikzpicture}%
+}
 
 \begin{document}
 
@@ -296,6 +303,56 @@
     \small Para un plano ideal, la proyección geométrica \textbf{también} da
     $A_1 > 0$ (GAP-2026-041, \S2.2).
   \end{block}
+\end{frame}
+
+\begin{frame}{Mecanismo 3: divergencia cinemática (Cazón \textit{et al.})}
+  \badgeMATH
+  \begin{columns}[T]
+    \column{0.52\textwidth}
+      \begin{itemize}\small
+        \item Distinto de la proyección de Billoir: aquí importa la
+          \textbf{distancia finita} $D$ entre producción y suelo.
+        \item El muón nace del decaimiento $\pi/K$ con momento transverso
+          $p_t$ $\Rightarrow$ ángulo de apertura $\sin\alpha\simeq cp_t/E$.
+        \item Espectro angular de emisión (\emph{ADF} de Cazón):
+          $$\frac{dN}{d\Omega}(\alpha) \propto \cos\alpha\,
+          \exp\!\left(-\frac{E\sin\alpha}{cQ}\right)$$
+        \item Densidad en el suelo: $S(d,\alpha)\propto d^{-2}\,dN/d\Omega$.
+      \end{itemize}
+    \column{0.44\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=3.7cm,keepaspectratio]{efecto_geo.png}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{¿Positivo o negativo? La energía de cruce}
+  \badgeMATH
+  \begin{equation*}
+    \frac{S_{\text{tardío}}}{S_{\text{temprano}}} \approx
+    \underbrace{\left(\frac{d_{\text{temprano}}}{d_{\text{tardío}}}\right)^{\!2}}_{\text{espacial}\,<\,1}
+    \cdot
+    \underbrace{\frac{\cos\alpha_{\text{tardío}}}{\cos\alpha_{\text{temprano}}}}_{\text{esp.\ de fases}\,>\,1}
+    \cdot
+    \underbrace{\exp\!\left(\frac{(\sin\alpha_{\text{temprano}}-\sin\alpha_{\text{tardío}})E}{cQ}\right)}_{\text{ganancia cinemática}\,>\,1}
+  \end{equation*}
+  \begin{itemize}\small
+    \item Sólo el tercer factor depende de $E$, y es
+      \textbf{monótonamente creciente}: $\approx1$ (sin efecto) a baja
+      $E$, relevante recién a alta $E$ --- existe una \textbf{energía de
+      cruce $E^*$} por debajo de la cual domina el término espacial
+      (favorece la región temprana, $A_1>0$).
+    \item Población B (baja $E$) contribuye entonces con el
+      \textbf{mismo signo} que la atenuación --- no con el opuesto.
+    \item En $r{=}1200$~m, $\theta{=}35^\circ$ ($D{=}7.5$~km,
+      $Q{=}0.2$~GeV, $\gamma{=}2.6$): $A_1\simeq+0.16$ en el umbral
+      tipo SD, $+0.02$ en el umbral del UMD, negativo recién por
+      encima de $\sim2$~GeV.
+  \end{itemize}
+  \vspace{0.2em}
+  \centering
+  \alert{Mecanismo real y positivo en casi todo el rango relevante ---
+  pero predice el UMD \emph{menos} positivo que el SD: no explica por
+  sí solo el contraste observado.}
 \end{frame}
 
 \begin{frame}{El observable: el primer armónico azimutal}
