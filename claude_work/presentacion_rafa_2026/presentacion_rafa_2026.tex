@@ -50,7 +50,7 @@
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=north east, xshift=-0.35cm, yshift=-0.9cm, fill=itedaOrange,
       rounded corners=1pt, inner sep=4pt] at (current page.north east)
-      {\scriptsize\textcolor{white}{\textbf{HIPÓTESIS --- EN VERIFICACIÓN}}};
+      {\scriptsize\textcolor{white}{\textbf{ANÁLISIS PRELIMINAR --- EN VERIFICACIÓN}}};
   \end{tikzpicture}%
 }
 \newcommand{\badgeMATH}{%
@@ -147,7 +147,7 @@
       \end{itemize}
     \column{0.52\textwidth}
       \centering
-      \vspace{0.6em}
+      \vspace{1.4em}
       \includegraphics[width=\textwidth,height=4.4cm,keepaspectratio]{x_max.jpg}
   \end{columns}
 \end{frame}
@@ -166,8 +166,8 @@
       \end{itemize}
     \column{0.52\textwidth}
       \centering
-      \vspace{0.6em}
-      \includegraphics[width=\textwidth,height=4.4cm,keepaspectratio]{eas.png}
+      \vspace{1.4em}
+      \includegraphics[width=\textwidth,height=4.9cm,keepaspectratio]{eas.png}
   \end{columns}
 \end{frame}
 
@@ -307,6 +307,7 @@
 
 \begin{frame}{Mecanismo 3: divergencia cinemática (Cazón \textit{et al.})}
   \badgeMATH
+  \vspace{-0.4em}
   \begin{columns}[T]
     \column{0.52\textwidth}
       \begin{itemize}\small
@@ -321,7 +322,8 @@
       \end{itemize}
     \column{0.44\textwidth}
       \centering
-      \includegraphics[width=\textwidth,height=3.7cm,keepaspectratio]{efecto_geo.png}
+      \vspace{1.0em}
+      \includegraphics[width=\textwidth,height=4.2cm,keepaspectratio]{efecto_geo.png}
   \end{columns}
 \end{frame}
 
@@ -341,18 +343,10 @@
       $E$, relevante recién a alta $E$ --- existe una \textbf{energía de
       cruce $E^*$} por debajo de la cual domina el término espacial
       (favorece la región temprana, $A_1>0$).
-    \item Población B (baja $E$) contribuye entonces con el
-      \textbf{mismo signo} que la atenuación --- no con el opuesto.
-    \item En $r{=}1200$~m, $\theta{=}35^\circ$ ($D{=}7.5$~km,
-      $Q{=}0.2$~GeV, $\gamma{=}2.6$): $A_1\simeq+0.16$ en el umbral
-      tipo SD, $+0.02$ en el umbral del UMD, negativo recién por
-      encima de $\sim2$~GeV.
   \end{itemize}
-  \vspace{0.2em}
-  \centering
-  \alert{Mecanismo real y positivo en casi todo el rango relevante ---
-  pero predice el UMD \emph{menos} positivo que el SD: no explica por
-  sí solo el contraste observado.}
+  \begin{block}{Signo}
+    Mecanismo real y positivo en casi todo el rango relevante.
+  \end{block}
 \end{frame}
 
 \begin{frame}{El observable: el primer armónico azimutal}
@@ -361,7 +355,7 @@
   \end{equation*}
   \begin{itemize}
     \item $A_1 > 0$: exceso temprano; $A_1 < 0$: exceso tardío --- requiere
-      un mecanismo \emph{adicional} a los dos ya vistos.
+      un mecanismo \emph{adicional} a los tres ya vistos.
     \item Fase fijada en $\phi_0=0$ (línea temprano-tardía), siguiendo la
       convención de estudios previos con el SD.
     \item Deflexión geomagnética: efecto de segundo orden aquí; dominante
@@ -369,7 +363,7 @@
   \end{itemize}
   \vspace{0.2em}
   \centering
-  \alert{Si los dos mecanismos conocidos dan siempre $A_1>0$,
+  \alert{Si los tres mecanismos conocidos dan siempre $A_1>0$,
   ¿qué pasa si medimos $A_1<0$?}
 \end{frame}
 
@@ -569,8 +563,9 @@
     \item Flag \texttt{HasStation} (umbral de reconstrucción del SD):
       \textbf{antes} de aplicarlo (azul) el conteo muónico se mantiene
       positivo, como el UMD; la EM (derecha) casi no cambia.
-    \item \alert{Hipótesis en verificación}: el corte podría sesgar la
-      muestra hacia eventos con componente muónica más dura.
+    \item \alert{Hipótesis}: un \textbf{sesgo de selección} --- el corte
+      podría favorecer eventos con mayor cantidad de muones (componente
+      muónica más grande).
   \end{itemize}
 \end{frame}
 
