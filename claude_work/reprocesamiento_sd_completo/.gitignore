@@ -1,0 +1,6 @@
+# Pilot outputs (parquet/json written by piloto/correr_piloto.py). The scripts stay tracked.
+piloto/*/
+# Temporary files from interrupted atomic writes
+*.tmp
+.ipynb_checkpoints/
+__pycache__/
