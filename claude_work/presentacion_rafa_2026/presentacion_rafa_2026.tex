@@ -46,6 +46,13 @@
       {\scriptsize\textcolor{white}{\textbf{DATOS REALES --- PRELIMINAR}}};
   \end{tikzpicture}%
 }
+\newcommand{\badgeCHECK}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, xshift=-0.35cm, yshift=-0.9cm, fill=itedaOrange,
+      rounded corners=1pt, inner sep=4pt] at (current page.north east)
+      {\scriptsize\textcolor{white}{\textbf{HIPÓTESIS --- EN VERIFICACIÓN}}};
+  \end{tikzpicture}%
+}
 
 \begin{document}
 
@@ -495,7 +502,19 @@
 \end{frame}
 
 \begin{frame}{¿Qué explica la inversión del SD?}
-  % Intencionalmente en blanco: contenido a rediseñar por el autor.
+  \vspace{1.4em}
+  \centering
+  \includegraphics[width=0.78\textwidth,height=4.0cm,keepaspectratio]{sd_hasstation_antes_despues.pdf}
+  \badgeCHECK
+
+  \small
+  \begin{itemize}
+    \item Flag \texttt{HasStation} (umbral de reconstrucción del SD):
+      \textbf{antes} de aplicarlo (azul) el conteo muónico se mantiene
+      positivo, como el UMD; la EM (derecha) casi no cambia.
+    \item \alert{Hipótesis en verificación}: el corte podría sesgar la
+      muestra hacia eventos con componente muónica más dura.
+  \end{itemize}
 \end{frame}
 
 % ============================================================
