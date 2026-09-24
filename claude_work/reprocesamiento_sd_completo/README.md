@@ -13,7 +13,8 @@ Branch: `claude/reprocesamiento-sd-completo`. Nothing outside this folder was mo
 |---|---|
 | `lector_adst_v17_completo.py` | The reader: your v17, every change marked `# CHANGE N`. Produces two tables per ROOT file. |
 | `Procesamiento_ADST_v17_completo.ipynb` / `.py` | Runner notebook, laid out like v8-2 (one cell per production) + a validation cell. |
-| `comparar_sd_umd_reprocesado.ipynb` / `.py` | Readable reproduction of Astra's SD-vs-UMD comparison. Input switch `FUENTE`. |
+| `comparar_sd_umd_reprocesado.ipynb` / `.py` | SD muons before/after the requirement vs UMD, with the paired bootstrap. Input switch `FUENTE` (`reprocesado_v13` by default; `insumos_astra` re-runs the same code on Astra's inputs as a cross-check). |
+| `desglose_sd_mc_vs_rec.ipynb` / `.py` | The last figure of `plots_seccion_6` (UMD + SD EM + SD muons + SD total VEM, twin axes), with each SD MC curve drawn **both** with and without the reconstruction requirement. |
 | `validaciones.py` | Pandas-only checks used by the notebook and the pilot (PASS/FAIL with numbers). |
 | `CAMBIOS.md` | **Read first.** Every change vs v8-2 with its reason; why each Astra attempt failed; the Offline library finding. |
 | `piloto/correr_piloto.py` | Runs the reader on one file in one process (outputs in `piloto/<label>/`, git-ignored). |
@@ -44,9 +45,10 @@ Your v10/v11 parquets are not touched. Pilots go to `ADST_Alexey_module_v13_pilo
 4. Set `PILOTO = False`, re-run cell 2 and the **Sibyl-Proton** cell. 8 workers; ~30–50 min for 20 files
    (test7 reads slower than 4.0.1, see below). Then the validation cell again.
 5. Other productions: same, one cell each, whenever you want.
-6. Open `comparar_sd_umd_reprocesado.ipynb`, set `FUENTE = "reprocesado_v13"`, run all
-   (pandas only, ~1 min). Section 6 must print `PASS`: the result from your own pipeline
+6. Open `comparar_sd_umd_reprocesado.ipynb` and run all (pandas only, ~2 min). With
+   `FUENTE = "reprocesado_v13"` section 6 must print `PASS`: the result from your own pipeline
    equals Astra's.
+7. Open `desglose_sd_mc_vs_rec.ipynb` and run all (~3 min) for the signal-breakdown figure.
 
 Do not "Run All" the processing notebook: each production cell is a batch job on the shared server.
 
@@ -84,9 +86,28 @@ All run on 2026-09-17 on this server, single process. Reproduce with
 | Closed-form fit vs `curve_fit`, 24 band×sample combinations | max difference 4.5e-10 |
 | All 17 columns of Astra's `comparacion_directa.csv` | reproduced to ≤ 1e-16 (float rounding) |
 
-What remains for you: the full 20-file run, then `FUENTE="reprocesado_v13"`. Given A–C, that
-should also print `PASS` in section 6; if it does not, the per-file validation table in the
-processing notebook tells you which file differs.
+**D. The full 20-file run (done, 2026-09-17, by the author, 8 workers)**
+
+Every file read cleanly; no counter skipped anywhere. The per-file module counts with
+`has_sd_rec` reproduce the March run file by file (79710, 79305, 78960, 79020, 79953, …).
+Totals in the analysis band (30 ≤ θ < 40°): 156,633 UMD modules and 1,045,964 SD station
+occurrences, of which 52,211 have a reconstructed station and **993,753 do not** — the
+population the old pipeline could not see.
+
+Running `comparar_sd_umd_reprocesado` with `FUENTE="reprocesado_v13"`, i.e. entirely from
+this pipeline, reproduces Astra's `comparacion_directa.csv` in **all 17 columns to 1e-16**.
+The 270 UMD module rows recovered by the flag change the UMD curve by 0.00000 in every band,
+confirming they are irrelevant for that curve (they are not what the rewrite was for).
+
+Signal breakdown (`desglose_sd_mc_vs_rec`), A1 in the outermost band 1200–1350 m:
+
+| Curve | with SD REC | MC only (whole array) |
+|---|---:|---:|
+| SD muonic | **−0.124** | **+0.069** |
+| SD electromagnetic | +0.448 | +0.518 |
+
+The muon inversion at large r is present only when a reconstructed SD station is required.
+Same showers, same MC counts, same geometry.
 
 **Runtime note:** with test7 one file took 549 s in a single process. Your March run
 (4.0.1 library, 8 workers) took ~600 s per file. Expect roughly 30–50 min for the 20 files with
