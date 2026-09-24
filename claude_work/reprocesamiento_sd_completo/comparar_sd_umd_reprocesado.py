@@ -57,7 +57,9 @@ from IPython.display import display, Markdown
 # %%
 # ======================== CONFIGURATION ========================
 
-FUENTE = "insumos_astra"      # "insumos_astra"  or  "reprocesado_v13"
+# "reprocesado_v13" = your own pipeline (the default now that the v13 run exists).
+# "insumos_astra"   = Astra's CSV + the v11 parquet, kept as a cross-check of this code.
+FUENTE = "reprocesado_v13"
 
 # Folder of this notebook, and the repository root (the folder containing CLAUDE.md).
 AQUI = Path(os.path.abspath(""))
