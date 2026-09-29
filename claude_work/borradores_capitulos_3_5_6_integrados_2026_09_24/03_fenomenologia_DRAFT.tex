@@ -1,0 +1,261 @@
+% !TEX root = vista_previa.tex
+% BORRADOR INTEGRADO, 24-09-2026. No reemplaza el archivo de la tesis.
+% Fuentes, alcance y correcciones respecto de versiones anteriores: 03_NOTAS.md.
+
+\section{Fenomenología de las asimetrías azimutales en EAS}
+\label{sec:fenomenologia}
+
+La simetría circular de la distribución de partículas en el plano perpendicular al eje de una lluvia atmosférica extensa es una aproximación útil para describir su estructura lateral. Para lluvias inclinadas, sin embargo, la diferencia de recorridos hasta el suelo y la distribución de direcciones de las partículas introducen una dependencia azimutal. La modulación observada depende además de qué magnitud registra cada detector y de qué estaciones se incluyen al calcularla. Una densidad de muones incidentes, un conteo de trayectorias que interceptan un tanque y una señal Cherenkov no son observables intercambiables.
+
+En este capítulo se desarrollan tres contribuciones: la atenuación atmosférica, la proyección geométrica del flujo y la divergencia cinemática asociada a la distribución angular de emisión. Se explicita qué parte de la respuesta geométrica de un tanque se cancela en el límite ideal de señal proporcional a la longitud de traza. Finalmente, se introduce la selección de estaciones como un condicionamiento estadístico del observable, distinto de un mecanismo que produce o transporta muones. Esta separación permite interpretar los resultados de los capítulos siguientes sin atribuir un signo del primer armónico a una causa única.
+
+\subsection{El plano de la lluvia y las regiones temprana y tardía}
+\label{subsec:simetria_ruptura}
+
+Las posiciones de los detectores se definen sobre el terreno y se proyectan ortogonalmente sobre el plano perpendicular al eje de la lluvia, denominado \textit{plano de la lluvia}. El radio $r$ y el azimut $\phi$ utilizados en este trabajo corresponden a ese plano; $r$ no es la distancia horizontal al núcleo. La Figura~\ref{fig:plano_lluvia} muestra ambos sistemas de referencia.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{capitulos/imagenes_capitulos/cap3/esquema_lluvia.png}
+\caption{Proyección de las posiciones del suelo al plano perpendicular al eje de la lluvia. El azimut indicado como $\zeta$ en el esquema corresponde a $\phi$ en este trabajo.}
+\label{fig:plano_lluvia}
+\end{figure}
+
+Se fija $\phi=0$ en la región \textit{temprana} y $\phi=\pm\pi$ en la región \textit{tardía}. Para una misma fuente situada sobre el eje y a igual radio $r$, el trayecto hasta el suelo es menor en el lado temprano. Los nombres identifican regiones espaciales del frente: una partícula que llega con retraso a un detector no pertenece por ello a la región tardía. En el límite de una lluvia vertical, axialmente simétrica y sin campo magnético ni anisotropías instrumentales, no existe una dirección temprano--tardía privilegiada.
+
+Para fijar los signos se considera una fuente puntual a distancia axial $D$ del núcleo. Se aproxima el terreno por un plano horizontal y se propagan las partículas en línea recta. La geometría exacta de esta construcción es
+\begin{align}
+\delta&=r\tan\theta\cos\phi,&
+L&=\sqrt{(D-\delta)^2+r^2},\nonumber\\
+\sin\alpha&=\frac{r}{L},&
+\cos\vartheta&=\frac{D\cos\theta}{L}.
+\label{eq:geometria_fuente_muonica}
+\end{align}
+$\theta$ es el cenital de la lluvia; $L$, la distancia fuente--detector; $\alpha$, el ángulo de emisión respecto del eje descendente; y $\vartheta$, el cenital \emph{local} de la trayectoria. Se consideran puntos aguas abajo de la fuente, $D>\delta$. Entre los extremos temprano (E) y tardío (T) se cumple
+\begin{equation}
+L_{\mathrm T}>L_{\mathrm E},\qquad
+\alpha_{\mathrm T}<\alpha_{\mathrm E},\qquad
+\vartheta_{\mathrm T}>\vartheta_{\mathrm E}.
+\label{eq:fen2026:orden}
+\end{equation}
+El desplazamiento axial involucra $r\tan\theta$, porque $r$ se define en el plano de la lluvia. Reemplazarlo por $r\sin\theta$ mezclaría esta coordenada con una distancia medida en el terreno. La fuente puntual sirve para derivar la competencia de efectos; una lluvia real requiere integrar sobre su distribución extendida de producción.
+
+\subsection{Origen físico de la modulación azimutal}
+\label{subsec:origen_fisico}
+
+\subsubsection{Atenuación atmosférica}
+\label{subsubsec:atenuacion}
+
+Para muones con condiciones de producción equivalentes, el recorrido adicional hacia el lado tardío incrementa las pérdidas de energía, la probabilidad de decaimiento y la posibilidad de no alcanzar el detector. Estas pérdidas pasivas favorecen la región temprana. La supervivencia frente al decaimiento se escribe
+\begin{equation}
+P_{\mathrm{dec}}=
+\exp\left[-\int_0^L\frac{\mathrm ds}{\beta(s)\gamma(s)c\tau_\mu}\right],
+\label{eq:fen2026:supervivencia}
+\end{equation}
+donde $\tau_\mu$ es la vida media propia y la variación de $\beta\gamma$ incorpora la pérdida de energía durante la propagación~\cite{Cazon2012}. Un factor efectivo $\exp(-L/\lambda)$ representa este efecto sólo como aproximación local; no reemplaza su dependencia con la energía y la profundidad atmosférica.
+
+La componente electromagnética ordinaria observada después del máximo de desarrollo suele ser más sensible al espesor atmosférico adicional~\cite{Pryke1998,BradfieldThesis}. No obstante, su regeneración impide identificar cualquier cambio local de densidad con absorción pura. También para los muones, una derivada de la densidad respecto de la profundidad puede contener redistribución lateral, producción adicional y cambios de la población que supera un corte energético. Por ello, no debe sumarse una ``atenuación'' deducida de esa derivada a una divergencia lateral ya calculada, salvo que ambas contribuciones hayan sido separadas.
+
+El suelo sobre el UMD suprime fuertemente la componente electromagnética y exige a los muones un alcance suficiente para llegar al centellador~\cite{UMD_Design2016}. El filtro depende de su energía \emph{al nivel del suelo} y de su dirección local. No es un corte directo en la energía de producción, ni selecciona de manera unívoca una altura o generación de origen. Tampoco demuestra que la atenuación atmosférica domine la asimetría del UMD: la proyección geométrica puede contribuir con el mismo signo.
+
+\subsubsection{Proyección geométrica del flujo}
+\label{subsubsec:divergencia}
+
+Las trayectorias locales no son exactamente paralelas al eje de la lluvia. En consecuencia, una superficie horizontal intercepta de forma diferente un flujo divergente en los lados temprano y tardío. Para una distribución local axialmente simétrica, el término de proyección de Bertou y Billoir se expresa como~\cite{GAP2000_017}
+\begin{equation}
+A_{\mathrm{geo}}(r)=
+\left\langle\frac{p_r}{-p_z}\right\rangle_{\!\perp}\tan\theta,
+\qquad
+\mathcal A_{\mathrm{geo}}(r,\phi)=A_{\mathrm{geo}}(r)\cos\phi.
+\label{eq:efecto_geo}
+\end{equation}
+Aquí el eje longitudinal apunta hacia arriba, de modo que $p_z<0$ para partículas descendentes, y el promedio está ponderado por el flujo de cruce del plano normal al eje. La variable $p_r$ es la componente radial \emph{con signo}, no el módulo $p_t$ del momento transversal. Para un flujo netamente saliente, $\langle p_r/(-p_z)\rangle_\perp>0$, el término es positivo y favorece la región temprana. Un momento longitudinal menor no cambia por sí mismo ese signo. Si existen trayectorias radialmente entrantes, su contribución debe determinarse con la distribución de momentos y no inferirse de que los muones tengan baja energía.
+
+En el modelo de fuente puntual, una placa horizontal de área $A_p$ presenta a la trayectoria el área proyectada $A_p\cos\vartheta$. Como las trayectorias tempranas son más verticales, ese factor favorece el lado temprano. Esta es una modificación de la apertura frente a direcciones no paralelas, no el simple cambio de un círculo a una elipse al proyectar coordenadas. Para un haz perfectamente paralelo, una proyección consistente de posiciones y áreas no genera por sí sola ese dipolo.
+
+\subsubsection{Divergencia cinemática y distribución angular de emisión}
+\label{subsubsec:divergencia_cinematica}
+
+Los muones producidos principalmente en decaimientos de mesones heredan una distribución de momentos longitudinales y transversales~\cite{Cazon2012}. Si $p$ es el módulo del momento inicial, $p_t=p\sin\alpha$; sólo en el límite relativista puede reemplazarse $p$ por $E_i/c$, donde $E_i$ es la energía total de producción. Para ángulos pequeños y una fuente a distancia $D$, la relación radial es $r\simeq D\alpha\simeq Dp_t/p$.
+
+La región tardía exige un ángulo de emisión menor para alcanzar el mismo radio. Si $f(\alpha)=\mathrm dN/\mathrm d\Omega$ decrece con $\alpha$, esa región recibe partículas de una dirección más poblada de la distribución angular. Esta contribución favorece el lado tardío y es distinta de la apertura de la Ec.~\ref{eq:efecto_geo}. A la vez, el mayor recorrido tardío produce una dilución espacial mayor. Antes de incorporar apertura y supervivencia, la intensidad por unidad de área perpendicular a la trayectoria es proporcional a $f/L^2$, de modo que
+\begin{equation}
+\frac{[f/L^2]_{\mathrm T}}{[f/L^2]_{\mathrm E}}
+=\underbrace{\left(\frac{L_{\mathrm E}}{L_{\mathrm T}}\right)^2}_{\text{favorece temprano}}
+\underbrace{\frac{f(\alpha_{\mathrm T})}{f(\alpha_{\mathrm E})}}_{\text{favorece tardío si }f\text{ decrece}}.
+\label{eq:fen2026:competencia}
+\end{equation}
+El signo neto de esta competencia no está fijado por la geometría: depende de la pendiente de la distribución angular en los ángulos que efectivamente se muestrean.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap3/efecto_geo_luce_icrc2021.png}
+\caption{Geometría de la emisión hacia regiones temprana y tardía a igual radio en el plano de la lluvia. El ángulo requerido es menor hacia el lado tardío. El esquema, tomado de~\cite{Luce_ICRC2021}, ilustra la competencia angular, pero no determina por sí solo el signo del conteo o de la señal.}
+\label{fig:divergencia_angular}
+\end{figure}
+
+Es posible relacionar esta pendiente con un espectro transversal, en lugar de imponer una ley de potencias angular. Como aproximación separable inspirada en el tratamiento de producción de Cazón \textit{et al.}~\cite{Cazon2012}, se considera, a momento total fijo,
+\begin{equation}
+g(p_t\mid p)=\frac{p_t e^{-p_t/Q}}{Q^2 Z(k)},\qquad
+0\leq p_t\leq p,\qquad
+k=\frac{p}{Q},\qquad
+Z(k)=1-(1+k)e^{-k}.
+\label{eq:fen2026:pt}
+\end{equation}
+$Q$ tiene unidades de momento y $Z$ normaliza el intervalo cinemáticamente permitido. Suponiendo simetría azimutal y emisión en el hemisferio delantero, $\mathrm d\Omega=2\pi\sin\alpha\,\mathrm d\alpha$ y $\mathrm dp_t=p\cos\alpha\,\mathrm d\alpha$. El cambio de variables da
+\begin{equation}
+f(\alpha\mid p)=
+\frac{k^2}{2\pi Z(k)}\cos\alpha\,e^{-k\sin\alpha},
+\qquad
+\int_{\mathrm{hemisferio}}f(\alpha\mid p)\,\mathrm d\Omega=1.
+\label{eq:fen2026:adf}
+\end{equation}
+Esta expresión es una consecuencia exacta de la aproximación de la Ec.~\ref{eq:fen2026:pt}, no el modelo completo de producción y transporte de la referencia, que incluye correlaciones entre profundidad, energía y momento transversal.
+
+A momento fijo, el cociente de la Ec.~\ref{eq:fen2026:competencia} resulta
+\begin{equation}
+\frac{[f/L^2]_{\mathrm T}}{[f/L^2]_{\mathrm E}}
+=\left(\frac{L_{\mathrm E}}{L_{\mathrm T}}\right)^2
+\frac{\cos\alpha_{\mathrm T}}{\cos\alpha_{\mathrm E}}
+\exp\left[k(\sin\alpha_{\mathrm E}-\sin\alpha_{\mathrm T})\right].
+\label{eq:fen2026:cociente}
+\end{equation}
+Los dos factores angulares favorecen el lado tardío. A geometría y $Q$ fijos, la ganancia exponencial \emph{crece} con $p$: que los muones blandos tengan una distribución angular más ancha no implica que presenten una mayor diferencia relativa entre los dos ángulos. Una distribución ancha puede ser poco variable en el intervalo considerado; una distribución estrecha, muestreada en su cola, puede variar mucho. La ecuación no justifica atribuir automáticamente una inversión de signo a muones sub-GeV ni suprimirla mediante el umbral del UMD.
+
+En esta contribución aislada, el cruce entre ambos extremos se obtiene
+igualando el cociente a uno:
+\begin{equation}
+p^\ast=Q\,
+\frac{2\ln(L_{\mathrm T}/L_{\mathrm E})
+-\ln(\cos\alpha_{\mathrm T}/\cos\alpha_{\mathrm E})}
+{\sin\alpha_{\mathrm E}-\sin\alpha_{\mathrm T}}.
+\label{eq:fen2026:cruce}
+\end{equation}
+Si el numerador es positivo y los ángulos son distintos, existe un cruce
+a momento positivo: por debajo domina el extremo temprano y por encima
+el tardío. La energía total correspondiente es
+$E_i^\ast=\sqrt{(p^\ast c)^2+(m_\mu c^2)^2}$.
+No es un umbral universal de la lluvia ni del detector: se calculó sin
+supervivencia, sin respuesta instrumental y para una sola fuente. Tampoco
+equivale necesariamente al cero de un ajuste sobre todo el perfil azimutal.
+
+Para una población con espectro inicial $G(p)$ debe calcularse el cociente de intensidades integradas,
+\begin{equation}
+\frac{M_{\mathrm T}}{M_{\mathrm E}}
+=\frac{\int G(p)\,W_{\mathrm T}(p)\,\mathrm dp}
+       {\int G(p)\,W_{\mathrm E}(p)\,\mathrm dp},
+\qquad
+W_j=\frac{f(\alpha_j\mid p)}{L_j^2}\,
+P_j\,\mathcal R_j,\quad j=\mathrm E,\mathrm T.
+\label{eq:fen2026:integrales}
+\end{equation}
+$P_j$ representa la supervivencia y $\mathcal R_j$ la respuesta del detector. Promediar $W_{\mathrm T}/W_{\mathrm E}$ con el espectro inicial, sin ponderar por la contribución que llega a cada región, no reproduce este cociente. Asimismo, el prefactor $k^2/Z(k)$ de la Ec.~\ref{eq:fen2026:adf} se cancela a momento fijo, pero debe conservarse dentro de cada integral. La extensión a una fuente distribuida requiere integrar también sobre la profundidad de producción y sus correlaciones.
+
+La formulación permite verificar la consistencia del argumento cinemático, pero no constituye una predicción completa de los coeficientes medidos. En particular, extrapolar una única potencia del espectro inicial a bajas energías, omitir las pérdidas y el decaimiento, o usar un umbral al suelo como límite inferior en energía de producción modifica los pesos de la Ec.~\ref{eq:fen2026:integrales}. Una coincidencia numérica bajo esas aproximaciones no valida por sí sola una explicación del UMD.
+
+\subsubsection{Respuesta del tanque: conteo y señal no son equivalentes}
+\label{subsubsec:fen2026:tanque}
+
+Para un cilindro vertical de radio $R$ y altura $H$, la apertura a trayectorias rectas descendentes es
+\begin{equation}
+\mathcal A_{\mathrm{tanque}}(\vartheta)
+=\pi R^2\cos\vartheta+2RH\sin\vartheta.
+\label{eq:fen2026:apertura}
+\end{equation}
+La tapa favorece las direcciones más verticales y el lateral las más inclinadas. Por ello, sumar las entradas laterales modifica la asimetría de un conteo calculado sólo sobre la tapa; no implica necesariamente invertir su signo~\cite{GAP2000_017}.
+
+La señal proporcional a la longitud de traza satisface una identidad adicional. Para una dirección fija, cada punto $\mathbf b$ del área proyectada corresponde a una cuerda de longitud $\ell(\mathbf b)$ dentro del volumen. Integrar esas cuerdas reconstruye el volumen de agua:
+\begin{equation}
+\int_{\mathcal A_{\mathrm{proy}}}\ell(\mathbf b)\,\mathrm d^2b=V,
+\qquad
+\mathcal A_{\mathrm{proy}}\langle\ell\rangle=V.
+\label{eq:fen2026:cuerdas}
+\end{equation}
+Para una fluencia $F_\perp$ uniforme sobre la escala del tanque y muones que lo atraviesan completamente, el conteo es $N_\mu=F_\perp\mathcal A_{\mathrm{proy}}$. Si cada traza produce una señal $\xi\ell$, con $\xi$ constante, entonces
+\begin{equation}
+S_\mu=\xi F_\perp\mathcal A_{\mathrm{proy}}\langle\ell\rangle
+=\xi F_\perp V.
+\label{eq:fen2026:cancelacion}
+\end{equation}
+La apertura y la longitud media se compensan \emph{para cada dirección}, y por tanto en cada región azimutal; no es una cancelación obtenida al promediar temprano con tardío. La identidad también puede integrarse sobre una distribución de direcciones localmente uniforme sobre el tanque.
+
+El resultado es cero para la contribución angular de \emph{ese factor de respuesta ideal}, no para toda la asimetría muónica del SD. La señal conserva la modulación del flujo incidente $F_\perp$. El conteo de trayectorias no contiene el factor compensatorio $\langle\ell\rangle$, y los muones que se detienen, las variaciones de rendimiento luminoso, las ventanas temporales y la selección de señales requieren un tratamiento adicional. Por ello, la mayor longitud de ciertas trazas tardías no constituye por sí sola una explicación de un exceso tardío en el conteo MC. En particular, el contador de trayectorias muónicas inyectadas al tanque utilizado en esta tesis no es un conteo ponderado por la luz Cherenkov que producen.
+
+\subsubsection{Una expresión común para los términos físicos}
+\label{subsubsec:fen2026:marco}
+
+Para una contribución rectilínea a fuente y momento fijos puede escribirse
+\begin{equation}
+M_d(\phi)\propto
+\underbrace{P(\phi)}_{\text{supervivencia}}
+\underbrace{\frac{f(\alpha(\phi))}{L(\phi)^2}}_{\text{distribución angular y dilución}}
+\underbrace{\mathcal R_d(\phi)}_{\text{respuesta local}}.
+\label{eq:fen2026:producto}
+\end{equation}
+La respuesta es $A_p\cos\vartheta$ para el conteo en una placa ideal y la Ec.~\ref{eq:fen2026:apertura} para el conteo en el tanque. Para señal ideal de muones que atraviesan el volumen, la Ec.~\ref{eq:fen2026:cancelacion} reemplaza apertura por longitud de traza integrada. La transmisión del suelo, los umbrales y las eficiencias deben incorporarse cuando corresponda. Los factores se multiplican; la suma de sus primeros armónicos es únicamente una aproximación para modulaciones pequeñas.
+
+Esta organización recupera el resultado de Armbruster~\cite{Armbruster2018}, retomado por Luce \textit{et al.}~\cite{Luce_ICRC2021}, y precisa su observable. Si $r/D\ll1$, $\epsilon=(r/D)\tan\theta\ll1$, $f\propto\alpha^{-\gamma_{\mathrm{ADF}}}$ y $P=e^{-L/\lambda}$, resulta
+\begin{equation}
+A_{1,d}\simeq
+\left[\underbrace{2}_{\text{dilución}}
+-\underbrace{\gamma_{\mathrm{ADF}}}_{\text{pendiente angular}}
++\underbrace{D/\lambda}_{\text{atenuación}}
++\underbrace{\kappa_d}_{\text{apertura}}\right]\epsilon.
+\label{eq:fen2026:bracket}
+\end{equation}
+Aquí $\kappa_d$ se define mediante $\mathcal R_d(\phi)=\mathcal R_{d,0}[1+\kappa_d\epsilon\cos\phi+\cdots]$, manteniendo fijos los demás parámetros. Para la placa horizontal $\kappa_d=1$; para la señal ideal de trazas completas, $\kappa_d=0$. En un conteo de intersecciones con el tanque se deriva de su propia apertura y no toma necesariamente ninguno de esos dos valores.
+
+El $+2$ proviene exclusivamente de expandir $L^{-2}$. La expresión de señal $2-\gamma_{\mathrm{ADF}}+D/\lambda$ no incluye un $+1$ adicional de placa: en la derivación de señal, la apertura ya se compensó con la longitud media. En cambio, agregar $A_{\mathrm{geo}}$ después de multiplicar explícitamente por el área proyectada de la placa sí contaría dos veces la misma contribución.
+
+La conexión con la distribución de la Ec.~\ref{eq:fen2026:adf} no requiere imponer una potencia global. Su pendiente local es
+\begin{equation}
+s(\alpha,p)\equiv-
+\frac{\partial\ln f}{\partial\ln\sin\alpha}
+=\tan^2\alpha+\frac{p}{Q}\sin\alpha.
+\label{eq:fen2026:pendiente}
+\end{equation}
+En el límite de ángulos pequeños, $s$ desempeña el papel de $\gamma_{\mathrm{ADF}}$. Para una mezcla de fuentes y momentos, la pendiente efectiva debe ponderarse por las contribuciones que llegan al detector, no por el espectro de producción aislado. El término angular puede en principio superar las contribuciones positivas; por lo tanto, no existe un teorema que obligue a toda población muónica no seleccionada a tener $A_1>0$. Determinar su magnitud requiere los pesos de producción, transporte y respuesta correspondientes al observable estudiado.
+
+\subsubsection{Campo geomagnético y dispersión durante la propagación}
+\label{subsubsec:geomagnetico}
+
+La fuerza de Lorentz, $\vec F=q\vec v\times\vec B$, desvía en sentidos opuestos a muones de cargas diferentes. La distorsión depende de la rigidez, del recorrido y de la orientación de la lluvia respecto del campo; resulta especialmente relevante en lluvias muy inclinadas~\cite{GAP2007_124,collaboration_2014}. Su eje no coincide en general con la dirección temprano--tardía. Promediar distintas direcciones de arribo puede reducir algunas contribuciones, pero no garantiza que el efecto sea nulo ni que disminuya siempre el primer armónico.
+
+La dispersión múltiple también modifica las direcciones y posiciones de llegada, y debe distinguirse de la apertura angular adquirida en producción~\cite{Cazon2012}. Ambos procesos están fuera de la propagación rectilínea de la Ec.~\ref{eq:fen2026:producto}. No se los utiliza aquí como explicación demostrada de una inversión: aislarlos exige controles de transporte o información de partículas que permita separar su contribución. Tampoco es necesario invocar una nueva interacción atmosférica para explicar un cambio de signo que aparece al condicionar la muestra de estaciones.
+
+\subsection{Del conteo incidente al promedio en estaciones seleccionadas}
+\label{subsec:respuesta_seleccion}
+
+Sea $\mathcal S$ la condición de retener una estación y $b$ un intervalo de radio, cenital y demás parámetros de lluvia, incluyendo el azimut. El promedio antes de imponer esa condición y el promedio seleccionado están relacionados por la identidad
+\begin{equation}
+\mathrm E[N_\mu\mid\mathcal S,b]
+=\mathrm E[N_\mu\mid b]\,
+\frac{\epsilon_{N,b}}{\epsilon_b},\qquad
+\epsilon_b=P(\mathcal S\mid b),\qquad
+\epsilon_{N,b}=\frac{\mathrm E[N_\mu\mathbf1_{\mathcal S}\mid b]}
+                       {\mathrm E[N_\mu\mid b]}.
+\label{eq:fen2026:seleccion}
+\end{equation}
+Los denominadores se suponen no nulos. $\epsilon_b$ es la fracción de estaciones retenidas, mientras que $\epsilon_{N,b}$ pondera esa retención por su conteo muónico. Sólo si la selección es independiente del conteo, a parámetros $b$ fijos, puede eliminarse su cociente. Una dependencia azimutal de ese cociente modifica el perfil medio y puede invertir su primer armónico. No se trata simplemente de disponer de distintas cantidades de estaciones por bin: cambia la población sobre la que se calcula la media.
+
+En el SD, una interpretación físicamente plausible es que la mayor contribución electromagnética temprana ayude a retener tanques con pocos muones. En el lado tardío, con menor contribución electromagnética, los tanques retenidos pueden estar preferentemente enriquecidos en muones. No se crean ni se desplazan muones hacia esa región; se seleccionan estaciones con una composición de señal diferente. La atenuación electromagnética participa así indirectamente en un sesgo de selección, sin que cambie el signo temprano de las pérdidas pasivas de muones.
+
+La Sección~\ref{subsec:control_seleccion_sd} compara los mismos conteos simulados antes y después de exigir la presencia de una estación SD reconstruida, expresada por \texttt{HasStation}. Ese control establece el cambio de signo asociado al condicionamiento en la muestra estudiada. La secuencia de ayuda electromagnética y enriquecimiento muónico anterior es una interpretación del mecanismo subyacente, no una identificación ya demostrada de un algoritmo de disparo particular ni una prueba de funcionamiento incorrecto de \textit{Offline}. El conteo puede ser de verdad Monte Carlo y, al mismo tiempo, estar sesgado por la selección de las estaciones en que se lo consulta.
+
+El UMD no constituye un control idéntico con otro umbral. Cuenta una población transportada a través del suelo, en una superficie sensible distinta, cuyos muones no son necesariamente los que produjeron la señal del tanque asociado. La correlación de ese conteo con la selección SD puede ser diferente, aunque ambos compartan fluctuaciones de la lluvia. Una asimetría positiva del UMD no demuestra su independencia respecto de la selección, y la ausencia de información de verdad subterránea en una estación no puede reemplazarse automáticamente por un conteo físico nulo.
+
+\subsection{Parametrización armónica y alcance de la interpretación}
+\label{subsec:parametrizacion}
+
+Siguiendo la parametrización empleada en estudios del SD~\cite{Billoir2002,BradfieldThesis}, se describe el perfil mediante
+\begin{equation}
+S(r,\phi)=S_0(r)\,[1+A_1(r,\theta)\cos\phi].
+\label{eq:asimetria_a1}
+\end{equation}
+$S$ representa densidad, conteo medio o señal según se declare en cada análisis. $S_0$ es su normalización azimutal. Un coeficiente $A_1>0$ corresponde a exceso temprano y $A_1<0$ a exceso tardío; ninguno identifica exclusivamente un mecanismo. Fijar el eje en $\phi=0$ no obliga al coeficiente a ser positivo, sino que selecciona la componente temprano--tardía. Los residuos y controles complementarios permiten evaluar términos en $\sin\phi$ o armónicos superiores.
+
+Para una modulación puramente cosinusoidal se cumple $A_1=[S(0)-S(\pi)]/[S(0)+S(\pi)]$. Fuera de ese caso, un contraste entre dos puntos, un coeficiente de Fourier y un ajuste ponderado a medias en intervalos azimutales no son necesariamente iguales. Los resultados experimentales de los capítulos siguientes se refieren al estimador declarado en la metodología, no a un contraste de dos trayectorias del modelo puntual.
+
+En síntesis, las pérdidas pasivas y la proyección de un flujo saliente favorecen la región temprana; la preferencia angular por trayectorias más próximas al eje favorece la tardía y compite con la dilución espacial. La geometría de un tanque se compensa con la longitud media sólo para la contribución ideal a la señal de trazas completas. Finalmente, la selección modifica el promedio observado aunque los conteos individuales sean exactos. Este marco conserva los mecanismos físicos y evita usar una inversión del conteo seleccionado como prueba de una inversión de la densidad muónica incidente.
+
+\newpage

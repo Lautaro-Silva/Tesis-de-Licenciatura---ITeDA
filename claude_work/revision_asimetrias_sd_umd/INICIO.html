@@ -37,6 +37,10 @@ Separa el resultado demostrado, la hipótesis física y lo que sigue abierto.</p
 <td><a href="02_notebooks/03_sd_vs_umd/comparar_sd_umd.ipynb">Notebook 3: comparación directa</a> · <a href="02_notebooks/03_sd_vs_umd/comparar_sd_umd.html">HTML</a></td>
 </tr>
 <tr>
+<td>Reprocesar personalmente los ROOT con el lector v8-2 y HasStation como flag</td>
+<td><a href="02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.ipynb">Notebook 4: versión simple</a> · <a href="02_notebooks/04_reprocesamiento/README.md">Guía</a> · <a href="02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.html">HTML</a> — preparado, NO ejecutado</td>
+</tr>
+<tr>
 <td>Revisar propuestas para los capítulos 3, 5 y 6</td>
 <td><a href="03_borradores_tesis/README.md">Guía de borradores</a> · <a href="03_borradores_tesis/preview.pdf">Vista previa PDF</a></td>
 </tr>
@@ -65,7 +69,8 @@ En toda la entrega, A₁ positivo significa exceso temprano; negativo, exceso ta
 ├── 02_notebooks/
 │   ├── 01_seleccion/            Procedencia, selección y controles
 │   ├── 02_reproduccion/         Tu gráfico original, sin cambiar el estimador
-│   └── 03_sd_vs_umd/            Comparación directa que faltaba
+│   ├── 03_sd_vs_umd/            Comparación directa que faltaba
+│   └── 04_reprocesamiento/     v8-2 con flag; versión auditada anterior preservada
 ├── 03_borradores_tesis/         Tres capítulos completos, diffs y preview
 ├── 04_soporte/
 │   ├── codigo/                 Auditoría, verificadores y generadores
@@ -76,7 +81,10 @@ En toda la entrega, A₁ positivo significa exceso temprano; negativo, exceso ta
 │   └── organizacion/           Inventario y comprobaciones del traslado
 └── 99_archivo_local/            Copia recuperable y cachés; no se publica en Git
 </code></pre>
-<p>Cada notebook tiene su <code>.py</code> editable, <code>.ipynb</code> ejecutado y <code>.html</code> para lectura.
+<p>Cada notebook tiene su <code>.py</code> editable, <code>.ipynb</code> y <code>.html</code> para lectura.
+Los tres primeros están ejecutados. La carpeta cuarta contiene el procesamiento
+simple recomendado y la versión auditada anterior, ambos <strong>sin ejecutar</strong>, con
+pruebas sintéticas de código, no de ROOT real.
 Sus figuras y tablas están en <code>resultados/</code> (o <code>exports/</code> en el recorrido inicial).
 Son formatos de un mismo análisis, no tres versiones científicas distintas.</p>
 <h2>Qué figura es cuál — no mezclar sus números</h2>
@@ -125,6 +133,13 @@ reemplazarse silenciosamente por números de otro ajuste.</p>
 leen tablas existentes; <strong>no lanzan ROOT, Offline ni simulaciones nuevas</strong>.
 Necesitan el parquet original en la ruta indicada al comienzo de cada notebook.
 La extracción SD ya está guardada una sola vez en <code>04_soporte/tablas/</code>.</p>
+<p>El notebook 4 es distinto: prepara una nueva lectura de tus ROOT, que ejecutás vos.
+La versión simple conserva el lector v8-2 y guarda <code>has_sd_rec</code> en UN dataset:
+comparás todas sus filas con el subconjunto True. No hay auxiliares nuevos ni
+inventario SD en ese lector. La versión auditada anterior queda preservada aparte.
+No sustituye silenciosamente los datos de los notebooks anteriores. Seguí su guía
+y probá un archivo antes de toda la producción. Ejecutar su celda de procesamiento
+inicia una lectura real: está preparada para que la corras vos, no ejecutada aquí.</p>
 <p>Para editar, modificá el <code>.py</code> y sincronizá con <code>venv/bin/jupytext --sync ruta/al/cuaderno.py</code>.
 No borres ni ignores el <code>.ipynb</code>: conserva las salidas que el autor necesita.
 El lector ROOT es opcional y está documentado en el notebook 1; no ejecutarlo para

@@ -16,6 +16,7 @@ Separa el resultado demostrado, la hipótesis física y lo que sigue abierto.
 | Entender de dónde salen los datos y qué hace el requisito de reconstrucción | [Notebook 1: selección paso a paso](02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.ipynb) · [HTML](02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.html) |
 | Reproducir exactamente mi gráfico de cuatro componentes | [Notebook 2: reproducción](02_notebooks/02_reproduccion/reproducir_desglose_sd.ipynb) · [HTML](02_notebooks/02_reproduccion/reproducir_desglose_sd.html) |
 | Ver si el SD sin ese requisito coincide con UMD | [Notebook 3: comparación directa](02_notebooks/03_sd_vs_umd/comparar_sd_umd.ipynb) · [HTML](02_notebooks/03_sd_vs_umd/comparar_sd_umd.html) |
+| Reprocesar personalmente los ROOT con el lector v8-2 y HasStation como flag | [Notebook 4: versión simple](02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.ipynb) · [Guía](02_notebooks/04_reprocesamiento/README.md) · [HTML](02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.html) — preparado, NO ejecutado |
 | Revisar propuestas para los capítulos 3, 5 y 6 | [Guía de borradores](03_borradores_tesis/README.md) · [Vista previa PDF](03_borradores_tesis/preview.pdf) |
 | Examinar derivaciones, literatura externa y auditoría de Offline | [Informe completo](01_fisica/report.html) · [Markdown](01_fisica/report.md) |
 
@@ -44,7 +45,8 @@ revision_asimetrias_sd_umd/
 ├── 02_notebooks/
 │   ├── 01_seleccion/            Procedencia, selección y controles
 │   ├── 02_reproduccion/         Tu gráfico original, sin cambiar el estimador
-│   └── 03_sd_vs_umd/            Comparación directa que faltaba
+│   ├── 03_sd_vs_umd/            Comparación directa que faltaba
+│   └── 04_reprocesamiento/     v8-2 con flag; versión auditada anterior preservada
 ├── 03_borradores_tesis/         Tres capítulos completos, diffs y preview
 ├── 04_soporte/
 │   ├── codigo/                 Auditoría, verificadores y generadores
@@ -56,7 +58,10 @@ revision_asimetrias_sd_umd/
 └── 99_archivo_local/            Copia recuperable y cachés; no se publica en Git
 ```
 
-Cada notebook tiene su `.py` editable, `.ipynb` ejecutado y `.html` para lectura.
+Cada notebook tiene su `.py` editable, `.ipynb` y `.html` para lectura.
+Los tres primeros están ejecutados. La carpeta cuarta contiene el procesamiento
+simple recomendado y la versión auditada anterior, ambos **sin ejecutar**, con
+pruebas sintéticas de código, no de ROOT real.
 Sus figuras y tablas están en `resultados/` (o `exports/` en el recorrido inicial).
 Son formatos de un mismo análisis, no tres versiones científicas distintas.
 
@@ -89,6 +94,14 @@ Abrí el notebook deseado y ejecutá sus celdas. Los tres recorridos principales
 leen tablas existentes; **no lanzan ROOT, Offline ni simulaciones nuevas**.
 Necesitan el parquet original en la ruta indicada al comienzo de cada notebook.
 La extracción SD ya está guardada una sola vez en `04_soporte/tablas/`.
+
+El notebook 4 es distinto: prepara una nueva lectura de tus ROOT, que ejecutás vos.
+La versión simple conserva el lector v8-2 y guarda `has_sd_rec` en UN dataset:
+comparás todas sus filas con el subconjunto True. No hay auxiliares nuevos ni
+inventario SD en ese lector. La versión auditada anterior queda preservada aparte.
+No sustituye silenciosamente los datos de los notebooks anteriores. Seguí su guía
+y probá un archivo antes de toda la producción. Ejecutar su celda de procesamiento
+inicia una lectura real: está preparada para que la corras vos, no ejecutada aquí.
 
 Para editar, modificá el `.py` y sincronizá con `venv/bin/jupytext --sync ruta/al/cuaderno.py`.
 No borres ni ignores el `.ipynb`: conserva las salidas que el autor necesita.

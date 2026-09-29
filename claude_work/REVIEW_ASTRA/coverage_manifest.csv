@@ -1,0 +1,217 @@
+path,read_by,status,note
+claude_work/gap_notes_asimetrias_review/discriminating_analysis_proposal.md,Subagent C,read,"v1 (unversioned) predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review/kinematic_divergence_math_check.md,Subagent C,read,"v1 (unversioned) predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review/sd_umd_synthesis.md,Subagent C,read,"v1 (unversioned) predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review/sign_of_the_asymmetry.html,Subagent C,read,"v1 (unversioned) predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review/thesis_review_familiarization_notes.md,Subagent C,read,"v1 (unversioned) predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v2/discriminating_analysis_proposal.md,Subagent C,read,"v2 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v2/kinematic_divergence_math_check.md,Subagent C,read,"v2 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v2/sign_of_the_asymmetry.html,Subagent C,read,"v2 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v2/thesis_review_familiarization_notes.md,Subagent C,read,"v2 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v2/verificacion_eq9_kinematic_divergence.py,Subagent C,read,"v2 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v3/discriminating_analysis_proposal.md,Subagent C,read,"v3 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v3/kinematic_divergence_math_check.md,Subagent C,read,"v3 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v3/sd_umd_synthesis.md,Subagent C,read,"v3 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v3/sign_of_the_asymmetry.html,Subagent C,read,"v3 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v3/thesis_review_familiarization_notes.md,Subagent C,read,"v3 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v3/verificacion_eq9_kinematic_divergence.py,Subagent C,read,"v3 predecessor, diffed against v4 counterpart"
+claude_work/gap_notes_asimetrias_review_v4/discriminating_analysis_proposal.md,Subagent C,read,"v4 (latest pre-Astra Claude review pass), full read"
+claude_work/gap_notes_asimetrias_review_v4/kinematic_divergence_math_check.md,Subagent C,read,"v4 (latest pre-Astra Claude review pass), full read"
+claude_work/gap_notes_asimetrias_review_v4/sd_umd_synthesis.md,Subagent C,read,"v4 (latest pre-Astra Claude review pass), full read"
+claude_work/gap_notes_asimetrias_review_v4/sign_of_the_asymmetry.html,Subagent C,read,"v4 (latest pre-Astra Claude review pass), full read"
+claude_work/gap_notes_asimetrias_review_v4/thesis_review_familiarization_notes.md,Subagent C,read,"v4 (latest pre-Astra Claude review pass), full read"
+claude_work/gap_notes_asimetrias_review_v4/verificacion_eq9_kinematic_divergence.py,Subagent C,read,"v4 (latest pre-Astra Claude review pass), full read"
+claude_work/gap_notes_asimetrias_review/verificacion_eq9_kinematic_divergence.py,Subagent C,read,"v1 (unversioned) predecessor, diffed against v4 counterpart"
+claude_work/kinematic_divergence_explainer_and_thesis_updates/03_fenomenologia_DRAFT.tex,Subagent D,read,full read
+claude_work/kinematic_divergence_explainer_and_thesis_updates/05_anillo_denso_DRAFT.tex,Subagent D,read,full read
+claude_work/kinematic_divergence_explainer_and_thesis_updates/06_infill_DRAFT.tex,Subagent D,read,full read
+claude_work/kinematic_divergence_explainer_and_thesis_updates/explainer_kinematic_divergence_simulator.ipynb,not read,not read,"paired jupytext notebook, redundant with the .py per repo convention"
+claude_work/kinematic_divergence_explainer_and_thesis_updates/explainer_kinematic_divergence_simulator.py,Subagent D,read,full read
+claude_work/kinematic_divergence_explainer_and_thesis_updates/spectrum_weighting_correction.html,Subagent D,read,full read
+claude_work/revision_asimetrias_sd_umd/01_fisica/physics_explanation.html,not read,not read,rendered duplicate of the .md twin
+claude_work/revision_asimetrias_sd_umd/01_fisica/physics_explanation.md,Subagent F + me,read,full read (report.md and physics_explanation.md also read directly by me in Phase 3)
+claude_work/revision_asimetrias_sd_umd/01_fisica/README.md,Subagent F + me,read,full read (report.md and physics_explanation.md also read directly by me in Phase 3)
+claude_work/revision_asimetrias_sd_umd/01_fisica/report.html,not read,not read,rendered duplicate of the .md twin
+claude_work/revision_asimetrias_sd_umd/01_fisica/report.md,Subagent F + me,read,full read (report.md and physics_explanation.md also read directly by me in Phase 3)
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/01_perfiles_antes_despues.pdf,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/01_perfiles_antes_despues.png,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/02_eficiencia_y_enriquecimiento.pdf,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/02_eficiencia_y_enriquecimiento.png,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/03_distribuciones_de_conteo.pdf,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/03_distribuciones_de_conteo.png,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/04_bootstrap_pareado.pdf,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/04_bootstrap_pareado.png,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/05_evolucion_radial.pdf,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/05_evolucion_radial.png,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/06_diagnosticos_EM_y_ceros.pdf,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/06_diagnosticos_EM_y_ceros.png,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/07_UMD_SD_observables_seleccionados.pdf,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/07_UMD_SD_observables_seleccionados.png,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/A1_recalculado_con_bootstrap.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/comprobaciones.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/control_bandas_estrechas.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/control_mezcla_comun.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/ficha_de_ejecucion.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/observables_parquet_recalculados.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/procedencia_por_archivo.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/resultado_principal.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/exports/seleccion_por_azimut.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/.gitignore,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/raw_smoke_test/provenance.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/raw_smoke_test/stations.csv,Subagent F,read,"CSV data table, contents reported"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/README.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/read_original_adst.py,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.html,not read,not read,rendered duplicate of the .py (repo convention: edit/read the .py)
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.ipynb,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.py,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/VALIDACION.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/01_seleccion/validate_notebook.py,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/.gitignore,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/README.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/reproducir_desglose_sd.html,not read,not read,rendered duplicate of the .py
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/reproducir_desglose_sd.ipynb,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/reproducir_desglose_sd.py,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/RESULTADO.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/ajustes_reproducidos.csv,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/comparacion_numerica_con_PDF.csv,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/integridad_fuentes_offline.csv,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/SD_antes_despues_mismos_bins.pdf,not read,not read,figure image; underlying CSV numbers reported instead
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/SD_antes_despues_mismos_bins.png,not read,not read,figure image; underlying CSV numbers reported instead
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/SD_Desglose_Componentes_vs_UMD_reproducido.pdf,not read,not read,figure image; underlying CSV numbers reported instead
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/SD_Desglose_Componentes_vs_UMD_reproducido.png,not read,not read,figure image; underlying CSV numbers reported instead
+claude_work/revision_asimetrias_sd_umd/02_notebooks/02_reproduccion/resultados/seleccion_mismos_bins_ajuste_ponderado.csv,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/comparar_sd_umd.html,not read,not read,rendered duplicate of the .py
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/comparar_sd_umd.ipynb,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/comparar_sd_umd.py,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/RESULTADO.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/resultados/comparacion_directa.csv,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/resultados/replicas_pareadas.csv,Subagent F,read,"shape/columns inspected (581KB bootstrap-replica dump), not row-by-row"
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/resultados/SD_sin_corte_vs_UMD.pdf,not read,not read,figure image; underlying CSV numbers reported instead
+claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/resultados/SD_sin_corte_vs_UMD.png,not read,not read,figure image; underlying CSV numbers reported instead
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/03_fenomenologia_DRAFT.tex,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/05_anillo_denso_DRAFT.tex,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/06_infill_DRAFT.tex,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/BUILD_STATUS.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/cambios_03.diff,Subagent F,read,"diff inspected (representative portion, first ~80 lines)"
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/cambios_05.diff,Subagent F,read,"diff inspected (representative portion, first ~80 lines)"
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/cambios_06.diff,Subagent F,read,diff read in full
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/.gitignore,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/prepare_and_check.py,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/preview.pdf,not read,not read,"compiled PDF preview of the draft tex, not opened as image"
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/preview.tex,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/protected_sources_sha256.json,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/README.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/validation.json,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/adst_counts_fast.py,Subagent F,read,full read (decision-critical script)
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/adst_metadata.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/build_physics_explanation.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/build_report.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/consolidar_entrega.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/crear_inicio.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/crear_resumen_direccion.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/derivation_checks.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/finalizar_rutas.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/parent_bootstrap.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/read_adst_audit.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/review_paths.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/selection_closure.py,Subagent F,read,full read (decision-critical script)
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/selection_robustness.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/statistical_checks.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/transport_checks.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/umd_selection_check.py,Subagent F,read,full read (decision-critical script)
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/umd_selection_read.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/validar_entrega.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/validate_artifacts.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/codigo/verify.py,Subagent F,read,"inspected by name/docstring, described in report.md sec.10"
+claude_work/revision_asimetrias_sd_umd/04_soporte/figuras/selection_audit.png,not read,not read,"figure image, referenced by filename only"
+claude_work/revision_asimetrias_sd_umd/04_soporte/figuras/selection_audit.svg,not read,not read,"figure image, referenced by filename only"
+claude_work/revision_asimetrias_sd_umd/04_soporte/organizacion/inventario_traslado.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/organizacion/regresion_numerica.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/organizacion/VALIDACION.md,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/plantillas/estilo_informe.html,not read,not read,"HTML/MD template scaffolding, not analysis content"
+claude_work/revision_asimetrias_sd_umd/04_soporte/plantillas/report.template.md,not read,not read,"HTML/MD template scaffolding, not analysis content"
+claude_work/revision_asimetrias_sd_umd/04_soporte/plantillas/resumen_direccion.template.md,not read,not read,"HTML/MD template scaffolding, not analysis content"
+claude_work/revision_asimetrias_sd_umd/04_soporte/README_auditoria.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/04_soporte/README.md,Subagent F,read,full read
+claude_work/revision_asimetrias_sd_umd/04_soporte/referencias/SD_Desglose_Componentes_vs_UMD_original.pdf,not read,not read,"copy of the original thesis figure PDF, used only for provenance, not re-derived"
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_audit_summary.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_cluster_bootstrap.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_counts_fast.csv,Subagent F + me,read,schema/shape inspected via pandas; adst_counts_fast.csv independently reprocessed by me (see checks/zenith_energy_dependence.py)
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_counts_fast_summary.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_metadata.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_selection_bins.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_selection_fits.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_station_audit.csv,Subagent F + me,read,schema/shape inspected via pandas; adst_counts_fast.csv independently reprocessed by me (see checks/zenith_energy_dependence.py)
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/analytic_legacy.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/analytic_summary.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/cluster_bootstrap.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/data_manifest.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/derivation_numbers.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/energy_strata.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/far_bin_diagnostics.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/mc_fits.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/mc_summary.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/model_benchmark_residuals.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/offline_source_manifest.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/parent_cluster_bootstrap.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/primary_azimuth_fits.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/report_manifest.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/selection_closure_bins.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/selection_closure_fits.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/selection_composition.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/selection_match_summary.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/selection_narrow_bins.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/selection_paired_bootstrap.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/selection_standardized.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/standardized_fits.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/transport_convergence.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/transport_sensitivity.csv,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/umd_selection_check.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/umd_selection_raw.csv,Subagent F + me,read,schema/shape inspected via pandas; adst_counts_fast.csv independently reprocessed by me (see checks/zenith_energy_dependence.py)
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/umd_selection_raw_summary.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/unit_checks.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/validation_results.json,Subagent F,read,contents reported
+claude_work/revision_asimetrias_sd_umd/.gitignore,Subagent F,read,read
+claude_work/revision_asimetrias_sd_umd/INICIO.html,not read,not read,"rendered duplicate of a .md twin, or a compiled artifact"
+claude_work/revision_asimetrias_sd_umd/README.md,Subagent F + me,read,full read
+claude_work/revision_asimetrias_sd_umd/RESUMEN_PARA_DIRECCION.html,not read,not read,"rendered duplicate of a .md twin, or a compiled artifact"
+claude_work/revision_asimetrias_sd_umd/RESUMEN_PARA_DIRECCION.md,Subagent F + me,read,full read
+claude_work/revision_asimetrias_sd_umd/RESUMEN_PARA_DIRECCION.pdf,not read,not read,"rendered duplicate of a .md twin, or a compiled artifact"
+claude_work/unified_asymmetry_model_v1/report.html,not read,not read,rendered duplicate of report.md
+claude_work/unified_asymmetry_model_v1/report.md,Subagent G,read,full read; key numbers cross-checked against run_output.txt
+claude_work/unified_asymmetry_model_v1/run_output.txt,Subagent G,read,full read; key numbers cross-checked against run_output.txt
+claude_work/unified_asymmetry_model_v1/unified_model_verification.py,Subagent G,read,full read; key numbers cross-checked against run_output.txt
+GAP_Notes_Latex/GAP2026_041/Ajuste_UMD_MC_Bin9.pdf,not read,not read,"figure PDF; numbers already quoted in main.tex text, not opened"
+GAP_Notes_Latex/GAP2026_041/bibliografia.bib,not read,not read,"bibliography file, not prose"
+GAP_Notes_Latex/GAP2026_041/efecto_geo_luce_icrc2021.png,not read,not read,auxiliary asset
+GAP_Notes_Latex/GAP2026_041/esquema_lluvia.jpeg,not read,not read,auxiliary asset
+GAP_Notes_Latex/GAP2026_041/Evolucion_Asimetria_vs_Theta.pdf,not read,not read,"figure PDF; numbers already quoted in main.tex text, not opened"
+GAP_Notes_Latex/GAP2026_041/GAP__Azimuthal_Asymmetries_in_Extensive_Air_Showers__UMD_SD_Comparison_and_Insights_into_the_Surface_Detector_Sign_Inversion.pdf,not read,not read,"figure PDF; numbers already quoted in main.tex text, not opened"
+GAP_Notes_Latex/GAP2026_041/GAP__Azimuthal_Asymmetries_in_Extensive_Air_Showers__UMD_SD_Comparison_and_Insights_into_the_Surface_Detector_Sign_Inversion.zip,not read,not read,auxiliary asset
+GAP_Notes_Latex/GAP2026_041/Global_A1_vs_R_Theta_MC.pdf,not read,not read,"figure PDF; numbers already quoted in main.tex text, not opened"
+GAP_Notes_Latex/GAP2026_041/main.tex,Subagent A,read,"Current GAP-041 note, full read"
+GAP_Notes_Latex/GAP2026_041/SD_Desglose_Componentes_vs_UMD.pdf,not read,not read,"figure PDF; numbers already quoted in main.tex text, not opened"
+GAP_Notes_Latex/GAP2026_041/SILVA_lautaro.pdf,not read,not read,"figure PDF; numbers already quoted in main.tex text, not opened"
+GAP_Notes_Latex/GAP2026_041/UMD_vs_SD_Total_Asymmetry.pdf,not read,not read,"figure PDF; numbers already quoted in main.tex text, not opened"
+GAP_Notes_Latex/[UNFINISHED]GAP_Core_REC/GAP__Study_on_core_reconstruction_bias_and_how_it_attenuates_the_early_late_asymmetry.pdf,not read,not read,auxiliary asset
+GAP_Notes_Latex/[UNFINISHED]GAP_Core_REC/GAP__Study_on_core_reconstruction_bias_and_how_it_attenuates_the_early_late_asymmetry.zip,not read,not read,auxiliary asset
+GAP_Notes_Latex/[UNFINISHED]GAP_Core_REC/main.tex,Subagent A,read,"Unfinished core-reconstruction-bias note, full read (added to scope)"
+GAP_Notes_Latex/[Version_Vieja]GAP_41/Ajuste_UMD_MC_Bin9.pdf,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/bibliografia.bib,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/efecto_geo_luce_icrc2021.png,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/esquema_lluvia.jpeg,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/Evolucion_Asimetria_vs_Theta.pdf,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/Global_A1_vs_R_Theta_MC.pdf,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/main.tex,Subagent B,read,"Old/superseded GAP-041 draft, full read"
+GAP_Notes_Latex/[Version_Vieja]GAP_41/SD_Desglose_Componentes_vs_UMD.pdf,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/UMD_vs_SD_Total_Asymmetry.pdf,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/_VERSION_VIEJA__GAP__A_Phenomenological_Study_of_Early__Late_Azimuthal_Asymmetries_of_the_Muon_Density.pdf,not read,not read,duplicate figure/bib asset shared with current version
+GAP_Notes_Latex/[Version_Vieja]GAP_41/_VERSION_VIEJA__GAP__A_Phenomenological_Study_of_Early__Late_Azimuthal_Asymmetries_of_the_Muon_Density.zip,not read,not read,duplicate figure/bib asset shared with current version
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/textos_extraidos_PDF/armbruster.txt,SKIPPED,skipped,"Bibliography exception invoked: 479KB extracted-text cache of Armbruster (GAP-2020-066/bachelor thesis). Untracked, absent from review worktree. Astra quotes the load-bearing passages (Sec 2.4 Eqs 2.12-2.21, 2.33) verbatim with citations in 01_fisica/report.md Sec 4.3; primary PDF exists untracked at Bibliografia/Papers sin citar/GAP2020_066.pdf if the user wants it independently checked."
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/textos_extraidos_PDF/ave2017.txt,SKIPPED,skipped,"Bibliography exception invoked: 144KB extracted-text cache of Ave et al. 2017. Untracked, absent from review worktree. Cited briefly in report.md Sec 6.5; primary PDF is in Bibliografia/auger2020umd_infill-adjacent set (already a cited thesis reference), not independently re-read here."
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/textos_extraidos_PDF/bertou_billoir.txt,SKIPPED,skipped,"Bibliography exception invoked: 84KB extracted-text cache of Bertou and Billoir GAP-2000-017. Untracked, absent from review worktree. This is the single most load-bearing citation in the whole review (the retracted attenuation-sign correction in unified_asymmetry_model_v1 and the A_geo sign argument both hinge on it); primary PDF Bibliografia/GAP2000_017.pdf exists and is tracked -- recommended as the top-priority follow-up read if the user wants this independently verified beyond trusting the quotes in report.md."
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/textos_extraidos_PDF/cazon2012.txt,SKIPPED,skipped,"Bibliography exception invoked: 114KB extracted-text cache of Cazon et al. 2012. Untracked, absent from review worktree. Tracked primary PDF exists at Bibliografia/ (cited in CLAUDE.md Sec 11); report.md Sec 5.1 quotes its explicit rejection of the single power-law approximation directly."
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/textos_extraidos_PDF/garcia_pinto.txt,SKIPPED,skipped,"Bibliography exception invoked: 328KB extracted-text cache of the Garcia Pinto PhD thesis. Untracked, absent from review worktree. Not directly load-bearing for the selection-bias claim; primary PDF is in Bibliografia/Papers sin citar/."
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/textos_extraidos_PDF/luce2021.txt,SKIPPED,skipped,"Bibliography exception invoked: 39KB extracted-text cache of Luce et al. ICRC2021-435. Untracked, absent from review worktree. Cited repeatedly (report.md Sec 4.3, 01_fisica/physics_explanation.md); already independently cross-checked in prior Claude work (gap_notes_asimetrias_review_v4)."
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/originales_antes_de_organizar.tar.gz,not read,not read,"Archival tar.gz of pre-reorganization originals; not analysis content, not opened."
+claude_work/revision_asimetrias_sd_umd/99_archivo_local/intermedios/,not read,not read,"Build/cache intermediates (LaTeX aux files, __pycache__); not analysis content, not opened."
