@@ -32,14 +32,34 @@ for source in sources:
 
 notebooks = list((PACKAGE / '02_notebooks').rglob('*.ipynb'))
 notebooks = [p for p in notebooks if '.ipynb_checkpoints' not in p.parts]
-assert len(notebooks) == 3
+assert len(notebooks) == 5
+prepared_count = 0
 for filename in notebooks:
     nb = nbformat.read(filename, as_version=4)
     paired = jupytext.read(filename.with_suffix('.py'))
     assert [(c.cell_type, c.source) for c in nb.cells] == [(c.cell_type, c.source) for c in paired.cells], filename
+    prepared = filename.parent.name == '04_reprocesamiento'
+    if prepared:
+        prepared_count += 1
+        # Ambos cuadernos de procesamiento se entregan SIN ejecutar ROOT.
+        syntax = ast.parse(filename.with_suffix('.py').read_text())
+        settings = {n.targets[0].id: n.value.value for n in syntax.body
+                    if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)
+                    and isinstance(n.value, ast.Constant)}
+        if filename.stem == 'Procesamiento_ADST_dos_rutas':
+            assert settings['RUN_PROCESSING'] is False
+            assert settings['RUN_COMPARISON'] is False
+        else:
+            assert filename.stem == 'Procesamiento_ADST_v8-2_flag'
+            assert 'RUN_PROCESSING' not in settings
+            assert [n.name for n in syntax.body if isinstance(n, ast.FunctionDef)] == [
+                'getModuleList', 'readADST_surface_v17_flag', 'process_file_wrapper']
     for cell in nb.cells:
         if cell.cell_type == 'code' and cell.source.strip():
-            assert cell.execution_count is not None, filename
+            if prepared:
+                assert cell.execution_count is None and not cell.get('outputs'), filename
+            else:
+                assert cell.execution_count is not None, filename
             assert not any(o.output_type == 'error' for o in cell.get('outputs', [])), filename
     assert filename.with_suffix('.html').exists()
 
@@ -123,7 +143,9 @@ text = f'''# Validación de la entrega organizada
 - Archivos científicos/documentales trasladados y presentes en la entrega: {len(delivered)}.
 - Originales comprobados dentro de la copia recuperable local: {archive_checked}.
 - Fuentes Python con sintaxis válida: {len(sources)}.
-- Notebooks sincronizados con su .py, ejecutados y sin errores: {len(notebooks)}.
+- Notebooks sincronizados con su .py: {len(notebooks)}.
+- Notebooks de análisis ejecutados y sin errores: {len(notebooks)-prepared_count}.
+- Cuadernos de reprocesamiento sin ejecutar: {prepared_count}; la versión simple corre al ejecutar su celda, la auditada anterior mantiene sus interruptores deshabilitados.
 - Enlaces locales de documentos verificados: {checked_links}.
 - Tablas CSV contrastadas con los originales: {len(regressions)}; columnas numéricas sin cambios a tolerancia 1e-10 absoluta/relativa.
 - Archivos Offline con huella comprobada sin modificaciones: {offline_checked}.
@@ -134,7 +156,8 @@ exige identidad binaria de PDF, HTML, notebooks o manifiestos regenerados.
 
 La validación del informe técnico está en ../tablas/validation_results.json;
 la del recorrido didáctico, en ../../02_notebooks/01_seleccion/VALIDACION.md;
-la de los borradores, en ../../03_borradores_tesis/validation.json.
+la de los borradores, en ../../03_borradores_tesis/validation.json;
+las pruebas sintéticas del nuevo lector, en ../../02_notebooks/04_reprocesamiento/VALIDACION.md.
 
 No se ejecutó ROOT ni una producción Offline. El traslado no cambia estimadores,
 bins, semillas ni conclusiones físicas. La copia local original queda excluida

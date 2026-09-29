@@ -1,0 +1,345 @@
+OUTPUT VIEJO:
+
+--- INICIANDO PROCESO PARALELO (8 Workers) ---
+Buscando archivos en: /srv/data/Malargue/icrc2025/test7/IdealMC_CORSIKA/MdSdInfill_CORSIKA78010_FLUKA/SIB23e/17.5_18.0/proton
+Los archivos .parquet se guardarán en: /home/lsilva/Github/ADST_Alexey_module_v11/parquet_sib_proton_17/
+Encontrados 20 archivos .root para procesar.
+Iniciando Pool con 8 trabajadores...
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.root
+
+
+
+
+
+
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.root
+
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.root
+
+
+
+
+
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+Lectura completa. Total de eventos leídos: 1197
+Tiempo total de lectura: 587.39 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79305
+Lectura completa. Total de eventos leídos: 1204
+Tiempo total de lectura: 588.88 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79710
+Lectura completa. Total de eventos leídos: 1197
+Tiempo total de lectura: 589.89 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79020
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.root
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.root
+
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.root
+Lectura completa. Total de eventos leídos: 1211
+Tiempo total de lectura: 599.54 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79950
+Lectura completa. Total de eventos leídos: 1214
+Tiempo total de lectura: 601.60 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79953
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.root
+Lectura completa. Total de eventos leídos: 1198
+Tiempo total de lectura: 602.24 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 78960
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.root
+Lectura completa. Total de eventos leídos: 1201
+Tiempo total de lectura: 603.95 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79305
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.root
+Lectura completa. Total de eventos leídos: 1211
+Tiempo total de lectura: 600.53 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 80331
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.root
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.root
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+Lectura completa. Total de eventos leídos: 1208
+Tiempo total de lectura: 589.25 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79443
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.root
+Lectura completa. Total de eventos leídos: 1210
+Tiempo total de lectura: 595.18 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79746
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.root
+Lectura completa. Total de eventos leídos: 1206
+Tiempo total de lectura: 595.96 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79416
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.root
+Lectura completa. Total de eventos leídos: 1212
+Tiempo total de lectura: 596.89 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79488
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.root
+Lectura completa. Total de eventos leídos: 1202
+Tiempo total de lectura: 611.33 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79749
+Lectura completa. Total de eventos leídos: 1209
+Tiempo total de lectura: 599.35 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79731
+Lectura completa. Total de eventos leídos: 1210
+Tiempo total de lectura: 600.50 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79437
+Lectura completa. Total de eventos leídos: 1214
+Tiempo total de lectura: 608.82 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79641
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+Lectura completa. Total de eventos leídos: 1207
+Tiempo total de lectura: 393.23 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79266
+Lectura completa. Total de eventos leídos: 1206
+Tiempo total de lectura: 407.03 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79074
+Lectura completa. Total de eventos leídos: 1216
+Tiempo total de lectura: 398.46 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 79293
+Lectura completa. Total de eventos leídos: 1206
+Tiempo total de lectura: 405.32 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 78669
+
+
+--- Proceso Paralelo Completado ---
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.parquet (613.07s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.parquet (600.11s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.parquet (600.20s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.parquet (600.21s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.parquet (615.25s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.parquet (610.19s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.parquet (618.03s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.parquet (612.05s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.parquet (614.14s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.parquet (598.50s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.parquet (591.79s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.parquet (598.62s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.parquet (599.46s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.parquet (610.70s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.parquet (601.65s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.parquet (602.56s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.parquet (408.71s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.parquet (394.97s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.parquet (407.05s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.parquet (400.10s)
+
+--- Resumen de la Tanda ---
+Tiempo total: 26.94 minutos
+Total de archivos: 20
+Éxitos: 20
+Errores: 0
+¡Listo! Tus archivos .parquet están en: /home/lsilva/Github/ADST_Alexey_module_v11/parquet_sib_proton_17/
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+OUTPUT NUEVO:
+
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.root► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.root
+
+
+
+
+
+
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.rootIniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.root
+
+
+
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.root
+
+
+
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+Lectura completa. Total de eventos leídos: 1204
+Tiempo total de lectura: 613.98 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76431
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.root
+Lectura completa. Total de eventos leídos: 1197
+Tiempo total de lectura: 617.54 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76017
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.root
+Lectura completa. Total de eventos leídos: 1197
+Tiempo total de lectura: 622.25 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 75831
+Lectura completa. Total de eventos leídos: 1198
+Tiempo total de lectura: 623.27 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 75750
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.root
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.root
+Lectura completa. Total de eventos leídos: 1214
+Tiempo total de lectura: 626.27 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76575
+Lectura completa. Total de eventos leídos: 1201
+Tiempo total de lectura: 627.20 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76047
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.root
+Lectura completa. Total de eventos leídos: 1211
+Tiempo total de lectura: 629.46 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76626
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.root
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.root
+Lectura completa. Total de eventos leídos: 1211
+Tiempo total de lectura: 634.57 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 77028
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.root
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+Lectura completa. Total de eventos leídos: 1208
+Tiempo total de lectura: 611.97 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76368
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.root
+Lectura completa. Total de eventos leídos: 1206
+Tiempo total de lectura: 616.23 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76395
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.root
+Lectura completa. Total de eventos leídos: 1210
+Tiempo total de lectura: 623.37 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76530
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.root
+Lectura completa. Total de eventos leídos: 1212
+Tiempo total de lectura: 618.43 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76560
+Lectura completa. Total de eventos leídos: 1202
+Tiempo total de lectura: 631.36 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76446
+► [Iniciando]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.root
+Iniciando lectura de: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.root
+Lectura completa. Total de eventos leídos: 1214
+Tiempo total de lectura: 627.13 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76386
+Lectura completa. Total de eventos leídos: 1209
+Tiempo total de lectura: 625.97 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76614
+Lectura completa. Total de eventos leídos: 1210
+Tiempo total de lectura: 624.96 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76227
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 500 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+... procesados 1000 eventos.
+Lectura completa. Total de eventos leídos: 1207
+Tiempo total de lectura: 397.77 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76224
+Lectura completa. Total de eventos leídos: 1206
+Tiempo total de lectura: 402.63 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 75915
+Lectura completa. Total de eventos leídos: 1206
+Tiempo total de lectura: 407.02 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 75582
+Lectura completa. Total de eventos leídos: 1216
+Tiempo total de lectura: 406.73 segundos.
+Total de 'MÓDULOS' (filas) extraídos: 76233
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run010.parquet (634.84s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run011.parquet (627.31s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run012.parquet (630.03s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run013.parquet (634.32s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run014.parquet (639.44s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run030.parquet (641.76s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run031.parquet (646.46s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run032.parquet (638.92s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run033.parquet (633.89s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run034.parquet (626.09s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run080.parquet (614.36s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run081.parquet (618.35s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run082.parquet (621.11s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run083.parquet (629.44s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run084.parquet (628.18s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run090.parquet (626.74s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run091.parquet (404.27s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run092.parquet (399.34s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run093.parquet (408.72s)
+✔ [Éxito]: SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.root -> SIB23e_175_180_proton_MdSdInfill_CORSIKA78010_FLUKA_Run094.parquet (408.40s)
+Tiempo total: 27.82 minutos

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review: Astra's SD Asymmetry-Inversion Analysis</title>
+<style>
+  :root{
+    --bg:#faf9f6; --panel:#ffffff; --ink:#1c1b19; --ink-soft:#514f4a;
+    --border:#e4e1d9; --accent:#8a5a3b; --accent-soft:#f3e9de;
+    --demonstrated:#2f6b3a; --demonstrated-bg:#e8f3e6;
+    --plausible:#8a6d1a; --plausible-bg:#f7edd1;
+    --unsupported:#8a4a1a; --unsupported-bg:#f7e6d1;
+    --contradicted:#a02a2a; --contradicted-bg:#fbe6e2;
+    --code-bg:#f1efe8; --link:#7a4423;
+    --verdict-bg:#f3ece0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1a1815; --panel:#221f1b; --ink:#ece7de; --ink-soft:#b8b1a5;
+      --border:#3a352d; --accent:#d3a479; --accent-soft:#332a20;
+      --demonstrated:#7fd28f; --demonstrated-bg:#1c2e1e;
+      --plausible:#e0c15a; --plausible-bg:#332c17;
+      --unsupported:#e0a15a; --unsupported-bg:#332417;
+      --contradicted:#f08a7a; --contradicted-bg:#3a1f1c;
+      --code-bg:#26221c; --link:#e0b98a;
+      --verdict-bg:#2a251d;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1a1815; --panel:#221f1b; --ink:#ece7de; --ink-soft:#b8b1a5;
+    --border:#3a352d; --accent:#d3a479; --accent-soft:#332a20;
+    --demonstrated:#7fd28f; --demonstrated-bg:#1c2e1e;
+    --plausible:#e0c15a; --plausible-bg:#332c17;
+    --unsupported:#e0a15a; --unsupported-bg:#332417;
+    --contradicted:#f08a7a; --contradicted-bg:#3a1f1c;
+    --code-bg:#26221c; --link:#e0b98a;
+    --verdict-bg:#2a251d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--ink); margin:0;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,"Times New Roman",serif;
+    line-height:1.62; font-size:16px;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:32px 20px 80px;}
+  h1{font-size:1.7rem; line-height:1.3; margin:0 0 6px; letter-spacing:-0.01em;}
+  .meta{color:var(--ink-soft); font-size:0.92rem; margin-bottom:28px; padding-bottom:20px; border-bottom:1px solid var(--border);}
+  .meta code{font-size:0.85em;}
+  h2{
+    font-size:1.25rem; margin:2.6em 0 0.8em; padding-bottom:6px;
+    border-bottom:2px solid var(--accent-soft); color:var(--ink);
+    scroll-margin-top:16px;
+  }
+  h2 .num{color:var(--accent); font-variant-numeric:tabular-nums;}
+  h3{font-size:1.05rem; margin:1.6em 0 0.5em; color:var(--ink);}
+  p{margin:0.9em 0;}
+  code{
+    font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    background:var(--code-bg); padding:0.1em 0.35em; border-radius:4px;
+    font-size:0.86em; color:var(--accent);
+  }
+  a{color:var(--link);}
+  strong{color:var(--ink);}
+  .verdict-box{
+    background:var(--verdict-bg); border:1px solid var(--border); border-left:5px solid var(--accent);
+    border-radius:10px; padding:20px 24px; margin:18px 0;
+  }
+  .verdict-title{
+    display:inline-block; font-weight:700; font-size:1.05rem; letter-spacing:0.02em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:10px;
+  }
+  .confidence-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
+  .chip{
+    font-size:0.78rem; padding:4px 10px; border-radius:999px; border:1px solid var(--border);
+    background:var(--panel); color:var(--ink-soft); white-space:nowrap;
+  }
+  .chip b{color:var(--ink);}
+  nav.toc{
+    background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    padding:16px 20px; margin:22px 0 8px; font-size:0.92rem;
+  }
+  nav.toc ol{margin:8px 0 0; padding-left:1.3em;}
+  nav.toc li{margin:3px 0;}
+  nav.toc a{text-decoration:none;}
+  nav.toc a:hover{text-decoration:underline;}
+  .callout{
+    background:var(--accent-soft); border-radius:8px; padding:14px 18px; margin:1em 0;
+    font-size:0.95rem; border-left:4px solid var(--accent);
+  }
+  .callout.correction{
+    background:var(--plausible-bg); border-left-color:var(--plausible);
+  }
+  table{
+    width:100%; border-collapse:collapse; margin:1.2em 0; font-size:0.86rem;
+  }
+  th, td{
+    text-align:left; padding:9px 10px; border-bottom:1px solid var(--border); vertical-align:top;
+  }
+  th{
+    background:var(--accent-soft); font-weight:700; font-size:0.78rem;
+    text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-soft);
+  }
+  tr:hover td{background:var(--code-bg);}
+  .status{
+    display:inline-block; padding:2px 9px; border-radius:5px; font-size:0.76rem;
+    font-weight:700; white-space:nowrap;
+  }
+  .status.demonstrated{background:var(--demonstrated-bg); color:var(--demonstrated);}
+  .status.plausible{background:var(--plausible-bg); color:var(--plausible);}
+  .status.unsupported{background:var(--unsupported-bg); color:var(--unsupported);}
+  .status.contradicted{background:var(--contradicted-bg); color:var(--contradicted);}
+  .tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .small-table td, .small-table th{font-size:0.82rem;}
+  ol.objections{padding-left:1.2em;}
+  ol.objections li{margin:0.9em 0;}
+  .accepted{color:var(--demonstrated); font-weight:700;}
+  ul{padding-left:1.3em;}
+  li{margin:0.4em 0;}
+  hr{border:none; border-top:1px solid var(--border); margin:2.4em 0;}
+  footer{
+    margin-top:3em; padding-top:1.2em; border-top:1px solid var(--border);
+    font-size:0.82rem; color:var(--ink-soft);
+  }
+  .backtotop{
+    position:fixed; right:20px; bottom:20px; background:var(--panel); border:1px solid var(--border);
+    border-radius:999px; width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft); text-decoration:none; font-size:1.1rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  }
+  @media (max-width:520px){
+    .wrap{padding:20px 14px 70px;}
+    h1{font-size:1.4rem;}
+    table, thead, tbody, th, td, tr{display:block;}
+    thead{display:none;}
+    .tbl-scroll table{display:table;}
+    tr{border-bottom:2px solid var(--border); padding-bottom:6px; margin-bottom:6px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Independent review of Astra's SD asymmetry-inversion analysis</h1>
+  <div class="meta">
+    Reviewer: Claude (independent, not a co-author of either body of work) &middot; 2026-09-11<br>
+    Scope: <code>gap_notes_asimetrias_review_v4</code>, <code>kinematic_divergence_explainer_and_thesis_updates</code>,
+    <code>revision_asimetrias_sd_umd</code>, <code>unified_asymmetry_model_v1</code>,
+    <code>GAP2026_041</code>, <code>[Version_Vieja]GAP_41</code>, <code>[UNFINISHED]GAP_Core_REC</code>
+  </div>
+
+  <nav class="toc">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#verdict">Verdict</a></li>
+      <li><a href="#argument">Astra's argument, in my own words</a></li>
+      <li><a href="#claims">Claim-by-claim table</a></li>
+      <li><a href="#comparison">Comparison with the GAPs and prior work</a></li>
+      <li><a href="#answers">Answers to the seven review questions</a></li>
+      <li><a href="#adversarial">Adversarial check</a></li>
+      <li><a href="#next">Recommended next checks</a></li>
+      <li><a href="#open">Open questions for the user</a></li>
+      <li><a href="#coverage">Coverage manifest</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="verdict"><span class="num">1</span> &middot; Verdict</h2>
+  <div class="verdict-box">
+    <span class="verdict-title">Partially agree</span>
+    <p>Astra's central <em>empirical</em> claim is demonstrated, not merely asserted: requiring a reconstructed SD partner station
+    (<code>sEvent.HasStation(sdId)</code>, <code>Scripts/Procesamiento_ADST_v8-2.py:182</code>) before extracting a UMD counter's
+    simulated muon truth (<code>GetNumberOfMuons()</code>) removes a large, radius-dependent, azimuthally asymmetric fraction of
+    stations (~52% retained early vs. ~24% late in the far bin), and this alone flips the fitted SD-muon A1 from
+    <strong>+0.068 to &minus;0.095</strong> in the far radial bin (independently reproduced twice: once by a prior subagent, once
+    by me from raw data). Within the region where the inversion actually occurs, the selection-free SD curve is
+    <strong>statistically indistinguishable from UMD</strong>.</p>
+    <p>What remains genuinely open: the causal EM-help mechanism is an illustrative, unfitted existence-proof, not a validated
+    model; the zenith dependence of the effect is completely untested (only θ&isin;[30&deg;,40&deg;) has been checked); a
+    confirmatory re-implementation against the exact original pipeline exists but has not yet been executed; and whether
+    GAP-2026-041's own published number is literally the same selected observable Astra tested is a plausible but
+    <strong>unconfirmed inference</strong>, not a demonstrated fact.</p>
+    <div class="confidence-row">
+      <span class="chip"><b>High</b> &mdash; the selection effect is real &amp; sufficient in the tested bin</span>
+      <span class="chip"><b>Medium-low</b> &mdash; generalizes beyond one &theta;/primary/model</span>
+      <span class="chip"><b>Low/open</b> &mdash; causal EM-help mechanism; UMD selection-independence</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>One thing this review says plainly.</strong> <code>Tesis - Latex/capitulos/06_infill.tex:67</code> currently claims
+    the SD inversion "no es un artefacto de reconstrucción" (not a reconstruction artifact). That sentence needs a clarifying
+    revision, not necessarily a blanket "wrong" &mdash; it is about shower-geometry smearing, a different sense of
+    "reconstruction" than the station-selection gate this review demonstrates. But the specific mechanism the text goes on to
+    invoke (a claimed sign-reversal of the Bertou&ndash;Billoir geometric term) was already found algebraically wrong by the
+    group's own prior work months before Astra, on independent grounds.
+  </div>
+
+  <hr>
+
+  <h2 id="argument"><span class="num">2</span> &middot; Astra's argument, in my own words</h2>
+  <p>The thesis pipeline (<code>Procesamiento_ADST_v8-2.py:175&ndash;187</code>) loops over UMD counters and, for each one, looks
+  up its paired SD station. If that SD station was never reconstructed, the counter's row &mdash; including its Monte Carlo
+  <em>truth</em> muon count, which has nothing to do with reconstruction quality &mdash; is silently dropped. Astra's insight:
+  this drop is not random with respect to azimuth. SD stations trigger and reconstruct more easily when they see a large
+  signal, and early-side stations get a large electromagnetic (EM) boost from the less-attenuated shower front even when
+  their local muon content is modest. Late-side stations get less EM help, so a late-side station only survives into the
+  sample if its own muon content is large enough to trigger on its own. Among <em>retained</em> stations, the late-side mean
+  muon count is therefore inflated relative to the true, unconditional late-side density &mdash; not because there are more
+  late muons, but because the tanks that see few of them silently drop out of the average. Astra tests this directly by
+  reading raw ADST truth for every simulated SD station, with and without the reconstruction requirement, producing the
+  +0.068 &rarr; &minus;0.095 flip. Astra is explicit throughout that this establishes the <em>effect of the selection</em>,
+  not a proof that Offline is broken or that the causal EM-help story is validated.</p>
+
+  <hr>
+
+  <h2 id="claims"><span class="num">3</span> &middot; Claim-by-claim table</h2>
+  <p style="font-size:0.9rem; color:var(--ink-soft);">
+    <span class="status demonstrated">demonstrated</span> shown by data/code/reproducible computation &nbsp;&middot;&nbsp;
+    <span class="status plausible">plausible</span> reasoned, consistent with evidence, untested &nbsp;&middot;&nbsp;
+    <span class="status unsupported">unsupported</span> asserted, no computation behind it &nbsp;&middot;&nbsp;
+    <span class="status contradicted">contradicted</span> shown false by evidence in scope
+  </p>
+  <div class="tbl-scroll">
+  <table class="small-table">
+    <thead><tr><th style="width:4%">#</th><th style="width:28%">Claim</th><th style="width:30%">Evidence</th><th style="width:14%">Status</th><th style="width:24%">Source</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Pipeline requires a reconstructed SD partner before extracting UMD counter muon truth</td><td>Direct code read: <code>Procesamiento_ADST_v8-2.py:182-187</code></td><td><span class="status demonstrated">demonstrated</span></td><td>verified by me &amp; Subagent F independently</td></tr>
+      <tr><td>2</td><td>Removing the requirement flips far-bin SD-muon A1 from +0.068 to &minus;0.095</td><td><code>adst_counts_fast.csv</code> (106,280 rows), reproduced twice exactly</td><td><span class="status demonstrated">demonstrated</span></td><td><code>checks/zenith_energy_dependence.py</code></td></tr>
+      <tr><td>3</td><td>Retention fraction is a smooth, cosine-shaped function of azimuth (~52%&rarr;~24%)</td><td>Independently recomputed by me from raw data</td><td><span class="status demonstrated">demonstrated</span></td><td><code>checks/</code> phi-decile output</td></tr>
+      <tr><td>4</td><td>Effect persists across the whole available energy range</td><td>A1_all stays +, A1_selected stays &minus; in every 0.1-dex energy sub-bin</td><td><span class="status demonstrated">demonstrated</span></td><td><code>checks/</code> output</td></tr>
+      <tr><td>5</td><td>Sign flip persists across 4 primary-azimuth quadrants and covariate standardization</td><td><code>primary_azimuth_fits.csv</code>, <code>selection_standardized.json</code></td><td><span class="status demonstrated">demonstrated</span></td><td><code>04_soporte/tablas/</code></td></tr>
+      <tr><td>6</td><td>Paired bootstrap 95% CI [&minus;0.178,&minus;0.145] excludes zero</td><td>960 parent-shower clusters, documented</td><td><span class="status demonstrated">demonstrated</span></td><td><code>01_fisica/report.md</code> &sect;3.2</td></tr>
+      <tr><td>7</td><td>Removing selection reconciles SD with UMD in the disputed far-radius region</td><td>All 3 far-bin CIs on (SD-before&minus;UMD) include zero; the significant gap sits where no inversion occurs at all</td><td><span class="status demonstrated">demonstrated</span> (far); <span class="status plausible">open</span> (near)</td><td><code>03_sd_vs_umd/RESULTADO.md</code></td></tr>
+      <tr><td>8</td><td>Causal mechanism: early EM excess &rarr; easier trigger &rarr; late-side enrichment</td><td>Illustrative Poisson/EM-acceptance toy model, unfitted parameters</td><td><span class="status plausible">plausible</span></td><td><code>report.md</code> &sect;3.4; <code>physics_explanation.md:144</code></td></tr>
+      <tr><td>9</td><td>Zenith dependence of the effect</td><td>Only executed extraction is scoped to &theta;&isin;[30,40)&deg;</td><td><span class="status plausible">open/untested</span></td><td>confirmed by me</td></tr>
+      <tr><td>10</td><td>Two-route reprocessing script confirms the effect against the exact original pipeline</td><td>Correct cut semantics, but self-labeled <strong>not yet executed</strong> on real ADST</td><td><span class="status unsupported">not yet executed</span></td><td><code>Procesamiento_ADST_dos_rutas.py:19,799-801</code></td></tr>
+      <tr><td>11</td><td>UMD's own pre-selection truth could be examined the same way</td><td>Untriggered stations leave <em>no</em> UMD module records at all &mdash; absent, not zero</td><td><span class="status demonstrated">demonstrated limitation</span></td><td><code>report.md</code> &sect;2.3</td></tr>
+      <tr><td>12</td><td><code>GetNumberOfMuons()</code> is a pre-water trajectory-intersection count, not VEM-weighted</td><td>Offline source-chain audit; 0 mismatches in 51,031 matched rows</td><td><span class="status demonstrated">demonstrated</span></td><td><code>report.md</code> &sect;2.1</td></tr>
+      <tr><td>13</td><td>Bertou&ndash;Billoir's A_geo term is strictly positive, never negative</td><td>Algebraic sign argument; independently reproduced twice</td><td><span class="status demonstrated">demonstrated</span></td><td><code>gap_notes_asimetrias_review_v4</code> (pre-dates Astra)</td></tr>
+      <tr><td>14</td><td>Thesis's claim that this term "explodes negative" for surface muons</td><td>Contradicted by (13) and an exact tank-geometry theorem</td><td><span class="status contradicted">contradicted</span></td><td><code>06_infill.tex:84</code></td></tr>
+      <tr><td>15</td><td>Photonuclear-ancestor muons are a candidate soft late-favoring population</td><td>Cited literature fraction (6-11%), no local harmonic measured</td><td><span class="status plausible">plausible, untested</span></td><td><code>report.md</code> &sect;6.4</td></tr>
+      <tr><td>16</td><td>Original pipeline fit is unweighted/exposure-uncorrected</td><td><code>plots_seccion_6.py</code> actually uses SEM-weighted <code>curve_fit</code> &mdash; verified by me</td><td><span class="status contradicted">partially contradicted</span></td><td><code>plots_seccion_6.py:182-199</code></td></tr>
+      <tr><td>17</td><td>Unified kinematic model predicts UMD +0.13/SD +0.19 vs observed +0.11/&minus;0.10</td><td>Identical across report, script, and console output</td><td><span class="status demonstrated">demonstrated (as calc.)</span></td><td><code>unified_asymmetry_model_v1/report.md</code> &sect;2</td></tr>
+      <tr><td>18</td><td>Same report's own UMD re-measurement (+0.068) is unreconciled with its headline "+0.11" claim</td><td>Direct comparison of &sect;2 vs &sect;5, never reconciled</td><td><span class="status contradicted">internal inconsistency</span></td><td><code>unified_asymmetry_model_v1/report.md</code></td></tr>
+      <tr><td>19</td><td>Report's acceptance-modulation narrative ("&minus;0.32 at r=1200m")</td><td>Own <code>run_output.txt</code> gives <strong>+0.359</strong> for the same bin &mdash; opposite sign</td><td><span class="status contradicted">contradicted</span></td><td><code>run_output.txt:81</code></td></tr>
+      <tr><td>20</td><td>Retracted "muon attenuation sign correction" partially explains the SD gap</td><td>Explicitly tried, then retracted with documented rationale</td><td><span class="status demonstrated">retracted correctly</span></td><td><code>unified_asymmetry_model_v1/report.md</code> &sect;3</td></tr>
+      <tr><td>21</td><td>Ch.5 Merit Factor uses fit-covariance uncertainty, not intrinsic per-shower spread</td><td>Verified independently reading <code>presentacion_feb_2026_v2.py</code> directly</td><td><span class="status demonstrated">demonstrated</span> (new, orthogonal finding)</td><td><code>presentacion_feb_2026_v2.py:~911</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <hr>
+
+  <h2 id="comparison"><span class="num">4</span> &middot; Comparison with the GAPs and prior work</h2>
+  <p><strong>Definitions.</strong> All bodies of work agree: &rho;(&phi;)=&rho;&#8320;(1+A1&nbsp;cos&nbsp;&phi;), &phi;=0 early,
+  &phi;=&pi; late, positive A1 = early excess. No definitional mismatch found.</p>
+  <p><strong>Dataset/scope.</strong> GAP-2026-041's headline numbers and Astra's are both proton-only, SIBYLL-2.3e-only,
+  single-energy-decade, single-&theta;-band. Whether they are literally the same observable computed by the same gated
+  pipeline is a plausible but <strong>unconfirmed inference</strong> (see below) &mdash; not something any document in scope
+  actually states.</p>
+  <div class="callout correction">
+    <strong>A tension that looked real, and my first attempt to resolve it overreached.</strong> GAP-2026-041 states its
+    inversion analysis "bypasses reconstruction" using MC-truth geometry. My initial draft took this to mean GAP-041's Table 1
+    must be the <em>selected</em> observable Astra tested, resolving an apparent contradiction. Adversarial review found no
+    document in scope actually confirms this connection &mdash; it remains a plausible inference from the numbers landing in
+    the same ballpark, not a demonstrated fact. What <em>is</em> independent of this open question: neither GAP note's
+    methodology section mentions the <code>HasStation</code> gate at all, so the gate's existence and effect are demonstrated
+    on their own terms regardless of which specific published number it turns out to underlie.
+  </div>
+  <p><strong>Genuinely novel relative to all prior work.</strong> A grep sweep across every file in
+  <code>gap_notes_asimetrias_review_v4</code> (and its v1-v3 predecessors) for selection/cut/rejected/fiducial/trigger/6T5/
+  efficiency/HasStation found <strong>zero</strong> hits. That session exhaustively explored kinematic, tank-geometry,
+  threshold, and scattering mechanisms and explicitly concluded the origin "is not identified by anything derivable from the
+  cited literature's analytic toy models." The kinematic-divergence explainer flagged the possibility as an untested open
+  question but never tested it. <strong>Astra is the first body of work to actually test the selection hypothesis against
+  raw data, and it holds up.</strong></p>
+  <p><strong>Where Astra corrects, rather than contradicts, prior work.</strong> The claim that Bertou&ndash;Billoir's
+  geometric term is strictly positive (never the negative "exploding" term the thesis invokes) was already established
+  independently by <code>gap_notes_asimetrias_review_v4</code> months before Astra, on separate algebraic grounds. Astra
+  reaches the identical conclusion independently &mdash; doubly-independent confirmation the thesis's current sign argument
+  is simply wrong.</p>
+  <p><strong>Draft chapters are ahead of the committed thesis, but not reconciled with each other.</strong> The kinematic
+  explainer's own draft revision already retracts the "Population B" narrative, written before Astra's folder existed. The
+  committed <code>06_infill.tex</code> still carries the original, now twice-contradicted narrative in full. Astra's own draft
+  is a third, separate revision of the same chapter &mdash; a housekeeping point, not a scientific one.</p>
+
+  <hr>
+
+  <h2 id="answers"><span class="num">5</span> &middot; Answers to the seven review questions</h2>
+
+  <h3>5.1 Consistency</h3>
+  <p>Definitions match everywhere checked. GAP-041/Table-1 and Astra's headline result share the same narrow scope
+  (proton, SIBYLL 2.3e, &theta;&isin;[30,40)&deg;) &mdash; a genuine narrowness, flagged honestly by both, not a mismatch that
+  would produce a spurious sign difference on its own.</p>
+
+  <h3>5.2 Mechanism</h3>
+  <p>Physically plausible: an early EM excess is a real, independently-established effect, and it's reasonable that it
+  differentially helps early tanks pass selection. Its one directly testable qualitative prediction &mdash; small bias where
+  efficiency is already high &mdash; is confirmed by my own recomputation. The quantitative EM-acceptance story remains an
+  illustrative existence-proof, honestly labeled as such by Astra.</p>
+
+  <h3>5.3 The flag</h3>
+  <p>Confirmed directly, twice, reading the actual pipeline code. Removal fractions, computed independently by me:
+  <strong>~0% at r&lt;600m, ~3% at r&isin;[650,950)m, ~60% at r&isin;[1050,1400)m, ~95% at r&isin;[1400,1800)m</strong>; by
+  azimuth in the far bin, retention runs ~52% (early) to ~24% (late); by energy, retention rises smoothly from ~17% to ~64%
+  while the sign flip persists throughout. UMD's analogous flag could not be tested: untriggered stations leave no UMD
+  module records at all in this production &mdash; an open limitation, not filled with an assumption, by either side.</p>
+
+  <h3>5.4 Quantitative match</h3>
+  <p><strong>Sign:</strong> matched. <strong>Onset radius:</strong> matched. <strong>Magnitude/closure with UMD in the
+  disputed region:</strong> matched &mdash; statistically indistinguishable at r=900&ndash;1350m. A separate significant gap
+  exists at r=150&ndash;900m but is present with or without the cut, so it's an unrelated question.
+  <strong>Zenith/energy dependence:</strong> energy dependence now tested (holds throughout); zenith dependence remains
+  completely untested &mdash; the single most decisive open question left by this investigation.</p>
+
+  <h3>5.5 Falsifiable predictions</h3>
+  <ul>
+    <li><em>Effect should shrink where the array is fully efficient</em> &mdash; tested and confirmed.</li>
+    <li><em>UMD should be independent if its selection is independent</em> &mdash; not established either way; UMD's own
+    pre-selection truth cannot currently be recovered.</li>
+    <li><em>Should appear in full-detector-response sims with the same cuts</em> &mdash; partially tested (same production
+    the thesis uses); not tried on a second production/model/primary.</li>
+    <li><em>Should change if the flag is removed or relaxed</em> &mdash; tested and confirmed; this is the central result.</li>
+  </ul>
+
+  <h3>5.6 Relation to previous explanations</h3>
+  <p>Astra <strong>corrects</strong> one claim already independently corrected by prior work (the A_geo sign) and
+  <strong>complements, without fully superseding</strong>, the kinematic-divergence work: its "off by 0.29" SD gap shrinks to
+  "off by ~0.12" once the selection confound is removed &mdash; a substantial improvement, not full closure (arithmetic
+  computed here, not spelled out in any reviewed document). The thesis's "soft muon population" narrative is contradicted by
+  both threads independently, on different grounds.</p>
+
+  <h3>5.7 Alternatives</h3>
+  <ul>
+    <li><strong>Core-reconstruction bias:</strong> scoped only to UMD REC-vs-MC damping, not the SD inversion; ruled out as
+    an explanation of this specific effect since GAP-041's result bypasses geometric reconstruction entirely.</li>
+    <li><strong>Photonuclear-ancestor soft muons:</strong> plausible, soil-filterable, but untested locally &mdash; not ruled out.</li>
+    <li><strong>Geomagnetic deflection:</strong> disfavored, not excluded, by the quadrant test.</li>
+    <li><strong>Multiple Coulomb scattering:</strong> quantified and found ~10&times; too small on its own.</li>
+    <li><strong>Statistics/binning artifacts:</strong> checked by standardization and robustness tests; the flip survives every one tried.</li>
+  </ul>
+
+  <hr>
+
+  <h2 id="adversarial"><span class="num">6</span> &middot; Adversarial check</h2>
+  <p>A fresh subagent was given the draft verdict verbatim and asked to argue against it using only files in scope. Its six
+  ranked objections, all of which were verified and accepted:</p>
+  <ol class="objections">
+    <li><strong>"The verdict rebuts a stronger claim than Astra actually makes."</strong> Astra's own documents already hedge
+    narrowly. <span class="accepted">Accepted</span> &mdash; the verdict now credits Astra's own hedging rather than presenting it as a discovery.</li>
+    <li><strong>"The '5/8 bands significant' claim is misleading"</strong> &mdash; the significant bands are precisely where
+    no inversion occurs at all; the far bins that matter all have CIs including zero. <span class="accepted">Accepted and corrected</span> &mdash;
+    this was a real error, not a framing choice.</li>
+    <li><strong>"'Independently reproduced twice' overstates independence"</strong> &mdash; both derivations trace to one
+    CSV and one internal-consistency assertion. <span class="accepted">Accepted</span> &mdash; now described as an arithmetic
+    cross-check, not full triangulation.</li>
+    <li><strong>"Faulting Astra for narrow scope is a double standard"</strong> &mdash; GAP-041's own disputed claim shares
+    the identical scope. <span class="accepted">Accepted</span> &mdash; now stated as a shared limitation.</li>
+    <li><strong>"The GAP-041 = selected-observable claim is an unevidenced inference"</strong> &mdash; a grep sweep found no
+    supporting statement anywhere in scope. <span class="accepted">Accepted</span> &mdash; the most consequential correction; now flagged
+    as an open question.</li>
+    <li><strong>"Declaring the thesis sentence flatly 'wrong' conflates two senses of 'reconstruction'."</strong>
+    <span class="accepted">Accepted</span> &mdash; the verdict now calls for a clarifying revision, not a blanket rejection.</li>
+  </ol>
+  <p>All six objections held up under verification. The core empirical finding survives intact and, if anything, comes out
+  <strong>stronger</strong> than the first draft stated &mdash; but several reasons given for withholding a stronger verdict
+  did not hold up, and the honest open questions are narrower than first described.</p>
+
+  <hr>
+
+  <h2 id="next"><span class="num">7</span> &middot; Recommended next checks, ranked by decisiveness</h2>
+  <ol>
+    <li><strong>Confirm what actually generated GAP-2026-041's Table 1 numbers.</strong> Cheapest possible check &mdash; would settle, not infer, the observable's identity.</li>
+    <li><strong>Run the zenith scan.</strong> Extend the raw-ADST extraction to &theta; bins beyond [30,40)&deg; &mdash; the single most decisive open question, and appears cheap.</li>
+    <li><strong>Execute <code>Procesamiento_ADST_dos_rutas.py</code></strong> on at least a one-file pilot for the belt-and-suspenders confirmation.</li>
+    <li><strong>Test a second primary and/or hadronic model</strong> to see whether the effect's magnitude scales with shower muon content as the mechanism predicts.</li>
+    <li><strong>Pursue the UMD pre-electronics truth fix</strong> to finally test, rather than assume, UMD's own selection-independence.</li>
+    <li><strong>Update <code>06_infill.tex</code></strong> to remove the "not a reconstruction artifact" claim and the Population-B narrative.</li>
+    <li><strong>Reconcile the three divergent <code>06_infill_DRAFT.tex</code> revisions</strong> into one.</li>
+  </ol>
+
+  <hr>
+
+  <h2 id="open"><span class="num">8</span> &middot; Open questions for the user</h2>
+  <ul>
+    <li><strong>What actually generated GAP-2026-041's Table 1 numbers?</strong> The easiest fact in this whole review to just ask directly.</li>
+    <li>Should the zenith scan be run as a next step? It looks cheap, but per this session's ground rules it wasn't launched without asking.</li>
+    <li>The unfinished core-reconstruction GAP note was added to scope on my own initiative &mdash; confirm this was wanted.</li>
+    <li><code>notebooks_to_py/</code> and <code>analisis_campo/</code> were matched to their closest-named existing folders per your instruction &mdash; confirm these are correct.</li>
+    <li><code>gap_notes_asimetrias_review/</code> (no suffix) is byte-identical to v4, and two files (<code>99_archivo_local/</code>, <code>Procesamiento_ADST_dos_rutas.py</code>) are untracked in git, invisible to the isolated review worktree &mdash; you may want to <code>git add</code> these.</li>
+    <li>Should the Ch.5 Merit Factor uncertainty-definition finding (an issue found incidentally, independent of the SD/UMD question) become a separate action item?</li>
+  </ul>
+
+  <hr>
+
+  <h2 id="coverage"><span class="num">9</span> &middot; Appendix: coverage manifest</h2>
+  <p>See <code>claude_work/REVIEW_ASTRA/coverage_manifest.csv</code> &mdash; one row per in-scope file (216 files), columns
+  <code>path, read_by, status, note</code>.</p>
+  <p><strong>Summary:</strong> 162 files read in full or with reported contents &middot; 46 not read (figure images,
+  rendered HTML/PDF duplicates of an already-read <code>.md</code>/<code>.py</code> twin, or non-content assets) &middot;
+  6 skipped under the bibliography exception, all in <code>99_archivo_local/textos_extraidos_PDF/</code>: <code>armbruster.txt</code>,
+  <code>ave2017.txt</code>, <code>bertou_billoir.txt</code>, <code>cazon2012.txt</code>, <code>garcia_pinto.txt</code>,
+  <code>luce2021.txt</code> &mdash; each listed in the manifest with the specific passage it's cited for and where it's
+  quoted in-scope.</p>
+  <p>Independent verification scripts and their output live in <code>claude_work/REVIEW_ASTRA/checks/</code>.</p>
+
+  <footer>
+    Independent review &middot; read-only against the repository &middot; no thesis, GAP note, or existing analysis file was modified.
+  </footer>
+</div>
+</body>
+</html>

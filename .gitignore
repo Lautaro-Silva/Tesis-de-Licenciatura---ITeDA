@@ -40,3 +40,12 @@ venv/
 
 # Archivos temporales de MacOS (por las dudas si colaboras con alguien)
 .DS_Store
+# Python bytecode caches
+__pycache__/
+
+# Local SSH setup notes (not project material)
+setup_vscode_ssh.txt
+
+# Chapter-comparison package: throwaway browser profile and zip copy of the folder
+claude_work/comparacion_capitulos_2026_09_29/comprobacion_navegador/
+claude_work/comparacion_capitulos_2026_09_29/comparacion_capitulos.zip
