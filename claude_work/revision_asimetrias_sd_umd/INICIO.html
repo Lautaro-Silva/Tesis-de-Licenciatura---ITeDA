@@ -37,8 +37,8 @@ Separa el resultado demostrado, la hipótesis física y lo que sigue abierto.</p
 <td><a href="02_notebooks/03_sd_vs_umd/comparar_sd_umd.ipynb">Notebook 3: comparación directa</a> · <a href="02_notebooks/03_sd_vs_umd/comparar_sd_umd.html">HTML</a></td>
 </tr>
 <tr>
-<td>Reprocesar personalmente los ROOT con el lector v8-2 y HasStation como flag</td>
-<td><a href="02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.ipynb">Notebook 4: versión simple</a> · <a href="02_notebooks/04_reprocesamiento/README.md">Guía</a> · <a href="02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.html">HTML</a> — preparado, NO ejecutado</td>
+<td>Reprocesar los ROOT conservando las estaciones SD sin reconstruir</td>
+<td><a href="../reprocesamiento_sd_completo/README.md"><code>reprocesamiento_sd_completo/</code></a> — versión ejecutada. Reemplaza a <code>02_notebooks/04_reprocesamiento/</code>, eliminada el 2026-09-29 (recuperable desde el commit <code>0a5dd5e</code>)</td>
 </tr>
 <tr>
 <td>Revisar propuestas para los capítulos 3, 5 y 6</td>
@@ -69,8 +69,7 @@ En toda la entrega, A₁ positivo significa exceso temprano; negativo, exceso ta
 ├── 02_notebooks/
 │   ├── 01_seleccion/            Procedencia, selección y controles
 │   ├── 02_reproduccion/         Tu gráfico original, sin cambiar el estimador
-│   ├── 03_sd_vs_umd/            Comparación directa que faltaba
-│   └── 04_reprocesamiento/     v8-2 con flag; versión auditada anterior preservada
+│   └── 03_sd_vs_umd/            Comparación directa que faltaba
 ├── 03_borradores_tesis/         Tres capítulos completos, diffs y preview
 ├── 04_soporte/
 │   ├── codigo/                 Auditoría, verificadores y generadores
@@ -79,7 +78,6 @@ En toda la entrega, A₁ positivo significa exceso temprano; negativo, exceso ta
 │   ├── plantillas/             Plantilla y estilo del informe
 │   ├── referencias/            PDF original para el cotejo numérico
 │   └── organizacion/           Inventario y comprobaciones del traslado
-└── 99_archivo_local/            Copia recuperable y cachés; no se publica en Git
 </code></pre>
 <p>Cada notebook tiene su <code>.py</code> editable, <code>.ipynb</code> y <code>.html</code> para lectura.
 Los tres primeros están ejecutados. La carpeta cuarta contiene el procesamiento
@@ -152,8 +150,8 @@ los análisis previos <code>gap_notes_asimetrias_review_v4</code>,
 Tampoco se modificaron la tesis original, las notas GAP, Offline, datos de
 producción ni configuraciones del instituto.</p>
 <p>Se conserva un <a href="04_soporte/organizacion/inventario_traslado.csv">inventario de origen, destino y huella de contenido</a>.
-Los originales completos y los intermedios están recuperables localmente en
-<code>99_archivo_local/</code>; se excluyen del commit para no duplicar toda la entrega.
+La copia local de los originales y los intermedios (<code>99_archivo_local/</code>) se eliminó
+el 2026-09-29; el inventario conserva origen, destino y huella de cada archivo.
 No se eliminó trabajo científico para reducir el número de archivos.</p>
 <p>Los cambios ajenos ya presentes en el repositorio quedan fuera de este commit.
 La validación de rutas y resultados está en <a href="04_soporte/organizacion/VALIDACION.md">VALIDACION.md</a>.</p>

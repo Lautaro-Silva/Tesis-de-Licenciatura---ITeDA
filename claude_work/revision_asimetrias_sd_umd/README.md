@@ -16,7 +16,7 @@ Separa el resultado demostrado, la hipótesis física y lo que sigue abierto.
 | Entender de dónde salen los datos y qué hace el requisito de reconstrucción | [Notebook 1: selección paso a paso](02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.ipynb) · [HTML](02_notebooks/01_seleccion/seleccion_sd_paso_a_paso.html) |
 | Reproducir exactamente mi gráfico de cuatro componentes | [Notebook 2: reproducción](02_notebooks/02_reproduccion/reproducir_desglose_sd.ipynb) · [HTML](02_notebooks/02_reproduccion/reproducir_desglose_sd.html) |
 | Ver si el SD sin ese requisito coincide con UMD | [Notebook 3: comparación directa](02_notebooks/03_sd_vs_umd/comparar_sd_umd.ipynb) · [HTML](02_notebooks/03_sd_vs_umd/comparar_sd_umd.html) |
-| Reprocesar personalmente los ROOT con el lector v8-2 y HasStation como flag | [Notebook 4: versión simple](02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.ipynb) · [Guía](02_notebooks/04_reprocesamiento/README.md) · [HTML](02_notebooks/04_reprocesamiento/Procesamiento_ADST_v8-2_flag.html) — preparado, NO ejecutado |
+| Reprocesar los ROOT conservando las estaciones SD sin reconstruir | [`reprocesamiento_sd_completo/`](../reprocesamiento_sd_completo/README.md) — versión ejecutada. Reemplaza a `02_notebooks/04_reprocesamiento/`, eliminada el 2026-09-29 (recuperable desde el commit `0a5dd5e`) |
 | Revisar propuestas para los capítulos 3, 5 y 6 | [Guía de borradores](03_borradores_tesis/README.md) · [Vista previa PDF](03_borradores_tesis/preview.pdf) |
 | Examinar derivaciones, literatura externa y auditoría de Offline | [Informe completo](01_fisica/report.html) · [Markdown](01_fisica/report.md) |
 
@@ -45,8 +45,7 @@ revision_asimetrias_sd_umd/
 ├── 02_notebooks/
 │   ├── 01_seleccion/            Procedencia, selección y controles
 │   ├── 02_reproduccion/         Tu gráfico original, sin cambiar el estimador
-│   ├── 03_sd_vs_umd/            Comparación directa que faltaba
-│   └── 04_reprocesamiento/     v8-2 con flag; versión auditada anterior preservada
+│   └── 03_sd_vs_umd/            Comparación directa que faltaba
 ├── 03_borradores_tesis/         Tres capítulos completos, diffs y preview
 ├── 04_soporte/
 │   ├── codigo/                 Auditoría, verificadores y generadores
@@ -55,7 +54,6 @@ revision_asimetrias_sd_umd/
 │   ├── plantillas/             Plantilla y estilo del informe
 │   ├── referencias/            PDF original para el cotejo numérico
 │   └── organizacion/           Inventario y comprobaciones del traslado
-└── 99_archivo_local/            Copia recuperable y cachés; no se publica en Git
 ```
 
 Cada notebook tiene su `.py` editable, `.ipynb` y `.html` para lectura.
@@ -118,8 +116,8 @@ Tampoco se modificaron la tesis original, las notas GAP, Offline, datos de
 producción ni configuraciones del instituto.
 
 Se conserva un [inventario de origen, destino y huella de contenido](04_soporte/organizacion/inventario_traslado.csv).
-Los originales completos y los intermedios están recuperables localmente en
-`99_archivo_local/`; se excluyen del commit para no duplicar toda la entrega.
+La copia local de los originales y los intermedios (`99_archivo_local/`) se eliminó
+el 2026-09-29; el inventario conserva origen, destino y huella de cada archivo.
 No se eliminó trabajo científico para reducir el número de archivos.
 
 Los cambios ajenos ya presentes en el repositorio quedan fuera de este commit.

@@ -71,7 +71,8 @@ stations, `SDEvent.GetSimStationVector()`. Hence the second table.
 
 ## 4. Why each of Astra's reprocessing attempts failed
 
-All in `claude_work/revision_asimetrias_sd_umd/02_notebooks/04_reprocesamiento/`.
+All in `claude_work/revision_asimetrias_sd_umd/02_notebooks/04_reprocesamiento/` (folder removed
+2026-09-29; recoverable from git history at commit `0a5dd5e`).
 
 ### 4.1 `Procesamiento_ADST_v8-2_flag` — lost 63,747 rows
 
