@@ -75,4 +75,5 @@ dejaron como `.ipynb` — son código histórico/deprecado, no se construye sobr
 La conversión se verificó como puramente de formato: el contenido de cada celda de
 código y markdown es idéntico, carácter por carácter, entre el `.ipynb` original y el
 `.py` convertido, para los 10 notebooks — ver
-`claude_work/notebooks_a_py/verificar_roundtrip.py` y el informe en la misma carpeta.
+`claude_work/notebooks_a_py/` en el historial de git (carpeta eliminada el 2026-09-29;
+recuperable desde el commit `0a5dd5e`).

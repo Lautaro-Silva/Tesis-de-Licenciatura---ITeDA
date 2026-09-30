@@ -18,7 +18,8 @@ exige identidad binaria de PDF, HTML, notebooks o manifiestos regenerados.
 La validación del informe técnico está en ../tablas/validation_results.json;
 la del recorrido didáctico, en ../../02_notebooks/01_seleccion/VALIDACION.md;
 la de los borradores, en ../../03_borradores_tesis/validation.json;
-las pruebas sintéticas del nuevo lector, en ../../02_notebooks/04_reprocesamiento/VALIDACION.md.
+las pruebas sintéticas del nuevo lector, en ../../02_notebooks/04_reprocesamiento/VALIDACION.md
+(carpeta eliminada el 2026-09-29; recuperable desde el commit `0a5dd5e`).
 
 No se ejecutó ROOT ni una producción Offline. El traslado no cambia estimadores,
 bins, semillas ni conclusiones físicas. La copia local original queda excluida
