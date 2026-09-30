@@ -1,0 +1,48 @@
+\documentclass[spanish,a4paper,12pt]{article}
+% Vista previa del borrador del Capitulo 3. Preambulo copiado de "Tesis - Latex/main.tex"
+% (via claude_work/comparacion_capitulos_2026_09_29), mas el paquete cancel.
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{newtxtext, newtxmath}
+\usepackage{cancel}
+\usepackage{siunitx}
+\usepackage[margin=2.5cm]{geometry}
+\setlength{\parskip}{2mm}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[font=footnotesize, labelfont=bf, width=0.8\textwidth, justification=justified]{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{bibliografia.bib}
+\addbibresource{bibliografia_adicional.bib}
+\usepackage[pdfencoding=auto, psdextra]{hyperref}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\counterwithin{equation}{section}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection.\ #1}{}}
+\lhead{\leftmark}
+\rfoot{\thepage}
+\setlength{\headheight}{30pt}
+% Etiquetas de otros capitulos (no incluidos en esta vista previa)
+\makeatletter
+\newlabel{sec:cap_anillo_denso}{{5}{1}{}{}{}}
+\newlabel{cap:infill}{{6}{1}{}{}{}}
+\newlabel{subsec:fast_mc}{{6.1.x}{1}{}{}{}}
+\makeatother
+\begin{document}
+\begin{center}\Large Capítulo 3 unificado · borrador 30 septiembre 2026\end{center}
+\noindent Vista previa del capítulo 3 solo. Las referencias a los capítulos 5 y 6 apuntan
+a sus números en la tesis completa.
+\setcounter{section}{2}
+\input{03_fenomenologia.tex}
+\printbibliography
+\end{document}

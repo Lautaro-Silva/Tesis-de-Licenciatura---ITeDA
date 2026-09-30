@@ -1,0 +1,13 @@
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.run.xml
+*.toc
+biber.out
+build.log
+missfont.log
+mfput.log
+__pycache__/
