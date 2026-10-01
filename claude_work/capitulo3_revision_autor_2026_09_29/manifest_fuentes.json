@@ -1,0 +1,70 @@
+[
+  {
+    "path": "Tesis - Latex/capitulos/03_fenomenologia.tex",
+    "sha256": "a4d6ab249acbfaf98680a9e7465101a617372283ce16b1c1a488c3be7b4df8a5"
+  },
+  {
+    "path": "Tesis - Latex/capitulos/05_anillo_denso.tex",
+    "sha256": "e131d26060ceeadf2cc3576daf546ad888f0eb71369286a8ef899b6422b933dd"
+  },
+  {
+    "path": "Tesis - Latex/capitulos/06_infill.tex",
+    "sha256": "78179cb4688875f3a78de09cf131951ed09b0f676890e3cfea444276f2921bb0"
+  },
+  {
+    "path": "Tesis - Latex/bibliografia.bib",
+    "sha256": "f3d913c9adaee3ab9ced9afa4a196acaa402b62abe74684bc199c60cf731daec"
+  },
+  {
+    "path": "claude_work/kinematic_divergence_explainer_and_thesis_updates/03_fenomenologia_DRAFT.tex",
+    "sha256": "11a53ce0d6fd90e895c0b111f237ba3456e6d590b09231cf6667f54f7201664c"
+  },
+  {
+    "path": "claude_work/kinematic_divergence_explainer_and_thesis_updates/explainer_kinematic_divergence_simulator.py",
+    "sha256": "4bf4b58ae85a75fb89d66fbc59633e7cb90faaa8198fdbc19502444dd2fc00e3"
+  },
+  {
+    "path": "claude_work/revision_asimetrias_sd_umd/03_borradores_tesis/03_fenomenologia_DRAFT.tex",
+    "sha256": "2902c17eb4cd10d2ba29e43cc8da21062f96b843681611bd82dc33e3c09f8567"
+  },
+  {
+    "path": "claude_work/borradores_capitulos_3_5_6_integrados_2026_09_24/03_fenomenologia_DRAFT.tex",
+    "sha256": "84cb46ac9001b79af3c1e775b4300eeda1d4cef0ba195b9f6d0c89464171672c"
+  },
+  {
+    "path": "GAP_Notes_Latex/[Version_Vieja]GAP_41/main.tex",
+    "sha256": "16f10712e15d6ce8b73263675033d405f8e1fae91b3100f06c3d93e25c84ff37"
+  },
+  {
+    "path": "GAP_Notes_Latex/GAP2026_041/main.tex",
+    "sha256": "f1da30d81becc774c0798d94c40aada04335bb3ebde81032bf7259e823dedf67"
+  },
+  {
+    "path": "GAP_Notes_Latex/[Version_Vieja]GAP_41/esquema_lluvia.jpeg",
+    "sha256": "adf84e004a0a46fdef3320a7aaa31aecb24f3dd35b33d2290b3c30a172e784b7"
+  },
+  {
+    "path": "Tesis - Latex/capitulos/imagenes_capitulos/cap3/efecto_geo_luce_icrc2021.png",
+    "sha256": "2a6bc469abfbcd6b0395f889e9518bc8810e5a704b24f93ae3f100ae0068d0bb"
+  },
+  {
+    "path": "Bibliografia/Papers sin citar/GAP2020_066.pdf",
+    "sha256": "db467cdcc301b08da762dd1015be32208a49b767ce8a55b9e4f66bf6ea634b5e"
+  },
+  {
+    "path": "Bibliografia/cazon2012.pdf",
+    "sha256": "9057caf21dcab125f089e99ba674caed57e3c466b7e872fdc943383761cf6b19"
+  },
+  {
+    "path": "Bibliografia/GAP2000_017.pdf",
+    "sha256": "cfb9b199669e692d041842a2ec1d4c4ad5b4699f6870362ca9d2f9684b44d9db"
+  },
+  {
+    "path": "Bibliografia/GAP2002_074.pdf",
+    "sha256": "b0ac12864eaacac337ca67bbae75a644d36ffd2449a849c1f35685c7af31ee13"
+  },
+  {
+    "path": "Bibliografia/ICRC2021_435.pdf",
+    "sha256": "89f553946405cb9e08336822207b9860aedfaaf110cd495719552162412b8c31"
+  }
+]

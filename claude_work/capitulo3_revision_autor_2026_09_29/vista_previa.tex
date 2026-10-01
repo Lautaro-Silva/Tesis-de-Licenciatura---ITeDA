@@ -1,0 +1,32 @@
+% !TEX program = pdflatex
+% !BIB program = biber
+\documentclass[spanish,a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath,amssymb}
+\usepackage{newtxtext,newtxmath}
+\usepackage{derivative,siunitx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx,float}
+\usepackage[export]{adjustbox}
+\usepackage[font=footnotesize,labelfont=bf,width=0.9\textwidth]{caption}
+\usepackage{booktabs,chngcntr}
+\usepackage[backend=biber,sorting=none]{biblatex}
+\addbibresource{bibliografia.bib}
+\addbibresource{bibliografia_adicional.bib}
+\usepackage[pdfencoding=auto,psdextra,hidelinks]{hyperref}
+\hypersetup{pdftitle={Capítulo 3 -- borrador para revisión del autor},pdfauthor={Lautaro Silva Pizzi}}
+\setlength{\parskip}{2mm}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\counterwithin{equation}{section}
+\begin{document}
+\noindent\textit{Borrador para revisión del autor --- 30 de septiembre de 2026.}
+\setcounter{section}{2}
+\input{03_fenomenologia_DRAFT.tex}
+\clearpage
+\printbibliography[heading=bibintoc,title={Referencias}]
+\end{document}
