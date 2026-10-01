@@ -1,0 +1,47 @@
+{
+  "alcance": "Control documental y algebraico; no es una validación de simulaciones.",
+  "fuentes_sin_modificar": 17,
+  "ecuacion_conservada": "3.4",
+  "citas_resueltas": 10,
+  "referencias_internas_resueltas": 8,
+  "avisos_criticos_compilacion": [],
+  "paginas": {
+    "capitulo_3.pdf": 12,
+    "RESPUESTAS_Y_CRITERIOS.pdf": 6
+  },
+  "normalizacion_distribucion_angular": {
+    "0.2": 0.9999999999999926,
+    "1": 1.0,
+    "5": 1.0,
+    "40": 1.0000000000000002
+  },
+  "cociente_a_parametros_ilustrativos": {
+    "1": 0.671720375234892,
+    "50": 3.717406906847561
+  },
+  "limite_armbruster": [
+    {
+      "r_m": 100.0,
+      "fourier_producto": 0.007933819155841189,
+      "primer_orden": 0.007935685433043379,
+      "error_absoluto": 1.866277202189695e-06
+    },
+    {
+      "r_m": 50.0,
+      "fourier_producto": 0.003967609420572176,
+      "primer_orden": 0.003967842716521689,
+      "error_absoluto": 2.3329594951368438e-07
+    },
+    {
+      "r_m": 25.0,
+      "fourier_producto": 0.0019838921959142008,
+      "primer_orden": 0.0019839213582608446,
+      "error_absoluto": 2.9162346643855225e-08
+    }
+  ],
+  "ejemplos_aritmeticos_no_son_datos": {
+    "cociente_de_sumas": 0.8316831683168316,
+    "promedio_sin_pesos_correctos": 2.4,
+    "media_tardia_seleccionada": 5.0
+  }
+}
