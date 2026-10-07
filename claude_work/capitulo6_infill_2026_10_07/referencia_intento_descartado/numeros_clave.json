@@ -1,0 +1,61 @@
+{
+  "error_ratio_bootstrap_over_naive_median": 1.0962485747625814,
+  "error_ratio_bootstrap_over_naive_min": 0.8634235908820089,
+  "error_ratio_bootstrap_over_naive_max": 1.7750601123205627,
+  "convention_phi_max_deg": {
+    "phi_MC_deg": 3.202013858168263,
+    "phi_REC_deg": 3.877922307175453
+  },
+  "selection_far_early_enrichment": 1.665518816543097,
+  "selection_far_late_enrichment": 2.276057326667053,
+  "selection_far_early_epsilon": 0.42008797653958946,
+  "selection_far_late_epsilon": 0.18464214711729623,
+  "mass_summary": [
+    {
+      "geometry": "MC",
+      "n_cells": 10,
+      "mean_delta_A1": -0.010184925099847307,
+      "mean_delta_A1_err": 0.004452071779866489,
+      "chi2_vs_zero": 9.92489159646114,
+      "ndf": 10
+    },
+    {
+      "geometry": "REC",
+      "n_cells": 10,
+      "mean_delta_A1": -0.0027041113531813253,
+      "mean_delta_A1_err": 0.004508376420977504,
+      "chi2_vs_zero": 5.285782528392548,
+      "ndf": 10
+    }
+  ],
+  "energy_summary": [
+    {
+      "sample": "proton",
+      "energy_low": 17.5,
+      "n_cells": 10,
+      "mean_A1": 0.1103780422018157,
+      "mean_A1_err": 0.00510411058455963
+    },
+    {
+      "sample": "proton",
+      "energy_low": 17.75,
+      "n_cells": 10,
+      "mean_A1": 0.11815702331685689,
+      "mean_A1_err": 0.0039737327684877585
+    },
+    {
+      "sample": "hierro",
+      "energy_low": 17.5,
+      "n_cells": 10,
+      "mean_A1": 0.10215753019606912,
+      "mean_A1_err": 0.00406810106272161
+    },
+    {
+      "sample": "hierro",
+      "energy_low": 17.75,
+      "n_cells": 10,
+      "mean_A1": 0.10455609738530802,
+      "mean_A1_err": 0.0031432512690381773
+    }
+  ]
+}
