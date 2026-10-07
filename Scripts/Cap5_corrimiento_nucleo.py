@@ -197,13 +197,16 @@ print(shift_fits.round(2).to_string(index=False))
 # %% [markdown]
 # ## 4. Figure for the chapter
 #
-# Mean radial error per azimuthal bin (error bars: standard error of the mean) for the three
-# zenith bins, with the validated azimuth. The original figure showed the per-station spread
-# (standard deviation); the standard error is what tells whether the modulation is significant.
+# One panel per zenith bin. Each panel shows every station as a point (the cloud), the mean
+# radial error per azimuthal bin with error bars of $\pm 1\sigma$ (the spread of the stations
+# in that bin; the standard error of the mean is smaller than the markers), and the fitted
+# $a + b\cos\phi$, where $b$ is the displacement of the reconstructed core towards the early
+# region.
 
 # %%
 AZIMUTH_BIN_EDGES_deg = np.linspace(-180.0, 180.0, 19)
 azimuth_centres = 0.5 * (AZIMUTH_BIN_EDGES_deg[1:] + AZIMUTH_BIN_EDGES_deg[:-1])
+phi_curve_deg = np.linspace(-180.0, 180.0, 361)
 
 ZENITH_STYLES = {
     "20-30": {"color": "tab:blue", "marker": "o"},
@@ -212,39 +215,105 @@ ZENITH_STYLES = {
 }
 
 profile_rows = []
-fig, ax = plt.subplots(figsize=(7.5, 4.6))
-for zenith_low, zenith_high in ZENITH_BINS_deg:
+fig, axes = plt.subplots(1, 3, figsize=(13.0, 4.4), sharey=True)
+for ax, (zenith_low, zenith_high) in zip(axes, ZENITH_BINS_deg):
     label_bin = "{:.0f}-{:.0f}".format(zenith_low, zenith_high)
+    style = ZENITH_STYLES[label_bin]
     in_bin = (stations["theta_MC"] >= zenith_low) & (stations["theta_MC"] < zenith_high)
     subset = stations[in_bin & stations["delta_r_m"].notna()].copy()
+
+    # Cloud: every station of the bin.
+    ax.scatter(subset[VALIDATED], subset["delta_r_m"], s=2, alpha=0.08, color=style["color"],
+               rasterized=True)
+
+    # Mean +- 1 sigma per azimuthal bin.
     subset["azimuth_bin"] = pd.cut(subset[VALIDATED], AZIMUTH_BIN_EDGES_deg)
     grouped = subset.groupby("azimuth_bin", observed=False)["delta_r_m"]
     means = grouped.mean().to_numpy()
-    errors = (grouped.std() / np.sqrt(grouped.count())).to_numpy()
-    for centre, mean, error in zip(azimuth_centres, means, errors):
+    spreads = grouped.std().to_numpy()
+    standard_errors = (grouped.std() / np.sqrt(grouped.count())).to_numpy()
+    for centre, mean, spread, error in zip(azimuth_centres, means, spreads, standard_errors):
         profile_rows.append({"zenith_bin": label_bin, "phi_deg": centre,
-                             "delta_r_mean_m": mean, "delta_r_sem_m": error})
-    style = ZENITH_STYLES[label_bin]
-    ax.errorbar(azimuth_centres, means, yerr=errors, color=style["color"],
-                marker=style["marker"], markersize=4, capsize=2, linewidth=1.2,
-                label="$\\theta_{{MC}} \\in [{:.0f}^\\circ, {:.0f}^\\circ)$".format(zenith_low,
-                                                                                  zenith_high))
+                             "delta_r_mean_m": mean, "delta_r_std_m": spread,
+                             "delta_r_sem_m": error})
+    ax.errorbar(azimuth_centres, means, yerr=spreads, color="black",
+                markerfacecolor=style["color"], marker=style["marker"], markersize=5,
+                capsize=2, linewidth=1.0, linestyle="none", label="media $\\pm 1\\sigma$")
+
+    # Fitted a + b cos(phi).
+    fit_row = shift_fits[(shift_fits["zenith_bin"] == label_bin)
+                         & (shift_fits["convention"] == VALIDATED)].iloc[0]
+    curve = fit_row["offset_m"] + fit_row["cos_amplitude_m"] * np.cos(np.deg2rad(phi_curve_deg))
+    ax.plot(phi_curve_deg, curve, color="black", linewidth=1.4, linestyle="--",
+            label="ajuste $a + b\\cos\\phi$, $b = {:.0f}$ m".format(fit_row["cos_amplitude_m"]))
+
+    ax.axhline(0.0, color="black", linewidth=0.8)
+    ax.set_xlim(-180.0, 180.0)
+    ax.set_ylim(-80.0, 80.0)
+    ax.set_xticks([-180, -90, 0, 90, 180])
+    ax.grid(True, alpha=0.3)
+    ax.set_title("$\\theta_{{MC}} \\in [{:.0f}^\\circ, {:.0f}^\\circ)$".format(zenith_low,
+                                                                         zenith_high),
+                 fontsize=11)
+    ax.set_xlabel("$\\phi_{MC}$ [grados]")
+    ax.text(0.5, 0.97, "temprano", transform=ax.transAxes, ha="center", va="top", fontsize=8,
+            color="dimgray")
+    ax.text(0.02, 0.97, "tardío", transform=ax.transAxes, ha="left", va="top", fontsize=8,
+            color="dimgray")
+    ax.text(0.98, 0.97, "tardío", transform=ax.transAxes, ha="right", va="top", fontsize=8,
+            color="dimgray")
+    ax.legend(fontsize=8, frameon=True, framealpha=0.9, loc="lower center")
+axes[0].set_ylabel("$\\Delta r = r_{MC} - r_{REC}$ [m]")
 pd.DataFrame(profile_rows).to_csv(TABLE_DIR / "perfil_corrimiento_nucleo.csv", index=False)
 
-ax.axhline(0.0, color="black", linewidth=0.8)
-ax.set_xlim(-180.0, 180.0)
-ax.set_ylim(-25.0, 27.0)
-ax.set_xticks([-180, -120, -60, 0, 60, 120, 180])
-ax.grid(True, alpha=0.3)
-ax.set_xlabel("Azimut de la estación en el plano de la lluvia $\\phi_{MC}$ [grados]")
-ax.set_ylabel("$\\Delta r = r_{MC} - r_{REC}$ [m]")
-ax.text(0.5, 0.97, "temprano", transform=ax.transAxes, ha="center", va="top", fontsize=9,
-        color="dimgray")
-ax.text(0.02, 0.97, "tardío", transform=ax.transAxes, ha="left", va="top", fontsize=9,
-        color="dimgray")
-ax.text(0.98, 0.97, "tardío", transform=ax.transAxes, ha="right", va="top", fontsize=9,
-        color="dimgray")
-ax.legend(fontsize=8, frameon=True, framealpha=0.9, loc="lower center")
 fig.tight_layout()
-fig.savefig(FIGURE_DIR / "corrimiento_nucleo_azimut.pdf")
+fig.savefig(FIGURE_DIR / "corrimiento_nucleo_azimut.pdf", dpi=200)
 plt.show()
+
+# %% [markdown]
+# ## 5. What the displacement implies for $A_1$
+#
+# A core displaced by $\delta$ towards the early region places each station, as seen from the
+# reconstructed core, at the wrong distance: early stations look closer than they are, late
+# ones farther. When the asymmetry is measured with the **reconstructed geometry** (Infill
+# analysis with $r_{\rm REC}$), the falling lateral distribution $\rho\propto r^{-\beta}$ then
+# adds a spurious modulation of the opposite sign,
+# $\Delta A_1 \simeq -\beta\,\delta/r$. We measure $\beta$ from the muon counts of the same
+# stations between 300 and 650 m (true distance) and evaluate the estimate at 450 and 1000 m.
+#
+# This does **not** apply to the Dense Ring: its stations are placed during the simulation at
+# 450 m from the *true* core, so the displacement only changes the azimuth assigned to them, by
+# at most $\delta/r \approx 2$--$3^\circ$, and it affects $N^{\rm MC}_\mu$ and $N^{\rm REC}_\mu$
+# in the same way.
+
+# %%
+muon_columns = ["event_id", "run_number", "theta_MC", "counterId", "sdId", "nMuones_MC",
+                "r_core_MC"]
+muon_tables = []
+for path in sorted(glob.glob(PARQUET_FOLDER + "*.parquet")):
+    muon_tables.append(pd.read_parquet(path, columns=muon_columns))
+muon_modules = pd.concat(muon_tables, ignore_index=True)
+muon_modules = muon_modules[muon_modules["counterId"] >= 100000]
+muon_stations = muon_modules.groupby(["run_number", "event_id", "sdId"], as_index=False).agg(
+    theta_MC=("theta_MC", "first"), r_core_MC=("r_core_MC", "first"),
+    n_muons_MC=("nMuones_MC", "sum"))
+
+SLOPE_EDGES_m = np.linspace(300.0, 650.0, 8)
+slope_centres = 0.5 * (SLOPE_EDGES_m[1:] + SLOPE_EDGES_m[:-1])
+rows = []
+for zenith_low, zenith_high in ZENITH_BINS_deg:
+    label_bin = "{:.0f}-{:.0f}".format(zenith_low, zenith_high)
+    in_bin = (muon_stations["theta_MC"] >= zenith_low) & (muon_stations["theta_MC"] < zenith_high)
+    near = muon_stations[in_bin & (muon_stations["r_core_MC"] > 300.0)
+                         & (muon_stations["r_core_MC"] < 650.0)]
+    mean_counts = near.groupby(pd.cut(near["r_core_MC"], SLOPE_EDGES_m),
+                               observed=False)["n_muons_MC"].mean().to_numpy()
+    beta = -np.polyfit(np.log(slope_centres), np.log(mean_counts), 1)[0]
+    displacement = shift_fits[(shift_fits["zenith_bin"] == label_bin)
+                              & (shift_fits["convention"] == VALIDATED)]["cos_amplitude_m"].iloc[0]
+    rows.append({"zenith_bin": label_bin, "ldf_slope_beta": beta, "displacement_m": displacement,
+                 "delta_A1_at_450m": -beta * displacement / 450.0,
+                 "delta_A1_at_1000m": -beta * displacement / 1000.0})
+washing_estimate = pd.DataFrame(rows)
+washing_estimate.to_csv(TABLE_DIR / "estimacion_lavado_A1.csv", index=False)
+print(washing_estimate.round(3).to_string(index=False))
