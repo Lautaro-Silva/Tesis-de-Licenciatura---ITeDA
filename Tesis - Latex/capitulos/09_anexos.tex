@@ -1,9 +1,47 @@
 % !TEX root = ../main.tex
 
+
 % ==========================================================================
-% ANEXO A: ANILLO DENSO
+% ANEXO A: LINEARIZACION
 %==========================================================================
-\section{Ajustes Armónicos para el Anillo Denso}
+
+
+\chapter{Desarrollo a primer orden del modelo de juguete}
+\label{anexo:linealizacion}
+
+Este anexo deriva la Ec.~\ref{eq:a1_lineal} a partir del modelo de la Ec.~\ref{eq:modelo_juguete}. Todos sus factores dependen de $\phi$ sólo a través de la distancia $d$ a la fuente. En la Ec.~\ref{eq:distancia_fuente}, el término $r^2$ dentro de la raíz es de segundo orden en $r/D$, de modo que a primer orden
+
+\begin{equation}
+	d \simeq D - r\tan\theta_{sh}\cos\phi = D\,(1 - x),
+	\qquad x \equiv \frac{r}{D}\tan\theta_{sh}\cos\phi \ll 1 .
+	\nonumber
+\end{equation}
+
+La variable $x$ es positiva en la región temprana y negativa en la tardía, y lleva toda la dependencia con $\phi$. Cada factor se desarrolla a primer orden en $x$, usando $(1-x)^n \simeq 1-nx$ y $e^{y}\simeq 1+y$, y separando la parte que no depende de $\phi$:
+
+\begin{align}
+	\textbf{i)}\quad & \frac{1}{d^2} = \frac{1}{D^2}(1-x)^{-2} \simeq \frac{1}{D^2}\,(1+2x), \nonumber\\
+	\textbf{ii)}\quad & e^{-d/\lambda} = e^{-D/\lambda}\,e^{(D/\lambda)\,x} \simeq e^{-D/\lambda}\Big(1+\frac{D}{\lambda}\,x\Big), \nonumber\\
+	\textbf{iii)}\quad & \cos\vartheta = \frac{D\cos\theta_{sh}}{d} = \cos\theta_{sh}\,(1-x)^{-1} \simeq \cos\theta_{sh}\,(1+x). \nonumber
+\end{align}
+
+El factor \textbf{iii)} es la respuesta de un detector plano ($\kappa=1$). Para el tanque, el mismo desarrollo aplicado a la Ec.~\ref{eq:area_tanque} da $\mathcal{A}_{tanque}\propto 1+\kappa\,x$, con $\kappa\simeq0.3$ para $\theta_{sh}=35^\circ$.
+
+\textbf{iv)} La distribución angular depende de $\phi$ a través de $\alpha$. Como $\sin\alpha = r/d$, el mismo desarrollo da $\sin\alpha \simeq \sin\alpha_0\,(1+x)$, con $\sin\alpha_0 = r/D$ su valor en $x=0$. En la distribución de momentos usada en Ec.~\ref{eq:cazon_dNdOmega}, el factor exponencial resulta
+
+\begin{equation}
+	e^{-(p/Q)\sin\alpha} = e^{-(p/Q)\sin\alpha_0}\,e^{-(p/Q)\sin\alpha_0\,x} \simeq e^{-(p/Q)\sin\alpha_0}\Big(1-\frac{p}{Q}\sin\alpha_0\,x\Big),
+	\nonumber
+\end{equation}
+%
+mientras que $\cos\alpha$ cambia mucho menos, en una fracción $\tan^2\alpha_0\,x$, de orden $(r/D)^2x$. En total, $f(\alpha) \simeq f(\alpha_0)\,(1-s\,x)$, con $s = (p/Q)\sin\alpha_0 + \tan^2\alpha_0 \simeq p\,r/(QD)$.
+
+El producto de factores de la forma $(1+a_i x)$ es, a primer orden, $1+(\sum_i a_i)\,x$, y los prefactores que no dependen de $\phi$ sólo fijan la normalización $\langle S\rangle$. Reemplazando $x$ y comparando con la Ec.~\ref{eq:asimetria_a1}, cuyo término modulado es $A_1\cos\phi$, se obtiene la Ec.~\ref{eq:a1_lineal}.
+
+% ==========================================================================
+% ANEXO B: ANILLO DENSO
+%==========================================================================
+\chapter{Ajustes Armónicos para el Anillo Denso}
 \label{anexo:ajustes_anillo_denso}
 
 En esta sección se presenta la inspección visual del ajuste armónico realizado sobre la señal total del Detector de Superficie (SD) en el entorno del Anillo Denso. Como fue discutido en la Sección \ref{subsec:mc_vs_rec}, los elevados valores de $\chi^2/\text{ndf}$ obtenidos para el SD no responden a una falla fenomenológica del modelo dipolar, sino a la extrema reducción de la incertidumbre estadística (consecuencia de la alta afluencia de partículas electromagnéticas) que vuelve al ajuste hipersensible a fluctuaciones de segundo orden. 
@@ -20,9 +58,9 @@ En la Figura \ref{fig:anexo_ajuste_sd_bin9} se expone el ajuste representativo p
 
 
 % ==========================================================================
-% ANEXO B: INFILL
+% ANEXO C: INFILL
 %==========================================================================
-\section{Grillas de Ajustes Armónicos para el Arreglo \textit{Infill} en simulaciones}
+\chapter{Grillas de Ajustes Armónicos para el Arreglo \textit{Infill} en simulaciones}
 \label{anexo:ajustes_infill}
 
 En este anexo se presentan las grillas completas de los ajustes armónicos realizados sobre las simulaciones del arreglo \textit{Infill} tanto usando la geometria verdadera como la reconstruida. Cada figura corresponde a un rango cenital específico ($\Delta\theta = 10^\circ$) y expone la evolución de los cinco observables físicos analizados a lo largo de los sucesivos bines radiales ($\Delta r = 150$~m). 
@@ -35,7 +73,7 @@ Para cada celda del espacio de fases, se reportan los datos experimentales simul
 \begin{landscape}
 	
 	% --- Geometría Monte Carlo ---
-	\subsection{Geometría Verdadera (Monte Carlo)}
+	\section{Geometría Verdadera (Monte Carlo)}
 	\label{anexo:ajustes_infill_mc}
 	
 	% --- Bin 0 - 10 ---
@@ -99,7 +137,7 @@ Para cada celda del espacio de fases, se reportan los datos experimentales simul
 \begin{landscape}
 	
 	% --- Geometría Monte Carlo ---
-	\subsection{Geometría Reconstruida}
+	\section{Geometría Reconstruida}
 	\label{anexo:ajustes_infill_rec}
 	
 	% --- Bin 0 - 10 ---

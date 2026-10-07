@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 
-\section{Rayos Cósmicos de Ultra-Alta Energía}
+\chapter{Rayos Cósmicos de Ultra-Alta Energía}
 \label{sec:introduccion}
 
 Los Rayos Cósmicos de Ultra-Alta Energía (\textit{UHECR}, por sus siglas en inglés) son las partículas más energéticas del universo observable que impactan contra la Tierra, superando los $10^{18}eV$ y llegando a alcanzar energías extremas del orden de los $10^{20}eV$. Cuando estas partículas primarias interactúan con los núcleos en la alta atmósfera terrestre, inician una reacción en cadena que produce una cascada de partículas secundarias. Estas partículas se propagan hacia el suelo distribuyéndose en lo que se conoce como una Lluvia Atmosférica Extensa (\textit{EAS}, por sus siglas en inglés). 
@@ -23,7 +23,7 @@ A pesar de la solidez matemática de la predicción GZK, hacia finales del siglo
 
 El Observatorio Auger resolvió la paradoja inicial midiendo, con una precisión estadística muy grande, una abrupta supresión en el flujo por encima de los $4 \times 10^{19}eV$ \cite{augerSpectrum2020}, confirmando la existencia del corte GZK de manera empírica. Sin embargo, las mediciones simultáneas del desarrollo longitudinal de las lluvias revelaron un cambio de paradigma: a estas energías extremas, la composición de los rayos cósmicos se torna progresivamente más pesada, estando dominada por núcleos de mayor masa similares al hierro \cite{augerComposition2017}, \cite{aloisio2017}.
 
-\subsection{El espectro de energía y composición química}
+\section{El espectro de energía y composición química}
 \label{subsec:espectro}
 
 El espectro de energía de los rayos cósmicos que arriban a la Tierra constituye la herramienta fundamental para analizar y comprender tanto los mecanismos de aceleración astrofísica como la composición química de las partículas primarias. Este espectro describe el flujo diferencial de partículas por unidad de energía, área, tiempo y ángulo sólido, y se caracteriza por extenderse a lo largo de más de once órdenes de magnitud, siguiendo una distribución general de ley de potencias
@@ -39,14 +39,18 @@ El espectro de energía presenta cuatro características morfológicas principal
 
 A energías de alrededor de $\sim 10^{17}eV$, el espectro sufre una nueva caída abrupta conocida como la \textit{segunda rodilla} (\textit{second knee}), donde el índice espectral se desplaza hacia $\gamma \approx 3.3$. Mediciones recientes del Observatorio Pierre Auger confirman que esta estructura se manifiesta como una atenuación gradual del flujo \cite{augerSpectrum2020}. Fenomenológicamente, la segunda rodilla se interpreta como la extinción de la componente galáctica pesada, correspondiente al límite de energía alcanzable por los núcleos de hierro ($Z=26$) en los remanentes de supernovas (SNR). Esta hipótesis se sustenta en que la escala energética de la segunda rodilla satisface de manera aproximada la relación de rigidez magnética $E_{2da} \approx Z \times E_{1ra}$.
 
-\begin{figure}[H]
+Al concentrar el análisis en la región de los rayos cósmicos de ultra-alta energía (UHECR), resulta conveniente evaluar el flujo multiplicado por $E^3$, permitiendo un examen minucioso de las estructuras superiores como se ve en la Figura \ref{fig:espectro_UHERC}. A una energía de aproximadamente $\sim 4 - 5 \times 10^{18}$~eV, el espectro vuelve a aplanarse notablemente, recuperando un índice espectral de $\gamma \approx 2.6 - 2.7$. Esta estructura recibe el nombre de el \textit{tobillo} (\textit{ankle}) y su naturaleza física cuenta históricamente con varias explicaciones competitivas. Una de ellas postula que el tobillo es causada por una transición composicional, marcando el punto de cruce donde el flujo de rayos cósmicos extra-galácticos (predominantemente livianos) comienza a dominar sobre la componente galáctica pesada en extinción.
+
+Por encima del tobillo, la estadística de precisión del Observatorio Pierre Auger ha permitido identificar una nueva estructura morfológica intermedia denominada el \textit{instep} (o escalón), localizada a energías en torno a los $10 \times 10^{18}$~eV \cite{augerSpectrum2020}. Consistente con las revisiones actuales del \textit{Particle Data Group} \cite{PDG2024}, el \textit{instep} se manifiesta como un sutil pero sistemático ablandamiento del espectro posterior al tobillo. Esta característica aporta información física crucial, sugiriendo que la transición hacia el límite superior del espectro no es abrupta, sino que está modulada por la combinación de las energías máximas de inyección de diferentes componentes de masa en las fuentes y los efectos de foto-desintegración intergaláctica.
+
+Finalmente, por encima de los $4 \times 10^{19}$~eV, el espectro experimenta una pronunciada y definitiva \textit{supresión del flujo}, cuya existencia ha sido confirmada por la Colaboración Auger con una significancia estadística superior a $20\sigma$ \cite{augerSpectrum2020}. La dilucidación de los mecanismos físicos detrás de esta supresión constituye uno de los problemas abiertos más relevantes de la astrofísica moderna. 
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap1/espectro_completo.jpg}
 	\caption{Espectro de energía de rayos cósmicos en los rangos de energía $10^{13}\text{ eV} < E < 2 \times 10^{20}\text{ eV}$. Se observa cómo cambia el flujo escalado por $E^{2.6}$ y se visualizan las características morfológicas más relevantes: la 'rodilla', la 'segunda rodilla', el 'tobillo' y la supresión de flujo a energías extremas. Obtenido de \cite{PDG2018}.}
 	\label{fig:espectro_completo}
-\end{figure}
-
-Al concentrar el análisis en la región de los rayos cósmicos de ultra-alta energía (UHECR), resulta conveniente evaluar el flujo multiplicado por $E^3$, permitiendo un examen minucioso de las estructuras superiores como se ve en la Figura \ref{fig:espectro_UHERC}. A una energía de aproximadamente $\sim 4 - 5 \times 10^{18}$~eV, el espectro vuelve a aplanarse notablemente, recuperando un índice espectral de $\gamma \approx 2.6 - 2.7$. Esta estructura recibe el nombre de el \textit{tobillo} (\textit{ankle}) y su naturaleza física cuenta históricamente con varias explicaciones competitivas. Una de ellas postula que el tobillo es causada por una transición composicional, marcando el punto de cruce donde el flujo de rayos cósmicos extra-galácticos (predominantemente livianos) comienza a dominar sobre la componente galáctica pesada en extinción. 
+\end{figure} 
 
 \begin{figure}[H]
 	\centering
@@ -55,13 +59,9 @@ Al concentrar el análisis en la región de los rayos cósmicos de ultra-alta en
 	\label{fig:espectro_UHERC}
 \end{figure}
 
-Por encima del tobillo, la estadística de precisión del Observatorio Pierre Auger ha permitido identificar una nueva estructura morfológica intermedia denominada el \textit{instep} (o escalón), localizada a energías en torno a los $10 \times 10^{18}$~eV \cite{augerSpectrum2020}. Consistente con las revisiones actuales del \textit{Particle Data Group} \cite{PDG2024}, el \textit{instep} se manifiesta como un sutil pero sistemático ablandamiento del espectro posterior al tobillo. Esta característica aporta información física crucial, sugiriendo que la transición hacia el límite superior del espectro no es abrupta, sino que está modulada por la combinación de las energías máximas de inyección de diferentes componentes de masa en las fuentes y los efectos de foto-desintegración intergaláctica.
-
-Finalmente, por encima de los $4 \times 10^{19}$~eV, el espectro experimenta una pronunciada y definitiva \textit{supresión del flujo}, cuya existencia ha sido confirmada por la Colaboración Auger con una significancia estadística superior a $20\sigma$ \cite{augerSpectrum2020}. La dilucidación de los mecanismos físicos detrás de esta supresión constituye uno de los problemas abiertos más relevantes de la astrofísica moderna. 
-
 Determinar cuál de los escenarios teóricos domina este corte espectral, si el frenado cinemático por efecto GZK sobre protones, la foto-desintegración de núcleos o el agotamiento de la capacidad de aceleración de las fuentes, requiere imperativamente un conocimiento preciso de la composición química de los rayos cósmicos evento a evento. Las mediciones espectrales y de desarrollo longitudinal de la Colaboración Auger indican un comportamiento transicional complejo: mientras que en la región del tobillo la radiación está dominada por componentes livianos, a medida que la energía escala hacia la región de la supresión, se evidencia un endurecimiento sistemático del flujo hacia núcleos progresivamente más pesados, consistentes con elementos del grupo del hierro \cite{augerComposition2017}. Esta evolución composicional empírica subraya la necesidad de desarrollar observables terrestres de alta sensibilidad y técnicas analíticas avanzadas para discriminar de forma robusta la masa primaria en los rangos energéticos más extremos.
 
-\subsection{Lluvias Atmosféricas Extensas y el desarrollo longitudinal ($X_{max}$)}
+\section{Lluvias Atmosféricas Extensas y el desarrollo longitudinal ($X_{max}$)}
 \label{subsec:eas_xmax}
 
 Dado su flujo extremadamente bajo la detección directa de UHECRs en el espacio exterior resulta instrumentalmente inviable. Su estudio se realiza de manera indirecta observando la Lluvia Atmosférica Extensa que la partícula primaria induce al colisionar inelásticamente con un núcleo de aire (típicamente nitrógeno u oxígeno) en las altas capas de la atmósfera terrestre.
@@ -91,7 +91,7 @@ La dependencia de este observable con la composición primaria puede derivarse a
 
 Esta separación logarítmica demuestra que, a una energía dada, los núcleos pesados tendrán un $\langle X_{max} \rangle$ sistemáticamente menor (más alto en la atmósfera) que los primarios livianos. Por lo tanto, medir indirectamente el valor de $X_{max}$ a nivel del suelo se consolida como el problema central de los estudios de composición másica en grandes arreglos de superficie.
 
-\subsection{Motivación y objetivos de la tesis}
+\section{Motivación y objetivos de la tesis}
 \label{subsec:motivacion}
 
 La estimación de la masa primaria mediante arreglos de superficie (SD) resulta sumamente compleja debido a que los detectores Cherenkov en agua (WCD) y los centelladores de superficie (SSD) registran una señal convolucionada de las componentes electromagnética y muónica de la cascada. Históricamente, se ha intentado extraer información del desarrollo longitudinal estudiando la asimetría azimutal de la señal en el suelo. Los estudios recientes sobre la señal total del SD, como el trabajo de Bradfield \cite{BradfieldThesis}, han servido como un punto de partida fundamental para esta investigación al caracterizar dicha modulación. Sin embargo, los observables basados en la señal total exhiben un comportamiento ambiguo: la disminución de la asimetría con lluvias más profundas (y por ende más energéticas o livianas), la aparición de inversiones de signo en la asimetría, entre otras cosas, complican la inferencia física de la composición.

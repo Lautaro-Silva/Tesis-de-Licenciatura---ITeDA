@@ -1,21 +1,21 @@
 % !TEX root = ../main.tex
 
-\section{Simulación y Metodología de Análisis}
+\chapter{Simulación y Metodología de Análisis}
 \label{cap:metodologia}
 
 En este capítulo se detallan las herramientas computacionales y los criterios analíticos empleados para el estudio de las asimetrías azimutales. Se describe la cadena de simulación y reconstrucción, la biblioteca de simulaciones usadas y se validan los parámetros de reconstrucción fundamentales (energía y dirección) que garantizan la fidelidad de los resultados experimentales.
 
-\subsection{Librería de Simulaciones y Framework de Reconstrucción}
+\section{Librería de Simulaciones y Framework de Reconstrucción}
 
 El análisis de lluvias atmosféricas extensas (EAS) requiere de una cadena de simulación robusta que permita comparar las predicciones teóricas con las señales registradas, de manera de representar la física de la lluvia fidedignamente. La generación de lluvias mediante simulaciones Monte Carlo (MC) demanda recursos computacionales masivos. Por este motivo, para el desarrollo de este trabajo de tesis no se generaron simulaciones desde cero, sino que se recurrió a una producción oficial generada por la Colaboración Pierre Auger.
 
-\subsubsection{CORSIKA y Modelos Hadrónicos}
+\subsection{CORSIKA y Modelos Hadrónicos}
 Para la generación de las cascadas atmosféricas se empleó el código \texttt{CORSIKA} (COsmic Ray SImulations for KAscade) \cite{heck1998corsika}. Esta herramienta permite el seguimiento detallado de todas las partículas secundarias producidas por el primario en la atmósfera. Dado que la mayor incertidumbre en la física de las EAS reside en las interacciones hadrónicas a energías ultra-altas, se utilizaron librerías que cubren diversos modelos de alta energía, principalmente \texttt{EPOS-LHC}, \texttt{QGSJET} y \texttt{SIBYLL} \cite{pierog2015epos, riehn2020sibyll, ostapchenko2011qgsjet}. Estas simulaciones contemplan primarios de distinta naturaleza química, desde protones hasta núcleos de hierro, cubriendo el rango de interés para este estudio.
 
-\subsubsection{El Framework \textit{Offline}}
+\subsection{El Framework \textit{Offline}}
 La respuesta de los detectores de superficie (SD) y el detector subterráneo de muones (UMD) se simuló mediante el framework \texttt{Offline} del Observatorio \cite{argiro2007offline}. Este software procesa la salida de \texttt{CORSIKA} (las partículas que alcanzan el nivel del suelo) y simula procesos físicos como la emisión de radiación Cherenkov en los tanques de agua, el centelleo en los módulos del UMD y la respuesta de la electrónica de adquisición, entre otras cosas. Dentro de esta parte del codigo es donde también esta la incorporación de las estaciones físicas del observatorio siguiendo la geometría real de las mismas tal como fueron descriptas en la Sección \ref{subsec:ssd}. El resultado final se empaqueta en archivos de formato ADST (Advanced Data Summary Tree), los cuales contienen tanto la información intrínseca de la lluvia inyectada (Monte Carlo o MC) como los observables derivados por el algoritmo de reconstrucción (\textit{Reconstructed} o REC).
 
-\subsubsection{Producción Oficial y Disponibilidad de Datos}
+\subsection{Producción Oficial y Disponibilidad de Datos}
 \label{sec:produccion_mc}
 
 La muestra analizada proviene de la producción denominada internamente \textit{Offline icrc2025-test7: SD-750 and UMD production for Auger}. Las cascadas originales fueron simuladas utilizando \texttt{CORSIKA} (v7.8010) y procesadas con el framework \texttt{Offline}.
@@ -54,7 +54,7 @@ También cabe destacar que el dataset de Helio de alta energía ($\log_{10}(E/\m
 
 Como se evidencia en el Cuadro \ref{tab:adst_datasets}, para asegurar una estadística robusta y simétrica en la comparación de composición de masa, el análisis fenomenológico de esta tesis se centra en el subconjunto completo correspondiente al modelo \texttt{SIBYLL 2.3e} hasta $\log_{10}(E/\mathrm{eV}) = 18.0$.
 
-\subsubsection{Caracterización del Anillo Denso}
+\subsection{Caracterización del Anillo Denso}
 \label{subsec:anillo_denso}
 
 Para posibilitar el estudio puramente azimutal aislando la caída radial de la Función de Distribución Lateral (LDF), se requiere un control estricto de la geometría. Para lograr esto, se utiliza la configuración denominada \textit{Anillo Denso} (o \textit{Dense Ring}), una metodología estándar en la Colaboración para estudios de performance y calibración de asimetrías \cite{BradfieldThesis}.
@@ -63,14 +63,16 @@ En las simulaciones, esto consiste en rodear artificialmente el núcleo de la ll
 
 En la práctica se distribuyen 12 estaciones virtuales situadas a un radio fijo de $r = 450$~m \cite{auger2021infill}. Estas estaciones se ubican en ángulos azimutales ($\phi$) fijos y equiespaciados cada $30^\circ$ en el plano de la lluvia (comenzando en $\phi = 0^\circ$ hasta cubrir los $360^\circ$), garantizando una muestra uniforme de las regiones temprana y tardías. Al fijar el radio y las posiciones angulares, se asegura que cualquier modulación en la densidad de muones observada obedezca estrictamente a factores físicos, como la atenuación atmosférica o la cinemática de producción de los hadrones progenitores, dependientes del ángulo azimutal $\phi$, permitiendo realizar el ajuste armónico $S(\phi) = \langle S \rangle (1 + A_1 \cos\phi)$ sin artefactos introducidos por otras fuentes.
 
-\subsection{Procesamiento de Datos y Extracción de Observables}
+\section{Procesamiento de Datos y Extracción de Observables}
 \label{sec:procesamiento_datos}
 
 El procesamiento de la librería de simulaciones se llevó a cabo desarrollando un \textit{pipeline} en \texttt{Python} que interactúa con las bibliotecas del framework \texttt{Offline} a través de la interfaz \texttt{PyROOT}. La lectura de los archivos ADST se realizó iterando sobre cada evento (lluvia) y, consecuentemente, sobre cada estación y sus respectivos módulos de detección.
 
+\vspace{2cm}
+
 Para realizar un estudio integral que permita caracterizar la asimetría y evaluar la performance de los algoritmos del observatorio, se extrajeron conjuntos de observables tanto a nivel Monte Carlo como a nivel del algoritmo de reconstrucción (REC). 
 
-\subsubsection{Parámetros Globales de la Cascada}
+\subsection{Parámetros Globales de la Cascada}
 
 Las variables recolectadas se agrupan de la siguiente manera, Por cada evento, se identificó la naturaleza del primario (Protón, Helio, Oxígeno, Hierro) y se extrajeron las propiedades fundamentales a nivel global:
 \begin{itemize}
@@ -79,50 +81,59 @@ Las variables recolectadas se agrupan de la siguiente manera, Por cada evento, s
 	\item \textbf{Ángulos de Arribo de la Lluvia ($\theta_{shower}, \phi_{shower}$):} Se extrajeron las direcciones MC y REC. Además de su uso evidente para la clasificación cenital del evento, estos ángulos son necesario para realizar las proyecciones de las estaciones al plano de la lluvia a mano.
 \end{itemize}
 
-\subsubsection{Geometría en el Plano de la Lluvia}
+\subsection{Geometría en el Plano de la Lluvia}
 \label{sec:calculo_manual_geometria}
 
 En el marco del análisis estándar, las coordenadas de las estaciones en el plano perpendicular al eje de la lluvia (\textit{shower plane}) se obtienen mediante funciones nativas de \texttt{Offline} (como \texttt{GetAzimuthSP}), las cuales operan utilizando los parámetros reconstruidos de la lluvia (ángulos y núcleo REC).
 
 Para este trabajo, a fin de aislar la asimetría física real de las distorsiones introducidas por la reconstrucción instrumental, se implementó un cálculo matricial \textit{a mano} de las posiciones de las estaciones en el contexto MC. Utilizando las coordenadas cartesianas absolutas de cada detector, se aplicaron rotaciones espaciales en 3D (rotaciones de Euler) forzando el uso de los ángulos de arribo verdaderos ($\theta_{\mathrm{MC}}, \phi_{\mathrm{MC}}$) y tomando como origen de referencia el núcleo inyectado por la simulación ($Core_{\mathrm{MC}}$). Para proyectar correctamente estas posiciones, el algoritmo extrae las coordenadas 3D cartesianas del detector ($X, Y, Z$) y del núcleo MC de la lluvia. Posteriormente, se aplican transformaciones de rotación de Euler (rotaciones en los ángulos $Z$ e $Y$ dadas por el azimut y el cenit de la cascada) para transformar el vector de la estación sobre la superficie al plano de la lluvia (donde ahora depende de las coordenadas $r_{station, \,  showerplane}$ y $\phi_{station, \, showerplane}$), corrigiendo así la deformación de proyección.
 
+\vspace{5cm}
+
 Esta proyección analítica dota al análisis de un 'entorno de control', permitiendo contrastar la asimetría azimutal intrínseca y pura de la cascada simulada contra la asimetría finalmente reportada por la cadena de reconstrucción.
 
-\subsubsection{Observables a Nivel de Estación (SD y UMD)}
+\subsection{Observables a Nivel de Estación (SD y UMD)}
 Finalmente, el \textit{pipeline} desciende al nivel granular de los detectores para recolectar las señales y sus respectivos identificadores de calidad:
 \begin{itemize}
 	\item \textbf{Detector de Superficie (SD):} Se extrajo la señal total reconstruida en unidades VEM (\textit{Vertical Equivalent Muon}), junto con la cantidad exacta de muones y partículas electromagnéticas inyectadas (\textit{MC truth}) para permitir estudios de composición de señal. Adicionalmente, se registraron \textit{flags} del detector, prestando especial atención a la saturación (\texttt{IsLowGainSaturated}), un indicador que permite excluir detectores con señales saturadas.
 	\item \textbf{Detector Subterráneo de Muones (UMD):} A nivel de los segmentos de centelladores (\textit{modules}), se extrajo la cantidad de muones estimada por la reconstrucción ($N_{\mu}^{\mathrm{REC}}$) y también la cantidad de muones inyectados ($N_{\mu}^{\mathrm{MC}}$) obtenida iterando directamente sobre los objetos de simulación (\textit{SimScintillators}) sumando los muones inyectados por \texttt{CORSIKA} en cada canal. A su vez, se guardaron los estados operativos de los módulos (\textit{candidate}, \textit{silent}, \textit{rejected}) como información relevante para el análisis.
 \end{itemize}
 
-\subsection{Performance y Calibración de la Reconstrucción}
+\section{Performance y Calibración de la Reconstrucción}
 \label{sec:performance_reconstruccion}
 
 Antes de realizar estudios de composición y asimetrías, es imperativo cuantificar la precisión con la que el software \texttt{Offline} recupera las propiedades intrínsecas del rayo cósmico primario. Para ello, se llevaron a cabo pruebas de validación sobre los parámetros de reconstrucción esperados.
 
-\subsubsection{Reconstrucción de Energía y Bias Sistemático}
+\subsection{Reconstrucción de Energía y Bias Sistemático}
 
 Para cada conjunto de datos correspondiente a los distintos modelos hadrónicos, primarios y rangos de energía, se evaluó evento a evento el comportamiento de la energía reconstruida ($E_{\mathrm{REC}}$) en comparación con la energía inyectada en la simulación ($E_{\mathrm{MC}}$). A modo de referencia, la correlación para el conjunto de lluvias de protones simuladas con el modelo \texttt{SIBYLL 2.3e} se presenta en la Figura \ref{fig:rec_energy}.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap4/energy_reconstr.pdf} 
-	\caption{Reconstrucción de la energía del primario incidente. La línea punteada indica la relación ideal donde la energía reconstruida iguala a la simulada ($E_{\mathrm{REC}} = E_{\mathrm{MC}}$). Se observa la dispersión de los datos reconstruidos con una clara tendencia a subestimar el valor real.}
-	\label{fig:rec_energy}
-\end{figure}
 
 Al analizar la diferencia logarítmica entre ambas energías, se constató la presencia de un sesgo (\textit{bias}) sistemático. Tal como se detalla en la Figura \ref{fig:bias_energy} para lluvias de protones (\texttt{SIBYLL 2.3e}), se halló un desplazamiento medio de $\mu \approx -0.142$ en la variable $\Delta \log_{10}(E/\mathrm{eV})$, con una resolución (desviación estándar) de $\sigma \approx 0.111$. Es importante destacar que este comportamiento sistemático se comprobó en todos los conjuntos de datos analizados dentro de la banda de interés $\log_{10}(E_0/\mathrm{eV}) \in [17.5, 18.0]$.
 
-Este desplazamiento representa una subestimación de la energía de aproximadamente un 28\% y es el comportamiento esperado para la cadena de reconstrucción del arreglo \textit{Infill}. Esta discrepancia no constituye un error algorítmico, sino que es una manifestación del conocido \textit{Déficit de Muones} en los modelos de interacciones hadrónicas \cite{auger2016muon_deficit}. Dado que el algoritmo de reconstrucción \texttt{Offline} está calibrado empíricamente con datos híbridos del Observatorio (los cuales presentan una mayor densidad de muones que las predicciones teóricas), las lluvias simuladas con modelos como \texttt{SIBYLL 2.3e} producen señales en el SD artificialmente bajas. Al ser procesadas por un reconstructor que 'espera' una mayor abundancia muónica, la energía resultante es sistemáticamente menor a la verdadera. Este fenómeno de escala entre datos y simulaciones para el rango de energías del \textit{Infill} y el UMD ha sido extensamente caracterizado por la Colaboración \cite{auger2020umd_infill}.
-
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap4/energy_bias.pdf} 
-	\caption{Histograma del error relativo en la reconstrucción de energía, $\Delta \log_{10}E = \log_{10}E_{\mathrm{REC}} - \log_{10}E_{\mathrm{MC}}$. La distribución presenta un valor central de $\mu \approx -0.142$ con una resolución de $\sigma \approx 0.111$.}
-	\label{fig:bias_energy}
+	\begin{subfigure}[b]{0.82\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap4/energy_reconstr.pdf} 
+		\caption{Reconstrucción de la Energía.}
+		\label{fig:rec_energy}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.82\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap4/energy_bias.pdf} 
+		\caption{Bias de la reconstrucción de la Energia}
+		\label{fig:bias_energy}
+	\end{subfigure}
+	\caption{\textbf{(a)} Reconstrucción de la energía del primario incidente donde la línea punteada indica la relación ideal donde la energía reconstruida iguala a la simulada ($E_{\mathrm{REC}} = E_{\mathrm{MC}}$). Se observa la dispersión de los datos reconstruidos con una clara tendencia a subestimar el valor real. \textbf{(b)} Histograma del error relativo en la reconstrucción de energía, $\Delta \log_{10}E = \log_{10}E_{\mathrm{REC}} - \log_{10}E_{\mathrm{MC}}$. La distribución presenta un valor central de $\mu \approx -0.142$ con una resolución de $\sigma \approx 0.111$..}
+	\label{fig:bias_energia_full}
 \end{figure}
 
-\subsubsection{Resolución Angular}
+
+Este desplazamiento representa una subestimación de la energía de aproximadamente un 28\% y es el comportamiento esperado para la cadena de reconstrucción del arreglo \textit{Infill}. Esta discrepancia no constituye un error algorítmico, sino que es una manifestación del conocido \textit{Déficit de Muones} en los modelos de interacciones hadrónicas \cite{auger2016muon_deficit}. Dado que el algoritmo de reconstrucción \texttt{Offline} está calibrado empíricamente con datos híbridos del Observatorio (los cuales presentan una mayor densidad de muones que las predicciones teóricas), las lluvias simuladas con modelos como \texttt{SIBYLL 2.3e} producen señales en el SD artificialmente bajas. Al ser procesadas por un reconstructor que 'espera' una mayor abundancia muónica, la energía resultante es sistemáticamente menor a la verdadera. Este fenómeno de escala entre datos y simulaciones para el rango de energías del \textit{Infill} y el UMD ha sido extensamente caracterizado por la Colaboración \cite{auger2020umd_infill}.
+
+\subsection{Resolución Angular}
 
 La precisión en la determinación de la dirección de arribo de la cascada es vital, ya que define el vector normal utilizado para la proyección espacial de las estaciones al plano de la lluvia. Los resultados de la reconstrucción, presentados en la Figura \ref{fig:bias_angular}, evidencian una resolución angular rigurosa:
 
@@ -133,16 +144,16 @@ La precisión en la determinación de la dirección de arribo de la cascada es v
 
 Estos márgenes confirman que el error en la determinación de las coordenadas intrínsecas del plano de la lluvia es mínimo, asegurando que la propagación de incertezas angulares no introduce modulaciones espurias significativas en el cálculo posterior de la amplitud de asimetría $A_1$.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\begin{subfigure}[b]{0.8\textwidth}
+	\begin{subfigure}[b]{0.82\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap4/theta_bias.pdf}
 		\caption{Sesgo en el ángulo cenital ($\theta$).}
 		\label{fig:bias_theta}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.8\textwidth}
+	\begin{subfigure}[b]{0.82\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap4/phi_bias.pdf}
 		\caption{Sesgo en el ángulo azimutal ($\phi$).}

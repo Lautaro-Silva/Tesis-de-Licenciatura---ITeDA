@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 
-\section{El Observatorio Pierre Auger y la Detección Híbrida}
+\chapter{El Observatorio Pierre Auger y la Detección Híbrida}
 \label{sec:observatorio}
 
 El Observatorio Pierre Auger, ubicado en la provincia de Mendoza, Argentina, es el experimento de rayos cósmicos más grande del mundo. Tras su concepción inicial por los físicos Jim Cronin y Alan Watson en 1991, la construcción del observatorio comenzó en 2002 y se completó formalmente en 2008. El objetivo fundamental de este experimento es estudiar el espectro de energía, las direcciones de arribo y la composición de masa de los Rayos Cósmicos de Ultra-Alta Energía (UHECRs) con una estadística sin precedentes.
@@ -20,7 +20,7 @@ El Detector de Superficie opera de manera continua, proporcionando una inmensa e
 	\label{fig:mapa_auger}
 \end{figure}
 
-\subsection{El Detector de Superficie (SD)}
+\section{El Detector de Superficie (SD)}
 \label{subsec:ssd}
 
 El Arreglo de Superficie estándar está compuesto por 1660 detectores Cherenkov en agua (WCD, por sus siglas en inglés: \textit{Water Cherenkov Detector}) distribuidos en una red triangular equilátera con una separación de 1500~m, cubriendo un área de aproximadamente $3000\text{ km}^2$. Adicionalmente, el arreglo cuenta con una región más densa conocida como el \textit{Infill}, donde la separación entre estaciones se reduce a 750~m, bajando el umbral de energía de detección y permitiendo estudiar lluvias menos energéticas con mayor resolución espacial. 
@@ -40,7 +40,7 @@ El principio de funcionamiento del detector se basa en el efecto Cherenkov, cuan
 
 Para garantizar su autonomía y sincronización, cada estación WCD opera de manera independiente. Cuentan con una antena GPS que proporciona una estampa temporal de alta precisión para cada evento, lo cual es indispensable para construir los eventos híbridos y reconstruir la dirección de arribo y la geometría geométrica de la lluvia. La electrónica local, los PMTs, el sistema de comunicación y el receptor GPS son alimentados por dos baterías que se recargan mediante paneles solares acoplados a la estructura del tanque. Una imagen del WCD con sus componentes principales se puede ver en la Figura \ref{fig:ssd}.
 
-\subsection{El Detector de Fluorescencia (FD)}
+\section{El Detector de Fluorescencia (FD)}
 \label{subsec:fd}
 
 Mientras que el Arreglo de Superficie mide la distribución lateral de las partículas que logran llegar al suelo, el Detector de Fluorescencia (FD) está diseñado para observar el desarrollo longitudinal de la cascada a medida que esta atraviesa la atmósfera. El FD consta de 24 telescopios distribuidos en conjuntos de seis a lo largo de cuatro edificios perimetrales que observan el volumen de aire sobre el arreglo SD: Los Leones, Los Morados, Loma Amarilla y Coihueco. En la Figura \ref{fig:fd_leones} se muestra una fotografía de las instalaciones del FD ubicadas en el sitio Los Leones.
@@ -62,7 +62,7 @@ A pesar de sus enormes beneficios analíticos, el FD posee una limitación instr
 
 Esta severa penalización estadística, especialmente crítica para eventos de ultra-alta energía que ya poseen un flujo intrínsecamente bajo, subraya la necesidad vital de desarrollar observables sensibles a la masa (como la asimetría azimutal) utilizando exclusivamente los detectores de superficie, los cuales operan con un ciclo de trabajo continuo cercano al 100\%.
 
-\subsection{Actualizaciones del Observatorio}
+\section{Actualizaciones del Observatorio}
 \label{subsec:enhancements}
 
 Con el objetivo de extender el rango energético de detección y mejorar la capacidad del observatorio para discriminar la masa de los rayos cósmicos evento a evento, la Colaboración Auger ha implementado una serie de mejoras y actualizaciones sistemáticas a lo largo de los años. 
@@ -77,19 +77,12 @@ Por otro lado, para complementar los estudios a menores energías, recientemente
 
 Aunque estas mejoras son sustanciales para el arreglo a gran escala, la medición empírica directa y pura del contenido muónico exige un enfoque instrumental diferente, el cual se materializa en la extensión AMIGA.
 
-\subsection{AMIGA y el Detector Subterráneo de Muones (UMD)}
+\section{AMIGA y el Detector Subterráneo de Muones (UMD)}
 \label{subsec:umd}
 
 AMIGA (\textit{Auger Muons and Infill for the Ground Array}) es una extensión del observatorio diseñada específicamente para estudiar la transición entre los rayos cósmicos galácticos y extragalácticos (alrededor de $\sim 10^{17}$~eV). Como parte del despliegue de AugerPrime, el UMD está siendo extendido para operar de manera conjunta con los arreglos SD-750 y SD-433.
 
 El UMD constituye el núcleo experimental de esta tesis. Está compuesto por detectores de centelleo plástico enterrados junto a las estaciones WCD. Cada estación de detección muónica consta de tres módulos de $10\text{ m}^2$ cada uno, sumando un área total de detección de $30\text{ m}^2$ por posición. A su vez, cada módulo está segmentado finamente en 64 tiras de centellador. Estas tiras cuentan con fibras ópticas que conducen los fotones producidos por el paso de partículas cargadas hacia un arreglo de 64 fotomultiplicadores de silicio (SiPMs). Una imagen representativa de la estación se puede ver en la Figura \ref{fig:umd_station}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{capitulos/imagenes_capitulos/cap2/umd.png}
-	\caption{Esquema de Detector Subterráneo de Muones junto a su estación de superficie asociada donde se observa la distribución de los tres módulos centelladores. Obtenido de \cite{botti2019}.}
-	\label{fig:umd_station}
-\end{figure}
 
 La electrónica del UMD está diseñada para operar con una alta segmentación y resolución temporal, permitiendo medir directamente la densidad de partículas mediante una estrategia de conteo digital junto a un modo de integrar una señal.
 
@@ -102,6 +95,13 @@ Este escudo de tierra cumple un doble propósito analítico vital:
 	
 	\item \textbf{Umbral Cinemático:} La pérdida de energía por ionización que sufren los muones al atravesar los $2.3\text{ m}$ de tierra impone un umbral de energía estricto. Solo los muones con una energía superior a $E_\mu \gtrsim 1\text{ GeV}$ son capaces de alcanzar los detectores subterráneos. 
 \end{enumerate}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{capitulos/imagenes_capitulos/cap2/umd.png}
+	\caption{Esquema de Detector Subterráneo de Muones junto a su estación de superficie asociada donde se observa la distribución de los tres módulos centelladores. Obtenido de \cite{botti2019}.}
+	\label{fig:umd_station}
+\end{figure}
 
 Este umbral cinemático actúa como un filtro fenomenológico invaluable. Al bloquear la población de muones blandos, el UMD muestrea exclusivamente los denominados muones duros, es decir de alta energía. Estas partículas altamente energéticas, nacidas en las primeras generaciones hadrónicas en la alta atmósfera, conservan trayectorias cuasi-rectilíneas. Por lo tanto, su distribución espacial en el suelo retiene de manera fiel la memoria direccional del eje de la lluvia y la dinámica de expansión geométrica de la cascada.
 

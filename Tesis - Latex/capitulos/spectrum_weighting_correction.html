@@ -1,0 +1,392 @@
+<title>Weighting the Angle by Its Probability</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Archivo:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  :root{
+    --paper:#f9f9f7; --surface:#fcfcfb; --surface-2:#f1f1ee;
+    --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+    --rule:#e1e0d9; --axis:#8d8b80;
+    --accent:#4a3aa7; --accent-soft:#efecfa;
+    --early:#e34948; --late:#2a78d6;
+    --orange:#eb6834; --good:#0ca30c; --good-soft:#e3f7e3;
+    --bad:#d1442a; --bad-soft:#fbe7e2;
+    --shadow: 0 1px 2px rgba(11,11,11,.04), 0 8px 24px -12px rgba(11,11,11,.12);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --paper:#0d0d0d; --surface:#17171a; --surface-2:#1f1f22;
+    --ink:#f4f4f2; --ink-2:#c3c2b7; --ink-3:#8b897f;
+    --rule:#2c2c2a; --axis:#6a6a63;
+    --accent:#9085e9; --accent-soft:#241f3d;
+    --early:#e66767; --late:#3987e5;
+    --orange:#e07a45; --good:#3fc23f; --good-soft:#12250f;
+    --bad:#f0966d; --bad-soft:#2c1d13;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    color-scheme: dark; } }
+  :root[data-theme="dark"]{
+    --paper:#0d0d0d; --surface:#17171a; --surface-2:#1f1f22;
+    --ink:#f4f4f2; --ink-2:#c3c2b7; --ink-3:#8b897f;
+    --rule:#2c2c2a; --axis:#6a6a63;
+    --accent:#9085e9; --accent-soft:#241f3d;
+    --early:#e66767; --late:#3987e5;
+    --orange:#e07a45; --good:#3fc23f; --good-soft:#12250f;
+    --bad:#f0966d; --bad-soft:#2c1d13;
+    color-scheme: dark; }
+  *{box-sizing:border-box;}
+  body{background:var(--paper); color:var(--ink); font-family:"Source Serif 4",Georgia,serif; line-height:1.62; font-size:17px;}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif; text-wrap:balance; letter-spacing:-.01em;}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
+  .shell{max-width:1180px; margin:0 auto; padding:0 clamp(18px,4vw,40px) 110px;}
+  .masthead{padding:52px 0 34px; border-bottom:1px solid var(--rule);}
+  .kicker{display:flex; align-items:center; gap:10px; font-family:"Archivo",sans-serif; font-weight:600; font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--accent); margin-bottom:16px;}
+  .kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  h1.title{font-size:clamp(2.1rem,5vw,3.2rem); font-weight:600; margin:0 0 14px; max-width:19ch;}
+  .subhead{font-size:1.13rem; color:var(--ink-2); max-width:60ch; font-style:italic; margin:0 0 26px;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:8px 26px; font-family:"Archivo",sans-serif; font-size:13px; color:var(--ink-3);}
+  .meta-row b{color:var(--ink-2); font-weight:600;}
+  .verdict-strip{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:10px; overflow:hidden; margin-top:30px;}
+  .vcard{background:var(--surface); padding:17px 19px;}
+  .vlabel{font-family:"Archivo",sans-serif; font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px;}
+  .vtext{font-size:14.5px; line-height:1.45;}
+  .chip{display:inline-block; font-family:"Archivo",sans-serif; font-weight:700; font-size:10.5px; letter-spacing:.04em; padding:3px 9px; border-radius:99px; margin-bottom:8px; text-transform:uppercase;}
+  .chip.bad{background:var(--bad-soft); color:var(--bad);} .chip.good{background:var(--good-soft); color:var(--good);}
+  .layout{display:grid; grid-template-columns:212px minmax(0,1fr); gap:52px; margin-top:42px; align-items:start;}
+  @media (max-width:980px){ .layout{grid-template-columns:1fr;} }
+  nav.toc{position:sticky; top:22px; font-family:"Archivo",sans-serif;}
+  nav.toc ol{list-style:none; margin:0; padding:0; border-left:1px solid var(--rule);}
+  nav.toc a{display:block; padding:7px 0 7px 15px; font-size:13px; color:var(--ink-3); text-decoration:none;}
+  nav.toc a:hover{color:var(--ink);}
+  nav.toc .n{font-family:"JetBrains Mono",monospace; margin-right:7px; font-size:11.5px;}
+  @media (max-width:980px){ nav.toc{position:static;} nav.toc ol{display:flex; overflow-x:auto; border-left:none; border-bottom:1px solid var(--rule); padding-bottom:9px; gap:4px;} nav.toc a{white-space:nowrap; background:var(--surface-2); border-radius:99px; padding:6px 12px;} }
+  main{min-width:0; max-width:760px;}
+  section{margin-bottom:70px; scroll-margin-top:22px;}
+  .sec-head{display:flex; align-items:baseline; gap:15px; margin-bottom:20px;}
+  .sec-num{font-family:"Fraunces",serif; font-size:2.5rem; font-weight:500; color:var(--accent); line-height:1; opacity:.48;}
+  .sec-head h2{font-size:1.62rem; font-weight:600; margin:0;}
+  p{margin:0 0 17px; max-width:68ch;}
+  .lede{font-size:1.1rem; color:var(--ink-2);}
+  strong{font-weight:600;}
+  blockquote{margin:20px 0; padding:6px 0 6px 20px; border-left:3px solid var(--rule); color:var(--ink-2); font-style:italic; max-width:64ch;}
+  blockquote cite{display:block; margin-top:7px; font-family:"Archivo",sans-serif; font-style:normal; font-size:12px; color:var(--ink-3);}
+  .callout{background:var(--surface); border:1px solid var(--rule); border-radius:12px; padding:20px 23px; margin:26px 0; box-shadow:var(--shadow);}
+  .callout.bad{border-left:3px solid var(--bad);} .callout.good{border-left:3px solid var(--good);} .callout.accent{border-left:3px solid var(--accent);}
+  .callout-label{font-family:"Archivo",sans-serif; font-weight:600; font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); margin-bottom:9px;}
+  table{width:100%; border-collapse:collapse; margin:20px 0; font-size:14.5px;}
+  caption{text-align:left; font-family:"Archivo",sans-serif; font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); margin-bottom:9px; caption-side:top;}
+  th,td{padding:9px 13px; text-align:right; border-bottom:1px solid var(--rule);}
+  th:first-child,td:first-child{text-align:left;}
+  th{font-family:"Archivo",sans-serif; font-weight:600; font-size:12px; color:var(--ink-3); text-transform:uppercase;}
+  td.num{font-family:"JetBrains Mono",monospace; font-variant-numeric:tabular-nums;}
+  .table-wrap{overflow-x:auto;}
+  tr.hl td{background:var(--accent-soft);}
+  figure{margin:28px 0;}
+  figcaption{font-family:"Archivo",sans-serif; font-size:12.5px; color:var(--ink-3); margin-top:9px; line-height:1.5;}
+  .fig-label{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.06em; color:var(--accent); text-transform:uppercase; margin-right:6px;}
+  .panel{background:var(--surface); border:1px solid var(--rule); border-radius:14px; padding:22px 24px; box-shadow:var(--shadow);}
+  svg text{font-family:"Archivo",sans-serif;}
+  .axis-label{fill:var(--ink-3); font-size:10.5px;}
+  .grid-line{stroke:var(--rule); stroke-width:1;}
+  .legend{display:flex; gap:16px; flex-wrap:wrap; font-family:"Archivo",sans-serif; font-size:12.5px; color:var(--ink-2); margin-top:8px;}
+  .legend .sw{display:inline-flex; align-items:center; gap:6px;}
+  .legend .sw i{width:11px;height:11px;border-radius:3px;display:inline-block;}
+  .eqn{overflow-x:auto; padding:14px 6px; margin:18px 0;}
+  .divider{height:1px; background:var(--rule); margin:52px 0; border:none;}
+  .nb-map{display:flex; flex-direction:column; gap:11px; list-style:none; margin:0; padding:0;}
+  .nb-map li{display:flex; gap:14px; align-items:flex-start; background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:13px 17px;}
+  .nb-map .sec{font-family:"JetBrains Mono",monospace; font-size:12.5px; color:var(--accent); font-weight:600; min-width:6.5ch;}
+  .nb-map .body b{display:block; margin-bottom:2px; font-weight:600;}
+  .nb-map .body span{color:var(--ink-2); font-size:14.5px;}
+  code{font-family:"JetBrains Mono",monospace; font-size:.88em; background:var(--surface-2); padding:1px 5px; border-radius:4px;}
+  footer{margin-top:70px; padding-top:26px; border-top:1px solid var(--rule); font-family:"Archivo",sans-serif; font-size:12.5px; color:var(--ink-3);}
+</style>
+
+<div class="shell">
+<header class="masthead">
+  <div class="kicker"><span class="dot"></span>Analysis memo &middot; Pierre Auger &middot; UMD azimuthal asymmetry</div>
+  <h1 class="title">Weighting the Angle by Its Probability</h1>
+  <p class="subhead">A correction to the spectrum-weighted kinematic-divergence calculation &mdash; and the sharper, more uncomfortable result it produces about the UMD&ndash;SD contrast.</p>
+  <div class="meta-row">
+    <span><b>Prompted by</b> a question about whether emission angles are weighted by their probability at a given energy</span>
+    <span><b>Companion notebook</b> <span class="mono">explainer_kinematic_divergence_simulator.ipynb</span></span>
+    <span><b>Reference point</b> r&nbsp;=&nbsp;1200&nbsp;m, &theta;&nbsp;=&nbsp;35&deg;, D&nbsp;=&nbsp;7.5&nbsp;km, Q&nbsp;=&nbsp;0.2&nbsp;GeV</span>
+  </div>
+  <div class="verdict-strip">
+    <div class="vcard"><span class="chip bad">Was wrong</span><div class="vlabel">Earlier spectrum-weighting</div><div class="vtext">Averaged <em>ratios</em> instead of taking a <em>ratio of integrals</em>, and dropped the ADF&rsquo;s own normalisation.</div></div>
+    <div class="vcard"><span class="chip good">Resolved</span><div class="vlabel">The divergence</div><div class="vtext">Was an artifact of the flawed formulation. The corrected integral is stable over four decades in E<sub>max</sub>.</div></div>
+    <div class="vcard"><span class="chip bad">Backwards</span><div class="vlabel">The threshold argument</div><div class="vtext">Raising the threshold drives A<sub>1</sub> <em>down</em>. The model predicts UMD&nbsp;&lt;&nbsp;SD; the data says the opposite.</div></div>
+    <div class="vcard"><span class="chip good">Localised</span><div class="vlabel">What is actually missing</div><div class="vtext">With each detector&rsquo;s geometry folded in, the UMD comes out right and only the SD fails.</div></div>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc"><ol>
+  <li><a href="#s1"><span class="n">01</span>The question</a></li>
+  <li><a href="#s2"><span class="n">02</span>What was already right</a></li>
+  <li><a href="#s3"><span class="n">03</span>Two errors</a></li>
+  <li><a href="#s4"><span class="n">04</span>Corrected formalism</a></li>
+  <li><a href="#s5"><span class="n">05</span>The threshold test</a></li>
+  <li><a href="#s6"><span class="n">06</span>Per-detector totals</a></li>
+  <li><a href="#s7"><span class="n">07</span>Radial trends</a></li>
+  <li><a href="#s8"><span class="n">08</span>Thesis consequences</a></li>
+  <li><a href="#s9"><span class="n">09</span>Notebook map</a></li>
+  <li><a href="#s10"><span class="n">10</span>Caveats &amp; next steps</a></li>
+</ol></nav>
+
+<main>
+
+<section id="s1">
+<div class="sec-head"><span class="sec-num">01</span><h2>The question that prompted this</h2></div>
+<blockquote>&ldquo;Given the geometry fixed you determine what angles &alpha; late and early you need, but you are not weighing that angle sample by the probability of sampling it given the energy you are working on. That means that if you need a big angle and you are working with high energy you should be penalised.&rdquo;</blockquote>
+<p class="lede">The objection is half right, and the half that is right invalidates a published-in-the-notebook result. Section&nbsp;2 shows what the model already did correctly; Section&nbsp;3 shows the two places where it did not.</p>
+</section>
+
+<div class="divider"></div>
+
+<section id="s2">
+<div class="sec-head"><span class="sec-num">02</span><h2>What the per-energy calculation already did right</h2></div>
+<p>The angular distribution is evaluated <em>at each of the two required angles separately</em>, at the energy under consideration. So the &ldquo;penalty for needing a big angle at high energy&rdquo; is present &mdash; it is the factor <span class="mono">exp(&minus;E&nbsp;sin&alpha;/cQ)</span> computed at &alpha;<sub>early</sub> and at &alpha;<sub>late</sub>. The subtlety is that the penalty applies to <strong>both</strong> regions, and hits the early one (larger angle) harder. That asymmetric penalty <em>is</em> the mechanism.</p>
+
+<figure>
+<div class="panel"><svg viewBox="0 0 640 300" width="100%" height="300" role="img" aria-label="Angular distribution shape versus muon energy">
+<line x1="54" x2="624" y1="262.0" y2="262.0" class="grid-line"/>
+<line x1="54" x2="624" y1="200.0" y2="200.0" class="grid-line"/>
+<line x1="54" x2="624" y1="138.0" y2="138.0" class="grid-line"/>
+<line x1="54" x2="624" y1="76.0" y2="76.0" class="grid-line"/>
+<line x1="54" x2="624" y1="14.0" y2="14.0" class="grid-line"/>
+<line x1="209.6" x2="209.6" y1="14" y2="262" stroke="var(--late)" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="209.6" y="12" class="axis-label" text-anchor="middle" fill="var(--late)">α late</text>
+<line x1="248.1" x2="248.1" y1="14" y2="262" stroke="var(--early)" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="248.1" y="12" class="axis-label" text-anchor="middle" fill="var(--early)">α early</text>
+<polyline points="54.0,14.0 56.6,14.6 59.2,15.2 61.8,15.8 64.4,16.4 67.0,17.0 69.6,17.6 72.2,18.1 74.8,18.7 77.4,19.3 80.0,19.9 82.6,20.5 85.2,21.1 87.8,21.7 90.4,22.3 93.0,22.9 95.6,23.5 98.2,24.1 100.8,24.7 103.5,25.3 106.1,25.8 108.7,26.4 111.3,27.0 113.9,27.6 116.5,28.2 119.1,28.8 121.7,29.4 124.3,30.0 126.9,30.6 129.5,31.2 132.1,31.7 134.7,32.3 137.3,32.9 139.9,33.5 142.5,34.1 145.1,34.7 147.7,35.3 150.3,35.9 152.9,36.4 155.5,37.0 158.1,37.6 160.7,38.2 163.3,38.8 165.9,39.4 168.5,40.0 171.1,40.5 173.7,41.1 176.3,41.7 178.9,42.3 181.5,42.9 184.1,43.5 186.7,44.0 189.3,44.6 191.9,45.2 194.5,45.8 197.2,46.4 199.8,46.9 202.4,47.5 205.0,48.1 207.6,48.7 210.2,49.2 212.8,49.8 215.4,50.4 218.0,51.0 220.6,51.5 223.2,52.1 225.8,52.7 228.4,53.3 231.0,53.8 233.6,54.4 236.2,55.0 238.8,55.6 241.4,56.1 244.0,56.7 246.6,57.3 249.2,57.8 251.8,58.4 254.4,59.0 257.0,59.5 259.6,60.1 262.2,60.7 264.8,61.2 267.4,61.8 270.0,62.4 272.6,62.9 275.2,63.5 277.8,64.1 280.4,64.6 283.0,65.2 285.6,65.7 288.2,66.3 290.8,66.9 293.5,67.4 296.1,68.0 298.7,68.5 301.3,69.1 303.9,69.6 306.5,70.2 309.1,70.8 311.7,71.3 314.3,71.9 316.9,72.4 319.5,73.0 322.1,73.5 324.7,74.1 327.3,74.6 329.9,75.2 332.5,75.7 335.1,76.3 337.7,76.8 340.3,77.3 342.9,77.9 345.5,78.4 348.1,79.0 350.7,79.5 353.3,80.1 355.9,80.6 358.5,81.1 361.1,81.7 363.7,82.2 366.3,82.8 368.9,83.3 371.5,83.8 374.1,84.4 376.7,84.9 379.3,85.4 381.9,86.0 384.5,86.5 387.2,87.0 389.8,87.6 392.4,88.1 395.0,88.6 397.6,89.2 400.2,89.7 402.8,90.2 405.4,90.7 408.0,91.3 410.6,91.8 413.2,92.3 415.8,92.8 418.4,93.3 421.0,93.9 423.6,94.4 426.2,94.9 428.8,95.4 431.4,95.9 434.0,96.5 436.6,97.0 439.2,97.5 441.8,98.0 444.4,98.5 447.0,99.0 449.6,99.5 452.2,100.1 454.8,100.6 457.4,101.1 460.0,101.6 462.6,102.1 465.2,102.6 467.8,103.1 470.4,103.6 473.0,104.1 475.6,104.6 478.2,105.1 480.8,105.6 483.5,106.1 486.1,106.6 488.7,107.1 491.3,107.6 493.9,108.1 496.5,108.6 499.1,109.1 501.7,109.6 504.3,110.1 506.9,110.6 509.5,111.1 512.1,111.5 514.7,112.0 517.3,112.5 519.9,113.0 522.5,113.5 525.1,114.0 527.7,114.5 530.3,114.9 532.9,115.4 535.5,115.9 538.1,116.4 540.7,116.9 543.3,117.4 545.9,117.8 548.5,118.3 551.1,118.8 553.7,119.3 556.3,119.7 558.9,120.2 561.5,120.7 564.1,121.1 566.7,121.6 569.3,122.1 571.9,122.6 574.5,123.0 577.2,123.5 579.8,124.0 582.4,124.4 585.0,124.9 587.6,125.3 590.2,125.8 592.8,126.3 595.4,126.7 598.0,127.2 600.6,127.6 603.2,128.1 605.8,128.6 608.4,129.0 611.0,129.5 613.6,129.9 616.2,130.4 618.8,130.8 621.4,131.3 624.0,131.7" fill="none" stroke="#2a78d6" stroke-width="2"/>
+<polyline points="54.0,14.0 56.6,15.5 59.2,16.9 61.8,18.4 64.4,19.9 67.0,21.3 69.6,22.8 72.2,24.2 74.8,25.6 77.4,27.0 80.0,28.5 82.6,29.9 85.2,31.3 87.8,32.6 90.4,34.0 93.0,35.4 95.6,36.8 98.2,38.1 100.8,39.5 103.5,40.8 106.1,42.2 108.7,43.5 111.3,44.8 113.9,46.2 116.5,47.5 119.1,48.8 121.7,50.1 124.3,51.4 126.9,52.7 129.5,53.9 132.1,55.2 134.7,56.5 137.3,57.7 139.9,59.0 142.5,60.2 145.1,61.5 147.7,62.7 150.3,63.9 152.9,65.1 155.5,66.4 158.1,67.6 160.7,68.8 163.3,69.9 165.9,71.1 168.5,72.3 171.1,73.5 173.7,74.7 176.3,75.8 178.9,77.0 181.5,78.1 184.1,79.2 186.7,80.4 189.3,81.5 191.9,82.6 194.5,83.7 197.2,84.9 199.8,86.0 202.4,87.1 205.0,88.1 207.6,89.2 210.2,90.3 212.8,91.4 215.4,92.4 218.0,93.5 220.6,94.6 223.2,95.6 225.8,96.6 228.4,97.7 231.0,98.7 233.6,99.7 236.2,100.8 238.8,101.8 241.4,102.8 244.0,103.8 246.6,104.8 249.2,105.8 251.8,106.7 254.4,107.7 257.0,108.7 259.6,109.7 262.2,110.6 264.8,111.6 267.4,112.5 270.0,113.5 272.6,114.4 275.2,115.3 277.8,116.3 280.4,117.2 283.0,118.1 285.6,119.0 288.2,119.9 290.8,120.8 293.5,121.7 296.1,122.6 298.7,123.5 301.3,124.4 303.9,125.3 306.5,126.1 309.1,127.0 311.7,127.9 314.3,128.7 316.9,129.6 319.5,130.4 322.1,131.2 324.7,132.1 327.3,132.9 329.9,133.7 332.5,134.5 335.1,135.4 337.7,136.2 340.3,137.0 342.9,137.8 345.5,138.6 348.1,139.4 350.7,140.1 353.3,140.9 355.9,141.7 358.5,142.5 361.1,143.2 363.7,144.0 366.3,144.8 368.9,145.5 371.5,146.3 374.1,147.0 376.7,147.7 379.3,148.5 381.9,149.2 384.5,149.9 387.2,150.7 389.8,151.4 392.4,152.1 395.0,152.8 397.6,153.5 400.2,154.2 402.8,154.9 405.4,155.6 408.0,156.3 410.6,156.9 413.2,157.6 415.8,158.3 418.4,159.0 421.0,159.6 423.6,160.3 426.2,160.9 428.8,161.6 431.4,162.3 434.0,162.9 436.6,163.5 439.2,164.2 441.8,164.8 444.4,165.4 447.0,166.1 449.6,166.7 452.2,167.3 454.8,167.9 457.4,168.5 460.0,169.1 462.6,169.7 465.2,170.3 467.8,170.9 470.4,171.5 473.0,172.1 475.6,172.7 478.2,173.3 480.8,173.8 483.5,174.4 486.1,175.0 488.7,175.5 491.3,176.1 493.9,176.7 496.5,177.2 499.1,177.8 501.7,178.3 504.3,178.9 506.9,179.4 509.5,179.9 512.1,180.5 514.7,181.0 517.3,181.5 519.9,182.1 522.5,182.6 525.1,183.1 527.7,183.6 530.3,184.1 532.9,184.6 535.5,185.1 538.1,185.6 540.7,186.1 543.3,186.6 545.9,187.1 548.5,187.6 551.1,188.1 553.7,188.6 556.3,189.0 558.9,189.5 561.5,190.0 564.1,190.5 566.7,190.9 569.3,191.4 571.9,191.9 574.5,192.3 577.2,192.8 579.8,193.2 582.4,193.7 585.0,194.1 587.6,194.6 590.2,195.0 592.8,195.4 595.4,195.9 598.0,196.3 600.6,196.7 603.2,197.2 605.8,197.6 608.4,198.0 611.0,198.4 613.6,198.8 616.2,199.2 618.8,199.7 621.4,200.1 624.0,200.5" fill="none" stroke="#4a3aa7" stroke-width="2"/>
+<polyline points="54.0,14.0 56.6,19.9 59.2,25.6 61.8,31.2 64.4,36.6 67.0,42.0 69.6,47.2 72.2,52.2 74.8,57.2 77.4,62.1 80.0,66.8 82.6,71.4 85.2,75.9 87.8,80.3 90.4,84.6 93.0,88.8 95.6,92.9 98.2,96.9 100.8,100.9 103.5,104.7 106.1,108.4 108.7,112.1 111.3,115.6 113.9,119.1 116.5,122.5 119.1,125.8 121.7,129.0 124.3,132.2 126.9,135.2 129.5,138.3 132.1,141.2 134.7,144.1 137.3,146.9 139.9,149.6 142.5,152.3 145.1,154.9 147.7,157.4 150.3,159.9 152.9,162.3 155.5,164.7 158.1,167.0 160.7,169.2 163.3,171.4 165.9,173.6 168.5,175.7 171.1,177.7 173.7,179.7 176.3,181.7 178.9,183.6 181.5,185.5 184.1,187.3 186.7,189.1 189.3,190.8 191.9,192.5 194.5,194.1 197.2,195.7 199.8,197.3 202.4,198.8 205.0,200.3 207.6,201.8 210.2,203.2 212.8,204.6 215.4,206.0 218.0,207.3 220.6,208.6 223.2,209.9 225.8,211.1 228.4,212.3 231.0,213.5 233.6,214.7 236.2,215.8 238.8,216.9 241.4,217.9 244.0,219.0 246.6,220.0 249.2,221.0 251.8,222.0 254.4,222.9 257.0,223.8 259.6,224.7 262.2,225.6 264.8,226.5 267.4,227.3 270.0,228.1 272.6,228.9 275.2,229.7 277.8,230.5 280.4,231.2 283.0,232.0 285.6,232.7 288.2,233.4 290.8,234.0 293.5,234.7 296.1,235.3 298.7,236.0 301.3,236.6 303.9,237.2 306.5,237.8 309.1,238.3 311.7,238.9 314.3,239.4 316.9,240.0 319.5,240.5 322.1,241.0 324.7,241.5 327.3,242.0 329.9,242.4 332.5,242.9 335.1,243.3 337.7,243.8 340.3,244.2 342.9,244.6 345.5,245.0 348.1,245.4 350.7,245.8 353.3,246.2 355.9,246.6 358.5,246.9 361.1,247.3 363.7,247.6 366.3,248.0 368.9,248.3 371.5,248.6 374.1,248.9 376.7,249.2 379.3,249.5 381.9,249.8 384.5,250.1 387.2,250.4 389.8,250.6 392.4,250.9 395.0,251.2 397.6,251.4 400.2,251.7 402.8,251.9 405.4,252.1 408.0,252.4 410.6,252.6 413.2,252.8 415.8,253.0 418.4,253.2 421.0,253.4 423.6,253.6 426.2,253.8 428.8,254.0 431.4,254.2 434.0,254.4 436.6,254.6 439.2,254.7 441.8,254.9 444.4,255.1 447.0,255.2 449.6,255.4 452.2,255.5 454.8,255.7 457.4,255.8 460.0,256.0 462.6,256.1 465.2,256.2 467.8,256.4 470.4,256.5 473.0,256.6 475.6,256.7 478.2,256.9 480.8,257.0 483.5,257.1 486.1,257.2 488.7,257.3 491.3,257.4 493.9,257.5 496.5,257.6 499.1,257.7 501.7,257.8 504.3,257.9 506.9,258.0 509.5,258.1 512.1,258.2 514.7,258.3 517.3,258.4 519.9,258.4 522.5,258.5 525.1,258.6 527.7,258.7 530.3,258.8 532.9,258.8 535.5,258.9 538.1,259.0 540.7,259.0 543.3,259.1 545.9,259.2 548.5,259.2 551.1,259.3 553.7,259.4 556.3,259.4 558.9,259.5 561.5,259.5 564.1,259.6 566.7,259.6 569.3,259.7 571.9,259.7 574.5,259.8 577.2,259.8 579.8,259.9 582.4,259.9 585.0,260.0 587.6,260.0 590.2,260.1 592.8,260.1 595.4,260.2 598.0,260.2 600.6,260.2 603.2,260.3 605.8,260.3 608.4,260.3 611.0,260.4 613.6,260.4 616.2,260.5 618.8,260.5 621.4,260.5 624.0,260.6" fill="none" stroke="#eb6834" stroke-width="2"/>
+<polyline points="54.0,14.0 56.6,36.6 59.2,57.2 61.8,75.9 64.4,92.8 67.0,108.3 69.6,122.3 72.2,135.0 74.8,146.6 77.4,157.1 80.0,166.7 82.6,175.4 85.2,183.3 87.8,190.5 90.4,197.0 93.0,202.9 95.6,208.3 98.2,213.2 100.8,217.7 103.5,221.7 106.1,225.4 108.7,228.7 111.3,231.8 113.9,234.5 116.5,237.0 119.1,239.3 121.7,241.4 124.3,243.3 126.9,245.0 129.5,246.5 132.1,247.9 134.7,249.2 137.3,250.4 139.9,251.4 142.5,252.4 145.1,253.3 147.7,254.1 150.3,254.8 152.9,255.4 155.5,256.0 158.1,256.6 160.7,257.1 163.3,257.5 165.9,257.9 168.5,258.3 171.1,258.6 173.7,258.9 176.3,259.2 178.9,259.5 181.5,259.7 184.1,259.9 186.7,260.1 189.3,260.3 191.9,260.4 194.5,260.6 197.2,260.7 199.8,260.8 202.4,260.9 205.0,261.0 207.6,261.1 210.2,261.2 212.8,261.3 215.4,261.3 218.0,261.4 220.6,261.4 223.2,261.5 225.8,261.5 228.4,261.6 231.0,261.6 233.6,261.7 236.2,261.7 238.8,261.7 241.4,261.7 244.0,261.8 246.6,261.8 249.2,261.8 251.8,261.8 254.4,261.8 257.0,261.9 259.6,261.9 262.2,261.9 264.8,261.9 267.4,261.9 270.0,261.9 272.6,261.9 275.2,261.9 277.8,261.9 280.4,261.9 283.0,261.9 285.6,261.9 288.2,262.0 290.8,262.0 293.5,262.0 296.1,262.0 298.7,262.0 301.3,262.0 303.9,262.0 306.5,262.0 309.1,262.0 311.7,262.0 314.3,262.0 316.9,262.0 319.5,262.0 322.1,262.0 324.7,262.0 327.3,262.0 329.9,262.0 332.5,262.0 335.1,262.0 337.7,262.0 340.3,262.0 342.9,262.0 345.5,262.0 348.1,262.0 350.7,262.0 353.3,262.0 355.9,262.0 358.5,262.0 361.1,262.0 363.7,262.0 366.3,262.0 368.9,262.0 371.5,262.0 374.1,262.0 376.7,262.0 379.3,262.0 381.9,262.0 384.5,262.0 387.2,262.0 389.8,262.0 392.4,262.0 395.0,262.0 397.6,262.0 400.2,262.0 402.8,262.0 405.4,262.0 408.0,262.0 410.6,262.0 413.2,262.0 415.8,262.0 418.4,262.0 421.0,262.0 423.6,262.0 426.2,262.0 428.8,262.0 431.4,262.0 434.0,262.0 436.6,262.0 439.2,262.0 441.8,262.0 444.4,262.0 447.0,262.0 449.6,262.0 452.2,262.0 454.8,262.0 457.4,262.0 460.0,262.0 462.6,262.0 465.2,262.0 467.8,262.0 470.4,262.0 473.0,262.0 475.6,262.0 478.2,262.0 480.8,262.0 483.5,262.0 486.1,262.0 488.7,262.0 491.3,262.0 493.9,262.0 496.5,262.0 499.1,262.0 501.7,262.0 504.3,262.0 506.9,262.0 509.5,262.0 512.1,262.0 514.7,262.0 517.3,262.0 519.9,262.0 522.5,262.0 525.1,262.0 527.7,262.0 530.3,262.0 532.9,262.0 535.5,262.0 538.1,262.0 540.7,262.0 543.3,262.0 545.9,262.0 548.5,262.0 551.1,262.0 553.7,262.0 556.3,262.0 558.9,262.0 561.5,262.0 564.1,262.0 566.7,262.0 569.3,262.0 571.9,262.0 574.5,262.0 577.2,262.0 579.8,262.0 582.4,262.0 585.0,262.0 587.6,262.0 590.2,262.0 592.8,262.0 595.4,262.0 598.0,262.0 600.6,262.0 603.2,262.0 605.8,262.0 608.4,262.0 611.0,262.0 613.6,262.0 616.2,262.0 618.8,262.0 621.4,262.0 624.0,262.0" fill="none" stroke="#e34948" stroke-width="2"/>
+<text x="54.0" y="286" class="axis-label" text-anchor="middle">0°</text>
+<text x="149.0" y="286" class="axis-label" text-anchor="middle">5°</text>
+<text x="244.0" y="286" class="axis-label" text-anchor="middle">10°</text>
+<text x="339.0" y="286" class="axis-label" text-anchor="middle">15°</text>
+<text x="434.0" y="286" class="axis-label" text-anchor="middle">20°</text>
+<text x="529.0" y="286" class="axis-label" text-anchor="middle">25°</text>
+<text x="624.0" y="286" class="axis-label" text-anchor="middle">30°</text>
+<text x="339" y="298" class="axis-label" text-anchor="middle">emission angle α relative to shower axis</text>
+<text x="10" y="138" class="axis-label" text-anchor="middle" transform="rotate(-90 10 138)">dN/dΩ (normalised to peak)</text>
+</svg>
+<div class="legend">
+ <span class="sw"><i style="background:#2a78d6"></i>E = 0.2 GeV</span>
+ <span class="sw"><i style="background:#4a3aa7"></i>E = 0.5 GeV</span>
+ <span class="sw"><i style="background:#eb6834"></i>E = 2 GeV</span>
+ <span class="sw"><i style="background:#e34948"></i>E = 8 GeV</span>
+</div></div>
+<figcaption><span class="fig-label">Fig. 1</span><b>Why low energy cannot buy a large asymmetry.</b> Each curve is the normalised angular distribution dN/d&Omega;(&alpha;|E) at one muon energy, with the two geometrically required angles marked. A low-energy muon has a distribution so broad that &alpha;<sub>late</sub> and &alpha;<sub>early</sub> are almost equally likely &mdash; it cannot &ldquo;tell them apart&rdquo;. Only as the distribution narrows with energy does the ~2&deg; gap start to matter.</figcaption>
+</figure>
+
+<div class="table-wrap"><table>
+<caption>Per-muon late/early preference from the angular distribution alone</caption>
+<thead><tr><th>Muon energy</th><th>f(&alpha;<sub>late</sub>) / f(&alpha;<sub>early</sub>)</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td>0.2 GeV</td><td class="num">1.041</td><td style="text-align:left">essentially indifferent</td></tr>
+<tr><td>0.5 GeV</td><td class="num">1.097</td><td style="text-align:left">weak preference</td></tr>
+<tr><td>2.0 GeV</td><td class="num">1.426</td><td style="text-align:left">comparable to the 1/d&sup2; handicap</td></tr>
+<tr><td>8.0 GeV</td><td class="num">4.065</td><td style="text-align:left">strong late preference</td></tr>
+</tbody></table></div>
+
+<p>The spatial <span class="mono">(d<sub>early</sub>/d<sub>late</sub>)&sup2;</span> factor is <strong>0.645</strong> at this point, i.e. an early-favouring handicap of 1/0.645&nbsp;=&nbsp;<strong>1.55</strong>. The table says the angular term only overcomes it somewhere between 2 and 8&nbsp;GeV &mdash; which is exactly the crossover E*&nbsp;&asymp;&nbsp;2.5&nbsp;GeV found independently in Section&nbsp;3 of the notebook. <strong>Low-energy muons are the population <em>least</em> able to generate a late excess, not the most.</strong></p>
+</section>
+
+<div class="divider"></div>
+
+<section id="s3">
+<div class="sec-head"><span class="sec-num">03</span><h2>Two errors in the earlier spectrum-weighted calculation</h2></div>
+
+<h3 style="font-size:1.12rem;margin:26px 0 6px;">Error 1 &mdash; an average of ratios, not a ratio of averages</h3>
+<p>The earlier version computed</p>
+<div class="eqn">$$\left\langle \rho \right\rangle=\frac{\int E^{-\gamma}\,\rho(E)\,dE}{\int E^{-\gamma}\,dE},\qquad \rho(E)=\frac{S_{late}(E)}{S_{early}(E)}$$</div>
+<p>weighting every energy by the <em>raw production spectrum</em>. Its own docstring admitted the assumption: <em>&ldquo;assumes the early-region density at each E is simply proportional to N(E)&rdquo;</em>. It is not &mdash; the early region demands the larger angle and is therefore exponentially harder to populate at <em>every</em> energy. Weighting both regions identically discards precisely the selection effect being measured. The correct object weights each energy by how many muons of that energy actually <em>arrive in that region</em>:</p>
+<div class="eqn">$$\frac{S_{late}}{S_{early}}=\frac{d_{early}^{2}}{d_{late}^{2}}\cdot\frac{\displaystyle\int N(E)\,f(\alpha_{late}\mid E)\,dE}{\displaystyle\int N(E)\,f(\alpha_{early}\mid E)\,dE}$$</div>
+
+<h3 style="font-size:1.12rem;margin:30px 0 6px;">Error 2 &mdash; the ADF&rsquo;s own energy-dependent normalisation</h3>
+<p>Deriving the angular distribution properly from Caz&oacute;n&rsquo;s transverse-momentum law rather than quoting its shape:</p>
+<div class="eqn">$$P(p_t)=\frac{p_t}{Q^{2}}e^{-p_t/Q},\qquad \sin\alpha=\frac{cp_t}{E}\;\Longrightarrow\; f(\alpha\mid E)=\frac{k^{2}}{2\pi}\,\frac{\cos\alpha\,e^{-k\sin\alpha}}{1-e^{-k}(1+k)},\qquad k\equiv\frac{E}{cQ}$$</div>
+<p>The <span class="mono">k&sup2;</span> prefactor <strong>cancels in the late/early ratio at fixed E</strong> &mdash; which is why dropping it never affected the crossover energy &mdash; but it does <strong>not</strong> cancel under a spectrum integral, because it changes <em>which</em> energies dominate. Physically: an energetic muon squeezes its emission into a solid angle ~1/k&sup2;, so per muon it delivers k&sup2; times more density in whatever direction it does go. Including it turns the effective weight from <span class="mono">E<sup>&minus;&gamma;</sup></span> into roughly <span class="mono">E<sup>2&minus;&gamma;</sup></span>.</p>
+
+<div class="callout good">
+<div class="callout-label">Consequence &mdash; the divergence was never physical</div>
+<p style="margin:0">The old calculation ran away to A<sub>1</sub>&nbsp;&rarr;&nbsp;&minus;1 once E<sub>max</sub> passed ~100&nbsp;GeV, and that was explained away as &ldquo;the toy model breaking outside its calibration&rdquo;. It was simpler than that: it was the wrong integral. Done correctly, A<sub>1</sub> = +0.160 at E<sub>max</sub> = 20, 100, 2000 and 20&thinsp;000&nbsp;GeV alike &mdash; high-energy muons are exponentially suppressed in <em>both</em> regions, so they can never dominate.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<section id="s4">
+<div class="sec-head"><span class="sec-num">04</span><h2>The corrected result, and what it says about low energy</h2></div>
+<p>At the reference point with &gamma;&nbsp;=&nbsp;2.6, the corrected spectrum-weighted kinematic term gives <strong>A<sub>1</sub> = +0.160</strong> &mdash; early-favouring, and dominated by the 1/d&sup2; dilution. The low-energy population does dominate the arriving flux, exactly as the steep spectrum implies, but it contributes almost no asymmetry of its own because (Fig.&nbsp;1) its angular distribution cannot resolve the 2&deg; gap. <strong>Breadth washes the asymmetry out; it does not create it.</strong></p>
+</section>
+
+<div class="divider"></div>
+
+<section id="s5">
+<div class="sec-head"><span class="sec-num">05</span><h2>The decisive test: vary only the threshold</h2></div>
+<p class="lede">With the calculation fixed, the model makes a prediction that can be checked against the two detectors directly &mdash; and it fails in a specific, informative way.</p>
+
+<figure>
+<div class="panel"><svg viewBox="0 0 640 320" width="100%" height="320" role="img" aria-label="Asymmetry versus energy threshold">
+<line x1="58" x2="624" y1="253.2" y2="253.2" class="grid-line"/>
+<text x="50" y="257.2" class="axis-label" text-anchor="end">-0.3</text>
+<line x1="58" x2="624" y1="207.6" y2="207.6" class="grid-line"/>
+<text x="50" y="211.6" class="axis-label" text-anchor="end">-0.2</text>
+<line x1="58" x2="624" y1="162.0" y2="162.0" class="grid-line"/>
+<text x="50" y="166.0" class="axis-label" text-anchor="end">-0.1</text>
+<line x1="58" x2="624" y1="116.4" y2="116.4" stroke="var(--axis)" stroke-width="1.5"/>
+<text x="50" y="120.4" class="axis-label" text-anchor="end">+0.0</text>
+<line x1="58" x2="624" y1="70.7" y2="70.7" class="grid-line"/>
+<text x="50" y="74.7" class="axis-label" text-anchor="end">+0.1</text>
+<line x1="58" x2="624" y1="25.1" y2="25.1" class="grid-line"/>
+<text x="50" y="29.1" class="axis-label" text-anchor="end">+0.2</text>
+<line x1="58.0" x2="58.0" y1="16" y2="276" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="63.0" y="30" class="axis-label" fill="var(--orange)" font-weight="700">SD</text>
+<line x1="394.3" x2="394.3" y1="16" y2="276" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="399.3" y="30" class="axis-label" fill="var(--accent)" font-weight="700">UMD</text>
+<polyline points="58.0,61.4 80.6,63.8 103.3,66.4 125.9,69.0 148.6,71.7 171.2,74.5 193.8,77.4 216.5,80.5 239.1,83.8 261.8,87.3 284.4,91.0 307.0,95.2 329.7,99.8 352.3,104.9 375.0,110.6 397.6,117.2 420.2,124.6 442.9,133.1 465.5,142.9 488.2,154.1 510.8,166.8 533.4,181.4 556.1,198.0 578.7,216.8 601.4,237.9 624.0,261.5" fill="none" stroke="#e34948" stroke-width="2.2"/>
+<polyline points="58.0,43.3 80.6,45.9 103.3,48.6 125.9,51.6 148.6,54.7 171.2,57.9 193.8,61.3 216.5,64.9 239.1,68.7 261.8,72.8 284.4,77.2 307.0,82.0 329.7,87.2 352.3,92.9 375.0,99.3 397.6,106.5 420.2,114.6 442.9,123.8 465.5,134.2 488.2,146.0 510.8,159.4 533.4,174.6 556.1,191.8 578.7,211.2 601.4,232.9 624.0,257.1" fill="none" stroke="#eb6834" stroke-width="2.2"/>
+<polyline points="58.0,36.5 80.6,38.9 103.3,41.5 125.9,44.3 148.6,47.3 171.2,50.5 193.8,53.9 216.5,57.6 239.1,61.6 261.8,65.8 284.4,70.4 307.0,75.4 329.7,80.8 352.3,86.8 375.0,93.5 397.6,100.9 420.2,109.3 442.9,118.8 465.5,129.5 488.2,141.6 510.8,155.3 533.4,170.8 556.1,188.3 578.7,208.0 601.4,230.0 624.0,254.5" fill="none" stroke="#2a78d6" stroke-width="2.2"/>
+<text x="99.5" y="300" class="axis-label" text-anchor="middle">0.2</text>
+<text x="248.8" y="300" class="axis-label" text-anchor="middle">0.5</text>
+<text x="361.8" y="300" class="axis-label" text-anchor="middle">1.0</text>
+<text x="474.7" y="300" class="axis-label" text-anchor="middle">2.0</text>
+<text x="624.0" y="300" class="axis-label" text-anchor="middle">5.0</text>
+<text x="341" y="316" class="axis-label" text-anchor="middle">muon energy threshold E_min (GeV, log scale)</text>
+</svg>
+<div class="legend">
+ <span class="sw"><i style="background:#e34948"></i>&gamma; = 2.0</span>
+ <span class="sw"><i style="background:#eb6834"></i>&gamma; = 2.6</span>
+ <span class="sw"><i style="background:#2a78d6"></i>&gamma; = 3.0</span>
+</div></div>
+<figcaption><span class="fig-label">Fig. 2</span><b>Asymmetry versus detection threshold.</b> Raising the muon energy threshold makes A<sub>1</sub> <em>less</em> positive, crossing zero near 2&nbsp;GeV. The SD floor (Caz&oacute;n&rsquo;s simulation threshold, 0.155&nbsp;GeV) and the UMD&rsquo;s effective overburden threshold (1&nbsp;GeV/cos&theta; = 1.22&nbsp;GeV at 35&deg;) are marked.</figcaption>
+</figure>
+
+<div class="table-wrap"><table>
+<caption>Kinematic term only, r = 1200 m, &theta; = 35&deg;</caption>
+<thead><tr><th>E<sub>min</sub> (GeV)</th><th>&gamma;=2.0</th><th>&gamma;=2.6</th><th>&gamma;=3.0</th></tr></thead>
+<tbody>
+<tr class="hl"><td>0.155 &nbsp;<span style="color:var(--ink-3)">(SD-like)</span></td><td class="num">+0.121</td><td class="num">+0.160</td><td class="num">+0.175</td></tr>
+<tr><td>0.50</td><td class="num">+0.068</td><td class="num">+0.101</td><td class="num">+0.116</td></tr>
+<tr class="hl"><td>1.22 &nbsp;<span style="color:var(--ink-3)">(UMD-like)</span></td><td class="num">+0.001</td><td class="num">+0.024</td><td class="num">+0.036</td></tr>
+<tr><td>2.00</td><td class="num">&minus;0.068</td><td class="num">&minus;0.049</td><td class="num">&minus;0.039</td></tr>
+<tr><td>3.00</td><td class="num">&minus;0.154</td><td class="num">&minus;0.139</td><td class="num">&minus;0.131</td></tr>
+<tr><td>5.00</td><td class="num">&minus;0.318</td><td class="num">&minus;0.309</td><td class="num">&minus;0.303</td></tr>
+</tbody></table></div>
+
+<div class="callout bad">
+<div class="callout-label">The headline result</div>
+<p style="margin:0 0 10px">Changing <em>nothing but the threshold</em>, the model predicts the UMD should be <strong>less</strong> early-favouring than the SD, by about &minus;0.14. The simulations report the <strong>opposite</strong>: UMD&nbsp;=&nbsp;+0.11 against SD-Muon(MC)&nbsp;=&nbsp;&minus;0.10, i.e. UMD <em>more</em> positive by ~0.21.</p>
+<p style="margin:0"><strong>This is not &ldquo;the mechanism is too small&rdquo;. As formulated, it orders the two detectors backwards.</strong> The narrative in which the UMD&rsquo;s overburden acts as a kinematic filter &mdash; removing the population responsible for the late excess and thereby preserving a positive attenuation asymmetry &mdash; does not survive this check: within this model, raising the threshold <em>enriches</em> the late-favouring population rather than removing it.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<section id="s6">
+<div class="sec-head"><span class="sec-num">06</span><h2>Folding in each detector&rsquo;s own geometric response</h2></div>
+<p>The kinematic term is not the whole prediction: each instrument adds its own geometric response, already derived earlier in the notebook &mdash; a flat buried plane for the UMD (A<sub>1</sub> = +0.109, uncancelled because its observable is a raw count) and the WCD tank&rsquo;s projected aperture for the SD (A<sub>1</sub> = +0.031, the top/side trade-off).</p>
+
+<div class="table-wrap"><table>
+<caption>Total predicted vs. simulated, r = 1200 m, &theta; &isin; [30&deg;,40&deg;]</caption>
+<thead><tr><th>&gamma;</th><th>UMD predicted</th><th>UMD observed</th><th>SD predicted</th><th>SD observed</th></tr></thead>
+<tbody>
+<tr><td>2.0</td><td class="num">+0.110</td><td class="num">+0.11</td><td class="num">+0.151</td><td class="num">&minus;0.10</td></tr>
+<tr class="hl"><td>2.6</td><td class="num">+0.133</td><td class="num">+0.11</td><td class="num">+0.191</td><td class="num">&minus;0.10</td></tr>
+<tr><td>3.0</td><td class="num">+0.145</td><td class="num">+0.11</td><td class="num">+0.205</td><td class="num">&minus;0.10</td></tr>
+</tbody></table></div>
+
+<div class="callout accent">
+<div class="callout-label">The constructive half of the result</div>
+<p style="margin:0">Attenuation aside, <strong>the UMD is reproduced essentially correctly</strong> by kinematic divergence plus flat-plane projection alone (+0.13 vs. +0.11 measured). The framework fails <em>only</em> on the SD, and fails by ~0.29 in amplitude. That is a far more useful statement than &ldquo;no mechanism works&rdquo;: it says the unexplained physics is specific to the surface detector, not to the muon flux as such.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<section id="s7">
+<div class="sec-head"><span class="sec-num">07</span><h2>Radial behaviour</h2></div>
+<figure>
+<div class="panel"><svg viewBox="0 0 640 330" width="100%" height="330" role="img" aria-label="Radial trend, model versus simulation">
+<line x1="58" x2="624" y1="246.5" y2="246.5" class="grid-line"/>
+<text x="50" y="250.5" class="axis-label" text-anchor="end">-0.1</text>
+<line x1="58" x2="624" y1="180.6" y2="180.6" stroke="var(--axis)" stroke-width="1.5"/>
+<text x="50" y="184.6" class="axis-label" text-anchor="end">+0.0</text>
+<line x1="58" x2="624" y1="114.8" y2="114.8" class="grid-line"/>
+<text x="50" y="118.8" class="axis-label" text-anchor="end">+0.1</text>
+<line x1="58" x2="624" y1="48.9" y2="48.9" class="grid-line"/>
+<text x="50" y="52.9" class="axis-label" text-anchor="end">+0.2</text>
+<polyline points="58.0,151.4 98.4,142.0 138.9,132.7 179.3,123.7 219.7,114.9 260.1,106.3 300.6,98.1 341.0,90.1 381.4,82.4 421.9,75.1 462.3,68.1 502.7,61.4 543.1,55.1 583.6,49.1" fill="none" stroke="var(--orange)" stroke-width="2.2"/>
+<polyline points="58.0,160.4 98.4,156.4 138.9,153.5 179.3,151.8 219.7,151.2 260.1,151.8 300.6,153.4 341.0,156.2 381.4,160.0 421.9,164.8 462.3,170.8 502.7,177.7 543.1,185.6 583.6,194.5" fill="none" stroke="var(--accent)" stroke-width="2.2"/>
+<circle cx="118.6" cy="147.7" r="5" fill="var(--orange)" stroke="var(--paper)" stroke-width="1.5"/>
+<circle cx="260.1" cy="154.3" r="5" fill="var(--orange)" stroke="var(--paper)" stroke-width="1.5"/>
+<circle cx="421.9" cy="246.5" r="5" fill="var(--orange)" stroke="var(--paper)" stroke-width="1.5"/>
+<rect x="114.1" y="110.3" width="9" height="9" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.5"/>
+<rect x="255.6" y="97.1" width="9" height="9" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.5"/>
+<rect x="417.4" y="103.7" width="9" height="9" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.5"/>
+<text x="98.4" y="310" class="axis-label" text-anchor="middle">400</text>
+<text x="260.1" y="310" class="axis-label" text-anchor="middle">800</text>
+<text x="421.9" y="310" class="axis-label" text-anchor="middle">1200</text>
+<text x="583.6" y="310" class="axis-label" text-anchor="middle">1600</text>
+<text x="341" y="326" class="axis-label" text-anchor="middle">shower-plane radius r (m)</text>
+</svg>
+<div class="legend">
+ <span class="sw"><i style="background:var(--orange)"></i>model, SD-like threshold</span>
+ <span class="sw"><i style="background:var(--accent)"></i>model, UMD-like threshold</span>
+ <span class="sw"><i style="background:var(--orange);border-radius:50%"></i>SD-Muon(MC), simulated</span>
+ <span class="sw"><i style="background:var(--accent)"></i>UMD, simulated</span>
+</div></div>
+<figcaption><span class="fig-label">Fig. 3</span><b>Model radial trends against the simulated values.</b> Lines are the corrected kinematic term (&gamma;&nbsp;=&nbsp;2.6, D&nbsp;=&nbsp;7.5&nbsp;km); markers are the Table&nbsp;2 values from both GAP notes. The model&rsquo;s SD curve rises with r while the simulation falls and inverts &mdash; the discrepancy grows with radius, exactly where the note reports the inversion.</figcaption>
+</figure>
+<p>Note also that the model&rsquo;s <em>UMD-like</em> curve turns slightly negative beyond ~1500&nbsp;m, whereas the measured UMD amplitude stays positive and flat. So even the successful half of Section&nbsp;6 should not be over-read: it works at the reference radius, not necessarily across the whole range.</p>
+</section>
+
+<div class="divider"></div>
+
+<section id="s8">
+<div class="sec-head"><span class="sec-num">08</span><h2>Consequences for the thesis text</h2></div>
+<p><strong>Chapter&nbsp;3 (draft).</strong> The paragraph that previously deferred the threshold question to Chapter&nbsp;6 has been rewritten, since the question is now answerable and the answer is negative. It now states the filter expectation, evaluates it, reports that A<sub>1</sub> <em>falls</em> from +0.16 to +0.02 across the SD&rarr;UMD threshold change and crosses zero above ~2&nbsp;GeV, and concludes that kinematic divergence is a real and correctly derived mechanism which nevertheless does not by itself explain the measured detector contrast.</p>
+<p><strong>Chapter&nbsp;5 (draft).</strong> Unaffected. Its A<sub>1</sub>&ndash;vs&ndash;energy mechanism is the 1/D geometric term, checked separately against the X<sub>max</sub> elongation rate (right sign, ~40&ndash;65% of the measured magnitude).</p>
+<p><strong>Chapter&nbsp;6 (not yet revised).</strong> Still carries the Population&nbsp;B narrative for the SD inversion, which is now doubly unsupported: wrong population (crossover energy), and wrong detector ordering (this memo). This is the largest remaining inconsistency in the thesis.</p>
+</section>
+
+<div class="divider"></div>
+
+<section id="s9">
+<div class="sec-head"><span class="sec-num">09</span><h2>Where each number lives in the notebook</h2></div>
+<p>Everything above is reproducible from <span class="mono">explainer_kinematic_divergence_simulator.ipynb</span> in this folder. Run top to bottom; the sections map as follows.</p>
+<ul class="nb-map">
+<li><span class="sec">&sect;1&ndash;2</span><div class="body"><b>Exact 3D geometry and Caz&oacute;n&rsquo;s emission model</b><span>&alpha;<sub>early</sub> = 10.21&deg;, &alpha;<sub>late</sub> = 8.19&deg;, spatial factor 0.645 &mdash; the inputs to Fig.&nbsp;1 here.</span></div></li>
+<li><span class="sec">&sect;2b</span><div class="body"><b>Two different &ldquo;&alpha;&rdquo;s</b><span>Why a fixed geometric gap plus a narrowing population means the effect grows with energy.</span></div></li>
+<li><span class="sec">&sect;3</span><div class="body"><b>Crossover energy E*</b><span>E* = 2.48&nbsp;GeV at D = 7.5&nbsp;km; the D-scan showing E* only drops below the UMD threshold for D &lesssim; 2&ndash;3&nbsp;km.</span></div></li>
+<li><span class="sec">&sect;3b</span><div class="body"><b>Energy&ndash;production-depth correlation</b><span>Caz&oacute;n Fig.&nbsp;4: higher-energy muons are produced <em>farther</em> from the ground, where &Delta;&alpha; has already collapsed below a degree.</span></div></li>
+<li><span class="sec">&sect;5</span><div class="body"><b>Tank vs. flat plane</b><span>Flat-plane +0.109, tank count +0.031, tank VEM exactly 0 &mdash; the geometric responses used in Section&nbsp;6 above.</span></div></li>
+<li><span class="sec">&sect;8</span><div class="body"><b>Corrected spectrum weighting</b><span>Everything in Sections&nbsp;3&ndash;6 of this memo: stability check, threshold scan, per-detector totals.</span></div></li>
+<li><span class="sec">&sect;9</span><div class="body"><b>In-flight Coulomb scattering</b><span>Right sign, ~1&ndash;2% &mdash; an order of magnitude short on its own.</span></div></li>
+<li><span class="sec">&sect;10a</span><div class="body"><b>A<sub>1</sub> vs primary energy via X<sub>max</sub></b><span>Elongation rate &rarr; &Delta;D &rarr; &Delta;A<sub>1</sub> = +0.006 to +0.010, against +0.015 measured (Ch.&nbsp;5).</span></div></li>
+</ul>
+</section>
+
+<div class="divider"></div>
+
+<section id="s10">
+<div class="sec-head"><span class="sec-num">10</span><h2>Caveats, and what would settle it</h2></div>
+<p><strong>What this is.</strong> A closed-form toy model: a single production point at fixed D, a single p<sub>t</sub> scale Q, ballistic propagation, no attenuation term, and no geomagnetic deflection. It is useful for one thing &mdash; checking whether a stated equation behaves the way surrounding prose claims &mdash; and it has now done that for several claims.</p>
+<p><strong>What it is not.</strong> A shower simulation. In particular the absolute predicted values inherit the choice D&nbsp;=&nbsp;7.5&nbsp;km and &gamma;&nbsp;=&nbsp;2.6, and the single-production-point assumption is known to matter (&sect;3b). The <em>relative</em> statement &mdash; that raising the threshold moves A<sub>1</sub> downward &mdash; is far more robust than any absolute number, since it holds across every (D, &gamma;) combination tried.</p>
+<div class="callout accent">
+<div class="callout-label">Questions worth putting to the advisor</div>
+<p style="margin:0 0 10px">1. Does the group accept that the UMD-as-kinematic-filter argument should be dropped from the GAP note and the thesis, given it predicts the detector ordering backwards?</p>
+<p style="margin:0 0 10px">2. Is the SD&rsquo;s MC-truth muon count at the tank boundary (<span class="mono">GetNumberOfMuons()</span>) genuinely a count of incident muons, or does it already carry a detector-level selection that the toy model cannot represent? The framework reproduces the UMD and fails only on the SD, which makes the SD-side observable definition the first thing to re-examine.</p>
+<p style="margin:0">3. Is per-muon production data (energy, height, angle) retrievable from the existing <span class="mono">icrc2025-test7</span> production, or would settling this need a dedicated CORSIKA run?</p>
+</div>
+</section>
+
+</main>
+</div>
+
+<footer>
+Reproducible from <span class="mono">explainer_kinematic_divergence_simulator.ipynb</span> &mdash; every figure and table above is computed by the same functions the notebook runs.
+</footer>
+</div>

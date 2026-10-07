@@ -1,4 +1,4 @@
-\documentclass[spanish,a4paper,12pt]{article}
+\documentclass[spanish,a4paper,12pt]{book}
 
 % ==========================================
 % 1. IDIOMA Y CODIFICACIÓN
@@ -15,8 +15,8 @@
 \usepackage{amssymb}
 \usepackage{newtxtext, newtxmath} % Recomendado para arXiv
 \usepackage{derivative}
-\usepackage{cancel} % Cap. 3: cancelaciones en la derivación de dN/dOmega
 \usepackage{siunitx} % Excelente para unidades físicas
+\usepackage{cancel}
 
 % ==========================================
 % 3. DISEÑO Y FORMATO DE PÁGINA
@@ -107,6 +107,24 @@
 \rfoot{\thepage} 
 \renewcommand{\headrulewidth}{0.4pt} 
 
+% Completar cuando estén confirmados.
+\newcommand{\juradoUno}{Dr. Rodolfo Sassot}
+\newcommand{\juradoDos}{Dr. Dario Pablo Rodrigues Ferreira Maltez}
+\newcommand{\juradoTres}{Dr. Diego Ravignani}
+\newcommand{\profesorTesis}{Dr. Rodolfo Sassot}
+
+% Línea de firma, nombre y función.
+\newcommand{\firmatesis}[2]{%
+	\begin{minipage}[t]{0.30\textwidth}
+		\centering
+		\rule{\linewidth}{0.4pt}\par
+		\vspace{0.15cm}
+		{\small #1\par}
+		\vspace{0.08cm}
+		{\small #2\par}
+	\end{minipage}%
+}
+
 % ==========================================
 % INICIO DEL DOCUMENTO
 % ==========================================
@@ -119,7 +137,7 @@
 		\centering
 		
 		\vspace*{0.3cm}
-		{\LARGE \textbf{Asimetrías Azimutales de la Densidad de Muones en Lluvias Atmosféricas Extensas con el Detector Subterráneo de Muones del Observatorio Pierre Auger}\par}
+		{\LARGE \textbf{Asimetrías Azimutales de la Densidad de Muones en Lluvias Atmosféricas Extensas con el \\ Detector Subterráneo de Muones del \\ Observatorio Pierre Auger}\par}
 		
 		\vspace{1.5cm}
 		{\Large Tesis de Licenciatura en Ciencias Físicas\par}
@@ -145,7 +163,7 @@
 			Facultad de Ciencias Exactas y Naturales \\
 			Universidad de Buenos Aires \\[0.5cm]
 			Buenos Aires, Argentina \\
-			Agosto 2026 \par}
+			Octubre 2026 \par}
 		
 	\end{titlepage}
 	
@@ -157,48 +175,45 @@
 	\begin{center}
 		
 		\begin{itemize}
-			\item TEMA:
+			\item \textbf{Título:} Asimetrías Azimutales de la Densidad de Muones en Lluvias Atmosféricas Extensas con el Detector Subterráneo de Muones del Observatorio Pierre Auger
 			\vspace{0.2cm}
-			\item ALUMNO/A: 
+			\item \textbf{Tema:} Rayos Cósmicos - Observatorio Pierre Auger - Astropartículas
 			\vspace{0.2cm}
-			\item LUGAR DE TRABAJO: 
+			\item \textbf{Alumno:} Lautaro Silva Pizzi
 			\vspace{0.2cm}
-			\item DIRECTOR/A DEL TRABAJO: 
+			\item \textbf{LU:} 879/21
 			\vspace{0.2cm}
-			\item CO-DIRECTOR/A DEL TRABAJO: 
+			\item \textbf{Lugar de trabajo:} Instituto de Tecnologías en Detección y Astropartículas - CNEA
+			\vspace{0.2cm}
+			\item \textbf{Director de Tesis:} Juan Manuel Figueira
+			\vspace{0.2cm}
+			\item \textbf{Co-Director de Tesis:} Federico Sánchez
 			\vspace{0.2cm}      
-			\item FECHA DE INICIACIÓN: 
+			\item \textbf{Fecha de Inicio:} Agosto 2025
 			\vspace{0.2cm}
-			\item FECHA DE FINALIZACIÓN: 
+			\item \textbf{Fecha de Finalización:} Octubre 2026
 			\vspace{0.2cm}
-			\item FECHA DE EXAMEN: 
+			\item \textbf{Fecha de Examen:} 16 de Octubre 2026 
 			\vspace{0.2cm}
-			\item INFORME FINAL APROBADO POR:
+			\item \textbf{Informe final aprobado por:}
 		\end{itemize}  
 		
-		\vspace{1 cm}
+		% Firmas distribuidas como en la imagen.
+		\vspace{0.8cm}
+		\noindent
+		\firmatesis{Lautaro Silva Pizzi}{Autor}\hfill
+		\firmatesis{Dr. Juan Manuel Figueira}{Director}\hfill
+		\firmatesis{Dr. Federico Sánchez}{Co-Director}
 		
-		\begin{table}[h]
-			\begin{tabular}{ll}
-				Autor/a:                             & Jurado:   
-				\vspace{1.0 cm}
-				\\
-				\vspace{1cm}
-				\rule{82mm}{0.1mm}                 & \rule{82mm}{0.1mm} 
-				\\
-				\vspace{1.0 cm}
-				Director/a:                          & Jurado:            
-				\\
-				\vspace{1cm}
-				\rule{82mm}{0.1mm}                 & \rule{82mm}{0.1mm} 
-				\\
-				\vspace{1.0 cm}
-				Profesor/a de Tesis de Licenciatura: & Jurado:            
-				\\
-				\vspace{1cm}
-				\rule{82mm}{0.1mm}                 & \rule{82mm}{0.1mm}
-			\end{tabular}
-		\end{table}
+		\par\vspace{1.1cm}
+		\noindent
+		\firmatesis{\juradoUno}{Jurado}\hfill
+		\firmatesis{\juradoDos}{Jurado}\hfill
+		\firmatesis{\juradoTres}{Jurado}
+		
+		\par\vspace{1.1cm}
+		\firmatesis{\profesorTesis}{Profesor a cargo}
+		
 	\end{center}
 	\noindent 
 	
@@ -211,36 +226,70 @@
 		\Large \textbf{Resumen}
 	\end{center}
 	\vspace{1cm}
-	Aca va el resumen.
+	Los estudios con el Detector de Superficie (SD) del Observatorio Pierre Auger han
+	mostrado que, en lluvias inclinadas, la distribución lateral de la señal presenta una
+	asimetría azimutal temprano-tardía sensible a la profundidad del máximo de la cascada,
+	$X_{max}$, y por lo tanto a la composición del primario. Sin embargo, esa señal mezcla
+	las componentes electromagnética y muónica. En esta tesis se estudia por primera vez la
+	asimetría azimutal de la densidad de muones medida con el Detector Subterráneo de Muones
+	(UMD) de AMIGA, que registra muones con un umbral de $\sim 1$~GeV y sin contaminación
+	electromagnética. La asimetría se mide con la amplitud del primer armónico, $A_1$, en
+	la parametrización $\rho(\phi) = \rho_0 (1 + A_1 \cos\phi)$, ajustada por bines de
+	distancia al eje y ángulo cenital.
+	
+	Mediante simulaciones CORSIKA+\textit{Offline} (SIBYLL~2.3e, QGSJET-III.01 y
+	EPOS-LHC-R) en el rango $\log_{10}(E/\mathrm{eV}) \in [17.5, 18.0]$, se muestra que la
+	asimetría sobrevive en la componente muónica pura. Fenomenologicamente la asimetria es una combinacion de varios efectos, entre ellos   
+	
+	AGREGAR QUE VERGA QUIOERO DEIR
+	
+	A diferencia del SD, donde la asimetría
+	disminuye al aumentar $X_{max}$, en el UMD crece para lluvias más penetrantes. En una
+	configuración de estaciones sintéticas (Anillo Denso), $A_1$ separa protón de hierro con
+	un factor de mérito $MF \approx 2.5$ en la ventana $40^\circ \leq \theta \leq 55^\circ$,
+	el observable resulta estable frente al modelo hadrónico, y se caracterizan los sesgos
+	que introduce la reconstrucción. En el arreglo \textit{Infill}, se identifica una
+	inversión de la asimetría del SD lejos del núcleo, causada por muones de baja energía y
+	gran divergencia que el blindaje del UMD suprime.
+	[COMPLETAR: resultado de la aplicación a datos reales del UMD (Cap.~7) y comparación con
+	las predicciones Monte Carlo.]
+	
+	ES UNA VERGA LO QUE ESCRIBIO
 
 	
 	% --- AGRADECIMIENTOS ---
-	\newpage
-	\thispagestyle{empty}
-	\vspace*{2cm}
+	\clearpage
+	\begingroup
+	% Evita encabezados de otras secciones si ocupa más de una página.
+	\pagestyle{plain}
+	\thispagestyle{plain}
+	\setlength{\parindent}{0pt}
+	\setlength{\parskip}{0.2cm}
+	
+	\vspace*{0.2cm}
 	\begin{center}
 		\Large \textbf{Agradecimientos}
 	\end{center}
-	\vspace{1cm}
-	Aquí van tus agradecimientos...
+	\vspace{0.2cm}
 	
-	mica
+	Quiero empezar agradeciendo a mi familia, por el amor y el apoyo de siempre. A mis padres, por acompañarme en cada etapa y ayudarme a seguir el camino que elegí (aún siendo, tal vez, no el más original). A mis abuelas Rosa y Azucena y a mi abuelo Alejandro, por tanto cariño, todas las comidas que me hicieron desde que soy chico y por ese lugar tan especial que tienen en mi vida y en mi corazón. A mi hermana Cata, por estar siempre cerca, por compartir todos mis intereses y por ser alguien con quien puedo hablar de todo y en quien siempre puedo confiar. Y al resto de mi familia, por estar cerca, por interesarse y por compartir conmigo la alegría de cada paso.
 	
-	chicos cq
+	A mis amigos del secundario, con quienes vengo compartiendo	todo desde hace ya muchos años. Por tantas vacaciones juntos, las salidas, las risas y por seguir encontrando maneras	de acompañarnos mientras cada uno hace su camino, aun cuando sentimos que no nos alcanzan el tiempo ni la vida.
+		
+	Quiero agradecer especialmente a Mica, que me acompañó durante toda la carrera y desde mucho antes también, y que ocupa un lugar muy importante en mi vida. No podría haber llegado acá	sin vos. Crecer juntos me formó en muchos aspectos y aprendí	muchísimo de estar cerca tuyo. Gracias por tanto cariño, por todo lo que compartimos, por escucharme, por sostenerme en los momentos difíciles y por celebrar conmigo cada alegría.
 	
-	chicos facu
+	A los amigos que fui haciendo durante la carrera, en distintas materias y en diferentes momentos. Cada uno, desde su lugar,	fue y es muy importante para mí. Gracias por las horas de estudio, por las dudas compartidas, por la ayuda cuando algo no salía y por las risas en medio del cansancio. Y gracias, especialmente, por tanto fútbol compartido con muchos de	ustedes. Transitar una carrera tan difícil fue mucho más llevadero con ustedes, y me alegra llevarme, además de lo	aprendido, tantas amistades.
 	
-	chicos primario?
+	A mis amigos del primario, a quienes conozco hace más de veinte años y que siempre están. Por seguir siendo parte	de mi vida después de tanto tiempo.
 	
-	directores + instituto
+	A mis directores, Juan y Fede,	por acompañarme tanto durante este trabajo. Gracias por la paciencia y la dedicación para compartir lo que saben, por ayudarme con cada dificultad y por darme confianza para aprender. Gracias por apoyarme en mis primeras experiencias en el mundo científico, desde conferencias hasta publicaciones. Su acompañamiento fue fundamental para poder llevar adelante esta tesis.
 	
-	facultad + df
+	A toda la gente del ITeDA, por recibirme tan bien y hacer del instituto un lugar en el que fue un gusto trabajar. Me llevo mucho de esta experiencia, y también muy buenos amigos. Fue hermoso estar rodeado de tan buena gente y poder compartir con ustedes el día a día de esta etapa, especialmente los viernes. Y esperemos que sigamos compartiendo más momentos a futuro.
 	
-	familia
+	Finalmente, al Departamento de Física, a la Facultad de	Ciencias Exactas y Naturales y a la Universidad de Buenos Aires, por la carrera y la formación de excelencia que me brindaron. A los profesores, ayudantes, compañeros y a todas las personas que enseñan y sostienen día a día la universidad pública,	gracias por hacer posible este recorrido y por darme herramientas para seguir aprendiendo.
 	
-	abuelas y abuelo
-	
-	cata
+	\clearpage
+	\endgroup
 	
 	% --- ÍNDICES ---
 	\newpage
@@ -255,7 +304,6 @@
 	\input{capitulos/04_metodologia.tex}
 	\input{capitulos/05_anillo_denso.tex}
 	\input{capitulos/06_infill.tex}
-	\input{capitulos/07_datos_reales.tex}
 	\input{capitulos/08_conclusiones.tex}
 	
 	% --- ANEXOS ---
