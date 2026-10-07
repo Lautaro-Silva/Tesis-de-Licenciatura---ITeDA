@@ -197,6 +197,8 @@ VARIANTS = {
                   "attenuation": False, "umd_threshold": False, "color": "tab:gray"},
     "with_attenuation": {"label": "+ atenuación", "response": "perpendicular",
                          "attenuation": True, "umd_threshold": False, "color": "tab:purple"},
+    "with_plate": {"label": "+ respuesta de placa ($\\kappa = 1$)", "response": "plate",
+                   "attenuation": True, "umd_threshold": False, "color": "tab:green"},
     "UMD": {"label": "UMD", "response": "plate",
             "attenuation": True, "umd_threshold": True, "color": "tab:blue"},
     "SD_count": {"label": "SD (número de muones)", "response": "tank_count",
@@ -239,21 +241,64 @@ def population_A1(variant, radius_m, zenith_deg, params):
 #
 # At fixed momentum, dilution favours the early side and angular emission the late side. The late
 # side wins only for **hard** muons, above $p^* \simeq 2QD/r$.
+#
+# Three curves switch on one ingredient at a time: dilution x emission, + attenuation, + plate
+# response. Each is compared with its linear approximation (Eq. `eq:a1_lineal` of the chapter),
+#
+# $$ A_1 \simeq \left[\,2 - s(p) + D/\lambda(p) + \kappa\,\right]\frac{r}{D}\tan\theta_{sh},
+#    \qquad s(p) = \frac{p}{Q}\sin\alpha_0 + \tan^2\alpha_0, \qquad \sin\alpha_0 = r/D , $$
+#
+# where the attenuation and response terms are present only in the curves that include them.
 
 # %%
-momenta_GeV = np.geomspace(0.3, 30.0, 150)
+FIXED_MOMENTUM_CURVES = {
+    "kinematic": {"attenuation_term": False, "kappa": 0.0},
+    "with_attenuation": {"attenuation_term": True, "kappa": 0.0},
+    "with_plate": {"attenuation_term": True, "kappa": 1.0},
+}
+
+
+def linear_A1_fixed_momentum(momentum_GeV, radius_m, zenith_deg, params, attenuation_term, kappa):
+    sin_alpha0 = radius_m / params.D_m
+    tan2_alpha0 = sin_alpha0**2 / (1.0 - sin_alpha0**2)
+    slope = (momentum_GeV / params.Q_GeV) * sin_alpha0 + tan2_alpha0
+    bracket = 2.0 - slope + kappa
+    if attenuation_term:
+        attenuation_length = momentum_GeV * MUON_CTAU_m / MUON_MASS_GeV
+        bracket = bracket + params.D_m / attenuation_length
+    return bracket * (radius_m / params.D_m) * np.tan(np.deg2rad(zenith_deg))
+
+
+def first_sign_change(momenta, values):
+    """Momentum where the curve first crosses zero (linear interpolation in log p)."""
+    index = int(np.argmax(values < 0))
+    log_low, log_high = np.log(momenta[index - 1]), np.log(momenta[index])
+    value_low, value_high = values[index - 1], values[index]
+    log_crossing = log_low + (log_high - log_low) * value_low / (value_low - value_high)
+    return float(np.exp(log_crossing))
+
+
+momenta_GeV = np.geomspace(0.1, 40.0, 300)
 fixed_momentum = pd.DataFrame({"momentum_GeV": momenta_GeV})
-for name in ["kinematic", "with_attenuation"]:
+crossing_rows = []
+for name, curve in FIXED_MOMENTUM_CURVES.items():
     density = density_matrix(VARIANTS[name], momenta_GeV, REFERENCE_RADIUS_m,
                              REFERENCE_ZENITH_deg, CENTRAL)
-    fixed_momentum[name] = asymmetry_early_late(density[:, 0], density[:, 1])
+    exact = asymmetry_early_late(density[:, 0], density[:, 1])
+    linear = linear_A1_fixed_momentum(momenta_GeV, REFERENCE_RADIUS_m, REFERENCE_ZENITH_deg,
+                                      CENTRAL, curve["attenuation_term"], curve["kappa"])
+    fixed_momentum[name] = exact
+    fixed_momentum[name + "_linear"] = linear
+    crossing_rows.append({"curve": name,
+                          "crossing_exact_GeV": first_sign_change(momenta_GeV, exact),
+                          "crossing_linear_GeV": first_sign_change(momenta_GeV, linear)})
+crossings = pd.DataFrame(crossing_rows)
 
-crossing_index = np.argmax(fixed_momentum["kinematic"].to_numpy() < 0)
-crossing_momentum = fixed_momentum["momentum_GeV"].iloc[crossing_index]
-estimate_crossing = 2 * CENTRAL.Q_GeV * CENTRAL.D_m / REFERENCE_RADIUS_m
-print("Kinematic term changes sign at p = {:.2f} GeV/c (estimate 2QD/r = {:.2f})".format(
-    crossing_momentum, estimate_crossing))
+crossing_momentum = 2 * CENTRAL.Q_GeV * CENTRAL.D_m / REFERENCE_RADIUS_m   # p* = 2QD/r
+print("p* = 2QD/r = {:.2f} GeV/c".format(crossing_momentum))
+print(crossings.round(2).to_string(index=False))
 fixed_momentum.to_csv(TABLE_DIR / "A1_momento_fijo.csv", index=False)
+crossings.to_csv(TABLE_DIR / "cruces_momento_fijo.csv", index=False)
 
 # %% [markdown]
 # ## 6. Populations: expected sign for each detector versus radius
@@ -363,18 +408,29 @@ print(threshold_scan.round(3).to_string(index=False))
 # %%
 fig, (ax_momentum, ax_radius) = plt.subplots(1, 2, figsize=(10.0, 4.0))
 
-for name in ["kinematic", "with_attenuation"]:
+for name in FIXED_MOMENTUM_CURVES:
     variant = VARIANTS[name]
     ax_momentum.plot(fixed_momentum["momentum_GeV"], fixed_momentum[name],
-                     color=variant["color"], label=variant["label"])
+                     color=variant["color"], linewidth=1.8, label=variant["label"])
+    ax_momentum.plot(fixed_momentum["momentum_GeV"], fixed_momentum[name + "_linear"],
+                     color=variant["color"], linewidth=1.2, linestyle=":")
+# One legend entry explains the dotted style for all three curves.
+ax_momentum.plot([], [], color="black", linewidth=1.2, linestyle=":",
+                 label="aproximación lineal")
+ax_momentum.axvline(crossing_momentum, color="tab:gray", linestyle="--", linewidth=1.0,
+                    label="$p^* = 2QD/r \\simeq {:.1f}$ GeV/$c$".format(crossing_momentum))
 ax_momentum.axhline(0.0, color="black", linewidth=0.8)
-ax_momentum.axvline(crossing_momentum, color="tab:gray", linestyle=":", linewidth=1.0)
+ax_momentum.text(0.97, 0.53, "exceso temprano", transform=ax_momentum.transAxes,
+                 ha="right", va="bottom", fontsize=8, color="dimgray")
+ax_momentum.text(0.97, 0.47, "exceso tardío", transform=ax_momentum.transAxes,
+                 ha="right", va="top", fontsize=8, color="dimgray")
 ax_momentum.set_xscale("log")
-ax_momentum.set_ylim(-1.0, 0.6)
+ax_momentum.set_ylim(-0.8, 0.8)
+ax_momentum.grid(True, which="both", alpha=0.3)
 ax_momentum.set_xlabel("Momento del muón en la producción $p$ [GeV/$c$]")
-ax_momentum.set_ylabel("$A_1$")
+ax_momentum.set_ylabel("$A_1$ a momento fijo")
 ax_momentum.set_title("(a) Muones de un único momento", fontsize=10)
-ax_momentum.legend(fontsize=8, frameon=False, loc="lower left")
+ax_momentum.legend(fontsize=7.5, frameon=True, framealpha=0.9, loc="lower left")
 
 for name in ["UMD", "SD_count"]:
     variant = VARIANTS[name]
@@ -388,6 +444,7 @@ for name in ["UMD", "SD_count"]:
         style["label"] = variant["label"] + ", $\\theta = {:.0f}^\\circ$".format(zenith)
         ax_radius.plot(subset["radius_m"], subset[name], **style)
 ax_radius.axhline(0.0, color="black", linewidth=0.8)
+ax_radius.grid(True, alpha=0.3)
 ax_radius.set_xlabel("$r$ [m]")
 ax_radius.set_ylabel("$A_1$")
 ax_radius.set_title("(b) Población con espectro $p^{-2.6}$", fontsize=10)
