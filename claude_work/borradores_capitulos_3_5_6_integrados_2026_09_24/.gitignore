@@ -1,4 +1,0 @@
-# Conservar la vista previa PDF; excluir sólo auxiliares de compilación.
-compilacion/*
-!compilacion/vista_previa.pdf
-__pycache__/
