@@ -1179,3 +1179,144 @@ plt.savefig('SD_Desglose_Componentes_vs_UMD_TwinAxes.pdf', dpi=300)
 plt.show()
 
 # %%
+# =============================================================================
+# CELDA: SELECCIÓN DE ESTACIONES - SD SOBRE TODAS vs SOBRE RECONSTRUIDAS (CAP. 6)
+# =============================================================================
+# Conteo MC de muones del SD (sd_nMuons_MC) calculado sobre TODAS las estaciones
+# simuladas y sobre las que forman parte del evento reconstruido (HasStation),
+# junto con el UMD. Mismo estimador y mismo bineado que la celda UMD vs SD.
+# Los valores y los errores (bootstrap pareado sobre 960 lluvias, 1200 réplicas)
+# vienen de claude_work/revision_asimetrias_sd_umd/02_notebooks/03_sd_vs_umd/
+# (comparar_sd_umd.py); esta celda sólo los grafica.
+
+from pathlib import Path
+
+ruta_control = None
+for carpeta in [Path.cwd(), *Path.cwd().parents]:
+    candidata = (carpeta / "claude_work" / "revision_asimetrias_sd_umd" / "02_notebooks"
+                 / "03_sd_vs_umd" / "resultados" / "comparacion_directa.csv")
+    if candidata.exists():
+        ruta_control = candidata
+        break
+control = pd.read_csv(ruta_control)
+
+th_min, th_max = 30, 40
+r_edges = np.array([150, 300, 450, 600, 750, 900, 1050, 1200, 1350])
+
+curvas = [
+    {'col': 'A_UMD_original', 'err': 'sigma_boot_UMD', 'label': r'UMD ($N_\mu^{\mathrm{MC}}$)',
+     'color': 'mediumblue', 'marker': 's', 'linestyle': '-', 'desplazamiento': -12},
+    {'col': 'A_SD_antes', 'err': 'sigma_boot_SD_antes', 'label': r'SD muones (MC): todas las estaciones',
+     'color': 'forestgreen', 'marker': '^', 'linestyle': '-', 'desplazamiento': 0},
+    {'col': 'A_SD_despues', 'err': 'sigma_boot_SD_despues', 'label': r'SD muones (MC): estaciones reconstruidas',
+     'color': 'forestgreen', 'marker': 'v', 'linestyle': '--', 'desplazamiento': 12},
+]
+
+fig, ax = plt.subplots(figsize=(10, 7))
+
+for curva in curvas:
+    ax.errorbar(control['r_center'] + curva['desplazamiento'], control[curva['col']], yerr=control[curva['err']],
+                fmt=f"{curva['linestyle']}{curva['marker']}", color=curva['color'], label=curva['label'],
+                markersize=8, linewidth=2.5, capsize=4, markeredgecolor='black', markeredgewidth=0.5)
+
+ax.axhline(0, color='black', linestyle='--', linewidth=1.5, alpha=0.8)
+
+ax.set_xlabel(r'$r_{\mathrm{MC}}$ [m]', fontsize=16)
+ax.set_ylabel(r'$A_1$', fontsize=16)
+ax.set_xlim(100, 1400)
+ax.set_ylim(-0.16, 0.26)
+ax.set_xticks(r_edges)
+
+ax.grid(True, which='major', linestyle='-', alpha=0.5)
+ax.grid(True, which='minor', linestyle=':', alpha=0.3)
+ax.minorticks_on()
+
+ax.legend(fontsize=12, loc='lower left', framealpha=0.9)
+
+ax.text(0.96, 0.95, r"$\mathbf{Lluvias\ de\ prot\acute{o}n}$", transform=ax.transAxes, fontsize=14, va='top', ha='right', color=COLORS.get('Proton', 'royalblue'))
+ax.text(0.96, 0.88, r"$\mathbf{SIB2.3e}$", transform=ax.transAxes, fontsize=14, va='top', ha='right', color='purple')
+ax.text(0.96, 0.81, rf"$\mathbf{{{th_min}^\circ < \theta_{{\mathrm{{MC}}}} < {th_max}^\circ}}$", transform=ax.transAxes, fontsize=13, va='top', ha='right')
+ax.text(0.96, 0.75, r"$\mathbf{Geometr\acute{i}a\ MC}$", transform=ax.transAxes, fontsize=13, va='top', ha='right', color='dimgray')
+
+plt.tight_layout()
+plt.savefig('SD_Seleccion_Estaciones_vs_UMD.pdf', dpi=300)
+plt.show()
+
+# %%
+# =============================================================================
+# CELDA: CHEQUEO DE LA SELECCIÓN - MUONES EN LOS TANQUES QUE QUEDAN AFUERA
+# =============================================================================
+# Si la inversión es un efecto de selección, los tanques que NO forman parte del
+# evento reconstruido (HasStation = False) deberían ser los que tienen muy pocos
+# muones. Se histograma el número de muones MC que atraviesa cada tanque, para
+# los tanques excluidos y para los retenidos, separando región temprana
+# (|phi| < 60) y tardía (|phi| > 120). Se usa la banda 900-1500 m, donde
+# conviven ambas poblaciones.
+# Fuente: extracción de TODAS las estaciones SD simuladas de los ADST
+# (claude_work/revision_asimetrias_sd_umd/04_soporte/tablas/adst_counts_fast.csv,
+# 30 <= theta_MC < 40, protones SIB2.3e); una fila por estación y evento.
+
+ruta_estaciones = None
+for carpeta in [Path.cwd(), *Path.cwd().parents]:
+    candidata = (carpeta / "claude_work" / "revision_asimetrias_sd_umd" / "04_soporte"
+                 / "tablas" / "adst_counts_fast.csv")
+    if candidata.exists():
+        ruta_estaciones = candidata
+        break
+estaciones = pd.read_csv(ruta_estaciones)
+estaciones['phi_deg'] = np.rad2deg(estaciones['phi'])
+
+r_min, r_max = 900, 1500
+banda = estaciones[(estaciones['r'] >= r_min) & (estaciones['r'] < r_max)]
+
+regiones = [
+    {'nombre': 'temprana', 'filtro': np.abs(banda['phi_deg']) < 60, 'color': 'darkorange', 'hatch': None},
+    {'nombre': 'tardía', 'filtro': np.abs(banda['phi_deg']) > 120, 'color': 'mediumblue', 'hatch': '//'},
+]
+paneles = [
+    {'titulo': 'Tanques excluidos (HasStation = False)', 'has_rec': 0},
+    {'titulo': 'Tanques retenidos (HasStation = True)', 'has_rec': 1},
+]
+n_max = 8
+valores_n = np.arange(0, n_max + 1)
+
+filas_resumen = []
+fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
+for ax, panel in zip(axes, paneles):
+    seleccion = banda[banda['has_rec'] == panel['has_rec']]
+    for indice, region in enumerate(regiones):
+        tanques = seleccion[region['filtro'].loc[seleccion.index]]
+        # Fracción de tanques con N muones; el último bin acumula N >= n_max.
+        conteos = np.clip(tanques['mu'].to_numpy(), 0, n_max)
+        fracciones = np.array([np.mean(conteos == n) for n in valores_n])
+        desplazamiento = -0.2 + 0.4 * indice
+        ax.bar(valores_n + desplazamiento, fracciones, width=0.4, color=region['color'], alpha=0.75,
+               edgecolor='black', linewidth=0.6, hatch=region['hatch'],
+               label=f"región {region['nombre']} (N = {len(tanques)}, "
+                     rf"$\langle N_\mu \rangle$ = {tanques['mu'].mean():.2f})")
+        filas_resumen.append({'panel': panel['titulo'], 'region': region['nombre'], 'n_tanques': len(tanques),
+                              'media_mu': tanques['mu'].mean(), 'mediana_mu': tanques['mu'].median(),
+                              'fraccion_mu_0': np.mean(tanques['mu'] == 0),
+                              'fraccion_mu_1': np.mean(tanques['mu'] == 1),
+                              'fraccion_mu_hasta_1': np.mean(tanques['mu'] <= 1),
+                              'media_em': tanques['em'].mean()})
+    ax.set_title(panel['titulo'], fontsize=14)
+    ax.set_xlabel(r'Muones que atraviesan el tanque, $N_\mu^{\mathrm{SD}}$ (MC)', fontsize=14)
+    ax.set_xticks(valores_n)
+    ax.set_xticklabels([str(n) for n in valores_n[:-1]] + [rf'$\geq${n_max}'])
+    ax.grid(True, which='major', linestyle='-', alpha=0.5)
+    ax.legend(fontsize=11, loc='upper right', framealpha=0.9)
+axes[0].set_ylabel('Fracción de tanques', fontsize=14)
+axes[0].text(0.96, 0.70, rf"$\mathbf{{{r_min} \leq r_{{\mathrm{{MC}}}} < {r_max}\ m}}$", transform=axes[0].transAxes,
+             fontsize=13, va='top', ha='right')
+axes[0].text(0.96, 0.63, r"$\mathbf{30^\circ < \theta_{\mathrm{MC}} < 40^\circ}$", transform=axes[0].transAxes,
+             fontsize=13, va='top', ha='right')
+
+plt.tight_layout()
+plt.savefig('SD_Muones_Tanques_Excluidos.pdf', dpi=300)
+plt.show()
+
+resumen_excluidos = pd.DataFrame(filas_resumen)
+print(resumen_excluidos.round(3).to_string(index=False))
+
+# %%
