@@ -31,7 +31,7 @@ Este análisis se extendió usando también los datos de tanto la cantidad de mu
 	\label{fig:ejemplo_ajuste}
 \end{figure}
 
-Es importante distinguir la naturaleza de los observables: mientras que el UMD cuantifica puramente la cantidad de muones, el SD registra la energía depositada total en unidades VEM (\textit{Vertical Equivalent Muon}) \cite{auger2015detector}. Esta es una unidad de energía normalizada propia del detector que considera la energía depositada de todas las partículas que atraviesan el SD, ya sean pertenecientes a la componente muónica como electromagnética de la lluvia. La evolución de $A_1$ para todos los bines cenitales se resume en la Figura \ref{fig:evolucion_asym_vs_theta}.
+Es importante distinguir la naturaleza de los observables: mientras que el UMD cuantifica puramente la cantidad de muones, el SD registra la señal total en unidades VEM (\textit{Vertical Equivalent Muon}) \cite{auger2015detector}. Esta es una unidad de energía normalizada a la energia depositada por un muón vertical atravesando el detector y la señal total considera la energía depositada de todas las partículas que atraviesan el SD. La evolución de $A_1$ para todos los bines cenitales se resume en la Figura \ref{fig:evolucion_asym_vs_theta}.
 
 Al comparar las curvas, se observa que el SD presenta valores de asimetría significativamente mayores en bines de baja inclinación cenital, pero sufre un decaimiento abrupto a partir de $\theta_{\text{shower}} \gtrsim 50^\circ$. 
 
@@ -83,7 +83,7 @@ Si bien la distribución está centrada cerca del cero con una resolución acept
 	\label{fig:bias_umd_global}
 \end{figure}
 
-Se intento ver si esta asimetría de la distribución respecto del cero podía explicar las diferencias de la amplitud de asimetría $A_1$ entre los datos REC y los datos MC. Para esto se construyo un modelo que implementase la distribución encontrada en la Figura \ref{fig:bias_umd_global} en los datos. Sin embargo, este procedimiento solo inyectó ruido estadístico en los ajustes, sin lograr desplazar los valores de $A_1^{\text{MC}}$ hacia los niveles de $A_1^{\text{REC}}$. Este resultado negativo sugiere que el sesgo de reconstrucción no es uniforme, sino que posee una dependencia funcional con, por ejemplo, la posición de la estación o la densidad local de partículas.
+Se intento ver si esta asimetría de la distribución respecto del cero podía explicar las diferencias de la amplitud de asimetría $A_1$ entre los datos REC y los datos MC. Para esto se construyó un modelo que implementase la distribución encontrada en la Figura \ref{fig:bias_umd_global} en los datos. Sin embargo, este procedimiento solo inyectó ruido estadístico en los ajustes, sin lograr desplazar los valores de $A_1^{\text{MC}}$ hacia los niveles de $A_1^{\text{REC}}$. Este resultado negativo sugiere que el sesgo de reconstrucción no es uniforme, sino que posee una dependencia funcional con, por ejemplo, la posición de la estación o la densidad local de partículas.
 
 \subsection{Bias Direccional en la Reconstrucción}
 \label{subsec:bias_direccional}
@@ -95,18 +95,18 @@ Para verificar esta premisa, se estudió la evolución del valor medio del resid
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/directional_bias.pdf}
-	\caption{Distribución de la media del residuo relativo de reconstrucción en función del ángulo azimutal de la estación en el plano de la lluvia. Se evidencia un desempeño degradado en las regiones tardías ($\pm 180^\circ$), donde el sesgo de sobreconteo es máximamente superior al de la región temprana ($0^\circ$).}
+	\caption{Distribución de la media del residuo relativo de reconstrucción en función del ángulo azimutal de la estación en el plano de la lluvia. Se evidencia un desempeño degradado en las regiones tardías ($\pm 180^\circ$), donde el sesgo de sobreconteo es claramente mayor que en la región temprana ($0^\circ$).}
 	\label{fig:bias_direccional_rec}
 \end{figure}
 
-Como se observa, el algoritmo de reconstrucción presenta un sesgo positivo significativamente mayor en las regiones tardías. Físicamente, esto se debe a que en las zonas de menor densidad, cualquier fluctuación estadística o error en la deconvolución de trazas tiene un impacto relativo mucho mayor sobre el valor medio, elevando artificialmente la densidad de muones allí donde la atenuación atmosférica debería ser máxima. Este efecto actúa como un ruido coherente que 'lava' la asimetría física intrínseca de la cascada.
+Como se observa, el algoritmo de reconstrucción presenta un sesgo positivo significativamente mayor en las regiones tardías. Físicamente, esto puede deberse a que en las zonas de menor densidad, cualquier fluctuación estadística o error en la deconvolución de trazas tiene un impacto relativo mucho mayor sobre el valor medio, elevando artificialmente la densidad de muones allí donde la atenuación atmosférica debería ser máxima. Este efecto actúa como un ruido coherente que 'lava' la asimetría física intrínseca de la cascada.
 
 \subsection{Modelado del Bias: Implementación del \textit{Toy Model} empírico}
 \label{subsec:toy_model}
 
 Para caracterizar el impacto del error de reconstrucción en la amplitud medida y verificar si el sesgo direccional es suficiente para explicar la discrepancia observada entre los datos ideales y los reconstruidos, se implementó un \textit{Toy Model} de perturbación. Este modelo utiliza un enfoque de remuestreo empírico computacional, conocido como \textit{Bootstrap} \cite{efron1979bootstrap}. 
 
-El algoritmo toma las densidades muónicas ideales ($N_{\mu}^{\text{MC}}$) en cada bin azimutal y les inyecta un factor de error extraído aleatoriamente de la distribución real de residuos relativos evaluada en la Figura \ref{fig:bias_direccional_rec} segmentados por $\phi$. Esta metodología garantiza dos condiciones físicas fundamentales: respeta estrictamente el límite de sub-reconstrucción (dado que el detector no puede reconstruir cantidades negativas de muones, el residuo empírico extraído siempre está acotado en un mínimo de $-1$), y captura con total fidelidad la cola asimétrica de sobreconteo característica del algoritmo del UMD. 
+El algoritmo toma las densidades muónicas ideales ($N_{\mu}^{\text{MC}}$) en cada bin azimutal y les inyecta un factor de error extraído aleatoriamente de la distribución real de residuos relativos evaluada en la Figura \ref{fig:bias_direccional_rec} segmentados por $\phi$. Esta metodología garantiza dos condiciones físicas fundamentales: respeta estrictamente el límite de sub-reconstrucción (dado que el detector no puede reconstruir cantidades negativas de muones, el residuo empírico extraído siempre está acotado en un mínimo de $-1$), y reproduce la cola asimétrica de sobreconteo característica del algoritmo del UMD. 
 
 De esta manera, se evalúa la degradación resultante en $A_1$ considerando exclusivamente el efecto del ruido de conteo direccional, aislándola de otras fuentes de incertidumbre como la reconstrucción del núcleo, permitiendo su comparación directa con la asimetría reconstruida ($A_1^{\mathrm{REC}}$). Los resultados de este modelo se observan en la Figura \ref{fig:toy_model}.
 
@@ -131,7 +131,7 @@ Esta divergencia remanente señala el límite de un modelo basado únicamente en
 
 Para investigar la precisión geométrica de esta reconstrucción, se analizó el error en la determinación de la coordenada radial utilizando datos de las estaciones reales del \textit{Infill}. En la Figura \ref{fig:bias_core_azimut} se presenta el error radial ($\Delta r = r_{MC} - r_{REC}$) en función del azimut verdadero de la estación ($\phi_{MC}$) en el plano de la lluvia, para estaciones con $r_{REC} < 1400$~m y tres intervalos de ángulo cenital.
 
-La figura revela una modulación sistemática con la forma de un coseno. En la región temprana ($\phi \approx 0^\circ$) el error es positivo ($\Delta r > 0 \implies r_{REC} < r_{MC}$): el algoritmo sitúa a las estaciones tempranas más cerca del núcleo de lo que realmente están. En la región tardía ($\phi \approx \pm 180^\circ$) el error es negativo, y las estaciones quedan más lejos. Este patrón es la firma de un desplazamiento del núcleo reconstruido desde su posición verdadera hacia la región temprana de la lluvia. Ajustando $\Delta r(\phi) = a + b\cos\phi$, la amplitud $b$ da directamente el tamaño de ese desplazamiento, que resulta $b \simeq 9$, $15$ y $21$~m para $\theta_{MC}$ entre $20^\circ$ y $30^\circ$, entre $30^\circ$ y $40^\circ$ y entre $40^\circ$ y $50^\circ$, respectivamente: crece con la inclinación y es del mismo orden que la resolución del arreglo. El mismo corrimiento, en dirección y en magnitud, se obtiene de forma independiente en el Capítulo~\ref{sec:datos_reales}.
+La figura revela una modulación sistemática con la forma de un coseno. En la región temprana ($\phi \approx 0^\circ$) el error es positivo ($\Delta r > 0 \implies r_{\mathrm{REC}} < r_{\mathrm{MC}}$): el algoritmo sitúa a las estaciones tempranas más cerca del núcleo de lo que realmente están. En la región tardía ($\phi \approx \pm 180^\circ$) el error es negativo, y las estaciones quedan más lejos. Este patrón es la firma de un desplazamiento del núcleo reconstruido desde su posición verdadera hacia la región temprana de la lluvia. Ajustando $\Delta r(\phi) = a + b\cos\phi$, la amplitud $b$ estima, a primer orden, la componente media de ese desplazamiento hacia la región temprana en el plano de la lluvia, que resulta $b \simeq 9$, $15$ y $21$~m para $\theta_{\mathrm{MC}}$ entre $20^\circ$ y $30^\circ$, entre $30^\circ$ y $40^\circ$ y entre $40^\circ$ y $50^\circ$, respectivamente: crece con la inclinación y es del mismo orden que la resolución del arreglo. El mismo corrimiento, en dirección y en magnitud, se analiza mediante otro procedimiento en la Sección~\ref{subsec:lavado_nucleo}.
 
 \begin{figure}[h]
 	\centering
@@ -151,12 +151,12 @@ En el Anillo Denso, en cambio, este efecto es despreciable. Las estaciones virtu
 \section{Estudios de Robustez}
 \label{subsec:robustez}
 
-Se estudio también el comportamiento del detector y el parámetro de asimetría, al enfrentarse a situaciones en las que, al ser circunstancia donde la física es la misma especialmente considerando los efectos de la atenuación atmosférica, no se espera ver cambios en su performance.
+Se estudió también el comportamiento del detector y del parámetro de asimetría en situaciones en las que la física, en particular la atenuación atmosférica, es la misma, y por lo tanto no se esperan cambios en su desempeño.
 
 \subsection{Invariancia azimutal de incidencia ($\phi_{shower}$)}
 \label{subsubsec:invariancia_phi}
 
-Para asegurar que la asimetría medida sea una propiedad intrínseca de la cascada y no un artefacto de la orientación del arreglo, se evaluó la estabilidad de $A_1$ en función del ángulo azimutal de entrada de la lluvia ($\phi_{\text{shower}}$). Para esto se separaron los datos del anillo denso en 6 bines equiespaciados en función del angulo de incidencia de la lluvia y se repitio el análisis explicando en la sección \ref{subsec:entorno_control} para cada uno de ellos.
+Para asegurar que la asimetría medida sea una propiedad intrínseca de la cascada y no un artefacto de la orientación del arreglo, se evaluó la estabilidad de $A_1$ en función del ángulo azimutal de entrada de la lluvia ($\phi_{\text{shower}}$). Para esto se separaron los datos del anillo denso en 6 bines equiespaciados en función del ángulo de incidencia de la lluvia y se repitió el análisis explicado en la Sección \ref{subsec:entorno_control} para cada uno de ellos.
 
 \begin{figure}[H]
 	\centering
@@ -167,7 +167,7 @@ Para asegurar que la asimetría medida sea una propiedad intrínseca de la casca
 
 En la Figura \ref{fig:robustez_phi} se analizo el dataset de protones con el modelo \texttt{Sibyll 2.3e} para lluvias inclinadas ($40^\circ < \theta < 60^\circ$). Se ve que el valor ajustado del parametro de asimetría $A_1$ no depende del angulo de incidencia de la lluvia, como era esperado. Esto es una buena prueba de estrés para los fundamentos del trabajo y que garantiza que se puede avanzar en el análisis en pos de hacer discriminacion de masa. Nuevamente aparece la discrepancia entre los valores absolutos de asimetria usando los muones inyectados y los reconstruidos.
 
-\subsection{Independencia del modelo hadrónico}
+\subsection{Comparación entre modelos hadrónicos}
 \label{subsubsec:independencia_modelo}
 
 Análogamente, se evaluó la robustez de la asimetría $A_1$ frente al uso de diferentes modelos de interacciones hadrónicas en las simulaciones. Para ello, se comparó la evolución del parámetro $A_1$ para un mismo primario (Helio) y rango de energía utilizando diferentes librerías fenomenológicas. Dada la disponibilidad de datos detallada en el Capítulo~\ref{cap:metodologia}, se contrastaron las cascadas simuladas con los modelos \texttt{SIBYLL 2.3e} y \texttt{QGSJet-III.01}.

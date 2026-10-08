@@ -112,7 +112,7 @@ Para verificar si este mecanismo opera en las simulaciones, se recalculó la asi
 
 El cambio de signo se obtiene con los mismos conteos, las mismas coordenadas y el mismo ajuste: lo único que cambia es qué estaciones entran en el promedio. En la banda $1200$--$1350$~m sólo el $42\%$ de las estaciones tempranas y el $18\%$ de las tardías forman parte del evento. Las estaciones tardías retenidas están más enriquecidas en muones que las tempranas. Una hipótesis compatible con este comportamiento es que la componente electromagnética, más intensa del lado temprano, facilita que una estación dispare aun con pocos muones, mientras que del lado tardío sólo sobreviven las estaciones con más muones. A favor de esta hipótesis, entre $900$ y $1350$~m una estación sin muones forma parte del evento en el $39\%$ de los casos en la región temprana y en el $18\%$ en la tardía, donde el número medio de partículas electromagnéticas es unas $2.4$ veces menor. Esto no prueba el mecanismo, ya que la condición de formar parte del evento resume el disparo, la lectura y la reconstrucción de la estación, y aquí no se separaron esas etapas.
 
-Un chequeo directo de esta hipótesis consiste en contar cuántos muones atraviesan los tanques que quedan fuera de la selección. Si la inversión es un efecto de selección, las estaciones excluidas deberían ser justamente las que reciben muy pocos muones, y no podría ser mucho mayor a 1 muón dado que los \textit{triggers} de las estaciones están configurados en 1 VEM. La Figura~\ref{fig:muones_tanques_excluidos} muestra la distribución del número de muones Monte Carlo en los tanques excluidos y en los retenidos, para $900 \leq r < 1500$~m, donde conviven ambas poblaciones. Los tanques excluidos contienen como máximo un muón en el $95\%$ de los casos en la región temprana y en el $93\%$ en la tardía, con un promedio de $0.35$ y $0.46$ muones respectivamente, mientras que los retenidos tienen en promedio $1.5$ y $1.7$. Las estaciones que se pierden son, por lo tanto, las de menor contenido de muones, como exige la Ec.~\ref{eq:seleccion} para que $\varepsilon_N > \varepsilon$.
+Un chequeo directo de esta hipótesis consiste en contar cuántos muones atraviesan los tanques que quedan fuera de la selección. Si la inversión es un efecto de selección, las estaciones excluidas deberían ser justamente las que reciben muy pocos muones, y no podría ser mucho mayor a 1 muón dado que los \textit{triggers} de las estaciones están configurados en 1 VEM. La Figura~\ref{fig:muones_tanques_excluidos} muestra la distribución del número de muones Monte Carlo en los tanques excluidos y en los retenidos, para $900 \leq r < 1500$~m, donde conviven ambas poblaciones. Los tanques excluidos contienen como máximo un muón en el $95\%$ de los casos en la región temprana y en el $93\%$ en la tardía, con un promedio de $0.35$ y $0.46$ muones respectivamente, mientras que los retenidos tienen en promedio $1.5$ y $1.7$. Las estaciones que se pierden son, por lo tanto, las de menor contenido de muones, lo que es consistente con el enriquecimiento del promedio seleccionado descrito anteriormente.
 
 \begin{figure}[H]
 	\centering
@@ -126,31 +126,6 @@ La comparación entre regiones muestra además el mecanismo de la inversión. De
 Retirar el requisito tampoco hace idénticas las curvas del SD y del UMD. Entre $150$ y $900$~m, donde casi todas las estaciones son seleccionadas, el UMD presenta una asimetría entre $0.03$ y $0.06$ mayor que la de los muones del SD, una diferencia que excluye el cero al $95\%$ de confianza. Una candidata es la distinta respuesta de un detector plano y de un tanque (Sección~\ref{subsubsec:respuesta_detector}), junto con el umbral del UMD, que es más alto para las trayectorias tardías, pero esta diferencia queda abierta en este trabajo. Por otra parte, la curva del UMD también se calcula sobre los módulos de estaciones seleccionadas, y no se dispone de su conteo en las estaciones no retenidas. El efecto de la selección sobre el UMD debería ser menor, porque los muones que atraviesan los módulos enterrados no son los que hacen disparar al tanque, pero no puede descartarse a grandes distancias, donde la fracción de estaciones retenidas depende fuertemente de $\phi$.
 
 En conclusión, la comparación con el UMD muestra que la asimetría de los muones medida bajo tierra se mantiene positiva a todas las distancias, mientras que la del SD se invierte por la forma en que se seleccionan las estaciones. Esto no se debe a que el blindaje filtre una población de muones blandos con asimetría negativa: según el Capítulo~\ref{sec:fenomenologia}, elevar el umbral hace a la asimetría \textit{menos} positiva. La asimetría del conteo de muones depende tanto de la respuesta del detector como de la selección de estaciones sobre la que se calcula, y la comparación entre detectores, o entre simulaciones y datos, requiere que esa selección sea la misma.
-
-% REVISAR: la subsección del Fast-MC queda desactivada (\iffalse ... \fi) pero intacta. Su objetivo declarado ("probar [...] que la asimetría negativa es un artefacto geométrico exclusivo de la Población B y que el UMD lo anula") quedó refutado por el Cap. 3 y por el control de selección. Los pasos 1-3 siguen siendo una buena forma de predecir AMPLITUDES (el modelo de juguete del Cap. 3 no lo hace). Sugerencia para el Cap. 8 (Perspectivas):
-% "Una extensión natural de este trabajo es predecir cuantitativamente la amplitud $A_1$ a partir de la cinemática de producción, extrayendo de simulaciones dedicadas de CORSIKA las distribuciones $F(X,E_i,p_t)$, propagando los muones con el modelo de Cazón \textit{et al.} \cite{Cazon2012} y proyectándolos sobre el suelo con la respuesta y el umbral de cada detector, en lugar de la fuente puntual del modelo de juguete del Capítulo~\ref{sec:fenomenologia}."
-\iffalse
-\subsection{Propuesta de Modelado del Filtro Cinemático}
-\label{subsec:fast_mc}
-
-Si bien el análisis de las simulaciones procesadas con el \textit{framework Offline} ha demostrado de manera contundente la degradación sistemática de la asimetría azimutal en el Detector de Superficie (SD) y su preservación en el Detector Subterráneo de Muones (UMD), la demostración del mecanismo propuesto en la sección anterior para explicar la competencia entre efectos y la diferencia fenomenológica entre detectores requiere un abordaje desde primeros principios. 
-
-La limitación intrínseca de este estudio radica en que las simulaciones utilizadas entregan la huella final de la lluvia a nivel del suelo, careciendo de la granularidad necesaria para rastrear la cinemática de producción individual ($p_z$, $p_t$ y altura de decaimiento $z$) de cada partícula antes de su propagación. Para probar de manera aislada que la asimetría negativa es un artefacto geométrico exclusivo de la Población B y que el UMD lo anula por completo, se deja planteado como perspectiva a futuro, excediendo los alcances del presente trabajo, el desarrollo de un \textit{Toy Model} fenomenológico (un propagador \textit{Fast-Monte Carlo}).
-
-La hoja de ruta propuesta para implementar este modelo en futuras investigaciones, el cual acoplaría la producción hadrónica con el transporte analítico de los muones, se estructuraría en las siguientes etapas:
-
-\begin{enumerate}
-	\item \textbf{Extracción de las distribuciones de producción:} Generar un lote de simulaciones dedicadas en CORSIKA con el único fin de extraer la función de distribución tridimensional en el punto de decaimiento del hadrón progenitor: $F(X, E_i, p_t)$. De esta forma, se obtiene el espectro de energía inicial y momento transversal real en función de la profundidad atmosférica $X$.
-	
-	\item \textbf{Propagación analítica y supervivencia:} A partir de $F(X, E_i, p_t)$, aplicar técnicas de remuestreo (\textit{Bootstrap} o Monte Carlo) para inyectar muones y propagarlos analíticamente hacia el suelo. Esta etapa utilizará el modelo de transporte cinemático de L. Cazón \textit{et al.} \cite{Cazon2012}, aplicando la isoterma atmosférica para calcular las pérdidas continuas de energía por ionización ($dE/dX$) y evaluar la probabilidad de supervivencia frente al decaimiento en vuelo.
-	
-	\item \textbf{Proyección geométrica e impacto:} Intersecar las trayectorias resultantes con el plano inclinado del arreglo de superficie. Este paso introducirá de forma natural la excentricidad geométrica, permitiendo evaluar cómo la divergencia radial de cada partícula afecta su fase azimutal de impacto.
-	
-	\item \textbf{El filtro instrumental:} Al obtener la energía final residual a nivel del suelo ($E_f$), se aplicarán funciones escalón para emular los diferentes umbrales instrumentales. Se evaluará la densidad total (emulando la respuesta muónica del SD) y se contrastará contra la distribución aplicando un umbral cinemático estricto de $E_f \gtrsim 1.0\text{ GeV}$ (emulando el blindaje pasivo del UMD).
-\end{enumerate}
-
-Una vez concretado en trabajos posteriores, este marco permitirá demostrar de forma completamente analítica cómo el espectro de baja energía, al poseer ángulos de divergencia masivos, dispara el término geométrico $\langle p_r / -p_z \rangle$ forzando la asimetría negativa ($A_1 < 0$) en el \textit{far-core}. Simultáneamente, probará desde las ecuaciones fundamentales de transporte que la barrera de atenuación del UMD filtra las trayectorias de bajo momento longitudinal, anulando la distorsión proyectiva de manera determinista y revelando únicamente la asimetría positiva intrínseca al desarrollo longitudinal de la lluvia.
-\fi
 
 \section{Arreglo \textit{Infill} usando la geometría reconstruida}
 \label{subsec:infill_rec}
@@ -225,17 +200,24 @@ La diferencia entre $A_1^{\mathrm{REC}}$ y $A_1^{\mathrm{MC}}$ en el UMD puede s
 
 La comparativa evidencia, por lo tanto, que la geometría reconstruida reduce de manera sistemática la amplitud observable. Esta reducción no es una pérdida aleatoria de resolución, sino un corrimiento que puede estimarse a partir de $b$ y de la pendiente de la LDF, y que por lo tanto podría corregirse o incluirse en la comparación con los datos. La ventana en la que la asimetría reconstruida se mantiene positiva y medible, $600 \leq r < 1200$~m y $20^\circ \leq \theta < 55^\circ$, es la región de referencia utilizada en la Sección~\ref{sec:datos_reales}. Mejorar la determinación del núcleo, por ejemplo con un ajuste de la LDF que incluya la modulación azimutal, resulta tan determinante para medir la asimetría como la propia respuesta del detector.
 
+\subsection{Perspectiva: un modelo cinemático de producción y transporte}
+\label{subsec:perspectiva_cinematica}
+
+El modelo de juguete del Capítulo~\ref{sec:fenomenologia} permite discutir la competencia de mecanismos, pero no constituye una predicción cuantitativa de $A_1$. Esa extensión requiere la distribución conjunta de producción muónica $F(X,E_i,p_t)$, que no se reconstruye a partir de la huella al suelo disponible en los archivos ADST de este análisis. Su desarrollo quedó diferido.
+
+La propuesta consiste en extraer esas distribuciones de simulaciones dedicadas de CORSIKA, propagar los muones con un modelo de transporte que incluya las pérdidas de energía y el decaimiento \cite{Cazon2012}, y proyectar sus trayectorias sobre los detectores incorporando sus respuestas, umbrales y la selección de estaciones. El objetivo sería contrastar amplitudes y diferencias entre observables, sin imponer de antemano que una población de baja energía deba producir una inversión de signo.
+
 \section{Datos de campo: trabajo en curso}
 \label{sec:datos_reales}
 
 Como paso final de este trabajo se comenzó a aplicar el análisis desarrollado en los capítulos anteriores a los datos medidos por el UMD en el arreglo \textit{Infill}. Este análisis se encuentra actualmente en curso, por lo que en este capítulo sólo se presenta el estado del procesamiento de los datos y los primeros resultados obtenidos.
 
-Se procesaron los eventos del arreglo de $750$m con información del UMD de la producción \texttt{v4r2}, en sus dos flujos de reconstrucción: \textit{Fase I}, de abril de 2021 a abril de 2023, y \textit{Fase II SPMT}, de febrero de 2022 a mayo de 2026. Sobre estos eventos se aplicaron los cortes de calidad estándar (selección 6T5, $\lg(E/\mathrm{eV}) \geq 17.5$ y rechazo de estaciones y contadores marcados), excluyendo además el período de puesta en marcha de la Fase II durante 2022. La Figura\ref{fig:cap7_dataset} resume la muestra obtenida.
+Se procesaron los eventos del arreglo de $750$m con información del UMD de la producción \texttt{v4r2}, en sus dos flujos de reconstrucción: \textit{Fase I}, de abril de 2021 a abril de 2023, y \textit{Fase II SPMT}, de febrero de 2022 a mayo de 2026. Sobre estos eventos se aplicaron los cortes de calidad estándar (selección 6T5, $\lg(E/\mathrm{eV}) \geq 17.5$ y rechazo de estaciones y contadores marcados), excluyendo además el período de puesta en marcha de la Fase II durante 2022. La Figura \ref{fig:cap7_dataset} resume la muestra obtenida.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/cap7_dataset.pdf}
-	\caption{Muestra de datos de campo con $\lg(E/\mathrm{eV}) \geq 17.5$ luego de los cortes de calidad. Izquierda: eventos por mes en cada flujo de reconstrucción. Centro: espectro de energía reconstruidDerecha: distribución en $\cos^2\theta$; la línea vertical marca $\theta = 55^\circ$.}
+	\caption{Muestra de datos de campo con $\lg(E/\mathrm{eV}) \geq 17.5$ luego de los cortes de calidad. Izquierda: eventos por mes en cada flujo de reconstrucción. Centro: espectro de energía reconstruidos. Derecha: distribución en $\cos^2\theta$; la línea vertical marca $\theta = 55^\circ$.}
 	\label{fig:cap7_dataset}
 \end{figure}
 
@@ -243,9 +225,11 @@ Los primeros resultados son alentadores. La Figura~\ref{fig:cap7_modulacion} mue
 
 Para extender esta observación a todo el espacio de fases se aplicó el mismo procedimiento de extracción de $A_1$ utilizado con la geometría reconstruida en el Capítulo~\ref{cap:infill}, y se comparó con las simulaciones procesadas con la misma reconstrucción (Figura~\ref{fig:cap7_A1_r}). Los datos siguen, en líneas generales, el comportamiento de las simulaciones, incluida la asimetría negativa cerca del núcleo en las lluvias más inclinadas, asociada al corrimiento del núcleo reconstruido (Sección~\ref{subsec:lavado_nucleo}).
 
+Si bien la asimetría es visible en los datos, su caracterización completa requerirá más trabajo. Queda pendiente el estudio de las incertezas sistemáticas, la comparación cuantitativa con las simulaciones en todo el rango de distancias y ángulos, y la extensión de las simulaciones por encima de $10^{18}$eV, necesaria para interpretar los datos de mayor energía, como los de la Figura \ref{fig:cap7_modulacion}.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.85\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_Experimental_Modulation_Corrected.pdf}
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_Experimental_Modulation_Corrected.pdf}
 	\caption{Perfil azimutal de la densidad de muones reconstruida por el UMD en datos de campo de Fase II, normalizado a su valor medio, para $18.0 \leq \lg(E_\mathrm{REC}/\mathrm{eV}) < 18.5$, $40^\circ \theta_\mathrm{REC} < 60^\circ$ y $750 \leq r < 1050$m. Las barras de error representan el error estándar de la media en cada bin, y la curva es el ajuste del primer armónico de la Ec.\ref{eq:ajuste_armonico}.}
 	\label{fig:cap7_modulacion}
 \end{figure}
@@ -256,7 +240,5 @@ Para extender esta observación a todo el espacio de fases se aplicó el mismo p
 	\caption{$A_1$ en función de la distancia al núcleo reconstruido, por banda de ángulo cenital reconstruido, para $17.5 \leq \lg(E/\mathrm{eV}) < 18.0$. Negro: datos de campo (Fase I + II). Colores: simulaciones reconstruidas de protón, helio y hierro (\texttt{SIBYLL 2.3e}) y de helio (\texttt{QGSJET-III}), desplazadas levemente en $r$ para facilitar la lectura. La franja sombreada marca la región $600 \leq r < 1200$~m y $20^\circ \leq \theta < 55^\circ$. En la banda $55^\circ \leq \theta < 65^\circ$ los datos se muestran con símbolos vacíos.}
 	\label{fig:cap7_A1_r}
 \end{figure}
-
-Si bien la asimetría es visible en los datos, su caracterización completa requerirá más trabajo. Queda pendiente el estudio de las incertezas sistemáticas, la comparación cuantitativa con las simulaciones en todo el rango de distancias y ángulos, y la extensión de las simulaciones por encima de $10^{18}$eV, necesaria para interpretar los datos de mayor energía, como los de la Figura\ref{fig:cap7_modulacion}.
 
 \newpage

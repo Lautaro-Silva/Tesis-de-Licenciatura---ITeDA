@@ -226,35 +226,20 @@
 		\Large \textbf{Resumen}
 	\end{center}
 	\vspace{1cm}
-	Los estudios con el Detector de Superficie (SD) del Observatorio Pierre Auger han
-	mostrado que, en lluvias inclinadas, la distribución lateral de la señal presenta una
-	asimetría azimutal temprano-tardía sensible a la profundidad del máximo de la cascada,
-	$X_{max}$, y por lo tanto a la composición del primario. Sin embargo, esa señal mezcla
-	las componentes electromagnética y muónica. En esta tesis se estudia por primera vez la
-	asimetría azimutal de la densidad de muones medida con el Detector Subterráneo de Muones
-	(UMD) de AMIGA, que registra muones con un umbral de $\sim 1$~GeV y sin contaminación
-	electromagnética. La asimetría se mide con la amplitud del primer armónico, $A_1$, en
-	la parametrización $\rho(\phi) = \rho_0 (1 + A_1 \cos\phi)$, ajustada por bines de
-	distancia al eje y ángulo cenital.
 	
-	Mediante simulaciones CORSIKA+\textit{Offline} (SIBYLL~2.3e, QGSJET-III.01 y
-	EPOS-LHC-R) en el rango $\log_{10}(E/\mathrm{eV}) \in [17.5, 18.0]$, se muestra que la
-	asimetría sobrevive en la componente muónica pura. Fenomenologicamente la asimetria es una combinacion de varios efectos, entre ellos   
+	Las asimetrías azimutales de las lluvias atmosféricas extensas ofrecen información sobre el desarrollo y la masa primaria de los rayos cósmicos de ultra-alta energía que impactan contra la Tierra. Explorar este fenómeno utilizando el Detector Subterráneo de Muones (UMD) del proyecto AMIGA del Observatorio Pierre Auger es uno de los objetivos principales de esta tesis.
 	
-	AGREGAR QUE VERGA QUIOERO DEIR
+	Se desarrolló un análisis fenomenológico completo para describir todos los efectos que contribuyen a generar dichas asimetrías azimutales detallando un modelo analítico para describirlos. Se hizo foco en aquellos que afectan a la componentes muonica de las lluvias de aire extensas que son las detectadas por el UMD.
 	
-	A diferencia del SD, donde la asimetría
-	disminuye al aumentar $X_{max}$, en el UMD crece para lluvias más penetrantes. En una
-	configuración de estaciones sintéticas (Anillo Denso), $A_1$ separa protón de hierro con
-	un factor de mérito $MF \approx 2.5$ en la ventana $40^\circ \leq \theta \leq 55^\circ$,
-	el observable resulta estable frente al modelo hadrónico, y se caracterizan los sesgos
-	que introduce la reconstrucción. En el arreglo \textit{Infill}, se identifica una
-	inversión de la asimetría del SD lejos del núcleo, causada por muones de baja energía y
-	gran divergencia que el blindaje del UMD suprime.
-	[COMPLETAR: resultado de la aplicación a datos reales del UMD (Cap.~7) y comparación con
-	las predicciones Monte Carlo.]
+	Se analizaron simulaciones CORSIKA y \textit{Offline}, de varios modelos hadrónicos disponibles en el rango de energías $17.5\leq\log_{10}(E/\mathrm{eV})<18.0$. El observable es el parámetro $A_1$ del ajuste $\rho(\phi)=\rho_0(1+A_1\cos\phi)$ en el plano de la lluvia que describe la diferencia de cantidad de partículas o de señal entre la región temprana y tardía de la lluvia. Se comparó un Anillo Denso de doce estaciones virtuales a $450$~m junto a simulaciones la geometría real del arreglo \textit{Infill} y finalmente datos reales de campo en la etapa final de la tesis.
 	
-	ES UNA VERGA LO QUE ESCRIBIO
+	La asimetría muónica se conservó en lluvias inclinadas y, con las coordenadas Monte Carlo del \textit{Infill}, creciendo con el radio y el angulo cenital de la lluvia como era esperado por la fenomenología descrita. En el Anillo Denso, los protones presentaron amplitudes mayores que el hierro permitiendo, en algunas regiones, distinguir entre los primarios solo analizando la asimetría, el cual era otro de los objetivos principales de esta tesis.
+	
+	Se recuperó un fenómeno previamente descripto en la bibliografía pero no explicado, donde aparece una inversión de la asimetría  para el Detector de Superficie (SD) a radios grandes. Frente al contraste novedoso con el UMD, donde no se observa esta inversión, se buscó encontrar la causa de esta diferencia entre detectores. La respuesta propuesta fue un fenómeno de sesgo en la selección de estaciones del SD, al cual se le puede adjudicar el cambio de signo del parámetro de asimetría $A_1$. El detector SD seleccionaba a radios grandes en la región tardía estaciones con mayor contenido muónico que la media para esa región, y aislando este efecto, se logró encontrar una concordancia en el funcionamiento de SD con el UMD frente al estudio de asimetrías azimutales. 
+	
+	Además, se estudió el funcionamiento de la reconstrucción del centro de la lluvias y se encontró que el error en la posición de dicho eje estaba sistemáticamente alineado con la asimetría temprano-tardía, lavando parte de la asimetría física que existe.
+	
+	Los resultados respaldan estudiar $A_1$ como indicador potencial de masa, condicionado por la selección y la reconstrucción. Se logró encontrar potencial sesgo de selección en el SD previamente inexplorado.
 
 	
 	% --- AGRADECIMIENTOS ---
@@ -272,7 +257,7 @@
 	\end{center}
 	\vspace{0.2cm}
 	
-	Quiero empezar agradeciendo a mi familia, por el amor y el apoyo de siempre. A mis padres, por acompañarme en cada etapa y ayudarme a seguir el camino que elegí (aún siendo, tal vez, no el más original). A mis abuelas Rosa y Azucena y a mi abuelo Alejandro, por tanto cariño, todas las comidas que me hicieron desde que soy chico y por ese lugar tan especial que tienen en mi vida y en mi corazón. A mi hermana Cata, por estar siempre cerca, por compartir todos mis intereses y por ser alguien con quien puedo hablar de todo y en quien siempre puedo confiar. Y al resto de mi familia, por estar cerca, por interesarse y por compartir conmigo la alegría de cada paso.
+	Quiero empezar agradeciendo a mi familia, por el amor y el apoyo de siempre. A mis papás, por acompañarme en cada etapa y ayudarme a seguir el camino que elegí (aún siendo, tal vez, no el más original). A mis abuelas Rosa y Azucena y a mi abuelo Alejandro, por tanto cariño, todas las comidas que me hicieron desde que soy chico y por ese lugar tan especial que tienen en mi vida y en mi corazón. A mi hermana Cata, por estar siempre cerca, por compartir todos mis intereses y por ser alguien con quien puedo hablar de todo y en quien siempre puedo confiar. Y al resto de mi familia, por estar cerca, por interesarse y por compartir conmigo la alegría de cada paso.
 	
 	A mis amigos del secundario, con quienes vengo compartiendo	todo desde hace ya muchos años. Por tantas vacaciones juntos, las salidas, las risas y por seguir encontrando maneras	de acompañarnos mientras cada uno hace su camino, aun cuando sentimos que no nos alcanzan el tiempo ni la vida.
 		

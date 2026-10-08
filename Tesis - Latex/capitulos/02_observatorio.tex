@@ -11,7 +11,7 @@ Para estudiar las EAS a nivel del suelo, se implementó el Detector de Superfici
 
 En la Figura \ref{fig:mapa_auger} se presenta la disposición espacial del SD y el FD. Cada estación de superficie está representada por un punto, mientras que en los bordes del arreglo se ubican los edificios del FD junto con las líneas que delimitan sus respectivos campos de visión sobre la atmósfera. El mapa también ilustra las regiones correspondientes a las distintas extensiones y mejoras del observatorio.
 
-El Detector de Superficie opera de manera continua, proporcionando una inmensa estadística y una apertura geométrica bien definida que resulta independiente de la energía, la composición de masa y los modelos de interacción hadrónica. En contraste, el FD requiere condiciones operativas estrictas, funcionando únicamente durante noches despejadas y sin luna, lo que reduce su ciclo de trabajo a aproximadamente un $10\%$. Sin embargo, el FD aporta beneficios invaluables a la reconstrucción híbrida, proporcionando una observación directa del $X_{max}$ y una medición calorimétrica de la energía primaria que es prácticamente independiente de los modelos teóricos.
+El Detector de Superficie opera de manera continua, proporcionando una inmensa estadística y una apertura geométrica bien definida que resulta independiente de la energía, la composición de masa y los modelos de interacción hadrónica. En contraste, el FD requiere condiciones operativas estrictas, funcionando únicamente durante noches despejadas y sin luna, lo que reduce su ciclo de trabajo a aproximadamente un $15\%$. Sin embargo, el FD aporta beneficios invaluables a la reconstrucción híbrida, proporcionando una observación directa del $X_{max}$ y una medición calorimétrica de la energía primaria que es prácticamente independiente de los modelos teóricos.
 
 \begin{figure}[H]
 	\centering
@@ -38,7 +38,7 @@ El principio de funcionamiento del detector se basa en el efecto Cherenkov, cuan
 	\label{fig:ssd}
 \end{figure}
 
-Para garantizar su autonomía y sincronización, cada estación WCD opera de manera independiente. Cuentan con una antena GPS que proporciona una estampa temporal de alta precisión para cada evento, lo cual es indispensable para construir los eventos híbridos y reconstruir la dirección de arribo y la geometría geométrica de la lluvia. La electrónica local, los PMTs, el sistema de comunicación y el receptor GPS son alimentados por dos baterías que se recargan mediante paneles solares acoplados a la estructura del tanque. Una imagen del WCD con sus componentes principales se puede ver en la Figura \ref{fig:ssd}.
+Para garantizar su autonomía y sincronización, cada estación WCD opera de manera independiente. Cuentan con una antena GPS que proporciona una estampa temporal de alta precisión para cada evento, lo cual es indispensable para construir los eventos híbridos y reconstruir la dirección de arribo y la geometría de la lluvia. La electrónica local, los PMTs, el sistema de comunicación y el receptor GPS son alimentados por dos baterías que se recargan mediante paneles solares acoplados a la estructura del tanque. Una imagen del WCD con sus componentes principales se puede ver en la Figura \ref{fig:ssd}.
 
 \section{El Detector de Fluorescencia (FD)}
 \label{subsec:fd}
@@ -48,7 +48,7 @@ Mientras que el Arreglo de Superficie mide la distribución lateral de las part�
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap2/fd_leones.png}
-	\caption{Edificio del Detector de Fluorescencia (FD) ubicado en el sitio perimetral Los Leones sacada durante el día. Detrás del edificio esta la antena de comunicación. Además se aprecian las persianas abiertas debido a un mantenimiento. Obtenido de \cite{auger2015detector}.}
+	\caption{Edificio del Detector de Fluorescencia (FD) ubicado en el sitio perimetral Los Leones sacada durante el día. Detrás del edificio está la antena de comunicación. Además se aprecian las persianas abiertas debido a un mantenimiento. Obtenido de \cite{auger2015detector}.}
 	\label{fig:fd_leones}
 \end{figure}
 
@@ -56,7 +56,7 @@ El principio de detección se basa en que las partículas cargadas de la lluvia 
 
 La intensidad de la luz de fluorescencia depende de la cantidad de partículas en la lluvia, lo cual está directamente relacionado con la energía de la partícula primaria. Por lo tanto, la intensidad de la señal registrada en los tubos fotomultiplicadores (PMTs) del FD opera como un estimador calorimétrico directo de la energía del rayo cósmico primario. A su vez, mediante el análisis detallado de los tiempos de arribo de los fotones a los distintos PMTs de la cámara, es posible determinar de forma independiente la dirección de arribo de la cascada.
 
-La importancia fundamental del FD radica en que permite realizar esta medición calorimétrica de la energía integrando el perfil de desarrollo longitudinal, obteniendo asi una estimación robusta. Además, este perfil longitudinal proporciona una observación directa de la profundidad del máximo de la lluvia, $X_{max}$. Tal como se estableció teóricamente en la Sección \ref{subsec:eas_xmax}, este observable es el indicador experimental más sensible para determinar la composición de masa del rayo cósmico.
+La importancia fundamental del FD radica en que permite realizar esta medición calorimétrica de la energía integrando el perfil de desarrollo longitudinal, obteniendo así una estimación robusta. Además, este perfil longitudinal proporciona una observación directa de la profundidad del máximo de la lluvia, $X_{max}$. Tal como se estableció teóricamente en la Sección \ref{subsec:eas_xmax}, este observable es el indicador experimental más sensible para determinar la composición de masa del rayo cósmico.
 
 A pesar de sus enormes beneficios analíticos, el FD posee una limitación instrumental que es su bajo ciclo de trabajo (\textit{duty cycle}). Dado que la emisión de luz de fluorescencia es sumamente tenue, los telescopios solo pueden operar con eficiencia durante noches despejadas y con escasa o nula iluminación lunar. Esto restringe el tiempo efectivo de observación a tan solo un $15-19\%$ del tiempo operativo total del observatorio. 
 
@@ -91,9 +91,9 @@ La innovación física fundamental del UMD radica en su blindaje pasivo. Los mó
 Este escudo de tierra cumple un doble propósito analítico vital:
 
 \begin{enumerate}
-	\item \textbf{Absorción Electromagnética:} El espesor del blindaje supera ampliamente las longitudes de radiación requeridas para extinguir la componente electromagnética (electrones y fotones) de la lluvia. Esto garantiza que la señal registrada por el UMD corresponda a un frente muónico puro, eliminando por completo la convolución de señales ($S_{EM} + S_\mu$) que afecta y confunde a los detectores de superficie.
+	\item \textbf{Absorción electromagnética:} El blindaje reduce la contribución de electrones y fotones hasta un nivel despreciable en los rangos de distancia al núcleo relevantes para el diseño del UMD \cite{UMD_Design2016}. Esto permite estudiar una señal predominantemente muónica, sin la mezcla de componentes electromagnética y muónica característica de los detectores de superficie.
 	
-	\item \textbf{Umbral Cinemático:} La pérdida de energía por ionización que sufren los muones al atravesar los $2.3\text{ m}$ de tierra impone un umbral de energía estricto. Solo los muones con una energía superior a $E_\mu \gtrsim 1\text{ GeV}$ son capaces de alcanzar los detectores subterráneos. 
+	\item \textbf{Umbral de penetración:} La pérdida de energía de los muones al atravesar el suelo introduce un umbral efectivo de aproximadamente $1$~GeV para incidencia vertical \cite{auger2020umd_infill}. El umbral aumenta para trayectorias inclinadas debido a la mayor columna de suelo atravesada; depende del ángulo de incidencia de cada muón y no constituye un corte energético universal y exacto.
 \end{enumerate}
 
 \begin{figure}[h]

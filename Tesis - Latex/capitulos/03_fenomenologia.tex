@@ -5,7 +5,7 @@
 
 La reconstrucción estándar de eventos se basa en el supuesto de que la densidad de partículas, y específicamente de muones, de una lluvia atmosférica extensa (EAS) presenta una simetría circular en el plano perpendicular a su eje de propagación, el plano de la lluvia. Sin embargo, esta hipótesis sólo es estrictamente válida para lluvias verticales. Para lluvias inclinadas, la simetría en el plano de la lluvia se rompe de manera sistemática, dando lugar a patrones en la densidad de muones que presentan una fuerte dependencia con el ángulo azimutal ($\phi$).
 
-En este capítulo se describe el origen físico de esta asimetría, originada por la competencia entre la atenuación longitudinal de la cascada, efectos geométricos y cinemáticos de divergencia, y el efecto del campo geomagnético terrestre, y se define el formalismo matemático utilizado para su parametrización armónica. Luego se combinan los mecanismos en un único modelo analítico de juguete, que permite evaluar cualitativamente su competencia, y se discute la diferencia entre la densidad de muones que incide sobre el suelo y el promedio que se mide sobre una muestra de estaciones seleccionadas.
+En este capítulo se describe el origen físico de esta asimetría, originada por la competencia entre la atenuación longitudinal de la cascada, efectos geométricos y cinemáticos de divergencia, y el efecto del campo geomagnético terrestre, y se define el formalismo matemático utilizado para su parametrización armónica. Luego se combinan los mecanismos en un único modelo analítico de juguete, que permite evaluar cualitativamente su competencia y anticipar el signo de la asimetría esperada.
 
 \section{El plano de la lluvia y la ruptura de simetría}
 \label{subsec:simetria_ruptura}
@@ -23,7 +23,7 @@ Para comprender esta ruptura geométrica, es necesario analizar la intersección
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{capitulos/imagenes_capitulos/cap3/esquema_lluvia.jpeg}
-	\caption{Esquema geométrico de una Lluvia Atmosférica Extensa (EAS) con ángulo cenital $\theta_{sh}$ y azimut $\phi_{sh}$ de arribo. Las posiciones de los detectores en el plano del suelo (\textit{detector plane}) se proyectan sobre el plano de la lluvia (\textit{shower plane}), perpendicular al eje, definiendo las coordenadas intrínsecas $r$ y $\phi$. La región temprana corresponde a $\phi = 0$ y la tardía a $\phi = \pm\pi$. En el texto se denota $\theta \equiv \theta_{sh}$.}
+	\caption{Esquema geométrico de una Lluvia Atmosférica Extensa (EAS) con ángulo cenital $\theta_{sh}$ y azimut $\phi_{sh}$ de arribo. Las posiciones de los detectores en el plano del suelo (\textit{detector plane}) se proyectan sobre el plano de la lluvia (\textit{shower plane}), perpendicular al eje, definiendo las coordenadas intrínsecas $r$ y $\phi$. La región temprana corresponde a $\phi = 0$ y la tardía a $\phi = \pm\pi$.}
 	\label{fig:plano_lluvia}
 \end{figure}
 
@@ -44,7 +44,7 @@ La ruptura de la simetría circular detallada anteriormente es el resultado de l
 
 La atenuación longitudinal es consecuencia de la evolución de la cascada a través del medio. Como se estableció en la Sección \ref{subsec:simetria_ruptura}, las partículas en la región tardía deben atravesar una profundidad atmosférica mayor que aquellas en la región temprana cuando la lluvia está inclinada, es decir, no es estrictamente vertical. Esto se puede entender al considerar que la parte temprana de la lluvia impacta contra el suelo `\textit{antes}' que la tardía, y por ende esta última atraviesa más atmósfera.
 
-Dado que la cascada evoluciona y se absorbe a medida que penetra en la atmósfera, este camino extra resulta en un vaciamiento relativo de partículas en la zona tardía. Físicamente, la atenuación genera un exceso de densidad de muones en la dirección $\phi = 0^\circ$ temprana respecto de la zona tardía. Este fenómeno ha sido ampliamente documentado en simulaciones y datos experimentales del SD \cite{Pryke1998, BradfieldThesis}. Vale aclarar que este fenómeno ocurre tanto para la componente electromagnética como la muónica pero con mayor magnitud para la componente EM a causa de ser más interactuante, razón por la cual este mecanismo ya estaba caracterizado.
+Dado que la cascada evoluciona y se absorbe a medida que penetra en la atmósfera, este camino extra resulta en un vaciamiento relativo de partículas en la zona tardía. Físicamente, la atenuación genera un exceso de densidad de muones en la dirección $\phi = 0^\circ$ temprana respecto de la zona tardía. Este fenómeno ha sido ampliamente documentado en simulaciones y datos experimentales del SD \cite{Pryke1998, BradfieldThesis}. Vale aclarar que este fenómeno ocurre tanto para la componente electromagnética como la muónica pero con mayor magnitud para la componente EM a causa de ser más interactuante, razón por la cual este mecanismo ya estaba caracterizado para el SD.
 
 Una descripción analítica sencilla consiste en suponer que, en cada intervalo de recorrido $\mathrm dL$, se pierde una fracción constante de las partículas que aún sobreviven. Esto se puede escribir como
 
@@ -99,7 +99,7 @@ Para visualizar el origen de este término, considérese un haz local de trayect
 
 En otras palabras, una superficie horizontal intercepta más partículas cuanto más perpendicular es su incidencia, de modo que, a igual densidad en el plano de la lluvia, el suelo recibe más partículas por unidad de área del lado temprano que del tardío. Este cociente es exactamente el término de Bertou y Billoir.
 
-La hipótesis de lluvia estacionaria es la que distingue a este efecto de la divergencia cinemática de la Sección~\ref{subsubsec:divergencia_cinematica} que sigue. Allí se considera que los muones provienen de una región de producción a distancia finita, y que el haz se sigue abriendo entre el plano de la lluvia y el suelo, pero estos efectos se compararán más adelante.
+La hipótesis de lluvia estacionaria es la que distingue a este efecto de la divergencia cinemática de la Sección~\ref{subsubsec:divergencia_cinematica} que sigue. Allí se considera que los muones provienen de una región de producción a distancia finita, y que el haz se sigue abriendo entre el plano de la lluvia y el suelo, pero estos efectos se compararán más adelante en la Sección~\ref{subsec:toy_models}.
 
 La Ec.~\ref{eq:efecto_geo} describe cuántas partículas atraviesan una superficie horizontal. Un detector real, sin embargo, no mide la densidad de partículas en el plano de la lluvia, sino el número de partículas que atraviesan su superficie sensible, o la señal que éstas producen. Como las trayectorias llegan con distinta inclinación a cada región, la asimetría registrada depende de la forma del detector y de qué magnitud se mide. Se distinguen tres casos relevantes para esta tesis:
 
@@ -155,7 +155,7 @@ Al propagar el haz de partículas hacia el suelo, la densidad de muones $S$ que 
 	\label{eq:asym_a1_previa}
 \end{equation}
 
-Por otro lado, la cantidad de partículas emitidas en una dirección dada, $\mathrm{d}N/\mathrm{d}\Omega$, decae a medida que se exigen ángulos $\alpha$ más extremos, porque el momento transversal está acotado por la cinemática de las interacciones hadrónicas. Cazón \textit{et al.} \cite{Cazon2012} parametrizan su distribución con un factor lineal y una cola exponencial, $\mathrm{d}N/\mathrm{d}p_t \propto p_t \exp(-p_t/Q)$, donde $Q$ es una escala empírica que representa el intercambio característico de momento transversal en la interacción.
+Por otro lado, la cantidad de partículas emitidas en una dirección dada, $\mathrm{d}N/\mathrm{d}\Omega$, decae a medida que se exigen ángulos $\alpha$ más extremos, porque los momentos transversales grandes son cada vez menos probables en las interacciones hadrónicas. Cazón \textit{et al.} \cite{Cazon2012} parametrizan su distribución con un factor lineal y una cola exponencial, $\mathrm{d}N/\mathrm{d}p_t \propto p_t \exp(-p_t/Q)$, donde $Q$ es una escala empírica que representa el intercambio característico de momento transversal en la interacción.
 
 Para evaluar la densidad en el suelo, esta distribución de momentos debe transformarse en una distribución angular de emisión. A momento $p$ fijo, el elemento de ángulo sólido y el de momento transversal son
 
@@ -180,7 +180,7 @@ Aplicando la regla de la cadena a la distribución de momentos, el factor lineal
 	\label{eq:cazon_dNdOmega}
 \end{equation}
 
-Se puede dejar de lado el factor $p^2$ que no depende del ángulo y es constante a energía constante. Expresando el momento transversal en función del ángulo de emisión y la energía (usando Ec.~\ref{eq:cazon_alpha}), y combinando con la expansión espacial de la Ec.~\ref{eq:asym_a1_previa}, se obtiene la dependencia de la densidad de muones en el suelo:
+A energía fija, el factor $p^2$ no depende del ángulo y puede dejarse de lado. Expresando el momento transversal en función del ángulo de emisión y la energía (usando Ec.~\ref{eq:cazon_alpha}), y combinando con la expansión espacial de la Ec.~\ref{eq:asym_a1_previa}, se obtiene la dependencia de la densidad de muones en el suelo:
 
 \begin{equation}
 	S(d, \alpha) \propto \frac{1}{d^2}\,\cos\alpha\,\exp\left(-\frac{E\sin\alpha}{cQ}\right).
