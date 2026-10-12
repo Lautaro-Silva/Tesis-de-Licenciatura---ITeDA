@@ -9,7 +9,7 @@ Context file for Claude sessions working in this repo. Read this fully before do
 - **Author:** Lautaro Silva Pizzi (lautarosilvapizzi@gmail.com)
 - **Director:** Dr. Juan Manuel Figueira (CONICET/UNSAM) · **Co-director:** Dr. Federico Sánchez (CONICET/UNSAM)
 - **Institution:** ITeDA (CNEA-CONICET-UNSAM), Centro Atómico Constituyentes
-- **Cover date in the LaTeX source:** Agosto 2026 — the thesis is at/near its intended submission time now.
+- **Status: finished and submitted.** Cover date Octubre 2026; FCEN cover sheet lists start Agosto 2025, end Octubre 2026, exam date 16 de Octubre 2026. The final compiled PDF is committed as `Tesis - Latex/main.pdf` (commit `779f5f2`). Treat the thesis text as frozen: any further edit to it should be an explicitly requested correction (e.g. from the jury), not unprompted polishing.
 
 **Physics question:** Surface-detector (SD) studies of Pierre Auger have long shown the lateral distribution function of *total* signal is azimuthally asymmetric for inclined showers (an "early-late" effect from atmospheric attenuation + shower-front geometry), and this asymmetry correlates with X_max (mass-sensitive). This has never been checked with a *pure muon* signal. This thesis is the first application of muon-map/asymmetry analysis to UMD (AMIGA) data — muons measured in isolation, shielded underground (~2.3 m soil, ~1 GeV threshold), free of EM contamination. Central observable: the first-harmonic amplitude **A1** in `ρ(φ) = ρ₀(1 + A1·cos φ)`, fit per radial/zenith bin.
 
@@ -37,41 +37,44 @@ This session runs on the **institute's shared server**, not a disposable sandbox
 |---|---|
 | `Plan_de_trabajo_tesis_de_licenciatura_02.pdf` | Official work plan: objectives, methodology, ~1-year timeline, feasibility. The authoritative task list — see §1. |
 | `Bibliografia/` | 34 cited PDFs (papers, GAP notes, textbooks). See §9. |
-| `Bibliografia/Papers sin citar/` | 2 uncited-but-relevant PDFs (García Pinto PhD thesis, Grieder EAS textbook) — arguably should be promoted to cited. |
-| `Notas  - Latex/` (note: double space in the folder name) | Informal working notes, separate from the thesis. `main.tex` includes `Notas Iniciales.tex` (Q&A-style reading notes on foundational papers) and `Trabajo.tex` (a dated lab notebook, Oct 2025–Feb 2026, chronicling pipeline development, bugs found/fixed — see §6). Has its own `Referencias.bib`, distinct from the thesis bibliography. |
-| `Tesis - Latex/` | The actual thesis LaTeX source. See §5. |
+| `Bibliografia/Papers sin citar/` | 3 uncited PDFs: García Pinto PhD thesis (GAP-2010-054), GAP-2020-066, Grieder EAS textbook. |
+| `Notas  - Latex/` (note: double space in the folder name) | Informal working notes, separate from the thesis. `main.tex` includes `Notas Iniciales.tex` (Q&A-style reading notes on foundational papers) and `Trabajo.tex` (a dated lab notebook, Oct 2025–Feb 2026, chronicling pipeline development, bugs found/fixed — see §7). Has its own `Referencias.bib`, distinct from the thesis bibliography. |
+| `Tesis - Latex/` | The thesis LaTeX source and the final compiled `main.pdf`. See §5. |
+| `GAP_Notes_Latex/` | LaTeX sources for an Auger GAP note derived from the thesis (`GAP2026_041/` current, `[Version_Vieja]GAP_41/` older, `[UNFINISHED]GAP_Core_REC/` an unfinished second note). |
 | `Scripts/` | All analysis/processing code. See §7–8. |
+| `claude_work/` | Output of earlier Claude/Codex sessions: reviews (`REVIEW_ASTRA/`, `revision_asimetrias_sd_umd/`, `revision_codex_2026_10_07/`, `gap_notes_asimetrias_review_v4/`, `unified_asymmetry_model_v1/`, `kinematic_divergence_explainer_and_thesis_updates/`), the Ch. 7 field-data audit (`auditoria_datos_campo_cap7/`), the SD-station-preserving reprocessing (`reprocesamiento_sd_completo/`), a talk (`presentacion_rafa_2026/`), and a backup of a longer, unused Ch. 7 draft (`respaldo_pull_2026_10_07/`). Supporting material, not thesis source. Some of it contains claims that were later retracted or superseded — check against the final thesis text before reusing anything. |
+| `AGENTS.md` | Tells Codex sessions to follow this file. |
+| `README.md` | Short public README. Outdated (cites SIBYLL 2.1 / QGSJET-II-04 and the old objectives wording). |
 | `SDenseStationList.xml` | Auger Offline config defining 12 virtual "Dense Ring" muon stations at r=450m, spaced 30° apart in shower-plane azimuth — the synthetic detector geometry behind Ch. 5. |
 | `Comandos.odt`, `Notas.odt` | Binary LibreOffice docs (not readable by the Read tool). Likely a command cheatsheet and an early/parallel notes doc. Ask the user directly if their content is ever needed. |
 | `venv/` | Python 3.12.3 virtualenv. See §10. |
 
 ## 5. Thesis status (`Tesis - Latex/`)
 
-Main file: `Tesis - Latex/main.tex` → `\input`s `capitulos/01..09_*.tex` in order, bibliography via biblatex/biber (`bibliografia.bib`).
+**The thesis is complete** (see §1). Main file: `Tesis - Latex/main.tex`, bibliography via biblatex/biber (`bibliografia.bib`, 41 entries). Figures live in `Tesis - Latex/capitulos/imagenes_capitulos/<capN|anexo>/`; logos in `Tesis - Latex/imagenes/`.
 
-| # | File | Status |
+`main.tex` `\input`s, in this order: `01_introduccion`, `02_observatorio`, `03_fenomenologia`, `04_metodologia`, `05_anillo_denso`, `06_infill`, `08_conclusiones`, and then `09_anexos` inside an `appendices` environment (renamed "Anexo"). **File numbers no longer match compiled chapter numbers:** there is no `07_*.tex` file (the planned real-data chapter was folded into Ch. 6), so `08_conclusiones.tex` compiles as Chapter 7. The appendices are chapters inside `09_anexos.tex`. There is no separate `anexos/` folder anymore.
+
+| Compiled | File | Content |
 |---|---|---|
-| 1 | `01_introduccion.tex` | Done — UHECR flux/spectrum, EAS/X_max phenomenology, Heitler-Matthews model, objectives. |
-| 2 | `02_observatorio.tex` | Done — Auger Observatory, AugerPrime, AMIGA/UMD design. |
-| 3 | `03_fenomenologia.tex` | Done (recently revised) — the three asymmetry mechanisms (attenuation, geometric/divergence, geomagnetic), harmonic parametrization. |
-| 4 | `04_metodologia.tex` | Done — CORSIKA+Offline chain, MC production ("icrc2025-test7": SIBYLL 2.3e, QGSJET-III.01, EPOS-LHC-R), Dense Ring config, reconstruction bias figures. |
-| 5 | `05_anillo_denso.tex` | Done — most mature chapter. Dense Ring A1 results, SD-vs-UMD comparison, bootstrap toy model (successful, unlike §6's toy model), mass discrimination via Merit Factor (~2.5 sweet spot at θ=40–55°). The thesis's strongest positive result. |
-| 6 | `06_infill.tex` | **Partially done.** First ~60% is finished prose (MC-geometry A1 results, the SD "asymmetry inversion" explained via a soft/divergent low-energy muon population, REC-geometry results). The back half (mass/energy dependence for Infill, MC-vs-REC performance comparison) is raw outline notes in Spanish caps, not prose — genuinely unfinished. Contains the abandoned Fast-MC dead end, see §6 below. |
-| 7 | `07_datos_reales.tex` | **Not started.** Only section headers (real-data selection, asymmetry extraction, comparison vs MC). This is the final validation step of the whole thesis. |
-| 8 | `08_conclusiones.tex` | **Not started.** Only section headers, zero body text. |
-| 9 | `09_anexos.tex` | Mostly done — Appendix A (Dense Ring fits) finished, Appendix B (Infill fit galleries, 12 figures) structurally complete. |
+| Ch. 1 | `01_introduccion.tex` | UHECR spectrum/composition, EAS and X_max, motivation and objectives. |
+| Ch. 2 | `02_observatorio.tex` | Auger SD/FD, AugerPrime, AMIGA/UMD. |
+| Ch. 3 | `03_fenomenologia.tex` | Shower plane and symmetry breaking. Four mechanisms: atmospheric attenuation, detector response, kinematic divergence of muon emission, geomagnetic field. First-harmonic parametrization. Analytic toy model for the sign of A1, with the crossover momentum p* ≃ 2QD/r above which divergence favors the late region. |
+| Ch. 4 | `04_metodologia.tex` | CORSIKA+Offline chain, official production ("icrc2025-test7": SIBYLL 2.3e, QGSJET-III.01, EPOS-LHC-R), Dense Ring, shower-plane geometry, reconstruction performance (energy bias, angular resolution). |
+| Ch. 5 | `05_anillo_denso.tex` | Dense Ring A1. MC-vs-REC systematics (directional bias, empirical bootstrap toy model, reconstructed-core shift). Robustness (φ_sh invariance, hadronic models). Energy dependence. p-vs-Fe separation (max ~2.5σ of the combined fit uncertainty at θ=40–55°). X_max interpretation and contrast with the SD. The thesis's strongest result. |
+| Ch. 6 | `06_infill.tex` | Infill with MC geometry (UMD vs SD total, signal breakdown, SD sign inversion and station selection). Infill with REC geometry (degradation from the core shift, EM resilience, SD inversion under REC). UMD MC-vs-REC performance. Kinematic production+transport model left as future work (§6 below). **Final section "Datos de campo: trabajo en curso" (`\label{sec:datos_reales}`)** holds the real-data analysis: v4r2 Phase I + Phase II SPMT, 6T5, lgE ≥ 17.5. First observation of the modulation in field data, A1 = 0.063 ± 0.017 (Phase II, 18.0–18.5, 40–60°, 750–1050 m). A1(r) data vs MC (p/He/Fe). Systematics and quantitative comparison stated as pending. |
+| Ch. 7 | `08_conclusiones.tex` | Conclusions (full prose). |
+| Anexo A | `09_anexos.tex` | First-order expansion of the toy model. |
+| Anexo B | `09_anexos.tex` | Dense Ring harmonic fits. |
+| Anexo C | `09_anexos.tex` | Infill fit grids (MC and REC geometry, θ bins 0–65°). |
 
-**Also unfinished:** the abstract (`Resumen`) is a placeholder ("Aca va el resumen"), acknowledgments are a bare bullet list of names (not prose), and the FCEN cover-sheet fields are blank.
+The front matter is complete: FCEN cover sheet, Resumen in prose, and Agradecimientos.
 
-**Orphaned file:** `Tesis - Latex/anexos/A_parametros_corsika.tex` is empty (0 bytes) and not `\input`'d anywhere — dead/superseded stub, actual appendix content lives in `capitulos/09_anexos.tex`.
-
-**Build artifacts:** `main.bbl-SAVE-ERROR` / `main.bcf-SAVE-ERROR` exist in `Tesis - Latex/` — remnants of a failed biber compile at some point; not necessarily current, but worth checking if bibliography rendering ever breaks.
-
-**Likely near-term priorities (for orientation, not a mandate):** finish Ch. 6's back half, write Ch. 7 using the already-mature `Procesamiento_Datos_Campo/` real-data pipeline, write Ch. 8, and fill in the front-matter placeholders.
+**Known scope limits stated in the thesis itself** (useful if writing a paper/GAP note from it): no composition estimate is made from data; the field-data result is preliminary (no systematics study, MC only up to 10^18 eV while the headline data bin is 18.0–18.5).
 
 ## 6. Known dead end — do not blindly re-attempt
 
-`Scripts/Intento Toy Model para Inversion Fallido/` (`mc_model_muonic_divergence_v1.ipynb`, `v2.ipynb`) was a phenomenological Fast-MC muon propagator meant to explain, from first-principles kinematics, the SD-signal azimuthal asymmetry "inversion" at large core distance described in `06_infill.tex`. It generated muons analytically (gamma-distributed production height, power-law energy, transverse momentum) with geometric + relativistic-decay weighting, rather than tracking real per-particle production kinematics from CORSIKA. It did not reproduce the discrepancy convincingly. Git commit `6d6b97b` ("update de que no voy a poder hacer el modelo MC para explicar la discrepancia") records the author concluding this approach is out of scope for the thesis; `06_infill.tex` now frames it as deferred future work (4-step roadmap: extract F(X,E,p_t) from dedicated CORSIKA runs → propagate via Cazón's transport model → project geometrically → apply instrumental thresholds). **If asked to revisit this, first read that section of `06_infill.tex` and the two notebooks — the core limitation was data availability (ADST gives only the ground footprint, not per-muon production kinematics), not a fixable bug.**
+`Scripts/Intento Toy Model para Inversion Fallido/` (`mc_model_muonic_divergence_v1.ipynb`, `v2.ipynb`) was a phenomenological Fast-MC muon propagator meant to explain, from first-principles kinematics, the SD-signal azimuthal asymmetry "inversion" at large core distance described in `06_infill.tex`. It generated muons analytically (gamma-distributed production height, power-law energy, transverse momentum) with geometric + relativistic-decay weighting, rather than tracking real per-particle production kinematics from CORSIKA. It did not reproduce the discrepancy convincingly. Git commit `6d6b97b` ("update de que no voy a poder hacer el modelo MC para explicar la discrepancia") records the author concluding this approach is out of scope for the thesis. The final `06_infill.tex` frames it as deferred future work in the subsection "Perspectiva: un modelo cinemático de producción y transporte": extract F(X,E,p_t) from dedicated CORSIKA runs, propagate with Cazón's transport model, project onto the detectors, and apply responses/thresholds/station selection. The analytic toy model in Ch. 3 is a different, qualitative tool that *is* in the thesis. **If asked to revisit this, first read that subsection of `06_infill.tex` and the two notebooks — the core limitation was data availability (ADST gives only the ground footprint, not per-muon production kinematics), not a fixable bug.**
 
 Note this is distinct from the *dense-ring* bootstrap toy model in `validacion_rec_muones.py`, which **did** work and is written up successfully in Ch. 5.
 
@@ -103,10 +106,11 @@ change — that's an accepted tradeoff, not a bug to fix by untracking it again.
 
 **Active / current** (build on these):
 - `Scripts/Procesamiento_ADST_v8-2.py`, `Scripts/Procesamiento_ADST_Campo_v9.py` — main MC ADST→parquet pipelines.
-- `Scripts/Procesamiento_Datos_Campo/` — the **real-data pipeline**, most actively maintained (updated through Aug 2026): `ADST2ASCII/` (compiled Auger Offline C++ user module reading raw production ADST from the collaboration's data server, cuts configured in `Config.xml.in`), `readADST_data_v19.py` (Python/pandas port of the same cuts: `readADST_surface_data_v19(fname, only_6T5=True, min_logE=17.0, max_theta_deg=60.0, ...)`), plus notebooks for orchestration (`Procesamiento_Datos_Campo_v1.py`) and exploratory analysis (`Analisis_Preliminar_DatosCampo_Phase1/Phase2.py`).
-- `Scripts/analisis_infill_sims.py`, `Scripts/validacion_asimetria_infill_sd_mu_v2.py`, `Scripts/validacion_rec_muones.py` (best-documented notebook, has the working dense-ring toy model), `Scripts/plots_seccion_6.py` (largest, most recently modified — generates the Ch. 6 figures).
+- `Scripts/Procesamiento_Datos_Campo/` — the **real-data pipeline**: `ADST2ASCII/` (compiled Auger Offline C++ user module reading raw production ADST from the collaboration's data server, cuts configured in `Config.xml.in`), `readADST_data_v19.py` (Python/pandas port of the same cuts: `readADST_surface_data_v19(fname, only_6T5=True, min_logE=17.0, max_theta_deg=60.0, ...)`), plus notebooks for orchestration (`Procesamiento_Datos_Campo_v1.py`) and exploratory analysis (`Analisis_Preliminar_DatosCampo_Phase1/Phase2.py`). `Analisis_Asimetria_DatosCampo_Cap7.py` (only the `.py` is tracked) produces the field-data numbers, tables and figures, written to `resultados_cap7/`. Its header still says it feeds `07_datos_reales.tex`, but that chapter no longer exists. What made it into the thesis is the final section of Ch. 6 (§5). It reads existing parquet only and runs in the plain `venv/`.
+- `Scripts/Cap3_modelos_juguete.py` (Ch. 3 analytic toy model → `resultados_cap3_modelos_juguete/`), `Scripts/Cap5_corrimiento_nucleo.py` (Ch. 5 reconstructed-core-shift study → `resultados_cap5_corrimiento_nucleo/`).
+- `Scripts/analisis_infill_sims.py`, `Scripts/validacion_asimetria_infill_sd_mu_v2.py`, `Scripts/validacion_rec_muones.py` (best-documented notebook, has the working dense-ring toy model), `Scripts/plots_seccion_6.py` (largest — generates the Ch. 6 figures).
 - `Scripts/Presentacion_Foundations/presentacion_feb_2026_v2.py` — curated highlight-reel figures for an Auger "Foundations" collaboration-meeting talk.
-- `Scripts/Pruebas Infill/` — debugging notebooks (still `.ipynb`, not converted) for the φ-convention bug (§6.2 above); useful if similar geometry bugs resurface.
+- `Scripts/Pruebas Infill/` — debugging notebooks (still `.ipynb`, not converted) for the φ-convention investigation (§7.2 above); useful if similar geometry bugs resurface.
 
 **Deprecated / historical** (provenance only, do not build on): `Scripts/Codigo Viejo V1/`, `Codigo Viejo V2/`, `Scripts/Cosas Random Mayo 2026/`, `Scripts/Test Iniciales/`, `Scripts/Reportes Viejos/`. `Scripts/Reportes Feb 2026/` holds the current valid PDF reports.
 
@@ -120,7 +124,7 @@ change — that's an accepted tradeoff, not a bug to fix by untracking it again.
 - **Dense Ring** (synthetic, fixed shower-plane azimuth, `SDenseStationList.xml`) vs **Infill** (real array, needs geometric projection, φ bug history in §7).
 - **Module IDs**: simulation 0–5, real data 100–115. **Counter IDs**: simulation = stationId + 100000 (the standard `counterId ≥ 100000` filter for Infill/simulated UMD).
 - **Hadronic models**: SIBYLL 2.3e, QGSJET-III.01, EPOS-LHC-R (current MC production "icrc2025-test7"). **Note:** the work-plan PDF references SIBYLL 2.1 / QGSJET-II-04 — outdated relative to what's actually used; worth flagging/reconciling if writing methodology text.
-- **Primaries**: proton, helium, oxygen, iron. **Real-data cuts**: 6T5 fiducial trigger, logE ≥ 17.0, θ ≤ 60°, station-rejection flags (`is_sd_rejected`, `is_counter_rejected`).
+- **Primaries**: proton, helium, oxygen, iron. **Real-data cuts**: 6T5 fiducial trigger, logE ≥ 17.0, θ ≤ 60°, station-rejection flags (`is_sd_rejected`, `is_counter_rejected`). The defaults in `readADST_data_v19` are those. The thesis's field-data section uses lgE ≥ 17.5 and excludes the Phase II commissioning period in 2022.
 
 ## 10. Environment
 
@@ -130,7 +134,7 @@ change — that's an accepted tradeoff, not a bug to fix by untracking it again.
 
 ## 11. Bibliography quick reference (`Bibliografia/`)
 
-**Core asymmetry lineage (GAP notes + theses)** — read in this order for background: GAP-1998-034 (Pryke, foundational early-late effect) → GAP-2000-017 (Bertou & Billoir, origin of ground-density asymmetry) → GAP-2002-073 / GAP-2002-074 (Billoir & Da Silva, LDF asymmetry parametrization / checking origin) → GAP-2007-054 (Dembinski, Hebbeker, Leuthold — MC muon maps vs near-horizontal showers; **filename on disk is `GAP2007_124.pdf`, a mislabel — content confirmed as GAP-2007-054**) → García Pinto 2009 PhD thesis (`Bibliografia/Papers sin citar/`, matches GAP-2010-054, arguably should be promoted to cited) → Bradfield 2022 PhD thesis / GAP-2022-023 (closest prior work: SD-based asymmetry + composition with AugerPrime).
+**Core asymmetry lineage (GAP notes + theses)** — read in this order for background: GAP-1998-034 (Pryke, foundational early-late effect) → GAP-2000-017 (Bertou & Billoir, origin of ground-density asymmetry) → GAP-2002-073 / GAP-2002-074 (Billoir & Da Silva, LDF asymmetry parametrization / checking origin) → GAP-2007-054 (Dembinski, Hebbeker, Leuthold — MC muon maps vs near-horizontal showers; **filename on disk is `GAP2007_124.pdf`, a mislabel — content confirmed as GAP-2007-054**) → García Pinto 2009 PhD thesis (`Bibliografia/Papers sin citar/`, matches GAP-2010-054, not cited in the final thesis) → Bradfield 2022 PhD thesis / GAP-2022-023 (closest prior work: SD-based asymmetry + composition with AugerPrime).
 
 **Hadronic interaction models:** Pierog 2015 (EPOS-LHC), Ostapchenko 2011 (QGSJET-II) and 2024 (QGSJET-III), Riehn 2020 (SIBYLL 2.3d) — see §9 for the version-consistency caveat vs. what's actually simulated.
 
@@ -140,13 +144,16 @@ change — that's an accepted tradeoff, not a bug to fix by untracking it again.
 
 **Simulation/software tools:** `heck1998corsika.pdf` (CORSIKA), `argiro2007offline.pdf` (Offline framework), `efron1979bootstrap.pdf` (bootstrap statistics — the only stats-methodology reference present; thin coverage if more rigorous error propagation is needed).
 
-**Coverage gaps a referee would flag:** no dedicated reference on geomagnetic-deflection asymmetry (despite it being one of the three mechanisms discussed in Ch. 3); no modern statistics/fitting reference beyond Efron 1979; the uncited García Pinto thesis and Grieder textbook sit unused in "Papers sin citar" despite clear relevance.
+**Also cited in the final bibliography:** `Luce_ICRC2021` (geomagnetic effect, figure in Ch. 3), `Cazon2012` (muon transport model, Ch. 6 outlook), `botti2019`. The `.bib` is the authoritative list. Not every entry has a PDF in `Bibliografia/`.
+
+**Coverage gaps a referee would still flag:** no modern statistics/fitting reference beyond Efron 1979; the García Pinto thesis and Grieder textbook remain uncited.
 
 ## 12. Quick file-path reference
 
-- Thesis entry point: `Tesis - Latex/main.tex`; chapters: `Tesis - Latex/capitulos/0{1..9}_*.tex`; bibliography: `Tesis - Latex/bibliografia.bib`.
+- Thesis entry point: `Tesis - Latex/main.tex`; final PDF: `Tesis - Latex/main.pdf`; chapters: `Tesis - Latex/capitulos/0{1..6,8,9}_*.tex` (no `07`); bibliography: `Tesis - Latex/bibliografia.bib`.
 - Work plan: `Plan_de_trabajo_tesis_de_licenciatura_02.pdf`.
 - Informal lab notebook: `Notas  - Latex/Trabajo.tex`.
-- Real-data pipeline: `Scripts/Procesamiento_Datos_Campo/readADST_data_v19.py`, `Scripts/Procesamiento_Datos_Campo/ADST2ASCII/`.
-- Most recent analysis notebook: `Scripts/plots_seccion_6.py`.
+- Real-data pipeline: `Scripts/Procesamiento_Datos_Campo/readADST_data_v19.py`, `Scripts/Procesamiento_Datos_Campo/ADST2ASCII/`; field-data analysis: `Scripts/Procesamiento_Datos_Campo/Analisis_Asimetria_DatosCampo_Cap7.py`.
+- Ch. 6 figures: `Scripts/plots_seccion_6.py`.
+- GAP note: `GAP_Notes_Latex/GAP2026_041/main.tex`.
 - Dense-ring geometry config: `SDenseStationList.xml`.
