@@ -43,6 +43,11 @@ Estos resultados muestran que, en ausencia de incertezas geométricas instrument
 
 Es pertinente destacar que, al replicar este mismo análisis sustituyendo la cantidad de muones inyectada ($N_\mu^{\mathrm{MC}}$) por la cantidad reconstruida por el algoritmo del UMD ($N_\mu^{\mathrm{REC}}$), pero manteniendo el núcleo y los ángulos Monte Carlo, la fenomenología global se conserva de forma idéntica. Como se ilustra en la Figura \ref{fig:umd_rec_vs_mc_theta} para  el rango cenital de referencia de $40^\circ \leq \theta < 50^\circ$, la principal consecuencia de introducir la respuesta de la reconstrucción de la cantidad de muones es una atenuación en la magnitud absoluta de la asimetría, sin alterar su forma fundamental ni las transiciones radiales discutidas, igual que sucedía en la Sección~\ref{subsec:mc_vs_rec}. Se estima que la causa de esta diferencia es la misma que en el Anillo Denso y deviene del funcionamiento de los algoritmos de reconstrucción y su sesgo direccional.
 
+\subsection{Competencia de observables: UMD frente al SD Total}
+\label{subsubsec:umd_vs_sd_mc}
+
+Con la fenomenología muónica del UMD caracterizada, el siguiente paso analítico consistió en contrastar este comportamiento frente a la señal total registrada por los tanques Cherenkov en superficie. Resulta importante realizar una distinción fundamental respecto a las variables físicas analizadas: mientras que el detector subterráneo proporciona un conteo directo del número de partículas muónicas incidentes reconstruidas, el SD registra la energía depositada en el volumen de agua, calibrada en unidades VEM, también a partir de la reconstrucción. Para garantizar la validez fenomenológica de este contraste, se mantuvo estrictamente la geometría Monte Carlo, de modo que las diferencias observadas se deban a la naturaleza de la señal detectada o a la forma en que se seleccionan las estaciones que participan del promedio.
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_Asymmetry_MC_vs_REC.pdf}
@@ -50,14 +55,11 @@ Es pertinente destacar que, al replicar este mismo análisis sustituyendo la can
 	\label{fig:umd_rec_vs_mc_theta}
 \end{figure}
 
-\subsection{Competencia de observables: UMD frente al SD Total}
-\label{subsubsec:umd_vs_sd_mc}
-
-Con la fenomenología muónica del UMD caracterizada, el siguiente paso analítico consistió en contrastar este comportamiento frente a la señal total registrada por los tanques Cherenkov en superficie. Resulta importante realizar una distinción fundamental respecto a las variables físicas analizadas: mientras que el detector subterráneo proporciona un conteo directo del número de partículas muónicas incidentes reconstruidas, el SD registra la energía depositada en el volumen de agua, calibrada en unidades VEM, también a partir de la reconstrucción. Para garantizar la validez fenomenológica de este contraste, se mantuvo estrictamente la geometría Monte Carlo, de modo que las diferencias observadas se deban a la naturaleza de la señal detectada o a la forma en que se seleccionan las estaciones que participan del promedio.
-
 Si se analiza para el bin radial que incluye $\sim 450$~m se puede ver que, análogamente como sucedía para el Anillo Denso, la asimetría detectada por el SD es significativamente mayor a la del UMD. Además, ambas asimetrías calculadas tienen magnitudes comparables a las encontradas en el Capítulo~\ref{sec:cap_anillo_denso}. Esto permite ver que los análisis realizados en ambos marcos son comparables y consistentes.
 
 Al extraer la amplitud de asimetría sobre la señal del SD, la curva resultante $A_1(r, \theta)$ expone un comportamiento espacial sistemáticamente distinto al del detector subterráneo. Como se evidencia en la Figura \ref{fig:umd_vs_sd_mc} para un rango cenital de referencia de $30^\circ \leq \theta < 40^\circ$, mientras que el UMD exhibe un crecimiento suave hacia una asimetría positiva a grandes distancias (aun en este rango cenital donde se ve un amesetamiento), el observable del SD presenta una pronunciada inversión fenomenológica. En el régimen donde el gradiente atmosférico debería garantizar una marcada asimetría positiva, la amplitud del SD alcanza un máximo local, comienza a suprimirse y finalmente se invierte, adoptando valores de asimetría fuertemente negativos en la periferia del centro de la lluvia. 
+
+Esta inversión aparece aun con la geometría Monte Carlo, por lo que no se debe a errores en el núcleo ni en la dirección reconstruidos. Para identificar su origen se desglosa a continuación la señal del tanque en sus componentes.
 
 \begin{figure}[H]
 	\centering
@@ -65,8 +67,6 @@ Al extraer la amplitud de asimetría sobre la señal del SD, la curva resultante
 	\caption{Comparación de la evolución radial de la amplitud de asimetría $A_1$ entre el número de muones reconstruido por el UMD ($N_\mu^{\mathrm{REC}}$) y la señal total registrada por los tanques del SD en superficie, evaluada para el rango cenital de referencia de $30^\circ \leq \theta < 40^\circ$. Ambas curvas fueron extraídas fijando la geometría real de Monte Carlo donde las barras de error representan el error estándar de la media. Se evidencia el comportamiento divergente de los observables: mientras que el UMD mantiene una asimetría positiva a todas las distancias, la señal del SD Total exhibe una severa disminución de la asimetría que culmina en una inversión (asimetría negativa) en el \textit{far-core}.}
 	\label{fig:umd_vs_sd_mc}
 \end{figure}
-
-Esta inversión aparece aun con la geometría Monte Carlo, por lo que no se debe a errores en el núcleo ni en la dirección reconstruidos. Para identificar su origen se desglosa a continuación la señal del tanque en sus componentes.
 
 \subsection{Desglose de señales: La inversión de la asimetría muónica}
 \label{subsubsec:desglose_sd}
@@ -81,19 +81,10 @@ Por otro lado, la asimetría de los muones registrados por el SD exhibe un compo
 
 El Capítulo~\ref{sec:fenomenologia} mostró que esta inversión no puede explicarse con la propagación de los muones. La densidad de muones que incide sobre el suelo tiene una asimetría positiva tanto para el UMD como para el SD (Sección~\ref{subsec:toy_models}), el término de Bertou y Billoir (Ec.~\ref{eq:efecto_geo}) es siempre positivo, y la divergencia cinemática sólo favorece a la región tardía para muones de momento mayor que $p^* \simeq 2QD/r$ (Ec.~\ref{eq:p_cruce}), que son escasos a grandes distancias. El origen debe buscarse, entonces, en la forma en que se construye el observable, lo que se analiza en la Sección~\ref{subsec:seleccion_estaciones}.
 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/SD_Desglose_Componentes_vs_UMD.pdf}
-	\caption{Desglose de la asimetría azimutal para las componentes inyectadas a nivel del suelo frente al número de muones inyectado en el detector subterráneo ($N_\mu^{\mathrm{MC}}$), para $30^\circ \leq \theta < 40^\circ$ y geometría Monte Carlo. La asimetría electromagnética del SD (naranja) exhibe un comportamiento marcadamente positivo acoplado a la evolución longitudinal. En contraste, los muones del SD (verde) presentan una asimetría negativa a grandes distancias cuando se calcula sobre las estaciones que forman parte del evento reconstruido (Sección~\ref{subsec:seleccion_estaciones}). Las barras de error representan el error estándar de la media.}
-	\label{fig:desglose_sd_mc}
-\end{figure}
-
 \subsection{Selección de estaciones y la inversión del SD}
 \label{subsec:seleccion_estaciones}
 
 Los resultados anteriores no miden la densidad de muones que \textit{incide} sobre el suelo, sino un promedio sobre las estaciones que forman parte del análisis, y una estación sólo forma parte del análisis si la estación del SD disparó y fue incluida en la reconstrucción del evento. Se trabajo de esta manera dado que al ser un trabajo centrado en el UMD y ser este un detector sin \textit{trigger} propio, pareció razonable en un principio solo analizar estaciones donde la reconstrucción por estación se había activado. 
-
 
 Entonces, aun cuando el número de muones de cada estación sea exacto, como en el conteo Monte Carlo de las simulaciones, el promedio sobre las estaciones seleccionadas puede diferir del promedio sobre todas.
 
@@ -101,27 +92,35 @@ Esto ocurre cuando la probabilidad de que una estación sea seleccionada depende
 
 Un ejemplo ilustra el efecto. Supóngase que a un radio grande el número medio de muones por estación es $\alpha$ en la región temprana y $\beta$ en la tardía tal que $\alpha > \beta$ y entonces $A_1>0$. En la región temprana la componente electromagnética es suficiente para que todas las estaciones disparen y el promedio seleccionado es $\gamma$. En la tardía, la componente electromagnética está más atenuada, y supóngase que una estación sólo dispara si contiene al menos un muón. Entonces una menor proporcion de las estaciones tardías es seleccionada pero esas estaciones contienen todas los muones y el promedio seleccionado es $\delta$ donde termina siendo $\gamma < \delta$. La asimetría medida sobre las estaciones seleccionadas sera tal que $A_1 < 0$ donde el signo se invierte sin que se haya creado ni desplazado ningún muón. Lo que cambió es la población de estaciones sobre la que se calcula el promedio.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/SD_Desglose_Componentes_vs_UMD.pdf}
+	\caption{Desglose de la asimetría azimutal para las componentes inyectadas a nivel del suelo frente al número de muones inyectado en el detector subterráneo ($N_\mu^{\mathrm{MC}}$), para $30^\circ \leq \theta < 40^\circ$ y geometría Monte Carlo. La asimetría electromagnética del SD (naranja) exhibe un comportamiento marcadamente positivo acoplado a la evolución longitudinal. En contraste, los muones del SD (verde) presentan una asimetría negativa a grandes distancias cuando se calcula sobre las estaciones que forman parte del evento reconstruido (Sección~\ref{subsec:seleccion_estaciones}). Las barras de error representan el error estándar de la media.}
+	\label{fig:desglose_sd_mc}
+\end{figure}
+
 Para verificar si este mecanismo opera en las simulaciones, se recalculó la asimetría del conteo Monte Carlo de muones del SD para las mismas lluvias de protón ($30^\circ \leq \theta < 40^\circ$), pero sobre todas las estaciones simuladas, sin exigir que formen parte del evento reconstruido. Los errores se estimaron con un \textit{bootstrap} sobre las $960$ lluvias de la muestra, que mantiene juntas las estaciones y los módulos de una misma lluvia. El resultado se presenta en la Figura~\ref{fig:seleccion_estaciones}. Sobre todas las estaciones, la asimetría de los muones del SD es positiva a todas las distancias, entre $+0.03$ y $+0.07$. Al exigir que la estación forme parte del evento, los valores no cambian hasta $\sim 750$~m, donde prácticamente todas las estaciones son seleccionadas, pero luego decrecen hasta $A_1 = -0.124 \pm 0.019$ en $1200$--$1350$~m, frente a $+0.069 \pm 0.016$ sobre todas las estaciones.
 
-\begin{figure}[H]
+El cambio de signo se obtiene con los mismos conteos, las mismas coordenadas y el mismo ajuste: lo único que cambia es qué estaciones entran en el promedio. En la banda $1200$--$1350$~m sólo el $42\%$ de las estaciones tempranas y el $18\%$ de las tardías forman parte del evento. Las estaciones tardías retenidas están más enriquecidas en muones que las tempranas. Una hipótesis compatible con este comportamiento es que la componente electromagnética, más intensa del lado temprano, facilita que una estación dispare aun con pocos muones, mientras que del lado tardío sólo sobreviven las estaciones con más muones. A favor de esta hipótesis, entre $900$ y $1350$~m una estación sin muones forma parte del evento en el $39\%$ de los casos en la región temprana y en el $18\%$ en la tardía, donde el número medio de partículas electromagnéticas es unas $2.4$ veces menor. Esto no prueba el mecanismo, ya que la condición de formar parte del evento resume el disparo, la lectura y la reconstrucción de la estación, y aquí no se separaron esas etapas.
+
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/SD_Seleccion_Estaciones_vs_UMD.pdf}
 	\caption{Asimetría del número de muones Monte Carlo del SD calculada sobre todas las estaciones simuladas y sólo sobre las que forman parte del evento reconstruido, junto con la del número de muones inyectado en el UMD ($N_\mu^{\mathrm{MC}}$), para $30^\circ \leq \theta < 40^\circ$ y geometría Monte Carlo. Las barras de error se obtienen con un \textit{bootstrap} sobre las lluvias de la muestra. La inversión del SD sólo aparece al restringir el promedio a las estaciones reconstruidas.}
 	\label{fig:seleccion_estaciones}
 \end{figure}
 
-El cambio de signo se obtiene con los mismos conteos, las mismas coordenadas y el mismo ajuste: lo único que cambia es qué estaciones entran en el promedio. En la banda $1200$--$1350$~m sólo el $42\%$ de las estaciones tempranas y el $18\%$ de las tardías forman parte del evento. Las estaciones tardías retenidas están más enriquecidas en muones que las tempranas. Una hipótesis compatible con este comportamiento es que la componente electromagnética, más intensa del lado temprano, facilita que una estación dispare aun con pocos muones, mientras que del lado tardío sólo sobreviven las estaciones con más muones. A favor de esta hipótesis, entre $900$ y $1350$~m una estación sin muones forma parte del evento en el $39\%$ de los casos en la región temprana y en el $18\%$ en la tardía, donde el número medio de partículas electromagnéticas es unas $2.4$ veces menor. Esto no prueba el mecanismo, ya que la condición de formar parte del evento resume el disparo, la lectura y la reconstrucción de la estación, y aquí no se separaron esas etapas.
-
 Un chequeo directo de esta hipótesis consiste en contar cuántos muones atraviesan los tanques que quedan fuera de la selección. Si la inversión es un efecto de selección, las estaciones excluidas deberían ser justamente las que reciben muy pocos muones, y no podría ser mucho mayor a 1 muón dado que los \textit{triggers} de las estaciones están configurados en 1 VEM. La Figura~\ref{fig:muones_tanques_excluidos} muestra la distribución del número de muones Monte Carlo en los tanques excluidos y en los retenidos, para $900 \leq r < 1500$~m, donde conviven ambas poblaciones. Los tanques excluidos contienen como máximo un muón en el $95\%$ de los casos en la región temprana y en el $93\%$ en la tardía, con un promedio de $0.35$ y $0.46$ muones respectivamente, mientras que los retenidos tienen en promedio $1.5$ y $1.7$. Las estaciones que se pierden son, por lo tanto, las de menor contenido de muones, lo que es consistente con el enriquecimiento del promedio seleccionado descrito anteriormente.
 
-\begin{figure}[H]
+La comparación entre regiones muestra además el mecanismo de la inversión. Del lado tardío se excluyen tanques con más muones que del lado temprano ($0.46$ frente a $0.35$ en promedio) pero con aproximadamente la mitad de partículas electromagnéticas ($14$ frente a $28$), es decir, del lado tardío quedan afuera estaciones que del lado temprano habrían sido retenidas gracias a su componente electromagnética. Como consecuencia, entre los tanques retenidos los tardíos terminan con más muones que los tempranos ($1.69$ frente a $1.49$), aunque la densidad de muones que llega al suelo es mayor del lado temprano. Ésta es precisamente la situación del ejemplo anterior y apoya la hipótesis de que la componente electromagnética determina qué estaciones se retienen.
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/SD_Muones_Tanques_Excluidos.pdf}
 	\caption{Distribución del número de muones Monte Carlo que atraviesan cada tanque del SD para las estaciones que quedan fuera del evento reconstruido (izquierda) y para las que forman parte de él (derecha), en las regiones temprana ($|\phi| < 60^\circ$) y tardía ($|\phi| > 120^\circ$). Lluvias de protón (\texttt{SIBYLL 2.3e}), $30^\circ \leq \theta < 40^\circ$, $900 \leq r < 1500$~m y geometría Monte Carlo. Cada distribución está normalizada a su número de tanques.}
 	\label{fig:muones_tanques_excluidos}
 \end{figure}
-
-La comparación entre regiones muestra además el mecanismo de la inversión. Del lado tardío se excluyen tanques con más muones que del lado temprano ($0.46$ frente a $0.35$ en promedio) pero con aproximadamente la mitad de partículas electromagnéticas ($14$ frente a $28$), es decir, del lado tardío quedan afuera estaciones que del lado temprano habrían sido retenidas gracias a su componente electromagnética. Como consecuencia, entre los tanques retenidos los tardíos terminan con más muones que los tempranos ($1.69$ frente a $1.49$), aunque la densidad de muones que llega al suelo es mayor del lado temprano. Ésta es precisamente la situación del ejemplo anterior y apoya la hipótesis de que la componente electromagnética determina qué estaciones se retienen.
 
 Retirar el requisito tampoco hace idénticas las curvas del SD y del UMD. Entre $150$ y $900$~m, donde casi todas las estaciones son seleccionadas, el UMD presenta una asimetría entre $0.03$ y $0.06$ mayor que la de los muones del SD, una diferencia que excluye el cero al $95\%$ de confianza. Una candidata es la distinta respuesta de un detector plano y de un tanque (Sección~\ref{subsubsec:respuesta_detector}), junto con el umbral del UMD, que es más alto para las trayectorias tardías, pero esta diferencia queda abierta en este trabajo. Por otra parte, la curva del UMD también se calcula sobre los módulos de estaciones seleccionadas, y no se dispone de su conteo en las estaciones no retenidas. El efecto de la selección sobre el UMD debería ser menor, porque los muones que atraviesan los módulos enterrados no son los que hacen disparar al tanque, pero no puede descartarse a grandes distancias, donde la fracción de estaciones retenidas depende fuertemente de $\phi$.
 
@@ -198,7 +197,7 @@ Habiendo justificado el comportamiento del SD, el foco recae finalmente sobre la
 
 La diferencia entre $A_1^{\mathrm{REC}}$ y $A_1^{\mathrm{MC}}$ en el UMD puede separarse en tres contribuciones. La primera es la reconstrucción del número de muones, que con la geometría fija reduce la asimetría entre un $5$ y un $23\%$ sin cambiar su forma (Figura~\ref{fig:umd_rec_vs_mc_theta}), por el sesgo direccional del algoritmo (Sección~\ref{subsec:bias_direccional}). La segunda es el azimut reconstruido, cuyo efecto es despreciable. La tercera, y dominante, es la distancia al núcleo reconstruido, que resta a la asimetría el término de la Ec.~\ref{eq:lavado_nucleo} (Tabla~\ref{tab:lavado_nucleo}).
 
-La comparativa evidencia, por lo tanto, que la geometría reconstruida reduce de manera sistemática la amplitud observable. Esta reducción no es una pérdida aleatoria de resolución, sino un corrimiento que puede estimarse a partir de $b$ y de la pendiente de la LDF, y que por lo tanto podría corregirse o incluirse en la comparación con los datos. La ventana en la que la asimetría reconstruida se mantiene positiva y medible, $600 \leq r < 1200$~m y $20^\circ \leq \theta < 55^\circ$, es la región de referencia utilizada en la Sección~\ref{sec:datos_reales}. Mejorar la determinación del núcleo, por ejemplo con un ajuste de la LDF que incluya la modulación azimutal, resulta tan determinante para medir la asimetría como la propia respuesta del detector.
+La comparativa evidencia, por lo tanto, que la geometría reconstruida reduce de manera sistemática la amplitud observable. Esta reducción no es una pérdida aleatoria de resolución, sino un corrimiento que puede estimarse a partir de $b$ y de la pendiente de la LDF, y que por lo tanto podría corregirse o incluirse en la comparación con los datos. La ventana en la que la asimetría reconstruida se mantiene positiva y medible, $600 \leq r < 1200$~m y $20^\circ \leq \theta < 55^\circ$, es la región de referencia utilizada en la Sección~\ref{sec:datos_reales}. Mejorar la determinación del núcleo, por ejemplo con un ajuste de la LDF que incluya la modulación azimutal, resulta tan determinante para medir la asimetría como la propia respuesta del detector. La multiplicidad de estaciones del arreglo Infill a estas energías limita la viabilidad de ese ajuste evento a evento, pero vale la pena explorarlo en los eventos más energéticos, donde el número de estaciones disparadas es mayor.
 
 \subsection{Perspectiva: un modelo cinemático de producción y transporte}
 \label{subsec:perspectiva_cinematica}
@@ -227,16 +226,16 @@ Para extender esta observación a todo el espacio de fases se aplicó el mismo p
 
 Si bien la asimetría es visible en los datos, su caracterización completa requerirá más trabajo. Queda pendiente el estudio de las incertezas sistemáticas, la comparación cuantitativa con las simulaciones en todo el rango de distancias y ángulos, y la extensión de las simulaciones por encima de $10^{18}$eV, necesaria para interpretar los datos de mayor energía, como los de la Figura \ref{fig:cap7_modulacion}.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_Experimental_Modulation_Corrected.pdf}
+	\includegraphics[width=0.7\textwidth]{capitulos/imagenes_capitulos/cap6/UMD_Experimental_Modulation_Corrected.pdf}
 	\caption{Perfil azimutal de la densidad de muones reconstruida por el UMD en datos de campo de Fase II, normalizado a su valor medio, para $18.0 \leq \lg(E_\mathrm{REC}/\mathrm{eV}) < 18.5$, $40^\circ \theta_\mathrm{REC} < 60^\circ$ y $750 \leq r < 1050$m. Las barras de error representan el error estándar de la media en cada bin, y la curva es el ajuste del primer armónico de la Ec.\ref{eq:ajuste_armonico}.}
 	\label{fig:cap7_modulacion}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap6/cap7_A1_vs_r_datos_vs_mc.pdf}
+	\includegraphics[width=0.8\textwidth]{capitulos/imagenes_capitulos/cap6/cap7_A1_vs_r_datos_vs_mc.pdf}
 	\caption{$A_1$ en función de la distancia al núcleo reconstruido, por banda de ángulo cenital reconstruido, para $17.5 \leq \lg(E/\mathrm{eV}) < 18.0$. Negro: datos de campo (Fase I + II). Colores: simulaciones reconstruidas de protón, helio y hierro (\texttt{SIBYLL 2.3e}) y de helio (\texttt{QGSJET-III}), desplazadas levemente en $r$ para facilitar la lectura. La franja sombreada marca la región $600 \leq r < 1200$~m y $20^\circ \leq \theta < 55^\circ$. En la banda $55^\circ \leq \theta < 65^\circ$ los datos se muestran con símbolos vacíos.}
 	\label{fig:cap7_A1_r}
 \end{figure}

@@ -4,7 +4,7 @@
 \chapter{Caracterización de la Asimetría en el Anillo Denso}
 \label{sec:cap_anillo_denso}
 
-En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este marco permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Además, este estudio permite mitigar las fluctuaciones estadísticas que podrían presentarse debido a la distribución física irregular de las estaciones en el terreno, garantizando una alta estadística por bin azimutal. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la capacidad de este observable para la discriminación de la masa del rayo cósmico primario.
+En este capítulo se presentan los resultados obtenidos a partir del análisis de la asimetría azimutal en la densidad de muones utilizando la configuración de \textit{Anillo Denso}. Este marco permite estudiar la respuesta del detector y la física de la cascada en condiciones controladas, minimizando las incertidumbres vinculadas a la caída radial de la densidad de partículas. Además, este estudio permite mitigar las fluctuaciones estadísticas que podrían presentarse debido a la distribución física irregular de las estaciones en el terreno, garantizando una alta estadística por bin azimutal. Se analizan la estabilidad del parámetro $A_1$, los efectos sistemáticos de la reconstrucción y, finalmente, la sensibilidad de este observable a la masa del rayo cósmico primario.
 
 \section{El Anillo Denso como entorno de control}
 \label{subsec:entorno_control}
@@ -135,7 +135,7 @@ La figura revela una modulación sistemática con la forma de un coseno. En la r
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap5/corrimiento_nucleo_azimut.pdf}
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/corrimiento_nucleo_azimut.pdf}
 	\caption{Error radial $\Delta r = r_{MC} - r_{REC}$ de las estaciones del \textit{Infill} en función de su azimut en el plano de la lluvia, para tres intervalos de ángulo cenital (protones, \texttt{SIBYLL 2.3e}, $17.5 \leq \log_{10}(E/\mathrm{eV}) < 18.0$). Cada punto es una estación; los marcadores son la media en cada intervalo de azimut, con barras de $\pm1\sigma$ (la dispersión de las estaciones; el error de la media es menor que el marcador), y la curva a trazos es el ajuste $a + b\cos\phi$. La modulación en coseno muestra que el núcleo reconstruido no sufre un esparcimiento aleatorio, sino un corrimiento sistemático de tamaño $b$ hacia la región temprana.}
 	\label{fig:bias_core_azimut}
 \end{figure}
@@ -165,25 +165,25 @@ Para asegurar que la asimetría medida sea una propiedad intrínseca de la casca
 	\label{fig:robustez_phi}
 \end{figure}
 
-En la Figura \ref{fig:robustez_phi} se analizo el dataset de protones con el modelo \texttt{Sibyll 2.3e} para lluvias inclinadas ($40^\circ < \theta < 60^\circ$). Se ve que el valor ajustado del parametro de asimetría $A_1$ no depende del angulo de incidencia de la lluvia, como era esperado. Esto es una buena prueba de estrés para los fundamentos del trabajo y que garantiza que se puede avanzar en el análisis en pos de hacer discriminacion de masa. Nuevamente aparece la discrepancia entre los valores absolutos de asimetria usando los muones inyectados y los reconstruidos.
+En la Figura \ref{fig:robustez_phi} se analizo el dataset de protones con el modelo \texttt{Sibyll 2.3e} para lluvias inclinadas ($40^\circ < \theta < 60^\circ$). Se ve que el valor ajustado del parametro de asimetría $A_1$ no depende del angulo de incidencia de la lluvia, como era esperado. Esto es una buena prueba de estrés para los fundamentos del trabajo y que garantiza que se puede avanzar en el análisis hacia el estudio de la sensibilidad a la masa del primario. Nuevamente aparece la discrepancia entre los valores absolutos de asimetria usando los muones inyectados y los reconstruidos.
 
 \subsection{Comparación entre modelos hadrónicos}
 \label{subsubsec:independencia_modelo}
 
 Análogamente, se evaluó la robustez de la asimetría $A_1$ frente al uso de diferentes modelos de interacciones hadrónicas en las simulaciones. Para ello, se comparó la evolución del parámetro $A_1$ para un mismo primario (Helio) y rango de energía utilizando diferentes librerías fenomenológicas. Dada la disponibilidad de datos detallada en el Capítulo~\ref{cap:metodologia}, se contrastaron las cascadas simuladas con los modelos \texttt{SIBYLL 2.3e} y \texttt{QGSJet-III.01}.
 
-Aunque no existe garantía teórica de que ambos modelos predigan densidades totales de muones idénticas (debido a las diferencias en el déficit muónico intrínseco de cada parametrización), la modulación relativa $A_1$ debería presentar una consistencia cualitativa. Confirmar esta independencia es fundamental para validar el uso de la asimetría en la discriminación de masa y justificar la potencial combinación de conjuntos de datos para incrementar la estadística. 
+Aunque no existe garantía teórica de que ambos modelos predigan densidades totales de muones idénticas (debido a las diferencias en el déficit muónico intrínseco de cada parametrización), la modulación relativa $A_1$ debería presentar una consistencia cualitativa. Confirmar esta independencia es fundamental para validar el uso de la asimetría en estudios de composición y justificar la potencial combinación de conjuntos de datos para incrementar la estadística. 
 
 Para llevar a cabo esta validación, se replicó el análisis angular realizando ajustes independientes por bin cenital, tal como se detalló en la sección \ref{subsec:entorno_control}. A su vez, se calculó la diferencia relativa porcentual entre los valores de amplitud obtenidos por ambos modelos, propagando las incertezas estadísticas correspondientes. La comparación de estas distribuciones se presenta en la Figura \ref{fig:modelos_hadronicos}.
 
-\begin{figure}[H]
+Como se observa en el panel superior, la evolución de la asimetría presenta una consistencia morfológica excelente entre ambos modelos a lo largo de todo el rango angular. El panel inferior cuantifica esta concordancia: la diferencia relativa se mantiene predominantemente dentro de una banda de tolerancia del $\pm 10\%$, con desviaciones estadísticas puntuales que no superan el $15\%$. Este resultado confirma empíricamente que la amplitud de la asimetría azimutal $A_1$ es un observable robusto. Su forma funcional y magnitud relativa están dominadas por la cinemática macroscópica de la cascada y la atenuación atmosférica, manteniéndose esencialmente invariantes frente a los detalles microscópicos del modelo de interacción hadrónica empleado por el generador de Monte Carlo.
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Hadronic_Uncertainty_Helium.pdf}
 	\caption{Comparación de la amplitud $A_1$ para lluvias de Helio simuladas con diferentes modelos hadrónicos. El panel inferior muestra que la diferencia relativa se mantiene mayoritariamente dentro de una banda de tolerancia aceptable, indicando una tendencia común independiente del modelo.}
 	\label{fig:modelos_hadronicos}
 \end{figure}
-
-Como se observa en el panel superior, la evolución de la asimetría presenta una consistencia morfológica excelente entre ambos modelos a lo largo de todo el rango angular. El panel inferior cuantifica esta concordancia: la diferencia relativa se mantiene predominantemente dentro de una banda de tolerancia del $\pm 10\%$, con desviaciones estadísticas puntuales que no superan el $15\%$. Este resultado confirma empíricamente que la amplitud de la asimetría azimutal $A_1$ es un observable robusto. Su forma funcional y magnitud relativa están dominadas por la cinemática macroscópica de la cascada y la atenuación atmosférica, manteniéndose esencialmente invariantes frente a los detalles microscópicos del modelo de interacción hadrónica empleado por el generador de Monte Carlo.
 
 \section{Dependencia de la amplitud $A_1$ con la energía del primario}
 \label{subsec:dependencia_energia}
@@ -201,41 +201,44 @@ A priori, al tratarse de un rango energético relativamente estrecho (media déc
 
 La hipótesis de trabajo propuesta para explicar este comportamiento físico radica en el corrimiento de la profundidad del máximo de desarrollo de la cascada ($X_{\mathrm{max}}$). Teóricamente, un aumento en la energía del primario implica que la lluvia penetra más profundamente en la atmósfera antes de alcanzar su número máximo de partículas, acercando el $X_{\mathrm{max}}$ al nivel del suelo. Al reducirse la distancia atmosférica remanente entre el máximo de la lluvia y los detectores, la cascada observada resulta longitudinalmente más 'joven'. Esto altera los gradientes de densidad de partículas a través del plano de la lluvia, impactando directamente en la magnitud de la asimetría de atenuación. Cabe destacar que, si bien esta interpretación fenomenológica vincula lógicamente el incremento de $A_1$ con la evolución del $X_{\mathrm{max}}$, en el marco de este trabajo constituye una hipótesis interpretativa que sienta las bases para futuros estudios dedicados a correlacionar el desarrollo longitudinal con la topología en superficie.
 
-Desde el punto de vista metodológico, el hallazgo más relevante de este escrutinio es la escala de la variación. Si bien la dependencia con la energía existe, la variación absoluta del parámetro a lo largo de toda la media década es marginal ($\Delta A_1 \approx 0.015$). Esta estabilidad garantiza que la integración de todos los eventos del rango $\log_{10}(E/\mathrm{eV}) \in [17.5, 18.0]$ no inducirá un lavado ni ensanchará significativamente las distribuciones de manera crítica. Por consiguiente, queda plenamente justificado realizar el estudio de discriminación de masa primaria utilizando el \textit{dataset} completo de forma integrada, lo cual resulta imperativo para maximizar el poder estadístico sin comprometer la sensibilidad del observable.
+Desde el punto de vista metodológico, el hallazgo más relevante de este escrutinio es la escala de la variación. Si bien la dependencia con la energía existe, la variación absoluta del parámetro a lo largo de toda la media década es marginal ($\Delta A_1 \approx 0.015$). Esta estabilidad garantiza que la integración de todos los eventos del rango $\log_{10}(E/\mathrm{eV}) \in [17.5, 18.0]$ no inducirá un lavado ni ensanchará significativamente las distribuciones de manera crítica. Por consiguiente, queda plenamente justificado realizar la comparación entre primarios utilizando el \textit{dataset} completo de forma integrada, lo cual resulta imperativo para maximizar el poder estadístico sin comprometer la sensibilidad del observable.
 
-\section{Discriminación de Masa Primaria: Protón vs. Hierro}
+\section{Separación entre primarios: protón vs. hierro}
 \label{sec:discriminacion_masa}
 
-Habiendo caracterizado los efectos sistemáticos y validado la estabilidad de la reconstrucción en el entorno del Anillo Denso, el objetivo culminante de este análisis es evaluar la capacidad del observable $A_1$ para discriminar la naturaleza química del rayo cósmico primario. Para ello, se compararon las distribuciones de amplitud de asimetría para las poblaciones extremas de masa: primarios livianos (protones) y primarios pesados (hierro, con 56 nucleones). 
+Habiendo caracterizado los efectos sistemáticos y validado la estabilidad de la reconstrucción en el entorno del Anillo Denso, el objetivo culminante de este análisis es evaluar la sensibilidad del observable $A_1$ a la naturaleza química del rayo cósmico primario. Para ello, se compararon las distribuciones de amplitud de asimetría para las poblaciones extremas de masa: primarios livianos (protones) y primarios pesados (hierro, con 56 nucleones). 
 
 Al evaluar el parámetro $A_1$ para ambos conjuntos de datos con energías $\log_{10}(E/\mathrm{eV}) \in [17.5, 18.0]$ usando el modelo hadrónico \texttt{Sibyll 2.3e}, se observó una separación sistemática entre las curvas. La población de protones desarrolla amplitudes de asimetría consistentemente mayores a las correspondientes a la población de hierro a lo largo del rango angular evaluado para la mayoría de los bines.
 
-\subsection{El Factor de Mérito ($MF$) y el \textit{Sweet Spot} de discriminación}
+\subsection{Significancia de la separación y rango cenital óptimo}
 \label{subsec:sweet_spot}
 
-Para cuantificar rigurosamente el poder separador del observable, es necesario evaluar no solo la distancia entre los valores medios de ambas poblaciones, sino también su dispersión estadística. Con este fin, se utilizo como métrica de evaluación el Factor de Mérito ($MF$) como:
+Para cuantificar la separación entre ambas poblaciones es necesario evaluar no solo la distancia entre los valores medios, sino también la incerteza con que cada uno se determina. Con este fin se definió la significancia de la separación, S, como:
 
 \begin{equation}
-	MF = \frac{|\langle A_1^{\text{P}} \rangle - \langle A_1^{\text{Fe}} \rangle|}{\sqrt{(\sigma_{A_1}^{\text{P}})^2 + (\sigma_{A_1}^{\text{Fe}})^2}}
+	S = \frac{|\langle A_1^{\text{P}} \rangle - \langle A_1^{\text{Fe}} \rangle|}{\sqrt{(\sigma_{A_1}^{\text{P}})^2 + (\sigma_{A_1}^{\text{Fe}})^2}}
+	\label{eq:merit_factor}
 \end{equation}
 
-donde $\langle A_1 \rangle$ es la amplitud de asimetría ajustada para cada primario y $\sigma_{A_1}$ su incertidumbre. Con esta definición, $MF$ mide la significancia de la diferencia entre las amplitudes de ambas muestras, en unidades de su incertidumbre combinada: un $MF > 1$ indica que la diferencia supera a la incertidumbre. Es, por lo tanto, una medida de la separación entre los valores medios con la estadística simulada. En la Figura \ref{fig:mf_sweet_spot} se presenta la evolución del Factor de Mérito en función del ángulo cenital de la cascada.
+donde $\langle A_1 \rangle$ es la amplitud de asimetría ajustada para cada primario y $\sigma_{A_1}$ su incertidumbre. Con esta definición, S mide la diferencia entre las amplitudes medias de ambas muestras en unidades de su incerteza combinada: un valor $S > 1$ indica que la diferencia supera a la incerteza. Conviene subrayar que $\sigma_{A_1}$ es la incerteza con que cada amplitud queda determinada por el ajuste, de modo que $S$ depende de la estadística simulada disponible y crece aproximadamente como $\sqrt{N}$. Por esa razón no debe identificarse con el factor de mérito habitual en estudios de composición, que compara la separación entre los valores medios con las anchuras de sus distribuciones. En la Figura \ref{fig:mf_sweet_spot} se presenta la evolución de $S$ en función del ángulo cenital de la cascada.
 
-El análisis de esta figura revela un comportamiento fuertemente dependiente de la inclinación. Se identifica de manera clara una región óptima, o \textit{Sweet Spot} de discriminación, en el rango angular $40^\circ \leq \theta \leq 55^\circ$. En esta ventana, el $MF$ alcanza valores máximos del orden de $\approx 2.5$, lo que indica una diferencia significativa entre las asimetrías de ambos primarios.
+El análisis de esta figura revela un comportamiento fuertemente dependiente de la inclinación. Se identifica de manera clara un rango cenital de máxima separación, $40^\circ \leq \theta_{sh} \leq 55^\circ$. En esta ventana $S$ alcanza valores del orden de $2,5$, es decir, la diferencia entre las amplitudes medias de ambos primarios supera en ese factor a su incerteza combinada.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/Mass_Discrimination_MF.pdf}
-	\caption{Evolución del Factor de Mérito ($MF$) en función del ángulo cenital. Se identifica un \textit{Sweet Spot} de máxima separación entre bines de $40^\circ$ y $55^\circ$, donde el poder de discriminación alcanza su máximo antes de degradarse por efectos instrumentales.}
+	\caption{Evolución de la significancia de la separación S en función del ángulo cenital. El máximo se alcanza entre $40^\circ$ y $55^\circ$, antes de degradarse por efectos instrumentales.}
 	\label{fig:mf_sweet_spot}
 \end{figure}
 
-Fuera de este rango, el poder de discriminación decae abruptamente o se vuelve inestable debido a dos regímenes limitantes de carácter completamente distinto:
+Fuera de este rango, la separación decae abruptamente o se vuelve inestable debido a dos regímenes limitantes de carácter completamente distinto:
 
 \begin{enumerate}
 	\item \textbf{Régimen de baja inclinación ($\theta < 35^\circ$):} En cascadas cuasi-verticales, la diferencia de camino atravesado por las partículas entre la región temprana y tardía es mínima. Por lo tanto, la asimetría de atenuación física es en modulo tan pequeña que la diferencia absoluta entre protón y hierro resulta imperceptible, quedando enmascarada por las fluctuaciones estadísticas propias de la lluvia.
-	\item \textbf{Régimen de alta inclinación ($\theta > 60^\circ$):} Aunque a estos ángulos la asimetría física debería ser máxima, entra en juego el colapso de la reconstrucción instrumental. Tal como se discutió en la Sección \ref{subsec:mc_vs_rec}, a grandes inclinaciones la reconstrucción del UMD reduce la asimetría, por el sobreconteo direccional de muones y por un remanente que el modelo de conteo no explica. Este efecto no solo achata artificialmente las medias de $A_1$, reduciendo el numerador del $MF$, sino que introduce un ruido correlacionado masivo que dispara el tamaño de las desviaciones estándar ($\sigma$), reduciendo la capacidad discriminatoria en este régimen.
+	\item \textbf{Régimen de alta inclinación ($\theta > 60^\circ$):} Aunque a estos ángulos la asimetría física debería ser máxima, entra en juego el colapso de la reconstrucción instrumental. Tal como se discutió en la Sección \ref{subsec:mc_vs_rec}, a grandes inclinaciones la reconstrucción del UMD reduce la asimetría, por el sobreconteo direccional de muones y por un remanente que el modelo de conteo no explica. Este efecto no solo achata artificialmente las medias de $A_1$, reduciendo el numerador del $S$, sino que aumenta las incertezas de los ajustes, reduciendo S en este régimen.
 \end{enumerate}
+
+Cabe señalar que $A_1$ se obtiene del ajuste del perfil azimutal de un ensamble de lluvias y no es medible evento a evento, dado que la multiplicidad de estaciones por evento no permite ajustar una amplitud individual. La comparación entre primarios es, por lo tanto, necesariamente estadística, y $S$ cuantifica con qué precisión quedan determinadas las amplitudes medias con la muestra simulada disponible. La pregunta correspondiente para un uso en composición, con qué número de eventos la asimetría permite distinguir dos hipótesis de masa requiere estimar la variabilidad de $A_1$ entre submuestras independientes de lluvias, y queda fuera del alcance de este trabajo.
 
 \section{Interpretación Física: dependencia con el $X_{max}$}
 \label{subsec:interpretacion_fisica}
@@ -246,7 +249,7 @@ Este comportamiento encuentra su marco teórico en el Modelo de Superposición y
 
 Esta separación en la profundidad de máximo desarrollo entre especies primarias es un fenómeno empíricamente robusto, medido de forma extensiva por los telescopios de fluorescencia del Observatorio Pierre Auger \cite{yushkov2019mass}. En la Figura \ref{fig:auger_xmax} se ilustra esta dependencia, evidenciando cómo el $X_{\text{max}}$ se ubica más profundo a mayores energías y cómo los primarios livianos penetran sistemáticamente más que los pesados.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/x_max.jpg}
 	\caption{Evolución del valor medio de $X_{\text{max}}$ (izquierda) y sus fluctuaciones (derecha) en función de la energía primaria, medido por el Observatorio Pierre Auger. Se observan las curvas teóricas de los modelos hadrónicos acotando el comportamiento entre protón (líneas rojas superiores) y hierro (líneas azules inferiores). Se ve también la dependencia lineal que hay entre el $X_{max}$ y el logaritmo de la energia del primario. Extraído de \cite{yushkov2019mass}.}
@@ -256,13 +259,6 @@ Esta separación en la profundidad de máximo desarrollo entre especies primaria
 Para comprender por qué esta diferencia en la profundidad del máximo impacta directamente sobre la amplitud de asimetría $A_{1}$ medida en superficie, es necesario analizar la dinámica del desarrollo longitudinal y su proyección topológica sobre el arreglo.
 
 Como se ve en la Figura \ref{fig:longitudinal_profile} a medida que la lluvia penetra en la atmósfera, experimenta una fase de multiplicación en avalancha hasta alcanzar la profundidad del máximo, $X_{max}$. Superado este umbral, la energía media de las partículas secundarias cae por debajo de la energía crítica para seguir alimentando la creación de nuevas partículas, momento en el cual los procesos de pérdida por ionización y el decaimiento dominan sobre la sección eficaz de interacción, forzando a la cascada a entrar en su fase de atenuación.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{capitulos/imagenes_capitulos/cap5/ammount_xmax.jpg}
-	\caption{El gráfico corresponde al evento de mayor energía detectado por el experimento Fly's Eye ($E \approx 3.2 \times 10^{20}$ eV) extraído de \cite{FlysEye1995}. Se observa claramente la fase de multiplicación hasta alcanzar la profundidad del máximo, seguida de la atenuación de la cascada. La distancia recorrida de atmosfera hasta llegar al máximo es lo que se denomina $X_{max}$.}
-	\label{fig:longitudinal_profile}
-\end{figure}
 
 Dado que el UMD es un detector subterráneo, ciego a la componente electromagnética, la asimetría registrada debe depender estrictamente del historial de producción y transporte de la componente muónica. Los muones se originan principalmente a partir del decaimiento de mesones cargados (piones y kaones, ej. $\pi^{\pm} \rightarrow \mu^{\pm} + \nu_{\mu}$). La tasa de producción de estas partículas sigue de cerca el perfil longitudinal del cascada hadrónica y alcanza su propio máximo, denominado $X_{max}^{\mu}$, a una profundidad correlacionada con $X_{max}$, aunque algo menor \cite{Cazon2012}.
 
@@ -274,7 +270,15 @@ Cuando una lluvia inducida por un núcleo de Hierro impacta contra el arreglo, e
 
 En contraste, los primarios livianos (Protones) penetran profundamente en la atmósfera, situando su $X_{max}$ mucho más próximo a la superficie topográfica. Esta proximidad reduce severamente la distancia $D$, incrementando significativamente el peso relativo de la dispersión espacial ($\Delta d / D$). Para frentes de cascada ubicados cerca del punto de observación, la diferencia de camino entre la región temprana y la tardía pesa más, generando un valor de asimetría mayor.
 
-En conclusión, la profundidad de penetración del primario modula la agudeza topológica de la cascada medida en tierra. Las lluvias con un $X_{max}$ profundo (protones o lluvias de mayor energía) exponen al UMD a frentes de partículas más concentrados espacialmente, donde cualquier diferencia de proyección geométrica induce fluctuaciones grandes en las densidades relativas de muones. Este mecanismo fenomenológico consolida a la amplitud de asimetría $A_1$ no solo como un descriptor morfológico de la LDF, sino como un trazador valioso de la evolución longitudinal y, en última instancia, como un instrumento extra para realizar discriminación de la masa $A$ del rayo cósmico primario.
+En conclusión, la profundidad de penetración del primario modula la agudeza topológica de la cascada medida en tierra. Las lluvias con un $X_{max}$ profundo (protones o lluvias de mayor energía) exponen al UMD a frentes de partículas más concentrados espacialmente, donde cualquier diferencia de proyección geométrica induce fluctuaciones grandes en las densidades relativas de muones. Este mecanismo fenomenológico consolida a la amplitud de asimetría $A_1$ no solo como un descriptor morfológico de la LDF, sino como un trazador valioso de la evolución longitudinal y, en última instancia, como un observable complementario para el estudio estadístico de la masa A del rayo cósmico primario.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap5/ammount_xmax.jpg}
+	\caption{El gráfico corresponde al evento de mayor energía detectado por el experimento Fly's Eye ($E \approx 3.2 \times 10^{20}$ eV) extraído de \cite{FlysEye1995}. Se observa claramente la fase de multiplicación hasta alcanzar la profundidad del máximo, seguida de la atenuación de la cascada. La distancia recorrida de atmosfera hasta llegar al máximo es lo que se denomina $X_{max}$.}
+	\label{fig:longitudinal_profile}
+\end{figure}
 
 \subsection{Contraste fenomenológico con el Detector de Superficie}
 \label{subsec:contraste_sd_bradfield}

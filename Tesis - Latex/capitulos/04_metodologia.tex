@@ -22,7 +22,7 @@ La muestra analizada proviene de la producción denominada internamente \textit{
 
 Para el tratamiento teórico del desarrollo longitudinal y la producción de muones en el régimen de ultra-alta energía, se utilizaron tres de los modelos fenomenológicos más actualizados: \texttt{EPOS LHC-R}, \texttt{Sibyll 2.3e} y \texttt{QGSJet-III.01} \cite{ostapchenko2024qgsjetiiimodelhighenergy}.
 
-La librería abarca un rango paramétrico amplio diseñado para el estudio del arreglo \textit{Infill} y el UMD. Sin embargo, por motivos de disponibilidad de acceso a los servidores en el momento de la extracción y estado de la producción de la colaboración, el conjunto de datos efectivo al que se tuvo acceso presenta variaciones en la completitud de sus lotes. El detalle de los archivos ADST extraídos se resume en el Cuadro \ref{tab:adst_datasets}.
+La librería abarca un rango paramétrico amplio diseñado para el estudio del arreglo \textit{Infill} y el UMD. Sin embargo, por motivos de disponibilidad de acceso a los servidores en el momento de la extracción y estado de la producción de la colaboración, el conjunto de datos efectivo al que se tuvo acceso presenta variaciones en la completitud de sus lotes. El detalle de los archivos ADST extraídos se resume en la Tabla \ref{tab:adst_datasets}.
 
 \begin{table}[htpb]
 	\centering
@@ -31,20 +31,20 @@ La librería abarca un rango paramétrico amplio diseñado para el estudio del a
 		\textbf{Modelo Hadrónico} & \textbf{Rango de $\log_{10}(E/\mathrm{eV})$} & \textbf{Protón} & \textbf{Helio} & \textbf{Oxígeno} & \textbf{Hierro} \\
 		\midrule
 		\multirow{2}{*}{\textbf{SIBYLL 2.3e}} & $17.5 - 18.0$ & 20 (Full) & 20 (Full) & 20 (Full) & 20 (Full) \\
-		& $18.0 - 18.5$ & 1 & 12\textsuperscript{*} & 3 & 0 \\
+		& $18.0 - 18.5$ & 1 & 12\textsuperscript{*} & 3 & - \\
 		\midrule
-		\multirow{2}{*}{\textbf{QGSJET-III.01}} & $17.5 - 18.0$ & - & 20 (Full) & - & 0 \\
-		& $18.0 - 18.5$ & - & 0 & - & - \\
+		\multirow{2}{*}{\textbf{QGSJET-III.01}} & $17.5 - 18.0$ & - & 20 (Full) & - & - \\
+		& $18.0 - 18.5$ & - & - & - & - \\
 		\midrule
 		\multirow{2}{*}{\textbf{EPOS LHC-R}} & $17.5 - 18.0$ & - & 2 & - & - \\
-		& $18.0 - 18.5$ & - & 20 (Full) & - & 0 \\
+		& $18.0 - 18.5$ & - & 20 (Full) & - & - \\
 		\bottomrule
 	\end{tabular}
-	\caption{Disponibilidad de ADSTs en la producción \textit{icrc2025-test7}. Los valores numéricos indican la cantidad de archivos disponibles por núcleo primario. Los ceros indican lotes vacíos en la producción, mientras que los guiones (-) señalan bines sin datos accesibles. En base a esta disponibilidad, el análisis fenomenológico principal de esta tesis se priorizó a las simulaciones de \texttt{SIBYLL 2.3e} en el rango de energías de $10^{17.5}$ a $10^{18.0}$ eV. \textsuperscript{*}Dataset de Helio en alta energía dejado para análisis posterior por posible falta de estadística.}
+	\caption{Disponibilidad de ADSTs en la producción \textit{icrc2025-test7}. Los valores numéricos indican la cantidad de archivos disponibles por núcleo primario. Los guiones (-) indican lotes inaccesible por estar vacíos dentro de los servidores del instituto. En base a esta disponibilidad, el análisis fenomenológico principal de esta tesis se priorizó a las simulaciones de \texttt{SIBYLL 2.3e} en el rango de energías de $10^{17.5}$ a $10^{18.0}$ eV. \textsuperscript{*}Dataset de Helio en alta energía dejado para análisis posterior por posible falta de estadística.}
 	\label{tab:adst_datasets}
 \end{table}
 
-Para garantizar la homogeneidad en los ajustes de asimetría y el cálculo del factor de mérito, este trabajo se basa primordialmente en los lotes que cuentan con un set completo de 20 archivos ADST por primario para garantizar buena estadística. Cada uno de estos archivos contiene aproximadamente 1200 lluvias reconstruidas. Cabe destacar que, aunque la documentación interna de la colaboración sugiere una capacidad nominal de 5000 lluvias por ADST, el conteo efectivo en los archivos procesados es menor.
+Para garantizar la homogeneidad en los ajustes de asimetría y en el cálculo de la significancia de la separación entre primarios, este trabajo se basa primordialmente en los lotes que cuentan con un set completo de 20 archivos ADST por primario para garantizar buena estadística. Cada uno de estos archivos contiene aproximadamente 1200 lluvias reconstruidas. Cabe destacar que, aunque la documentación interna de la colaboración sugiere una capacidad nominal de 5000 lluvias por ADST, el conteo efectivo en los archivos procesados es menor.
 
 Vale la pena comentar también que todas las simulaciones presentan lluvias de hasta $65^\circ$ y que el análisis no se realiza de forma continua en el ángulo $\theta$. El rango angular fue particionado en 10 bines de igual ancho en $\sin^2\theta$. Dado que el flujo de rayos cósmicos isotrópico es proporcional al diferencial de ángulo sólido ($\mathrm{d}\Omega \propto \sin\theta \mathrm{d}\theta \propto \mathrm{d}(\sin^2\theta)$), este bineado garantiza que cada intervalo angular contenga poblaciones estadísticas equivalentes (bines equiprobables), lo cual es crítico para una estimación no sesgada del parámetro de asimetría $A_1$.
 
@@ -52,7 +52,7 @@ De manera preventiva, se identificó la existencia de un dataset de Helio en el 
 
 También cabe destacar que el dataset de Helio de alta energía ($\log_{10}(E/\mathrm{eV}) \in [18.0, 18.5]$) correspondiente al modelo \texttt{EPOS LHC-R} fue analizado de manera exhaustiva, pero arrojó resultados anómalos o de difícil interpretación. Ante la imposibilidad de concluir empíricamente si dicho comportamiento responde a una característica física intrínseca del régimen de más alta energía o a un artefacto computacional (\textit{bug}) de esa serie de simulaciones, este lote fue excluido de parte de los resultados de este trabajo.
 
-Como se evidencia en el Cuadro \ref{tab:adst_datasets}, para asegurar una estadística robusta y simétrica en la comparación de composición de masa, el análisis fenomenológico de esta tesis se centra en el subconjunto completo correspondiente al modelo \texttt{SIBYLL 2.3e} hasta $\log_{10}(E/\mathrm{eV}) = 18.0$.
+Como se evidencia en la Tabla \ref{tab:adst_datasets}, para asegurar una estadística robusta y simétrica en la comparación de composición de masa, el análisis fenomenológico de esta tesis se centra en el subconjunto completo correspondiente al modelo \texttt{SIBYLL 2.3e} hasta $\log_{10}(E/\mathrm{eV}) = 18.0$.
 
 \subsection{Caracterización del Anillo Denso}
 \label{subsec:anillo_denso}
@@ -113,14 +113,14 @@ Al analizar la diferencia logarítmica entre ambas energías, se constató la pr
 
 \begin{figure}[H]
 	\centering
-	\begin{subfigure}[b]{0.82\textwidth}
+	\begin{subfigure}[b]{0.98\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap4/energy_reconstr.pdf} 
 		\caption{Reconstrucción de la Energía.}
 		\label{fig:rec_energy}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.82\textwidth}
+	\begin{subfigure}[b]{0.98\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap4/energy_bias.pdf} 
 		\caption{Bias de la reconstrucción de la Energia}
@@ -146,14 +146,14 @@ Estos márgenes confirman que el error en la determinación de las coordenadas i
 
 \begin{figure}[h]
 	\centering
-	\begin{subfigure}[b]{0.82\textwidth}
+	\begin{subfigure}[b]{1\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap4/theta_bias.pdf}
 		\caption{Sesgo en el ángulo cenital ($\theta$).}
 		\label{fig:bias_theta}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.82\textwidth}
+	\begin{subfigure}[b]{1\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{capitulos/imagenes_capitulos/cap4/phi_bias.pdf}
 		\caption{Sesgo en el ángulo azimutal ($\phi$).}
