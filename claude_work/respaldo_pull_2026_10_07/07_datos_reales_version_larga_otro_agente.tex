@@ -1,0 +1,266 @@
+% !TEX root = ../main.tex
+
+\section{Análisis de Asimetría en Datos Experimentales de campo}
+\label{sec:datos_reales}
+
+Los capítulos anteriores establecieron, exclusivamente con simulaciones, que la densidad de muones medida por el UMD presenta una modulación azimutal de primer armónico en el plano de la lluvia, que esa modulación sobrevive (atenuada) a la reconstrucción del arreglo \textit{Infill}, y cuál es su forma esperada en función de la distancia al eje $r$ y del ángulo cenital $\theta$. Este capítulo somete esa predicción a la prueba de los datos de campo. El análisis se plantea deliberadamente como un \emph{contraste de una predicción} y no como una búsqueda: la grilla de bines, el estimador y la región de mayor sensibilidad se fijan a partir de lo desarrollado en los Capítulos \ref{sec:cap_anillo_denso} y \ref{cap:infill}, y se reportan todas las celdas, no sólo las más significativas.
+
+Las preguntas que se responden son tres, en orden decreciente de robustez: (i) si existe en los datos una asimetría azimutal de la señal muónica con la fase esperada; (ii) si su dependencia con $r$ y $\theta$ es compatible con la de las simulaciones procesadas con la misma reconstrucción; y (iii) si su magnitud permite discriminar la composición del primario.
+
+Todos los números, tablas y figuras de este capítulo se generan con el notebook \texttt{Scripts/Procesamiento\_Datos\_Campo/Analisis\_Asimetria\_DatosCampo\_Cap7}, que sólo lee archivos ya procesados.
+
+\subsection{Selección de datos experimentales del \textit{Infill}}
+\label{subsec:seleccion_datos}
+
+\subsubsection{Conjunto de datos}
+
+Se utilizaron los eventos reconstruidos por el detector de superficie del arreglo de $750$~m con información del UMD de la producción \texttt{v4r2}, en sus dos flujos de reconstrucción: \textit{Fase I} (abril de 2021 a abril de 2023) y \textit{Fase II SPMT} (febrero de 2022 a mayo de 2026). Aunque ambos períodos se superponen durante quince meses y cubren prácticamente las mismas estaciones, no comparten ningún identificador de evento: son conjuntos disjuntos y pueden combinarse sin doble conteo.
+
+Los archivos ADST se convirtieron a tablas con una fila por módulo del UMD y por evento mediante un lector en Python que reproduce los cortes del lector de referencia de la colaboración (\texttt{ADSTReader.cc}): selección 6T5, energía mínima y ángulo cenital máximo a nivel de evento, y las marcas de rechazo de la estación SD y del contador UMD, que se guardan como columnas en lugar de aplicarse en la lectura. La restricción a una lista fija de estaciones que contiene el lector de referencia (pensada para el sub-arreglo de $433$~m) no se aplica, ya que este análisis utiliza el arreglo \textit{Infill} completo. Los archivos intermedios se escribieron con cortes más laxos que los finales ($\lg E \geq 16.5$, $\theta \leq 70^\circ$), por lo que todos los cortes del análisis se reimponen al leerlos.
+
+La Tabla \ref{tab:cut_flow} resume el efecto de cada corte. La energía mínima se fija en $\lg(E/\mathrm{eV}) = 17.5$ por dos razones: por debajo de ese valor el arreglo de $750$~m no alcanza eficiencia de disparo completa \cite{auger2021infill}, de modo que la muestra seleccionada depende de las fluctuaciones de la lluvia y de la composición; y la biblioteca de simulaciones disponible comienza en esa energía. % VERIFICAR con el director el umbral de eficiencia completa citado.
+Se excluye además el año 2022 del flujo de Fase II, que corresponde a la puesta en marcha de la nueva electrónica y presenta un $83\%$ de estaciones SD rechazadas, frente a un $23$--$29\%$ en los años siguientes. Finalmente, el resultado principal se restringe a $\theta < 55^\circ$: la calibración del estimador de energía del arreglo de $750$~m está establecida para lluvias moderadamente inclinadas, y la banda $55^\circ \leq \theta < 65^\circ$ se muestra por separado y señalada en todas las figuras. % VERIFICAR con el director el rango cenital de validez de la calibración S(450)->E.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrr}
+		\toprule
+		Corte & Eventos & Módulos \\
+		\midrule
+		En disco (6T5, $\lg E \geq 16.5$, $\theta \leq 70^\circ$) & 939\,701 & 13\,190\,065 \\
+		$\lg(E_\mathrm{REC}/\mathrm{eV}) \geq 17.5$ & 78\,525 & 1\,863\,095 \\
+		$\theta_\mathrm{REC} \leq 65^\circ$ & 76\,405 & 1\,814\,354 \\
+		Sin Fase II 2022 (puesta en marcha) & 73\,655 & 1\,794\,792 \\
+		Estación SD y contador UMD no rechazados & 68\,844 & 1\,270\,152 \\
+		Módulo en estado \textit{candidate} & 68\,844 & 1\,131\,661 \\
+		$\theta_\mathrm{REC} < 55^\circ$ (resultado principal) & 58\,775 & 981\,577 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Efecto acumulado de los cortes sobre los datos de campo. La muestra principal contiene 9\,729 eventos de Fase I y 49\,046 de Fase II.}
+	\label{tab:cut_flow}
+\end{table}
+
+La Figura \ref{fig:cap7_dataset} muestra la tasa mensual de eventos de cada flujo, el espectro de energía reconstruida y la distribución cenital de la muestra seleccionada. La caída de la tasa de eventos de Fase I a mediados de 2022 coincide con el inicio del flujo de Fase II; el espectro decrece rápidamente con la energía, de modo que en cualquier bin ancho en $\lg E$ dominan los eventos de menor energía, un hecho que será relevante en la Sección \ref{subsec:energia_datos}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_dataset.pdf}
+	\caption{Muestra de datos de campo con $\lg(E/\mathrm{eV}) \geq 17.5$ luego de los cortes de calidad. Izquierda: eventos por mes en cada flujo de reconstrucción. Centro: espectro de energía reconstruida. Derecha: distribución en $\cos^2\theta$, plana para un flujo isótropo detectado con eficiencia completa; la línea vertical marca $\theta = 55^\circ$.}
+	\label{fig:cap7_dataset}
+\end{figure}
+
+\subsubsection{Simulaciones de referencia}
+
+Como referencia se emplean las mismas simulaciones del Capítulo \ref{cap:infill}: lluvias de protón, helio y hierro con \texttt{SIBYLL 2.3e} y de helio con \texttt{QGSJET-III}, con $\lg(E_\mathrm{MC}/\mathrm{eV}) \in [17.5, 18.0]$ y $\theta \in [0^\circ, 65^\circ]$, alrededor de $4\,850$ eventos reconstruidos por muestra. De ellas se utilizan únicamente los módulos del arreglo \textit{Infill} y todo el tratamiento es a nivel reconstruido, igual que en los datos: ángulo cenital $\theta_\mathrm{REC}$, distancia $r$ al núcleo reconstruido y ángulo azimutal $\phi$ en el plano de la lluvia reconstruido. La selección de estaciones de estas simulaciones exige que la estación SD asociada forme parte del evento reconstruido, que es la misma condición que cumplen necesariamente los datos de campo, cuyo UMD sólo se lee cuando la estación SD vecina dispara.
+
+Tres detalles de la comparación merecen mención explícita:
+\begin{itemize}
+	\item \textbf{Energía.} En estas simulaciones la energía reconstruida por el SD es en promedio $0.14$ menor en $\lg E$ que la verdadera, consecuencia de que las lluvias simuladas contienen menos muones que las reales mientras que la calibración $S(450) \rightarrow E$ proviene de datos \cite{auger2016muon_deficit}. Seleccionar las simulaciones por energía reconstruida tomaría entonces lluvias de otra energía. Por eso las simulaciones se seleccionan por energía verdadera (la biblioteca completa) y los datos por energía reconstruida en el mismo intervalo.
+	\item \textbf{Espectro.} La biblioteca se generó plana en $\lg E$ (espectro $E^{-1}$); a cada evento simulado se le asigna un peso $E^{-2}$ para que la muestra reproduzca el espectro empinado ($\approx E^{-3}$) de los datos dentro del bin.
+	\item \textbf{Convención azimutal.} En los datos, $\phi$ es directamente el valor de \texttt{GetAzimuthSP()} de cada estación. En las simulaciones se reconstruye el mismo valor y se verificó que sigue al azimut verdadero en el plano de la lluvia: la mediana de la diferencia es de $1.5^\circ$ para $r > 400$~m, y el $99.8\%$ de las estaciones difiere en menos de $20^\circ$. Se descartan además los eventos cuya reconstrucción falló (cerca del $3\%$).
+\end{itemize}
+
+\subsection{Extracción de la asimetría azimutal en datos reales}
+\label{subsec:extraccion_asimetria}
+
+\subsubsection{Estimador}
+
+En cada celda de la grilla (banda de energía, banda de $\theta$, banda de $r$) los módulos se reparten en 12 bines de $\phi$ de $30^\circ$ y en cada bin se calcula el número medio de muones reconstruidos por módulo, $\langle N_\mu^\mathrm{REC} \rangle_\phi$. A esos 12 valores se les ajusta, por mínimos cuadrados pesados,
+\begin{equation}
+	\langle N_\mu^\mathrm{REC} \rangle_\phi = \rho_0 \left( 1 + A_1 \cos\phi + B_1 \sin\phi \right).
+	\label{eq:ajuste_armonico_b1}
+\end{equation}
+Respecto de la Ecuación \ref{eq:ajuste_armonico} se agrega el término $B_1 \sin\phi$. Por la simetría de la lluvia respecto del plano que contiene al eje y a la vertical, $B_1$ debe anularse; su valor ajustado funciona como prueba de la convención azimutal y de la aceptancia.
+
+Los módulos de un mismo evento, y en particular los tres módulos de un mismo contador, están fuertemente correlacionados, por lo que el error estándar de la media por bin subestima la incerteza. Las incertezas se obtienen entonces con un \textit{bootstrap} a nivel de evento \cite{efron1979bootstrap}: se remuestrean los eventos con pesos de Poisson, se recalculan las 12 medias y se repite el ajuste. La dispersión de las réplicas da el error de cada media (usado como peso en el ajuste y en el $\chi^2/\mathrm{ndf}$) y el error de $A_1$ y $B_1$. Se exigen al menos 50 eventos por celda y ningún bin azimutal vacío.
+
+Para verificar la continuidad con el Capítulo \ref{cap:infill} se aplicaron ambos estimadores a las mismas celdas de protones ($40^\circ \leq \theta_\mathrm{MC} < 50^\circ$, $450 \leq r < 1200$~m). Los valores centrales de $A_1$ coinciden en todas las celdas a menos de $0.002$, y los errores por \textit{bootstrap} resultan entre un $7$ y un $32\%$ mayores que los obtenidos con el error estándar, como corresponde a la correlación entre módulos.
+
+\subsubsection{Grilla, región de referencia y significancia global}
+
+La grilla es la del Capítulo \ref{cap:infill}: bines de $\Delta r = 150$~m desde $150$~m y bandas de $\theta$ de $10^\circ$, con la última banda dividida en $50^\circ$--$55^\circ$ y $55^\circ$--$65^\circ$. La banda de energía principal es $\lg(E/\mathrm{eV}) \in [17.5, 18.0)$, la única en la que existen simulaciones.
+
+Ajustar decenas de celdas e informar sólo las de mayor significancia sobreestimaría la evidencia (efecto \textit{look-elsewhere}). Para evitarlo se reportan todas las celdas y la evidencia global se cuantifica en una única \emph{región de referencia}, $600 \leq r < 1200$~m y $20^\circ \leq \theta < 55^\circ$ (16 celdas), que corresponde a la ventana en la que las simulaciones con geometría reconstruida del Capítulo \ref{cap:infill} preservan la asimetría. En ella se calculan dos cantidades: el $\chi^2$ de las 16 celdas respecto de $A_1 = 0$, que responde si existe asimetría, y la media pesada por la inversa de la varianza $\langle A_1 \rangle$. Esta última promedia celdas con distinto $r$ y $\theta$, por lo que es un resumen y no una constante física; se calcula idénticamente para datos y simulaciones.
+
+\subsubsection{Exposición azimutal}
+
+El número de módulos por bin de $\phi$ no es uniforme (Figura \ref{fig:cap7_exposicion}). A grandes distancias la región temprana contiene muchos más módulos que la tardía (alrededor del doble a $1200$--$1500$~m): el primer armónico de la exposición vale $0.22$ a $900$--$1200$~m y $0.33$ a $1200$--$1500$~m. El origen es la condición de disparo: en la región temprana la señal total de los tanques es mayor y las estaciones lejanas disparan con más frecuencia. Dos observaciones acotan su impacto. Primero, el estimador promedia \emph{dentro} de cada bin de $\phi$, por lo que el número de módulos por bin no entra en $A_1$; sólo podría hacerlo a través de una diferencia en la mezcla de distancias o energías entre bines, y la distancia media de los módulos de cada bin de $\phi$ varía en menos de $5$~m (panel derecho). Segundo, y más importante, las simulaciones reproducen esta exposición: el primer armónico vale $0.24$ y $0.38$ en las mismas bandas para protones (Figura \ref{fig:cap7_exposicion}, líneas a trazos). La selección de estaciones impuesta por el disparo está, por lo tanto, modelada en la referencia con la que se comparan los datos.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_exposicion_phi.pdf}
+	\caption{Exposición azimutal para $17.5 \leq \lg E < 18.0$ y $20^\circ \leq \theta < 55^\circ$. Izquierda: número de módulos por bin de $\phi$ normalizado a su media, en datos (líneas sólidas) y en simulaciones de protón (trazos). Derecha: diferencia entre la distancia media de los módulos de cada bin de $\phi$ y la de la banda radial, en datos.}
+	\label{fig:cap7_exposicion}
+\end{figure}
+
+\subsection{Resultados en datos}
+\label{subsec:resultados_datos}
+
+La Figura \ref{fig:cap7_ejemplo} muestra una celda individual de la región de referencia. La modulación es visible directamente en las medias por bin y el ajuste da $A_1 = 0.043 \pm 0.010$, con $B_1$ compatible con cero; las curvas ajustadas en la misma celda para protón y hierro tienen amplitudes del mismo orden.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_ejemplo_ajuste.pdf}
+	\caption{Ejemplo de ajuste en una celda de la región de referencia ($17.5 \leq \lg E < 18.0$, $20^\circ \leq \theta < 30^\circ$, $750 \leq r < 900$~m). Puntos: medias por bin de los datos normalizadas a $\rho_0$, con errores por \textit{bootstrap}. Líneas: ajuste de la Ecuación \ref{eq:ajuste_armonico_b1} a los datos, y primer armónico ajustado en la misma celda a las simulaciones de protón y hierro.}
+	\label{fig:cap7_ejemplo}
+\end{figure}
+
+\subsubsection{Pruebas nulas}
+
+Antes de interpretar $A_1$ se verificaron tres condiciones que deben cumplirse si el estimador y la convención azimutal son correctos (Figura \ref{fig:cap7_nulos}):
+
+\begin{itemize}
+	\item \textbf{Término seno.} Sobre las 56 celdas con $r < 1350$~m, $B_1$ es compatible con cero: $\chi^2 = 50.2$ para 56 grados de libertad ($p = 0.69$), y la distribución de $B_1/\sigma_{B_1}$ tiene media $+0.06$ y ancho $0.95$. Esto confirma además que los errores por \textit{bootstrap} están bien calibrados. La mediana del $\chi^2/\mathrm{ndf}$ de los ajustes armónicos es $1.02$.
+	\item \textbf{Lluvias cuasi verticales.} Para $\theta < 10^\circ$ no existe región temprana ni tardía; los valores de $A_1$ son compatibles con cero ($\chi^2 = 13.8$ para 8 grados de libertad, $p = 0.09$).
+	\item \textbf{Fase I frente a Fase II.} Las dos fases son conjuntos de eventos independientes. La diferencia de $A_1$ celda a celda tiene media compatible con cero ($+0.04$ en unidades de $\sigma$), pero su dispersión es mayor que la esperada: ancho $1.41$, $\chi^2 = 103$ para 53 grados de libertad. El exceso no se concentra en una región particular de la grilla, sino que proviene de una dispersión mayor en las celdas de Fase I, que tienen cinco veces menos eventos. Aplicando a los errores de Fase I un factor de escala $S = \sqrt{\chi^2/\mathrm{ndf}} = 1.39$ y recombinando, el valor medio en la región de referencia pasa de $0.0227$ a $0.0225$: la tensión no afecta al resultado combinado, que está dominado por la Fase II. Su origen (diferencias en la electrónica o en la reconstrucción del UMD entre ambos flujos, o colas no gaussianas en celdas poco pobladas) queda abierto.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_tests_nulos.pdf}
+	\caption{Pruebas nulas en la banda $17.5 \leq \lg E < 18.0$ ($r < 1350$~m). Izquierda: $B_1/\sigma_{B_1}$ en todas las celdas, con la distribución normal esperada. Centro: diferencia de $A_1$ entre Fase I y Fase II en unidades de su error combinado. Derecha: $A_1$ en función de $r$ para $\theta < 10^\circ$.}
+	\label{fig:cap7_nulos}
+\end{figure}
+
+\subsubsection{Existencia de la asimetría}
+
+En la región de referencia los datos dan
+\begin{equation}
+	\langle A_1 \rangle_\mathrm{datos} = 0.023 \pm 0.003\,(\mathrm{est.}) \pm 0.006\,(\mathrm{sist.}),
+\end{equation}
+con $\chi^2 = 89.9$ para 16 grados de libertad respecto de $A_1 = 0$ ($p = 3 \times 10^{-12}$). La incerteza sistemática se discute en la Sección \ref{subsec:sistematicos_datos}; ninguna de las variaciones consideradas lleva $\langle A_1 \rangle$ por debajo de $0.020$ ni su significancia por debajo de $7\sigma$, con la sola excepción de la muestra de Fase I aislada ($0.011 \pm 0.008$), que carece de estadística suficiente. La fase es la esperada: exceso de muones en la región temprana ($\phi = 0$) y $B_1$ nulo.
+
+Hasta donde sabemos, ésta es la primera medición de la asimetría azimutal de la densidad de muones con una señal muónica aislada del componente electromagnético, en datos del Observatorio.
+
+\subsection{Comparación Datos vs. MC y composición de masa media}
+\label{subsec:comparacion_mc_datos}
+
+\subsubsection{Dependencia con la distancia y el ángulo cenital}
+
+La Figura \ref{fig:cap7_A1_r} es el resultado central del capítulo: $A_1$ en función de $r$ para cada banda cenital, en datos y en las cuatro muestras simuladas, todas tratadas con el mismo estimador. Los datos reproducen la estructura de las simulaciones reconstruidas en toda la grilla: $A_1 \approx 0$ en las lluvias cuasi verticales; asimetría positiva creciente con $r$ hasta $\sim 0.05$ entre $600$ y $1200$~m para $\theta \geq 20^\circ$; y valores \emph{negativos} cerca del núcleo ($r < 450$~m) en las lluvias más inclinadas, que se discuten más abajo.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_A1_vs_r_datos_vs_mc.pdf}
+	\caption{$A_1$ en función de la distancia al núcleo reconstruido, por banda de ángulo cenital reconstruido, para $17.5 \leq \lg E < 18.0$. Negro: datos de campo (Fase I + II). Colores: simulaciones reconstruidas de protón, helio y hierro (\texttt{SIBYLL 2.3e}) y de helio (\texttt{QGSJET-III}), desplazadas levemente en $r$ para la lectura. La franja sombreada marca la región de referencia. En la banda $55^\circ \leq \theta < 65^\circ$ los datos se muestran con símbolos vacíos por estar fuera del rango cenital del resultado principal.}
+	\label{fig:cap7_A1_r}
+\end{figure}
+
+La Figura \ref{fig:cap7_A1_theta} resume la dependencia cenital en dos rangos radiales. Entre $750$ y $1050$~m la asimetría de los datos no crece de manera monótona con $\theta$: aumenta hasta $0.035 \pm 0.007$ en $20^\circ$--$40^\circ$, cae a $0.010 \pm 0.008$ en $40^\circ$--$50^\circ$ y vuelve a crecer por encima de $50^\circ$. Las simulaciones reconstruidas muestran la misma caída en $40^\circ$--$50^\circ$ ($0.018 \pm 0.010$ para protón y $0.018 \pm 0.008$ para hierro). A nivel Monte Carlo la asimetría crece de forma monótona con $\theta$ (Sección \ref{subsec:infill_mc}), por lo que esta estructura es un efecto de la reconstrucción que los datos comparten, no una propiedad física de la lluvia.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_A1_vs_theta.pdf}
+	\caption{$A_1$ en función del ángulo cenital reconstruido, para $17.5 \leq \lg E < 18.0$, en $750 \leq r < 1050$~m (izquierda) y en la región cercana al núcleo, $300 \leq r < 450$~m (derecha). Cada punto es la media pesada de las celdas de $150$~m del rango. La franja gris marca $\theta \geq 55^\circ$.}
+	\label{fig:cap7_A1_theta}
+\end{figure}
+
+\subsubsection{La región cercana al núcleo}
+
+Para $\theta \geq 40^\circ$ y $r < 450$~m los datos dan $A_1$ significativamente negativo: $-0.051 \pm 0.010$ y $-0.043 \pm 0.007$ en las dos primeras celdas de la banda $40^\circ$--$50^\circ$. Una asimetría negativa contradice el mecanismo de atenuación, pero las simulaciones reconstruidas presentan el mismo comportamiento (Figura \ref{fig:cap7_A1_theta}, derecha): $-0.053 \pm 0.010$ para protón y $-0.019 \pm 0.009$ para hierro en $300$--$450$~m y $40^\circ$--$50^\circ$, frente a $-0.043 \pm 0.007$ en los datos.
+
+Las simulaciones permiten identificar el origen, porque en ellas se conocen a la vez la distancia verdadera y la reconstruida de cada estación. El promedio de $r_\mathrm{REC} - r_\mathrm{MC}$ en función del azimut verdadero es una modulación de primer armónico: las estaciones de la región temprana se reconstruyen entre $12$ y $21$~m \emph{más cerca} del eje de lo que están, y las de la región tardía, la misma cantidad más lejos (los valores mayores corresponden a $40^\circ \leq \theta < 55^\circ$). Es decir, el núcleo reconstruido se desplaza hacia la región temprana, donde la señal de los tanques es mayor, como se espera al ajustar una LDF simétrica a una lluvia asimétrica.
+% NOTA PARA EL AUTOR: la Sección 5 (subsec:mc_vs_rec) describe el corrimiento del núcleo "hacia la región tardía". La medición directa en las simulaciones Infill (Scripts/Procesamiento_Datos_Campo/resultados_cap7/corrimiento_nucleo_mc.csv) indica lo contrario, con phi = 0 temprano. Conviene revisar la convención en el Capítulo 5 antes de entregar.
+En un bin fijo de $r$ reconstruido, las estaciones tempranas están entonces en realidad más lejos del eje y registran menos muones, y las tardías, más. El efecto reduce $A_1$ en todas las distancias y es proporcional a la pendiente logarítmica de la LDF, $|\mathrm{d}\ln\rho/\mathrm{d}\ln r| \cdot \delta/r$. Por eso domina cerca del núcleo, donde invierte el signo de la asimetría. Que los datos reproduzcan este comportamiento es una validación adicional de la descripción de la reconstrucción en las simulaciones, y justifica excluir la región $r < 600$~m de la región de referencia.
+
+\subsubsection{Comparación cuantitativa y composición}
+
+La Tabla \ref{tab:region_referencia} y la Figura \ref{fig:cap7_composicion} resumen la comparación en la región de referencia. Los datos son compatibles con todas las muestras simuladas. Celda a celda, el $\chi^2$ de la diferencia entre datos y simulación (sumando en cuadratura ambos errores) es $17.9$ para protón, $26.4$ para helio, $29.7$ para hierro (\texttt{SIBYLL 2.3e}) y $16.4$ para helio (\texttt{QGSJET-III}), siempre con 16 grados de libertad.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lccc}
+		\toprule
+		Muestra & $\langle A_1 \rangle$ & $\chi^2$ (datos $-$ MC) / ndf & $p$ \\
+		\midrule
+		Datos (Fase I + II) & $0.0227 \pm 0.0028$ & -- & -- \\
+		\quad Fase I & $0.0104 \pm 0.0077$ & -- & -- \\
+		\quad Fase II & $0.0234 \pm 0.0030$ & -- & -- \\
+		p (\texttt{SIBYLL 2.3e}) & $0.0167 \pm 0.0038$ & $17.9/16$ & $0.33$ \\
+		He (\texttt{SIBYLL 2.3e}) & $0.0217 \pm 0.0035$ & $26.4/16$ & $0.05$ \\
+		Fe (\texttt{SIBYLL 2.3e}) & $0.0195 \pm 0.0030$ & $29.7/16$ & $0.02$ \\
+		He (\texttt{QGSJET-III}) & $0.0275 \pm 0.0037$ & $16.4/16$ & $0.43$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Media pesada de $A_1$ en la región de referencia ($600 \leq r < 1200$~m, $20^\circ \leq \theta < 55^\circ$, $17.5 \leq \lg E < 18.0$, 16 celdas) y compatibilidad celda a celda entre datos y cada muestra simulada. Errores estadísticos.}
+	\label{tab:region_referencia}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_composicion.pdf}
+	\caption{Media pesada de $A_1$ en la región de referencia para los datos (banda gris: $\pm 1\sigma$ estadístico) y para cada muestra simulada.}
+	\label{fig:cap7_composicion}
+\end{figure}
+
+Estas diferencias de $\chi^2$ entre primarios \emph{no} constituyen una medición de composición. La razón es que, a nivel reconstruido y en esta región, las propias simulaciones de protón y de hierro no se distinguen entre sí: la diferencia media es $\langle A_1 \rangle_\mathrm{Fe} - \langle A_1 \rangle_\mathrm{p} = 0.002 \pm 0.005$, y el $\chi^2$ celda a celda entre ambas es $15.1$ para 16 grados de libertad. Las diferencias en el $\chi^2$ de los datos respecto de cada primario reflejan entonces fluctuaciones estadísticas de las simulaciones (alrededor de $4\,850$ eventos por muestra, una estadística comparable a la de los datos en cada celda) y no una preferencia física. Una interpolación lineal en $\ln A$ entre protón y hierro no produce un intervalo acotado dentro del rango físico, y por eso no se reporta un valor de $\langle \ln A \rangle$.
+
+Este resultado negativo es consistente con lo encontrado en los capítulos anteriores. La separación entre primarios que el Anillo Denso muestra con geometría Monte Carlo (Sección \ref{sec:discriminacion_masa}) se pierde en el arreglo \textit{Infill} al pasar a la geometría reconstruida (Sección \ref{subsec:infill_rec}), por la combinación del corrimiento del núcleo, la resolución angular y el sesgo direccional del conteo del UMD. Con la reconstrucción estándar, $A_1$ medido con el \textit{Infill} es por ahora un observable de la física de la cascada que las simulaciones describen correctamente, pero no un discriminador de masa. Recuperar esa sensibilidad requiere reducir la degradación de la reconstrucción, por ejemplo con un ajuste de LDF que incluya la modulación azimutal, y una biblioteca de simulaciones con más eventos que la actual.
+
+Una ventaja de $A_1$ merece destacarse para trabajos futuros. Al ser un cociente, $A_1$ no depende de la normalización absoluta del número de muones, que es la cantidad que las simulaciones subestiman respecto de los datos \cite{auger2016muon_deficit}; depende de la forma de la distribución en el plano de la lluvia. El acuerdo entre datos y simulaciones encontrado aquí indica que, en este rango de energía y dentro de las incertezas, los modelos describen correctamente la atenuación diferencial de los muones entre la región temprana y la tardía, a pesar del déficit en su número total.
+
+\subsection{Dependencia con la energía}
+\label{subsec:energia_datos}
+
+Los datos permiten extender la medición por encima del rango simulado (Figura \ref{fig:cap7_energia}). La media en la región de referencia crece con la energía: $0.023 \pm 0.003$ en $17.5 \leq \lg E < 18.0$, $0.044 \pm 0.007$ en $18.0 \leq \lg E < 18.5$ y $0.07 \pm 0.03$ para $\lg E \geq 18.5$. El crecimiento entre las dos primeras bandas (alrededor de $3\sigma$) se mantiene con el estimador alternativo de la Sección \ref{subsec:sistematicos_datos} ($0.032 \pm 0.003$ y $0.050 \pm 0.006$).
+
+Sin embargo, dentro de la banda simulada no hay pendiente apreciable ni en datos ni en simulaciones. Dividiendo $[17.5, 18.0)$ en dos mitades, la diferencia de $\langle A_1 \rangle$ entre ellas es $-0.001 \pm 0.006$ en los datos, $+0.000 \pm 0.007$ para protón y $+0.000 \pm 0.005$ para hierro. El aumento por encima de $10^{18}$~eV puede deberse a la física de la cascada (un $X_\mathrm{max}$ más profundo, como se discutió en la Sección \ref{subsec:dependencia_energia}) o a la mejora de la reconstrucción con la energía, ya que más estaciones con señal reducen el corrimiento del núcleo. Sin simulaciones por encima de $10^{18}$~eV no es posible separar ambas contribuciones.
+
+La banda $17.0 \leq \lg E < 17.5$, por debajo de la eficiencia completa, da $\langle A_1 \rangle = 0.000 \pm 0.002$ con el estimador nominal y $0.014 \pm 0.002$ con el alternativo. Esto explica por qué un análisis preliminar que integraba todas las energías desde $10^{17}$~eV encontraba asimetrías nulas o negativas: el espectro empinado hace que esos eventos, con selección sesgada y peor reconstrucción, dominen numéricamente cualquier bin ancho en energía.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{capitulos/imagenes_capitulos/cap7/cap7_evolucion_energia.pdf}
+	\caption{Dependencia de $A_1$ con la energía en los datos. Izquierda: $A_1$ en función de $r$, promediado en $20^\circ \leq \theta < 55^\circ$, para tres bandas de energía (la de $17.0$--$17.5$ está por debajo de la eficiencia completa del arreglo). Derecha: media en la región de referencia por banda de energía, con el estimador nominal (círculos; vacío: eficiencia incompleta) y con el estimador de cociente a la LDF media (cuadrados vacíos), junto con las simulaciones de protón y hierro (estimador nominal), disponibles sólo en $17.5 \leq \lg E < 18.0$.}
+	\label{fig:cap7_energia}
+\end{figure}
+
+\subsection{Incertezas sistemáticas}
+\label{subsec:sistematicos_datos}
+
+Cada fuente se evaluó repitiendo el análisis completo de la región de referencia con una única opción modificada, sobre datos y sobre las simulaciones de protón y hierro (Tabla \ref{tab:sistematicos}).
+
+\begin{table}[H]
+	\centering
+	\small
+	\begin{tabular}{lcccc}
+		\toprule
+		Variación & $\langle A_1 \rangle_\mathrm{datos}$ & $\Delta$ datos & $\langle A_1 \rangle_\mathrm{p}$ & $\langle A_1 \rangle_\mathrm{Fe}$ \\
+		\midrule
+		Nominal & $0.0226$ & -- & $0.0162$ & $0.0207$ \\
+		Estimador: cociente a la LDF media & $0.0318$ & $+0.0092$ & $0.0366$ & $0.0347$ \\
+		8 bines en $\phi$ & $0.0214$ & $-0.0012$ & $0.0160$ & $0.0189$ \\
+		16 bines en $\phi$ & $0.0228$ & $+0.0002$ & $0.0155$ & $0.0205$ \\
+		Bordes en $r$ desplazados $75$~m & $0.0275$ & $+0.0049$ & $0.0258$ & $0.0173$ \\
+		Escala de energía $+14\%$ & $0.0230$ & $+0.0004$ & -- & -- \\
+		Escala de energía $-14\%$ & $0.0202$ & $-0.0024$ & -- & -- \\
+		Sólo contadores de 3 módulos & $0.0228$ & $+0.0002$ & -- & -- \\
+		Conteos negativos llevados a cero & $0.0223$ & $-0.0003$ & -- & -- \\
+		Sin repesar el espectro simulado & -- & -- & $0.0171$ & $0.0204$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Variaciones sistemáticas sobre la media de $A_1$ en la región de referencia. Los guiones indican que la variación no modifica esa muestra. Las variaciones usan 250 réplicas de \textit{bootstrap}, de ahí la pequeña diferencia del valor nominal con la Tabla \ref{tab:region_referencia}.}
+	\label{tab:sistematicos}
+\end{table}
+
+\begin{itemize}
+	\item \textbf{Definición del estimador.} Es la mayor variación. El estimador alternativo divide cada módulo por una LDF media suave $\langle N_\mu \rangle(r, \lg E)$, ajustada en cada banda de $\theta$, antes de promediar por bin de $\phi$; así elimina la mezcla de distancias y energías dentro de cada celda. Con él, $\langle A_1 \rangle$ aumenta en $0.009$ en los datos y en $0.014$--$0.020$ en las simulaciones. El valor absoluto de $A_1$ depende entonces de la definición operativa del observable a un nivel de $\sim 0.01$, pero la conclusión de la comparación no: los datos siguen siendo compatibles con las simulaciones con cualquiera de los dos estimadores ($\chi^2/\mathrm{ndf} = 1.5$ y $1.6$ respecto de protón y hierro con el estimador alternativo). La misma mezcla explica que cada mitad de la banda de energía dé un valor algo mayor que la banda completa (Sección \ref{subsec:energia_datos}). Por ser una elección de definición aplicada por igual a datos y simulaciones, esta diferencia no se incluye en la incerteza sistemática de la comparación.
+	\item \textbf{Binado.} Cambiar el número de bines azimutales mueve el resultado en menos de $0.0012$. Desplazar medio bin los bordes radiales lo mueve en $0.005$ en los datos, y en una cantidad similar y de signo variable en las simulaciones, lo que refleja la estadística de las celdas.
+	\item \textbf{Escala de energía.} Desplazar los bordes de la banda de energía de los datos en $\pm 14\%$, la incerteza de la escala de energía del Observatorio \cite{augerSpectrum2020}, cambia el resultado en $+0.0004$ y $-0.0024$.
+	\item \textbf{Composición del arreglo y señal.} Restringir el análisis a los contadores con tres módulos, como en las simulaciones, o anular los conteos reconstruidos negativos ($0.7\%$ de los módulos) no cambia el resultado.
+	\item \textbf{Fases.} La tensión entre Fase I y Fase II (Sección \ref{subsec:resultados_datos}) cambia el valor combinado en $0.0002$ al aplicar el factor de escala.
+\end{itemize}
+
+Sumando en cuadratura las contribuciones del binado, la escala de energía y el resto, la incerteza sistemática sobre $\langle A_1 \rangle$ con el estimador nominal es de $\pm 0.006$, dominada por la elección de los bordes radiales.
+
+\subsection{Síntesis}
+\label{subsec:sintesis_datos}
+
+\begin{itemize}
+	\item Los datos de campo del UMD presentan una asimetría azimutal de primer armónico de la densidad de muones con la fase esperada (exceso temprano, $B_1$ nulo). En la región de referencia vale $\langle A_1 \rangle = 0.023 \pm 0.003\,(\mathrm{est.}) \pm 0.006\,(\mathrm{sist.})$ para $17.5 \leq \lg E < 18.0$, con una significancia global de aproximadamente $7\sigma$.
+	\item Su dependencia con $r$ y $\theta$, incluidos el valor nulo para lluvias verticales, la caída en $40^\circ$--$50^\circ$ y la inversión de signo cerca del núcleo en lluvias inclinadas, es reproducida por las simulaciones procesadas con la misma reconstrucción. La inversión cerca del núcleo se explica por el corrimiento sistemático del núcleo reconstruido hacia la región temprana.
+	\item Con la reconstrucción actual del arreglo \textit{Infill}, las simulaciones de protón y de hierro predicen la misma asimetría dentro de los errores, de modo que la medición no permite inferir la composición. El acuerdo entre datos y simulaciones en la forma de la distribución lateral-azimutal contrasta con el conocido déficit de muones de los modelos en su número total.
+	\item La asimetría de los datos crece por encima de $10^{18}$~eV; separar el origen físico de la mejora de la reconstrucción requiere simulaciones en ese rango.
+\end{itemize}
+
+\newpage

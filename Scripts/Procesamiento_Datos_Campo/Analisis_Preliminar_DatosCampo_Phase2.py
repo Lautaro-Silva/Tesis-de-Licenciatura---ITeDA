@@ -541,7 +541,6 @@ ax.axhline(1.0, color='black', linestyle='--', linewidth=1.5, alpha=0.6)
 
 ax.set_xlabel(r'Azimuth Phase in Shower Plane $\phi$ [deg]', fontsize=16)
 ax.set_ylabel(r'Normalized UMD Signal $\rho_\mu / \langle \rho_\mu \rangle$', fontsize=16)
-ax.set_title(r'Preliminary Field Data: UMD Azimuthal Modulation', fontsize=18, fontweight='bold', pad=15)
 
 ax.set_xlim(-180, 180)
 ax.set_xticks(np.arange(-180, 181, 45))
@@ -556,15 +555,15 @@ ax.legend(fontsize=13, loc='upper right', framealpha=0.9)
 textstr = '\n'.join((
     r"$\mathbf{Kinematic\ Cuts:}$",
     r"$18.0 \leq \log_{10}(E_{\mathrm{REC}}/\mathrm{eV}) < 18.5$",
-    r"$40^\circ \leq \theta_{\mathrm{REC}} < 60^\circ$",
-    r"$750 \leq r_{\mathrm{core}} < 1050$ m"
+    r"$50^\circ \leq \theta_{\mathrm{REC}} < 60^\circ$",
+    r"$750 \leq r_{\mathrm{core}} < 1250$ m"
 ))
 props = dict(boxstyle='round', facecolor='whitesmoke', alpha=0.8, edgecolor='gray')
 ax.text(0.04, 0.95, textstr, transform=ax.transAxes, fontsize=13,
         verticalalignment='top', bbox=props)
 
 plt.tight_layout()
-#plt.savefig('UMD_Experimental_Modulation_Corrected.pdf', dpi=300)
+plt.savefig('UMD_Experimental_Modulation_Corrected.pdf', dpi=300)
 plt.show()
 
 # %%

@@ -1,0 +1,9 @@
+cut,events,modules
+"En disco (6T5, lgE >= 16.5, theta <= 70)",939701,13190065
+lgE_REC >= 17.5,78525,1863095
+theta_REC <= 65,76405,1814354
+Sin Fase II 2022 (puesta en marcha),73655,1794792
+Estacion SD no rechazada,68844,1270152
+Contador UMD no rechazado,68844,1270152
+Modulo candidato,68844,1131661
+theta_REC < 55 (resultado principal),58775,981577
