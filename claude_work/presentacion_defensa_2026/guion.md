@@ -2,344 +2,314 @@
 
 Deck: `presentacion_defensa_2026.pdf` (Spanish, 16:9 Beamer/metropolis, ITeDA palette).
 Build: `./compilar.sh` (two pdflatex passes). Source: `presentacion_defensa_2026.tex`.
-Target: 40–45 min. This note is in English per the repo convention; the lines to say
+Target: 40–45 min (≈28 min of content since revision 20). This note is in English per the repo convention; the lines to say
 aloud are quoted in Spanish.
 
 All data figures are copied from `Tesis - Latex/capitulos/imagenes_capitulos/`, so every
-plot on screen is the exact one in the thesis. The slides do not cite thesis figure or
+plot on screen is the exact one in the thesis — except two redrawn from the same data and
+cuts: the mass slide (19, `scripts/figura_masa.py`, same A1 values without the significance
+S) and the field-data slide (33, `scripts/figura_datos_campo.py`, same A1 and χ²). The slides do not cite thesis figure or
 equation numbers (author's request); the "Thesis" column below keeps that mapping for you,
 in case the jury asks where something is in the document. Third-party images keep a
-one-line source credit (PDG, Botti, Haungs, Luce, Yushkov).
+one-line source credit (PDG, Botti, Haungs, Luce, Pierre Auger Collaboration).
 
-Slide numbers are the frame counter shown on screen (`n/53`); the 9 section-title pages
-are not counted. "R#" = RAFA 2026 content slide number (the author's own counting).
+Slide numbers are the frame counter shown on screen (`n/35`); the 8 section-title pages
+are not counted, and slide 25 has two PDF pages (the meme appears on the second).
 Simulation slides carry a badge saying which topology they use: "SIMULACIONES -- ANILLO
 DENSO" or "SIMULACIONES -- INFILL".
 
-## Timing (≈43.7 min of content + ≈0.5 min of section dividers)
+## Timing (≈28 min of content + ≈0.5 min of section dividers)
 
-This is at the top of the 40–45 min window. The cut list below the table saves ≈3 min.
+Revision 20 cut the deck from 53 to 35 slides (directors' and jury's corrections), so the
+talk is now well inside the 40–45 min window; the spare time is for questions.
 
-| # | Slide | Origin | Thesis | min |
-|---|---|---|---|---|
-| 1 | Portada | R1, modified | — | 0.3 |
-| 2 | ¿Qué son los UHECR? | R2 | Fig. 1.1.1 | 0.8 |
-| 3 | Estructuras del espectro | R3 (quick) | Fig. 1.1.2 | 0.4 |
-| 4 | Anatomía de una lluvia y X_max | R5 + R4, rewritten | Fig. 1.2.1 + N(X) sketch | 1.2 |
-| 5 | El Observatorio | R6 | Fig. 2.0.1 | 0.7 |
-| 6 | AugerPrime | R7 | Fig. 2.1.1 | 0.4 |
-| 7 | AMIGA / UMD | R8, fixed | Fig. 2.4.1 | 0.7 |
-| 8 | ¿Por qué el UMD es distinto? | R9, fixed | §2.4 | 0.7 |
-| 9 | Objetivos (+ herramientas) | new; absorbs R16/R17 | §1.3, Tabla 4.1.1 | 1.1 |
-| 10 | Índice | new | — | 0.3 |
-| 11 | Plano de la lluvia | R10 | Fig. 3.1.1 | 0.8 |
-| 12 | El observable A1 | R15, moved up | Ec. 3.3.1 | 0.7 |
-| 13 | Mecanismo 1: atenuación | R11 + math | Ec. 3.2.1–3.2.3 | 1.0 |
-| 14 | Mecanismo 2: respuesta del detector | R12, rewritten (merged) | Ec. 3.2.4, §3.2.2 | 1.3 |
-| 15 | Mecanismo 2: placa, tanque y umbral | R12, split (3/3) | Ec. 3.2.5, §3.2.2 | 1.0 |
-| 16 | Divergencia: la producción | R13, rewritten | Ec. 3.2.6–3.2.7, Fig. 3.2.1 | 1.0 |
-| 17 | Divergencia: del momento al ángulo | new | Ec. 3.2.8–3.2.9 | 1.2 |
-| 18 | Divergencia: ¿temprana o tardía? | R14, rewritten | Ec. 3.2.10 | 1.2 |
-| 19 | Campo geomagnético | new | §3.2.4 | 0.3 |
-| 20 | Modelo de juguete | new | Ec. 3.4.1, 3.4.3, 3.4.4 | 1.0 |
-| 21 | Del muón a la población | new | Ec. 3.4.2, 3.4.5 | 0.8 |
-| 22 | Linealización | new | Ec. 3.4.6, Anexo A | 0.9 |
-| 23 | ¿Qué signo tiene la población? | new | Ec. 3.4.7–3.4.8, §3.4.1 (end) | 1.0 |
-| 24 | Resultados del modelo: la predicción | new | Fig. 3.4.1 | 1.0 |
-| 25 | Anillo Denso: ejemplo | R18 | Fig. 5.1.1 | 0.6 |
-| 26 | A1 vs θ: UMD y SD | R19 | Fig. 5.1.2 | 0.9 |
-| 27 | Robustez | R20 (φ_sh + models) | Figs. 5.3.1, 5.3.2 | 0.5 |
-| 28 | Protón vs. hierro | R21 → thesis figure | Fig. 5.5.1, Ec. 5.5.1 | 1.0 |
-| 29 | Dependencia con la energía | from R20 | Fig. 5.4.1 | 0.5 |
-| 30 | Interpretación: X_max | new | Fig. 5.6.1, Ec. 5.6.2 | 0.9 |
-| 31 | ¿Por qué el SD va al revés con X_max? | new | Fig. 5.6.2, Ec. 5.6.1 | 1.0 |
-| 32 | El UMD en el Infill | R22 | Fig. 6.1.1 | 0.7 |
-| 33 | UMD vs. SD total | R23 | Fig. 6.1.3 | 0.7 |
-| 34 | Desglose del SD | R24 (table removed) | Fig. 6.1.4 | 0.9 |
-| 35 | ¿Qué estamos viendo? (2 pages: + meme) | new | Fig. 6.1.4 | 0.9 |
-| 36 | ¿Cuándo dispara una estación del SD? | new | §2.1, §6.1.3 | 0.8 |
-| 37 | Hipótesis de selección | new | §6.1.3 | 1.2 |
-| 38 | Prueba 1: sacando la selección de estaciones | new, replaces R25 | Fig. 6.1.5 | 1.2 |
-| 39 | Prueba 2: los tanques que quedan afuera | new | Fig. 6.1.6 | 1.2 |
-| 40 | ¿Qué estaciones entran, en cada región? | new | §6.1.3 (text) | 1.0 |
-| 41 | Qué queda abierto | new | §6.1.3 (end) | 0.6 |
-| 42 | La pregunta (REC < MC) | R19 repeated | Fig. 5.1.2 | 0.5 |
-| 43 | ¿Son los ajustes? | RAFA backup B1 | Fig. 5.2.1 | 0.6 |
-| 44 | El residuo | R26, fixed | Fig. 5.2.2 | 0.9 |
-| 45 | El error depende de la región | RAFA backup B2 | Fig. 5.2.3 | 0.7 |
-| 46 | Bootstrap por región | R28, LDF text removed | Fig. 5.2.4 | 0.8 |
-| 47 | En el arreglo real: segunda reconstrucción | new | Tabla 6.2.1 | 0.8 |
-| 48 | El núcleo se corre hacia la temprana | R27 with thesis figure | Fig. 5.2.5 | 0.9 |
-| 49 | El modelo de β | new | Ec. 6.2.1, Tabla 6.2.1 | 1.2 |
-| 50 | Dos reconstrucciones, dos efectos | new | §6.3 | 0.6 |
-| 51 | Datos de campo | R29, thesis numbers | Figs. 6.4.2, 6.4.3 | 1.0 |
-| 52 | Conclusiones | new (by objective) | Cap. 7 | 1.0 |
-| 53 | Trabajo futuro | new | Cap. 7 (last paragraph) | 0.5 |
+| # | Slide | Thesis | min |
+|---|---|---|---|
+| 1 | Portada | — | 0.3 |
+| 2 | ¿Qué son los UHECR? | Fig. 1.1.1 | 0.8 |
+| 3 | Estructuras del espectro | Fig. 1.1.2 | 0.4 |
+| 4 | Anatomía de una lluvia y X_max | Fig. 1.2.1 + N(X) sketch | 0.8 |
+| 5 | El Observatorio | Fig. 2.0.1 | 0.7 |
+| 6 | AugerPrime | §2.1 (photo: arXiv:2507.07762) | 0.4 |
+| 7 | AMIGA / UMD | Fig. 2.4.1 | 0.7 |
+| 8 | ¿Por qué el UMD es distinto? | §2.4 | 0.6 |
+| 9 | Índice | — | 0.3 |
+| 10 | Plano de la lluvia | Fig. 3.1.1 | 0.8 |
+| 11 | El observable A1 | Ec. 3.3.1 | 0.6 |
+| 12 | Mecanismos: atenuación y respuesta del detector | Ec. 3.2.1–3.2.5, §3.2.2 | 1.2 |
+| 13 | Mecanismos: divergencia cinemática | Fig. 3.2.1 (redrawn), Ec. 3.2.6–3.2.10 | 1.8 |
+| 14 | Un modelo de juguete (+ geomagnético) | §3.2.4, Ec. 3.4.1, 3.4.6, Anexo A | 1.1 |
+| 15 | La predicción del modelo | Fig. 3.4.1 (b) | 0.7 |
+| 16 | Simulaciones | Cap. 4, Tabla 4.1.1 | 0.8 |
+| 17 | Anillo Denso: ejemplo | Fig. 5.1.1 | 0.6 |
+| 18 | A1 vs θ: UMD y SD | Fig. 5.1.2 | 0.8 |
+| 19 | ¿Discrimina la masa? Protón vs. hierro | Fig. 5.5.1 (redrawn without S) | 0.8 |
+| 20 | Dependencia con la energía | Fig. 5.4.1 | 0.5 |
+| 21 | El arreglo Infill: dos geometrías | Cap. 6 (intro), §6.2 | 0.8 |
+| 22 | El UMD en el Infill | Fig. 6.1.1 | 0.7 |
+| 23 | UMD vs. SD total | Fig. 6.1.3 | 0.7 |
+| 24 | Desglose del SD | Fig. 6.1.4 | 0.9 |
+| 25 | ¿Qué estamos viendo? (2 pages: + meme) | Fig. 6.1.4 | 0.7 |
+| 26 | Promedio por región | §6.1.3 | 1.1 |
+| 27 | Prueba 1: sacando la selección de estaciones | Fig. 6.1.5 | 1.1 |
+| 28 | Prueba 2: muones en los tanques excluidos | Fig. 6.1.6 | 1.0 |
+| 29 | Discusión | §6.1.3 (end) | 1.3 |
+| 30 | Con la geometría REC, la asimetría desaparece | Tabla 6.2.1 | 0.7 |
+| 31 | El core reconstruido se corre hacia la temprana | Fig. 5.2.5 | 0.9 |
+| 32 | El efecto sobre A1 | Ec. 6.2.1, Tabla 6.2.1 | 1.0 |
+| 33 | Datos de campo (PRELIMINAR) | Fig. 6.4.2 (redrawn) | 0.8 |
+| 34 | Conclusiones | Cap. 7 | 1.2 |
+| 35 | ¡Gracias! | — | — |
 
-If running long, cut in this order: 6 (AugerPrime), 3 (spectrum zoom), 27 (robustness →
-backup), 19 (say it in one line on slide 18), 41 (one sentence at the end of 40),
-43 (one sentence on 42). That saves ≈3 min.
+Backups, in order: La pregunta (REC < MC), ¿Es un problema de los ajustes?, El residuo,
+El error depende de la región, bootstrap por región (these five were main slides 42–46
+until revision 19), incertezas de A1 y S, grillas MC/REC, conteo REC vs. MC, A1(r) en
+datos vs. simulaciones (the A1(r) panel that left the data slide), datos de campo — región
+de referencia y fases, muestra de datos de campo, reconstrucción de energía y dirección,
+ajuste del SD en el Anillo Denso.
 
 ## Talking points
 
 **1–4 Rayos cósmicos.** Open with the flux (1/km²/siglo). Three open questions; "hoy
-nos importa la composición". Slide 4 explains X_max with the N(X) sketch: first each
-interaction multiplies the particles; once their energy drops below a critical value they
-stop multiplying and the number falls. "X_max no es algo geométrico: la lluvia se sigue
-abriendo como un cono después del máximo; lo que cae es la cantidad de partículas."
-Close with ⟨X_max⟩ ∝ ln(E/A): deeper for higher energy and lighter primaries. The X_max vs
-energy plot (Yushkov) appears only on slide 30, where it is used.
+nos importa la composición". Slide 4: two components, X_max as the depth of the maximum
+*number* of particles (the N(X) sketch), ⟨X_max⟩ ∝ ln(E/A).
 
-**5–8 Auger.** Keep brief. Slide 5 gives the duty cycles (SD ~100%, FD ~15%). On 7, say
-"más de media atmósfera" (540 g/cm² vs ≈870 g/cm² vertical at Auger). On 8, the threshold
-depends on the *local* angle of each muon, so it is higher for late muons: this seeds the
-detector-response term.
+**5–8 Auger.** Keep brief. Slide 5 gives the duty cycles (SD ~100%, FD ~15%). Slide 6: the
+photo is a real upgraded station (SSD on top of the tank, radio antenna above it). Only say
+that WCD+SSD does not separate the two components physically. On 7, say "más de media
+atmósfera" (540 g/cm² vs ≈870 g/cm² vertical at Auger). On 8, the threshold depends on the
+*local* angle of each muon, so it is higher for late muons — the soil attenuation is not
+modelled anywhere else in the talk, so do not promise to come back to it.
 
-**9–10 Objetivos e índice.** Three objectives as in the author's plan. Say aloud that
-objective (c), the analytic model, came later: "surgió a posteriori, cuando vimos la
-inversión del SD y necesitábamos entender qué esperar". The index is deliberately neutral:
-just read the six items.
-Slide 9 also carries the "Herramientas" block, which replaced the separate simulation
-slide: official simulations with several hadronic models and primaries, in the Anillo Denso
-(12 virtual stations at 450 m) and in the real Infill array, plus field data. MC vs REC is
-no longer written on any slide (author's choice): say it aloud the first time it appears
-(slide 26, A1 vs θ): "MC es la verdad de la simulación; REC, lo que entrega la
-reconstrucción". If asked for details: SIBYLL 2.3e (main), QGSJET-III.01 and EPOS-LHC-R;
-p/He/O/Fe; 10^17.5–10^18 eV.
+**9 Índice.** Just read the six items. (The objectives slide was removed: "es como poner
+las conclusiones antes".)
 
-**11–12 Plano y observable.** The observable comes before the mechanisms so that each
+**10–11 Plano y observable.** The observable comes before the mechanisms so that each
 mechanism can be labelled "favorece temprana / tardía". "El signo de A1 dice qué domina,
 no identifica a un mecanismo."
 
-**13 Atenuación.** For muons, attenuation = survival against decay; λ_dec = 6.2 km × p/GeV.
-"Como λ crece con el momento, un muón blando decae en un recorrido más corto; el camino
-extra del lado tardío se lleva una fracción mayor de muones blandos que de energéticos."
-λ in practice is effective. Favours early.
+**12 Atenuación y respuesta del detector.** Attenuation: f_att = e^(−d/λ); the late region
+travels a longer path, so attenuation *always* favours the early region. For muons it is
+mostly survival against decay (λ_dec ≈ 6.2 km × p/GeV), if asked. Detector response: the
+sketch shows that the *local* incidence angles ϑ are not the same in the two regions — the
+late muons arrive more inclined. Projected onto the ground, the same number of particles is
+spread over a larger area (∝ 1/cos ϑ) on the late side, so a flat detector sees a lower
+density there: it favours early. The block on the right: in the model this enters with a
+weight κ — 1 for the UMD plate, 0 for the SD tank signal. If asked why κ = 0 for the tank:
+where more muons enter the tank they cross less water, and number × track ≈ volume, so the
+signal is not modulated (the tank-count κ ≈ 0.3 and the Bertou & Billoir first-order
+expression are no longer on the slides; have them ready).
 
-**14–15 Mecanismo 2 (respuesta del detector), two slides.**
-14: Bertou & Billoir (2000, GAP-2000-017 — not Armbruster) assume a stationary shower. The
-particles open out from the axis by an angle α, with tan α ≈ p_t/(−p_z) — the variable that
-appears in their expression. (The kinematic-divergence slides use sin α = p_t/p: it is the
-same angle written with another function, and to first order they coincide.) Opening outward
-tilts the track toward the vertical on the early side, ϑ = θ_sh − α, and lays it down on the
-late side, ϑ = θ_sh + α. The sketch exaggerates on purpose: a very inclined axis (θ_sh = 50°)
-and a production point high up, so the early track arrives almost vertical (ϑ ≈ 0) and the
-late one very inclined (~67°); the grey segments with tick marks on the shower plane show
-that both points are at the same r — say it aloud, it is not written. (The sketch uses a
-single production point, like the kinematic-divergence picture, to make the angles visible;
-under B&B's stationary hypothesis the opening angle belongs to each particle, but the
-geometric consequence — more vertical early, more inclined late — is the same.)
-Then the plate: "un haz … ve a una placa horizontal de área A como A cos ϑ ⇒ la atraviesan
-N = nA cos ϑ partículas". Projected along the axis, the plate covers A cos θ_sh of the
-shower plane, so ρ = n cos ϑ / cos θ_sh (larger early, smaller late) — say this step aloud,
-it is not on the slide. The Bertou & Billoir box: to first order in α,
-cos(θ_sh ∓ α)/cos θ_sh ≈ 1 ± α tan θ_sh, which averaged over the particles gives their
-⟨p_t/(−p_z)⟩ tan θ_sh: "el mismo resultado, en otras variables". Be ready to do the
-expansion on the board.
-15, *plate, tank, threshold.* The plate (UMD) feels the full effect. The tank is a 3D body.
-Its top is horizontal, so it intercepts more muons the more vertically they arrive — the
-early side; its side wall is vertical, so it intercepts more the more inclined they arrive —
-the late side. They pull in opposite directions and almost cancel (κ ≈ 0.3). For the *signal*, each muon gives
-light in proportion to its track in the water; where more muons enter, they cross less
-water, and number × track = volume, so the signal is not modulated (κ = 0). Plus the UMD
-threshold, higher on the late side.
+**13 Divergencia cinemática (the core of the physics part).** The diagram is a redrawn
+version of Luce et al.'s figure (ICRC 2021) — the credit line was removed from the slide, so
+**say it aloud**: "la figura está adaptada de Luce et al.". θ_sh ≈ 52°, both stations at the
+same r (red arrows, drawn slightly offset along the axis with dotted reference lines), the
+local zenith angles ϑ_temp ≈ 19° / ϑ_tard ≈ 66°. The arrows at the axis are the transverse
+momenta p_t opening outwards, in the colour of each region; the momentum p along the axis is
+not drawn — say it: "el muón sale con un momento p a lo largo del eje y un p_t que lo abre".
+The two p_t are to scale for the same p: the late station needs a much smaller one (α_tard ≈
+14° vs α_temp ≈ 33°). Bullets: the divergence angle is defined by sin α = p_t/p ≃ c p_t/E;
+Cazón's dN/dp_t ∝ p_t e^(−p_t/Q), small p_t most probable; same r ⇒ the late region is
+farther (dilution, favours early) but needs a smaller α (favours late). The boxed function is
+called F^div (not S, which is reserved for the total signal): "el efecto da algo como esto";
+in the ratio F^div_tard / F^div_temp the first factor favours early and the two under the
+single brace favour late. Do **not** discuss energy dependence or a possible sign flip — it
+does not happen.
 
-**16–18 Divergencia cinemática (the core of the physics part).** Take your time.
-16: "el mecanismo anterior trata a la lluvia como estacionaria; acá los muones nacen a una
-distancia D sobre el eje, y entonces los puntos temprano y tardío quedan a distancias
-distintas de la fuente". Cazón's p_t distribution, density ∝ 1/d². Same r ⇒ the late region
-is farther and needs a smaller angle.
-17: the Jacobian — the linear p_t cancels; then "reemplazando p_t = p sin α" and adding 1/d².
-18: three factors. Dilution favours early; the two emission factors favour late. "El signo
-lo decide la energía del muón." The box: a detector sums all energies; energetic muons come
-out in a narrow cone and concentrate density where they land; so the sign depends on which
-energies dominate among the muons that reach r, and that is what the toy model answers.
+**14–15 Modelo de juguete.** 14 opens with the geomagnetic field: another effect that
+exists — the Lorentz force would separate μ+ and μ− — but it is second order for these θ_sh
+(dominant only at θ ≳ 70°) and is not included. Then "podemos construir un modelo de juguete con" one point source of muons on the axis at distance D that
+combines the mechanisms (divergence, attenuation, response, UMD threshold). "Analizando la
+asimetría y linealizándola a primer orden en r/D" gives the bracket: one term per mechanism,
+only −s is negative. Say aloud that this generalises Armbruster (2018), whose expression is
+the κ = 0 case (cited by Luce et al., ICRC 2021) — it is no longer on the slide. 15: the
+prediction: A1 > 0 in UMD and SD, growing with r and θ_sh. Frame it as a starting point:
+"nos sirve para ver cómo esperamos que se comporte la asimetría y probar qué tanto se ajusta
+al modelo que propusimos" — and anticipate that it will *not* fully hold (e.g. the UMD
+asymmetry flattens with r instead of growing at intermediate θ, 30°–50°). (Model parameters, if asked:
+D = 7.5 km, Q = 0.15 GeV/c, p_UMD = 1 GeV/c, γ = 2.6. The amplitudes depend on them and are
+not a prediction.)
 
-**19 Geomagnético.** One line: elliptical deformation, small projection on cos φ, adds
-scatter; dominant only at θ ≳ 70°.
+**16 Simulaciones.** Official production, CORSIKA + Offline, SD-750 + UMD. SIBYLL 2.3e
+(main), QGSJET-III.01 and EPOS-LHC-R; p, He, O, Fe; 10^17.5–10^18 eV; θ ≤ 65°. The Dense
+Ring: 12 virtual stations at r = 450 m from the *true* axis, every 30° in the shower plane;
+the radius is fixed, so there is no geometric difference between MC and REC here (the
+reconstructed core only rotates φ by ~b/r ≈ 2°). Say "MC es la verdad de la
+simulación; REC, lo que entrega la reconstrucción" the first time REC appears (slide 17).
 
-**20–24 Modelo de juguete.**
-20: the equation; d(φ) is the distance from the source to the station that enters the
-divergence and attenuation terms; α enters the emission factor, ϑ the response and the
-threshold. "El muón llega al centellador si su momento alcanza para atravesar la tierra a
-lo largo de su trayectoria; del lado tardío llega más inclinado, atraviesa más tierra y
-necesita más momento."
-21: the production spectrum is an inverse power law, p^−2.6: many soft muons, few energetic
-ones; each region sums its own muons. The A1 box: S ∝ 1 + A1 cos φ gives ⟨S⟩(1+A1) early
-and ⟨S⟩(1−A1) late, so A1 = (S_temp − S_tard)/(S_temp + S_tard).
-22: the linearised bracket, one term per mechanism. Only −s is negative and it grows with
-the muon momentum. Armbruster's expression (cited by Luce et al. ICRC 2021) is the κ = 0
-case.
-23: the sign of the population, in three steps. (1) A single muon flips to A1 < 0 only
-above the crossover momentum p* = 2QD/r (≈1.9 GeV/c at 1200 m); attenuation and response
-push it higher. (2) To reach r, a muon needs p_t ≈ p r/D, and Cazón suppresses large p_t as
-e^(−p/p0), with p0 = QD/r. (3) p0 = p*/2: the muons that do arrive are below the crossover,
-so the population gives A1 > 0. "Los muones que favorecerían a la región tardía son
-justamente los que casi no llegan lejos del eje." The sketch shows exactly this.
-24: results and the prediction box: "con esto en la mano, vamos a las simulaciones". The
-sign survived varying D, Q and γ. (Model parameters, off the slides, if asked: D = 7.5 km,
-Q = 0.15 GeV/c, p_UMD = 1 GeV/c, reference point r = 1200 m, θ = 35°. The amplitudes depend
-on them and are not a prediction — say this only if asked.)
+**17–20 Anillo Denso.** 17: positive, as predicted. 18: SD above UMD at low θ (EM), below at
+θ ≳ 50° (κ = 0 vs κ = 1, if asked). The REC < MC difference is no longer discussed in the
+main talk (backups "La pregunta" … "bootstrap por región"). Robustness (φ_sh, hadronic
+models) was removed: if asked, φ_sh-independent and SIBYLL vs QGSJET-III within ±10% over
+almost the whole range (thesis §5.3). 19: we wanted to know whether A1 could be used for mass
+discrimination, and it cannot: marginally ⟨A1^p⟩ ≳ ⟨A1^Fe⟩, but the difference is ≲ 0.01 and
+only in some θ bins, so the two primaries are comparable. The figure no longer shows the
+significance S (author's request); if a juror asks for a number, the maximum was S ≈ 2.5 at
+40–55°, and it is a difference of *means* (grows as √N), not an event-by-event separation.
+20: "también se analizó la dependencia de A1 con la energía incidente de la lluvia" —
+protons, 40–60°, five bins of reconstructed energy; A1 grows only slightly with E, which
+justifies integrating 17.5–18.0. (The X_max interpretation slides were
+removed; do not bring it up unless asked.)
 
-**25–26 Anillo Denso.** Say that these slides are in the Anillo Denso (the badge says it
-too). 25: positive, as predicted. 26: SD above UMD at low θ (EM), below
-at θ ≳ 50°. If asked why: κ = 0 for the tank signal vs κ = 1 for the plate. Plant: "fíjense
-que REC está por debajo de MC — volvemos a esto".
+**21 El arreglo Infill: dos geometrías.** Still simulations (the badge says SIMULACIONES --
+INFILL): now the Infill stations: their distances to
+the axis vary, so we can look at A1(r). r and φ of each station depend on where the axis is.
+Two geometries: MC (true core and direction) and REC (reconstructed). The main difference
+between them is the **core** position. Say "core" throughout, never "núcleo".
 
-**27 Robustez.** φ_sh-independent; SIBYLL vs QGSJET-III within ±10% over almost the whole
-range (helium only). If asked: a few isolated bins reach 15% (thesis §5.3.2).
+**22–25 UMD vs SD.** 22: MC geometry. Read the curves by θ: below 10° it is small
+(compatible with zero within ~2σ); at 10°–30° it grows slowly with r; at 30°–50° it rises to
+≈0.1 by ~600 m and then stays **constant** with r (the 40°–50° curve only rises again beyond
+~1200 m, where the statistics are poor); at θ ≥ 50° it grows with r out to 1500 m. So it is
+positive but does not always grow with r — a discrepancy with the model, say it explicitly. 23
+(30–40°, MC geometry, both written on the plot): the SD total inverts far from the core; already
+reported (Bradfield 2022), never explained. 24: split by component — the EM is positive
+everywhere; the SD muons are what inverts. (The right-hand "A1 (VEM)" twin axis was cropped
+out: it duplicates the left scale and A1 is dimensionless.) 25: same shower, same region —
+but the particles crossing each detector are not the same ones. Same quantity (muons
+crossing the detector, MC count), completely different behaviour. Next click: the meme.
 
-**28 Protón vs. hierro.** No "factor de mérito", no "composición de masa". S is a
-difference of means in units of the combined uncertainty; it grows as √N. "No es una
-separación evento a evento." Max ~2.5 at 40–55°.
+**26–29 Sesgo de selección (central result — the most time).**
+26: the analysis averages only stations that triggered and belong to the reconstructed
+event. Present it as a proposal: if the probability of entering depends on the station's
+muon content, and differently in each region, the average is biased. The cartoon is
+illustrative.
+27: same counts, coordinates and fit; only which stations enter changes. Without the
+selection the inversion disappears. +0.069 ± 0.016 (all) vs −0.124 ± 0.019 (selected) at
+1200–1350 m; errors from a bootstrap over the 960 showers, if asked.
+28: if it is a trigger effect — knowing the SD is calibrated — the excluded tanks should
+hold at most one muon: 95% / 93%, means 0.35 / 0.46. "A lo sumo uno", not "alrededor de
+uno". If asked for the retained fractions: 42% of the early and 18% of the late stations
+enter (1200–1350 m).
+29, *Discusión*: without selection the SD muons are positive again but do not reach the
+UMD; candidates already in the model: plate vs tank response (κ) and the UMD threshold.
+Then: the UMD has no trigger of its own — it depends on the SD trigger, a module is read only
+if the tank of its station triggers. So why is its average not biased the same way? First
+sub-bullet: the SD is selected *on its own particles* — a tank enters when its own count
+fluctuates upward, so its average is pulled up; that fluctuation need not repeat in the UMD
+because the two detectors do not measure the same particles ("imaginate que son partículas
+distinguibles, con nombre"). Second: from the start the UMD covers a different surface and
+is not exactly under the tank, so the muons crossing it are other muons, and they also have
+to cross the equivalent of more than half an atmosphere of soil. The tank triggering decides
+which station enters, not how many muons the UMD sees: the expected UMD count is still the
+local density. If a juror pushes ("¿entonces el UMD no tiene ningún sesgo?"): a residual
+effect remains through what the two share — the station's position inside the r bin and the
+muon content of each shower — second order and not quantified. (Removed from the slide by
+the author's choice; I agree it is better said orally than written, but have it ready.)
 
-**29–31 Energía y X_max.** p > Fe and A1 rising with E both point to a deeper X_max.
-Slide 30: say first that the X_max plot is a published Auger FD measurement, not part of
-this thesis. Then the argument, step by step: a deeper shower produces its muons closer to
-the ground (smaller D). The path difference between the late and the early region,
-d_tardío − d_temprano ≈ 2 r tan θ_sh (from d(φ) ≈ D − r tan θ_sh cos φ), is fixed by the
-geometry and does **not** depend on D; what matters is how big it is compared with D. In the
-linearised model, A1 ≈ [2 − s + D/λ + κ](r/D) tan θ_sh: the dilution and detector-response
-terms go as Δd/D ∝ 1/D; the attenuation term is r tan θ_sh/λ, independent of D (it compares
-Δd with λ, not with D); and the emission term s, at fixed momentum, would grow as 1/D² — but
-the muons that actually reach r have p ~ QD/r, so s ≈ 1 for the arriving population and the
-bracket stays roughly fixed. Net result: A1 ∝ 1/D, it grows when D shrinks. If someone
-pushes: this is the point-source toy model, so it is a qualitative argument, not a
-prediction of how much A1 changes between p and Fe. Slide 31: the EM component
-follows the *gradient* of the longitudinal profile (→0 near the maximum, so it falls as the
-shower gets deeper); the muons follow the *distance* (rises). Opposite trends with X_max,
-consistent with what was reported for the SD (Bradfield). Present it as an interpretation
-(HIPÓTESIS badge), not as a disagreement with Bradfield.
+**30–32 La posición del core reconstruido.** 30: A1 of the *same* injected muons with the
+true (MC) and reconstructed (REC) geometry, 450–600 m: with REC geometry it almost
+disappears (0.108 → −0.002 at 40–50°). 31: the reconstruction LDF is symmetric in φ, so the
+only way to absorb the early excess is to move the core toward the early side; the fit
+Δr = a + b cos φ gives b = 9, 15, 21 m, growing with θ. 32: approximating and fitting the LDF as
+ρ ∝ r^−β, the correction to the LDF from the core shifted by b along the early–late
+direction is a cos φ modulation: ρ(r + b cos φ) ≈ ρ(r)[1 − β(b/r) cos φ]
+⇒ ΔA1 ≈ −β b/r. Point at the table: simulation vs −βb/r. Conclusion of the slide (now written on it): with
+this model we reproduce the loss of asymmetry seen in the simulations when going from the MC
+to the REC geometry. β is the local log-log slope of
+the UMD muon LDF, measured on the same simulations. **Check before the defense:** the β
+values (2.9, 2.7, 2.5) are thesis Table 6.2.1, but the committed
+`Scripts/Cap5_corrimiento_nucleo.py` fits 300–650 m and gives 2.63, 2.46, 2.37; with those the
+prediction at 450 m is −0.054, −0.085, −0.111 — same conclusion, but know where each number
+comes from. If asked about φ: the shift also rotates the azimuth seen from the REC core by
+~b/r ≈ 2°, much less than the 30° bins (0.108 → 0.107); only the distance matters.
 
-**32–34 SD (now in the Infill — say so).** 32: Infill, MC geometry, the UMD behaves as
-predicted. 33: the SD total inverts far from the core; already reported, never explained;
-appears with MC geometry, so it is not a core or coordinate error, nor a mix-up of the
-stations' φ: r and φ are exact here. "Si la geometría está descartada, lo que queda es qué
-medimos y sobre qué estaciones promediamos" — that sets up the next slides. 34: split by component — the EM is
-positive everywhere; the SD muons are what inverts. Stop here.
+**33 Datos de campo.** What we see: the UMD muon density as a function of φ, normalised to
+its mean, for Phase II showers with the cuts in the box, and the fit 1 + A1 cos φ. The
+maximum at φ ≈ 0 means an excess in the early region, as in the simulations. Preliminary:
+the core-position correction we just saw exists has not been applied. If asked for the number: A1 = 0.063 ± 0.017, 18.0 ≤ lg E <
+18.5, **50–60°, 750–1250 m** (the caption of thesis Fig. 6.4.2 says 40–60° / 750–1050 m;
+the code, the abstract and the conclusions say 50–60° / 750–1250 m — the slide figure was
+regenerated from the code and reproduces A1 = 0.063 ± 0.017, χ²/ndf = 15.5/11). No
+systematics yet, and no MC above 10^18 eV for this bin. The A1(r) data-vs-MC panel is now a
+backup.
 
-**35 ¿Qué estamos viendo?** "Es la misma lluvia; uno está enterrado debajo del otro;
-miramos lo mismo, los muones que cruzan el detector; el UMD coincide con el modelo, el SD
-no." Next click (same frame, second page): the orange "Preguntas" box and the meme appear
-together on the right. Ask the three questions, let the meme land, then move on.
-
-**36 ¿Cuándo dispara una estación del SD?** Particles crossing the tank emit Cherenkov
-light; three PMTs collect it; the signal is measured in VEM (the signal of a vertical muon
-crossing the whole tank); if it passes a minimum threshold the station triggers and can
-enter the event reconstruction. The slide says the threshold is "del orden de la señal de un
-muón vertical (1 VEM)". Say it that way, not "exactly 1 VEM": as far as I recall the SD
-station triggers are a threshold trigger of order 1.75 VEM peak in coincidence of the
-three PMTs (T1) and 3.2 VEM peak (T2), plus time-over-threshold — check Abraham et al.,
-NIM A 613 (2010) 29 before the defense. With the real values the argument is even stronger:
-a lone muon often does not trigger. (The "sobre todo si cruza de costado" remark was removed
-from the slide: it is not well founded — an inclined muon crossing the whole tank has a
-*longer* track, so one could argue the opposite. Only corner-clipping muons have short
-tracks. Don't bring it up.)
-
-**37–41 Sesgo de selección (central result — the most time).**
-37: the analysis averages only stations that triggered and belong to the reconstructed
-event. The cartoon is illustrative: on the late side only the more muon-rich stations
-enter, so the selected mean goes up and A1 flips "sin crear ni mover ningún muón".
-Label it a working hypothesis.
-38: the cleanest test — same counts, coordinates and fit; only the averaged population
-changes. Without the selection the inversion disappears and the SD muons behave like the
-UMD, positive at every r. +0.069 ± 0.016 (all) vs −0.124 ± 0.019 (selected) at 1200–1350 m.
-Errors are a bootstrap over the 960 showers, if asked. (The 42% / 18% retained fractions
-moved to the table on slide 40, where they are actually used.)
-39: if it is selection, the excluded tanks should hold at most one muon (the trigger was
-explained on slide 36): 95% / 93%, means 0.35 / 0.46. Say "a lo sumo uno", not "alrededor
-de uno" — most have zero. "Being part of the event" also includes event-level triggers and
-station rejection, not only the station trigger.
-40, *¿Qué estaciones entran, en cada región?* Read the table top to bottom: of every 100
-stations, 42 enter on the early side and only 18 on the late side (1200–1350 m band); the
-ones that enter carry 1.49 and 1.69 muons; the ones left out carry 0.35 and 0.46; the late
-ones left out have half the EM (14 vs 28). Then the three numbered steps:
-(1) far fewer stations enter on the late side (18 of 100 vs 42);
-(2) the stations that enter carry more muons than the mean of their region, and on the late
-side that excess is much larger — so much that the late ones that enter even have more
-muons than the early ones. The average over the stations that enter therefore overestimates
-the late region, and that is what flips A1. The size of the excess, illustratively: the
-regional means over all stations are early ≈ 0.42 × 1.49 + 0.58 × 0.35 ≈ 0.83 and late ≈
-0.18 × 1.69 + 0.82 × 0.46 ≈ 0.68, so the selected early stations carry ~1.8× their regional
-mean and the selected late ones ~2.5×. Caveat: the 42/18 fractions are from 1200–1350 m and
-the means from 900–1500 m, so these ratios are only illustrative; the thesis states it
-qualitatively ("las estaciones tardías retenidas están más enriquecidas en muones").
-(3) working hypothesis: on the late side very little EM is left, so it is hard for a station
-to trigger, and only the ones with far more muons than their region's mean get in. The
-thesis says this does not prove the mechanism. Supporting number, not on the slide (the
-author was not convinced by that row): between 900 and 1350 m, a station with zero muons
-still enters 39% of the time on the early side and 18% on the late side.
-The footer note is the band caveat plus "entrar = disparo + lectura + reconstrucción".
-41: what remains — UMD still 0.03–0.06 above the SD muons at 150–900 m (if asked: the
-difference excludes zero at 95% CL). The model predicts UMD > SD through κ. Third bullet:
-the UMD has no trigger of its own — a module is read out only if the tank of its station
-triggers, so the UMD curve is also built on selected stations. Back-of-envelope (not in the thesis, verify before quoting):
-Δκ·(r/D)·tan θ ≈ 0.7 × 0.08 × 0.7 ≈ 0.04.
-
-**42–50 La reconstrucción del UMD.** The story has two layers; keep them separate (the
-badges help: 42–46 are Anillo Denso, 47–49 are Infill).
-42–46 are the *counting* layer: fits are fine (χ²_ν ≈ 1); the residual has mean 0.013 and
-**width** σ = 0.20 (say "ancho", not "±"); it is cut at −1 and unbounded upwards; a global
-bootstrap fails; the residual depends on φ (≈0.005 early, ≈0.03 late; the 40–65° selection and the
-global mean 0.019 are printed on the plot); a
-φ-dependent bootstrap explains everything up to 35° and more than half above. "El
-remanente queda abierto."
-47–49 are the *geometry* layer. 47: we compute A1 of the *same* injected muons with the
-true (MC) and the reconstructed (REC) geometry; with REC geometry the asymmetry almost
-disappears (0.108 → −0.002 at 40–50°, 450–600 m). 48: the core position error points along
-the same direction as the early–late axis — the reconstructed core moves toward the early
-region — so early stations look closer to the REC core and late ones farther; the fit
-Δr = a + b cos φ gives b = 9, 15, 21 m, growing with θ. Why: the LDF is symmetric in φ and
-the only way to absorb the early excess is to move the core. 49: the β model. ρ is the UMD
-muon density in the Infill (mean number of injected muons per station, MC truth), as a
-function of the distance to the axis — the muon LDF. Near the bin it is approximated by a
-power law ρ ∝ r^−β, so ln ρ = const − β ln r: β is the slope of ln ρ vs ln r, i.e. the
-relative drop of density per relative increase of distance ("si r crece un 1%, ρ baja un
-β%"). It is measured on the same set of simulated showers (per θ bin), exactly like b,
-which also comes from the set (the fit of the mean Δr vs φ profile): neither is an
-event-by-event quantity. How it is done in `Scripts/Cap5_corrimiento_nucleo.py`: mean muon
-count per station in bins of *true* distance, then a straight-line fit of ln(count) vs
-ln(r). In a REC radial bin the early station is really farther, at r + b (fewer muons), and
-the late one really closer, at r − b (more muons), so ρ picks up a fake −β(b/r) cos φ and
-ΔA1 ≈ −β b/r. **Check before the defense:** the β values on the slide (2.9, 2.7, 2.5) are
-the thesis Table 6.2.1 values for the 450–600 m bin, but the committed script fits 300–650
-m and gives β = 2.63, 2.46, 2.37 (`Scripts/resultados_cap5_corrimiento_nucleo/
-estimacion_lavado_A1.csv`); I could not find the script that produced the table's β. With
-the script's β the prediction at r = 450 m is −0.054, −0.085, −0.111, which agrees with the
-simulation just as well, so the conclusion does not change — but know where each number
-comes from if asked. The table now labels which column is the simulation (ΔA1 measured as REC −
-MC geometry) and which is the prediction (−β b/r), and includes b: −0.110 vs −0.102 at
-40–50°. Swapping only φ does nothing (0.108 → 0.107); it is the distance that kills it.
-50: the core does **not** explain the counting bias — a module's muon count does not use
-the core position. In the Dense Ring the stations sit at the true 450 m and the shift only
-rotates φ by ~2°, the same for MC and REC.
-
-**51 Datos de campo.** Use the thesis numbers: A1 = 0.063 ± 0.017, Phase II, 18.0–18.5,
-**50–60°, 750–1250 m** (the caption of thesis Fig. 6.4.2 says 40–60° / 750–1050 m; the
-code, the abstract and the conclusions say 50–60° / 750–1250 m). Max in the early region.
-The A1(r) panel follows the reconstructed MC, including the negative near-core cells at
-high θ — the β effect. Preliminary: no systematics yet, and no MC above 10^18 eV for the
-headline bin.
-
-**52–53 Conclusiones y futuro.** One block per objective, then the two instrumental
-results. On the analytic model, the slide says its predictions (A1 > 0, growing with r and
-θ, UMD above SD) were confirmed by the simulations and that it "parece una descripción
-fenomenológica bastante completa del signo y de las tendencias". Keep that qualifier if
-asked: the toy model predicts signs and trends, not amplitudes, and the SD inversion is not
-a prediction of the model — it is a selection effect, which the model is consistent with
-(propagation alone cannot produce a late excess). Future work is taken from the last
-paragraph of `08_conclusiones.tex`.
-
-**49, extra notes.** Is ρ ∝ r^−β "the LDF the Observatory uses"? Not literally: the
-reconstruction LDFs are not pure power laws (the SD one is NKG-like). But over a narrow
-range like 450–600 m any smooth LDF is well approximated by a power law, and β is its local
-log-log slope; here it was measured directly on the simulated UMD muon counts, not taken
-from the official LDF parameters. The approximation is first order in b/r ≈ 2–4%. The φ
-bullet: the core shift also changes the azimuth seen from the reconstructed core (a
-parallax), but only by ~b/r ≈ 2°, much smaller than the 30° φ bins, so using the
-reconstructed φ does not change A1 (0.108 → 0.107); only the distance matters.
+**34 Conclusiones.** Four points: (1) the azimuthal asymmetry of the muon density was
+analysed with the UMD — early excess in simulations and a first, preliminary observation in
+field data; (2) the analytic model gets the sign but is not complete — e.g. at intermediate θ (30°–50°) the
+UMD asymmetry flattens with r instead of growing; (3) the SD sign inversion far from the core is a
+selection bias — only the stations that trigger are averaged, and on the late side those are
+mostly the ones with more muons than the mean; averaging over all stations, the SD muon
+asymmetry is positive again, like the UMD's; (4) a systematic error in the core (shower-axis)
+position along the early–late direction was observed: the reconstructed core moves toward
+the early region, which reduces A1 as ΔA1 ≈ −β b/r. Future work is no longer a slide: if asked, the kinematic
+production + transport model (thesis §6, "Perspectiva") and the core correction in data.
 
 ## Revision log
+
+**Revision 23 (author's corrections 1–3):** slide 8 — "la contribución de e±/γ queda muy
+reducida y la señal es principalmente muónica" (no S_EM + S_μ). Slide 12 — "del lado tardío
+los muones llegan más inclinados" and "la densidad en el piso es n cos ϑ" removed (said
+aloud). Slide 22 — the "crece, con una meseta" bullet rewritten per θ range to match the
+figure: 10°–30° grows slowly with r; 30°–50° reaches ≈0.1 near 600 m and then stays constant;
+θ ≥ 50° grows out to 1500 m. This also corrects the old "θ ≥ 40°: crecimiento monótono", which
+the 40°–50° curve does not show; conclusion 2 now says "a θ intermedios (30°–50°)" instead of
+"θ ≲ 40°".
+
+**Revision 22 (author's corrections 1–11):** slide 4 — "se absorbe más rápido", "llega al
+suelo" removed. Slide 12 — the projection bullet starts from "un haz de n partículas por unidad
+de área" and ends with the ground density n cos ϑ (no "un detector plano ve menos densidad");
+κ block on two lines. Slide 13 — Luce credit line and the p arrow removed (both said aloud),
+late r arrow raised, "salen con un ángulo de divergencia definido como", the divergence
+function renamed F^div, ratio equation lowered. Slide 14 — "Podemos construir un modelo de
+juguete con…". Slide 16 — temprana/tardía labels removed from the sketch, "no hay diferencia
+de geometría entre MC y REC". Slide 17 — figure shifted left. Slide 21 — bigger sketch.
+Slide 25 — bullets reordered, "misma cantidad" in bold. Slide 26 — "el promedio por región
+se sesga". Slide 29 — no parenthesis; sub-bullets rewritten (not the same particles; other
+surface, not exactly under the tank, more than half an atmosphere of soil); residual-effect
+sub-bullet removed. Slide 32 — conclusion line added.
+
+**Revision 21 (author's corrections 1–17):** slide 4 — one bullet per component. Slide 12 —
+figure at the top of the right column, κ in a block below it, and the ground-projection
+argument back (same particles over a larger area ∝ 1/cos ϑ on the late side). Slide 13 —
+diagram redrawn with the production point higher (ϑ_temp ≈ 19°, visible), p_t arrows and
+labels in the colour of each region, the early r arrow offset along the axis, α_temp label
+moved outside the wedge; bullets: sin α = p_t/p ≃ c p_t/E, Cazón's distribution in its own
+bullet; the geomagnetic line moved to the start of slide 14. Slide 19 — figure redrawn
+without S (`scripts/figura_masa.py`, same A1 as thesis Fig. 5.5.1), first bullet "Buscamos si
+podíamos usar la asimetría A1 para hacer discriminación de masa". Slide 20 — first bullet
+replaced. Slide 21 — SIMULACIONES -- INFILL badge. Slide 22 — "discrepancia con el modelo".
+Slide 23 — first bullet removed. Slide 24 — right frame line restored (crop 58 pt instead of
+66). Slide 27 — table right under its bullet. Slide 28 — bigger plot, the ≤1-muon bullet
+moved to the right column. Slide 29 — UMD "depende del trigger del SD"; decorrelation
+argument rewritten (selection on the SD's own particles vs. independent UMD fluctuation;
+residual through shared position/shower content). Slide 31 — wider plot, bullets and caption
+lower. Slide 32 — "aproximando y ajustando la LDF … corrección por el core corrido en la
+dirección temprana–tardía". Slide 33 — two-column layout with an explanation of the plot.
+Slide 34 — conclusions 3 and 4 rewritten. Plots enlarged on 17, 18, 19, 20, 22, 23, 24, 27.
+
+**Revision 20 (directors' and jury's corrections — "sacar mucho texto"):** 53 → 35
+slides. Removed: objectives, robustness, the two X_max slides, the SD-trigger slide, "¿Qué
+estaciones entran, en cada región?", "Dos reconstrucciones", future work, and the old
+mechanism/toy-model sequence (13–24 → 4 slides). Moved to backups: the five
+counting-reconstruction slides (old 42–46). New: "Mecanismos: atenuación y respuesta del
+detector" (f_att, local angles, κ = 1/0), "Mecanismos: divergencia cinemática" (Luce's figure
+redrawn in TikZ with p along the axis, p_t opening outwards to scale, local ϑ_temp/ϑ_tard; α
+≃ p_t/p and Cazón's p_t distribution; the boxed S(d, α); the three-factor ratio with a single
+brace under the two late-favouring factors; a one-line geomagnetic note), "Un modelo de
+juguete" (equation + linearised bracket, no Armbruster box), "La predicción del modelo"
+(panel b + prediction box, framed as a starting point), "Simulaciones" (what used to be
+"Herramientas", with a Dense Ring sketch), "El arreglo Infill: dos geometrías" (MC vs REC,
+the core position is the main difference). AugerPrime: new photo of an upgraded station
+(SSD + radio antenna; Pierre Auger Collaboration, arXiv:2507.07762), only "no las separa
+físicamente". Slide 4 lost the multiplication bullet and "no es geométrico"; slide 8 lost
+"lo retomamos en la fenomenología". Mass slide rebuilt around "no discrimina: los primarios
+son comparables". Infill: "como el modelo" removed; figures enlarged on 23, 24 (right twin
+axis cropped) and 27; "¿Qué estamos viendo?" says the particles are not the same, no
+questions box; "Promedio por región" (no HIPÓTESIS badge, phrased as a proposal, last bullet
+removed); Prueba 2 retitled, trigger-calibration phrasing, "lo esperado" removed;
+"Discusión" with the UMD–SD decorrelation argument. Section titles renamed; "núcleo" →
+"core" everywhere. REC-geometry slide retitled, first bullet removed; core-shift slide with
+a bigger figure and the "¿Por qué?" folded into the first bullet; β slide reduced to one
+bullet + table. Field-data slide: only the regenerated azimuthal profile
+(`scripts/figura_datos_campo.py`: no fit result in the legend, "Fase II" in the cuts box,
+PRELIMINAR watermark) and one sentence; the A1(r) panel became a backup. Conclusions
+replaced by four points, no "Además". Slide numbers in revisions ≤ 19 below refer to the
+53-slide version.
+
+**Revision 19:** Pierre Auger Observatory logo added to the title slide, next to UBA and
+ITeDA (`figuras/logo_auger.png`, rasterised from the official SVG served by the KIT Auger
+site, iap.kit.edu/pierre-auger-observatory/img/auger-logo.svg).
 
 **Revision 18 (final):** closing slide redone — full-screen background `figuras/auger_cr.jpg`
 (shower over an SD tank with the Milky Way), "¡Gracias!" and "¿Preguntas?" top right with a
@@ -482,17 +452,23 @@ toy model split into "ecuación" and "población", run parameters removed.
 
 ## To verify before the 16th
 
-1. SD station-trigger thresholds (see slide 36 note).
+1. SD station-trigger thresholds, if the trigger comes up on slide 28: the thesis says
+   "del orden de 1 VEM"; as far as I recall T1 ≈ 1.75 VEM peak and T2 ≈ 3.2 VEM peak plus
+   time-over-threshold — check Abraham et al., NIM A 613 (2010) 29.
 2. "Se empezó a instalar en 2018" — if you say the UMD deployment year aloud, check it.
-3. The 0.005 / 0.03 early/late residuals on slide 45 are read off thesis Fig. 5.2.3 (the
-   text of the thesis does not quote them); the global mean 0.019 is printed on the plot.
-4. Backup "datos de campo — región de referencia y fases" uses numbers from
+3. β on slide 32: thesis table (2.9/2.7/2.5) vs committed script (2.63/2.46/2.37); see the
+   talking points.
+4. The 0.005 / 0.03 early/late residuals on the "error depende de la región" backup are read
+   off thesis Fig. 5.2.3; the global mean 0.019 is printed on the plot.
+5. Backup "datos de campo — región de referencia y fases" uses numbers from
    `Scripts/Procesamiento_Datos_Campo/resultados_cap7/` that are **not in the thesis**. Use
    it only if asked.
-5. Slide 14's first-order step (ϑ = θ_sh ∓ α and the expansion behind the B&B box) is a re-derivation
-   of Bertou & Billoir's result written for the talk; the thesis text (§3.2.2) gives the
-   plate argument and the final expression but not the expansion step. It is standard, but
-   be ready to do it on the board.
+6. Slide 6 photo credit: taken from the arXiv source of "The Scintillator Surface Detector of
+   the Pierre Auger Observatory" (arXiv:2507.07762, Fig. 1 right). Journal reference not
+   checked; the slide cites the arXiv number only.
+7. Slide 29's argument (the UMD fluctuation is independent of the tank's, so the SD trigger
+   does not bias the UMD average to first order) is qualitative; the residual effect through
+   position-in-bin and shower muon content is not quantified in the thesis.
 
 ## Likely questions (short answers)
 
@@ -518,7 +494,7 @@ toy model split into "ecuación" and "población", run parameters removed.
   and A1 ∝ 1/D (the attenuation term gives r/λ, D-independent).
 - **El UMD tiene umbral de ~1 GeV/c y p0 ≈ 0.95 GeV/c: ¿no quedan los muones del UMD cerca
   del cruce?** With attenuation and the plate response the crossover moves to ≈3.2 GeV/c
-  (slide 24, panel a), well above the UMD population; the full numerical model with the
+  (thesis Fig. 3.4.1 a), well above the UMD population; the full numerical model with the
   threshold still gives A1 > 0. The thesis also notes that raising the threshold makes A1
   *less* positive, not negative.
 - **Exposición en φ en datos.** The cos φ exposure term is similar in data and MC (0.22 vs
