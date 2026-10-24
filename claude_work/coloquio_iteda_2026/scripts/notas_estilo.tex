@@ -1,0 +1,30 @@
+% Style for the printed speaker notes (included by scripts/notas_a_pdf.sh)
+\usepackage{xcolor}
+\definecolor{itedaTeal}{HTML}{1B5E7E}
+\definecolor{itedaOrange}{HTML}{F07E26}
+\usepackage{sectsty}
+\sectionfont{\color{itedaTeal}\Large\bfseries}
+\subsectionfont{\color{itedaOrange}\large\bfseries}
+\usepackage{titlesec}
+% Every slide note (### -> subsection) starts on a clear, ruled block
+\titleformat{\subsection}{\color{itedaOrange}\large\bfseries}{}{0pt}{}[\vspace{-4pt}{\color{itedaOrange}\rule{\linewidth}{0.6pt}}]
+\titlespacing*{\subsection}{0pt}{14pt}{6pt}
+\setlength{\parskip}{3pt}
+\usepackage{enumitem}
+\setlist{itemsep=1pt, topsep=2pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{itedaTeal} Huellas del universo --- notas del expositor}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\usepackage{needspace}
+\let\oldsubsection\subsection
+\renewcommand{\subsection}{\needspace{6\baselineskip}\oldsubsection}
+% Glyphs missing from Fira Sans (≲ ≳ ∝ ≃ ⟨ ⟩ ″ ⚠) fall back to DejaVu Sans
+\directlua{
+  luaotfload.add_fallback("notasfallback", {"DejaVu Sans:mode=harf;"})
+}
+\setmainfont{Fira Sans}[UprightFont=*-Book, BoldFont=*-SemiBold,
+  ItalicFont=*-BookItalic, BoldItalicFont=*-SemiBoldItalic,
+  RawFeature={fallback=notasfallback}]
