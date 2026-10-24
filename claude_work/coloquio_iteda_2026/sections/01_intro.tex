@@ -1,0 +1,89 @@
+% ======================================================================
+% BLOQUE 0 — Portada y hoja de ruta
+% ======================================================================
+\bloque{}
+
+% ---------------------------------------------------------------- 1
+% Logo de la FIFA (Federación Interuniversitaria de Físicos Argentinos):
+% se incluye automáticamente si existe figures/logos/logo_fifa.png
+\begin{frame}[plain]
+  \fondo[0.10]{halzen/halzen_p005_sintexto.jpg}
+  \velo[0.85]{b}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north west, text=white, font=\small\bfseries, fill=itedaOrange,
+      rounded corners=2pt, inner sep=4pt]
+      at ([xshift=0.9cm, yshift=-0.6cm]current page.north west)
+      {CasiCasiColoquios \;·\; UBA};
+    \node[anchor=south west, align=left, text=white, inner sep=0pt]
+      at ([xshift=0.9cm, yshift=1.05cm]current page.south west) {%
+      {\fontsize{34}{38}\selectfont\bfseries Huellas del universo}\\[5pt]
+      {\large\color{itedaOrange}\bfseries Rayos cósmicos, cosmología y
+        neutrinos desde Argentina}\\[12pt]
+      {\normalsize Lautaro Silva Pizzi}\\[2pt]
+      {\small ITeDA (CNEA--CONICET--UNSAM) \quad·\quad FCEN-UBA \quad·\quad octubre de 2026}};
+    \node[anchor=south east, fill=white, rounded corners=2pt, inner sep=3pt]
+      (logos) at ([xshift=-0.6cm, yshift=1.05cm]current page.south east) {%
+      \includegraphics[height=0.95cm]{logos/logo_uba.png}\hspace{6pt}%
+      \includegraphics[height=0.95cm]{logos/logo-portada5-iteda.png}};
+    % FIFA (Federación Interuniversitaria de Físicos Argentinos): arriba a la derecha
+    \node[anchor=north east, inner sep=0pt] at ([xshift=-0.6cm, yshift=-0.45cm]current page.north east)
+      {\includegraphics[height=1.9cm]{logos/logo_fifa.png}};
+  \end{tikzpicture}
+  \creditoblanco{Composición de fondo: F.~Halzen, \textit{IceCube: the first decade of neutrino astronomy}, Erice 2024}
+\end{frame}
+
+% Paso de la hoja de ruta: #1 color, #2 mensajero, #3 pregunta, #4 experimento
+\newcommand{\paso}[4]{%
+  \begin{tikzpicture}
+    \node[fill=#1, text=white, font=\bfseries\small, minimum width=2.05cm,
+      minimum height=1.15cm, align=center, rounded corners=2pt] (a) {#2};
+    \node[right=0.22cm of a, text width=7.15cm, align=left,
+      font=\small] {\hyphenpenalty=10000\exhyphenpenalty=10000
+      #3\\[-1pt]{\footnotesize\color{itedaGray}#4}};
+  \end{tikzpicture}\par\vspace{3.5pt}}
+
+% ---------------------------------------------------------------- 2
+\begin{frame}{Cuatro huellas, un mismo cielo}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.31\textwidth}
+      \centering
+      \begin{tikzpicture}
+        \mapabase{6.55cm}
+        % ITeDA
+        \fill[white] \geo{-58.52}{-34.57} circle (1.6pt);
+        \node[font=\tiny\bfseries, text=white, anchor=north]
+          at \geo{-59.5}{-35.0} {ITeDA};
+        % Proyectos
+        \tikzset{proyecto/.style={fill=itedaTealDark, draw=white, line width=1.1pt},
+          every node/.append style={fill=noche, fill opacity=0.75, text opacity=1,
+            inner sep=1.2pt, rounded corners=1pt}}
+        \filldraw[proyecto] \geo{-66.48}{-24.19} circle (3pt);
+        \node[font=\scriptsize\bfseries, text=white, anchor=west]
+          at \geo{-65.0}{-24.0} {QUBIC};
+        \filldraw[proyecto] \geo{-67.8}{-30.6} circle (3pt);
+        \node[font=\scriptsize\bfseries, text=white, anchor=west]
+          at \geo{-66.3}{-30.5} {HERON};
+        \filldraw[proyecto] \geo{-69.25}{-35.25} circle (3pt);
+        \node[font=\scriptsize\bfseries, text=white, anchor=west]
+          at \geo{-67.7}{-35.9} {Pierre Auger};
+        \draw[white, -{Stealth}, thick] \geo{-64}{-51} -- \geo{-64}{-55.3}
+          node[pos=0, above, font=\tiny\bfseries, align=center]
+          {IceCube\\Polo Sur};
+      \end{tikzpicture}
+    \column{0.66\textwidth}
+      \vspace{-2pt}
+      \paso{cmbAzul}{Luz de 380.000\\años post\\Big Bang}
+        {\textbf{¿Cómo era el universo temprano?}}
+        {Fondo cósmico de microondas y su polarización \;→\; QUBIC, Salta}
+      \paso{itedaOrange}{Núcleos de\\$10^{20}$\,eV}
+        {\textbf{¿Qué acelera partículas a energías macroscópicas?}}
+        {Lluvias atmosféricas \;→\; Observatorio Pierre Auger, Mendoza}
+      \paso{itedaTeal}{Muones\\bajo tierra}
+        {\textbf{¿Qué medimos realmente cuando detectamos?}}
+        {Mi tesis de licenciatura con el detector subterráneo de muones}
+      \paso{violetaNu}{Neutrinos}
+        {\textbf{¿Dónde están las fuentes?}}
+        {IceCube (Polo Sur) \;→\; HERON, San Juan}
+  \end{columns}
+  \creditoizq{Mapa: Natural Earth (dominio público)}
+\end{frame}

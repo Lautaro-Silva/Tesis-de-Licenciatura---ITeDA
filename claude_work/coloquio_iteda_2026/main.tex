@@ -1,0 +1,32 @@
+% !TEX program = lualatex
+% ======================================================================
+% Huellas del universo
+% Rayos cósmicos, cosmología y neutrinos desde Argentina
+% Coloquio — Lautaro Silva Pizzi, ITeDA (CNEA-CONICET-UNSAM)
+%
+% Compilar:  ./compilar.sh      (o: latexmk -lualatex main.tex)
+% Notas orales: notas_expositor.md   ·   Fuentes de figuras: fuentes_figuras.md
+% ======================================================================
+\documentclass[aspectratio=169,11pt]{beamer}
+\input{sections/00_preambulo.tex}
+
+\title{Huellas del universo}
+\subtitle{Rayos cósmicos, cosmología y neutrinos desde Argentina}
+\author{Lautaro Silva Pizzi}
+\institute{ITeDA (CNEA--CONICET--UNSAM)}
+\date{Coloquio --- octubre de 2026}
+
+\begin{document}
+
+\input{sections/01_intro.tex}
+\input{sections/02_cosmologia.tex}
+\input{sections/03_rayos_cosmicos.tex}
+\input{sections/04_auger.tex}
+\input{sections/05_tesis.tex}
+\input{sections/06_neutrinos.tex}
+\input{sections/07_heron_cierre.tex}
+
+\appendix
+\input{sections/08_respaldo.tex}
+
+\end{document}
