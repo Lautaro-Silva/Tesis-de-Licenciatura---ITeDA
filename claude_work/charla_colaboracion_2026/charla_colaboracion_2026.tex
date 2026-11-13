@@ -143,6 +143,50 @@
     \textit{Transition:} We start in the cleanest setup we have.}
 \end{frame}
 
+\begin{frame}{Why an early--late asymmetry?}
+  \small
+  Four mechanisms modulate the muon density in the shower plane:
+  \vspace{0.4em}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.35}
+    \begin{tabular}{p{3.3cm}p{7.6cm}l}
+      \toprule
+      \textbf{Mechanism} & \textbf{Effect} & \textbf{Favours}\\
+      \midrule
+      Atmospheric attenuation & The late region is farther: more muons decay on the way &
+        \textcolor{plotBlue}{\textbf{early}}\\
+      Detector response & Late muons arrive more inclined: a flat detector (UMD) sees a lower
+        density there & \textcolor{plotBlue}{\textbf{early}}\\
+      Kinematic divergence & At the same $r$, the late region is farther ($1/d^2$ dilution) but
+        needs a smaller opening angle (smaller, more probable $p_t$) &
+        \textcolor{plotBlue}{\textbf{early}} / \textcolor{plotMaroon}{\textbf{late}}\\
+      Geomagnetic field & Separates $\mu^+$ and $\mu^-$; second order for $\theta\lesssim70^\circ$ &
+        ---\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \vspace{0.3em}
+  \centering A toy model combining them predicts \alert{$A_1>0$, growing with $r$ and $\theta$}.
+  \note{%
+    Why should there be an asymmetry at all? Four mechanisms act on the muons. The late
+    region of an inclined shower is farther from where the muons are produced, so more of
+    them decay on the way: attenuation always favours the early side. The late muons
+    also arrive more inclined, so a flat detector like the UMD sees a lower density
+    there; for the SD tank signal this effect is essentially absent. The third is the
+    kinematic divergence of the muon emission: at the same distance in the shower plane
+    the late stations are farther, which dilutes the density, but they need a smaller
+    opening angle, that is a smaller transverse momentum, which is more probable; the
+    first favours early and the second late. Finally the geomagnetic field separates
+    positive and negative muons, but it is a second-order effect below about seventy
+    degrees and we do not include it. A toy model with a point source of muons on the
+    axis combines the first three and predicts a positive A1, growing with distance and
+    with zenith angle, for both the UMD and the SD. That is the expectation we test.
+    (If asked: to first order in r over D, A1 is about the bracket two minus s plus D over
+    lambda plus kappa, times r over D times tan theta; kappa is one for the UMD plate and
+    zero for the tank signal.)\par
+    \textit{Transition:} Now the simulations.}
+\end{frame}
+
 % ============================================================
 \section{The reference: Monte Carlo geometry}
 % ============================================================
@@ -157,8 +201,8 @@
       {\footnotesize
       \renewcommand{\arraystretch}{1.15}
       \hspace{1.2em}\begin{tabular}{@{}ll@{}}
-        \textbf{Hadronic models} & SIBYLL~2.3e (main), QGSJET-III.01, EPOS-LHC-R\\
-        \textbf{Primaries} & p, He, O, Fe\\
+        \textbf{Hadronic models} & SIBYLL~2.3e (main), QGSJET-III.01\\
+        \textbf{Primaries} & p (main), He, Fe\\
         \textbf{Energy} & $10^{17.5}$--$10^{18}$~eV\\
         \textbf{Zenith angle} & $\theta\le65^\circ$\\
       \end{tabular}}
@@ -250,53 +294,14 @@
     need the real Infill array.}
 \end{frame}
 
-\begin{frame}{The Infill array: two geometries}
-  \badgeIF
-  \begin{columns}[c]
-    \column{0.57\textwidth}
-      \begin{itemize}
-        \item Now the real Infill stations (750~m): the distance to the axis varies
-          from station to station $\Rightarrow$ we can study $A_1(r)$.
-        \item $r$ and $\phi$ of each station depend on where the shower axis is.
-          Two geometries:
-          \begin{itemize}
-            \item \textbf{MC}: true core and direction;
-            \item \textbf{REC}: reconstructed core and direction.
-          \end{itemize}
-        \item The main difference between them is the \textbf{core position}.
-      \end{itemize}
-    \column{0.40\textwidth}
-      \centering
-      \begin{tikzpicture}[x=1.05cm,y=1.05cm]
-        \foreach \fila in {0,1,2,3} {
-          \foreach \col in {0,1,2,3,4} {
-            \pgfmathsetmacro{\xpos}{\col + 0.5*mod(\fila,2)}
-            \pgfmathsetmacro{\ypos}{0.866*\fila}
-            \fill[itedaTeal] (\xpos,\ypos) circle (2.6pt);
-          }
-        }
-        \node[star, star points=5, fill=plotBlue, inner sep=1.6pt] at (2.25,1.35) {};
-        \node[font=\tiny, plotBlue, anchor=north] at (2.25,1.22) {MC core};
-        \draw[plotMaroon, very thick] (2.55,1.55) -- ++(0.16,0.16) (2.55,1.71) -- ++(0.16,-0.16);
-        \node[font=\tiny, plotMaroon, anchor=north west] at (2.72,1.55) {REC core};
-        \draw[plotBlue, dashed] (2.25,1.35) circle (1.25);
-      \end{tikzpicture}
-
-      \vspace{0.2em}
-      {\scriptsize Stations every 750~m. With another core, $r$ and $\phi$ of every
-      station change.}
-  \end{columns}
-  \note{%
-    Still simulations, but now with the real Infill stations. Their distances to the
-    axis vary, so we can follow A1 as a function of r. The distance and azimuth of each
-    station depend on where the shower axis is, and there are two choices: the true
-    core and direction from the simulation, or the reconstructed ones. The main
-    difference between the two is the core position. We start with the true one.\par
-    \textit{Transition:} This is the UMD asymmetry with the true geometry.}
-\end{frame}
 
 \begin{frame}{UMD radial dependence on the Infill (MC geometry)}
   \badgeIF
+  \vspace{-0.4em}
+  {\small Real Infill stations (750~m): the distance to the axis varies from station to station
+  $\Rightarrow$ $A_1(r)$. Station $r$ and $\phi$ depend on where the axis is: here the
+  \textbf{true} core and direction.}
+  \vspace{0.2em}
   \begin{columns}[c]
     \column{0.62\textwidth}
       \includegraphics[width=\textwidth]{Infill_UMD_A1_vs_r_MC_EN.pdf}
@@ -305,8 +310,7 @@
       \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
       \begin{itemize}
         \setlength{\itemsep}{2pt}
-        \item \textbf{UMD only} (injected muons); $r,\phi$ from the \textbf{true}
-          core and direction.
+        \item \textbf{UMD only} (injected muons).
         \item Radial bins of $\Delta r=150$~m; zenith bins of $10^\circ$.
         \item $\theta<10^\circ$: compatible with zero.
         \item $10$--$40^\circ$: grows with $r$, then \textbf{flattens}.
@@ -316,8 +320,12 @@
       \centering\alert{\textbf{This is our reference.}}
   \end{columns}
   \note{%
-    This is the UMD alone, with the injected muon numbers and the true core and
-    direction, in radial bins of 150 meters and zenith bins of ten degrees. Near-vertical
+    Still simulations, but now with the real Infill stations. Their distances to the axis
+    vary, so we can follow A1 as a function of r. The distance and azimuth of each station
+    depend on where the shower axis is: we can use the true core and direction from the
+    simulation, or the reconstructed ones, and the main difference between the two is the
+    core position. Here we use the true one. This is the UMD alone, with the injected muon
+    numbers, in radial bins of 150 meters and zenith bins of ten degrees. Near-vertical
     showers show no significant asymmetry. Between ten and forty degrees it grows with
     distance and then flattens. Above forty degrees it grows with distance. (If asked:
     at forty to fifty degrees it stays around 0.1 and rises only beyond about twelve
@@ -380,6 +388,7 @@
     \textit{Transition:} The key point: we never average over all stations.}
 \end{frame}
 
+
 \begin{frame}{Hypothesis: the station selection biases the average}
   \badgeHYP
   \small
@@ -394,31 +403,35 @@
       on/.style={tank, fill=itedaTeal!35},
       off/.style={tank, fill=white, dashed, text=itedaGray}]
     \node[font=\small\bfseries, anchor=west] at (-0.4,1.2) {Early side (strong EM)};
-    \foreach \x/\n in {0/0,1/1,2/1,3/2,4/3} {\node[on] at (\x,0.4) {\n};}
-    \node[font=\small, anchor=west, align=left] at (4.7,0.4) {true: $1.4$\\ selected: $1.4$};
+    \node[off] at (0,0.4) {0};
+    \foreach \x/\n in {1/0,2/1,3/1,4/2,5/3} {\node[on] at (\x,0.4) {\n};}
+    \node[font=\small, anchor=west, align=left] at (5.7,0.4) {true: $1.17$\\ selected: $1.40$};
     \node[font=\small\bfseries, anchor=west] at (-0.4,-0.6) {Late side (attenuated EM)};
-    \foreach \x/\n in {0/0,1/0,2/1} {\node[off] at (\x,-1.4) {\n};}
-    \foreach \x/\n in {3/2,4/2} {\node[on] at (\x,-1.4) {\n};}
-    \node[font=\small, anchor=west, align=left] at (4.7,-1.4) {true: $1.0$\\ selected: \textcolor{plotMaroon}{$\mathbf{2.0}$}};
-    \node[on, minimum width=0.5cm] at (8.6,0.4) {};
-    \node[font=\scriptsize, anchor=west] at (8.95,0.4) {kept};
-    \node[off, minimum width=0.5cm] at (8.6,-0.3) {};
-    \node[font=\scriptsize, anchor=west] at (8.95,-0.3) {not kept};
-    \node[font=\scriptsize, anchor=west] at (8.3,-1.0) {number = muons};
+    \foreach \x/\n in {0/0,1/0,2/0,3/1} {\node[off] at (\x,-1.4) {\n};}
+    \foreach \x/\n in {4/2,5/2} {\node[on] at (\x,-1.4) {\n};}
+    \node[font=\small, anchor=west, align=left] at (5.7,-1.4) {true: $0.83$\\ selected: \textcolor{plotMaroon}{$\mathbf{2.00}$}};
+    \node[on, minimum width=0.5cm] at (9.6,0.4) {};
+    \node[font=\scriptsize, anchor=west] at (9.95,0.4) {kept};
+    \node[off, minimum width=0.5cm] at (9.6,-0.3) {};
+    \node[font=\scriptsize, anchor=west] at (9.95,-0.3) {not kept};
+    \node[font=\scriptsize, anchor=west] at (9.3,-1.0) {number = muons};
   \end{tikzpicture}
   \end{center}
   \vspace{-0.2em}
-  \centering The sign can flip \textbf{without moving a single muon}.
-  \fuente{Illustrative cartoon, not simulation output.}
+  \centering Both averages go up, the late one much more: the sign flips
+  \textbf{without moving a single muon}.
+  \fuente{Illustrative cartoon. In the simulation, at 900--1500~m, 54\% of the early and 33\% of the late tanks are kept.}
   \note{%
     Every curve so far is an average over stations that are part of the reconstructed
-    event. For the UMD that seemed natural, since it has no trigger of its own. But
-    suppose the chance that a station is kept depends on how many muons it has. On
-    the early side the electromagnetic signal is strong enough that almost every
-    station is kept. On the late side it is more attenuated, so mostly the stations
-    with more muons survive. The late average is pulled up, and the asymmetry can
-    change sign although no muon was created or moved. This is a hypothesis; the next
-    two slides test it.\par
+    event. For the UMD that seemed natural, since it has no trigger of its own. But suppose
+    the chance that a station is kept depends on how many muons it has. On the early side
+    the electromagnetic signal is strong, so almost every station is kept, even one with no
+    muons; only a few muon-poor ones are lost and the average goes up a little. On the late
+    side the electromagnetic signal is weaker, so mostly the stations with more muons
+    survive and the average goes up a lot. In this example the true averages are 1.17 and
+    0.83, an early excess; the selected ones are 1.40 and 2.00, a late excess. The sign
+    flips although no muon was created or moved. This is a hypothesis; the next two slides
+    test it with the simulation.\par
     \textit{Transition:} The direct test is to remove the requirement.}
 \end{frame}
 
@@ -449,7 +462,8 @@
     stations of each shower together. So the sign flip is a
     property of the station sample. Without the selection the SD muons have the same
     sign and trend as the UMD, but between 150 and 900 meters the UMD is still 0.03 to
-    0.06 higher; detector response and threshold are candidates, this is open.\par
+    0.06 higher, and that difference excludes zero at 95 percent (backup slide);
+    detector response and threshold are candidates, this is open.\par
     \textit{Transition:} If this is a trigger effect, there is a direct check.}
 \end{frame}
 
@@ -459,29 +473,42 @@
   \footnotesize
   \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
   \begin{itemize}
-    \setlength{\itemsep}{1pt}
     \item If the inversion comes from the \textbf{trigger}, the tanks dropped by the
-      reconstruction (\texttt{HasStation} = False) should have been crossed, on average,
-      by \alert{at most one muon}, too few for the station to trigger.
-    \item Excluded tanks: $\le1\,\mu$ in \alert{95\%} (early) and \alert{93\%} (late) of
-      the cases.
+      reconstruction (\texttt{HasStation} = False) should hold, on average,
+      \alert{at most one muon}: too few for the station to trigger.
   \end{itemize}
-  \vspace{0.1em}
+  \vspace{-0.5em}
   \centering
-  \makebox[\textwidth][c]{\includegraphics[width=1.04\textwidth,height=4.9cm,keepaspectratio]{Selection_Test2_EN.pdf}}
+  \makebox[\textwidth][c]{\includegraphics[width=1.02\textwidth,height=3.85cm,keepaspectratio]{Selection_Test2_EN.pdf}}
+
+  {\scriptsize
+  \renewcommand{\arraystretch}{1.0}
+  \begin{tabular}{lccc}
+    \toprule
+    & $\langle N_\mu\rangle$ all tanks & $\langle N_\mu\rangle$ kept tanks & fraction kept\\
+    \midrule
+    \textcolor{plotBlue}{\textbf{early}} & $0.96$ & $1.49$ & $0.54$\\
+    \textcolor{plotMaroon}{\textbf{late}} & $0.87$ & $1.69$ & $0.33$\\
+    \bottomrule
+  \end{tabular}}
   \note{%
     If the inversion is a trigger effect, there is a clear prediction: the tanks that
     the reconstruction drops should have been crossed by at most about one muon. If we
     found excluded tanks with several muons, a trigger explanation would not be
-    credible. So we count the Monte Carlo muons in the excluded tanks. Ninety-five
-    percent of the excluded early tanks and ninety-three percent of the late ones have
-    at most one muon. The excluded late tanks have about half the electromagnetic
-    particles of the early ones, 14 against 28, so on the late side we lose tanks that
-    on the early side would have been kept thanks to their electromagnetic signal. That
-    is why, among the kept tanks, the late ones carry more muons than the early ones,
-    even though the true density is higher on the early side, and why only eighteen
-    percent of the late stations are kept far from the core, against forty-two percent
-    of the early ones. This supports the trigger picture, but HasStation also includes
+    credible. So we count the Monte Carlo muons in the tanks between 900 and 1500
+    meters. Each region is normalised to all of its tanks, so the area of the bars is the
+    fraction lost or kept: on the early side 46 percent of the tanks are dropped, on the
+    late side 67 percent. Ninety-five percent of the excluded early tanks and ninety-three
+    percent of the late ones have at most one muon. The table is the bias in numbers: over
+    all tanks the early side has more muons, 0.96 against 0.87, which is the true positive
+    asymmetry; over the kept tanks it is the other way round, 1.49 against 1.69. (If asked
+    why the kept late tanks have more muons than the kept early ones: the selection
+    raises both means, but much more on the late side, by a factor 1.9 against 1.55,
+    because there the electromagnetic signal is weaker, about half, 14 against 28
+    particles in the excluded tanks, so only muon-rich tanks pass; on the early side tanks
+    with zero or one muon are often kept thanks to their electromagnetic signal. At 1200
+    to 1350 meters only 18 percent of the late stations are kept, against 42 percent of
+    the early ones.) This supports the trigger picture, but HasStation also includes
     readout and reconstruction, and we have not separated them, so it is consistent
     with a trigger effect, not a proof. (Early: $|\phi|<60^\circ$, late: $|\phi|>120^\circ$;
     MC geometry.)\par
@@ -493,38 +520,50 @@
 \section{Reconstructed geometry and the core position}
 % ============================================================
 
-\begin{frame}[t]{With REC geometry, the UMD asymmetry vanishes}
+\begin{frame}{REC geometry suppresses the asymmetry near the core}
   \badgeIF
-  \vspace{-0.6em}
-  \begin{itemize}
-    \item Same UMD modules, same \textbf{injected} muon number, $450\le r<600$~m.
-  \end{itemize}
-  \begin{center}
-    \renewcommand{\arraystretch}{1.15}
-    \begin{tabular}{lcc}
-      \toprule
-      $\theta$ & $A_1$ Monte Carlo & $A_1$ Reconstructed\\
-      \midrule
-      $20^\circ$--$30^\circ$ & $0.062$ & $0.011$\\
-      $30^\circ$--$40^\circ$ & $0.086$ & $0.002$\\
-      $40^\circ$--$50^\circ$ & $0.108$ & \textcolor{plotMaroon}{$-0.002$}\\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-  \begin{itemize}
-    \item With the \textbf{reconstructed core}, the asymmetry is lost almost completely.
-    \item The effect comes from the \textbf{offset between the true and the reconstructed
-      core positions}.
-  \end{itemize}
+  \begin{columns}[c]
+    \column{0.62\textwidth}
+      \includegraphics[width=\textwidth]{Rec_vs_MC_A1_vs_r_40_50_EN.pdf}
+    \column{0.36\textwidth}
+      \centering
+      \begin{tikzpicture}[x=0.78cm,y=0.78cm]
+        \foreach \fila in {0,1,2,3} {
+          \foreach \col in {0,1,2,3,4} {
+            \pgfmathsetmacro{\xpos}{\col + 0.5*mod(\fila,2)}
+            \pgfmathsetmacro{\ypos}{0.866*\fila}
+            \fill[itedaTeal] (\xpos,\ypos) circle (2.0pt);
+          }
+        }
+        \node[star, star points=5, fill=plotBlue, inner sep=1.2pt] at (2.25,1.35) {};
+        \node[font=\tiny, plotBlue, anchor=north] at (2.25,1.20) {MC core};
+        \draw[plotMaroon, very thick] (2.55,1.55) -- ++(0.16,0.16) (2.55,1.71) -- ++(0.16,-0.16);
+        \node[font=\tiny, plotMaroon, anchor=south west] at (2.72,1.65) {REC core};
+        \draw[plotBlue, dashed] (2.25,1.35) circle (1.25);
+      \end{tikzpicture}
+
+      \raggedright
+      \footnotesize
+      \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
+      \begin{itemize}
+        \setlength{\itemsep}{1pt}
+        \item Same UMD modules and \textbf{injected} muons; \textbf{only the core changes}.
+        \item Near the core $A_1$ drops to \textbf{zero or below}; farther out the curves
+          \textbf{converge}.
+        \item The effect comes from the \textbf{offset between the true and the reconstructed
+          core positions}.
+      \end{itemize}
+  \end{columns}
   \note{%
-    Same UMD modules, same injected muon numbers; we only change the geometry used to
-    compute each station's distance and azimuth. With the reconstructed core the
-    asymmetry essentially disappears: at forty to fifty degrees it goes from 0.108 to
-    zero. We also swapped the two quantities one at a time: using the reconstructed or
-    the true azimuth gives the same A1 within 0.002, so everything comes from the
-    distance to the reconstructed core. (If asked: farther out, at forty to fifty degrees
-    and 600 to 1050 meters, the asymmetry survives but reduced, below 0.05 against about
-    0.11.)\par
+    This is the reference curve of slide eight, forty to fifty degrees, with the
+    same UMD modules and the same injected muon numbers, now computed a second time with
+    the reconstructed core. Near the core the asymmetry drops to zero or becomes negative:
+    at 450 to 600 meters it goes from 0.108 to minus 0.002. Farther out the two curves
+    approach each other: the loss is not global, it shrinks with distance. We also swapped
+    the two quantities one at a time: using the reconstructed or the true azimuth gives the
+    same A1 within 0.002, so everything comes from the distance to the reconstructed core.
+    (If asked, other zenith bands at 450 to 600 meters: 0.061 to 0.011 at twenty to thirty
+    degrees, 0.085 to 0.002 at thirty to forty.)\par
     \textit{Transition:} So where is the reconstructed core?}
 \end{frame}
 
@@ -532,7 +571,7 @@
   \badgeIF
   \vspace{-1.2em}
   \centering
-  \makebox[\textwidth][c]{\includegraphics[width=1.06\textwidth,height=5.0cm,keepaspectratio]{Core_Shift_EN.pdf}}
+  \makebox[\textwidth][c]{\includegraphics[width=1.06\textwidth,height=4.5cm,keepaspectratio]{Core_Shift_EN.pdf}}
 
   \vspace{0.1em}
   \raggedright
@@ -540,9 +579,9 @@
   \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
   \begin{itemize}
     \setlength{\itemsep}{0pt}
-    \item $\Delta r=r_{\text{MC}}-r_{\text{REC}}$ vs.\ $\phi$ can be fitted by
-      $a+b\cos\phi$: early stations are placed \textbf{closer} to the core, late ones
-      \textbf{farther}, with $b\simeq9$, $15$, $21$~m, increasing with $\theta$.
+    \item $\Delta r=r_{\text{MC}}-r_{\text{REC}}$ vs.\ $\phi$ is fitted by $a+b\cos\phi$, the
+      modulation expected from a \textbf{rigid displacement of the core} by $b$: early stations
+      are placed \textbf{closer} to the core, late ones \textbf{farther}; $a\simeq0.2$~m.
     \item Likely cause: the reconstruction LDF is \textbf{symmetric in $\phi$}; it absorbs
       the early excess by \textbf{moving the core toward the early side, where there is
       more signal}.
@@ -552,8 +591,17 @@
     core, as a function of its true azimuth. If the core error were random, this
     would be flat. Instead it follows a cosine: early stations are placed closer to
     the core than they are, late stations farther. That is the signature of a
-    systematic shift of the reconstructed core toward the early side, by about nine,
-    fifteen and twenty-one meters in these three zenith bins. A likely reason: the LDF
+    systematic shift of the reconstructed core toward the early side: if the core is
+    displaced rigidly by b toward the early direction, to first order every station's
+    distance changes by b cos phi, which is exactly the fitted form. The constant a comes
+    out at about 0.2 meters, so there is no azimuth-independent radial bias. The error bars
+    are the standard error of the mean in each azimuth bin, smaller than the markers; the
+    cloud behind them is the station-by-station spread, about twenty meters. So the
+    modulation is very well determined even though single stations scatter a lot. The fitted shift is 9.3, 15.4 and 20.9 meters, with errors of
+    0.1 to 0.2 meters. (If asked: those errors treat the stations as independent, but the
+    stations of one shower share the same core error, so they are underestimated; a
+    bootstrap over events is pending. The trend with zenith angle is far larger than
+    any plausible error.) A likely reason: the LDF
     used in the reconstruction is symmetric in azimuth. Faced with more signal on the
     early side, the only thing the fit can do is move the core toward it. (Infill
     stations with reconstructed distance below 1400 meters.)\par
@@ -562,108 +610,114 @@
 
 \begin{frame}{A shifted core adds a $\cos\phi$ term to the LDF}
   \badgeIF
-  \vspace{-0.6em}
+  \vspace{-0.4em}
   \begin{itemize}
-    \item Approximating the LDF locally as $\rho\propto r^{-\beta}$ and correcting it
-      for the core shift with an azimuthal dependence, $r\to r+b\cos\phi$:
-      \begin{equation*}
-        \rho(r+b\cos\phi)\simeq\rho(r)\Big[1-\beta\,\frac{b}{r}\cos\phi\Big]
-        \;\Rightarrow\;\boxed{\Delta A_1\simeq-\beta\,\frac{b}{r}}
-      \end{equation*}
+    \item Binned by $r_{\text{REC}}$, a station at $r$ is really at $r+b\cos\phi$: its density
+      belongs to \textbf{another radius}.
   \end{itemize}
+  \vspace{-0.4em}
+  \begin{equation*}
+    \rho(r+b\cos\phi)\simeq\rho(r)\Big[1-\beta\,\frac{b}{r}\cos\phi\Big]
+    \;\Rightarrow\;\boxed{\Delta A_1\simeq-\beta\,\frac{b}{r}}
+    \qquad \beta=-\frac{\mathrm{d}\ln\rho}{\mathrm{d}\ln r}\ \text{(local)}
+  \end{equation*}
   \centering
-  \renewcommand{\arraystretch}{1.08}
-  \begin{tabular}{lcccc}
+  {\footnotesize $450\le r<600$~m, injected muons}\\[0.2em]
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{lcc|ccc}
     \toprule
-    $\theta$ & $A_1$ (MC) & $A_1$ (REC) & $\Delta A_1$ &
-    \textbf{$A_1^{\text{REC}}+\beta b/r$}\\
+    $\theta$ & $b$ [m] & $\beta$ & $\Delta A_1$ measured & $-\beta b/r$ predicted & residual\\
     \midrule
-    $20$--$30^\circ$ & $0.062$ & $0.011$  & $-0.051$ & $\mathbf{0.062}$\\
-    $30$--$40^\circ$ & $0.086$ & $0.002$  & $-0.084$ & $\mathbf{0.083}$\\
-    $40$--$50^\circ$ & $0.108$ & $-0.002$ & $-0.110$ & $\mathbf{0.100}$\\
+    $20$--$30^\circ$ & $9.3$  & $2.96$ & $-0.050$ & $-0.052$ & $+0.002$\\
+    $30$--$40^\circ$ & $15.4$ & $2.72$ & $-0.084$ & $-0.080$ & $-0.004$\\
+    $40$--$50^\circ$ & $20.9$ & $2.52$ & $-0.110$ & $-0.100$ & $-0.010$\\
     \bottomrule
   \end{tabular}
 
-  \vspace{0.4em}
-  \raggedright
-  \begin{itemize}
-    \item The shift accounts for \textbf{93--100\%} of the loss; adding it back
-      \textbf{recovers the MC reference asymmetry} to $\lesssim0.01$.
-  \end{itemize}
-  \fuente{$450\le r<600$~m, injected muons. $\beta=2.9,\,2.7,\,2.5$ (UMD muon LDF, same simulations).
-    Last column derived from the table.}
   \note{%
-    Locally the muon LDF falls as a power law with slope beta, between about 2.4 and
-    2.9 at these distances. If the reconstructed core is shifted by b toward the early
-    side, a station we place at distance r on the early side is really at r plus b,
-    so it has fewer muons than we think, and a late station has more. To first order
-    this multiplies the LDF by one minus beta b over r times cos phi: a cosine
-    modulation with the opposite sign to the physical one. So the reconstructed
-    asymmetry should be lower by beta b over r. The prediction, minus 0.051, 0.081 and
-    0.102, matches the observed loss in the three zenith bins. Read the other way: adding beta b over r back to
-    the reconstructed value recovers the Monte Carlo reference within about 0.01.
-    The exact agreement depends on the beta fit range and on the effective r of the
-    bin at the ten percent level.\par
+    Here is why a shifted core changes the asymmetry. We bin stations by their
+    reconstructed distance. From the previous slide, a station that we place at distance r
+    is really at r plus b cos phi: an early station is farther than we think, a late one
+    closer. So its density is the density of another radius, and that difference has a cos
+    phi dependence. Locally the LDF falls with slope beta, minus the logarithmic derivative
+    of the density at the radius of the bin; it is not a global exponent. To first order
+    the density gets a factor one minus beta b over r cos phi: a spurious cosine term of
+    opposite sign to the physical one, which the harmonic fit absorbs into A1. So the
+    measured A1 should drop by beta b over r. The table, all at 450 to 600 meters with
+    injected muons, puts measured and predicted side by side: b comes from the previous
+    slide, beta is measured in the same bin, and r is about 526 meters, the harmonic mean
+    of the reconstructed distances. Both b and beta are measured on their own, before
+    looking at the asymmetry, so the prediction has no free parameter tuned to match the
+    loss; the residuals are below 0.01, about ten percent of the loss. (Sign, if asked: Delta r is r MC minus r REC equal to b
+    cos phi, so r MC equals r REC plus b cos phi; the argument of rho is the true distance
+    of a station binned at r REC, so the plus sign is correct.)\par
     \textit{Transition:} So what would it take to apply this to real data?}
 \end{frame}
 
-\begin{frame}{Recovering the asymmetry: what it needs, what is missing}
-  \badgeIF
-  \vspace{-0.6em}
-  \footnotesize
-  \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
-  \begin{columns}[T]
-    \column{0.49\textwidth}
-      \begin{block}{What the correction needs}
-        \footnotesize
-        \begin{itemize}
-          \setlength{\itemsep}{0pt}
-          \item $b(\theta)$: mean core shift, early--late direction.
-            \alert{Measured with MC truth.}
-          \item $\beta$: local slope of the muon LDF. From MC here; in principle
-            measurable in data.
-          \item Apply: move the core back by $b$, or add $\beta b/r$ to $A_1$.
-        \end{itemize}
-      \end{block}
-      \begin{block}{Established}
-        \footnotesize
-        The loss is \textbf{systematic}, not resolution, and predicted by
-        $\beta b/r$ ($450$--$600$~m, $20$--$50^\circ$).
-      \end{block}
-    \column{0.49\textwidth}
-      \begin{alertblock}{Not done yet}
-        \footnotesize
-        \begin{itemize}
-          \setlength{\itemsep}{0pt}
-          \item Move the core and recompute $A_1(r)$ at all $r$.
-          \item Counting bias ($N_\mu^{\text{REC}}$, 5--23\%): separate effect.
-          \item \textbf{For data} (no true core), $b$ must come from:
-            \begin{itemize}
-              \setlength{\itemsep}{0pt}
-              \item $b(\theta)$ parametrized on simulations and \textbf{validated on
-                unseen ones} (other showers, primaries, models; tested so far: p,
-                SIBYLL~2.3e);
-              \item or an LDF fit with an azimuthal term in the reconstruction.
-            \end{itemize}
-        \end{itemize}
-      \end{alertblock}
+
+% ============================================================
+\section{A first look at field data}
+% ============================================================
+
+\begin{frame}{The modulation is visible in field data (preliminary)}
+  \badgeDATA
+  \vspace{-0.8em}
+  \begin{columns}[c]
+    \column{0.62\textwidth}
+      \includegraphics[width=\textwidth]{FieldData_PhaseII_Profile_EN.pdf}
+    \column{0.36\textwidth}
+      \footnotesize
+      \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
+      \begin{itemize}
+        \setlength{\itemsep}{2pt}
+        \item UMD muon density vs.\ $\phi$, normalised to its mean, Phase~II; REC geometry.
+        \item Maximum at $\phi\approx0$: \textbf{early excess}, as in the simulations.
+        \item $A_1=0.063\pm0.022$ ($2.8\sigma$), $\chi^2/\mathrm{ndf}=10.6/9$; errors from a
+          bootstrap over \textbf{events}.
+        \item \textbf{Preliminary}: no core-shift correction, no systematics, no MC above
+          $10^{18}$~eV.
+      \end{itemize}
   \end{columns}
   \note{%
-    The correction has two ingredients. The slope beta is a property of the lateral
-    distribution and could in principle be measured from the data themselves. The
-    shift b is the delicate part: so far we measure it against the true core, which
-    only exists in simulations. In data there is no true core, so there are two ways.
-    One is to parametrize b as a function of zenith angle on one set of simulations and
-    check, as in a train and test split, that it recovers the asymmetry on simulations
-    it has not seen: other showers, other primaries, other hadronic models. That tells
-    us how model- and composition-dependent the correction is; it does not test the
-    differences between data and simulations, such as the muon deficit. The other way is
-    to remove the shift at its origin, with a reconstruction LDF that allows an
-    azimuthal modulation. At Infill energies the
-    station multiplicity makes that hard event by event, but it is worth trying for
-    the most energetic events. The test is done in one radial bin, for protons with
-    one hadronic model, and with injected muon numbers. The counting bias of the UMD
-    reconstruction is a separate, smaller effect.\par
+    This is the UMD muon density measured in the field, as a function of azimuth in the
+    shower plane, for Phase II events in the cell shown in the box. The maximum is on the
+    early side, as in the simulations. The first harmonic gives 0.063 plus or minus 0.022.
+    That error comes from a bootstrap over events, because the modules of one shower are
+    correlated; treating every module as independent gives 0.017, which overstates the
+    significance. So this is a 2.8 sigma early excess, with a good fit. It is preliminary:
+    the core correction we just discussed is not applied, there is no systematics study,
+    and our simulations stop at ten to the eighteen. (If asked: part of the zenith range,
+    55 to 60 degrees, is outside the standard SD-750 energy calibration; and 2022 Phase II
+    commissioning data are excluded.)\par
+    \textit{Transition:} And the radial pattern?}
+\end{frame}
+
+\begin{frame}[t]{Field data follow the REC-geometry simulations}
+  \badgeDATA
+  \vspace{-1.0em}
+  \centering
+  \includegraphics[width=0.97\textwidth,height=5.2cm,keepaspectratio]{FieldData_A1_vs_r_EN.pdf}
+
+  \vspace{0.4em}
+  \raggedright
+  \footnotesize
+  \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
+  \begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item Data (Phase I + II) and simulations with the \textbf{same reconstruction}, $17.5\le\lg E<18.0$.
+    \item Same radial pattern: $A_1\le0$ near the core in inclined showers, positive farther out:
+      the \textbf{signature of the core shift}, seen in data.
+  \end{itemize}
+  \note{%
+    Here are all the cells, data in black and simulations processed with the same
+    reconstruction in colours, one panel per zenith band. The data follow the simulations,
+    including the feature we have just explained: in inclined showers the asymmetry is
+    negative or zero near the core and becomes positive farther out. That is the
+    prediction of the core shift, beta b over r, which falls with distance, and here it
+    appears in data. The yellow band is the region where we expected the asymmetry to
+    survive the reconstruction, fixed from the simulations before looking at the data.
+    This is not a composition measurement: at this statistics and with REC geometry the
+    primaries are not separated.\par
     \textit{Transition:} Let me summarize.}
 \end{frame}
 
@@ -671,55 +725,53 @@
 \section{Conclusions}
 % ============================================================
 
-\begin{frame}{Conclusions}
+\begin{frame}[t]{Conclusions}
+  \vspace{-0.3em}
   \small
+  \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
   \begin{enumerate}
-    \setlength{\itemsep}{0.45em}
+    \setlength{\itemsep}{0.05em}
     \item In simulations the UMD muon density has a \textbf{positive early--late
-      asymmetry}: it grows with $r$ for inclined showers and is roughly flat at
-      intermediate angles.
-    \item The SD muon asymmetry inverts far from the core \textbf{only} when averaging
-      over the stations kept by the reconstruction: the selection acts \textbf{station by
-      station}, not shower by shower. Over all stations it is positive. The excluded
-      tanks hold \textbf{mostly} $\le1$ muon: \textbf{consistent with} a trigger effect,
-      not yet proven.
-    \item With the reconstructed geometry the UMD asymmetry nearly vanishes near the
-      core: the reconstructed core is shifted toward the early region by
-      $b\approx9$--$21$~m.
-    \item This loss follows $\Delta A_1\simeq-\beta\,b/r$; adding it back recovers the
-      MC reference. Applying it to data requires $b$ \textbf{without MC truth}.
+      asymmetry}, growing with $r$ for inclined showers.
+    \item The SD muon asymmetry inverts far from the core \textbf{only} when averaging over
+      the stations kept by the reconstruction (a \textbf{station-by-station} selection); over
+      all stations it is positive. Excluded tanks hold \textbf{mostly} $\le1$ muon:
+      \textbf{consistent with} a trigger effect.
+    \item With the reconstructed geometry the asymmetry is \textbf{suppressed near the core}:
+      the reconstructed core is shifted toward the early region by $b\approx9$--$21$~m.
+    \item The loss follows $\Delta A_1\simeq-\beta\,b/r$; adding it back recovers the MC
+      reference. Applying it to data requires $b$ \textbf{without MC truth}.
+    \item Field data (preliminary): early excess, $A_1=0.063\pm0.022$, and a radial pattern
+      that follows the REC-geometry simulations.
   \end{enumerate}
-  \vspace{0.4em}
+  \vspace{0.1em}
   \centering\alert{\textbf{Data--MC comparisons need the same station selection and the
   same geometry.}}
+
+  \vspace{0.1em}
+  {\footnotesize\textbf{Next:} parametrize $b(\theta)$, $\beta(\theta)$ and validate them on independent
+  simulations; correct the full radial range and field data; separate trigger, readout and
+  reconstruction in \texttt{HasStation}.}
   \note{%
-    Four points. The muon asymmetry is there, and it behaves as expected with zenith
+    Five points. The muon asymmetry is there, and it behaves as expected with zenith
     angle and distance. What we measure depends on how we build the observable: which
     stations we average over can flip the sign, and the reconstructed core can erase
     it. The second effect is simple and predictable, so it can be accounted for, and
     any comparison between data and simulation must use the same station selection
     and geometry. The open step is to determine the core shift without Monte Carlo
-    truth.}
+    truth. Next, we want to parametrize b and beta as functions of zenith angle, at this
+    fixed energy, and check on simulations not used to build it that the correction
+    recovers the asymmetry; apply it over the whole radial range and to field data; and
+    separate trigger, readout and reconstruction inside HasStation.
+    (If asked how to get b in data: either from that parametrization, validated on
+    independent simulations of other primaries and hadronic models, which tests the model
+    and composition dependence but not data-MC differences such as the muon deficit; or by
+    removing the shift at its origin, with a reconstruction LDF that allows an azimuthal
+    modulation, which is hard event by event at Infill energies but worth trying for the
+    most energetic events. The closure test so far is one radial bin, protons, one hadronic
+    model, injected muons; the UMD counting bias is a separate, smaller effect.)}
 \end{frame}
 
-\begin{frame}{Next steps}
-  \begin{itemize}
-    \setlength{\itemsep}{0.4em}
-    \item Parametrize the correction parameters vs.\ zenith angle: $b(\theta)$ and
-      $\beta(\theta)$, at fixed energy ($17.5\le\lg E<18.0$), and validate the recovery
-      on independent simulations.
-    \item Apply the full correction (core shift + LDF term) over the whole radial
-      range and compare with the MC reference.
-    \item Dependence on primary and hadronic model.
-    \item Separate trigger, readout and reconstruction inside \texttt{HasStation}.
-    \item Apply to field data.
-  \end{itemize}
-  \note{%
-    The natural next step is to parametrize b and beta as functions of zenith angle,
-    so that the correction can be applied without a per-bin Monte Carlo comparison.
-    Our sample covers a single energy range, so this is a zenith-angle
-    parametrization only, not an energy one.}
-\end{frame}
 
 \begin{frame}[plain]
   \begin{tikzpicture}[remember picture, overlay]
@@ -747,134 +799,132 @@
   \badgeIF
   \begin{columns}[c]
     \column{0.60\textwidth}
-      \includegraphics[width=\textwidth]{UMD_Asymmetry_MC_vs_REC.pdf}
+      \includegraphics[width=\textwidth]{Backup_Counting_Infill_EN.pdf}
     \column{0.37\textwidth}
       \begin{itemize}
         \item $40^\circ$--$50^\circ$, true core and direction.
-        \item Reconstructed muon number lowers $A_1$ by 5--23\%, same shape.
+        \item The reconstructed muon number lowers $A_1$ by 5--23\%, with the same shape.
         \item A separate effect from the core shift.
       \end{itemize}
   \end{columns}
 \end{frame}
 
-\begin{frame}{Backup: the counting bias depends on azimuth}
+\begin{frame}[t]{Backup: the counting bias depends on azimuth}
   \badgeAD
-  \begin{columns}[c]
-    \column{0.49\textwidth}
-      \includegraphics[width=\textwidth]{directional_bias.pdf}
-    \column{0.49\textwidth}
-      \includegraphics[width=\textwidth]{toy_model.pdf}
-  \end{columns}
+  \vspace{-0.8em}
+  \centering
+  \includegraphics[width=\textwidth,height=4.6cm,keepaspectratio]{Backup_Counting_Bias_DenseRing_EN.pdf}
+
+  \raggedright
   \footnotesize
+  \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
   \begin{itemize}
-    \item Mean relative residual $(N^{\text{REC}}-N^{\text{MC}})/N^{\text{MC}}$ is larger
-      on the late side (fewer muons) $\Rightarrow$ lower $A_1$.
-    \item Bootstrap with the per-region residuals reproduces $A_1^{\text{REC}}$ up to
-      $\theta\approx35^\circ$; above, half to two thirds of the loss. Remnant open.
+    \setlength{\itemsep}{0pt}
+    \item Left: mean relative residual $(N^{\text{REC}}-N^{\text{MC}})/N^{\text{MC}}$ vs.\ $\phi$:
+      $\approx0.005$ early, $\approx0.03$ late. More over-counting where there are fewer muons
+      $\Rightarrow$ lower $A_1$.
+    \item Right: injecting the residuals drawn per $\phi$ bin into $N_\mu^{\text{MC}}$ reproduces
+      $A_1^{\text{REC}}$ up to $\theta\approx35^\circ$; above, half to two thirds of the loss.
+      The remnant is open.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Backup: fit grids, MC and REC geometry ($40^\circ$--$50^\circ$)}
-  \badgeIF
-  \begin{columns}[T]
-    \column{0.5\textwidth}
-      \centering\footnotesize MC geometry\\
-      \includegraphics[width=\textwidth,height=5.6cm,keepaspectratio]{Anexo_Grilla_MC_40_50.pdf}
-    \column{0.5\textwidth}
-      \centering\footnotesize REC geometry\\
-      \includegraphics[width=\textwidth,height=5.6cm,keepaspectratio]{Anexo_Grilla_REC_40_50.pdf}
-  \end{columns}
-\end{frame}
 
 \begin{frame}{Backup: fit quality on the Dense Ring}
   \badgeAD
   \begin{columns}[c]
     \column{0.60\textwidth}
-      \includegraphics[width=\textwidth]{Chi2_Reduced_Fits.pdf}
+      \includegraphics[width=\textwidth]{Backup_Chi2_DenseRing_EN.pdf}
     \column{0.37\textwidth}
       \begin{itemize}
-        \item UMD, MC and REC: $\chi^2_\nu\approx1$.
-        \item SD: $\chi^2_\nu$ up to $\sim10$; with such small errors the fit is
-          sensitive to higher harmonics and to correlations between stations of
-          one shower.
+        \item UMD, MC and REC: $\chi^2_\nu\approx1$ (0.3 to 2.1).
+        \item SD: $\chi^2_\nu$ up to $\sim8$. With such small errors the fit is sensitive to
+          higher harmonics and to correlations between stations of one shower.
       \end{itemize}
   \end{columns}
 \end{frame}
 
-\begin{frame}{Backup: robustness}
+\begin{frame}[t]{Backup: robustness}
   \badgeAD
-  \begin{columns}[T]
-    \column{0.49\textwidth}
-      \includegraphics[width=\textwidth]{DenseRing_Systematics_Isotropy.pdf}
-      \footnotesize Independent of the shower arrival azimuth ($40$--$60^\circ$).
-    \column{0.49\textwidth}
-      \includegraphics[width=\textwidth]{Hadronic_Uncertainty_Helium.pdf}
-      \footnotesize Helium: SIBYLL~2.3e vs.\ QGSJET-III within $\pm10\%$ over most of
-      the range.
-  \end{columns}
+  \vspace{-0.6em}
+  \centering
+  \includegraphics[width=\textwidth,height=5.1cm,keepaspectratio]{Backup_Robustness_EN.pdf}
+
+  \raggedright
+  \footnotesize
+  \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
+  \begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item Left: $A_1$ does not depend on the arrival azimuth of the shower.
+    \item Right: helium, SIBYLL~2.3e vs.\ QGSJET-III: within $\pm10\%$ over most of the range.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Backup: reconstruction performance}
-  \begin{columns}[T]
-    \column{0.33\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{energy_bias.pdf}
-    \column{0.33\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{theta_bias.pdf}
-    \column{0.33\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{phi_bias.pdf}
-  \end{columns}
+  \centering
+  \includegraphics[width=\textwidth]{Backup_Reconstruction_EN.pdf}
+
+  \raggedright
   \small
   \begin{itemize}
-    \item Energy: $\mu\approx-0.142$, $\sigma\approx0.111$ in $\Delta\log_{10}E$.
-    \item $\theta$: bias $-0.05^\circ$, $\sigma=0.58^\circ$. $\phi$: bias
-      $-0.005^\circ$, $\sigma=2.2^\circ$.
+    \item Energy: mean $-0.142$, spread $0.111$ in $\Delta\log_{10}E$ (fewer muons in the
+      simulation than in data, with a data-based energy calibration).
+    \item $\theta$: bias $-0.05^\circ$, spread $0.58^\circ$. $\phi$: bias $-0.005^\circ$,
+      spread $2.2^\circ$.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Backup: why the core shift does not affect the Dense Ring}
+\begin{frame}{Backup: the core shift and the Dense Ring}
   \badgeAD
   \begin{itemize}
     \setlength{\itemsep}{0.5em}
-    \item The ring stations are placed during the simulation at 450~m from the
-      \textbf{true} axis: the shifted core does not make the ring eccentric.
-    \item It only rotates the azimuth assigned to each station, by
-      $\sim b/r\approx2^\circ$, much less than the $30^\circ$ spacing.
-    \item It affects $N_\mu^{\text{MC}}$ and $N_\mu^{\text{REC}}$ in the same way, so
-      it cannot explain the MC--REC gap on the ring (that gap is the counting bias).
+    \item In reconstructed coordinates the ring \textbf{is} eccentric, but the stations are
+      physically at 450~m from the \textbf{true} axis, and they are not re-binned in $r$.
+    \item The assigned azimuth rotates by $\sim b/r\approx2^\circ$, much less than the
+      $30^\circ$ spacing; the assigned radius changes by at most $b\approx20$~m.
+    \item Both affect $N_\mu^{\text{MC}}$ and $N_\mu^{\text{REC}}$ in the same way, so they cannot
+      explain the MC--REC gap on the ring (that gap is the counting bias).
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Backup: field data (preliminary)}
-  \badgeDATA
-  \vspace{-0.8em}
+\begin{frame}{Backup: is the UMD biased by the selection too?}
+  \badgeIF
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.4em}
+    \item The UMD has no trigger of its own: a module is read only if the tank of its station
+      is kept. So the UMD curve is also averaged over \texttt{HasStation} stations.
+    \item But the selection acts on the \textbf{tank's own particles} (its muons and its EM
+      signal). The module counts \textbf{other muons}: a different area, not right under the
+      tank, behind $\sim$2.3~m of soil ($\sim$1~GeV threshold).
+    \item Given the station position, the expected UMD count is still the local muon density:
+      to first order, \textbf{no bias}.
+    \item A residual effect can enter through what tank and module share, the fluctuation of
+      the local density from shower to shower and station to station. Not quantified here; the
+      UMD count of the stations that were not kept is not stored in this production.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Backup: SD muons over all stations vs.\ UMD}
+  \badgeIF
+  \vspace{-0.6em}
   \begin{columns}[c]
-    \column{0.60\textwidth}
-      \includegraphics[width=\textwidth]{datos_campo_preliminar.pdf}
-    \column{0.38\textwidth}
+    \column{0.64\textwidth}
+      \includegraphics[width=\textwidth]{Selection_Difference_SD_UMD_EN.pdf}
+    \column{0.34\textwidth}
       \footnotesize
       \setbeamerfont{itemize/enumerate body}{size=\footnotesize}
       \begin{itemize}
-        \item UMD muon density vs.\ $\phi$, normalized to its mean; Phase~II, cuts in
-          the box.
-        \item Maximum at $\phi\approx0$: \textbf{early excess}, as in the
-          simulations.
-        \item \textbf{Preliminary}: no core-shift correction, no systematics, no MC
-          above $10^{18}$~eV for this bin.
+        \item Without \texttt{HasStation}, the SD muons stay \textbf{below} the UMD:
+          $\Delta A_1\approx-0.03$ to $-0.06$ between 150 and 900~m.
+        \item There the pointwise 95\% interval excludes zero; beyond 900~m the difference
+          is not resolved.
+        \item Paired bootstrap over the 960 showers (UMD and SD from the same showers).
+        \item Candidates: flat plate vs.\ tank response, UMD threshold. Open.
       \end{itemize}
   \end{columns}
 \end{frame}
 
-\begin{frame}{Backup: $A_1(r)$ in field data vs.\ simulations}
-  \badgeDATA
-  \vspace{-0.8em}
-  \centering
-  \includegraphics[width=\textwidth,height=5.6cm,keepaspectratio]{cap7_A1_vs_r_datos_vs_mc.pdf}
 
-  \footnotesize UMD Infill, Phase~I + Phase~II, 6T5, $17.5\le\lg(E/\text{eV})<18.0$, REC
-  geometry in data and simulations.
-\end{frame}
 
 \end{document}
